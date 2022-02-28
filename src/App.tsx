@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import AllTalentsViewTable from './components/AllTalentsViewTable';
+import BuildDynamicTable from './components/TalentTable';
 
 function App() {
   const [greeting, setGreeting] = useState(null);
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <pre>{greeting}</pre>
+        <BuildDynamicTable />
         <AllTalentsViewTable />
       </header>
     </div>
