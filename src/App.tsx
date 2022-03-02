@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import AllTalentsViewTable from './components/AllTalentsViewTable';
 import BuildDynamicTable from './components/TalentTable';
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
       <header className="App-header">
         <pre>{greeting}</pre>
         <BuildDynamicTable />
-        <AllTalentsViewTable />
       </header>
     </div>
   );
