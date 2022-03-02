@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
+import { Table, TableBody, TableRow } from '@mui/material';
 
 export interface IState {
     apiurl: string;
     datarecords: any[];
     datacolumns: any[];
+    open: boolean;
 }
 
 class BuildDynamicTable extends React.Component<typeof useParams, IState> {
@@ -16,6 +18,7 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
              apiurl: "http://localhost:8080/talents",
              datarecords: [], 
              datacolumns: [],
+             open: false
         }
     }
     
@@ -44,6 +47,10 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
         return str.toUpperCase().replace("_", " ");
     }
 
+    private removeDescription() {
+        
+    }
+
     public render() {
         const datarecords = this.state.datarecords;
         const each_datarecord_keys = this.state.datacolumns;
@@ -56,23 +63,22 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
                 )}
                 <div className="container">
                     <div className="row">
-                        <table className="table table-bordered">
+                        <Table className="table table-bordered">
                             <thead className="thead-light">
-                             <tr>
-                             {each_datarecord_keys && each_datarecord_keys.map(each_datarecord_key => 
+                             <TableRow>
+                                 {each_datarecord_keys && each_datarecord_keys.map(each_datarecord_key => 
                             <th scope="col">{this.Capitalize(each_datarecord_key)}</th>
                                 )}
-                                <th scope="col">Actions</th>
-                                </tr>
+                                </TableRow>
                             </thead>                            
-                            <tbody> 
+                            <TableBody> 
                             {datarecords && datarecords.map((each_datarecord, recordindex) =>
-                                <tr key={each_datarecord.id}>
+                                <TableRow key={each_datarecord.id}>
                                 {this.displayRecords(recordindex)}
-                                </tr>
+                                </TableRow>
                                 )}
-                            </tbody>
-                        </table>
+                            </TableBody>
+                        </Table>
                     </div>
                 </div>
             </div>
