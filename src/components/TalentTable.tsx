@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Collapse } from '@mui/material';
 
 export interface IState {
     apiurl: string;
@@ -22,7 +22,7 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
         }
     }
 
-    public componentWillMount(): void {
+    public componentDidMount(): void {
         axios.get(this.state.apiurl).then(response => {
             this.setState({ datarecords: response.data });
             this.extractColumnNames();
@@ -35,7 +35,10 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
 
     private displayRecords(key: number) {
         return this.state.datacolumns.map((each_col) =>
-            this.displayRecordName(each_col, key)
+            {
+                console.log(key)
+                return this.displayRecordName(each_col, key);
+            },
         )
     }
 
@@ -43,7 +46,7 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
         return <TableCell>{this.state.datarecords[key][colname]}</TableCell>
     }
 
-    private Capitalize(str: string) {
+    private convertToTableHeader(str: string) {
         return str.toUpperCase().replace("_", " ");
     }
 
@@ -62,13 +65,13 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
                         <TableHead className="thead-light">
                             <TableRow>
                                 {each_datarecord_keys && each_datarecord_keys.map(each_datarecord_key =>
-                                    <TableCell scope="col">{this.Capitalize(each_datarecord_key)}</TableCell>
+                                    <TableCell scope="col">{this.convertToTableHeader(each_datarecord_key)}</TableCell>
                                 )}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {datarecords && datarecords.map((each_datarecord, recordindex) =>
-                                <TableRow key={each_datarecord.id}>
+                                <TableRow key={each_datarecord.name}>
                                     {this.displayRecords(recordindex)}
                                 </TableRow>
                             )}
