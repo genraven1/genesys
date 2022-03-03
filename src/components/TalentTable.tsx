@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Collapse } from '@mui/material';
+import TalentService from '../services/TalentService';
+import Talent from '../models/Talent';
 
 export interface IState {
     apiurl: string;
@@ -23,8 +25,8 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
     }
 
     public componentDidMount(): void {
-        axios.get(this.state.apiurl).then(response => {
-            this.setState({ datarecords: response.data });
+        TalentService.getTalents().then(talents => {
+            this.setState({ datarecords: talents });
             this.extractColumnNames();
         })
     }
@@ -53,6 +55,9 @@ class BuildDynamicTable extends React.Component<typeof useParams, IState> {
     public render() {
         const datarecords = this.state.datarecords;
         const each_datarecord_keys = this.state.datacolumns;
+        const description_datarecord = datarecords.pop;
+        const description_key = each_datarecord_keys.pop;
+
         return (
             <div>
                 {datarecords.length === 0 && (

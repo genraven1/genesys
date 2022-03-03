@@ -4,7 +4,7 @@ import rest from "./rest";
 
 export default class TalentService {
 
-    static getTalents(): Promise<Talent> {
+    static getTalents(): Promise<Talent[]> {
         return rest.get('/talents');
     }
 

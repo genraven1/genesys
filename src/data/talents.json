@@ -1,9 +1,0 @@
-{
-    "Durable": {
-        "name": "Durable",
-        "ranked": "Yes",
-        "activation": "Passive",
-        "tier": 1,
-        "description": "Your character reduces any Critical Injury result they suffer by 10 per rank of Durable, to a minimum of 01."
-    }
-}
