@@ -22,7 +22,6 @@ function Row(props: { row: Talent }) {
                 <TableCell>{row.ranked}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
-                <TableCell>{row.id}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -45,8 +44,11 @@ export default function AllTalentsView() {
     const [talents, setTalents] = useState<Talent[]>([]);
 
     useEffect(() => {
-        (async () => {
-            await TalentService.getTalents().then(response => setTalents(response));
+        (async (): Promise<void> => {
+            const talentList = await TalentService.getTalents();
+            if(!talentList) { return; }
+            setTalents(talentList);
+            console.log(talents);
         })();
     })
 
@@ -55,7 +57,6 @@ export default function AllTalentsView() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Talent Table</TableCell>
                         <TableCell>Talent Name</TableCell>
                         <TableCell>Ranked</TableCell>
                         <TableCell>Activation</TableCell>
