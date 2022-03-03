@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import axios from 'axios';
-import BuildDynamicTable from './components/TalentTable';
+import AllTalentsView from './components/AllTalentsViewTable';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BuildDynamicTable />
+        <AllTalentsView />
       </header>
     </div>
   );
