@@ -49,7 +49,7 @@ export default function AllTalentsView() {
             if(!talentList) { return; }
             setTalents(talentList);
         })();
-    })
+    });
 
     return (
         <TableContainer component={Paper}>

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import FadeMenu from './FadeMenu';
 
 export default function ButtonAppBar() {
   return (
@@ -12,7 +13,7 @@ export default function ButtonAppBar() {
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to='/'>Home</Link>
-            <Link to='/talents'>Talents</Link>
+            <FadeMenu>Talents</FadeMenu>
           </Typography>
         </Toolbar>
       </AppBar>
