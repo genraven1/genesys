@@ -1,13 +1,11 @@
-import AllTalentsView from './components/AllTalentsViewTable';
+import { Outlet } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <AllTalentsView />
       </header>
     </div>
   );
 }
-
-export default App;

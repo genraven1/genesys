@@ -48,7 +48,6 @@ export default function AllTalentsView() {
             const talentList = await TalentService.getTalents();
             if(!talentList) { return; }
             setTalents(talentList);
-            console.log(talents);
         })();
     })
 
