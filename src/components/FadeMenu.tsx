@@ -1,7 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import Fade from '@mui/material/Fade';
 import { Link, LinkProps } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@mui/material';
 
@@ -40,23 +39,15 @@ export default function FadeMenu(props:any) {
   return (
     <div>
       <Button
-        id="fade-button"
-        aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
+        Talents
       </Button>
       <Menu
-        id="fade-menu"
-        MenuListProps={{
-          'aria-labelledby': 'fade-button',
-        }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        TransitionComponent={Fade}
         onClick={handleClose}
       >
         <ListMenuItemLink name='Create Talent' to='talents'></ListMenuItemLink>
