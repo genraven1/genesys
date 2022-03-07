@@ -1,13 +1,8 @@
 import { forwardRef, Fragment, useMemo, useState } from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import { LinkProps, Link } from 'react-router-dom';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Collapse } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Box, Collapse, Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
 
 type Anchor = 'left';
 
@@ -33,7 +28,11 @@ function ListMenuItemLink(props: ListItemProps): JSX.Element {
     );
 }
 
-export default function TemporaryDrawer() {
+const TALENTS: Array<ListItemProps> = [
+    {to: 'talents', name: 'View All Talents'}
+];
+
+export default function SideNav() {
     const [state, setState] = useState({ left: false });
     const [collaspe, setCollaspe] = useState(false);
 
@@ -56,17 +55,16 @@ export default function TemporaryDrawer() {
                 setState({ ...state, [anchor]: open });
             };
 
-    const list = (anchor: Anchor) => (
+    const list = (anchor: Anchor, primary: string, items: Array<ListItemProps>) => (
         <Box role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
             <List>
-                <ListMenuItemLink name='Home' to='' />
                 <ListItem button onClick={handleCollaspe}>
-                    <ListItemText primary="Talents" />
+                    <ListItemText primary={primary} />
                     {collaspe ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={collaspe} timeout="auto" unmountOnExit>
                     <List>
-                        <ListMenuItemLink to={'talents'} name={'View All Talents'} />
+                        {items.map((item) => {return (<ListMenuItemLink to={item.to} name={item.name} />)})}
                     </List>
                 </Collapse>
             </List>
@@ -76,10 +74,13 @@ export default function TemporaryDrawer() {
     return (
         <div>
             {(['left'] as const).map((anchor) => (
-                <Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                <Fragment>
+                    <IconButton onClick={toggleDrawer(anchor, true)}>
+                        <MenuIcon />
+                    </IconButton>
                     <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                        {list(anchor)}
+                        <ListMenuItemLink name='Home' to='' />
+                        {list(anchor, "Talents", TALENTS)}
                     </Drawer>
                 </Fragment>
             ))}
