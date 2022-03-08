@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { URL } from "./constants"
 
 function createInstance(): AxiosInstance {
   const instance = axios.create({
-    baseURL: "http://192.168.1.189:8080",
+    baseURL: URL,
     headers: {
       "Content-type": "application/json"
     }
