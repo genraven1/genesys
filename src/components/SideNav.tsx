@@ -29,7 +29,8 @@ function ListMenuItemLink(props: ListItemProps): JSX.Element {
 }
 
 const TALENTS: Array<ListItemProps> = [
-    {to: 'talents', name: 'View All Talents'}
+    {to: 'talents/new', name: 'Create Talent'},
+    {to: 'talents', name: 'View All Talents'},
 ];
 
 export default function SideNav() {

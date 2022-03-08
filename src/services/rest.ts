@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 function createInstance(): AxiosInstance {
   const instance = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "http://192.168.1.189:8080",
     headers: {
       "Content-type": "application/json"
     }

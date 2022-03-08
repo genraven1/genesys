@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import NavBar from './components/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AllTalentsView from './components/AllTalentsViewTable';
+import CreateTalent from './components/CreateTalent';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <NavBar />
       <Routes>
         <Route path='/talents' element={<AllTalentsView />}></Route>
+        <Route path='/talents/new' element={<CreateTalent />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
