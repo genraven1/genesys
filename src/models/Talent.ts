@@ -6,3 +6,16 @@ export default interface Talent {
     description: string,
     id: string
 }
+
+export class DefaultTalent {
+    static create(): Talent {
+        return {
+            name: '',
+            ranked: '',
+            activation: '',
+            tier: '',
+            description: '',
+            id: '',
+        };
+    }
+}
