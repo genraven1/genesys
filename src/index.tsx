@@ -15,7 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route path='/talents' element={<AllTalentsView />} />
         <Route path='/talents/new' element={<CreateTalent />} />
-        <Route path='npcs/minions' element={<MinionTable />} />
+        <Route path='/actors/npcs/minions' element={<MinionTable />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

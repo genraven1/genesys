@@ -6,7 +6,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
-import Minion, { DefaultMinion } from '../models/Minion';
+import Minion from '../models/Minion';
+import ActorService from '../services/ActorService';
 
 function MinionRow(props: { row: Minion }) {
     const { row } = props;
@@ -28,7 +29,7 @@ export default function MinionTable() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const minionList = [DefaultMinion.create()];
+            const minionList = await ActorService.getMinions();
             if (!minionList) { return; }
             setMinions(minionList);
         })();

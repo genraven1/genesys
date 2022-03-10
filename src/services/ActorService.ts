@@ -7,6 +7,10 @@ export default class ActorService {
         return get('/actors/npc/minions');
     }
 
+    static getMinion(id: string): Promise<Minion> {
+        return post('/actors/npc/minions/' + id);
+    }
+
     static createMinion(minion: Minion): Promise<Minion> {
         return post('/actors/npc/minions/new', minion);
     }
