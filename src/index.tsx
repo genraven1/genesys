@@ -6,14 +6,16 @@ import NavBar from './components/navigation/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AllTalentsView from './components/AllTalentsViewTable';
 import CreateTalent from './components/CreateTalent';
+import MinionTable from './components/MinionTable';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path='/talents' element={<AllTalentsView />}></Route>
-        <Route path='/talents/new' element={<CreateTalent />}></Route>
+        <Route path='/talents' element={<AllTalentsView />} />
+        <Route path='/talents/new' element={<CreateTalent />} />
+        <Route path='npcs/minions' element={<MinionTable />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

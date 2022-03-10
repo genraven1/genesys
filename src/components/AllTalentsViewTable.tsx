@@ -11,7 +11,7 @@ import Talent from '../models/Talent';
 import TalentService from '../services/TalentService';
 import { Fragment, useEffect, useState } from 'react';
 
-function Row(props: { row: Talent }) {
+function TalentRow(props: { row: Talent }) {
     const { row } = props;
     const [open, setOpen] = useState(false);
 
@@ -64,7 +64,7 @@ export default function AllTalentsView() {
                 </TableHead>
                 <TableBody>
                     {talents.map((row: Talent) => (
-                        <Row key={row.name} row={row} />
+                        <TalentRow key={row.name} row={row} />
                     ))}
                 </TableBody>
             </Table>

@@ -4,7 +4,8 @@ export default interface Talent {
     activation: string,
     tier: string,
     description: string,
-    id: string
+    id: string,
+    experienceCost: number
 }
 
 export interface ActorTalent {
@@ -20,6 +21,7 @@ export class DefaultTalent {
             tier: '',
             description: '',
             id: '',
+            experienceCost: 5
         };
     }
 }
