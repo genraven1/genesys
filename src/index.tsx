@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import NavBar from './components/NavBar';
+import NavBar from './components/navigation/NavBar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AllTalentsView from './components/AllTalentsViewTable';
 import CreateTalent from './components/CreateTalent';

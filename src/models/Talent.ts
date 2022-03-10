@@ -7,6 +7,10 @@ export default interface Talent {
     id: string
 }
 
+export interface ActorTalent {
+    ranks: number
+}
+
 export class DefaultTalent {
     static create(): Talent {
         return {
