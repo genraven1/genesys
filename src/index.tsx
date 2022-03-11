@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AllTalentsView from './components/AllTalentsViewTable';
 import CreateTalent from './components/CreateTalent';
 import MinionTable from './components/MinionTable';
+import MinionView from './components/MinionView';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path='/talents' element={<AllTalentsView />} />
         <Route path='/talents/new' element={<CreateTalent />} />
         <Route path='/actors/npcs/minions' element={<MinionTable />} />
+        <Route path='/actors/npcs/minions/:id' element={<MinionView />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

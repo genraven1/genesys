@@ -10,7 +10,7 @@ const TALENTS: Array<MenuListItemProps> = [
 ];
 
 const NPCS: Array<MenuListItemProps> = [
-    { to: 'npcs/minions', name: 'Minions' },
+    { to: 'npcs/minions', name: 'View All Minions' },
 ];
 
 export default function SideNav() {

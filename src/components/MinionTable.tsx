@@ -8,6 +8,20 @@ import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import Minion from '../models/Minion';
 import ActorService from '../services/ActorService';
+import { Link } from 'react-router-dom';
+
+interface TableCellWithLinkProps {
+    to: string,
+    name: string,
+}
+
+function TableCellWithLink(props: TableCellWithLinkProps): JSX.Element {
+    return (
+        <TableCell>
+            <Link to={props.to}>{props.name}</Link>
+        </TableCell>
+    )
+}
 
 function MinionRow(props: { row: Minion }) {
     const { row } = props;
@@ -15,7 +29,7 @@ function MinionRow(props: { row: Minion }) {
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell>{row.name}</TableCell>
+                <TableCellWithLink to={'/actors/npcs/minions/:id'} name={row.name} />
                 <TableCell>{row.combatRating}</TableCell>
                 <TableCell>{row.socialRating}</TableCell>
                 <TableCell>{row.generalRating}</TableCell>
