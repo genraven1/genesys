@@ -55,3 +55,5 @@ export interface Wounds {
     currentValue: number,
     maxValue: number,
 }
+
+export const defaultWounds = { currentValue: 0, maxValue: 1}

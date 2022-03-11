@@ -8,7 +8,7 @@ export default interface Talent {
     experienceCost: number
 }
 
-export interface ActorTalent {
+export interface ActorTalent extends Talent {
     ranks: number
 }
 

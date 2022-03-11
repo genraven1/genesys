@@ -1,4 +1,4 @@
-import { defaultCharacteristics, defaultDefense } from "./Actor";
+import { defaultCharacteristics, defaultDefense, defaultWounds } from "./Actor";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 
 export default interface Minion extends NonPlayerCharacter {
@@ -13,7 +13,7 @@ export class DefaultMinion {
             characteristics: defaultCharacteristics,
             soak: 1,
             defense: defaultDefense,
-            wounds: { currentValue: 1, maxValue: 1 },
+            wounds: defaultWounds,
             talents: [],
             combatRating: 1,
             socialRating: 1,
