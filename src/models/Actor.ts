@@ -23,16 +23,14 @@ export interface Characteristics {
     label: Characteristic,
     currentValue: number,
     tempValue: number,
-    minValue: number,
-    maxValue: number,
 }
 
-const brawn = { label: Characteristic.Brawn, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
-const agility = { label: Characteristic.Agility, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
-const intellect = { label: Characteristic.Intellect, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
-const cunning = { label: Characteristic.Cunning, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
-const willpower = { label: Characteristic.Willpower, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
-const presence = { label: Characteristic.Presence, currentValue: 1, tempValue: 1, minValue: 1, maxValue: 1}
+const brawn = { label: Characteristic.Brawn, currentValue: 1, tempValue: 1}
+const agility = { label: Characteristic.Agility, currentValue: 1, tempValue: 1}
+const intellect = { label: Characteristic.Intellect, currentValue: 1, tempValue: 1}
+const cunning = { label: Characteristic.Cunning, currentValue: 1, tempValue: 1}
+const willpower = { label: Characteristic.Willpower, currentValue: 1, tempValue: 1}
+const presence = { label: Characteristic.Presence, currentValue: 1, tempValue: 1}
 
 export const defaultCharacteristics = [brawn, agility, intellect, cunning, willpower, presence];
 

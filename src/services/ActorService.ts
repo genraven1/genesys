@@ -12,6 +12,6 @@ export default class ActorService {
     }
 
     static createMinion(minion: Minion): Promise<Minion> {
-        return post('/actors/npc/minions/new', minion);
+        return post('/actors/npc/minions', minion);
     }
 }
