@@ -1,6 +1,6 @@
 import axios from "axios";
 import Talent from "../models/Talent";
-import { get, post } from "./rest";
+import { post } from "./rest";
 
 export default class TalentService {
 
