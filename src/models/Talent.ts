@@ -1,11 +1,11 @@
 export default interface Talent {
     name: string,
-    ranked: string,
+    ranked: boolean,
     activation: string,
-    tier: string,
+    tier: number,
     description: string,
     id: string,
-    experienceCost: number
+    experience: number
 }
 
 export interface ActorTalent extends Talent {
@@ -16,12 +16,12 @@ export class DefaultTalent {
     static create(): Talent {
         return {
             name: '',
-            ranked: '',
+            ranked: false,
             activation: '',
-            tier: '',
+            tier: 1,
             description: '',
             id: '',
-            experienceCost: 5
+            experience: 5
         };
     }
 }

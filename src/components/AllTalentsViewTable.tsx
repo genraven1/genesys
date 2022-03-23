@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Talent from '../models/Talent';
 import TalentService from '../services/TalentService';
 import { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
 
 function TalentRow(props: { row: Talent }) {
     const { row } = props;
@@ -19,7 +20,7 @@ function TalentRow(props: { row: Talent }) {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.ranked}</TableCell>
+                <TableCell>{row.ranked.toString()}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
             </TableRow>
@@ -46,7 +47,7 @@ export default function AllTalentsView() {
     useEffect(() => {
         (async (): Promise<void> => {
             const talentList = await TalentService.getTalents();
-            if(!talentList) { return; }
+            if (!talentList) { return; }
             setTalents(talentList);
         })();
     });

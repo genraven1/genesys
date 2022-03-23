@@ -3,9 +3,9 @@ import { URL } from "./constants"
 
 function createInstance(): AxiosInstance {
   const instance = axios.create({
-    baseURL: URL,
+    baseURL: "",
     headers: {
-      "Content-type": "application/json"
+      "Content-Type": "application/json"
     }
   })
   return instance;
