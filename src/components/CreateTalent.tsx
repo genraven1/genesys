@@ -10,8 +10,13 @@ function isValidValue(value: any): boolean {
     return !!value;
 }
 
-export const useFormControls = () => {
-    const [talent, setTalent] = useState(DefaultTalent.create());
+interface Props {
+    newTalent: Talent | null,
+}
+
+export default function CreateTalent(props: Props) {
+    const { newTalent } = props;
+    const [talent, setTalent] = useState(newTalent ?? DefaultTalent.create());
     const [errors, setErrors] = useState({} as any);
     const validate: any = (talent: Talent) => {
         let temp: any = { ...errors }
@@ -35,21 +40,49 @@ export const useFormControls = () => {
             ...temp
         });
     }
+
     const handleInputValue = (e: any) => {
         const { name, value } = e.target;
+        validate({ [name]: value });
         setTalent({
             ...talent,
-            [name]: value
         });
-        validate({ [name]: value });
     };
+
+    const handleTextChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        const { name, value } = event.target;
+        setErrors((prev_state: any) => ({
+            ...prev_state, [name]: false,
+        }));
+        setTalent((prev_state) => ({
+            ...prev_state,
+            [name]: value,
+        }));
+    };
+
+    const handleBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
+        const { name, value } = event.target;
+        const trimmedValue = value.trim();
+
+        if (!trimmedValue) {
+            setErrors((prev_state: any) => ({
+                ...prev_state, [name]: true,
+            }));
+        }
+
+        setTalent((prev_state) => ({
+            ...prev_state,
+            [name]: trimmedValue,
+        }));
+    };
+
     const handleFormSubmit = async (e: any) => {
         e.preventDefault();
         if (formIsValid()) {
             console.log(talent);
             // const createdTalent = await TalentService.createTalent(talent);
             // console.log(createdTalent);
-            alert("You've posted your form!")
+            alert("You've posted your form!");
         }
     };
     const formIsValid = (talentValues = talent) => {
@@ -63,31 +96,14 @@ export const useFormControls = () => {
 
         return isValid;
     };
-    return {
-        handleInputValue,
-        handleFormSubmit,
-        formIsValid,
-        errors
-    };
-}
-
-export default function CreateTalent() {
-    const [talent, setTalent] = useState(DefaultTalent.create());
-    const {
-        handleInputValue,
-        handleFormSubmit,
-        formIsValid,
-        errors
-    } = useFormControls();
 
     return (
         <form onSubmit={handleFormSubmit}>
             <Card>
-                <CardHeader title='Create a Talent'>
-                </CardHeader>
+                <CardHeader title='Create a Talent'/>
                 <CardContent>
                     {/* Text */}
-                    <TextField label='Name' type='text' value={talent.name} onChange={handleInputValue} />
+                    <TextField label='Name' value={talent.name ?? ''} onChange={handleTextChange} onBlur={handleBlur}/>
                     {/* Toggle */}
                     <TextField label='Ranked' type='text' value={talent.ranked} onChange={handleInputValue} />
                     {/* Selection */}
