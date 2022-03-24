@@ -8,10 +8,11 @@ import MinionView from './MinionView';
 
 export default function MainPage() {
     const selectedTalent = useRef<Talent | null>(null);
+
     return (
         <Routes>
         <Route path='/talents' element={<AllTalentsView />} />
-        <Route path='/talents/new' element={<CreateTalent newTalent={selectedTalent.current} />} />
+        <Route path='/talents/new' element={<CreateTalent talent={selectedTalent.current} />} />
         <Route path='/actors/npcs/minions' element={<MinionTable />} />
         <Route path='/actors/npcs/minions/:id' element={<MinionView />} />
       </Routes>
