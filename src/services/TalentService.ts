@@ -1,6 +1,5 @@
 import axios from "axios";
 import Talent from "../models/Talent";
-import { get, post } from "./rest";
 
 export default class TalentService {
 
@@ -8,7 +7,7 @@ export default class TalentService {
         return await (await axios.get('/talents')).data.Items
     }
 
-    static createTalent(talent: Talent): Promise<Talent> {
-        return post('talents', talent);
+    static async createTalent(talent: Talent): Promise<Talent> {
+        return await axios.post('/talents', talent);
     }
 }

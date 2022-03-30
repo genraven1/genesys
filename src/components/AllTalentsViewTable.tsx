@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 import Talent from '../models/Talent';
 import TalentService from '../services/TalentService';
 import { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
 
 function TalentRow(props: { row: Talent }) {
     const { row } = props;
@@ -46,11 +45,12 @@ export default function AllTalentsView() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents();
-            if (!talentList) { return; }
-            setTalents(talentList);
+                const talentList = await TalentService.getTalents();
+                if (!talentList) { return; }
+                setTalents(talentList);
+                return;
         })();
-    });
+    }, []);
 
     return (
         <TableContainer component={Paper}>

@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { URL } from "./constants"
 
 function createInstance(): AxiosInstance {
   const instance = axios.create({

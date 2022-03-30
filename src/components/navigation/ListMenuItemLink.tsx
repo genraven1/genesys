@@ -12,8 +12,7 @@ export default function ListMenuItemLink(props: MenuListItemProps): JSX.Element 
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
         <Link to={to} ref={ref} {...itemProps} />
-    )),
-        [to]);
+    )),[to]);
 
     return (
         <List>
