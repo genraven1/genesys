@@ -14,11 +14,9 @@ export default function CreateTalent(props: Props) {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        setTalent((prev_state) => ({
-            ...prev_state,
-            [talent.experience]: +talent.tier * 5,
-        }));
+        const createdTalent = TalentService.createTalent(talent);
         console.log(talent);
+        console.log(createdTalent);
     }
 
     const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -43,9 +41,9 @@ export default function CreateTalent(props: Props) {
         const { value } = event.target;
         let temp_ranked: Ranked;
 
-        if (value == Ranked.No) {
+        if (value === Ranked.No) {
             temp_ranked = Ranked.No;
-        } else if (value == Ranked.Yes) {
+        } else if (value === Ranked.Yes) {
             temp_ranked = Ranked.Yes
         }
 
@@ -59,15 +57,15 @@ export default function CreateTalent(props: Props) {
         const { value } = event.target;
         let temp_activation: Activation;
 
-        if (value == Activation.Passive) {
+        if (value === Activation.Passive) {
             temp_activation = Activation.Passive;
-        } else if (value == Activation.ActiveAction) {
+        } else if (value === Activation.ActiveAction) {
             temp_activation = Activation.ActiveAction
-        } else if (value == Activation.ActiveManeuver) {
+        } else if (value === Activation.ActiveManeuver) {
             temp_activation = Activation.ActiveManeuver
-        } else if (value == Activation.ActiveIncidental) {
+        } else if (value === Activation.ActiveIncidental) {
             temp_activation = Activation.ActiveIncidental
-        } else if (value == Activation.ActiveIncidentalOutOfTurn) {
+        } else if (value === Activation.ActiveIncidentalOutOfTurn) {
             temp_activation = Activation.ActiveIncidentalOutOfTurn
         }
 
@@ -81,15 +79,15 @@ export default function CreateTalent(props: Props) {
         const { value } = event.target;
         let temp_tier: Tier;
 
-        if (value == Tier.First) {
+        if (value === Tier.First) {
             temp_tier = Tier.First;
-        } else if (value == Tier.Second) {
+        } else if (value === Tier.Second) {
             temp_tier = Tier.Second
-        } else if (value == Tier.Third) {
+        } else if (value === Tier.Third) {
             temp_tier = Tier.Third
-        } else if (value == Tier.Fourth) {
+        } else if (value === Tier.Fourth) {
             temp_tier = Tier.Fourth
-        } else if (value == Tier.Fifth) {
+        } else if (value === Tier.Fifth) {
             temp_tier = Tier.Fifth
         }
 

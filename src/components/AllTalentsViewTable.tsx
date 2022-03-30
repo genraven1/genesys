@@ -45,11 +45,12 @@ export default function AllTalentsView() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents();
-            if (!talentList) { return; }
-            setTalents(talentList);
+                const talentList = await TalentService.getTalents();
+                if (!talentList) { return; }
+                setTalents(talentList);
+                return;
         })();
-    });
+    }, []);
 
     return (
         <TableContainer component={Paper}>

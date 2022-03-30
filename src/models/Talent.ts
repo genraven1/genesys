@@ -3,9 +3,7 @@ export default interface Talent {
     ranked: Ranked,
     activation: Activation,
     tier: Tier,
-    description: string,
-    id: string,
-    experience: number
+    description: String
 }
 
 export enum Ranked {
@@ -40,9 +38,7 @@ export class DefaultTalent {
             ranked: Ranked.No,
             activation: Activation.Passive,
             tier: Tier.First,
-            description: '',
-            id: '',
-            experience: 5
+            description: ''
         };
     }
 }
