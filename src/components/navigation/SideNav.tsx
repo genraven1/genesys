@@ -11,6 +11,7 @@ const TALENTS: Array<MenuListItemProps> = [
 
 const NPCS: Array<MenuListItemProps> = [
     { to: 'npcs/minions', name: 'View All Minions' },
+    { to: 'npcs/minions/new', name: 'Create Minion' },
 ];
 
 export default function SideNav() {
