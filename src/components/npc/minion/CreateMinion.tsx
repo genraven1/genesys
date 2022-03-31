@@ -1,15 +1,40 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@mui/material";
 import { ChangeEventHandler, FocusEventHandler, FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Characteristics } from "../../../models/Characteristics";
 import Minion, { DefaultMinion } from "../../../models/Minion";
-import ActorService from "../../../services/ActorService";
 
+interface CharacteristcsBoxProps {
+    characteristic: Characteristics
+}
+
+function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
+    const [characteristic, setCharacteristic] = useState(newMinion ?? DefaultMinion.create());
+
+    return (
+        <Grid item>
+        </Grid>
+    )
+}
+
+interface CharacteristcsRowProps {
+    characteristic: Characteristics
+}
+
+function CharacteristicRow(props: CharacteristcsRowProps): JSX.Element {
+
+    return (
+        <Grid item>
+            <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+        </Grid>
+    )
+}
 
 interface Props {
     minion?: Minion | null,
 }
 
-export default function CreateTalent(props: Props) {
+export default function CreateMinion(props: Props) {
     const { minion: newMinion } = props;
     const [minion, setMinion] = useState(newMinion ?? DefaultMinion.create());
     const [errors, setErrors] = useState({} as any);
