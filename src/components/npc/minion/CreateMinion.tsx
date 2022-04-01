@@ -7,6 +7,7 @@ import Minion, { DefaultMinion } from "../../../models/Minion";
 import { Rating, RatingType } from "../../../models/NonPlayerCharacter";
 import { CharacteristicBox } from "../CharacteristicBox";
 import { RatingBox } from "../RatingBox";
+import { SoakBox } from "../SoakBox";
 import { CreateWoundsBox } from "../WoundsBox";
 
 interface Props {
@@ -33,6 +34,7 @@ export default function CreateMinion(props: Props) {
             ...prev_state,
             [name]: value,
         }));
+        updateSoak(minion);
     }
 
     const handleTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -53,6 +55,8 @@ export default function CreateMinion(props: Props) {
             ...prev_state,
             characteristics: characteristicList,
         }));
+
+        updateSoak(minion);
     }
 
     const updateMinionWounds = (wounds: Wounds) => {
@@ -83,7 +87,13 @@ export default function CreateMinion(props: Props) {
                 }));
                 break;
         }
-        
+    }
+
+    const updateSoak = (minion: Minion) => {
+        setMinion((prev_state) => ({
+            ...prev_state,
+            soak: minion.characteristics[0].currentValue,
+        }));
     }
 
     return (
@@ -93,7 +103,19 @@ export default function CreateMinion(props: Props) {
             <form onSubmit={handleSubmit}>
                 <CardContent>
                     <Grid container justifyContent={'center'}>
-                        <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+                        <Grid container spacing={10}>
+                            <Grid item xs>
+                                <Card>
+                                    <CardHeader title={'Name'} style={{ textAlign: 'center' }} />
+                                    <Divider />
+                                    <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+                                </Card>
+                            </Grid>
+                            <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />
+                            <RatingBox updatedRating={minion.socialRating} onRatingUpdate={updateMinionRatings} />
+                            <RatingBox updatedRating={minion.generalRating} onRatingUpdate={updateMinionRatings} />
+                        </Grid>
+                        <Divider />
                         <Grid container spacing={10}>
                             <CharacteristicBox newCharacteristic={minion.characteristics[0]} type={CharacteristicType.Brawn} onCharacteristicUpdate={updateMinionCharacteristic} />
                             <CharacteristicBox newCharacteristic={minion.characteristics[1]} type={CharacteristicType.Agility} onCharacteristicUpdate={updateMinionCharacteristic} />
@@ -102,11 +124,10 @@ export default function CreateMinion(props: Props) {
                             <CharacteristicBox newCharacteristic={minion.characteristics[4]} type={CharacteristicType.Willpower} onCharacteristicUpdate={updateMinionCharacteristic} />
                             <CharacteristicBox newCharacteristic={minion.characteristics[5]} type={CharacteristicType.Presence} onCharacteristicUpdate={updateMinionCharacteristic} />
                         </Grid>
-                        <CreateWoundsBox newWounds={minion.wounds} onWoundsUpdate={updateMinionWounds} />
+                        <Divider />
                         <Grid container spacing={10}>
-                            <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />
-                            <RatingBox updatedRating={minion.socialRating} onRatingUpdate={updateMinionRatings} />
-                            <RatingBox updatedRating={minion.generalRating} onRatingUpdate={updateMinionRatings} />
+                            <CreateWoundsBox newWounds={minion.wounds} onWoundsUpdate={updateMinionWounds} />
+                            <SoakBox soak={minion.soak} />
                         </Grid>
                     </Grid>
                 </CardContent>
