@@ -1,11 +1,11 @@
-import { Characteristics } from "./Characteristics";
+import { Characteristic } from "./Characteristics";
 import { Defense } from "./Defense";
 import { ActorTalent } from "./Talent";
 
 export default interface Actor {
     name: string,
     id: string,
-    characteristics: Characteristics[],
+    characteristics: Characteristic[],
     soak: number,
     defense: Defense[],
     wounds: Wounds,
@@ -18,6 +18,15 @@ export interface Wounds {
 }
 
 export const defaultWounds = { currentValue: 0, maxValue: 1}
+
+export class DefaultWounds {
+    static create(): Wounds {
+        return {
+            currentValue: 0,
+            maxValue: 1,
+        };
+    }
+}
 
 export interface Strain {
     currentValue: number,

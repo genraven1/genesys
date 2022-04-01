@@ -1,34 +1,13 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@mui/material";
 import { ChangeEventHandler, FocusEventHandler, FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Characteristics } from "../../../models/Characteristics";
+import { Wounds } from "../../../models/Actor";
+import { CharacteristicType, Characteristic } from "../../../models/Characteristics";
 import Minion, { DefaultMinion } from "../../../models/Minion";
-
-interface CharacteristcsBoxProps {
-    characteristic: Characteristics
-}
-
-function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
-    const [characteristic, setCharacteristic] = useState(newMinion ?? DefaultMinion.create());
-
-    return (
-        <Grid item>
-        </Grid>
-    )
-}
-
-interface CharacteristcsRowProps {
-    characteristic: Characteristics
-}
-
-function CharacteristicRow(props: CharacteristcsRowProps): JSX.Element {
-
-    return (
-        <Grid item>
-            <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
-        </Grid>
-    )
-}
+import { Rating, RatingType } from "../../../models/NonPlayerCharacter";
+import { CharacteristicBox } from "../CharacteristicBox";
+import { RatingBox } from "../RatingBox";
+import { CreateWoundsBox } from "../WoundsBox";
 
 interface Props {
     minion?: Minion | null,
@@ -65,6 +44,48 @@ export default function CreateMinion(props: Props) {
         }));
     }
 
+    const updateMinionCharacteristic = (characteristic: Characteristic) => {
+        let characteristicList = minion.characteristics;
+
+        characteristicList[characteristicList.findIndex((char) => char.label === characteristic.label)] = characteristic;
+
+        setMinion((prev_state) => ({
+            ...prev_state,
+            characteristics: characteristicList,
+        }));
+    }
+
+    const updateMinionWounds = (wounds: Wounds) => {
+        setMinion((prev_state) => ({
+            ...prev_state,
+            wounds: wounds,
+        }));
+    }
+
+    const updateMinionRatings = (rating: Rating) => {
+        switch (rating.type) {
+            case RatingType.CombatRating:
+                setMinion((prev_state) => ({
+                    ...prev_state,
+                    combatRating: rating,
+                }));
+                break;
+            case RatingType.SocialRating:
+                setMinion((prev_state) => ({
+                    ...prev_state,
+                    socialRating: rating,
+                }));
+                break;
+            case RatingType.GeneralRating:
+                setMinion((prev_state) => ({
+                    ...prev_state,
+                    generalRating: rating,
+                }));
+                break;
+        }
+        
+    }
+
     return (
         <Card>
             <CardHeader title={'Create Minion'} />
@@ -73,6 +94,20 @@ export default function CreateMinion(props: Props) {
                 <CardContent>
                     <Grid container justifyContent={'center'}>
                         <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+                        <Grid container spacing={10}>
+                            <CharacteristicBox newCharacteristic={minion.characteristics[0]} type={CharacteristicType.Brawn} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.characteristics[1]} type={CharacteristicType.Agility} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.characteristics[2]} type={CharacteristicType.Intellect} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.characteristics[3]} type={CharacteristicType.Cunning} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.characteristics[4]} type={CharacteristicType.Willpower} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.characteristics[5]} type={CharacteristicType.Presence} onCharacteristicUpdate={updateMinionCharacteristic} />
+                        </Grid>
+                        <CreateWoundsBox newWounds={minion.wounds} onWoundsUpdate={updateMinionWounds} />
+                        <Grid container spacing={10}>
+                            <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />
+                            <RatingBox updatedRating={minion.socialRating} onRatingUpdate={updateMinionRatings} />
+                            <RatingBox updatedRating={minion.generalRating} onRatingUpdate={updateMinionRatings} />
+                        </Grid>
                     </Grid>
                 </CardContent>
                 <CardActions>

@@ -1,7 +1,7 @@
 import { defaultWounds } from "./Actor";
 import { defaultCharacteristics } from "./Characteristics";
 import { defaultDefense } from "./Defense";
-import NonPlayerCharacter from "./NonPlayerCharacter";
+import NonPlayerCharacter, { RatingType } from "./NonPlayerCharacter";
 
 export default interface Minion extends NonPlayerCharacter {
     groupSize: number,
@@ -17,9 +17,9 @@ export class DefaultMinion {
             defense: defaultDefense,
             wounds: defaultWounds,
             talents: [],
-            combatRating: 1,
-            socialRating: 1,
-            generalRating: 1,
+            combatRating: { type: RatingType.CombatRating, value: 1 },
+            socialRating: { type: RatingType.SocialRating, value: 1 },
+            generalRating: { type: RatingType.GeneralRating, value: 1 },
             groupSize: 1
         };
     }
