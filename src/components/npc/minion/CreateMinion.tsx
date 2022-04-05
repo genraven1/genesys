@@ -126,9 +126,7 @@ export default function CreateMinion(props: Props) {
                                 <Card>
                                     <CardHeader title={'Name'} style={{ textAlign: 'center' }} />
                                     <Divider />
-                                    <InlineTextField defaultValue={''} editable={true} onCommit={handleOnCommit} 
-                                    validate={(value: string): boolean => value.trim() !== ''} helperText={'Name'} 
-                                    placeholder={'Name'} errorText={''} />
+                                    <InlineTextField defaultValue={'Name'} editable={true} onCommit={handleOnCommit} helperText={'Name'} placeholder={'Name'} errorText={''} />
                                 </Card>
                             </Grid>
                             <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />

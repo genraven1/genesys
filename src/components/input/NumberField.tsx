@@ -3,21 +3,23 @@ import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import EditField from "./EditField";
 
 export interface Props {
-    defaultValue: string,
+    defaultValue: number,
     defaultEdit?: boolean,
     editable?: boolean,
-    onChange?: (value: string) => void,
-    onCommit: (value: string) => void,
+    onChange?: (value: number) => void,
+    onCommit: (value: number) => void,
     helperText?: string,
     disabled?: boolean,
     placeholder?: string,
     errorText?: string,
-    inputProps?: InputHTMLAttributes<HTMLInputElement>
+    inputProps?: InputHTMLAttributes<HTMLInputElement>,
+    max?: number,
+    min?: number,
 }
 
-export default function InlineTextField(props: Props): JSX.Element {
-    const { defaultValue, defaultEdit, editable, onChange, onCommit, helperText, disabled, placeholder, errorText, inputProps } = props;
-    const [textValue, setTextValue] = useState(defaultValue);
+export default function InlineNumberField(props: Props): JSX.Element {
+    const { defaultValue, defaultEdit, editable, onChange, onCommit, helperText, disabled, placeholder, errorText, inputProps, max, min } = props;
+    const [numberValue, setNumberValue] = useState(defaultValue);
     const [edit, setEdit] = useState(defaultEdit ?? false);
     const [error, setError] = useState(false);
 
@@ -25,41 +27,44 @@ export default function InlineTextField(props: Props): JSX.Element {
         setEdit(false);
 
         if(!error) {
-            onCommit(textValue);
+            onCommit(numberValue);
         }
 
         setError(false);
     }
 
     const handleOnCancel = (): void => {
-        setTextValue(defaultValue);
+        setNumberValue(defaultValue);
         setEdit(!edit);
-    }
-
-    const onValidate = (value: string): boolean => {
-        return value.trim() !== '';
     }
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target;
-        let isValid = onValidate(value);
+        let isValid = true;
+
+        if (min) {
+            isValid = +value > min;
+        }
+        if (max) {
+            isValid = +value < max;
+        }
 
         setError(!isValid);
-        setTextValue(isValid ? value : defaultValue);
+        setNumberValue(isValid ? +value : defaultValue);
 
         if (onChange) {
-            onChange(value)
+            onChange(+value)
         }
     }
 
     const editElement = (
         <ClickAwayListener onClickAway={handleOnCommit}>
-            <TextField defaultValue={textValue} onChange={inputOnChange} helperText={error ? errorText : helperText} size='small'
+            <TextField defaultValue={numberValue} onChange={inputOnChange} helperText={error ? errorText : helperText} size='small'
             disabled={Boolean(disabled)} placeholder={placeholder} error={error} inputProps={{ autoFocus: true, ...inputProps}} />
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography variant='body1' style={{ wordWrap: 'break-word' }}>{textValue}</Typography>
+    const viewElement = <Typography variant='body1' style={{ wordWrap: 'break-word' }}>{numberValue}</Typography>
 
     return (
         <EditField edit={edit} editable={editable} viewElement={viewElement} editElement={editElement} 

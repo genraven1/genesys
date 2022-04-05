@@ -1,6 +1,7 @@
 import { Grid, Card, CardHeader, Divider, TextField } from "@mui/material";
 import { useState, FocusEventHandler, ChangeEventHandler } from "react";
 import { Wounds, DefaultWounds } from "../../models/Actor";
+import InlineNumberField from "../input/NumberField";
 
 export interface CreateWoundsProps {
     newWounds: Wounds,
@@ -33,12 +34,21 @@ export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
         onWoundsUpdate(wounds);
     }
 
+    const handleOnCommit = (value: number) => {
+        setWounds((prev_state) => ({
+            ...prev_state,
+            maxValue: value,
+        }));
+        onWoundsUpdate(wounds);
+    }
+
     return (
         <Grid item xs>
             <Card>
                 <CardHeader title={'Wounds'} style={{ textAlign: 'center' }} />
                 <Divider />
-                <TextField name={'wounds'} value={wounds.maxValue ?? 1} onBlur={handleBlur} onChange={handleTextChange} fullWidth type={'number'} InputProps={{ inputProps: { min: 1 } }} />
+                <InlineNumberField defaultValue={1} onCommit={handleOnCommit} min={1} editable={true} />
+                {/* <TextField name={'wounds'} value={wounds.maxValue ?? 1} onBlur={handleBlur} onChange={handleTextChange} fullWidth type={'number'} InputProps={{ inputProps: { min: 1 } }} /> */}
             </Card>
         </Grid>
     )

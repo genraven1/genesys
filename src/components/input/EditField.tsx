@@ -15,7 +15,7 @@ export interface Props {
     onCommit: () => void,
 }
 
-export default function EditTextField(props: Props): JSX.Element {
+export default function EditField(props: Props): JSX.Element {
     const { edit, editable, viewElement, editElement, onEdit, onCancel, onCommit } = props;
     let isEditable = editable ?? true;
 
