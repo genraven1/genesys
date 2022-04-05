@@ -1,4 +1,4 @@
-import { Grid, Card, CardHeader, Divider, TextField, CardContent, Typography, ratingClasses } from "@mui/material";
+import { Grid, Card, CardHeader, Divider, CardContent, Typography } from "@mui/material";
 
 export interface SoakBoxProps {
     soak: number,

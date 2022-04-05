@@ -5,9 +5,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import { ReactNode } from "react";
 
 
-export interface TextFieldProps {
+export interface Props {
     edit: boolean,
-    editable: boolean,
+    editable?: boolean,
     viewElement: ReactNode | null,
     editElement: ReactNode | null,
     onEdit: () => void,
@@ -15,7 +15,7 @@ export interface TextFieldProps {
     onCommit: () => void,
 }
 
-export default function TextField(props: TextFieldProps): JSX.Element {
+export default function EditTextField(props: Props): JSX.Element {
     const { edit, editable, viewElement, editElement, onEdit, onCancel, onCommit } = props;
     let isEditable = editable ?? true;
 

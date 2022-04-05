@@ -1,10 +1,11 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, TextField } from "@mui/material";
-import { ChangeEventHandler, FocusEventHandler, FormEventHandler, useState } from "react";
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } from "@mui/material";
+import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Wounds } from "../../../models/Actor";
 import { CharacteristicType, Characteristic } from "../../../models/Characteristics";
 import Minion, { DefaultMinion } from "../../../models/Minion";
 import { Rating, RatingType } from "../../../models/NonPlayerCharacter";
+import InlineTextField from "../../input/TextField";
 import { CharacteristicBox } from "../CharacteristicBox";
 import { RatingBox } from "../RatingBox";
 import { SoakBox } from "../SoakBox";
@@ -25,25 +26,6 @@ export default function CreateMinion(props: Props) {
         console.log(minion);
         //ActorService.createMinion(minion);
         //navigate('/actors/npcs/minions/' + minion.id);
-    }
-
-    const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-        const { name, value } = event.target;
-
-        setMinion((prev_state) => ({
-            ...prev_state,
-            [name]: value,
-        }));
-        updateSoak(minion);
-    }
-
-    const handleTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { name, value } = event.target;
-
-        setMinion((prev_state) => ({
-            ...prev_state,
-            [name]: value,
-        }));
     }
 
     const updateMinionCharacteristic = (characteristic: Characteristic) => {
@@ -125,6 +107,13 @@ export default function CreateMinion(props: Props) {
         }));
     }
 
+    const handleOnCommit = (value: string) => {
+        setMinion((prev_state) => ({
+            ...prev_state,
+            name: value,
+        }));
+    }
+
     return (
         <Card>
             <CardHeader title={'Create Minion'} />
@@ -137,7 +126,9 @@ export default function CreateMinion(props: Props) {
                                 <Card>
                                     <CardHeader title={'Name'} style={{ textAlign: 'center' }} />
                                     <Divider />
-                                    <TextField name='name' label='Name' value={minion.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+                                    <InlineTextField defaultValue={''} editable={true} onCommit={handleOnCommit} 
+                                    validate={(value: string): boolean => value.trim() !== ''} helperText={'Name'} 
+                                    placeholder={'Name'} errorText={''} />
                                 </Card>
                             </Grid>
                             <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />
