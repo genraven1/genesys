@@ -9,7 +9,12 @@ export interface Defense {
     tempValue: number,
 }
 
-const defaultMeleeDefense = { type: DefenseType.Melee, currentValue: 0, tempValue: 0 };
-const defaultRangedDefense = { type: DefenseType.Ranged, currentValue: 0, tempValue: 0 };
-
-export const defaultDefense = [defaultMeleeDefense, defaultRangedDefense];
+export class DefaultDefense {
+    static create(type: DefenseType): Defense {
+        return {
+            type: type,
+            currentValue: 0,
+            tempValue: 0
+        }
+    }
+}

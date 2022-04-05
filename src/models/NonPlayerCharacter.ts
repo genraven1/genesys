@@ -18,9 +18,9 @@ export default interface NonPlayerCharacter extends Actor {
 }
 
 export class DefaultRating {
-    static create(rating: Rating): Rating {
+    static create(rating: RatingType): Rating {
         return {
-            type: rating.type,
+            type: rating,
             value: 1,
         };
     }

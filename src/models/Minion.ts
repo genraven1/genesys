@@ -1,7 +1,7 @@
-import { defaultWounds } from "./Actor";
-import { defaultCharacteristics } from "./Characteristics";
-import { defaultDefense } from "./Defense";
-import NonPlayerCharacter, { RatingType } from "./NonPlayerCharacter";
+import { DefaultWounds } from "./Actor";
+import { CharacteristicType, DefaultCharacteristic } from "./Characteristics";
+import { DefaultDefense, DefenseType } from "./Defense";
+import NonPlayerCharacter, { DefaultRating, RatingType } from "./NonPlayerCharacter";
 
 export default interface Minion extends NonPlayerCharacter {
     groupSize: number,
@@ -13,13 +13,19 @@ export class DefaultMinion {
             name: '',
             id: '',
             soak: 1,
-            characteristics: defaultCharacteristics,
-            defense: defaultDefense,
-            wounds: defaultWounds,
+            brawn: DefaultCharacteristic.create(CharacteristicType.Brawn),
+            agility: DefaultCharacteristic.create(CharacteristicType.Agility),
+            intellect: DefaultCharacteristic.create(CharacteristicType.Intellect),
+            cunning: DefaultCharacteristic.create(CharacteristicType.Cunning),
+            willpower: DefaultCharacteristic.create(CharacteristicType.Willpower),
+            presence: DefaultCharacteristic.create(CharacteristicType.Presence),
+            meleeDefense: DefaultDefense.create(DefenseType.Melee),
+            rangedDefense: DefaultDefense.create(DefenseType.Ranged),
+            wounds: DefaultWounds.create(),
             talents: [],
-            combatRating: { type: RatingType.CombatRating, value: 1 },
-            socialRating: { type: RatingType.SocialRating, value: 1 },
-            generalRating: { type: RatingType.GeneralRating, value: 1 },
+            combatRating: DefaultRating.create(RatingType.CombatRating),
+            socialRating: DefaultRating.create(RatingType.SocialRating),
+            generalRating: DefaultRating.create(RatingType.GeneralRating),
             groupSize: 1
         };
     }
