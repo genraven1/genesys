@@ -36,13 +36,9 @@ export default function InlineTextField(props: Props): JSX.Element {
         setEdit(!edit);
     }
 
-    const onValidate = (value: string): boolean => {
-        return value.trim() !== '';
-    }
-
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target;
-        let isValid = onValidate(value);
+        let isValid = value.trim() !== '';
 
         setError(!isValid);
         setTextValue(isValid ? value : defaultValue);
@@ -55,7 +51,7 @@ export default function InlineTextField(props: Props): JSX.Element {
     const editElement = (
         <ClickAwayListener onClickAway={handleOnCommit}>
             <TextField defaultValue={textValue} onChange={inputOnChange} helperText={error ? errorText : helperText} size='small'
-            disabled={Boolean(disabled)} placeholder={placeholder} error={error} inputProps={{ autoFocus: true, ...inputProps}} />
+            disabled={Boolean(disabled)} placeholder={placeholder} error={error} inputProps={{ autoFocus: true, ...inputProps}} fullWidth />
         </ClickAwayListener>
     )
 
