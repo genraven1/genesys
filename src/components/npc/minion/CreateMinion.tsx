@@ -6,10 +6,10 @@ import { CharacteristicType, Characteristic } from "../../../models/Characterist
 import Minion, { DefaultMinion } from "../../../models/Minion";
 import { Rating, RatingType } from "../../../models/NonPlayerCharacter";
 import InlineTextField from "../../input/TextField";
-import { CharacteristicBox } from "../CharacteristicBox";
-import { RatingBox } from "../RatingBox";
-import { SoakBox } from "../SoakBox";
-import { CreateWoundsBox } from "../WoundsBox";
+import CharacteristicBox from "../CharacteristicBox";
+import RatingBox from "../RatingBox";
+import SoakBox from "../SoakBox";
+import CreateWoundsBox from "../WoundsBox";
 
 interface Props {
     minion?: Minion | null,

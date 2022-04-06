@@ -8,7 +8,7 @@ interface CharacteristcsBoxProps {
     onCharacteristicUpdate: (characteristic: Characteristic) => Characteristic;
 }
 
-export function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
+export default function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
     const { newCharacteristic, onCharacteristicUpdate } = props;
     const [characteristic, setCharacteristic] = useState(newCharacteristic);
 

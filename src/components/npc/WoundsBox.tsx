@@ -8,7 +8,7 @@ interface CreateWoundsProps {
     onWoundsUpdate: (wounds: Wounds) => Wounds;
 }
 
-export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
+export default function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
     const { newWounds, onWoundsUpdate } = props;
     const [wounds, setWounds] = useState<Wounds>(newWounds);
 
