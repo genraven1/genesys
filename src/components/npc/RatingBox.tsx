@@ -8,7 +8,7 @@ interface RatingProps {
     onRatingUpdate: (rating: Rating) => Rating,
 }
 
-export function RatingBox(props: RatingProps): JSX.Element {
+export default function RatingBox(props: RatingProps): JSX.Element {
     const { updatedRating, onRatingUpdate } = props;
     const [rating, setRating] = useState(updatedRating);
 
