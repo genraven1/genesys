@@ -1,36 +1,31 @@
-import { Grid, Card, CardHeader, Divider, TextField } from "@mui/material";
-import { useState, FocusEventHandler, ChangeEventHandler } from "react";
-import { DefaultRating, Rating } from "../../models/NonPlayerCharacter";
+import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
+import { useState } from "react";
+import { Rating } from "../../models/NonPlayerCharacter";
+import InputButtonGroup from "../input/InputButtonGroup";
 
-export interface RatingProps {
+interface RatingProps {
     updatedRating: Rating,
-    onRatingUpdate: (rating: Rating) => void,
+    onRatingUpdate: (rating: Rating) => Rating,
 }
 
 export function RatingBox(props: RatingProps): JSX.Element {
     const { updatedRating, onRatingUpdate } = props;
-    const [rating, setRating] = useState(updatedRating ?? DefaultRating.create(updatedRating));
+    const [rating, setRating] = useState(updatedRating);
 
-    const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-
+    const handleOnDecrease = () => {
         setRating((prev_state) => ({
             ...prev_state,
-            value: +value,
+            value: rating.value--,
         }));
-
-        onRatingUpdate(rating);
+        setRating(onRatingUpdate(rating));
     }
 
-    const handleTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-
+    const handleOnIncrease = () => {
         setRating((prev_state) => ({
             ...prev_state,
-            value: +value,
+            value: rating.value++,
         }));
-
-        onRatingUpdate(rating);
+        setRating(onRatingUpdate(rating));
     }
 
     return (
@@ -38,7 +33,10 @@ export function RatingBox(props: RatingProps): JSX.Element {
             <Card>
                 <CardHeader title={rating.type} style={{ textAlign: 'center' }} />
                 <Divider />
-                <TextField name={rating.type} value={rating.value ?? 1} onBlur={handleBlur} onChange={handleTextChange} fullWidth type={'number'} InputProps={{ inputProps: { min: 1 } }} />
+                <Typography style={{ textAlign: 'center' }} >{rating.value}</Typography>
+                <CardActions>
+                    <InputButtonGroup onIncrease={handleOnIncrease} onDecrease={handleOnDecrease} />
+                </CardActions>
             </Card>
         </Grid>
     )

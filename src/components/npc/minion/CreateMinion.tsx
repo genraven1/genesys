@@ -36,37 +36,37 @@ export default function CreateMinion(props: Props) {
                     brawn: characteristic,
                 }));
                 updateSoak(minion);
-                break;
+                return minion.brawn;
             case CharacteristicType.Agility:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     agility: characteristic,
                 }));
-                break;
+                return minion.agility;
             case CharacteristicType.Intellect:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     intellect: characteristic,
                 }));
-                break;
+                return minion.intellect;
             case CharacteristicType.Cunning:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     cunning: characteristic,
                 }));
-                break;
+                return minion.cunning;
             case CharacteristicType.Willpower:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     willpower: characteristic,
                 }));
-                break;
+                return minion.willpower;
             case CharacteristicType.Presence:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     presence: characteristic,
                 }));
-                break;
+                return minion.presence;
         }
     }
 
@@ -77,19 +77,19 @@ export default function CreateMinion(props: Props) {
                     ...prev_state,
                     combatRating: rating,
                 }));
-                break;
+                return minion.combatRating;
             case RatingType.SocialRating:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     socialRating: rating,
                 }));
-                break;
+                return minion.socialRating;
             case RatingType.GeneralRating:
                 setMinion((prev_state) => ({
                     ...prev_state,
                     generalRating: rating,
                 }));
-                break;
+                return minion.generalRating;
         }
     }
 
@@ -105,6 +105,7 @@ export default function CreateMinion(props: Props) {
             ...prev_state,
             wounds: wounds,
         }));
+        return minion.wounds;
     }
 
     const handleOnCommit = (value: string) => {
@@ -135,12 +136,12 @@ export default function CreateMinion(props: Props) {
                         </Grid>
                         <Divider />
                         <Grid container spacing={10}>
-                            <CharacteristicBox newCharacteristic={minion.brawn} type={CharacteristicType.Brawn} onCharacteristicUpdate={updateMinionCharacteristic} />
-                            <CharacteristicBox newCharacteristic={minion.agility} type={CharacteristicType.Agility} onCharacteristicUpdate={updateMinionCharacteristic} />
-                            <CharacteristicBox newCharacteristic={minion.intellect} type={CharacteristicType.Intellect} onCharacteristicUpdate={updateMinionCharacteristic} />
-                            <CharacteristicBox newCharacteristic={minion.cunning} type={CharacteristicType.Cunning} onCharacteristicUpdate={updateMinionCharacteristic} />
-                            <CharacteristicBox newCharacteristic={minion.willpower} type={CharacteristicType.Willpower} onCharacteristicUpdate={updateMinionCharacteristic} />
-                            <CharacteristicBox newCharacteristic={minion.presence} type={CharacteristicType.Presence} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.brawn} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.agility} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.intellect} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.cunning}  onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.willpower} onCharacteristicUpdate={updateMinionCharacteristic} />
+                            <CharacteristicBox newCharacteristic={minion.presence} onCharacteristicUpdate={updateMinionCharacteristic} />
                         </Grid>
                         <Divider />
                         <Grid container spacing={10}>

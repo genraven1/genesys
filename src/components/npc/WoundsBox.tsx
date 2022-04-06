@@ -1,23 +1,23 @@
-import { Grid, Card, CardHeader, Divider, TextField, CardActions, Typography } from "@mui/material";
+import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { useState } from "react";
-import { Wounds, DefaultWounds } from "../../models/Actor";
+import { Wounds } from "../../models/Actor";
 import InputButtonGroup from "../input/InputButtonGroup";
 
-export interface CreateWoundsProps {
+interface CreateWoundsProps {
     newWounds: Wounds,
-    onWoundsUpdate: (wounds: Wounds) => void;
+    onWoundsUpdate: (wounds: Wounds) => Wounds;
 }
 
 export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
     const { newWounds, onWoundsUpdate } = props;
-    const [wounds, setWounds] = useState(newWounds ?? DefaultWounds.create());
+    const [wounds, setWounds] = useState<Wounds>(newWounds);
 
     const handleOnDecrease = () => {
         setWounds((prev_state) => ({
             ...prev_state,
             maxValue: wounds.maxValue--,
         }));
-        onWoundsUpdate(wounds);
+        setWounds(onWoundsUpdate(wounds));
     }
 
     const handleOnIncrease = () => {
@@ -25,7 +25,7 @@ export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
             ...prev_state,
             maxValue: wounds.maxValue++,
         }));
-        onWoundsUpdate(wounds);
+        setWounds(onWoundsUpdate(wounds));
     }
 
     return (

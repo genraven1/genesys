@@ -1,45 +1,42 @@
-import { Grid, Card, CardHeader, Divider, TextField } from "@mui/material";
-import { useState, FocusEventHandler, ChangeEventHandler } from "react";
-import { Characteristic, CharacteristicType, DefaultCharacteristic } from "../../models/Characteristics";
+import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
+import { useState } from "react";
+import { Characteristic } from "../../models/Characteristics";
+import InputButtonGroup from "../input/InputButtonGroup";
 
-export interface CharacteristcsBoxProps {
+interface CharacteristcsBoxProps {
     newCharacteristic: Characteristic,
-    type: CharacteristicType,
-    onCharacteristicUpdate: (characteristic: Characteristic) => void;
+    onCharacteristicUpdate: (characteristic: Characteristic) => Characteristic;
 }
 
 export function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
-    const { newCharacteristic, type, onCharacteristicUpdate } = props;
-    const [characteristic, setCharacteristic] = useState(newCharacteristic ?? DefaultCharacteristic.create(type));
+    const { newCharacteristic, onCharacteristicUpdate } = props;
+    const [characteristic, setCharacteristic] = useState(newCharacteristic);
 
-    const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-
+    const handleOnDecrease = () => {
         setCharacteristic((prev_state) => ({
             ...prev_state,
-            currentValue: +value,
+            currentValue: characteristic.currentValue--,
         }));
-        
-        onCharacteristicUpdate(characteristic);
+        setCharacteristic(onCharacteristicUpdate(characteristic));
     }
 
-    const handleTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-
+    const handleOnIncrease = () => {
         setCharacteristic((prev_state) => ({
             ...prev_state,
-            currentValue: +value,
+            currentValue: characteristic.currentValue++,
         }));
-
-        onCharacteristicUpdate(characteristic);
+        setCharacteristic(onCharacteristicUpdate(characteristic));
     }
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={type} style={{ textAlign: 'center' }} />
+                <CardHeader title={characteristic.type} style={{ textAlign: 'center' }} />
                 <Divider />
-                <TextField name={type} value={characteristic.currentValue ?? 1} onBlur={handleBlur} onChange={handleTextChange} fullWidth type={'number'} InputProps={{ inputProps: { min: 1, max: 5 } }} style={{ textAlign: 'center' }}/>
+                <Typography style={{ textAlign: 'center' }} >{characteristic.currentValue}</Typography>
+                <CardActions>
+                    <InputButtonGroup onIncrease={handleOnIncrease} onDecrease={handleOnDecrease} />
+                </CardActions>
             </Card>
         </Grid>
     )
