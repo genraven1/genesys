@@ -1,7 +1,7 @@
-import { Grid, Card, CardHeader, Divider } from "@mui/material";
-import { useState, FocusEventHandler, ChangeEventHandler } from "react";
+import { Grid, Card, CardHeader, Divider, TextField, CardActions, Typography } from "@mui/material";
+import { useState } from "react";
 import { Wounds, DefaultWounds } from "../../models/Actor";
-import InlineNumberField from "../input/NumberField";
+import InputButtonGroup from "../input/InputButtonGroup";
 
 export interface CreateWoundsProps {
     newWounds: Wounds,
@@ -12,10 +12,18 @@ export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
     const { newWounds, onWoundsUpdate } = props;
     const [wounds, setWounds] = useState(newWounds ?? DefaultWounds.create());
 
-    const handleOnCommit = (value: number) => {
+    const handleOnDecrease = () => {
         setWounds((prev_state) => ({
             ...prev_state,
-            maxValue: value,
+            maxValue: wounds.maxValue--,
+        }));
+        onWoundsUpdate(wounds);
+    }
+
+    const handleOnIncrease = () => {
+        setWounds((prev_state) => ({
+            ...prev_state,
+            maxValue: wounds.maxValue++,
         }));
         onWoundsUpdate(wounds);
     }
@@ -25,8 +33,10 @@ export function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
             <Card>
                 <CardHeader title={'Wounds'} style={{ textAlign: 'center' }} />
                 <Divider />
-                <InlineNumberField defaultValue={1} onCommit={handleOnCommit} editable={true} helperText={'Wound Threshold'} errorText={''} />
-                {/* <TextField name={'wounds'} value={wounds.maxValue ?? 1} onBlur={handleBlur} onChange={handleTextChange} fullWidth type={'number'} InputProps={{ inputProps: { min: 1 } }} /> */}
+                <Typography style={{ textAlign: 'center' }} >{wounds.maxValue}</Typography>
+                <CardActions>
+                    <InputButtonGroup onIncrease={handleOnIncrease} onDecrease={handleOnDecrease} />
+                </CardActions>
             </Card>
         </Grid>
     )

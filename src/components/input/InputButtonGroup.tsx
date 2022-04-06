@@ -1,17 +1,23 @@
-import { Fragment, useState } from "react";
-import { InputButton } from "./ButtonInput";
+import { Box, IconButton } from "@mui/material";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export interface InputButtonGroupProps {
-    value: number,
+    onIncrease: () => void,
+    onDecrease: () => void,
 }
 
 export default function InputButtonGroup(props: InputButtonGroupProps): JSX.Element {
-    const { value } = props;
-    const [updatedValue, setupdatedValue] = useState(value);
+    const { onIncrease, onDecrease } = props;
+
     return (
-        <Fragment>
-            <InputButton value={value} name={'Up'} onClick={} />
-            <InputButton value={value} name={'Down'} onClick={} />
-        </Fragment>
+        <Box component='span'>
+            <IconButton title='Increase' size='medium' onClick={(): void => onIncrease()}>
+                <ArrowUpwardIcon color='primary' fontSize='medium' />
+            </IconButton>
+            <IconButton title='Decrease' size='medium' onClick={(): void => onDecrease()}>
+                <ArrowDownwardIcon color='primary' fontSize='medium' />
+            </IconButton>
+        </Box>
     )
 }
