@@ -2,7 +2,7 @@ import { Box, IconButton } from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-export interface InputButtonGroupProps {
+interface InputButtonGroupProps {
     onIncrease: () => void,
     onDecrease: () => void,
 }

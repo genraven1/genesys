@@ -4,8 +4,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
 import { ReactNode } from "react";
 
-
-export interface Props {
+interface Props {
     edit: boolean,
     editable?: boolean,
     viewElement: ReactNode | null,

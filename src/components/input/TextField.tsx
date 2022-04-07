@@ -2,7 +2,7 @@ import { ClickAwayListener, TextField, Typography } from "@mui/material";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import EditField from "./EditField";
 
-export interface Props {
+interface Props {
     defaultValue: string,
     defaultEdit?: boolean,
     editable?: boolean,
