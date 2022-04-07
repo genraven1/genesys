@@ -1,5 +1,5 @@
 import axios from "axios";
-import Minion from "../models/Minion";
+import Minion from "../models/actor/Minion";
 import { post } from "./rest";
 
 export default class ActorService {

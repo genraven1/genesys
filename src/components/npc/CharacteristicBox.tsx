@@ -1,6 +1,6 @@
 import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { useState } from "react";
-import { Characteristic } from "../../models/Characteristics";
+import { Characteristic } from "../../models/actor/Characteristics";
 import InputButtonGroup from "../input/InputButtonGroup";
 
 interface CharacteristcsBoxProps {

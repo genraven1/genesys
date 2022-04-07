@@ -6,7 +6,7 @@ import CreateTalent from './talents/CreateTalent';
 import MinionTable from './npc/minion/MinionTable';
 import MinionView from './npc/minion/MinionView';
 import CreateMinion from './npc/minion/CreateMinion';
-import Minion from '../models/Minion';
+import Minion from '../models/actor/Minion';
 
 
 export default function MainPage() {

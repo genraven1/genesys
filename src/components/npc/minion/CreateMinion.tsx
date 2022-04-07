@@ -1,10 +1,10 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Wounds } from "../../../models/Actor";
-import { CharacteristicType, Characteristic } from "../../../models/Characteristics";
-import Minion, { DefaultMinion } from "../../../models/Minion";
-import { Rating, RatingType } from "../../../models/NonPlayerCharacter";
+import { Wounds } from "../../../models/actor/Actor";
+import { CharacteristicType, Characteristic } from "../../../models/actor/Characteristics";
+import Minion, { DefaultMinion } from "../../../models/actor/Minion";
+import { Rating, RatingType } from "../../../models/actor/NonPlayerCharacter";
 import InlineTextField from "../../input/TextField";
 import CharacteristicBox from "../CharacteristicBox";
 import RatingBox from "../RatingBox";

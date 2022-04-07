@@ -1,6 +1,6 @@
 import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { useState } from "react";
-import { Wounds } from "../../models/Actor";
+import { Wounds } from "../../models/actor/Actor";
 import InputButtonGroup from "../input/InputButtonGroup";
 
 interface CreateWoundsProps {
