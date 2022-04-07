@@ -6,8 +6,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
-import Minion from '../models/Minion';
-import ActorService from '../services/ActorService';
+import Minion from "../../../models/Minion";
+import ActorService from "../../../services/ActorService";
 import { Link } from 'react-router-dom';
 
 interface TableCellWithLinkProps {
@@ -47,7 +47,7 @@ export default function MinionTable() {
             if (!minionList) { return; }
             setMinions(minionList);
         })();
-    });
+    }, []);
 
     return (
         <TableContainer component={Paper}>

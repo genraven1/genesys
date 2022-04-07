@@ -1,7 +1,7 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, MenuItem, TextField } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, MenuItem, TextField } from "@mui/material";
 import { ChangeEventHandler, FocusEventHandler, FormEventHandler, useState } from "react";
-import Talent, { Activation, DefaultTalent, Ranked, Tier } from "../models/Talent";
-import TalentService from "../services/TalentService";
+import Talent, { Activation, DefaultTalent, Ranked, Tier } from "../../models/Talent";
+import TalentService from "../../services/TalentService";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -101,31 +101,34 @@ export default function CreateTalent(props: Props) {
     return (
         <Card>
             <CardHeader title={'Create Talent'} />
+            <Divider />
             <form onSubmit={handleSubmit}>
                 <CardContent>
                     <Grid container justifyContent={'center'}>
-                        <TextField name='name' label='Name' value={talent.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} />
-                        <TextField name='ranked' label='Ranked' value={talent.ranked ?? Ranked.No} onBlur={handleBlur} onChange={handleRankedChange} select >
-                            {Object.entries(Ranked).map(([key, value]) => (
-                                <MenuItem key={key} value={value}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField name='activation' label='Activation' value={talent.activation ?? Activation.Passive} onBlur={handleBlur} onChange={handleActivationChange} select >
-                            {Object.entries(Activation).map(([key, value]) => (
-                                <MenuItem key={key} value={value}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField name='tier' label='Tier' value={talent.tier ?? Tier.First} onBlur={handleBlur} onChange={handleTierChange} select >
-                            {Object.entries(Tier).map(([key, value]) => (
-                                <MenuItem key={key} value={value}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        <TextField name='name' label='Name' value={talent.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
+                        <Grid item sm={3}>
+                            <TextField name='ranked' label='Ranked' value={talent.ranked ?? Ranked.No} onBlur={handleBlur} onChange={handleRankedChange} select >
+                                {Object.entries(Ranked).map(([key, value]) => (
+                                    <MenuItem key={key} value={value}>
+                                        {value}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField name='activation' label='Activation' value={talent.activation ?? Activation.Passive} onBlur={handleBlur} onChange={handleActivationChange} select >
+                                {Object.entries(Activation).map(([key, value]) => (
+                                    <MenuItem key={key} value={value}>
+                                        {value}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField name='tier' label='Tier' value={talent.tier ?? Tier.First} onBlur={handleBlur} onChange={handleTierChange} select >
+                                {Object.entries(Tier).map(([key, value]) => (
+                                    <MenuItem key={key} value={value}>
+                                        {value}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
                         <TextField name='description' label='Description' value={talent.description ?? ''} onBlur={handleBlur} onChange={handleTextChange} multiline fullWidth />
                     </Grid>
                 </CardContent>

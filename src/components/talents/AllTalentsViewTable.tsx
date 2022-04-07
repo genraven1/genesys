@@ -7,8 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Talent from '../models/Talent';
-import TalentService from '../services/TalentService';
+import Talent from '../../models/Talent';
+import TalentService from '../../services/TalentService';
 import { Fragment, useEffect, useState } from 'react';
 
 function TalentRow(props: { row: Talent }) {
@@ -48,7 +48,6 @@ export default function AllTalentsView() {
                 const talentList = await TalentService.getTalents();
                 if (!talentList) { return; }
                 setTalents(talentList);
-                return;
         })();
     }, []);
 
