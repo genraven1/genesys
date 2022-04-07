@@ -5,3 +5,15 @@ export default interface Equipment {
     description: string,
     price: number
 }
+
+export class DefaultEquipment {
+    static create() {
+        return {
+            id: '',
+            name: '',
+            encumbrance: 0,
+            description: '',
+            price: 0
+        }
+    }
+}
