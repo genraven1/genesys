@@ -3,7 +3,8 @@ export default interface Equipment {
     name: string,
     encumbrance: number,
     description: string,
-    price: number
+    price: number,
+    rarity: number
 }
 
 export class DefaultEquipment {
@@ -13,7 +14,8 @@ export class DefaultEquipment {
             name: '',
             encumbrance: 0,
             description: '',
-            price: 0
+            price: 0,
+            rarity: 0
         }
     }
 }

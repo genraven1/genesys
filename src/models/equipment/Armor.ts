@@ -1,8 +1,12 @@
-import Equipment from "./Equipment";
-
-export default interface Armor extends Equipment {
+export default interface Armor {
     soak: number,
     defense: number,
+    id: string,
+    name: string,
+    encumbrance: number,
+    description: string,
+    price: number,
+    rarity: number
 }
 
 export class DefaultArmor {
@@ -15,6 +19,7 @@ export class DefaultArmor {
             price: 0,
             soak: 0,
             defense: 0,
+            rarity: 0
         }
     }
 }
