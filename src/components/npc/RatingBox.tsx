@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Rating } from "../../models/actor/NonPlayerCharacter";
 import InputButtonGroup from "../input/InputButtonGroup";
 
-interface RatingProps {
+interface Props {
     updatedRating: Rating,
     onRatingUpdate: (rating: Rating) => Rating,
 }
 
-export default function RatingBox(props: RatingProps): JSX.Element {
+export default function RatingBox(props: Props): JSX.Element {
     const { updatedRating, onRatingUpdate } = props;
     const [rating, setRating] = useState(updatedRating);
 

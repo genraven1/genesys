@@ -1,10 +1,10 @@
 import { Grid, Card, CardHeader, Divider, CardContent, Typography } from "@mui/material";
 
-interface SoakBoxProps {
+interface Props {
     soak: number,
 }
 
-export default function SoakBox(props: SoakBoxProps): JSX.Element {
+export default function SoakBox(props: Props): JSX.Element {
     const { soak } = props;
     return (
         <Grid item xs>

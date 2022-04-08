@@ -2,9 +2,8 @@ import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } fro
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Armor, { DefaultArmor } from "../../models/equipment/Armor";
-import Equipment from "../../models/equipment/Equipment";
 import InlineTextField from "../input/TextField";
-import CreateEquipmentBox from "./EncumbraceBox";
+import CreateArmorStats from "./CreateArmorStats";
 
 interface Props {
     newArmor?: Armor | null
@@ -37,18 +36,14 @@ export default function CreateArmor(props: Props) {
         }));
     }
 
-    const updateArmourEquipment = (equipment: Equipment) => {
-        setArmor((prev_state) => ({
-            ...prev_state,
-            encumbrance: equipment.encumbrance,
-            price: equipment.price,
-        }));
+    const updateArmorStats = (updatedArmnor: Armor) => {
+        setArmor(updatedArmnor);
         return armor;
     }
 
     return (
         <Card>
-            <CardHeader title={'Create Minion'} />
+            <CardHeader title={'Create Armor'} />
             <Divider />
             <form onSubmit={handleSubmit}>
                 <CardContent>
@@ -71,7 +66,7 @@ export default function CreateArmor(props: Props) {
                         </Grid>
                         <Divider />
                         <Grid container spacing={10}>
-                            <CreateEquipmentBox newEquipment={armor} onEquipmentUpdate={updateArmourEquipment} />
+                            <CreateArmorStats newArmor={armor} onArmorUpdate={updateArmorStats} />
                         </Grid>
                     </Grid>
                 </CardContent>

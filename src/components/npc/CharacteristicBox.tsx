@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Characteristic } from "../../models/actor/Characteristics";
 import InputButtonGroup from "../input/InputButtonGroup";
 
-interface CharacteristcsBoxProps {
+interface Props {
     newCharacteristic: Characteristic,
     onCharacteristicUpdate: (characteristic: Characteristic) => Characteristic;
 }
 
-export default function CharacteristicBox(props: CharacteristcsBoxProps): JSX.Element {
+export default function CharacteristicBox(props: Props): JSX.Element {
     const { newCharacteristic, onCharacteristicUpdate } = props;
     const [characteristic, setCharacteristic] = useState(newCharacteristic);
 
