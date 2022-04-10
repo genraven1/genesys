@@ -1,9 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Armor, { DefaultArmor } from "../../models/equipment/Armor";
+import Armor, { ArmorStats, DefaultArmor } from "../../models/equipment/Armor";
+import BaseEquipmentStats from "../../models/equipment/Equipment";
 import InlineTextField from "../input/TextField";
 import CreateArmorStats from "./CreateArmorStats";
+import CreateEquipmentStats from "./CreateEquipmentStats";
 
 interface Props {
     newArmor?: Armor | null
@@ -36,9 +38,20 @@ export default function CreateArmor(props: Props) {
         }));
     }
 
-    const updateArmorStats = (updatedArmnor: Armor) => {
-        setArmor(updatedArmnor);
-        return armor;
+    const updateEquipmentStats = (equipmentStats: BaseEquipmentStats) => {
+        setArmor((prev_state) => ({
+            ...prev_state,
+            equipment: equipmentStats,
+        }));
+        return armor.equipment;
+    }
+
+    const updateArmorStats = (armorStats: ArmorStats) => {
+        setArmor((prev_state) => ({
+            ...prev_state,
+            armorStats: armorStats,
+        }));
+        return armor.armorStats;
     }
 
     return (
@@ -66,7 +79,11 @@ export default function CreateArmor(props: Props) {
                         </Grid>
                         <Divider />
                         <Grid container spacing={10}>
-                            <CreateArmorStats newArmor={armor} onArmorUpdate={updateArmorStats} />
+                            <CreateEquipmentStats newEquipmentStats={armor.equipment} onEquipmentStatsUpdate={updateEquipmentStats}  />
+                        </Grid>
+                        <Divider />
+                        <Grid container spacing={10}>
+                            <CreateArmorStats newArmorStats={armor.armorStats} onArmorStatsUpdate={updateArmorStats} />
                         </Grid>
                     </Grid>
                 </CardContent>

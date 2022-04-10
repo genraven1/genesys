@@ -1,4 +1,4 @@
-export default interface Equipment {
+export default interface BaseEquipmentStats {
     id: string,
     name: string,
     encumbrance: number,

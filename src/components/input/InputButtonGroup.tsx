@@ -2,12 +2,12 @@ import { Box, IconButton } from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-interface InputButtonGroupProps {
+interface Props {
     onIncrease: () => void,
     onDecrease: () => void,
 }
 
-export default function InputButtonGroup(props: InputButtonGroupProps): JSX.Element {
+export default function InputButtonGroup(props: Props): JSX.Element {
     const { onIncrease, onDecrease } = props;
 
     return (

@@ -1,42 +1,68 @@
 import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
-import Armor from "../../models/equipment/Armor";
+import { ArmorStats, DefaultArmorStats } from "../../models/equipment/Armor";
 import InputButtonGroup from "../input/InputButtonGroup";
 
 interface Props {
-    newArmor: Armor,
-    onArmorUpdate: (armor: Armor) => Armor,
+    newArmorStats?: ArmorStats | null,
+    onArmorStatsUpdate: (armorStats: ArmorStats) => ArmorStats,
 }
 
 export default function CreateArmorStats(props: Props): JSX.Element {
-    const { newArmor, onArmorUpdate } = props;
-    const [armor, setArmor] = useState<Armor>(newArmor);
+    const { newArmorStats, onArmorStatsUpdate } = props;
+    const [armorStats, setArmorStats] = useState<ArmorStats>(newArmorStats ?? DefaultArmorStats.create());
 
-    const handleEncumbranceDecrease = () => {
-        setArmor((prev_state) => ({
+    const handleSoakDecrease = () => {
+        setArmorStats((prev_state) => ({
             ...prev_state,
-            encumbrance: armor.encumbrance--,
+            defense: armorStats.soak--,
         }));
-        setArmor(onArmorUpdate(armor));
+        setArmorStats(onArmorStatsUpdate(armorStats));
     }
 
-    const handleEncumbranceIncrease = () => {
-        setArmor((prev_state) => ({
+    const handleSoakIncrease = () => {
+        setArmorStats((prev_state) => ({
             ...prev_state,
-            encumbrance: armor.encumbrance++,
+            defense: armorStats.soak++,
         }));
-        setArmor(onArmorUpdate(armor));
+        setArmorStats(onArmorStatsUpdate(armorStats));
+    }
+
+    const handleDefenseDecrease = () => {
+        setArmorStats((prev_state) => ({
+            ...prev_state,
+            defense: armorStats.defense--,
+        }));
+        setArmorStats(onArmorStatsUpdate(armorStats));
+    }
+
+    const handleDefenseIncrease = () => {
+        setArmorStats((prev_state) => ({
+            ...prev_state,
+            defense: armorStats.defense++,
+        }));
+        setArmorStats(onArmorStatsUpdate(armorStats));
     }
 
     return (
         <Fragment>
             <Grid item xs>
                 <Card>
-                    <CardHeader title={'Encumbrance'} style={{ textAlign: 'center' }} />
+                    <CardHeader title={'Soak'} style={{ textAlign: 'center' }} />
                     <Divider />
-                    <Typography style={{ textAlign: 'center' }} >{armor.encumbrance}</Typography>
+                    <Typography style={{ textAlign: 'center' }} >{armorStats.soak}</Typography>
                     <CardActions>
-                        <InputButtonGroup onIncrease={handleEncumbranceIncrease} onDecrease={handleEncumbranceDecrease} />
+                        <InputButtonGroup onIncrease={handleSoakIncrease} onDecrease={handleSoakDecrease} />
+                    </CardActions>
+                </Card>
+            </Grid>
+            <Grid item xs>
+                <Card>
+                    <CardHeader title={'Defense'} style={{ textAlign: 'center' }} />
+                    <Divider />
+                    <Typography style={{ textAlign: 'center' }} >{armorStats.defense}</Typography>
+                    <CardActions>
+                        <InputButtonGroup onIncrease={handleDefenseIncrease} onDecrease={handleDefenseDecrease} />
                     </CardActions>
                 </Card>
             </Grid>

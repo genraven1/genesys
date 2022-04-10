@@ -1,25 +1,29 @@
+import BaseEquipmentStats, { DefaultEquipment } from "./Equipment"
+
 export default interface Armor {
+    armorStats: ArmorStats,
+    equipment: BaseEquipmentStats
+}
+
+export interface ArmorStats {
     soak: number,
     defense: number,
-    id: string,
-    name: string,
-    encumbrance: number,
-    description: string,
-    price: number,
-    rarity: number
+}
+
+export class DefaultArmorStats {
+    static create(): ArmorStats {
+        return {
+            soak: 0,
+            defense: 0,
+        }
+    }
 }
 
 export class DefaultArmor {
     static create(): Armor {
         return {
-            id: '',
-            name: '',
-            encumbrance: 0,
-            description: '',
-            price: 0,
-            soak: 0,
-            defense: 0,
-            rarity: 0
+            equipment: DefaultEquipment.create(),
+            armorStats: { soak: 0, defense: 0 },
         }
     }
 }
