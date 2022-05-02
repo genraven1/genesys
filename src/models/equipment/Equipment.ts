@@ -3,7 +3,7 @@ export default interface BaseEquipmentStats {
     name: string,
     encumbrance: number,
     description: string,
-    price: number,
+    price: string,
     rarity: number
 }
 
@@ -14,7 +14,7 @@ export class DefaultEquipment {
             name: '',
             encumbrance: 0,
             description: '',
-            price: 0,
+            price: '',
             rarity: 0
         }
     }

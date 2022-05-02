@@ -3,7 +3,6 @@ import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Armor, { ArmorStats, DefaultArmor } from "../../models/equipment/Armor";
 import BaseEquipmentStats from "../../models/equipment/Equipment";
-import InlineTextField from "../input/TextField";
 import CreateArmorStats from "./CreateArmorStats";
 import CreateEquipmentStats from "./CreateEquipmentStats";
 
@@ -24,25 +23,13 @@ export default function CreateArmor(props: Props) {
         //navigate('/actors/npcs/minions/' + armor.id);
     }
 
-    const handleOnNameCommit = (value: string) => {
-        setArmor((prev_state) => ({
-            ...prev_state,
-            name: value,
-        }));
-    }
-
-    const handleOnDescriptionCommit = (value: string) => {
-        setArmor((prev_state) => ({
-            ...prev_state,
-            description: value,
-        }));
-    }
-
     const updateEquipmentStats = (equipmentStats: BaseEquipmentStats) => {
+        console.log(equipmentStats)
         setArmor((prev_state) => ({
             ...prev_state,
             equipment: equipmentStats,
         }));
+        console.log(armor.equipment)
         return armor.equipment;
     }
 
@@ -61,26 +48,7 @@ export default function CreateArmor(props: Props) {
             <form onSubmit={handleSubmit}>
                 <CardContent>
                     <Grid container justifyContent={'center'}>
-                        <Grid container spacing={10}>
-                            <Grid item xs>
-                                <Card>
-                                    <CardHeader title={'Name'} style={{ textAlign: 'center' }} />
-                                    <Divider />
-                                    <InlineTextField defaultValue={'Name'} editable={true} onCommit={handleOnNameCommit} helperText={'Name'} placeholder={'Name'} errorText={''} />
-                                </Card>
-                            </Grid>
-                            <Grid item xs>
-                                <Card>
-                                    <CardHeader title={'Description'} style={{ textAlign: 'center' }} />
-                                    <Divider />
-                                    <InlineTextField defaultValue={'Description'} editable={true} onCommit={handleOnDescriptionCommit} helperText={'Description'} placeholder={'Description'} errorText={''} />
-                                </Card>
-                            </Grid>
-                        </Grid>
-                        <Divider />
-                        <Grid container spacing={10}>
-                            <CreateEquipmentStats newEquipmentStats={armor.equipment} onEquipmentStatsUpdate={updateEquipmentStats}  />
-                        </Grid>
+                        <CreateEquipmentStats newEquipmentStats={armor.equipment} onEquipmentStatsUpdate={updateEquipmentStats} />
                         <Divider />
                         <Grid container spacing={10}>
                             <CreateArmorStats newArmorStats={armor.armorStats} onArmorStatsUpdate={updateArmorStats} />
