@@ -5,7 +5,7 @@ import { Wounds } from "../../../models/actor/Actor";
 import { CharacteristicType, Characteristic } from "../../../models/actor/Characteristics";
 import Minion, { DefaultMinion } from "../../../models/actor/Minion";
 import { Rating, RatingType } from "../../../models/actor/NonPlayerCharacter";
-import InlineTextField from "../../input/TextField";
+import InputTextFieldCard from "../../input/InputTextFieldCard";
 import CharacteristicBox from "../CharacteristicBox";
 import RatingBox from "../RatingBox";
 import SoakBox from "../SoakBox";
@@ -123,13 +123,7 @@ export default function CreateMinion(props: Props) {
                 <CardContent>
                     <Grid container justifyContent={'center'}>
                         <Grid container spacing={10}>
-                            <Grid item xs>
-                                <Card>
-                                    <CardHeader title={'Name'} style={{ textAlign: 'center' }} />
-                                    <Divider />
-                                    <InlineTextField defaultValue={'Name'} editable={true} onCommit={handleOnCommit} helperText={'Name'} placeholder={'Name'} errorText={''} />
-                                </Card>
-                            </Grid>
+                            <InputTextFieldCard defaultValue={'Name'} onCommit={handleOnCommit} title={'Name'} helperText={'Name'} placeholder={'Name'} />
                             <RatingBox updatedRating={minion.combatRating} onRatingUpdate={updateMinionRatings} />
                             <RatingBox updatedRating={minion.socialRating} onRatingUpdate={updateMinionRatings} />
                             <RatingBox updatedRating={minion.generalRating} onRatingUpdate={updateMinionRatings} />

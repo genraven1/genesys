@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import Minion from "../../../models/actor/Minion";
 import ActorService from "../../../services/ActorService";
 
-
-
 interface MinionProps {
     minion?: Minion
 }
