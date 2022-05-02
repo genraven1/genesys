@@ -1,21 +1,6 @@
-export default interface BaseEquipmentStats {
+export default interface Equipment {
     id: string,
     name: string,
-    encumbrance: number,
     description: string,
     price: string,
-    rarity: number
-}
-
-export class DefaultEquipment {
-    static create() {
-        return {
-            id: '',
-            name: '',
-            encumbrance: 0,
-            description: '',
-            price: '',
-            rarity: 0
-        }
-    }
 }

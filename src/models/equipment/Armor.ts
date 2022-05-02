@@ -1,8 +1,9 @@
-import BaseEquipmentStats, { DefaultEquipment } from "./Equipment"
+import Equipment from "./Equipment"
+import EquipmentStats, { DefaultEquipment } from "./EquipmentStats"
 
-export default interface Armor {
+export default interface Armor extends Equipment {
     armorStats: ArmorStats,
-    equipment: BaseEquipmentStats
+    equipment: EquipmentStats
 }
 
 export interface ArmorStats {
@@ -24,6 +25,10 @@ export class DefaultArmor {
         return {
             equipment: DefaultEquipment.create(),
             armorStats: { soak: 0, defense: 0 },
+            id: '',
+            name: '',
+            description: '',
+            price: ''
         }
     }
 }
