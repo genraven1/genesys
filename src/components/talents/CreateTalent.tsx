@@ -1,12 +1,50 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid, MenuItem, TextField } from "@mui/material";
-import { ChangeEventHandler, FocusEventHandler, FormEventHandler, useState } from "react";
-import Talent, { Activation, DefaultTalent, Ranked, Tier } from "../../models/Talent";
+import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } from "@mui/material";
+import { FormEventHandler, useState } from "react";
+import Talent, { Activation, DefaultTalent, Ranked, TalentKey, Tier } from "../../models/Talent";
 import TalentService from "../../services/TalentService";
 import { useNavigate } from "react-router-dom";
+import InputTextFieldCard from "../input/InputTextFieldCard";
+import InputSelectField from "../input/InputSelectField";
 
 interface Props {
     talent?: Talent | null,
 }
+
+const RANKED_OPTIONS = function () {
+    const array = [];
+
+    for (const [key, value] of Object.entries(Ranked)) {
+        if (!Number.isNaN(Number(key))) {
+            continue;
+        }
+        array.push({ value: key, label: value });
+    }
+    return array;
+}
+
+const ACTIVATION_OPTIONS = function () {
+    const array = [];
+
+    for (const [key, value] of Object.entries(Activation)) {
+        if (!Number.isNaN(Number(key))) {
+            continue;
+        }
+        array.push({ value: key, label: value });
+    }
+    return array;
+};
+
+const TIER_OPTIONS = function () {
+    const array = [];
+
+    for (const [key, value] of Object.entries(Tier)) {
+        if (!Number.isNaN(Number(key))) {
+            continue;
+        }
+        array.push({ value: key, label: value });
+    }
+    return array;
+};
 
 export default function CreateTalent(props: Props) {
     const { talent: newTalent } = props;
@@ -16,86 +54,120 @@ export default function CreateTalent(props: Props) {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        TalentService.createTalent(talent);
-        navigate('/talents');
+        console.log(talent);
+        //TalentService.createTalent(talent);
+        //navigate('/talents');
     }
 
-    const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-        const { name, value } = event.target;
-
-        setTalent((prev_state) => ({
-            ...prev_state,
-            [name]: value,
-        }));
+    const onChange = (key: keyof Talent, value: string) => {
+        if (value.trim().length === 0 || talent[key] === value) {
+            return;
+        }
+        switch (key) {
+            case TalentKey.Name:
+                setTalent((prev_state) => ({
+                    ...prev_state,
+                    name: value,
+                }));
+                return;
+            case TalentKey.Description:
+                setTalent((prev_state) => ({
+                    ...prev_state,
+                    description: value,
+                }));
+                return;
+            case TalentKey.Ranked:
+                onRankedChange(value);
+                return;
+            case TalentKey.Activation:
+                onActivationChange(value);
+                return;
+            case TalentKey.Tier:
+                onTierChange(value);
+                return;
+        }
     }
 
-    const handleTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { name, value } = event.target;
-
-        setTalent((prev_state) => ({
-            ...prev_state,
-            [name]: value,
-        }));
-    }
-
-    const handleRankedChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-        let temp_ranked: Ranked;
-
+    const onRankedChange = (value: string) => {
         if (value === Ranked.No) {
-            temp_ranked = Ranked.No;
+            setTalent((prev_state) => ({
+                ...prev_state,
+                ranked: Ranked.No,
+            }));
         } else if (value === Ranked.Yes) {
-            temp_ranked = Ranked.Yes
+            setTalent((prev_state) => ({
+                ...prev_state,
+                ranked: Ranked.Yes,
+            }));
         }
-
-        setTalent((prev_state) => ({
-            ...prev_state,
-            ranked: temp_ranked,
-        }));
     }
 
-    const handleActivationChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-        let temp_activation: Activation;
-
+    const onActivationChange = (value: string) => {
         if (value === Activation.Passive) {
-            temp_activation = Activation.Passive;
+            setTalent((prev_state) => ({
+                ...prev_state,
+                activation: Activation.Passive,
+            }));
+            console.log(value)
+            console.log(talent)
         } else if (value === Activation.ActiveAction) {
-            temp_activation = Activation.ActiveAction
+            setTalent((prev_state) => ({
+                ...prev_state,
+                activation: Activation.ActiveAction,
+            }));
+            console.log(value)
+            console.log(talent)
         } else if (value === Activation.ActiveManeuver) {
-            temp_activation = Activation.ActiveManeuver
+            setTalent((prev_state) => ({
+                ...prev_state,
+                activation: Activation.ActiveManeuver,
+            }));
+            console.log(value)
+            console.log(talent)
         } else if (value === Activation.ActiveIncidental) {
-            temp_activation = Activation.ActiveIncidental
+            setTalent((prev_state) => ({
+                ...prev_state,
+                activation: Activation.ActiveIncidental,
+            }));
+            console.log(value)
+            console.log(talent)
         } else if (value === Activation.ActiveIncidentalOutOfTurn) {
-            temp_activation = Activation.ActiveIncidentalOutOfTurn
+            setTalent((prev_state) => ({
+                ...prev_state,
+                activation: Activation.ActiveIncidentalOutOfTurn,
+            }));
+            console.log(value)
+            console.log(talent)
         }
-
-        setTalent((prev_state) => ({
-            ...prev_state,
-            activation: temp_activation,
-        }));
     }
 
-    const handleTierChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target;
-        let temp_tier: Tier;
-
+    const onTierChange = (value: string) => {
         if (value === Tier.First) {
-            temp_tier = Tier.First;
+            setTalent((prev_state) => ({
+                ...prev_state,
+                tier: Tier.First,
+            }));
         } else if (value === Tier.Second) {
-            temp_tier = Tier.Second
+            setTalent((prev_state) => ({
+                ...prev_state,
+                tier: Tier.Second,
+            }));
         } else if (value === Tier.Third) {
-            temp_tier = Tier.Third
+            setTalent((prev_state) => ({
+                ...prev_state,
+                tier: Tier.Third,
+            }));
         } else if (value === Tier.Fourth) {
-            temp_tier = Tier.Fourth
+            setTalent((prev_state) => ({
+                ...prev_state,
+                tier: Tier.Fourth,
+            }));
         } else if (value === Tier.Fifth) {
-            temp_tier = Tier.Fifth
+            setTalent((prev_state) => ({
+                ...prev_state,
+                tier: Tier.Fifth,
+            }));
         }
-
-        setTalent((prev_state) => ({
-            ...prev_state,
-            tier: temp_tier,
-        }));
     }
 
     return (
@@ -105,31 +177,22 @@ export default function CreateTalent(props: Props) {
             <form onSubmit={handleSubmit}>
                 <CardContent>
                     <Grid container justifyContent={'center'}>
-                        <TextField name='name' label='Name' value={talent.name ?? ''} onBlur={handleBlur} onChange={handleTextChange} fullWidth />
-                        <Grid item sm={3}>
-                            <TextField name='ranked' label='Ranked' value={talent.ranked ?? Ranked.No} onBlur={handleBlur} onChange={handleRankedChange} select >
-                                {Object.entries(Ranked).map(([key, value]) => (
-                                    <MenuItem key={key} value={value}>
-                                        {value}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField name='activation' label='Activation' value={talent.activation ?? Activation.Passive} onBlur={handleBlur} onChange={handleActivationChange} select >
-                                {Object.entries(Activation).map(([key, value]) => (
-                                    <MenuItem key={key} value={value}>
-                                        {value}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField name='tier' label='Tier' value={talent.tier ?? Tier.First} onBlur={handleBlur} onChange={handleTierChange} select >
-                                {Object.entries(Tier).map(([key, value]) => (
-                                    <MenuItem key={key} value={value}>
-                                        {value}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                        <Grid container spacing={10}>
+                            <InputTextFieldCard defaultValue={'Name'} onCommit={(value: string): void => { onChange(TalentKey.Name, value) }} title={'Name'} helperText={'Name'} placeholder={'Name'} />
+                            <InputTextFieldCard defaultValue={'Description'} onCommit={(value: string): void => { onChange(TalentKey.Description, value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
                         </Grid>
-                        <TextField name='description' label='Description' value={talent.description ?? ''} onBlur={handleBlur} onChange={handleTextChange} multiline fullWidth />
+                        <Divider />
+                        <Grid container spacing={10}>
+                            {/* <Grid item xs>
+                                <InputSelectField defaultValue={Ranked.No} options={RANKED_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Ranked, value) }} />
+                            </Grid>
+                            <Grid item xs>
+                                <InputSelectField defaultValue={Activation.Passive} options={ACTIVATION_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Activation, value) }} />
+                            </Grid>
+                            <Grid item xs>
+                                <InputSelectField defaultValue={Tier.First} options={TIER_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Tier, value) }} />
+                            </Grid> */}
+                        </Grid>
                     </Grid>
                 </CardContent>
                 <CardActions>

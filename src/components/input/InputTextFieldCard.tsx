@@ -1,5 +1,5 @@
 import { Card, CardHeader, Divider, Grid } from "@mui/material"
-import InlineTextField from "./TextField"
+import InlineTextField from "./InlineTextField"
 
 interface Props {
     defaultValue: string,
