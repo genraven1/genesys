@@ -1,14 +1,14 @@
 import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { useState } from "react";
-import { Wounds } from "../../models/Actor";
+import { Wounds } from "../../models/actor/Actor";
 import InputButtonGroup from "../input/InputButtonGroup";
 
-interface CreateWoundsProps {
+interface Props {
     newWounds: Wounds,
     onWoundsUpdate: (wounds: Wounds) => Wounds;
 }
 
-export default function CreateWoundsBox(props: CreateWoundsProps): JSX.Element {
+export default function CreateWoundsBox(props: Props): JSX.Element {
     const { newWounds, onWoundsUpdate } = props;
     const [wounds, setWounds] = useState<Wounds>(newWounds);
 

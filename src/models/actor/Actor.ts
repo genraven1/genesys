@@ -1,6 +1,6 @@
 import { Characteristic } from "./Characteristics";
 import { Defense } from "./Defense";
-import { ActorTalent } from "./Talent";
+import { ActorTalent } from "../Talent";
 
 export default interface Actor {
     name: string,

@@ -3,7 +3,7 @@ export default interface Talent {
     ranked: Ranked,
     activation: Activation,
     tier: Tier,
-    description: String
+    description: string
 }
 
 export enum Ranked {
@@ -26,6 +26,14 @@ export enum Tier {
     Fourth = 'Fourth',
     Fifth = 'Fifth'
 };
+
+export enum TalentKey {
+    Name= 'name',
+    Ranked= 'ranked',
+    Activation= 'activation',
+    Tier= 'tier',
+    Description= 'description'
+}
 
 export interface ActorTalent extends Talent {
     ranks: number

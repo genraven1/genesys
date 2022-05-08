@@ -14,6 +14,11 @@ const NPCS: Array<MenuListItemProps> = [
     { to: 'npcs/minions/new', name: 'Create Minion' },
 ];
 
+const EQUIPMENT: Array<MenuListItemProps> = [
+    { to: 'equipment/armor', name: 'View All Armor' },
+    { to: 'equipment/armor/new', name: 'Create Armor' },
+];
+
 export default function SideNav() {
     const [state, setState] = useState({ left: false });
 
@@ -33,6 +38,7 @@ export default function SideNav() {
                         <ListMenuItemLink name='Home' to='' />
                         <ExpandedList name='Talents' items={ TALENTS } />
                         <ExpandedList name='Non-Player Characters' items={ NPCS } />
+                        <ExpandedList name='Equipment' items={ EQUIPMENT } />
                     </Drawer>
                 </Fragment>
             ))}
