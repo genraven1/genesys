@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from "@mui/material";
+import { ListItem, ListItemText } from "@mui/material";
 import { useMemo, forwardRef } from "react";
 import { LinkProps, Link } from "react-router-dom";
 
@@ -12,13 +12,11 @@ export default function ListMenuItemLink(props: MenuListItemProps): JSX.Element 
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
         <Link to={to} ref={ref} {...itemProps} />
-    )),[to]);
+    )), [to]);
 
     return (
-        <List>
-            <ListItem button component={renderLink}>
-                <ListItemText primary={name} />
-            </ListItem>
-        </List>
+        <ListItem button component={renderLink}>
+            <ListItemText primary={name} />
+        </ListItem>
     );
 }

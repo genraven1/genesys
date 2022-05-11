@@ -9,19 +9,31 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Talent from '../../models/Talent';
 import TalentService from '../../services/TalentService';
-import { Fragment, useEffect, useState } from 'react';
+import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
+import { Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import * as React from 'react';
+import { LinkProps, Link } from "react-router-dom";
 
-function TalentRow(props: { row: Talent }) {
+function TalentRow(props: { row: Talent }): JSX.Element {
     const { row } = props;
+    const { pathname } = useLocation()
     const [open, setOpen] = useState(false);
+
+    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
+        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
+    )),[pathname, row.name]);
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.ranked.toString()}</TableCell>
+                <TableCell>{row.ranked}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
+                <TableCell>
+                    <Button component={renderLink}>Edit</Button>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -45,9 +57,9 @@ export default function AllTalentsView() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-                const talentList = await TalentService.getTalents();
-                if (!talentList) { return; }
-                setTalents(talentList);
+            const talentList = await TalentService.getTalents();
+            if (!talentList) { return; }
+            setTalents(talentList);
         })();
     }, []);
 
@@ -60,6 +72,7 @@ export default function AllTalentsView() {
                         <TableCell>Ranked</TableCell>
                         <TableCell>Activation</TableCell>
                         <TableCell>Tier</TableCell>
+                        <TableCell>Edit</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
