@@ -1,15 +1,15 @@
 import { Button, Card, CardActions, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Wounds } from "../../../models/actor/Actor";
-import { CharacteristicType, Characteristic } from "../../../models/actor/Characteristics";
-import Minion, { DefaultMinion } from "../../../models/actor/Minion";
-import { Rating, RatingType } from "../../../models/actor/NonPlayerCharacter";
-import InputTextFieldCard from "../../input/InputTextFieldCard";
-import CharacteristicBox from "../CharacteristicBox";
-import RatingBox from "../RatingBox";
-import SoakBox from "../SoakBox";
-import CreateWoundsBox from "../WoundsBox";
+import { Wounds } from "../../../../models/actor/Actor";
+import { CharacteristicType, Characteristic } from "../../../../models/actor/Characteristics";
+import Minion, { DefaultMinion } from "../../../../models/actor/Minion";
+import { Rating, RatingType } from "../../../../models/actor/NonPlayerCharacter";
+import InputTextFieldCard from "../../../input/InputTextFieldCard";
+import CharacteristicBox from "../../CharacteristicBox";
+import RatingBox from "../../RatingBox";
+import SoakBox from "../../SoakBox";
+import CreateWoundsBox from "../../WoundsBox";
 
 interface Props {
     minion?: Minion | null,

@@ -1,8 +1,8 @@
 import { Box, Card, CardContent, CardHeader } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Minion from "../../../models/actor/Minion";
-import ActorService from "../../../services/ActorService";
+import Minion from "../../../../models/actor/Minion";
+import ActorService from "../../../../services/ActorService";
 
 interface MinionProps {
     minion?: Minion

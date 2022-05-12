@@ -6,8 +6,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
-import Minion from "../../../models/actor/Minion";
-import ActorService from "../../../services/ActorService";
+import Minion from "../../../../models/actor/Minion";
+import ActorService from "../../../../services/ActorService";
 import { Link } from 'react-router-dom';
 
 interface TableCellWithLinkProps {
