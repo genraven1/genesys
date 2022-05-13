@@ -4,7 +4,6 @@ import { ActorTalent } from "../Talent";
 
 export default interface Actor {
     name: string,
-    id: string,
     brawn: Characteristic,
     agility: Characteristic,
     intellect: Characteristic,

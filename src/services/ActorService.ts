@@ -28,4 +28,8 @@ export default class ActorService {
     static async getPlayers(): Promise<Player[]> {
         return await (await axios.get('/actors/players/')).data;
     }
+
+    static async updatePlayer(name: String, player: Player): Promise<Player> {
+        return await axios.put('/actors/players/' + name, player);
+    }
 }

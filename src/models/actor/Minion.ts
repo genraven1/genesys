@@ -11,7 +11,6 @@ export class DefaultMinion {
     static create(): Minion {
         return {
             name: '',
-            id: '',
             soak: 1,
             brawn: DefaultCharacteristic.create(CharacteristicType.Brawn),
             agility: DefaultCharacteristic.create(CharacteristicType.Agility),

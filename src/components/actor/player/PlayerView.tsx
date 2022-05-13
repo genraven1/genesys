@@ -1,8 +1,10 @@
 import { Card, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Characteristic } from "../../../models/actor/Characteristics";
 import Player from "../../../models/actor/Player";
 import ActorService from "../../../services/ActorService";
+import CharacteristicBox from "../CharacteristicBox";
 
 export default function PlayerView() {
     const { name } = useParams<{ name: string }>();
@@ -33,7 +35,9 @@ export default function PlayerView() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
+                        
                     </Grid>
+                    
                     <Divider />
                 </Grid>
             </CardContent>
