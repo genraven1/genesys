@@ -13,6 +13,15 @@ export interface Characteristic {
     tempValue: number,
 }
 
+export enum CharacteristicKey {
+    Brawn = 'brawn',
+    Agility = 'agility',
+    Intellect = 'intellect',
+    Cunning = 'cunning',
+    Willpower = 'willpower',
+    Presence = 'presence'
+}
+
 export class DefaultCharacteristic {
     static create(type: CharacteristicType): Characteristic {
         return {
