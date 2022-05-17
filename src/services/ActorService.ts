@@ -1,7 +1,6 @@
 import axios from "axios";
 import Minion from "../models/actor/Minion";
 import Player from "../models/actor/Player";
-import { post } from "./rest";
 
 export default class ActorService {
 
@@ -10,7 +9,7 @@ export default class ActorService {
     }
 
     static async getMinion(id: string): Promise<Minion> {
-        return post('/actors/npc/minions/' + id);
+        return axios.post('/actors/npc/minions/' + id);
     }
 
     static async createMinion(minion: Minion): Promise<Minion> {

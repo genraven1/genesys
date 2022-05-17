@@ -1,5 +1,7 @@
+import { ApiResponse, RequestParams } from "@elastic/elasticsearch";
 import axios from "axios";
 import Talent from "../models/Talent";
+import { client } from "./rest";
 
 export default class TalentService {
 
@@ -17,5 +19,18 @@ export default class TalentService {
 
     static async updateTalent(name: String, talent: Talent): Promise<Talent> {
         return await axios.put('/talents/' + name, talent);
+    }
+
+    static async createNewTalent(name: string): Promise<Talent> {
+        var doc: RequestParams.Index = {
+            index: 'talents',
+            id: name,
+            body: {
+                'name': name
+            }
+        }
+        await client.index(doc).then((result: ApiResponse) => {
+            return result.body
+        })
     }
 }
