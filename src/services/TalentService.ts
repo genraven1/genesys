@@ -21,7 +21,7 @@ export default class TalentService {
         return await axios.put('/talents/' + name, talent);
     }
 
-    static async createNewTalent(name: string): Promise<Talent> {
+    static async createNewTalent(name: string): Promise<any> {
         var doc: RequestParams.Index = {
             index: 'talents',
             id: name,
