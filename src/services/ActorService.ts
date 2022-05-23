@@ -21,6 +21,7 @@ export default class ActorService {
     }
 
     static async getPlayer(name: string): Promise<Player> {
+        console.log(await (await axios.get('/actors/players/' + name)).data)
         return await (await axios.get('/actors/players/' + name)).data;
     }
 

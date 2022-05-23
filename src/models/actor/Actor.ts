@@ -18,29 +18,29 @@ export default interface Actor {
 }
 
 export interface Wounds {
-    currentValue: number,
-    maxValue: number,
+    current: number,
+    max: number,
 }
 
 export class DefaultWounds {
     static create(): Wounds {
         return {
-            currentValue: 0,
-            maxValue: 1,
+            current: 0,
+            max: 1,
         };
     }
 }
 
 export interface Strain {
-    currentValue: number,
-    maxValue: number,
+    current: number,
+    max: number,
 }
 
 export class DefaultStrain {
     static create(): Strain {
         return {
-            currentValue: 0,
-            maxValue: 1,
+            current: 0,
+            max: 1,
         };
     }
 }

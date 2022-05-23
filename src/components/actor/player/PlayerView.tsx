@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Characteristic } from "../../../models/actor/Characteristics";
 import Player from "../../../models/actor/Player";
 import ActorService from "../../../services/ActorService";
 import CharacteristicRow from "../CharacteristicRow";
@@ -17,11 +16,12 @@ export default function PlayerView() {
         }
         (async (): Promise<void> => {
             const playerData = await ActorService.getPlayer(name);
-            setPlayer(playerData)
+            setPlayer(playerData);
         })();
     }, [name])
 
     function getName(player: Player | null): string {
+        console.log(player)
         if (!player) {
             return 'Player Character View'
         }
