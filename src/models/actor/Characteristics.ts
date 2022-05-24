@@ -9,25 +9,16 @@ export enum CharacteristicType {
 
 export interface Characteristic {
     type: CharacteristicType,
-    currentValue: number,
-    tempValue: number,
-}
-
-export enum CharacteristicKey {
-    Brawn = 'brawn',
-    Agility = 'agility',
-    Intellect = 'intellect',
-    Cunning = 'cunning',
-    Willpower = 'willpower',
-    Presence = 'presence'
+    current: number,
+    temp: number,
 }
 
 export class DefaultCharacteristic {
     static create(type: CharacteristicType): Characteristic {
         return {
             type: type,
-            currentValue: 1,
-            tempValue: 1,
+            current: 1,
+            temp: 1,
         };
     }
 }

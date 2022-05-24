@@ -5,16 +5,16 @@ export enum DefenseType {
 
 export interface Defense {
     type: DefenseType,
-    currentValue: number,
-    tempValue: number,
+    current: number,
+    temp: number,
 }
 
 export class DefaultDefense {
     static create(type: DefenseType): Defense {
         return {
             type: type,
-            currentValue: 0,
-            tempValue: 0
+            current: 0,
+            temp: 0
         }
     }
 }

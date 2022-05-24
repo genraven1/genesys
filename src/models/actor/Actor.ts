@@ -1,6 +1,7 @@
 import { Characteristic } from "./Characteristics";
 import { Defense } from "./Defense";
 import { ActorTalent } from "../Talent";
+import Stats from "./Stats";
 
 export default interface Actor {
     name: string,
@@ -11,36 +12,8 @@ export default interface Actor {
     willpower: Characteristic,
     presence: Characteristic,
     soak: number,
-    meleeDefense: Defense,
-    rangedDefense: Defense,
-    wounds: Wounds,
+    melee: Defense,
+    ranged: Defense,
+    wounds: Stats,
     talents: ActorTalent[],
-}
-
-export interface Wounds {
-    current: number,
-    max: number,
-}
-
-export class DefaultWounds {
-    static create(): Wounds {
-        return {
-            current: 0,
-            max: 1,
-        };
-    }
-}
-
-export interface Strain {
-    current: number,
-    max: number,
-}
-
-export class DefaultStrain {
-    static create(): Strain {
-        return {
-            current: 0,
-            max: 1,
-        };
-    }
 }

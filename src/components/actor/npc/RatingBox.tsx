@@ -1,7 +1,7 @@
 import { Grid, Card, CardHeader, Divider, CardActions, Typography } from "@mui/material";
 import { useState } from "react";
-import { Rating } from "../../models/actor/NonPlayerCharacter";
-import InputButtonGroup from "../input/InputButtonGroup";
+import { Rating } from "../../../models/actor/NonPlayerCharacter";
+import InputButtonGroup from "../../input/InputButtonGroup";
 
 interface Props {
     updatedRating: Rating,

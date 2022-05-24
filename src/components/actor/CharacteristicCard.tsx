@@ -1,5 +1,4 @@
 import { Grid, Card, CardHeader, Divider, Typography, CardActions } from "@mui/material";
-import { useState } from "react";
 import { Characteristic } from "../../models/actor/Characteristics";
 import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 
@@ -11,7 +10,7 @@ export default function CharacteristicBox(props: Props): JSX.Element {
     const { characteristic } = props;
 
     const onChange = async (value: number) => {
-        characteristic.currentValue = value
+        characteristic.current = value
     }
 
     return (
@@ -19,9 +18,9 @@ export default function CharacteristicBox(props: Props): JSX.Element {
             <Card>
                 <CardHeader title={characteristic.type} style={{ textAlign: 'center' }} />
                 <Divider />
-                <Typography style={{ textAlign: 'center' }} >{characteristic.currentValue}</Typography>
+                <Typography style={{ textAlign: 'center' }} >{characteristic.current}</Typography>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={characteristic.currentValue} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={characteristic.current} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
                 </CardActions>
             </Card>
         </Grid>

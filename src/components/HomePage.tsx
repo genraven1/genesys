@@ -12,12 +12,6 @@ export default function MainPage() {
       <Route path='/talents/:name' element={<TalentView />} />
       <Route path='/actors/players' element={<ViewAllPlayers />} />
       <Route path='/actors/players/:name' element={<PlayerView />} />
-
-      {/* <Route path='/npcs/minions' element={<MinionTable />} />
-      <Route path='/npcs/minions/new' element={<CreateMinion minion={selectedMinion.current} />} />
-      <Route path='/equipment/armor' element={<MinionTable />} />
-      <Route path='/equipment/armor/new' element={<CreateArmor newArmor={selectedArmor.current} />} />
-      <Route path='/npcs/minions/:id' element={<MinionView />} /> */}
     </Routes>
   )
 }

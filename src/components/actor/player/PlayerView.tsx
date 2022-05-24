@@ -1,9 +1,12 @@
 import { Card, CardContent, CardHeader, Divider, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Player from "../../../models/actor/Player";
+import Player, {DefaultPlayer} from "../../../models/actor/Player";
 import ActorService from "../../../services/ActorService";
 import CharacteristicRow from "../CharacteristicRow";
+import StatsCard from "../StatsCard";
+import Stats from "../../../models/actor/Stats";
+import PlayerStatsRow from "../PlayerStatsRow";
 
 export default function PlayerView() {
     const { name } = useParams<{ name: string }>();
@@ -21,11 +24,17 @@ export default function PlayerView() {
     }, [name])
 
     function getName(player: Player | null): string {
-        console.log(player)
         if (!player) {
             return 'Player Character View'
         }
         return player.name
+    }
+
+    function getPlayer(player: Player | null): Player {
+        if (!player) {
+            return DefaultPlayer.create();
+        }
+        return player
     }
 
     return (
@@ -34,8 +43,9 @@ export default function PlayerView() {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <CharacteristicRow brawn={player!!.brawn} agility={player!!.agility} intellect={player!!.intellect} cunning={player!!.cunning} willpower={player!!.willpower} presence={player!!.presence} />
+                    <CharacteristicRow actor={getPlayer(player)} />
                     <Divider />
+                    <PlayerStatsRow player={getPlayer(player)} />
                 </Grid>
             </CardContent>
         </Card>
