@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import Player, {DefaultPlayer} from "../../../models/actor/Player";
+import Player, {DefaultPlayer} from "../../../models/actor/player/Player";
 import ActorService from "../../../services/ActorService";
 import CharacteristicRow from "../CharacteristicRow";
 import PlayerStatsRow from "../PlayerStatsRow";

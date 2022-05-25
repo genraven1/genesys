@@ -1,10 +1,9 @@
-import Player from "../../models/actor/Player";
+import Player from "../../models/actor/player/Player";
 import {Grid} from "@mui/material";
 import SoakCard from "./SoakCard";
 import StatsCard from "./StatsCard";
-import Stats, {DefaultStats, StatsType} from "../../models/actor/Stats";
-import DisplayStatsCard from "./DisplayStatsCard";
-
+import {StatsType} from "../../models/actor/Stats";
+import TotalDefenseCard from "./TotalDefenseCard";
 
 interface Props {
     player: Player
@@ -13,18 +12,12 @@ interface Props {
 export default function PlayerStatsRow(props: Props) {
     const { player } = props
 
-    function getStats(stats: Stats, type: StatsType): Stats {
-        if (!stats) {
-            return DefaultStats.create(type)
-        }
-        return stats
-    }
     return (
         <Grid container spacing={10}>
             <SoakCard soak={player.soak} />
-            <StatsCard stats={getStats(player.wounds, StatsType.Wounds)} />
-            <StatsCard stats={getStats(player.strain, StatsType.Strain)} />
-            <DisplayStatsCard stats={getStats(player.wounds, StatsType.Wounds)} />
+            <StatsCard stats={player.wounds}  type={ StatsType.Wounds}/>
+            <StatsCard stats={player.strain} type={StatsType.Strain} />
+            <TotalDefenseCard melee={player.melee} ranged={player.ranged} />
         </Grid>
     )
 }

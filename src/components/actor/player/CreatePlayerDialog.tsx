@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField } from "@mui/material";
-import { useState } from "react";
+import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import ActorService from "../../../services/ActorService";
+import ActorService, {ActorPath} from "../../../services/ActorService";
 
 interface Props {
     open: boolean;
@@ -14,11 +14,11 @@ export default function CreatePlayerDialog(props: Props) {
     let navigate = useNavigate();
 
     const handleCreate = async (): Promise<void> => {
-        ActorService.createPlayer(name);
-        navigate('/actors/players' + name);
+        await ActorService.createPlayer(name);
+        navigate(ActorPath.Player + name);
     }
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
         setName(value);
     }

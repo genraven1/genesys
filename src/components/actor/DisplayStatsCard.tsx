@@ -1,17 +1,18 @@
-import Stats from "../../models/actor/Stats";
-import {Card, CardActions, CardHeader, Divider, Grid, Typography} from "@mui/material";
+import Stats, {StatsType} from "../../models/actor/Stats";
+import {Card, CardHeader, Divider, Grid, Typography} from "@mui/material";
 
 interface Props {
-    stats: Stats
+    stats: Stats,
+    type: StatsType
 }
 
 export default function DisplayStatsCard(props: Props) {
-    const { stats } = props;
+    const { stats, type } = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={stats.type} style={{ textAlign: 'center' }} />
+                <CardHeader title={type} style={{ textAlign: 'center' }} />
                 <Divider />
                 <Grid container spacing={10}>
                     <Grid item xs>

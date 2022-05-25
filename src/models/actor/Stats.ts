@@ -1,5 +1,4 @@
 export default interface Stats {
-    type: StatsType,
     current: number,
     max: number,
 }
@@ -10,11 +9,10 @@ export enum StatsType {
 }
 
 export class DefaultStats {
-    static create(type: StatsType): Stats {
+    static create(): Stats {
         return {
             current: 0,
             max: 1,
-            type: type
         }
     }
 }

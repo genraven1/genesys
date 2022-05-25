@@ -4,15 +4,13 @@ export enum DefenseType {
 }
 
 export interface Defense {
-    type: DefenseType,
     current: number,
     temp: number,
 }
 
 export class DefaultDefense {
-    static create(type: DefenseType): Defense {
+    static create(): Defense {
         return {
-            type: type,
             current: 0,
             temp: 0
         }

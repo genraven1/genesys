@@ -12,7 +12,7 @@ import { Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { LinkProps, Link } from "react-router-dom";
-import Player from '../../../models/actor/Player';
+import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 
 function Row(props: { row: Player }): JSX.Element {
