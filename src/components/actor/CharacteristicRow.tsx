@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import { Characteristic } from "../../models/actor/Characteristics"
+import {Grid} from "@mui/material";
+import {CharacteristicType} from "../../models/actor/Characteristics"
 import CharacteristicCard from "./CharacteristicCard";
 import Actor from "../../models/actor/Actor";
 
@@ -9,13 +9,15 @@ interface Props {
 
 export default function CharacteristicRow(props: Props): JSX.Element {
     const { actor } = props;
-    const characteristics = [actor.brawn, actor.agility, actor.intellect, actor.cunning, actor.willpower, actor.presence]
 
     return (
         <Grid container spacing={10}>
-            {characteristics.map((characteristic: Characteristic) => (
-                <CharacteristicCard characteristic={characteristic} />
-            ))}
+            <CharacteristicCard characteristic={actor.brawn}  type={CharacteristicType.Brawn}/>
+            <CharacteristicCard characteristic={actor.agility}  type={CharacteristicType.Agility}/>
+            <CharacteristicCard characteristic={actor.intellect}  type={CharacteristicType.Intellect}/>
+            <CharacteristicCard characteristic={actor.cunning}  type={CharacteristicType.Cunning}/>
+            <CharacteristicCard characteristic={actor.willpower}  type={CharacteristicType.Willpower}/>
+            <CharacteristicCard characteristic={actor.presence}  type={CharacteristicType.Presence}/>
         </Grid>
     )
 }

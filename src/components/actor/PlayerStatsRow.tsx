@@ -3,6 +3,7 @@ import {Grid} from "@mui/material";
 import SoakCard from "./SoakCard";
 import StatsCard from "./StatsCard";
 import Stats, {DefaultStats, StatsType} from "../../models/actor/Stats";
+import DisplayStatsCard from "./DisplayStatsCard";
 
 
 interface Props {
@@ -23,6 +24,7 @@ export default function PlayerStatsRow(props: Props) {
             <SoakCard soak={player.soak} />
             <StatsCard stats={getStats(player.wounds, StatsType.Wounds)} />
             <StatsCard stats={getStats(player.strain, StatsType.Strain)} />
+            <DisplayStatsCard stats={getStats(player.wounds, StatsType.Wounds)} />
         </Grid>
     )
 }

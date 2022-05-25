@@ -16,15 +16,16 @@ export default function StatsCard(props: Props) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={stats.type} style={{ textAlign: 'center' }} />
+                <CardHeader title={stats.type + ' Threshold'} style={{ textAlign: 'center' }} />
                 <Divider />
                 <Grid container spacing={10}>
-                    <Grid item xs><Typography style={{ textAlign: 'center' }} >{stats.current}</Typography></Grid>
-                    <Grid item xs><Typography style={{ textAlign: 'center' }} >{stats.max}</Typography></Grid>
+                    <Grid item xs>
+                        <Typography style={{ textAlign: 'center' }} >{stats.max}</Typography>
+                    </Grid>
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={20} onCommit={(value: number): void => { onChange(value) }} />
                 </CardActions>
             </Card>
         </Grid>

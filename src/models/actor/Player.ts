@@ -1,7 +1,7 @@
 import Actor from "./Actor";
 import {DefaultDefense, DefenseType} from "./Defense";
 import Stats, {DefaultStats, StatsType} from "./Stats";
-import {CharacteristicType, DefaultCharacteristic} from "./Characteristics";
+import {DefaultCharacteristic} from "./Characteristics";
 
 export default interface Player extends Actor {
     strain: Stats
@@ -10,17 +10,17 @@ export default interface Player extends Actor {
 export class DefaultPlayer {
     static create(): Player {
         return {
-            agility: DefaultCharacteristic.create(CharacteristicType.Agility),
-            brawn: DefaultCharacteristic.create(CharacteristicType.Brawn),
-            cunning: DefaultCharacteristic.create(CharacteristicType.Cunning),
-            intellect: DefaultCharacteristic.create(CharacteristicType.Intellect),
+            agility: DefaultCharacteristic.create(),
+            brawn: DefaultCharacteristic.create(),
+            cunning: DefaultCharacteristic.create(),
+            intellect: DefaultCharacteristic.create(),
             melee: DefaultDefense.create(DefenseType.Melee),
             name: "",
-            presence: DefaultCharacteristic.create(CharacteristicType.Presence),
+            presence: DefaultCharacteristic.create(),
             ranged: DefaultDefense.create(DefenseType.Ranged),
             soak: 0,
             talents: [],
-            willpower: DefaultCharacteristic.create(CharacteristicType.Willpower),
+            willpower: DefaultCharacteristic.create(),
             wounds: DefaultStats.create(StatsType.Wounds),
             strain: DefaultStats.create(StatsType.Strain)
         }

@@ -13,7 +13,7 @@ export class DefaultStats {
     static create(type: StatsType): Stats {
         return {
             current: 0,
-            max: 0,
+            max: 1,
             type: type
         }
     }
