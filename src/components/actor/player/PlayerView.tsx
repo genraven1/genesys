@@ -6,6 +6,8 @@ import ActorService from "../../../services/ActorService";
 import CharacteristicRow from "../CharacteristicRow";
 import PlayerStatsRow from "../PlayerStatsRow";
 import {Characteristic, CharacteristicType} from "../../../models/actor/Characteristics";
+import Stats, {StatsType} from "../../../models/actor/Stats";
+import {Defense, DefenseType} from "../../../models/actor/Defense";
 
 export default function PlayerView() {
     const { name } = useParams<{ name: string }>();
@@ -57,29 +59,64 @@ export default function PlayerView() {
         }
     }
 
-    const onChange = async (key: keyof Player, value: any, type: CharacteristicType) => {
-        if (value === null || (player !== null && player[key] === type)) {
+    const onStatChange = (copyPlayer: Player, value: Stats, type: StatsType) => {
+        if (type === StatsType.Wounds) {
+            copyPlayer.wounds = value
+        }
+        else if (type === StatsType.Strain) {
+            copyPlayer.strain = value
+        }
+    }
+
+    const onDefenseChange = (copyPlayer: Player, value: Defense, type: DefenseType) => {
+        if (type === DefenseType.Melee) {
+            copyPlayer.melee = value
+        }
+        else if (type === DefenseType.Ranged) {
+            copyPlayer.ranged = value
+        }
+    }
+
+    const onChange = async (key: keyof Player, value: any) => {
+        if (value === null || (player !== null && player[key] === value)) {
             return;
         }
         const copyPlayer = {...player} as Player
         switch (key) {
-            case "strain":
-                break;
             case "brawn":
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Brawn)
+                break;
             case "agility":
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Agility)
+                break;
             case "intellect":
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Intellect)
+                break;
             case "cunning":
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Cunning)
+                break;
             case "willpower":
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Willpower)
+                break;
             case "presence":
-                onCharacteristicChange(copyPlayer, value, type)
+                onCharacteristicChange(copyPlayer, value, CharacteristicType.Presence)
                 break;
             case 'talents':
+                break
             case "soak":
+                copyPlayer.soak = copyPlayer.brawn.current
                 break;
             case "melee":
+                onDefenseChange(copyPlayer, value, DefenseType.Melee)
+                break;
             case "ranged":
+                onDefenseChange(copyPlayer, value, DefenseType.Ranged)
                 break;
             case "wounds":
+                onStatChange(copyPlayer, value, StatsType.Wounds)
+                break;
+            case "strain":
+                onStatChange(copyPlayer, value, StatsType.Strain)
                 break;
             case "name":
                 copyPlayer.name = value
