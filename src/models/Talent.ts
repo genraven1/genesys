@@ -9,7 +9,7 @@ export default interface Talent {
 export enum Ranked {
     No = 'No',
     Yes = 'Yes'
-};
+}
 
 export enum Activation {
     Passive = 'Passive',
@@ -17,7 +17,7 @@ export enum Activation {
     ActiveManeuver = 'Active (Maneuver)',
     ActiveIncidental = 'Active (Incidental)',
     ActiveIncidentalOutOfTurn = 'Active (Incidental, Out of Turn)'
-};
+}
 
 export enum Tier {
     First = 'First',
@@ -25,7 +25,7 @@ export enum Tier {
     Third = 'Third',
     Fourth = 'Fourth',
     Fifth = 'Fifth'
-};
+}
 
 export enum TalentKey {
     Name= 'name',

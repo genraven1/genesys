@@ -11,7 +11,7 @@ export default function InputButtonGroup(props: Props): JSX.Element {
     const { onIncrease, onDecrease } = props;
 
     return (
-        <Box component='span'>
+        <Box component='span' style={{ textAlign: 'center' }} >
             <IconButton title='Increase' size='medium' onClick={(): void => onIncrease()}>
                 <ArrowUpwardIcon color='primary' fontSize='medium' />
             </IconButton>

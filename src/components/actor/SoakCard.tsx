@@ -4,7 +4,7 @@ interface Props {
     soak: number,
 }
 
-export default function SoakBox(props: Props): JSX.Element {
+export default function SoakCard(props: Props): JSX.Element {
     const { soak } = props;
     return (
         <Grid item xs>

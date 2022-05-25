@@ -8,17 +8,15 @@ export enum CharacteristicType {
 }
 
 export interface Characteristic {
-    type: CharacteristicType,
-    currentValue: number,
-    tempValue: number,
+    current: number,
+    temp: number,
 }
 
 export class DefaultCharacteristic {
-    static create(type: CharacteristicType): Characteristic {
+    static create(): Characteristic {
         return {
-            type: type,
-            currentValue: 1,
-            tempValue: 1,
+            current: 1,
+            temp: 1,
         };
     }
 }
