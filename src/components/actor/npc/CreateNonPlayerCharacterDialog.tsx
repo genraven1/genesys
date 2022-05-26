@@ -1,9 +1,10 @@
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import ActorService, {ActorPath} from "../../../services/ActorService";
+import ActorService from "../../../services/ActorService";
 import {NonPlayerCharacterType} from "../../../models/actor/npc/NonPlayerCharacter";
 import InputSelectField from "../../input/InputSelectField";
+import {Path} from "../../../services/Path";
 
 const NPC_OPTIONS = npcOptions()
 
@@ -37,7 +38,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
                 break
             case NonPlayerCharacterType.Nemesis:
                 await ActorService.createNemesis(name);
-                navigate(ActorPath.Nemesis + name);
+                navigate(Path.Nemesis + name);
                 break
         }
     }

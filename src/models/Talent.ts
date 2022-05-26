@@ -35,10 +35,6 @@ export enum TalentKey {
     Description= 'description'
 }
 
-export interface ActorTalent extends Talent {
-    ranks: number
-}
-
 export class DefaultTalent {
     static create(): Talent {
         return {

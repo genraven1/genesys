@@ -26,7 +26,8 @@ export class DefaultNemesis {
             talents: [],
             willpower: DefaultCharacteristic.create(),
             wounds: DefaultStats.create(),
-            strain: DefaultStats.create()
+            strain: DefaultStats.create(),
+            skills: []
         }
     }
 }

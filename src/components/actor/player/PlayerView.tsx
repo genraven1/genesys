@@ -1,13 +1,13 @@
-import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import Player, {DefaultPlayer} from "../../../models/actor/player/Player";
-import ActorService from "../../../services/ActorService";
-import CharacteristicRow from "../CharacteristicRow";
-import PlayerStatsRow from "../PlayerStatsRow";
-import {Characteristic, CharacteristicType} from "../../../models/actor/Characteristics";
-import Stats, {StatsType} from "../../../models/actor/Stats";
-import {Defense, DefenseType} from "../../../models/actor/Defense";
+import {Card, CardContent, CardHeader, Divider, Grid} from '@mui/material';
+import {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import Player, {DefaultPlayer} from '../../../models/actor/player/Player';
+import ActorService from '../../../services/ActorService';
+import CharacteristicRow from '../CharacteristicRow';
+import PlayerStatsRow from '../PlayerStatsRow';
+import {Characteristic, CharacteristicType} from '../../../models/actor/Characteristics';
+import Stats, {StatsType} from '../../../models/actor/Stats';
+import {Defense, DefenseType} from '../../../models/actor/Defense';
 
 export default function PlayerView() {
     const { name } = useParams<{ name: string }>();
@@ -83,42 +83,42 @@ export default function PlayerView() {
         }
         const copyPlayer = {...player} as Player
         switch (key) {
-            case "brawn":
+            case 'brawn':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Brawn)
                 break;
-            case "agility":
+            case 'agility':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Agility)
                 break;
-            case "intellect":
+            case 'intellect':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Intellect)
                 break;
-            case "cunning":
+            case 'cunning':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Cunning)
                 break;
-            case "willpower":
+            case 'willpower':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Willpower)
                 break;
-            case "presence":
+            case 'presence':
                 onCharacteristicChange(copyPlayer, value, CharacteristicType.Presence)
                 break;
             case 'talents':
                 break
-            case "soak":
+            case 'soak':
                 copyPlayer.soak = copyPlayer.brawn.current
                 break;
-            case "melee":
+            case 'melee':
                 onDefenseChange(copyPlayer, value, DefenseType.Melee)
                 break;
-            case "ranged":
+            case 'ranged':
                 onDefenseChange(copyPlayer, value, DefenseType.Ranged)
                 break;
-            case "wounds":
+            case 'wounds':
                 onStatChange(copyPlayer, value, StatsType.Wounds)
                 break;
-            case "strain":
+            case 'strain':
                 onStatChange(copyPlayer, value, StatsType.Strain)
                 break;
-            case "name":
+            case 'name':
                 copyPlayer.name = value
         }
 

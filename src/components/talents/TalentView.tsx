@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, Divider, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import Talent, { Activation, Ranked, TalentKey, Tier } from "../../models/Talent";
-import TalentService from "../../services/TalentService";
-import { useParams } from "react-router-dom";
-import InputTextFieldCard from "../input/InputTextFieldCard";
-import InputSelectField from "../input/InputSelectField";
+import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
+import { useEffect, useState } from 'react';
+import Talent, { Activation, Ranked, TalentKey, Tier } from '../../models/Talent';
+import TalentService from '../../services/TalentService';
+import { useParams } from 'react-router-dom';
+import InputTextFieldCard from '../input/InputTextFieldCard';
+import InputSelectField from '../input/InputSelectField';
 
 const RANKED_OPTIONS = rankedOptions()
 
@@ -32,7 +32,7 @@ function activationOptions() {
         array.push({ value: key, label: value });
     }
     return array;
-};
+}
 
 const TIER_OPTIONS = tierOptions()
 
@@ -46,7 +46,7 @@ function tierOptions() {
         array.push({ value: key, label: value });
     }
     return array;
-};
+}
 
 export default function TalentView() {
     const { name } = useParams<{ name: string }>();
