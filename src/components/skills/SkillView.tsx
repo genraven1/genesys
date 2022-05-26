@@ -1,5 +1,5 @@
-import {Card, CardContent, CardHeader, Checkbox, Divider, FormControlLabel, Grid} from '@mui/material';
-import {useEffect, useState} from 'react';
+import {Card, CardContent, CardHeader, Checkbox, Divider, Grid} from '@mui/material';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {DefaultSkill, SkillKey, SkillType} from '../../models/actor/Skill';
@@ -86,6 +86,16 @@ export default function SkillView() {
         await updateSkill(copySkill)
     }
 
+    const handleActiveClick = (event: ChangeEvent<HTMLInputElement>): void => {
+        const value = event.target.value
+        if (value === 'on') {
+            onChange(SkillKey.Active, true)
+        }
+        else {
+            onChange(SkillKey.Active, false)
+        }
+    }
+
     const updateSkill = async (copySkill: Skill) => {
         setSkill(copySkill)
 
@@ -113,7 +123,9 @@ export default function SkillView() {
                         </Card>
                     </Grid>
                     <Grid item xs>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label='Active' />
+                        <CardHeader title={'Active'} style={{ textAlign: 'center' }} />
+                        <Divider />
+                        <Checkbox onChange={handleActiveClick} checked={getSkill(skill).active}/>
                     </Grid>
                 </Grid>
             </CardContent>

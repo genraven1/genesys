@@ -13,12 +13,12 @@ export default function MainPage() {
   return (
     <Routes>
       <Route path={Path.Talent} element={<AllTalentsView />} />
-      <Route path={Path.Talent + ':name'} element={<TalentView />} />
+      <Route path={Path.Talent + '/:name'} element={<TalentView />} />
       <Route path={Path.Player} element={<ViewAllPlayers />} />
-      <Route path={Path.Player + ':name'} element={<PlayerView />} />
-      <Route path={Path.Nemesis + ':name'} element={<NemesisView />} />
+      <Route path={Path.Player + '/:name'} element={<PlayerView />} />
+      <Route path={Path.Nemesis + '/:name'} element={<NemesisView />} />
       <Route path={Path.Skills} element={<ViewAllSkills />} />
-      <Route path={Path.Skills + ':name'} element={<SkillView />} />
+      <Route path={Path.Skills + '/:name'} element={<SkillView />} />
     </Routes>
   )
 }

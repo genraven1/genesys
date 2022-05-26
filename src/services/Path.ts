@@ -1,6 +1,6 @@
 export enum Path {
     Player = '/actors/players/',
     Nemesis = '/actors/nemesis/',
-    Talent = '/talents/',
+    Talent = '/talents',
     Skills = '/skills'
 }
