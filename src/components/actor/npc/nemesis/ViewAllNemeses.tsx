@@ -7,15 +7,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Talent from '../../models/Talent';
-import TalentService from '../../services/TalentService';
 import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import {Button, Typography} from '@mui/material';
+import { Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { LinkProps, Link } from "react-router-dom";
+import Nemesis from "../../../../models/actor/npc/Nemesis";
+import ActorService from '../../../../services/ActorService'
 
-function Row(props: { row: Talent }): JSX.Element {
+function Row(props: { row: Nemesis }): JSX.Element {
     const { row } = props;
     const { pathname } = useLocation()
     const [open, setOpen] = useState(false);
@@ -28,9 +28,6 @@ function Row(props: { row: Talent }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.ranked}</TableCell>
-                <TableCell>{row.activation}</TableCell>
-                <TableCell>{row.tier}</TableCell>
                 <TableCell>
                     <Button component={renderLink}>Edit</Button>
                 </TableCell>
@@ -41,7 +38,6 @@ function Row(props: { row: Talent }): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <Typography fontFamily={'Genesys'}>{row.description}</Typography>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -52,14 +48,14 @@ function Row(props: { row: Talent }): JSX.Element {
     );
 }
 
-export default function AllTalentsView() {
-    const [talents, setTalents] = useState<Talent[]>([]);
+export default function AllNemesesView() {
+    const [nemeses, setNemeses] = useState<Nemesis[]>([]);
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents();
-            if (!talentList) { return; }
-            setTalents(talentList);
+            const nemesisList = await ActorService.getNemeses();
+            if (!nemesisList) { return; }
+            setNemeses(nemesisList);
         })();
     }, []);
 
@@ -68,15 +64,12 @@ export default function AllTalentsView() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Talent Name</TableCell>
-                        <TableCell>Ranked</TableCell>
-                        <TableCell>Activation</TableCell>
-                        <TableCell>Tier</TableCell>
+                        <TableCell>NPC Name</TableCell>
                         <TableCell>Edit</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {talents.map((row: Talent) => (
+                    {nemeses.map((row: Nemesis) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

@@ -33,7 +33,7 @@ export default function SideNav() {
                         <ExpandedList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent} dialogTitle={'Create Talent'} onClick={(): void => setOpenTalentCreationDialog(true)} />
                         <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
                         <ExpandedList header={'Player Characters'} viewTitle={'View All Player Characters'} to={Path.Player} dialogTitle={'Create Player Character'} onClick={(): void => setOpenPlayerCreationDialog(true)} />
-                        <ExpandedList header={'Non Player Characters'} viewTitle={'View All NPCS'} to={Path.Player} dialogTitle={'Create NPC'} onClick={(): void => setOpenNonPlayerCharacterCreationDialog(true)} />
+                        <ExpandedList header={'Non Player Characters'} viewTitle={'View All NPCS'} to={Path.Nemesis} dialogTitle={'Create NPC'} onClick={(): void => setOpenNonPlayerCharacterCreationDialog(true)} />
                         {/*<ExpandedList name='Equipment' items={ EQUIPMENT } />*/}
                     </Drawer>
                     {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog} onClose={(): void => setOpenTalentCreationDialog(false)} />}

@@ -4,15 +4,12 @@ import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 
 interface Props {
     stats: Stats,
-    type: StatsType
+    type: StatsType,
+    onChange: (value: number) => void
 }
 
 export default function StatsCard(props: Props) {
-    const { stats, type } = props;
-
-    const onChange = async (value: number) => {
-        stats.current = value
-    }
+    const { stats, type, onChange } = props;
 
     return (
         <Grid item xs>
@@ -26,7 +23,7 @@ export default function StatsCard(props: Props) {
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={20} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={20} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

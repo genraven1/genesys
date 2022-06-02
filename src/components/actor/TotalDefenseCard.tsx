@@ -16,8 +16,7 @@ export default function TotalDefenseCard(props: Props) {
                 <CardHeader title={'Defense'} style={{ textAlign: 'center' }} />
                 <Divider />
                 <Grid container spacing={10}>
-                    <DefenseCard defense={melee} type={DefenseType.Melee} />
-                    <DefenseCard defense={ranged} type={DefenseType.Ranged} />
+
                 </Grid>
             </Card>
         </Grid>
