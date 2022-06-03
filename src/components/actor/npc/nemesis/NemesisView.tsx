@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";

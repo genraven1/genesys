@@ -1,6 +1,6 @@
 import Nemesis from "../../../../models/actor/npc/Nemesis";
-import {Fragment} from "react";
 import * as React from "react";
+import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {ActorSkill} from "../../../../models/actor/Actor";
@@ -9,33 +9,132 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
-import {IconButton} from "@mui/material";
+import {IconButton, Typography} from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Collapse from "@mui/material/Collapse";
+import {SkillType} from "../../../../models/actor/Skill";
 
-function SkillRow(props: { row: ActorSkill }): JSX.Element {
-    const { row } = props;
+interface RowProps {
+    actorSkill: ActorSkill,
+    nemesisProp: Nemesis
+}
+
+function SkillRow(props: RowProps): JSX.Element {
+    const { actorSkill, nemesisProp } = props;
+    const [skill, setSkill] = useState<ActorSkill>(actorSkill)
+    const [nemesis, setNemesis] = useState<Nemesis>(nemesisProp)
+    const [disableIncrease, setDisableIncrease] = useState(false)
+    const [disableDecrease, setDisableDecrease] = useState(false)
 
     const setName = (): string => {
-        return row.name + '(' + row.characteristic + ')'
+        return actorSkill.name + '(' + actorSkill.characteristic + ')'
+    }
+
+    const setLimits = (): void => {
+        console.log(actorSkill.ranks)
+        if (actorSkill.ranks <= 0) {
+            console.log('IF')
+            actorSkill.ranks = 0
+            setDisableDecrease(true)
+            console.log(actorSkill.ranks)
+        } else if (actorSkill.ranks >= 5) {
+            console.log('IF ELSE')
+            actorSkill.ranks = 5
+            setDisableIncrease(true)
+            console.log(actorSkill.ranks)
+        }
+        else {
+            console.log('ELSE')
+            setDisableIncrease(false)
+            setDisableDecrease(false)
+            console.log(actorSkill.ranks)
+        }
+    }
+
+    const increaseSkillRank = (): void => {
+        setSkill((prev_state) => ({
+            ...prev_state,
+            ranks: skill.ranks++,
+        }));
+        setLimits()
+        replaceSkill()
+    }
+
+    const decreaseSkillRank = (): void => {
+        setSkill((prev_state) => ({
+            ...prev_state,
+            ranks: skill.ranks--,
+        }));
+        setLimits()
+        replaceSkill()
+    }
+
+    const getSkillIndex = (name: string): number => {
+        return nemesis.skills.findIndex(skill => skill.name === name)
+    }
+
+    const replaceSkill = (): void => {
+        const copyNemesis = {...nemesis} as Nemesis
+        let copySkills = copyNemesis.skills
+        copySkills[getSkillIndex(skill.name)] = skill
+        copyNemesis.skills = copySkills
+
+        console.log(copyNemesis)
     }
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell component="th" scope="row">{setName()}</TableCell>
-                <TableCell>{row.ranks}</TableCell>
+            <TableRow>
+                <TableCell>{setName()}</TableCell>
+                <TableCell>{actorSkill.ranks}</TableCell>
+                <TableCell></TableCell>
                 <TableCell>
-                    <IconButton title='Increase' size='medium'>
+                    <IconButton title='Increase' size='medium' disabled={disableIncrease} onClick={increaseSkillRank}>
                         <ArrowUpwardIcon color='primary' fontSize='medium' />
                     </IconButton>
-                    <IconButton title='Decrease' size='medium'>
+                    <IconButton title='Decrease' size='medium' disabled={disableDecrease} onClick={decreaseSkillRank}>
                         <ArrowDownwardIcon color='primary' fontSize='medium' />
                     </IconButton>
                 </TableCell>
             </TableRow>
         </Fragment>
     );
+}
+
+function SkillTypeGroup(props: {nemesis: Nemesis, type: SkillType}) {
+    const {nemesis, type} = props
+    const [open, setOpen] = useState(false);
+
+    return (
+        <Fragment>
+            <TableRow onClick={() => setOpen(!open)}>
+                <TableCell component="th" scope="row" style={{ textAlign: 'center' }}>{type}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Table>
+                            <TableRow>
+                                <TableCell>Skill</TableCell>
+                                <TableCell>Ranks</TableCell>
+                                <TableCell>Dice Pool</TableCell>
+                                <TableCell>Actions</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableBody>
+                                    <Typography fontFamily={'Genesys'}>{nemesis.skills.filter((skill) => skill.type === type).map((row: ActorSkill) => (
+                                        <SkillRow key={row.name} actorSkill={row} nemesisProp={nemesis}/>
+                                    ))}</Typography>
+                                </TableBody>
+                            </TableRow>
+
+                        </Table>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </Fragment>
+    )
 }
 
 interface Props {
@@ -50,15 +149,15 @@ export default function NemesisSkillTable(props: Props) {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Skill</TableCell>
-                        <TableCell>Ranks</TableCell>
-                        <TableCell>Actions</TableCell>
+                        <TableCell style={{textAlign: "center"}}>Skills</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {nemesis.skills.map((row: ActorSkill) => (
-                        <SkillRow key={row.name} row={row} />
-                    ))}
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.General} />
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Magic} />
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Combat} />
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Social} />
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Knowledge} />
                 </TableBody>
             </Table>
         </TableContainer>
