@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
-import {IconButton, Typography} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Collapse from "@mui/material/Collapse";
@@ -32,33 +32,32 @@ function SkillRow(props: RowProps): JSX.Element {
     }
 
     const setLimits = (): void => {
-        console.log(actorSkill.ranks)
         if (actorSkill.ranks <= 0) {
             console.log('IF')
             actorSkill.ranks = 0
             setDisableDecrease(true)
-            console.log(actorSkill.ranks)
         } else if (actorSkill.ranks >= 5) {
             console.log('IF ELSE')
             actorSkill.ranks = 5
             setDisableIncrease(true)
-            console.log(actorSkill.ranks)
         }
         else {
             console.log('ELSE')
             setDisableIncrease(false)
             setDisableDecrease(false)
-            console.log(actorSkill.ranks)
         }
     }
 
     const increaseSkillRank = (): void => {
+        console.log(skill)
         setSkill((prev_state) => ({
             ...prev_state,
             ranks: skill.ranks++,
         }));
+        console.log(skill)
         setLimits()
         replaceSkill()
+        console.log(skill)
     }
 
     const decreaseSkillRank = (): void => {
@@ -79,8 +78,8 @@ function SkillRow(props: RowProps): JSX.Element {
         let copySkills = copyNemesis.skills
         copySkills[getSkillIndex(skill.name)] = skill
         copyNemesis.skills = copySkills
-
-        console.log(copyNemesis)
+        setNemesis(copyNemesis)
+        console.log(nemesis.skills)
     }
 
     return (
@@ -114,22 +113,23 @@ function SkillTypeGroup(props: {nemesis: Nemesis, type: SkillType}) {
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table>
-                            <TableRow>
-                                <TableCell>Skill</TableCell>
-                                <TableCell>Ranks</TableCell>
-                                <TableCell>Dice Pool</TableCell>
-                                <TableCell>Actions</TableCell>
-                            </TableRow>
-                            <TableRow>
+                        <Box sx={{ margin: 1 }}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Skill</TableCell>
+                                        <TableCell>Ranks</TableCell>
+                                        <TableCell>Dice Pool</TableCell>
+                                        <TableCell>Actions</TableCell>
+                                    </TableRow>
+                                </TableHead>
                                 <TableBody>
-                                    <Typography fontFamily={'Genesys'}>{nemesis.skills.filter((skill) => skill.type === type).map((row: ActorSkill) => (
+                                    {nemesis.skills.filter((skill) => skill.type === type).map((row: ActorSkill) => (
                                         <SkillRow key={row.name} actorSkill={row} nemesisProp={nemesis}/>
-                                    ))}</Typography>
+                                    ))}
                                 </TableBody>
-                            </TableRow>
-
-                        </Table>
+                            </Table>
+                        </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
