@@ -1,4 +1,4 @@
-import { ListItem, ListItemText } from "@mui/material"
+import {ListItemButton, ListItemText} from "@mui/material"
 
 interface Props {
     name: string,
@@ -9,8 +9,8 @@ export default function ListMenuItemDialog(props: Props): JSX.Element {
     const { name, onClick } = props;
 
     return (
-        <ListItem button>
+        <ListItemButton>
             <ListItemText primary={name} onClick={onClick} />
-        </ListItem>
+        </ListItemButton>
     )
 }

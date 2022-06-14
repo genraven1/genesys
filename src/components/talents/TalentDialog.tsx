@@ -14,7 +14,7 @@ export default function TalentDialog(props: Props) {
     let navigate = useNavigate();
 
     const handleCreate = async (): Promise<void> => {
-        TalentService.createTalent(name);
+        await TalentService.createTalent(name);
         navigate('/talents/' + name);
         onClose()
     }
