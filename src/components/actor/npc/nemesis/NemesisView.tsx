@@ -12,7 +12,16 @@ import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
 import StatsCard from "../../StatsCard";
 import DefenseCard from "../../DefenseCard";
-import NemesisSkillTable from "./NemesisSkillTable";
+import {SkillTypeGroup} from "./NemesisSkillTable";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import {SkillType} from "../../../../models/actor/Skill";
+import TableContainer from "@mui/material/TableContainer";
+import * as React from "react";
 
 export default function NemesisView() {
     const { name } = useParams<{ name: string }>();
@@ -130,12 +139,13 @@ export default function NemesisView() {
         await updateNemesis(copyNemesis)
     }
 
-    const updateNemesis = async (copyNemesis: Nemesis) => {
+    const updateNemesis = async (copyNemesis: Nemesis): Promise<Nemesis> => {
         copyNemesis.soak = copyNemesis.brawn.current
-
+        console.log('Here')
         setNemesis(copyNemesis)
         console.log(copyNemesis)
         await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
+        return nemesis!!
     }
 
     return (
@@ -166,7 +176,22 @@ export default function NemesisView() {
                         <RatingCard  rating={getNemesis(nemesis).social} type={RatingType.Social} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>
                         <RatingCard  rating={getNemesis(nemesis).general} type={RatingType.General} onChange={(value: number): void => { onChange(NemesisKey.General, value) }}/>
                     </Grid>
-                    <NemesisSkillTable nemesis={getNemesis(nemesis)} />
+                    <TableContainer component={Paper}>
+                        <Table aria-label="collapsible table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell style={{textAlign: "center"}}>Skills</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <SkillTypeGroup nemesis={getNemesis(nemesis)} type={SkillType.General}/>
+                                <SkillTypeGroup nemesis={getNemesis(nemesis)} type={SkillType.Magic}/>
+                                <SkillTypeGroup nemesis={getNemesis(nemesis)} type={SkillType.Combat}/>
+                                <SkillTypeGroup nemesis={getNemesis(nemesis)} type={SkillType.Social}/>
+                                <SkillTypeGroup nemesis={getNemesis(nemesis)} type={SkillType.Knowledge}/>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Grid>
             </CardContent>
         </Card>
