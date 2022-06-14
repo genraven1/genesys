@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField } from "@mui/material";
-import { useState } from "react";
+import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import TalentService from "../../services/TalentService";
 
@@ -16,9 +16,10 @@ export default function TalentDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         TalentService.createTalent(name);
         navigate('/talents/' + name);
+        onClose()
     }
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
         setName(value);
     }
