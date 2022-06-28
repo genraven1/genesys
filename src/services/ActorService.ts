@@ -2,6 +2,7 @@ import axios from "axios";
 import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {Path} from "./Path";
+import {ActorSkill} from "../models/actor/Actor";
 
 export default class Service {
 
@@ -35,5 +36,9 @@ export default class Service {
 
     static async updateNemesis(name: string, nemesis: Nemesis): Promise<Nemesis> {
         return await axios.put(Path.Nemesis + name, nemesis);
+    }
+
+    static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
+        return await axios.put(Path.Nemesis + name + '/skill', skill);
     }
 }

@@ -35,91 +35,10 @@ function SkillRow(props: RowProps): JSX.Element {
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
             </TableRow>
-            {openEditSkillDialog && <EditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}  actorSkill={skill} nemesisProp={nemesis}/>}
+            {openEditSkillDialog && <EditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}  actorSkill={skill} name={nemesis.name}/>}
         </Fragment>
     );
 }
-
-// interface RowProps {
-//     actorSkill: ActorSkill,
-//     nemesisProp: Nemesis
-// }
-//
-// function SkillRow(props: RowProps): JSX.Element {
-//     const { actorSkill, nemesisProp } = props;
-//     const [skill, setSkill] = useState<ActorSkill>(actorSkill)
-//     const [nemesis, setNemesis] = useState<Nemesis>(nemesisProp)
-//
-//     const setName = (): string => {
-//         return actorSkill.name + '(' + actorSkill.characteristic + ')'
-//     }
-//
-//     const setLimits = (): void => {
-//         if (actorSkill.ranks <= 0) {
-//             console.log('IF')
-//             actorSkill.ranks = 0
-//             setDisableDecrease(true)
-//         } else if (actorSkill.ranks >= 5) {
-//             console.log('IF ELSE')
-//             actorSkill.ranks = 5
-//             setDisableIncrease(true)
-//         }
-//         else {
-//             console.log('ELSE')
-//             setDisableIncrease(false)
-//             setDisableDecrease(false)
-//         }
-//     }
-//
-//     const increaseSkillRank = (): void => {
-//         setSkill((prev_state) => ({
-//             ...prev_state,
-//             ranks: skill.ranks++,
-//         }));
-//         setLimits()
-//         replaceSkill()
-//     }
-//
-//     const decreaseSkillRank = (): void => {
-//         setSkill((prev_state) => ({
-//             ...prev_state,
-//             ranks: skill.ranks--,
-//         }));
-//         setLimits()
-//         replaceSkill()
-//     }
-//
-//     const getSkillIndex = (name: string): number => {
-//         return nemesis.skills.findIndex(skill => skill.name === name)
-//     }
-//
-//     const replaceSkill = (): void => {
-//         const copyNemesis = {...nemesis} as Nemesis
-//         let copySkills = copyNemesis.skills
-//         copySkills[getSkillIndex(skill.name)] = skill
-//         copyNemesis.skills = copySkills
-//         setNemesis(copyNemesis)
-//         console.log(nemesis.skills)
-//     }
-//
-//     return (
-//         <Fragment>
-//             <TableRow>
-//                 <TableCell>{setName()}</TableCell>
-//                 <TableCell>{skill.ranks}</TableCell>
-//                 <TableCell></TableCell>
-//                 <TableCell>
-//                     <IconButton title='Increase' size='medium' disabled={disableIncrease} onClick={increaseSkillRank}>
-//                         <ArrowUpwardIcon color='primary' fontSize='medium' />
-//                     </IconButton>
-//                     <IconButton title='Decrease' size='medium' disabled={disableDecrease} onClick={decreaseSkillRank}>
-//                         <ArrowDownwardIcon color='primary' fontSize='medium' />
-//                     </IconButton>
-//                 </TableCell>
-//             </TableRow>
-//         </Fragment>
-//     );
-// }
 
 interface Props {
     nemesis: Nemesis,

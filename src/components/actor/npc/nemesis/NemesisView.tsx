@@ -91,6 +91,10 @@ export default function NemesisView() {
         }
     }
 
+    const onSkillChange = () => {
+
+    }
+
     const onChange = async (key: keyof Nemesis, value: number) => {
         if (value === null || (nemesis !== null && nemesis[key] === value)) {
             return;

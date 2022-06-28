@@ -1,6 +1,6 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Box, List, ListItem, ListItemText, Collapse } from "@mui/material";
-import { useState, Fragment } from "react";
+import {Box, List, ListItemText, Collapse, ListItemButton} from "@mui/material";
+import React, { useState, Fragment, MouseEvent, KeyboardEvent } from "react";
 import ListMenuItemDialog from "./ListMenuItemDialog";
 import ListMenuItemLink from "./ListMenuItemLink";
 
@@ -17,15 +17,15 @@ interface ExpandedListItemProps {
 export default function ExpandedList(props: ExpandedListItemProps) {
     const { header, viewTitle, to, dialogTitle, onClick } = props;
     const [state, setState] = useState({ left: false });
-    const [collaspe, setCollaspe] = useState(false);
+    const [collapse, setCollapse] = useState(false);
 
-    const handleCollaspe = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const handleCollapse = (event: MouseEvent<HTMLDivElement>): void => {
         event.stopPropagation();
-        setCollaspe(!collaspe);
+        setCollapse(!collapse);
     }
 
-    const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) { return; }
+    const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
+        if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')) { return; }
         setState({ ...state, [anchor]: open });
     };
 
@@ -35,11 +35,11 @@ export default function ExpandedList(props: ExpandedListItemProps) {
                 <Fragment>
                     <Box role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
                         <List>
-                            <ListItem button onClick={handleCollaspe}>
+                            <ListItemButton onClick={handleCollapse}>
                                 <ListItemText primary={header} />
-                                {collaspe ? <ExpandLess /> : <ExpandMore />}
-                            </ListItem>
-                            <Collapse in={collaspe} timeout="auto" unmountOnExit>
+                                {collapse ? <ExpandLess /> : <ExpandMore />}
+                            </ListItemButton>
+                            <Collapse in={collapse} timeout="auto" unmountOnExit>
                                 <List>
                                     <ListMenuItemLink to={to} name={viewTitle} />
                                     <ListMenuItemDialog name={dialogTitle} onClick={onClick} />
