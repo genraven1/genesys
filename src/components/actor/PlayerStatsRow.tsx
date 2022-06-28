@@ -14,10 +14,10 @@ export default function PlayerStatsRow(props: Props) {
 
     return (
         <Grid container spacing={10}>
-            <SoakCard soak={player.soak} />
-            <StatsCard stats={player.wounds}  type={ StatsType.Wounds}/>
-            <StatsCard stats={player.strain} type={StatsType.Strain} />
-            <TotalDefenseCard melee={player.melee} ranged={player.ranged} />
+            {/*<SoakCard soak={player.soak} />*/}
+            {/*<StatsCard stats={player.wounds}  type={ StatsType.Wounds}/>*/}
+            {/*<StatsCard stats={player.strain} type={StatsType.Strain} />*/}
+            {/*<TotalDefenseCard melee={player.melee} ranged={player.ranged} />*/}
         </Grid>
     )
 }

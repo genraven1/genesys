@@ -1,8 +1,8 @@
-import { Characteristic } from './Characteristics';
+import {Characteristic, CharacteristicType} from './Characteristics';
 import { Defense } from './Defense';
 import Talent from '../Talent';
 import Stats from './Stats';
-import Skill from "./Skill";
+import Skill, {SkillType} from "./Skill";
 
 export default interface Actor {
     name: string,
@@ -27,4 +27,17 @@ export interface ActorTalent extends Talent {
 export interface ActorSkill extends Skill {
     ranks: number,
     career: boolean
+}
+
+export class DefaultActorSkill {
+    static create(): ActorSkill {
+        return {
+            active: false,
+            characteristic: CharacteristicType.Brawn,
+            name: '',
+            type: SkillType.General,
+            ranks: 0,
+            career: false
+        }
+    }
 }

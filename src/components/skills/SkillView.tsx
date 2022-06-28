@@ -112,14 +112,14 @@ export default function SkillView() {
                         <Card>
                             <CardHeader title={'Skill Type'} style={{ textAlign: 'center' }} />
                             <Divider />
-                            <InputSelectField defaultValue={SkillType.General} options={SKILL_TYPE_OPTIONS} onCommit={(value: string): void => { onChange(SkillKey.Type, value) }} />
+                            <InputSelectField defaultValue={getSkill(skill).type} options={SKILL_TYPE_OPTIONS} onCommit={(value: string): void => { onChange(SkillKey.Type, value) }} />
                         </Card>
                     </Grid>
                     <Grid item xs>
                         <Card>
                             <CardHeader title={'Linked Characteristic'} style={{ textAlign: 'center' }} />
                             <Divider />
-                            <InputSelectField defaultValue={CharacteristicType.Brawn} options={CHARACTERISTIC_OPTIONS} onCommit={(value: string): void => { onChange(SkillKey.Characteristic, value) }} />
+                            <InputSelectField defaultValue={getSkill(skill).characteristic} options={CHARACTERISTIC_OPTIONS} onCommit={(value: string): void => { onChange(SkillKey.Characteristic, value) }} />
                         </Card>
                     </Grid>
                     <Grid item xs>

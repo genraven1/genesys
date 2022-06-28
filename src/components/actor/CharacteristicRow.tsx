@@ -5,19 +5,20 @@ import Actor from "../../models/actor/Actor";
 
 interface Props {
     actor: Actor,
+    onChange: (value: number) => void,
 }
 
 export default function CharacteristicRow(props: Props): JSX.Element {
-    const { actor } = props;
+    const { actor, onChange } = props;
 
     return (
         <Grid container spacing={10}>
-            <CharacteristicCard characteristic={actor.brawn}  type={CharacteristicType.Brawn}/>
-            <CharacteristicCard characteristic={actor.agility}  type={CharacteristicType.Agility}/>
-            <CharacteristicCard characteristic={actor.intellect}  type={CharacteristicType.Intellect}/>
-            <CharacteristicCard characteristic={actor.cunning}  type={CharacteristicType.Cunning}/>
-            <CharacteristicCard characteristic={actor.willpower}  type={CharacteristicType.Willpower}/>
-            <CharacteristicCard characteristic={actor.presence}  type={CharacteristicType.Presence}/>
+            <CharacteristicCard characteristic={actor.brawn}  type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(value) }}/>
+            <CharacteristicCard characteristic={actor.agility}  type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(value) }}/>
+            <CharacteristicCard characteristic={actor.intellect}  type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(value) }}/>
+            <CharacteristicCard characteristic={actor.cunning}  type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(value) }}/>
+            <CharacteristicCard characteristic={actor.willpower}  type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(value) }}/>
+            <CharacteristicCard characteristic={actor.presence}  type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(value) }}/>
         </Grid>
     )
 }

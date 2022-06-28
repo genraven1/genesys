@@ -5,14 +5,11 @@ import {Defense, DefenseType} from "../../models/actor/Defense";
 interface Props {
     defense: Defense
     type: DefenseType
+    onChange: (value: number) => void
 }
 
 export default function DefenseCard(props: Props) {
-    const { defense, type } = props;
-
-    const onChange = async (value: number) => {
-        defense.current = value
-    }
+    const { defense, type, onChange } = props;
 
     return (
         <Grid item xs>
@@ -26,7 +23,7 @@ export default function DefenseCard(props: Props) {
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={defense.current} min={1} max={5} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={defense.current} min={1} max={5} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

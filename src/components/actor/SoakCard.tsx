@@ -12,7 +12,7 @@ export default function SoakCard(props: Props): JSX.Element {
                 <CardHeader title={'Soak'} style={{ textAlign: 'center' }} />
                 <Divider />
                 <CardContent>
-                    <Typography>{soak}</Typography>
+                    <Typography style={{ textAlign: 'center' }}>{soak}</Typography>
                 </CardContent>
             </Card>
         </Grid>

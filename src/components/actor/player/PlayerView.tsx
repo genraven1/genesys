@@ -137,9 +137,9 @@ export default function PlayerView() {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <CharacteristicRow actor={getPlayer(player)} />
-                    <Divider />
-                    <PlayerStatsRow player={getPlayer(player)} />
+                    {/*<CharacteristicRow actor={getPlayer(player)} />*/}
+                    {/*<Divider />*/}
+                    {/*<PlayerStatsRow player={getPlayer(player)} />*/}
                 </Grid>
             </CardContent>
         </Card>

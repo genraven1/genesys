@@ -17,6 +17,7 @@ export default function CreateSkillDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         await SkillService.createSkill(name)
         navigate(Path.Skills + name)
+        onClose()
     }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {

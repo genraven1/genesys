@@ -5,14 +5,11 @@ import InputNumberRangeSelectField from "../../input/InputNumberRangeSelect";
 interface Props {
     rating: number,
     type: RatingType,
+    onChange: (value: number) => void
 }
 
 export default function RatingCard(props: Props): JSX.Element {
-    let { rating, type } = props;
-
-    const onChange = async (value: number) => {
-        rating = value
-    }
+    let { rating, type, onChange } = props;
 
     return (
         <Grid item xs>
@@ -21,7 +18,7 @@ export default function RatingCard(props: Props): JSX.Element {
                 <Divider />
                 <Typography style={{ textAlign: 'center' }} >{rating}</Typography>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={rating} min={1} max={20} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={rating} min={1} max={20} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

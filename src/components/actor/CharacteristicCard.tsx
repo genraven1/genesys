@@ -5,14 +5,11 @@ import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 interface Props {
     characteristic: Characteristic,
     type: CharacteristicType,
+    onChange: (value: number) => void,
 }
 
 export default function CharacteristicBox(props: Props): JSX.Element {
-    const { characteristic, type } = props;
-
-    const onChange = async (value: number) => {
-        characteristic.current = value
-    }
+    const { characteristic, type, onChange } = props;
 
     return (
         <Grid item xs>

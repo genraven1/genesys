@@ -41,6 +41,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
                 navigate(Path.Nemesis + name);
                 break
         }
+        onClose()
     }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {

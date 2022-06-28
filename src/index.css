@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Genesys';
+  src: url("fonts/genesysglyphsanddice.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.boost {
+  color: lightskyblue;
+}
