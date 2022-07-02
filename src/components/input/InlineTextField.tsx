@@ -1,6 +1,7 @@
-import { ClickAwayListener, TextField, Typography } from "@mui/material";
+import { ClickAwayListener, TextField } from "@mui/material";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import EditField from "./EditField";
+import GenesysTypography from "../common/GenesysTypography";
 
 interface Props {
     defaultValue: string,
@@ -55,7 +56,7 @@ export default function InlineTextField(props: Props): JSX.Element {
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography variant='body1' style={{ wordWrap: 'break-word' }}>{textValue}</Typography>
+    const viewElement = <GenesysTypography text={textValue}/>
 
     return (
         <EditField edit={edit} editable={editable} viewElement={viewElement} editElement={editElement} 

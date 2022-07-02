@@ -5,7 +5,7 @@ interface Props {
     text: string
 }
 
-export default function GenesysTextField(props: Props): JSX.Element {
+export default function GenesysTypography(props: Props): JSX.Element {
     const {text} = props;
 
     const checkText = () => {
@@ -88,12 +88,12 @@ export default function GenesysTextField(props: Props): JSX.Element {
                 final += `${word} `;
             }
         });
-        return { __html: final };
+        return final;
     };
 
     return (
         <Fragment>
-            <div dangerouslySetInnerHTML={checkText()}/>
+            <Typography style={{ wordWrap: 'break-word' }} dangerouslySetInnerHTML={{ __html: checkText()}}/>
         </Fragment>
     )
 }
