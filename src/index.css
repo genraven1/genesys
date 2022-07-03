@@ -12,9 +12,15 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: 'genesys';
+  src: url("/src/fonts/genesys.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 i.symbol {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'genesysglyphsanddice' !important;
+  font-family: 'genesys' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
