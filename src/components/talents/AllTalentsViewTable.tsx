@@ -10,10 +10,11 @@ import Paper from '@mui/material/Paper';
 import Talent from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import {Button, Typography} from '@mui/material';
+import {Button} from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { LinkProps, Link } from "react-router-dom";
+import GenesysTypography from "../common/GenesysTypography";
 
 function Row(props: { row: Talent }): JSX.Element {
     const { row } = props;
@@ -41,7 +42,7 @@ function Row(props: { row: Talent }): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <Typography fontFamily={'Genesys'}>{row.description}</Typography>
+                                    <GenesysTypography text={row.description}/>
                                 </TableBody>
                             </Table>
                         </Box>

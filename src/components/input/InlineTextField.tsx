@@ -51,7 +51,7 @@ export default function InlineTextField(props: Props): JSX.Element {
 
     const editElement = (
         <ClickAwayListener onClickAway={handleOnCommit}>
-            <TextField defaultValue={textValue} onChange={inputOnChange} helperText={error ? errorText : helperText} size='small'
+            <TextField defaultValue={textValue} onChange={inputOnChange} helperText={error ? errorText : helperText}
             disabled={Boolean(disabled)} placeholder={placeholder} error={error} inputProps={{ autoFocus: true, ...inputProps}} fullWidth />
         </ClickAwayListener>
     )

@@ -12,13 +12,81 @@ code {
     monospace;
 }
 
-@font-face {
-  font-family: 'Genesys';
-  src: url("fonts/genesysglyphsanddice.woff") format("woff");
-  font-weight: normal;
+i.symbol {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'genesysglyphsanddice' !important;
+  speak: none;
   font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.symbol {
+  vertical-align: middle;
+  font-size: 1.4rem;
 }
 
-.boost {
-  color: lightskyblue;
+.symbol-border {
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 0.1rem;
 }
+
+.d6 {
+  letter-spacing: 0;
+}
+
+.ability-color{color:#41ad49;}
+.boost-color{color:#72cddc;}
+.challenge-color{color:#7d1721;}
+.difficulty-color{color:#6c2b83;}
+.proficiency-color{color:#fde700;}
+.setback-color{color:#000;}
+
+.grpg-advantage:before {
+  content: "\e937"; }
+
+.grpg-despair:before {
+  content: "\e938"; }
+
+.grpg-failure:before {
+  content: "\e939"; }
+
+.grpg-success:before {
+  content: "\e93a"; }
+
+.grpg-threat:before {
+  content: "\e93b"; }
+
+.grpg-triumph:before {
+  content: "\e93c"; }
+
+.d6:before {
+  content: "\e93d"; }
+
+.d6-outline:before {
+  content: "\e93e"; }
+
+.d8:before {
+  content: "\e93f"; }
+
+.d8-outline:before {
+  content: "\e940"; }
+
+.d12:before {
+  content: "\e941"; }
+
+.d12-outline:before {
+  content: "\e942"; }
+
+.imperial:before {
+  content: "\e943"; }
+
+.mercinary:before {
+  content: "\e944"; }
+
+.rebel:before {
+  content: "\e945"; }

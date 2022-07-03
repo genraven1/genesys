@@ -17,56 +17,40 @@ export default function GenesysTypography(props: Props): JSX.Element {
         const array = string.map((word: string) => {
             const target = word.toLowerCase();
             switch (true) {
-                // case target.replace(/[,"'.?<>{}[\]]/g, '') === 'crb':
-                //     return `<a href="http://www.drivethrurpg.com/product/228813/Genesys-Core-Rulebook?affiliate_id=1131280" target="_blank" rel="noopener noreferrer">CRB</a>`;
-                // case target.replace(/[,"'.?<>{}[\]]/g, '') === 'rot':
-                //     return `<a href="http://www.drivethrurpg.com/product/239561/Realms-of-Terrinoth?affiliate_id=1131280" target="_blank" rel="noopener noreferrer">ROT</a>`;
-                // case target.replace(/[,"'.?<>{}[\]]/g, '') === 'sotb':
-                //     return `<a href="https://www.drivethrurpg.com/product/266756/Shadow-of-the-Beanstalk?affiliate_id=1131280" target="_blank" rel="noopener noreferrer">SOTB</a>`;
-                case target.includes('[blue]'):
                 case target.includes('[boost]'):
-                    return '<i class="ffi ffi-d6 ffi-border ffi-grpg-boost-color"></i>';
-                case target.includes('[green]'):
+                    return '<i class="symbol d6 symbol-border boost-color"></i>';
                 case target.includes('[ability]'):
-                    return '<i class="ffi  ffi-d8 ffi-border ffi-grpg-ability-color"></i>';
-                case target.includes('[yellow]'):
+                    return '<i class="symbol  d8 symbol-border ability-color"></i>';
                 case target.includes('[proficiency]'):
-                    return '<i class="ffi ffi-d12 ffi-border ffi-grpg-proficiency-color"></i>';
-                case target.includes('[black]'):
+                    return '<i class="symbol d12 symbol-border proficiency-color"></i>';
                 case target.includes('[setback]'):
-                    return '<i class="ffi ffi-d6 ffi-border ffi-grpg-setback-color"></i>';
-                case target.includes('[purple]'):
+                    return '<i class="symbol d6 symbol-border setback-color"></i>';
                 case target.includes('[difficulty]'):
-                    return '<i class="ffi ffi-d8 ffi-border ffi-grpg-difficulty-color"></i>';
-                case target.includes('[red]'):
+                    return '<i class="symbol d8 symbol-border difficulty-color"></i>';
                 case target.includes('[challenge]'):
-                    return '<i class="ffi ffi-d12 ffi-border ffi-grpg-challenge-color"></i>';
-                case target.includes('[white]'):
-                    return '<i class="ffi ffi-d12 ffi-border"></i>';
+                    return '<i class="symbol d12 symbol-border challenge-color"></i>';
                 case target.includes('[advantage]'):
-                case target.includes('[adv]'):
-                    return '<i class="ffi ffi-grpg-advantage"></i>';
+                    return '<i class="symbol ffi-grpg-advantage"></i>';
                 case target.includes('[success]'):
-                case target.includes('[suc]'):
-                    return '<i class="ffi ffi-grpg-success"></i>';
+                    return '<i class="symbol ffi-grpg-success"></i>';
                 case target.includes('[triumph]'):
-                case target.includes('[tri]'):
-                    return '<i class="ffi ffi-grpg-triumph"></i>';
+                    return '<i class="symbol ffi-grpg-triumph"></i>';
                 case target.includes('[threat]'):
-                case target.includes('[thr]'):
-                    return '<i class="ffi ffi-grpg-threat"></i>';
+                    return '<i class="symbol ffi-grpg-threat"></i>';
                 case target.includes('[failure]'):
-                case target.includes('[fail]'):
-                    return '<i class="ffi ffi-grpg-failure"></i>';
+                    return '<i class="symbol ffi-grpg-failure"></i>';
                 case target.includes('[despair]'):
-                case target.includes('[des]'):
-                    return '<i class="ffi ffi-grpg-despair"></i>';
-                case target === '[rmblackblack]':
-                case target === '[rmsetbacksetback]':
-                    return `<b>(-</b><i class="ffi ffi-d6 ffi-border ffi-grpg-setback-color"></i> <i class="ffi ffi-d6 ffi-border ffi-grpg-setback-color"></i><b>)</b>`;
-                case target.includes('[rmsetback]'):
-                case target.includes('[rmblack]'):
-                    return `<b>(-</b><i class="ffi ffi-d6 ffi-border ffi-grpg-setback-color"></i><b>)</b>`;
+                    return '<i class="symbol ffi-grpg-despair"></i>';
+                case target === '[removesetbacksetback]':
+                    return `<b>(-</b><i class="symbol d6 symbol-border setback-color"></i> <i class="symbol d6 symbol-border setback-color"></i><b>)</b>`;
+                case target.includes('[removesetback]'):
+                    return `<b>(-</b><i class="symbol d6 symbol-border setback-color"></i><b>)</b>`;
+                case target.includes('[combat]'):
+                    return '<i class="symbol d6"></i>';
+                case target.includes('[social]'):
+                    return '<i class="symbol d6"></i>';
+                case target.includes('[general]'):
+                    return '<i class="symbol d6"></i>';
                 // case target.includes('[gm]'):
                 //     return `<img src=${images.gm} class="textSymbols" /> `;
                 // case target.includes('[pc]'):
@@ -78,9 +62,9 @@ export default function GenesysTypography(props: Props): JSX.Element {
         let final = '';
         array.forEach((word, index) => {
             if (
-                (word.includes('ffi') &&
+                (word.includes('symbol') &&
                     array[index + 1] &&
-                    array[index + 1].includes('ffi')) ||
+                    array[index + 1].includes('symbol')) ||
                 array.length === index + 1
             ) {
                 final += word;

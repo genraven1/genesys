@@ -1,0 +1,93 @@
+@function unicode($str) {
+  @return unquote("\"") + $str + unquote("\"");
+}
+
+.grpg-advantage {
+  &:before {
+    content: unicode($grpg-advantage);
+  }
+}
+
+.grpg-despair {
+  &:before {
+    content: unicode($grpg-despair);
+  }
+}
+
+.grpg-failure {
+  &:before {
+    content: unicode($grpg-failure);
+  }
+}
+
+.grpg-success {
+  &:before {
+    content: unicode($grpg-success);
+  }
+}
+
+.grpg-threat {
+  &:before {
+    content: unicode($grpg-threat);
+  }
+}
+
+.grpg-triumph {
+  &:before {
+    content: unicode($grpg-triumph);
+  }
+}
+
+.d6 {
+  &:before {
+    content: unicode($d6);
+  }
+}
+
+.d6-outline {
+  &:before {
+    content: unicode($d6-outline);
+  }
+}
+
+.d8 {
+  &:before {
+    content: unicode($d8);
+  }
+}
+
+.d8-outline {
+  &:before {
+    content: unicode($d8-outline);
+  }
+}
+
+.d12 {
+  &:before {
+    content: unicode($d12);
+  }
+}
+
+.d12-outline {
+  &:before {
+    content: unicode($d12-outline);
+  }
+}
+
+.imperial {
+  &:before {
+    content: unicode($imperial);
+  }
+}
+
+.mercinary {
+  &:before {
+    content: unicode($mercinary);
+  }
+}
+
+.rebel {
+  &:before {
+    content: unicode($rebel);
+  }
+}
