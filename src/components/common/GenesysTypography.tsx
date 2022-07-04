@@ -30,27 +30,27 @@ export default function GenesysTypography(props: Props): JSX.Element {
                 case target.includes('[challenge]'):
                     return '<i class="symbol d12 symbol-border challenge-color"></i>';
                 case target.includes('[advantage]'):
-                    return '<i class="symbol ffi-grpg-advantage"></i>';
+                    return '<i class="symbol advantage"></i>';
                 case target.includes('[success]'):
-                    return '<i class="symbol ffi-grpg-success"></i>';
+                    return '<i class="symbol success"></i>';
                 case target.includes('[triumph]'):
-                    return '<i class="symbol ffi-grpg-triumph"></i>';
+                    return '<i class="symbol triumph"></i>';
                 case target.includes('[threat]'):
-                    return '<i class="symbol ffi-grpg-threat"></i>';
+                    return '<i class="symbol threat"></i>';
                 case target.includes('[failure]'):
-                    return '<i class="symbol ffi-grpg-failure"></i>';
+                    return '<i class="symbol failure"></i>';
                 case target.includes('[despair]'):
-                    return '<i class="symbol ffi-grpg-despair"></i>';
+                    return '<i class="symbol despair"></i>';
                 case target === '[removesetbacksetback]':
                     return `<b>(-</b><i class="symbol d6 symbol-border setback-color"></i> <i class="symbol d6 symbol-border setback-color"></i><b>)</b>`;
                 case target.includes('[removesetback]'):
                     return `<b>(-</b><i class="symbol d6 symbol-border setback-color"></i><b>)</b>`;
                 case target.includes('[combat]'):
-                    return '<i class="symbol d6"></i>';
+                    return '<i class="symbol combat"></i>';
                 case target.includes('[social]'):
-                    return '<i class="symbol d6"></i>';
+                    return '<i class="symbol social"></i>';
                 case target.includes('[general]'):
-                    return '<i class="symbol d6"></i>';
+                    return '<i class="symbol general"></i>';
                 // case target.includes('[gm]'):
                 //     return `<img src=${images.gm} class="textSymbols" /> `;
                 // case target.includes('[pc]'):
