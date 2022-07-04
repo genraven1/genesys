@@ -52,22 +52,22 @@ i.symbol {
 .proficiency-color{color:#fde700;}
 .setback-color{color:#000;}
 
-.grpg-advantage:before {
+.advantage:before {
   content: "\e937"; }
 
-.grpg-despair:before {
+.despair:before {
   content: "\e938"; }
 
-.grpg-failure:before {
+.failure:before {
   content: "\e939"; }
 
-.grpg-success:before {
+.success:before {
   content: "\e93a"; }
 
-.grpg-threat:before {
+.threat:before {
   content: "\e93b"; }
 
-.grpg-triumph:before {
+.triumph:before {
   content: "\e93c"; }
 
 .d6:before {
@@ -88,11 +88,11 @@ i.symbol {
 .d12-outline:before {
   content: "\e942"; }
 
-.imperial:before {
+.combat:before {
   content: "\e943"; }
 
-.mercinary:before {
+.social:before {
   content: "\e944"; }
 
-.rebel:before {
+.general:before {
   content: "\e945"; }

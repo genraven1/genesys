@@ -2,39 +2,39 @@
   @return unquote("\"") + $str + unquote("\"");
 }
 
-.grpg-advantage {
+.advantage {
   &:before {
-    content: unicode($grpg-advantage);
+    content: unicode($advantage);
   }
 }
 
-.grpg-despair {
+.despair {
   &:before {
-    content: unicode($grpg-despair);
+    content: unicode($despair);
   }
 }
 
-.grpg-failure {
+.failure {
   &:before {
-    content: unicode($grpg-failure);
+    content: unicode($failure);
   }
 }
 
-.grpg-success {
+.success {
   &:before {
-    content: unicode($grpg-success);
+    content: unicode($success);
   }
 }
 
-.grpg-threat {
+.threat {
   &:before {
-    content: unicode($grpg-threat);
+    content: unicode($threat);
   }
 }
 
-.grpg-triumph {
+.triumph {
   &:before {
-    content: unicode($grpg-triumph);
+    content: unicode($triumph);
   }
 }
 
@@ -74,20 +74,20 @@
   }
 }
 
-.imperial {
+.combat {
   &:before {
-    content: unicode($imperial);
+    content: unicode($combat);
   }
 }
 
-.mercinary {
+.social {
   &:before {
-    content: unicode($mercinary);
+    content: unicode($social);
   }
 }
 
-.rebel {
+.general {
   &:before {
-    content: unicode($rebel);
+    content: unicode($general);
   }
 }
