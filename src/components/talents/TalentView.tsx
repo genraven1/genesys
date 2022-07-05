@@ -69,6 +69,9 @@ export default function TalentView() {
         }
         const copyTalent = { ...talent } as Talent;
         switch (key) {
+            case TalentKey.Summary:
+                copyTalent.summary = value
+                break
             case TalentKey.Description:
                 copyTalent.description = value
                 break;
@@ -109,6 +112,9 @@ export default function TalentView() {
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
                         <InputTextFieldCard defaultValue={getTalent(talent).description} onCommit={(value: string): void => { onChange(TalentKey.Description, value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                    </Grid>
+                    <Grid container spacing={10}>
+                        <InputTextFieldCard defaultValue={getTalent(talent).summary} onCommit={(value: string): void => { onChange(TalentKey.Summary, value) }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>

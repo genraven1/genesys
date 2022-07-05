@@ -25,7 +25,10 @@ export interface ActorTalent extends Talent {
 }
 
 export interface ActorSkill extends Skill {
-    ranks: number,
+    ranks: number
+}
+
+export interface PlayerSkill extends ActorSkill {
     career: boolean
 }
 
@@ -36,8 +39,7 @@ export class DefaultActorSkill {
             characteristic: CharacteristicType.Brawn,
             name: '',
             type: SkillType.General,
-            ranks: 0,
-            career: false
+            ranks: 0
         }
     }
 }
