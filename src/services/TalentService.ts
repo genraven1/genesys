@@ -8,6 +8,10 @@ export default class TalentService {
         return await (await axios.get(Path.Talent)).data;
     }
 
+    static async getTalentNames(): Promise<string[]> {
+        return await (await axios.get(Path.Talent + '/names')).data;
+    }
+
     static async getTalent(name: string): Promise<Talent> {
         return await (await axios.get(Path.Talent + '/' + name)).data;
     }

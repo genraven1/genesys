@@ -1,4 +1,4 @@
-import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Button, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
@@ -15,10 +15,12 @@ import DefenseCard from "../../DefenseCard";
 import SkillTable from "./NemesisSkillTable";
 import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
+import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog";
 
 export default function NemesisView() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
+    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
     const [errors, setErrors] = useState({} as any);
 
     useEffect(() => {
@@ -174,6 +176,8 @@ export default function NemesisView() {
                     <Divider />
                     <SkillTable  nemesis={getNemesis(nemesis)}/>
                     <Divider />
+                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
+                    {openSelectTalentDialog && <NPCTalentSelectionDialog nemesis={getNemesis(nemesis)} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NemesisTalentTable nemesis={getNemesis(nemesis)}/>
                 </Grid>
             </CardContent>

@@ -1,0 +1,79 @@
+import {Fragment, useEffect, useState} from "react";
+import TalentService from "../../../services/TalentService";
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import * as React from "react";
+import {Button} from "@mui/material";
+import TalentBackdrop from "./TalentBackdrop";
+import Talent, {DefaultTalent} from "../../../models/Talent";
+
+interface RowProps {
+    name: string
+}
+
+function TalentNameRow(props: RowProps): JSX.Element {
+    const {name} = props;
+    const [talent, setTalent] = useState<Talent>()
+    const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false);
+    const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false);
+
+    useEffect(() => {
+        if (!name) {
+            return;
+        }
+        (async (): Promise<void> => {
+            const talentData = await TalentService.getTalent(name);
+            if (!talentData) { return; }
+            setTalent(talentData)
+        })();
+    }, [name])
+
+    return (
+        <Fragment>
+            <TableRow>
+                <TableCell>
+                    <Button onClick={(): void => setOpenTalentBackDrop(true)}>{name}</Button>
+                    {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
+                </TableCell>
+                <TableCell>
+                    <Button onClick={(): void => setOpenEditSkillDialog(true)}>Add</Button>
+                </TableCell>
+            </TableRow>
+        </Fragment>
+    );
+}
+
+export default function TalentSelectionTable() {
+    const [names, setNames] = useState<string[]>([]);
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const talentList = await TalentService.getTalentNames();
+            if (!talentList) { return; }
+            setNames(talentList);
+        })();
+    }, []);
+
+    return (
+        <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Talent Name</TableCell>
+                        <TableCell>Add</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {names.map((name: string) => (
+                        <TalentNameRow name={name} />
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+}

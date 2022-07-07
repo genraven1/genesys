@@ -1,12 +1,14 @@
-import {Fragment} from "react";
-import {Typography} from "@mui/material";
+import {Fragment} from 'react';
+import {Typography} from '@mui/material';
 
 interface Props {
     text: string
+    ranks: number
+    secondaryRanks?: number
 }
 
-export default function GenesysTypography(props: Props): JSX.Element {
-    const {text} = props;
+export default function GenesysDiceTypography(props: Props): JSX.Element {
+    const {text, ranks, secondaryRanks} = props;
 
     const checkText = () => {
         if (text === null || text === undefined) {
@@ -18,7 +20,27 @@ export default function GenesysTypography(props: Props): JSX.Element {
             const target = word.toLowerCase();
             switch (true) {
                 case target.includes('[boost]'):
-                    return '<i class="symbol d6 symbol-border boost-color"></i>';
+                    let dice = ''
+                    switch (ranks) {
+                        case 1:
+                            dice = BoostDie.toString();
+                            break
+                        case 2:
+                            dice = BoostDie.toString() + BoostDie.toString();
+                            break
+                        case 3:
+                            dice = BoostDie.toString() + BoostDie.toString() + BoostDie.toString();
+                            break
+                        case 4:
+                            dice = BoostDie.toString() + BoostDie.toString() + BoostDie.toString() + BoostDie.toString();
+                            break
+                        case 5:
+                            dice = BoostDie.toString() + BoostDie.toString() + BoostDie.toString() + BoostDie.toString() + BoostDie.toString();
+                            break
+                        default:
+                            dice = '';
+                    }
+                    return dice
                 case target.includes('[ability]'):
                     return '<i class="symbol  d8 symbol-border ability-color"></i>';
                 case target.includes('[proficiency]'):
@@ -51,10 +73,6 @@ export default function GenesysTypography(props: Props): JSX.Element {
                     return '<i class="symbol social"></i>';
                 case target.includes('[general]'):
                     return '<i class="symbol general"></i>';
-                // case target.includes('[gm]'):
-                //     return `<img src=${images.gm} class="textSymbols" /> `;
-                // case target.includes('[pc]'):
-                //     return `<img src=${images.pc} class="textSymbols" /> `;
                 default:
                     return `${word}`;
             }
@@ -79,5 +97,11 @@ export default function GenesysTypography(props: Props): JSX.Element {
         <Fragment>
             <Typography style={{ wordWrap: 'break-word' }} dangerouslySetInnerHTML={{ __html: checkText()}}/>
         </Fragment>
+    )
+}
+
+export function BoostDie(): JSX.Element {
+    return (
+        <i className="symbol d6 symbol-border boost-color"></i>
     )
 }

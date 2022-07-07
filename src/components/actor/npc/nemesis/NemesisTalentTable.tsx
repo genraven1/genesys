@@ -1,16 +1,15 @@
-import {Link, LinkProps, useLocation} from "react-router-dom";
-import {forwardRef, Fragment, useMemo, useState} from "react";
+import {Fragment, useState} from "react";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import GenesysTypography from "../../../common/GenesysTypography";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
 import {ActorTalent} from "../../../../models/actor/Actor";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
+import GenesysDiceTypography from "../../../common/GenesysDiceTypography";
 
 function Row(props: { row: ActorTalent }): JSX.Element {
     const { row } = props;
@@ -20,7 +19,7 @@ function Row(props: { row: ActorTalent }): JSX.Element {
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>
-                    <GenesysTypography text={row.summary}/>
+                    <GenesysDiceTypography text={row.summary} ranks={row.ranks}/>
                 </TableCell>
             </TableRow>
         </Fragment>
@@ -39,8 +38,10 @@ export default function NemesisTalentTable(props: TableProps) {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{textAlign: "center"}}>Talents</TableCell>
+                        <TableCell colSpan={2} style={{textAlign: "center"}}>Talents</TableCell>
                     </TableRow>
+                </TableHead>
+                <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Summary</TableCell>
