@@ -7,20 +7,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
-import * as React from "react";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent, {DefaultTalent} from "../../../models/Talent";
+import Talent from "../../../models/Talent";
+import Nemesis from "../../../models/actor/npc/Nemesis";
+import ActorService from "../../../services/ActorService";
+import {ActorTalent} from "../../../models/actor/Actor";
 
 interface RowProps {
     name: string
+   nemesis: Nemesis
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {name} = props;
+    const {name, nemesis} = props;
     const [talent, setTalent] = useState<Talent>()
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false);
-    const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false);
 
     useEffect(() => {
         if (!name) {
@@ -33,6 +35,10 @@ function TalentNameRow(props: RowProps): JSX.Element {
         })();
     }, [name])
 
+    const addTalent = async () => {
+        await ActorService.addNemesisTalent(nemesis.name, {...talent!!} as ActorTalent)
+    }
+
     return (
         <Fragment>
             <TableRow>
@@ -41,14 +47,15 @@ function TalentNameRow(props: RowProps): JSX.Element {
                     {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
                 </TableCell>
                 <TableCell>
-                    <Button onClick={(): void => setOpenEditSkillDialog(true)}>Add</Button>
+                    <Button onClick={addTalent}>Add</Button>
                 </TableCell>
             </TableRow>
         </Fragment>
     );
 }
 
-export default function TalentSelectionTable() {
+export default function TalentSelectionTable(props: {nemesis: Nemesis}) {
+    const {nemesis} = props
     const [names, setNames] = useState<string[]>([]);
 
     useEffect(() => {
@@ -70,7 +77,7 @@ export default function TalentSelectionTable() {
                 </TableHead>
                 <TableBody>
                     {names.map((name: string) => (
-                        <TalentNameRow name={name} />
+                        <TalentNameRow name={name} nemesis={nemesis}/>
                     ))}
                 </TableBody>
             </Table>

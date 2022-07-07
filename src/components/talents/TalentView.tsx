@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Talent, {Activation, DefaultTalent, Ranked, TalentKey, Tier} from '../../models/Talent';
+import Talent, {Activation, Ranked, TalentKey, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import { useParams } from 'react-router-dom';
 import InputTextFieldCard from '../input/InputTextFieldCard';
@@ -50,7 +50,7 @@ function tierOptions() {
 
 export default function TalentView() {
     const { name } = useParams<{ name: string }>();
-    const [talent, setTalent] = useState<Talent | null>(null);
+    const [talent, setTalent] = useState<Talent>();
     const [errors, setErrors] = useState({} as any);
 
     useEffect(() => {
@@ -59,12 +59,13 @@ export default function TalentView() {
         }
         (async (): Promise<void> => {
             const talentData = await TalentService.getTalent(name);
+            if (!talentData) { return; }
             setTalent(talentData)
         })();
     }, [name])
 
     const onChange = async (key: keyof Talent, value: string) => {
-        if (value.trim().length === 0 || (talent !== null && talent[key] === value)) {
+        if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {
             return;
         }
         const copyTalent = { ...talent } as Talent;
@@ -90,31 +91,17 @@ export default function TalentView() {
         await TalentService.updateTalent(copyTalent.name, copyTalent);
     }
 
-    function getName(talent: Talent | null): string {
-        if (!talent) {
-            return 'Talent View'
-        }
-        return talent.name
-    }
-
-    function getTalent(talent: Talent | null): Talent {
-        if (!talent) {
-            return DefaultTalent.create();
-        }
-        return talent
-    }
-
     return (
         <Card>
-            <CardHeader title={getName(talent)} />
+            <CardHeader title={talent?.name} />
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={getTalent(talent).description} onCommit={(value: string): void => { onChange(TalentKey.Description, value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                        <InputTextFieldCard defaultValue={talent?.description!!} onCommit={(value: string): void => { onChange(TalentKey.Description, value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
                     </Grid>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={getTalent(talent).summary} onCommit={(value: string): void => { onChange(TalentKey.Summary, value) }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'} />
+                        <InputTextFieldCard defaultValue={talent?.summary!!} onCommit={(value: string): void => { onChange(TalentKey.Summary, value) }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
@@ -122,21 +109,21 @@ export default function TalentView() {
                             <Card>
                                 <CardHeader title={'Ranked'} style={{ textAlign: 'center' }} />
                                 <Divider />
-                                <InputSelectField defaultValue={getTalent(talent).ranked} options={RANKED_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Ranked, value) }} />
+                                <InputSelectField defaultValue={talent?.ranked!!} options={RANKED_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Ranked, value) }} />
                             </Card>
                         </Grid>
                         <Grid item xs>
                             <Card>
                                 <CardHeader title={'Activation'} style={{ textAlign: 'center' }} />
                                 <Divider />
-                                <InputSelectField defaultValue={getTalent(talent).activation} options={ACTIVATION_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Activation, value) }} />
+                                <InputSelectField defaultValue={talent?.activation!!} options={ACTIVATION_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Activation, value) }} />
                             </Card>
                         </Grid>
                         <Grid item xs>
                             <Card>
                                 <CardHeader title={'Tier'} style={{ textAlign: 'center' }} />
                                 <Divider />
-                                <InputSelectField defaultValue={getTalent(talent).tier} options={TIER_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Tier, value) }} />
+                                <InputSelectField defaultValue={talent?.tier!!} options={TIER_OPTIONS} onCommit={(value: string): void => { onChange(TalentKey.Tier, value) }} />
                             </Card>
                         </Grid>
                     </Grid>

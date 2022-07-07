@@ -1,4 +1,4 @@
-import {Fragment, useState} from "react";
+import {Fragment} from "react";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
@@ -9,17 +9,22 @@ import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
 import {ActorTalent} from "../../../../models/actor/Actor";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
-import GenesysDiceTypography from "../../../common/GenesysDiceTypography";
+import GenesysTalentTypography from "../../../common/GenesysTalentTypography";
 
-function Row(props: { row: ActorTalent }): JSX.Element {
-    const { row } = props;
+interface Props {
+    row: ActorTalent
+    skillRanks?: number
+}
+
+function Row(props: Props): JSX.Element {
+    const {row,skillRanks} = props;
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>
-                    <GenesysDiceTypography text={row.summary} ranks={row.ranks}/>
+                    <GenesysTalentTypography text={row.summary} ranks={row.ranks} secondRanks={skillRanks}/>
                 </TableCell>
             </TableRow>
         </Fragment>
