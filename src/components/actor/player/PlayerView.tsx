@@ -3,8 +3,6 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import Player, {DefaultPlayer} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
-import CharacteristicRow from '../CharacteristicRow';
-import PlayerStatsRow from '../PlayerStatsRow';
 import {Characteristic, CharacteristicType} from '../../../models/actor/Characteristics';
 import Stats, {StatsType} from '../../../models/actor/Stats';
 import {Defense, DefenseType} from '../../../models/actor/Defense';
