@@ -11,6 +11,8 @@ import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../../models/actor/Skill";
 import EditSkillDialog from "../../../skills/EditSkillDialog";
+import Paper from "@mui/material/Paper";
+import TableContainer from "@mui/material/TableContainer";
 
 interface RowProps {
     skill: ActorSkill,
@@ -40,12 +42,12 @@ function SkillRow(props: RowProps): JSX.Element {
     );
 }
 
-interface Props {
+interface GroupProps {
     nemesis: Nemesis,
     type: SkillType
 }
 
-export function SkillTypeGroup(props: Props) {
+export function SkillTypeGroup(props: GroupProps) {
     const {nemesis, type} = props
     const [open, setOpen] = useState(false);
 
@@ -78,5 +80,31 @@ export function SkillTypeGroup(props: Props) {
                 </TableCell>
             </TableRow>
         </Fragment>
+    )
+}
+
+interface TableProps {
+    nemesis: Nemesis
+}
+
+export default function SkillTable(props: TableProps) {
+    const {nemesis} = props;
+    return (
+        <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell style={{textAlign: "center"}}>Skills</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.General}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Magic}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Combat}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Social}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Knowledge}/>
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 }

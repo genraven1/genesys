@@ -2,9 +2,9 @@ import axios from "axios";
 import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {Path} from "./Path";
-import {ActorSkill} from "../models/actor/Actor";
+import {ActorSkill, ActorTalent} from "../models/actor/Actor";
 
-export default class Service {
+export default class ActorService {
 
     static async createPlayer(name: string): Promise<Player> {
         return await axios.post( Path.Player + name);
@@ -40,5 +40,9 @@ export default class Service {
 
     static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
         return await axios.put(Path.Nemesis + name + '/skill', skill);
+    }
+
+    static async addNemesisTalent(name: string, talent: ActorTalent): Promise<Nemesis> {
+        return await axios.put(Path.Nemesis + name + '/talent', talent);
     }
 }

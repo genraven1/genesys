@@ -1,11 +1,11 @@
-import {Fragment} from "react";
-import {Typography} from "@mui/material";
+import {Fragment} from 'react';
+import {Typography} from '@mui/material';
 
 interface Props {
     text: string
 }
 
-export default function GenesysTypography(props: Props): JSX.Element {
+export default function GenesysDescriptionTypography(props: Props): JSX.Element {
     const {text} = props;
 
     const checkText = () => {
