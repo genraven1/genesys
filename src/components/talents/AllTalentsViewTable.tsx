@@ -14,7 +14,7 @@ import {Button} from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { LinkProps, Link } from "react-router-dom";
-import GenesysTypography from "../common/GenesysTypography";
+import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
 
 function Row(props: { row: Talent }): JSX.Element {
     const { row } = props;
@@ -42,7 +42,7 @@ function Row(props: { row: Talent }): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysTypography text={row.description}/>
+                                    <GenesysDescriptionTypography text={row.description}/>
                                 </TableBody>
                             </Table>
                         </Box>
