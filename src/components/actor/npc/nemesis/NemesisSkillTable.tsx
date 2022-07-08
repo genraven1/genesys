@@ -11,6 +11,8 @@ import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../../models/actor/Skill";
 import EditSkillDialog from "../../../skills/EditSkillDialog";
+import GenesysSkillDiceTypography from "../../../common/GenesysSkillDiceTypography";
+import {CharacteristicType} from "../../../../models/actor/Characteristics";
 
 interface RowProps {
     skill: ActorSkill,
@@ -25,12 +27,31 @@ function SkillRow(props: RowProps): JSX.Element {
         return skill.name + '(' + skill.characteristic + ')'
     }
 
+    const getCharacteristicRanks = (): number => {
+        switch (skill.characteristic) {
+            case CharacteristicType.Agility:
+                return nemesis.agility.current
+            case CharacteristicType.Brawn:
+                return nemesis.brawn.current
+            case CharacteristicType.Cunning:
+                return nemesis.cunning.current
+            case CharacteristicType.Intellect:
+                return nemesis.intellect.current
+            case CharacteristicType.Presence:
+                return nemesis.presence.current
+            case CharacteristicType.Willpower:
+                return nemesis.willpower.current
+        }
+    }
+
     return (
         <Fragment>
             <TableRow>
                 <TableCell>{setName()}</TableCell>
                 <TableCell>{skill.ranks}</TableCell>
-                <TableCell>DICE</TableCell>
+                <TableCell>
+                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()} skillRanks={skill.ranks} />
+                </TableCell>
                 <TableCell>
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
