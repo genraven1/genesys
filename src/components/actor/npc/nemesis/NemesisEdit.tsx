@@ -6,7 +6,7 @@ import Nemesis, {DefaultNemesis, NemesisKey} from "../../../../models/actor/npc/
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import CharacteristicCard from "../../CharacteristicCard";
+import EditCharacteristicCard from "../../EditCharacteristicCard";
 import RatingCard from "../RatingCard";
 import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
@@ -36,7 +36,7 @@ export default function NemesisEdit() {
 
     function getName(nemesis: Nemesis | null): string {
         if (!nemesis) {
-            return 'Nemesis View'
+            return 'Nemesis Edit'
         }
         return nemesis.name
     }
@@ -150,17 +150,17 @@ export default function NemesisEdit() {
 
     return (
         <Card>
-            <CardHeader title={getName(nemesis)} />
+            <CardHeader title={getName(nemesis)} style={{ textAlign: 'center' }}/>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).brawn}  type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(NemesisKey.Brawn, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).agility}  type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(NemesisKey.Agility, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).intellect}  type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(NemesisKey.Intellect, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).cunning}  type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(NemesisKey.Cunning, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).willpower}  type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(NemesisKey.Willpower, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).presence}  type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(NemesisKey.Presence, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).brawn} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(NemesisKey.Brawn, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).agility} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(NemesisKey.Agility, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).intellect} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(NemesisKey.Intellect, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).cunning} type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(NemesisKey.Cunning, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).willpower} type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(NemesisKey.Willpower, value) }}/>
+                        <EditCharacteristicCard characteristic={getNemesis(nemesis).presence} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(NemesisKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>

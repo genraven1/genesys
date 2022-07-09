@@ -10,6 +10,7 @@ import ViewAllSkills from "./skills/ViewAllSkills";
 import AllNemesesView from "./actor/npc/nemesis/ViewAllNemeses";
 import AllRivalsView from "./actor/npc/rival/ViewAllRivals";
 import RivalView from "./actor/npc/rival/RivalView";
+import NemesisView from './actor/npc/nemesis/NemesisView';
 
 export default function MainPage() {
 
@@ -19,7 +20,8 @@ export default function MainPage() {
       <Route path={Path.Talent + ':name'} element={<TalentView />} />
       <Route path={Path.Player} element={<ViewAllPlayers />} />
       <Route path={Path.Player + ':name'} element={<PlayerView />} />
-      <Route path={Path.Nemesis + ':name'} element={<NemesisEdit />} />
+      <Route path={Path.Nemesis + ':name/edit'} element={<NemesisEdit />} />
+      <Route path={Path.Nemesis + ':name/view'} element={<NemesisView />} />
       <Route path={Path.Nemesis} element={<AllNemesesView />} />
       <Route path={Path.Skills} element={<ViewAllSkills />} />
       <Route path={Path.Skills + ':name'} element={<SkillView />} />
