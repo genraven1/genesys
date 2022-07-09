@@ -17,7 +17,7 @@ import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
 import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog";
 
-export default function NemesisView() {
+export default function NemesisEdit() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
@@ -29,6 +29,7 @@ export default function NemesisView() {
         }
         (async (): Promise<void> => {
             const nemesisData = await ActorService.getNemesis(name);
+            if (!nemesisData) {return}
             setNemesis(nemesisData);
         })();
     }, [name])
@@ -48,41 +49,47 @@ export default function NemesisView() {
     }
 
     const onCharacteristicChange = (copyNemesis: Nemesis, value: number, type: CharacteristicType) => {
-        if (type === CharacteristicType.Brawn) {
-            copyNemesis.brawn.current = value
-        }
-        else if(type === CharacteristicType.Agility) {
-            copyNemesis.agility.current = value
-        }
-        else if(type === CharacteristicType.Intellect) {
-            copyNemesis.intellect.current = value
-        }
-        else if(type === CharacteristicType.Cunning) {
-            copyNemesis.cunning.current = value
-        }
-        else if(type === CharacteristicType.Willpower) {
-            copyNemesis.willpower.current = value
-        }
-        else if(type === CharacteristicType.Presence) {
-            copyNemesis.presence.current = value
+        switch (type) {
+            case CharacteristicType.Brawn:
+                copyNemesis.brawn.current = value
+                break;
+            case CharacteristicType.Agility:
+                copyNemesis.agility.current = value
+                break;
+            case CharacteristicType.Intellect:
+                copyNemesis.intellect.current = value
+                break;
+            case CharacteristicType.Cunning:
+                copyNemesis.cunning.current = value
+                break;
+            case CharacteristicType.Willpower:
+                copyNemesis.willpower.current = value
+                break;
+            case CharacteristicType.Presence:
+                copyNemesis.presence.current = value
+                break;
         }
     }
 
     const onStatChange = (copyNemesis: Nemesis, value: number, type: StatsType) => {
-        if (type === StatsType.Wounds) {
-            copyNemesis.wounds.max = value
-        }
-        else if (type === StatsType.Strain) {
-            copyNemesis.strain.max = value
+        switch (type) {
+            case StatsType.Wounds:
+                copyNemesis.wounds.max = value
+                break;
+            case StatsType.Strain:
+                copyNemesis.strain.max = value
+                break;
         }
     }
 
     const onDefenseChange = (copyNemesis: Nemesis, value: number, type: DefenseType) => {
-        if (type === DefenseType.Melee) {
-            copyNemesis.melee.current = value
-        }
-        else if (type === DefenseType.Ranged) {
-            copyNemesis.ranged.current = value
+        switch (type) {
+            case DefenseType.Melee:
+                copyNemesis.melee.current = value
+                break;
+            case DefenseType.Ranged:
+                copyNemesis.ranged.current = value
+                break;
         }
     }
 

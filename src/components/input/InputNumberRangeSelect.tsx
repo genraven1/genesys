@@ -51,7 +51,7 @@ export default function InputNumberRangeSelectField(props: Props): JSX.Element {
 
     const onCancel = (): void => {
         setEdit(!edit);
-        setValue(defaultValue);
+        setValue(value);
     };
 
     return (

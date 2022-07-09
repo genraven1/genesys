@@ -45,6 +45,7 @@ export default class ActorService {
     
     static async addNemesisTalent(name: string, talent: ActorTalent): Promise<Nemesis> {
         return await axios.put(Path.Nemesis + name + '/talent', talent);
+    }
 
     static async createRival(name: string): Promise<Rival> {
         return await axios.post( Path.Rival + name);

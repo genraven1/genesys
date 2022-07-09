@@ -13,19 +13,19 @@ export default function GenesysSkillDiceTypography(props: Props): JSX.Element {
     const generateSkillDice = () => {
         let text = ''
         while (characteristicRanks > 0 && skillRanks > 0) {
-            text.concat('[proficiency]')
+            text = text.concat('[proficiency] ')
             characteristicRanks--
             skillRanks--
         }
         if (characteristicRanks > 0) {
             while (characteristicRanks > 0) {
-                text.concat('[ability]')
+                text = text.concat('[ability] ')
                 characteristicRanks--
             }
         }
         if (skillRanks > 0) {
             while (skillRanks > 0) {
-                text.concat('[ability]')
+                text = text.concat('[ability] ')
                 skillRanks--
             }
         }
