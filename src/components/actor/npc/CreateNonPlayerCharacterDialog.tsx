@@ -22,11 +22,12 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
                 break
             case NonPlayerCharacterType.Rival:
                 await ActorService.createRival(name);
-                navigate(Path.Rival + name);
+                navigate(Path.Rival + name + '/edit');
                 break
             case NonPlayerCharacterType.Nemesis:
                 await ActorService.createNemesis(name);
-                navigate(Path.Nemesis + name);
+                console.log(Path.Nemesis + name)
+                navigate(Path.Nemesis + name + '/edit');
                 break
         }
         onClose()

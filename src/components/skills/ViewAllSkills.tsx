@@ -1,5 +1,3 @@
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,7 +16,6 @@ import SkillService from "../../services/SkillService";
 function Row(props: { row: Skill }): JSX.Element {
     const { row } = props;
     const { pathname } = useLocation()
-    const [open, setOpen] = useState(false);
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
         <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
@@ -26,25 +23,13 @@ function Row(props: { row: Skill }): JSX.Element {
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.characteristic}</TableCell>
                 <TableCell>{row.active}</TableCell>
                 <TableCell>
                     <Button component={renderLink}>Edit</Button>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                            <Table size="small" aria-label="purchases">
-                                <TableBody>
-                                </TableBody>
-                            </Table>
-                        </Box>
-                    </Collapse>
                 </TableCell>
             </TableRow>
         </Fragment>

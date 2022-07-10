@@ -5,7 +5,7 @@ import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import CharacteristicCard from "../../CharacteristicCard";
+import EditCharacteristicCard from "../../EditCharacteristicCard";
 import RatingCard from "../RatingCard";
 import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
@@ -129,12 +129,12 @@ export default function RivalView() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <CharacteristicCard characteristic={rival!!.brawn}  type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(RivalKey.Brawn, value) }}/>
-                        <CharacteristicCard characteristic={rival!!.agility}  type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(RivalKey.Agility, value) }}/>
-                        <CharacteristicCard characteristic={rival!!.intellect}  type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(RivalKey.Intellect, value) }}/>
-                        <CharacteristicCard characteristic={rival!!.cunning}  type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(RivalKey.Cunning, value) }}/>
-                        <CharacteristicCard characteristic={rival!!.willpower}  type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(RivalKey.Willpower, value) }}/>
-                        <CharacteristicCard characteristic={rival!!.presence}  type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(RivalKey.Presence, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.brawn} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(RivalKey.Brawn, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.agility} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(RivalKey.Agility, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.intellect} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(RivalKey.Intellect, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.cunning} type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(RivalKey.Cunning, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.willpower} type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(RivalKey.Willpower, value) }}/>
+                        <EditCharacteristicCard characteristic={rival!!.presence} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(RivalKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>

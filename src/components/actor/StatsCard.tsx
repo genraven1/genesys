@@ -23,7 +23,7 @@ export default function StatsCard(props: Props) {
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={20} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={25} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

@@ -33,7 +33,7 @@ export default function InlineTextField(props: Props): JSX.Element {
     }
 
     const handleOnCancel = (): void => {
-        setTextValue(defaultValue);
+        setTextValue(textValue);
         setEdit(!edit);
     }
 

@@ -8,7 +8,7 @@ interface Props {
     onChange: (value: number) => void,
 }
 
-export default function CharacteristicBox(props: Props): JSX.Element {
+export default function EditCharacteristicCard(props: Props): JSX.Element {
     const { characteristic, type, onChange } = props;
 
     return (

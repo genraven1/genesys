@@ -1,27 +1,26 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
-import Nemesis, {DefaultNemesis, NemesisKey} from "../../../../models/actor/npc/Nemesis";
+import Nemesis, {DefaultNemesis} from "../../../../models/actor/npc/Nemesis";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import CharacteristicCard from "../../CharacteristicCard";
-import RatingCard from "../RatingCard";
-import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
-import DefenseCard from "../../DefenseCard";
-import SkillTable from "./NemesisSkillTable";
 import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
-import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog";
+import ViewCharacteristicCard from "../../ViewCharacteristicCard";
+import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import ViewStatsCard from "../../ViewStatsCard";
+import ViewDefenseCard from "../../ViewDefenseCard";
+import ViewSkillTable from "./ViewNemesisSkills";
+import EditIcon from "@mui/icons-material/Edit";
+import {Path} from "../../../../services/Path";
 
-export default function NemesisView() {
+export default function Nemesisview() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
-    const [errors, setErrors] = useState({} as any);
+    let navigate = useNavigate()
 
     useEffect(() => {
         if (!name) {
@@ -29,13 +28,14 @@ export default function NemesisView() {
         }
         (async (): Promise<void> => {
             const nemesisData = await ActorService.getNemesis(name);
+            if (!nemesisData) {return}
             setNemesis(nemesisData);
         })();
     }, [name])
 
     function getName(nemesis: Nemesis | null): string {
         if (!nemesis) {
-            return 'Nemesis View'
+            return 'Nemesis Edit'
         }
         return nemesis.name
     }
@@ -47,133 +47,46 @@ export default function NemesisView() {
         return nemesis
     }
 
-    const onCharacteristicChange = (copyNemesis: Nemesis, value: number, type: CharacteristicType) => {
-        if (type === CharacteristicType.Brawn) {
-            copyNemesis.brawn.current = value
-        }
-        else if(type === CharacteristicType.Agility) {
-            copyNemesis.agility.current = value
-        }
-        else if(type === CharacteristicType.Intellect) {
-            copyNemesis.intellect.current = value
-        }
-        else if(type === CharacteristicType.Cunning) {
-            copyNemesis.cunning.current = value
-        }
-        else if(type === CharacteristicType.Willpower) {
-            copyNemesis.willpower.current = value
-        }
-        else if(type === CharacteristicType.Presence) {
-            copyNemesis.presence.current = value
-        }
+    const getRatings = ():string => {
+        return '[combat] ' + String(getNemesis(nemesis).combat) + ' [social] ' + String(getNemesis(nemesis).social) + ' [general] ' + String(getNemesis(nemesis).general)
     }
 
-    const onStatChange = (copyNemesis: Nemesis, value: number, type: StatsType) => {
-        if (type === StatsType.Wounds) {
-            copyNemesis.wounds.max = value
-        }
-        else if (type === StatsType.Strain) {
-            copyNemesis.strain.max = value
-        }
-    }
-
-    const onDefenseChange = (copyNemesis: Nemesis, value: number, type: DefenseType) => {
-        if (type === DefenseType.Melee) {
-            copyNemesis.melee.current = value
-        }
-        else if (type === DefenseType.Ranged) {
-            copyNemesis.ranged.current = value
-        }
-    }
-
-    const onChange = async (key: keyof Nemesis, value: number) => {
-        if (value === null || (nemesis !== null && nemesis[key] === value)) {
-            return;
-        }
-        const copyNemesis = {...nemesis} as Nemesis
-        switch (key) {
-            case "brawn":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Brawn)
-                break;
-            case "agility":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Agility)
-                break;
-            case "intellect":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Intellect)
-                break;
-            case "cunning":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Cunning)
-                break;
-            case "willpower":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Willpower)
-                break;
-            case "presence":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Presence)
-                break;
-            case 'talents':
-                break
-            case "soak":
-                copyNemesis.soak = copyNemesis.brawn.current
-                break;
-            case "melee":
-                onDefenseChange(copyNemesis, value, DefenseType.Melee)
-                break;
-            case "ranged":
-                onDefenseChange(copyNemesis, value, DefenseType.Ranged)
-                break;
-            case "wounds":
-                onStatChange(copyNemesis, value, StatsType.Wounds)
-                break;
-            case "strain":
-                onStatChange(copyNemesis, value, StatsType.Strain)
-                break;
-            case "name":
-                break;
-        }
-
-        await updateNemesis(copyNemesis)
-    }
-
-    const updateNemesis = async (copyNemesis: Nemesis): Promise<Nemesis> => {
-        copyNemesis.soak = copyNemesis.brawn.current
-        setNemesis(copyNemesis)
-        await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
-        return nemesis!!
+    const onEdit = () => {
+        navigate(Path.Nemesis + name + '/edit');
     }
 
     return (
         <Card>
-            <CardHeader title={getName(nemesis)} />
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={getName(nemesis)}
+                subheader={<GenesysDescriptionTypography text={getRatings()} />}
+                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
+                    <EditIcon color='primary' fontSize='small' />
+                </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).brawn}  type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(NemesisKey.Brawn, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).agility}  type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(NemesisKey.Agility, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).intellect}  type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(NemesisKey.Intellect, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).cunning}  type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(NemesisKey.Cunning, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).willpower}  type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(NemesisKey.Willpower, value) }}/>
-                        <CharacteristicCard characteristic={getNemesis(nemesis).presence}  type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(NemesisKey.Presence, value) }}/>
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).brawn} type={CharacteristicType.Brawn} />
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).agility} type={CharacteristicType.Agility}/>
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).intellect} type={CharacteristicType.Intellect}/>
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).cunning} type={CharacteristicType.Cunning}/>
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).willpower} type={CharacteristicType.Willpower}/>
+                        <ViewCharacteristicCard characteristic={getNemesis(nemesis).presence} type={CharacteristicType.Presence}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={getNemesis(nemesis).soak} />
-                        <StatsCard stats={getNemesis(nemesis).wounds} type={StatsType.Wounds} onChange={(value: number): void => { onChange(NemesisKey.Wounds, value) }}/>
-                        <StatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>
-                        <DefenseCard defense={getNemesis(nemesis).melee} type={DefenseType.Melee} onChange={(value: number): void => { onChange(NemesisKey.Melee, value) }}/>
-                        <DefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(NemesisKey.Ranged, value) }}/>
+                        <ViewStatsCard stats={getNemesis(nemesis).wounds} type={StatsType.Wounds}/>
+                        <ViewStatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain}/>
+                        <ViewDefenseCard defense={getNemesis(nemesis).melee} type={DefenseType.Melee}/>
+                        <ViewDefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={10}>
-                        <RatingCard  rating={getNemesis(nemesis).combat} type={RatingType.Combat} onChange={(value: number): void => { onChange(NemesisKey.Combat, value) }}/>
-                        <RatingCard  rating={getNemesis(nemesis).social} type={RatingType.Social} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>
-                        <RatingCard  rating={getNemesis(nemesis).general} type={RatingType.General} onChange={(value: number): void => { onChange(NemesisKey.General, value) }}/>
-                    </Grid>
+                    <ViewSkillTable  nemesis={getNemesis(nemesis)}/>
                     <Divider />
-                    <SkillTable  nemesis={getNemesis(nemesis)}/>
-                    <Divider />
-                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <NPCTalentSelectionDialog nemesis={getNemesis(nemesis)} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NemesisTalentTable nemesis={getNemesis(nemesis)}/>
                 </Grid>
             </CardContent>

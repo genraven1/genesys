@@ -17,9 +17,7 @@ export default function EditSkillDialog(props: Props) {
 
     const handleEdit = async (ranks: number): Promise<void> => {
         const copySkill = {...skill} as ActorSkill
-        console.log(ranks)
         copySkill.ranks = ranks
-        console.log(copySkill)
         setSkill(copySkill)
         await ActorService.updateNemesisSkill(name, copySkill)
         onClose()
