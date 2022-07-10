@@ -4,8 +4,16 @@ export default interface Equipment {
     name: string
     description: string
     price: Price
-    encumbrance: Encumbrance
+    encumbrance: number
+    slot: EquipmentSlot
     rarity: Rarity
+}
+
+export enum EquipmentSlot {
+    Main='Main Hand',
+    Off='Off Hand',
+    Both='Both Hands',
+    Body='Body'
 }
 
 export interface Price {
@@ -38,4 +46,19 @@ export enum EquipmentType {
     Armor='Armor',
     Weapon='Weapon',
     Gear='Gear'
+}
+
+export class DefaultArmor{
+    static create():Armor {
+        return {
+            defense: 0,
+            description: "",
+            encumbrance: 0,
+            name: "",
+            price: {value: 0, restricted: false},
+            rarity: {value: 0, modifier: 0},
+            slot: EquipmentSlot.Body,
+            soak: 0
+        }
+    }
 }

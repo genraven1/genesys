@@ -12,6 +12,8 @@ import AllRivalsView from "./actor/npc/rival/ViewAllRivals";
 import RivalView from "./actor/npc/rival/RivalView";
 import NemesisView from './actor/npc/nemesis/NemesisView';
 import ViewAllArmor from "./equipment/armor/ViewAllArmor";
+import EditArmor from "./equipment/armor/EditArmor";
+import ViewArmor from "./equipment/armor/ViewArmor";
 
 export default function MainPage() {
 
@@ -29,6 +31,8 @@ export default function MainPage() {
       <Route path={Path.Rival} element={<AllRivalsView />} />
       <Route path={Path.Rival + ':name'} element={<RivalView />} />
       <Route path={Path.Armor} element={<ViewAllArmor/>} />
+      <Route path={Path.Armor + ':name/edit'} element={<EditArmor/>} />
+      <Route path={Path.Armor + ':name/view'} element={<ViewArmor/>} />
     </Routes>
   )
 }

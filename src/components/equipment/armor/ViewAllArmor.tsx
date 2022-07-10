@@ -31,7 +31,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>{row.defense}</TableCell>
                 <TableCell>{row.soak}</TableCell>
-                <TableCell>{row.encumbrance.value}</TableCell>
+                <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{row.price.value}</TableCell>
                 <TableCell>{row.rarity.value}</TableCell>
                 <TableCell>

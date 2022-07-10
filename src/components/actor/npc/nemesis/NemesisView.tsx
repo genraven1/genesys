@@ -17,7 +17,7 @@ import ViewSkillTable from "./ViewNemesisSkills";
 import EditIcon from "@mui/icons-material/Edit";
 import {Path} from "../../../../services/Path";
 
-export default function Nemesisview() {
+export default function NemesisView() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
     let navigate = useNavigate()
@@ -35,7 +35,7 @@ export default function Nemesisview() {
 
     function getName(nemesis: Nemesis | null): string {
         if (!nemesis) {
-            return 'Nemesis Edit'
+            return 'Nemesis View'
         }
         return nemesis.name
     }
