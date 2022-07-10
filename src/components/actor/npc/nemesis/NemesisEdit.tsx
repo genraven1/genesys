@@ -1,7 +1,7 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import Nemesis, {DefaultNemesis, NemesisKey} from "../../../../models/actor/npc/Nemesis";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
@@ -16,12 +16,15 @@ import DefenseCard from "../../DefenseCard";
 import SkillTable from "./NemesisSkillTable";
 import NemesisTalentTable from "./NemesisTalentTable";
 import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog";
+import {Path} from "../../../../services/Path";
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function NemesisEdit() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
     const [errors, setErrors] = useState({} as any);
+    let navigate = useNavigate()
 
     useEffect(() => {
         if (!name) {
@@ -171,9 +174,15 @@ export default function NemesisEdit() {
         return nemesis!!
     }
 
+    const onView = () => {
+        navigate(Path.Nemesis + name + '/view');
+    }
+
     return (
         <Card>
-            <CardHeader title={getName(nemesis)} style={{ textAlign: 'center' }}/>
+            <CardHeader title={getName(nemesis)} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                <CheckIcon color='primary' fontSize='small' />
+            </IconButton>}/>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -189,7 +198,7 @@ export default function NemesisEdit() {
                     <Grid container spacing={10}>
                         <SoakCard soak={getNemesis(nemesis).soak} />
                         <StatsCard stats={getNemesis(nemesis).wounds} type={StatsType.Wounds} onChange={(value: number): void => { onChange(NemesisKey.Wounds, value) }}/>
-                        <StatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>
+                        <StatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain} onChange={(value: number): void => { onChange(NemesisKey.Strain, value) }}/>
                         <DefenseCard defense={getNemesis(nemesis).melee} type={DefenseType.Melee} onChange={(value: number): void => { onChange(NemesisKey.Melee, value) }}/>
                         <DefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(NemesisKey.Ranged, value) }}/>
                     </Grid>

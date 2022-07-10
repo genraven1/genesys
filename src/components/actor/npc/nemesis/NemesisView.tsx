@@ -1,28 +1,26 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
-import Nemesis, {DefaultNemesis, NemesisKey} from "../../../../models/actor/npc/Nemesis";
+import Nemesis, {DefaultNemesis} from "../../../../models/actor/npc/Nemesis";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import RatingCard from "../RatingCard";
-import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
-import DefenseCard from "../../DefenseCard";
-import SkillTable from "./NemesisSkillTable";
 import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
-import ViewRatingCard from "../ViewRatingCard";
 import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
+import ViewSkillTable from "./ViewNemesisSkills";
+import EditIcon from "@mui/icons-material/Edit";
+import {Path} from "../../../../services/Path";
 
 export default function Nemesisview() {
     const { name } = useParams<{ name: string }>();
     const [nemesis, setNemesis] = useState<Nemesis | null>(null);
+    let navigate = useNavigate()
 
     useEffect(() => {
         if (!name) {
@@ -53,9 +51,19 @@ export default function Nemesisview() {
         return '[combat] ' + String(getNemesis(nemesis).combat) + ' [social] ' + String(getNemesis(nemesis).social) + ' [general] ' + String(getNemesis(nemesis).general)
     }
 
+    const onEdit = () => {
+        navigate(Path.Nemesis + name + '/edit');
+    }
+
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={getName(nemesis)} subheader={<GenesysDescriptionTypography text={getRatings()}/>}>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={getName(nemesis)}
+                subheader={<GenesysDescriptionTypography text={getRatings()} />}
+                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
+                    <EditIcon color='primary' fontSize='small' />
+                </IconButton>}>
             </CardHeader>
             <Divider />
             <CardContent>
@@ -77,13 +85,7 @@ export default function Nemesisview() {
                         <ViewDefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider />
-                    {/*<Grid container spacing={10}>*/}
-                    {/*    <RatingCard  rating={getNemesis(nemesis).combat} type={RatingType.Combat} onChange={(value: number): void => { onChange(NemesisKey.Combat, value) }}/>*/}
-                    {/*    <RatingCard  rating={getNemesis(nemesis).social} type={RatingType.Social} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>*/}
-                    {/*    <RatingCard  rating={getNemesis(nemesis).general} type={RatingType.General} onChange={(value: number): void => { onChange(NemesisKey.General, value) }}/>*/}
-                    {/*</Grid>*/}
-                    <Divider />
-                    <SkillTable  nemesis={getNemesis(nemesis)}/>
+                    <ViewSkillTable  nemesis={getNemesis(nemesis)}/>
                     <Divider />
                     <NemesisTalentTable nemesis={getNemesis(nemesis)}/>
                 </Grid>
