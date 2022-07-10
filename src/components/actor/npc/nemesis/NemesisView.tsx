@@ -15,6 +15,10 @@ import SkillTable from "./NemesisSkillTable";
 import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
+import ViewRatingCard from "../ViewRatingCard";
+import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import ViewStatsCard from "../../ViewStatsCard";
+import ViewDefenseCard from "../../ViewDefenseCard";
 
 export default function Nemesisview() {
     const { name } = useParams<{ name: string }>();
@@ -45,9 +49,14 @@ export default function Nemesisview() {
         return nemesis
     }
 
+    const getRatings = ():string => {
+        return '[combat] ' + String(getNemesis(nemesis).combat) + ' [social] ' + String(getNemesis(nemesis).social) + ' [general] ' + String(getNemesis(nemesis).general)
+    }
+
     return (
         <Card>
-            <CardHeader title={getName(nemesis)} style={{ textAlign: 'center' }}/>
+            <CardHeader style={{textAlign: 'center'}} title={getName(nemesis)} subheader={<GenesysDescriptionTypography text={getRatings()}/>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -60,14 +69,14 @@ export default function Nemesisview() {
                         <ViewCharacteristicCard characteristic={getNemesis(nemesis).presence} type={CharacteristicType.Presence}/>
                     </Grid>
                     <Divider />
-                    {/*<Grid container spacing={10}>*/}
-                    {/*    <SoakCard soak={getNemesis(nemesis).soak} />*/}
-                    {/*    <StatsCard stats={getNemesis(nemesis).wounds} type={StatsType.Wounds} onChange={(value: number): void => { onChange(NemesisKey.Wounds, value) }}/>*/}
-                    {/*    <StatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>*/}
-                    {/*    <DefenseCard defense={getNemesis(nemesis).melee} type={DefenseType.Melee} onChange={(value: number): void => { onChange(NemesisKey.Melee, value) }}/>*/}
-                    {/*    <DefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(NemesisKey.Ranged, value) }}/>*/}
-                    {/*</Grid>*/}
-                    {/*<Divider />*/}
+                    <Grid container spacing={10}>
+                        <SoakCard soak={getNemesis(nemesis).soak} />
+                        <ViewStatsCard stats={getNemesis(nemesis).wounds} type={StatsType.Wounds}/>
+                        <ViewStatsCard stats={getNemesis(nemesis).strain} type={StatsType.Strain}/>
+                        <ViewDefenseCard defense={getNemesis(nemesis).melee} type={DefenseType.Melee}/>
+                        <ViewDefenseCard defense={getNemesis(nemesis).ranged} type={DefenseType.Ranged}/>
+                    </Grid>
+                    <Divider />
                     {/*<Grid container spacing={10}>*/}
                     {/*    <RatingCard  rating={getNemesis(nemesis).combat} type={RatingType.Combat} onChange={(value: number): void => { onChange(NemesisKey.Combat, value) }}/>*/}
                     {/*    <RatingCard  rating={getNemesis(nemesis).social} type={RatingType.Social} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>*/}

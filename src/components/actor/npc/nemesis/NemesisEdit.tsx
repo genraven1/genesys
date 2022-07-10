@@ -1,4 +1,5 @@
 import {Button, Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import * as React from "react";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
@@ -13,7 +14,6 @@ import SoakCard from "../../SoakCard";
 import StatsCard from "../../StatsCard";
 import DefenseCard from "../../DefenseCard";
 import SkillTable from "./NemesisSkillTable";
-import * as React from "react";
 import NemesisTalentTable from "./NemesisTalentTable";
 import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog";
 
@@ -93,6 +93,20 @@ export default function NemesisEdit() {
         }
     }
 
+    const onRatingChange = (copyNemesis: Nemesis, value: number, type: RatingType) => {
+        switch (type) {
+            case RatingType.Combat:
+                copyNemesis.combat = value
+                break
+            case RatingType.Social:
+                copyNemesis.social = value
+                break
+            case RatingType.General:
+                copyNemesis.general = value
+                break
+        }
+    }
+
     const onChange = async (key: keyof Nemesis, value: number) => {
         if (value === null || (nemesis !== null && nemesis[key] === value)) {
             return;
@@ -134,6 +148,15 @@ export default function NemesisEdit() {
             case "strain":
                 onStatChange(copyNemesis, value, StatsType.Strain)
                 break;
+            case "combat":
+                onRatingChange(copyNemesis, value, RatingType.Combat)
+                break
+            case "social":
+                onRatingChange(copyNemesis, value, RatingType.Social)
+                break
+            case "general":
+                onRatingChange(copyNemesis, value, RatingType.General)
+                break
             case "name":
                 break;
         }
