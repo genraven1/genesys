@@ -57,6 +57,14 @@ export default function ViewArmor() {
                     <Grid container spacing={10}>
                         <ViewFieldCard name={'Description'} text={getArmor(armor).description} />
                     </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <ViewFieldCard name={'Soak'} text={String(getArmor(armor).soak)} />
+                        <ViewFieldCard name={'Defense'} text={String(getArmor(armor).defense)} />
+                        <ViewFieldCard name={'Encumbrance'} text={String(getArmor(armor).encumbrance)} />
+                        <ViewFieldCard name={'Price'} text={String(getArmor(armor).price)} />
+                        <ViewFieldCard name={'Rarity'} text={String(getArmor(armor).rarity)} />
+                    </Grid>
                 </Grid>
             </CardContent>
         </Card>

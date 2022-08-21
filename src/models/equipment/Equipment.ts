@@ -4,7 +4,7 @@ export default interface Equipment {
     name: string
     description: string
     price: Price
-    encumbrance: number
+    encumbrance: Encumbrance
     slot: EquipmentSlot
     rarity: Rarity
 }
@@ -53,7 +53,7 @@ export class DefaultArmor{
         return {
             defense: 0,
             description: "",
-            encumbrance: 0,
+            encumbrance: {value: 0, worn: false},
             name: "",
             price: {value: 0, restricted: false},
             rarity: {value: 0, modifier: 0},

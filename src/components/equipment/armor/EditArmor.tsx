@@ -6,6 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import {Path} from "../../../services/Path";
+import SoakCard from "../../actor/SoakCard";
 
 export default function EditArmor() {
     const { name } = useParams<{ name: string }>();
@@ -38,29 +39,6 @@ export default function EditArmor() {
         return armor
     }
 
-    // const onCharacteristicChange = (copyNemesis: Nemesis, value: number, type: CharacteristicType) => {
-    //     switch (type) {
-    //         case CharacteristicType.Brawn:
-    //             copyNemesis.brawn.current = value
-    //             break;
-    //         case CharacteristicType.Agility:
-    //             copyNemesis.agility.current = value
-    //             break;
-    //         case CharacteristicType.Intellect:
-    //             copyNemesis.intellect.current = value
-    //             break;
-    //         case CharacteristicType.Cunning:
-    //             copyNemesis.cunning.current = value
-    //             break;
-    //         case CharacteristicType.Willpower:
-    //             copyNemesis.willpower.current = value
-    //             break;
-    //         case CharacteristicType.Presence:
-    //             copyNemesis.presence.current = value
-    //             break;
-    //     }
-    // }
-    //
     // const onStatChange = (copyNemesis: Nemesis, value: number, type: StatsType) => {
     //     switch (type) {
     //         case StatsType.Wounds:
@@ -82,84 +60,58 @@ export default function EditArmor() {
     //             break;
     //     }
     // }
-    //
-    // const onRatingChange = (copyNemesis: Nemesis, value: number, type: RatingType) => {
-    //     switch (type) {
-    //         case RatingType.Combat:
-    //             copyNemesis.combat = value
-    //             break
-    //         case RatingType.Social:
-    //             copyNemesis.social = value
-    //             break
-    //         case RatingType.General:
-    //             copyNemesis.general = value
-    //             break
-    //     }
-    // }
-    //
-    // const onChange = async (key: keyof Nemesis, value: number) => {
-    //     if (value === null || (nemesis !== null && nemesis[key] === value)) {
-    //         return;
-    //     }
-    //     const copyNemesis = {...nemesis} as Nemesis
-    //     switch (key) {
-    //         case "brawn":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Brawn)
-    //             break;
-    //         case "agility":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Agility)
-    //             break;
-    //         case "intellect":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Intellect)
-    //             break;
-    //         case "cunning":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Cunning)
-    //             break;
-    //         case "willpower":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Willpower)
-    //             break;
-    //         case "presence":
-    //             onCharacteristicChange(copyNemesis, value, CharacteristicType.Presence)
-    //             break;
-    //         case 'talents':
-    //             break
-    //         case "soak":
-    //             copyNemesis.soak = copyNemesis.brawn.current
-    //             break;
-    //         case "melee":
-    //             onDefenseChange(copyNemesis, value, DefenseType.Melee)
-    //             break;
-    //         case "ranged":
-    //             onDefenseChange(copyNemesis, value, DefenseType.Ranged)
-    //             break;
-    //         case "wounds":
-    //             onStatChange(copyNemesis, value, StatsType.Wounds)
-    //             break;
-    //         case "strain":
-    //             onStatChange(copyNemesis, value, StatsType.Strain)
-    //             break;
-    //         case "combat":
-    //             onRatingChange(copyNemesis, value, RatingType.Combat)
-    //             break
-    //         case "social":
-    //             onRatingChange(copyNemesis, value, RatingType.Social)
-    //             break
-    //         case "general":
-    //             onRatingChange(copyNemesis, value, RatingType.General)
-    //             break
-    //         case "name":
-    //             break;
-    //     }
-    //
-    //     await updateNemesis(copyNemesis)
-    // }
-    //
-    // const updateNemesis = async (copyNemesis: Nemesis): Promise<Nemesis> => {
-    //     copyNemesis.soak = copyNemesis.brawn.current
-    //     setNemesis(copyNemesis)
-    //     await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
-    //     return nemesis!!
-    // }
+
+    const onEquipmentSlotChange = (copyNemesis: Nemesis, value: number, type: RatingType) => {
+        switch (type) {
+            case RatingType.Combat:
+                copyNemesis.combat = value
+                break
+            case RatingType.Social:
+                copyNemesis.social = value
+                break
+            case RatingType.General:
+                copyNemesis.general = value
+                break
+        }
+    }
+    
+    const onChange = async (key: keyof Armor, value: number) => {
+        if (value === null || (armor !== null && armor[key] === value)) {
+            return;
+        }
+        const copyArmor = {...armor} as Armor
+        switch (key) {
+            case "defense":
+                copyArmor.defense = value
+                break
+            case "encumbrance":
+                copyArmor.encumbrance = value
+                break
+            case "price":
+                copyArmor.price = value
+                break
+            case "rarity":
+                copyArmor.rarity = value
+                break
+            case "soak":
+                copyArmor.soak = value
+                break
+            case "slot":
+                break
+            case "description":
+                break
+            case "name":
+                break;
+        }
+
+        await updateArmor(copyArmor)
+    }
+
+    const updateArmor = async (copyArmor: Armor): Promise<Armor> => {
+        setArmor(copyArmor)
+        await EquipmentService.updateArmor(copyArmor.name, copyArmor)
+        return armor!!
+    }
 
     const onView = () => {
         navigate(Path.Armor + name + '/view');
