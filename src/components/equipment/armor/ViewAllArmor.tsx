@@ -33,7 +33,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell>{row.soak}</TableCell>
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{row.price.value}</TableCell>
-                <TableCell>{row.rarity.value}</TableCell>
+                <TableCell>{row.rarity}</TableCell>
                 <TableCell>
                     <Button component={renderLink}>Edit</Button>
                 </TableCell>
