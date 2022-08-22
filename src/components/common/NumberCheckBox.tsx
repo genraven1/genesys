@@ -27,23 +27,20 @@ interface EditProps {
     title: string
     value: number
     check: boolean
+    onChange: (value: boolean) => void
 }
 
 export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
-    const {title, value, check} = props
-
-    const onChange = () => {
-
-    }
+    const {title, value, check, onChange} = props
 
     const checkIsTrue = (
-        <IconButton title='Commit' size='small' onClick={(): void => onChange()}>
+        <IconButton title='Commit' size='small' onClick={(): void => onChange(true)}>
             <CheckIcon color='primary' fontSize='small' />
         </IconButton>
     )
 
     const checkIsFalse = (
-        <IconButton title='Cancel' size='small' onClick={(): void => onChange()}>
+        <IconButton title='Cancel' size='small' onClick={(): void => onChange(false)}>
             <CancelIcon color='primary' fontSize='small' />
         </IconButton>
     )
