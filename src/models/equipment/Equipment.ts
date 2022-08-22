@@ -6,7 +6,7 @@ export default interface Equipment {
     price: Price
     encumbrance: Encumbrance
     slot: EquipmentSlot
-    rarity: Rarity
+    rarity: number
 }
 
 export enum EquipmentSlot {
@@ -24,11 +24,6 @@ export interface Price {
 export interface Encumbrance {
     value: number
     worn: boolean
-}
-
-export interface Rarity {
-    value: number
-    modifier: number
 }
 
 export interface Armor extends Equipment {
@@ -56,7 +51,7 @@ export class DefaultArmor{
             encumbrance: {value: 0, worn: false},
             name: "",
             price: {value: 0, restricted: false},
-            rarity: {value: 0, modifier: 0},
+            rarity: 0,
             slot: EquipmentSlot.Body,
             soak: 0
         }

@@ -1,12 +1,13 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import * as React from 'react';
+import {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
-import EquipmentService from "../../../services/EquipmentService";
-import {Path} from "../../../services/Path";
-import SoakCard from "../../actor/SoakCard";
+import {Armor, DefaultArmor, Encumbrance, Price} from '../../../models/equipment/Equipment';
+import EquipmentService from '../../../services/EquipmentService';
+import {Path} from '../../../services/Path';
+import InputTextFieldCard from '../../input/InputTextFieldCard';
+import InputNumberRangeSelectField from "../../input/InputNumberRangeSelect";
 
 export default function EditArmor() {
     const { name } = useParams<{ name: string }>();
@@ -39,68 +40,40 @@ export default function EditArmor() {
         return armor
     }
 
-    // const onStatChange = (copyNemesis: Nemesis, value: number, type: StatsType) => {
-    //     switch (type) {
-    //         case StatsType.Wounds:
-    //             copyNemesis.wounds.max = value
-    //             break;
-    //         case StatsType.Strain:
-    //             copyNemesis.strain.max = value
-    //             break;
-    //     }
-    // }
-    //
-    // const onDefenseChange = (copyNemesis: Nemesis, value: number, type: DefenseType) => {
-    //     switch (type) {
-    //         case DefenseType.Melee:
-    //             copyNemesis.melee.current = value
-    //             break;
-    //         case DefenseType.Ranged:
-    //             copyNemesis.ranged.current = value
-    //             break;
-    //     }
-    // }
+    const onPriceChange = async (price: Price) => {
+        const copyArmor = {...armor} as Armor
+        copyArmor.price = price
+        await updateArmor(copyArmor)
+    }
 
-    const onEquipmentSlotChange = (copyNemesis: Nemesis, value: number, type: RatingType) => {
-        switch (type) {
-            case RatingType.Combat:
-                copyNemesis.combat = value
-                break
-            case RatingType.Social:
-                copyNemesis.social = value
-                break
-            case RatingType.General:
-                copyNemesis.general = value
-                break
-        }
+    const onEncumbranceChange = async (encumbrance: Encumbrance) => {
+        const copyArmor = {...armor} as Armor
+        copyArmor.encumbrance = encumbrance
+        await updateArmor(copyArmor)
     }
     
-    const onChange = async (key: keyof Armor, value: number) => {
+    const onChange = async (key: keyof Armor, value: string) => {
         if (value === null || (armor !== null && armor[key] === value)) {
             return;
         }
         const copyArmor = {...armor} as Armor
         switch (key) {
-            case "defense":
-                copyArmor.defense = value
+            case 'defense':
+                copyArmor.defense = Number(value)
                 break
-            case "encumbrance":
-                copyArmor.encumbrance = value
+            case 'soak':
+                copyArmor.soak = Number(value)
                 break
-            case "price":
-                copyArmor.price = value
+            case 'description':
+                copyArmor.description = value
                 break
-            case "rarity":
-                copyArmor.rarity = value
+            case 'rarity':
+                copyArmor.rarity = Number(value)
                 break
-            case "soak":
-                copyArmor.soak = value
-                break
-            case "slot":
-                break
-            case "description":
-                break
-            case "name":
+            case 'slot':
+            case 'encumbrance':
+            case 'price':
+            case 'name':
                 break;
         }
 
@@ -125,7 +98,13 @@ export default function EditArmor() {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-
+                    <Grid container spacing={10}>
+                        <InputTextFieldCard defaultValue={getArmor(armor).description} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                    </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <InputNumberRangeSelectField defaultValue={getArmor(armor).rarity} min={0} max={11} onCommit={(value: number): void => { onChange('description', String(value)) }} />
+                    </Grid>
                 </Grid>
             </CardContent>
         </Card>
