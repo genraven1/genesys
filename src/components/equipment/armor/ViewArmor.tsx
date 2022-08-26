@@ -7,6 +7,7 @@ import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import {Path} from "../../../services/Path";
 import ViewFieldCard from "../../common/ViewFieldCard";
+import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 
 export default function ViewArmor() {
     const { name } = useParams<{ name: string }>();
@@ -61,8 +62,8 @@ export default function ViewArmor() {
                     <Grid container spacing={10}>
                         <ViewFieldCard name={'Soak'} text={String(getArmor(armor).soak)} />
                         <ViewFieldCard name={'Defense'} text={String(getArmor(armor).defense)} />
-                        <ViewFieldCard name={'Encumbrance'} text={String(getArmor(armor).encumbrance)} />
-                        <ViewFieldCard name={'Price'} text={String(getArmor(armor).price)} />
+                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).encumbrance.worn} value={getArmor(armor).encumbrance.value}/>
+                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).price.restricted} value={getArmor(armor).price.value}/>
                         <ViewFieldCard name={'Rarity'} text={String(getArmor(armor).rarity)} />
                     </Grid>
                 </Grid>
