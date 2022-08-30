@@ -1,6 +1,6 @@
 import { Grid, Card, CardHeader, Divider, Typography, CardActions } from "@mui/material";
 import {RatingType} from "../../../models/actor/npc/NonPlayerCharacter";
-import InputNumberRangeSelectField from "../../input/InputNumberRangeSelect";
+import InputNumberRangeSelectField from "../../common/InputNumberRangeSelect";
 
 interface Props {
     rating: number,

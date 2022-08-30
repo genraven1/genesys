@@ -3,7 +3,7 @@ import {ChangeEvent, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {DefaultSkill, SkillKey, SkillType} from '../../models/actor/Skill';
-import InputSelectField from '../input/InputSelectField';
+import InputSelectField from '../common/InputSelectField';
 import {CharacteristicType} from '../../models/actor/Characteristics';
 
 const SKILL_TYPE_OPTIONS = skillTypeOptions()
