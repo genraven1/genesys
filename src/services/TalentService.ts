@@ -13,14 +13,14 @@ export default class TalentService {
     }
 
     static async getTalent(name: string): Promise<Talent> {
-        return await (await axios.get(Path.Talent + '/' + name)).data;
+        return await (await axios.get(Path.Talent + name)).data;
     }
 
     static async createTalent(name: string): Promise<Talent> {
-        return await axios.post(Path.Talent + '/' + name);
+        return await axios.post(Path.Talent + name);
     }
 
     static async updateTalent(name: string, talent: Talent): Promise<Talent> {
-        return await axios.put(Path.Talent + '/' + name, talent);
+        return await axios.put(Path.Talent + name, talent);
     }
 }
