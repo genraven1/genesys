@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
 import {ActorSkill} from "../../models/actor/Actor";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 import ActorService from "../../services/ActorService";
 
 interface Props {

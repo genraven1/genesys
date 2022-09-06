@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import TalentViewOnly from "../../talents/TalentViewOnly";
-import Talent from "../../../models/Talent";
+import TalentViewOnly from "../talents/TalentViewOnly";
+import Talent from "../../models/Talent";
 
 interface Props {
     talent: Talent

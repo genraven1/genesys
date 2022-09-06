@@ -1,5 +1,5 @@
 import {Card, CardActions, CardHeader, Divider, Grid, Typography} from "@mui/material";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 import {Defense, DefenseType} from "../../models/actor/Defense";
 
 interface Props {
