@@ -8,6 +8,8 @@ import EquipmentService from '../../../services/EquipmentService';
 import {Path} from '../../../services/Path';
 import InputTextFieldCard from '../../input/InputTextFieldCard';
 import InputNumberRangeSelectField from "../../input/InputNumberRangeSelect";
+import {EditNumberFieldCard, EditStringFieldCard, ViewFieldCard} from "../../common/ViewFieldCard";
+import {EditNumberCheckBoxCard, ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 
 export default function EditArmor() {
     const { name } = useParams<{ name: string }>();
@@ -97,11 +99,15 @@ export default function EditArmor() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={getArmor(armor).description} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                        <EditStringFieldCard defaultValue={getArmor(armor).description} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <InputNumberRangeSelectField defaultValue={getArmor(armor).rarity} min={0} max={11} onCommit={(value: number): void => { onChange('description', String(value)) }} />
+                        <EditNumberFieldCard value={getArmor(armor).soak} title={'Soak'} onChange={(value: number): void => { onChange('soak', String(value))}} min={0} max={6} />
+                        <EditNumberFieldCard value={getArmor(armor).defense} title={'Defense'} onChange={(value: number): void => { onChange('defense', String(value))}} min={0} max={5} />
+                        <EditNumberCheckBoxCard title={'Encumbrance'} check={getArmor(armor).equipped} value={getArmor(armor).encumbrance} checkTitle={'Equipped'} onChange={} />
+                        <EditNumberCheckBoxCard title={'Price'} check={getArmor(armor).restricted} value={getArmor(armor).price} checkTitle={'Restricted'} onChange={} />
+                        <EditNumberFieldCard value={getArmor(armor).rarity} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
                 </Grid>
             </CardContent>

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
-import ViewFieldCard from "../common/ViewFieldCard";
+import {ViewFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
 
 export default function TalentViewOnly(props: {talent: Talent}) {
@@ -11,13 +11,13 @@ export default function TalentViewOnly(props: {talent: Talent}) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} text={talent.description} />
+                        <ViewFieldCard name={'Description'} value={talent.description} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Ranked'} text={talent.ranked} />
-                        <ViewFieldCard name={'Activation'} text={talent.activation} />
-                        <ViewFieldCard name={'Tier'} text={talent.tier} />
+                        <ViewFieldCard name={'Ranked'} value={talent.ranked} />
+                        <ViewFieldCard name={'Activation'} value={talent.activation} />
+                        <ViewFieldCard name={'Tier'} value={talent.tier} />
                     </Grid>
                 </Grid>
             </CardContent>

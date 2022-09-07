@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import {Path} from "../../../services/Path";
-import ViewFieldCard from "../../common/ViewFieldCard";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 
 export default function ViewArmor() {
@@ -56,15 +56,15 @@ export default function ViewArmor() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} text={getArmor(armor).description} />
+                        <ViewFieldCard name={'Description'} value={getArmor(armor).description} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Soak'} text={String(getArmor(armor).soak)} />
-                        <ViewFieldCard name={'Defense'} text={String(getArmor(armor).defense)} />
-                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).equipped} value={getArmor(armor).encumbrance}/>
-                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).restricted} value={getArmor(armor).price}/>
-                        <ViewFieldCard name={'Rarity'} text={String(getArmor(armor).rarity)} />
+                        <ViewFieldCard name={'Soak'} value={String(getArmor(armor).soak)} />
+                        <ViewFieldCard name={'Defense'} value={String(getArmor(armor).defense)} />
+                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).equipped} value={getArmor(armor).encumbrance} checkTitle={'Equipped'}/>
+                        <ViewNumberCheckBoxCard  title={'Price'} check={getArmor(armor).restricted} value={getArmor(armor).price} checkTitle={'Restricted'}/>
+                        <ViewFieldCard name={'Rarity'} value={String(getArmor(armor).rarity)} />
                     </Grid>
                 </Grid>
             </CardContent>
