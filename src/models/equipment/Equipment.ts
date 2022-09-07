@@ -3,10 +3,12 @@ import Skill from "../actor/Skill";
 export default interface Equipment {
     name: string
     description: string
-    price: Price
-    encumbrance: Encumbrance
+    price: number
+    restricted: boolean
+    encumbrance: number
     slot: EquipmentSlot
     rarity: number
+    equipped: boolean
 }
 
 export enum EquipmentSlot {
@@ -14,11 +16,6 @@ export enum EquipmentSlot {
     Off='Off Hand',
     Both='Both Hands',
     Body='Body'
-}
-
-export interface Price {
-    value: number
-    restricted: boolean
 }
 
 export interface Encumbrance {
@@ -48,12 +45,14 @@ export class DefaultArmor{
         return {
             defense: 0,
             description: "",
-            encumbrance: {value: 0, worn: false},
+            encumbrance: 0,
             name: "",
-            price: {value: 0, restricted: false},
+            price: 0,
             rarity: 0,
             slot: EquipmentSlot.Body,
-            soak: 0
+            soak: 0,
+            restricted: false,
+            equipped: false
         }
     }
 }

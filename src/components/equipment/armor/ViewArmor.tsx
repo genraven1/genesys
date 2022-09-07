@@ -62,8 +62,8 @@ export default function ViewArmor() {
                     <Grid container spacing={10}>
                         <ViewFieldCard name={'Soak'} text={String(getArmor(armor).soak)} />
                         <ViewFieldCard name={'Defense'} text={String(getArmor(armor).defense)} />
-                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).encumbrance.worn} value={getArmor(armor).encumbrance.value}/>
-                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).price.restricted} value={getArmor(armor).price.value}/>
+                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).equipped} value={getArmor(armor).encumbrance}/>
+                        <ViewNumberCheckBoxCard  title={'Encumbrance'} check={getArmor(armor).restricted} value={getArmor(armor).price}/>
                         <ViewFieldCard name={'Rarity'} text={String(getArmor(armor).rarity)} />
                     </Grid>
                 </Grid>

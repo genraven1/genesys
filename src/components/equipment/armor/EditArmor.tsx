@@ -3,7 +3,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Armor, DefaultArmor, Encumbrance, Price} from '../../../models/equipment/Equipment';
+import {Armor, DefaultArmor} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
 import {Path} from '../../../services/Path';
 import InputTextFieldCard from '../../input/InputTextFieldCard';
@@ -39,18 +39,6 @@ export default function EditArmor() {
         }
         return armor
     }
-
-    const onPriceChange = async (price: Price) => {
-        const copyArmor = {...armor} as Armor
-        copyArmor.price = price
-        await updateArmor(copyArmor)
-    }
-
-    const onEncumbranceChange = async (encumbrance: Encumbrance) => {
-        const copyArmor = {...armor} as Armor
-        copyArmor.encumbrance = encumbrance
-        await updateArmor(copyArmor)
-    }
     
     const onChange = async (key: keyof Armor, value: string) => {
         if (value === null || (armor !== null && armor[key] === value)) {
@@ -70,9 +58,19 @@ export default function EditArmor() {
             case 'rarity':
                 copyArmor.rarity = Number(value)
                 break
-            case 'slot':
-            case 'encumbrance':
             case 'price':
+                copyArmor.price = Number(value)
+                break;
+            case "restricted":
+                copyArmor.restricted = Boolean(value)
+                break
+            case 'encumbrance':
+                copyArmor.encumbrance = Number(value)
+                break
+            case "equipped":
+                copyArmor.equipped = Boolean(value)
+                break
+            case 'slot':
             case 'name':
                 break;
         }

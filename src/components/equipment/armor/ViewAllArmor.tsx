@@ -15,6 +15,7 @@ import { LinkProps, Link } from "react-router-dom";
 import {Armor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
+import Typography from "@mui/material/Typography";
 
 function Row(props: { row: Armor }): JSX.Element {
     const { row } = props;
@@ -22,8 +23,23 @@ function Row(props: { row: Armor }): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
+        <Link to={`${pathname}${row.name}/edit`} ref={ref} {...itemProps} />
     )),[pathname, row.name]);
+
+    const renderPrice = (): JSX.Element => {
+        let price = ''
+        if (row.restricted) {
+            price = row.price + '(R)'
+        }
+        else {
+            price = String(row.price)
+        }
+        return (
+            <Fragment>
+                <Typography>{price}</Typography>
+            </Fragment>
+        )
+    }
 
     return (
         <Fragment>
@@ -32,7 +48,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell>{row.defense}</TableCell>
                 <TableCell>{row.soak}</TableCell>
                 <TableCell>{row.encumbrance}</TableCell>
-                <TableCell>{row.price.value}</TableCell>
+                <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
                 <TableCell>
                     <Button component={renderLink}>Edit</Button>
