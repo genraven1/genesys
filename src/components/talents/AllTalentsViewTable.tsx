@@ -22,7 +22,7 @@ function Row(props: { row: Talent }): JSX.Element {
     const [open, setOpen] = useState(false);
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
+        <Link to={`${pathname}${row.name}`} ref={ref} {...itemProps} />
     )),[pathname, row.name]);
 
     return (
