@@ -1,6 +1,7 @@
-import {Card, CardHeader, Divider, Grid, IconButton, Typography} from "@mui/material";
+import {Card, Divider, Grid, IconButton, Typography} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
+import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 
 interface ViewProps {
     title: string
@@ -39,20 +40,25 @@ interface EditProps {
     value: number
     check: boolean
     checkTitle: string
-    onChange: (value: boolean) => void
+    onBooleanChange: (value: boolean) => void
+    onNumberChange: (value: number) => void
 }
 
 export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
-    const {title, value, check, onChange, checkTitle} = props
+    const {title, value, check, onBooleanChange, checkTitle, onNumberChange} = props
+
+    const handleClick = () => {
+        onBooleanChange(check)
+    }
 
     const checkIsTrue = (
-        <IconButton title='Commit' size='small' onClick={(): void => onChange(true)}>
+        <IconButton title='Commit' size='small' onClick={(): void => handleClick()}>
             <CheckIcon color='primary' fontSize='small' />
         </IconButton>
     )
 
     const checkIsFalse = (
-        <IconButton title='Cancel' size='small' onClick={(): void => onChange(false)}>
+        <IconButton title='Cancel' size='small' onClick={(): void => handleClick()}>
             <CancelIcon color='primary' fontSize='small' />
         </IconButton>
     )
@@ -60,10 +66,20 @@ export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
-                <Typography style={{ textAlign: 'center' }} >{value}</Typography>
-                {check ? checkIsTrue : checkIsFalse}
+                <Grid container spacing={0}>
+                    <Grid item xs>
+                        <Typography style={{ textAlign: 'center' }}>{title}</Typography>
+                        <Divider />
+                        <InputNumberRangeSelectField defaultValue={value} min={0} max={11} onCommit={onNumberChange} />
+                    </Grid>
+                    <Grid item xs>
+                        <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
+                        <Divider />
+                        <Typography style={{ textAlign: 'center' }}>
+                            {check ? checkIsTrue : checkIsFalse}
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Card>
         </Grid>
     )

@@ -77,7 +77,7 @@ export default function GenesysDescriptionTypography(props: Props): JSX.Element 
 
     return (
         <Fragment>
-            <Typography style={{ wordWrap: 'break-word' }} dangerouslySetInnerHTML={{ __html: checkText()}}/>
+            <Typography style={{ wordWrap: 'break-word', textAlign: 'center' }} dangerouslySetInnerHTML={{ __html: checkText()}}/>
         </Fragment>
     )
 }
