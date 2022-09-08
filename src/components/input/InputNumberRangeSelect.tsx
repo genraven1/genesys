@@ -10,7 +10,7 @@ interface Props {
     editable?: boolean,
     onChange?: (value: string) => void,
     onCommit: (value: number) => void,
-    helperText?: string,
+    helperText?: string
 }
 
 export default function InputNumberRangeSelectField(props: Props): JSX.Element {
@@ -36,13 +36,7 @@ export default function InputNumberRangeSelectField(props: Props): JSX.Element {
     const editElement = (
         <ClickAwayListener mouseEvent="onMouseUp" onClickAway={handleOnCommit}>
             <TextField value={value} helperText={helperText} onChange={inputOnChange} select>
-                {
-                    range.map((key) => (
-                        <MenuItem key={key} value={key}>
-                            {key}
-                        </MenuItem>
-                    ))
-                }
+                {range.map((key) => (<MenuItem key={key} value={key}>{key}</MenuItem>))}
             </TextField>
         </ClickAwayListener>
     );

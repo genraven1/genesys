@@ -2,6 +2,7 @@ import {Card, Divider, Grid, IconButton, Typography} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
+import EditPriceCard from "./EditPriceCard";
 
 interface ViewProps {
     title: string
@@ -72,6 +73,51 @@ export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
                         <Divider />
                         <InputNumberRangeSelectField defaultValue={value} min={0} max={11} onCommit={onNumberChange} />
                     </Grid>
+                    <Grid item xs>
+                        <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
+                        <Divider />
+                        <Typography style={{ textAlign: 'center' }}>
+                            {check ? checkIsTrue : checkIsFalse}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Card>
+        </Grid>
+    )
+}
+
+interface EditPriceProps {
+    value: number
+    check: boolean
+    checkTitle: string
+    onBooleanChange: (value: boolean) => void
+    onNumberChange: (value: number) => void
+}
+
+export function EditPriceCheckBoxCard(props: EditPriceProps): JSX.Element {
+    const {value, check, onBooleanChange, checkTitle, onNumberChange} = props
+
+    const handleClick = () => {
+        onBooleanChange(check)
+    }
+
+    const checkIsTrue = (
+        <IconButton title='Commit' size='small' onClick={(): void => handleClick()}>
+            <CheckIcon color='primary' fontSize='small' />
+        </IconButton>
+    )
+
+    const checkIsFalse = (
+        <IconButton title='Cancel' size='small' onClick={(): void => handleClick()}>
+            <CancelIcon color='primary' fontSize='small' />
+        </IconButton>
+    )
+
+    return (
+        <Grid item xs>
+            <Card>
+                <Grid container spacing={0}>
+                    <EditPriceCard value={value} onNumberChange={onNumberChange} />
                     <Grid item xs>
                         <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
                         <Divider />
