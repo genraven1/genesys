@@ -13,7 +13,7 @@ export default class EquipmentService {
     }
 
     static async getArmor(name: string): Promise<Armor> {
-        return await (await axios.get(Path.Armor + '/' + name)).data;
+        return await (await axios.get(Path.Armor + name)).data;
     }
 
     static async updateArmor(name: string, armor: Armor): Promise<Armor> {

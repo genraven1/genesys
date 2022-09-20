@@ -39,11 +39,44 @@ export default function EditArmor() {
         }
         return armor
     }
+
+    const onNumberChange = async (key: keyof Armor, value: number) => {
+        console.log(value)
+        const copyArmor = {...armor} as Armor
+        switch (key) {
+            case 'defense':
+                copyArmor.defense = value
+                break
+            case 'soak':
+                copyArmor.soak = value
+                break
+            case 'rarity':
+                copyArmor.rarity = value
+                break
+            case 'price':
+                console.log('Price')
+                console.log(value)
+                copyArmor.price = value
+                break;
+            case 'encumbrance':
+                copyArmor.encumbrance = value
+                break
+            case 'slot':
+            case 'name':
+            case 'description':
+            case "equipped":
+            case "restricted":
+                break;
+        }
+
+        await updateArmor(copyArmor)
+    }
     
     const onChange = async (key: keyof Armor, value: string) => {
         if (value === null || (armor !== null && armor[key] === value)) {
             return;
         }
+        console.log(value)
         const copyArmor = {...armor} as Armor
         switch (key) {
             case 'defense':
@@ -59,6 +92,8 @@ export default function EditArmor() {
                 copyArmor.rarity = Number(value)
                 break
             case 'price':
+                console.log('HERE')
+                console.log(value)
                 copyArmor.price = Number(value)
                 break;
             case "restricted":
@@ -104,7 +139,7 @@ export default function EditArmor() {
                         <EditNumberFieldCard value={getArmor(armor).soak} title={'Soak'} onChange={(value: number): void => { onChange('soak', String(value))}} min={0} max={6} />
                         <EditNumberFieldCard value={getArmor(armor).defense} title={'Defense'} onChange={(value: number): void => { onChange('defense', String(value))}} min={0} max={5} />
                         <EditNumberCheckBoxCard title={'Encumbrance'} check={getArmor(armor).equipped} value={getArmor(armor).encumbrance} checkTitle={'Equipped'} onBooleanChange={(value: boolean): void => { onChange('equipped', String(value))}}  onNumberChange={(value: number): void => { onChange('encumbrance', String(value))}}/>
-                        <EditPriceCheckBoxCard check={getArmor(armor).restricted} value={getArmor(armor).price} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
+                        <EditPriceCheckBoxCard check={getArmor(armor).restricted} value={getArmor(armor).price} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onNumberChange('price', value)}} />
                         <EditNumberFieldCard value={getArmor(armor).rarity} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
                 </Grid>
