@@ -1,6 +1,7 @@
 import {Card, CardHeader, Divider, Grid, Typography} from "@mui/material";
 import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 import {PriceValues} from "../../models/Price";
+import {useState} from "react";
 
 interface EditPriceProps {
     value: number
@@ -9,12 +10,16 @@ interface EditPriceProps {
 
 export default function EditPriceCard(props: EditPriceProps): JSX.Element {
     const {onNumberChange, value} = props
+    const [price, setPrice] = useState(value);
     let ones: number, tens: number, hundreds: number, thousands: number, tenThousands: number = 0
 
     const handleNumberChange = (priceValue: PriceValues) => {
         let update = 0
+        console.log(priceValue)
         switch (priceValue) {
             case PriceValues.ONES:
+                console.log(update)
+                console.log(value)
                 update = value
                 break
             case PriceValues.TENS:
@@ -32,8 +37,6 @@ export default function EditPriceCard(props: EditPriceProps): JSX.Element {
             default:
                 break
         }
-        console.log(update)
-        console.log(value)
         let temp = value
         tenThousands = temp/10000
         temp = temp % 10000
