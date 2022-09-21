@@ -7,7 +7,6 @@ interface Props {
     defaultValue: number,
     defaultEdit?: boolean,
     editable?: boolean,
-    onChange?: (value: number) => void,
     onCommit: (value: number) => void,
     helperText?: string,
     disabled?: boolean,
@@ -17,7 +16,7 @@ interface Props {
 }
 
 export default function InlineNumberField(props: Props): JSX.Element {
-    const { defaultValue, defaultEdit, editable, onChange, onCommit, helperText, disabled, placeholder, errorText, inputProps } = props;
+    const { defaultValue, defaultEdit, editable, onCommit, helperText, disabled, placeholder, errorText, inputProps } = props;
     const [numberValue, setNumberValue] = useState(defaultValue);
     const [edit, setEdit] = useState(defaultEdit ?? false);
     const [error, setError] = useState(false);
@@ -38,12 +37,7 @@ export default function InlineNumberField(props: Props): JSX.Element {
     }
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        let value = +event.target.value
-
-        if (onChange) {
-            onChange(value)
-            setNumberValue(value)
-        }
+        setNumberValue(+event.target.value)
     }
 
     const editElement = (
