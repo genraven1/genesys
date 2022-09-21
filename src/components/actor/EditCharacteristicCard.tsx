@@ -1,6 +1,6 @@
 import { Grid, Card, CardHeader, Divider, Typography, CardActions } from "@mui/material";
 import {Characteristic, CharacteristicType} from "../../models/actor/Characteristics";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 
 interface Props {
     characteristic: Characteristic,

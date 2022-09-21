@@ -1,6 +1,6 @@
 import Stats, {StatsType} from "../../models/actor/Stats";
 import {Card, CardActions, CardHeader, Divider, Grid, Typography} from "@mui/material";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 
 interface Props {
     stats: Stats,

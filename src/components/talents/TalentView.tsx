@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import Talent, {Activation, DefaultTalent, Ranked, TalentKey, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import { useParams } from 'react-router-dom';
-import InputTextFieldCard from '../input/InputTextFieldCard';
-import InputSelectField from '../input/InputSelectField';
+import InputTextFieldCard from '../common/InputTextFieldCard';
+import InputSelectField from '../common/InputSelectField';
 
 const RANKED_OPTIONS = rankedOptions()
 

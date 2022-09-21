@@ -1,7 +1,7 @@
 import { ClickAwayListener, TextField } from "@mui/material";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import EditField from "./EditField";
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "./GenesysDescriptionTypography";
 
 interface Props {
     defaultValue: string,

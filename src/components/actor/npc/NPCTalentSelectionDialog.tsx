@@ -1,6 +1,6 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import Nemesis from "../../../models/actor/npc/Nemesis";
-import TalentSelectionTable from "./TalentSelectionTable";
+import TalentSelectionTable from "../TalentSelectionTable";
 
 interface Props {
     nemesis: Nemesis
@@ -17,7 +17,7 @@ export default function NPCTalentSelectionDialog(props: Props) {
                 Add Talent
             </DialogTitle>
             <DialogContent>
-                <TalentSelectionTable nemesis={nemesis}/>
+                <TalentSelectionTable actor={nemesis}/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

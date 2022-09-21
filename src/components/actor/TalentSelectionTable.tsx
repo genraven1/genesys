@@ -1,5 +1,5 @@
 import {Fragment, useEffect, useState} from "react";
-import TalentService from "../../../services/TalentService";
+import TalentService from "../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -9,18 +9,17 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent from "../../../models/Talent";
-import Nemesis from "../../../models/actor/npc/Nemesis";
-import ActorService from "../../../services/ActorService";
-import {ActorTalent} from "../../../models/actor/Actor";
+import Talent from "../../models/Talent";
+import ActorService from "../../services/ActorService";
+import Actor, {ActorTalent} from "../../models/actor/Actor";
 
 interface RowProps {
     name: string
-   nemesis: Nemesis
+   actor: Actor
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {name, nemesis} = props;
+    const {name, actor} = props;
     const [talent, setTalent] = useState<Talent>()
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false);
 
@@ -36,7 +35,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
     }, [name])
 
     const addTalent = async () => {
-        await ActorService.addNemesisTalent(nemesis.name, {...talent!!} as ActorTalent)
+        await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
     }
 
     return (
@@ -54,8 +53,8 @@ function TalentNameRow(props: RowProps): JSX.Element {
     );
 }
 
-export default function TalentSelectionTable(props: {nemesis: Nemesis}) {
-    const {nemesis} = props
+export default function TalentSelectionTable(props: {actor: Actor}) {
+    const {actor} = props
     const [names, setNames] = useState<string[]>([]);
 
     useEffect(() => {
@@ -77,7 +76,7 @@ export default function TalentSelectionTable(props: {nemesis: Nemesis}) {
                 </TableHead>
                 <TableBody>
                     {names.map((name: string) => (
-                        <TalentNameRow name={name} nemesis={nemesis}/>
+                        <TalentNameRow name={name} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>
