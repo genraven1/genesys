@@ -7,31 +7,49 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Talent from '../../models/Talent';
-import TalentService from '../../services/TalentService';
 import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
 import {Button} from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { LinkProps, Link } from "react-router-dom";
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import {Armor} from "../../../models/equipment/Equipment";
+import EquipmentService from "../../../services/EquipmentService";
+import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
+import Typography from "@mui/material/Typography";
 
-function Row(props: { row: Talent }): JSX.Element {
+function Row(props: { row: Armor }): JSX.Element {
     const { row } = props;
     const { pathname } = useLocation()
     const [open, setOpen] = useState(false);
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}${row.name}`} ref={ref} {...itemProps} />
+        <Link to={`${pathname}${row.name}/edit`} ref={ref} {...itemProps} />
     )),[pathname, row.name]);
+
+    const renderPrice = (): JSX.Element => {
+        let price = ''
+        if (row.restricted) {
+            price = row.price + '(R)'
+        }
+        else {
+            price = String(row.price)
+        }
+        return (
+            <Fragment>
+                <Typography>{price}</Typography>
+            </Fragment>
+        )
+    }
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.ranked}</TableCell>
-                <TableCell>{row.activation}</TableCell>
-                <TableCell>{row.tier}</TableCell>
+                <TableCell>{row.defense}</TableCell>
+                <TableCell>{row.soak}</TableCell>
+                <TableCell>{row.encumbrance}</TableCell>
+                <TableCell>{renderPrice()}</TableCell>
+                <TableCell>{row.rarity}</TableCell>
                 <TableCell>
                     <Button component={renderLink}>Edit</Button>
                 </TableCell>
@@ -53,14 +71,14 @@ function Row(props: { row: Talent }): JSX.Element {
     );
 }
 
-export default function AllTalentsView() {
-    const [talents, setTalents] = useState<Talent[]>([]);
+export default function ViewAllArmor() {
+    const [armors, setArmors] = useState<Armor[]>([]);
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents();
-            if (!talentList) { return; }
-            setTalents(talentList);
+            const armorList = await EquipmentService.getArmors();
+            if (!armorList) { return; }
+            setArmors(armorList);
         })();
     }, []);
 
@@ -69,15 +87,17 @@ export default function AllTalentsView() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Talent Name</TableCell>
-                        <TableCell>Ranked</TableCell>
-                        <TableCell>Activation</TableCell>
-                        <TableCell>Tier</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Defense</TableCell>
+                        <TableCell>Soak</TableCell>
+                        <TableCell>Encumbrance</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Rarity</TableCell>
                         <TableCell>Edit</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {talents.map((row: Talent) => (
+                    {armors.map((row: Armor) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

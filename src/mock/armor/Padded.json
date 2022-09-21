@@ -1,0 +1,10 @@
+{
+  "defense": 0,
+  "description": "",
+  "encumbrance": {"value": 0, "worn": false},
+  "name": "Padded",
+  "price": {"value": 0, "restricted": false},
+  "rarity": 0,
+  "slot": "EquipmentSlot.Body",
+  "soak": 0
+}
