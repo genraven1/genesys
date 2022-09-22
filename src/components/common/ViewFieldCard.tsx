@@ -1,7 +1,8 @@
+
+import InputNumberRangeSelectField from "./InputNumberRangeSelect";
+import InlineTextField from "./InlineTextField";
 import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./GenesysDescriptionTypography";
-import InlineTextField from "../input/InlineTextField";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 
 interface ViewProps {
     name: string
