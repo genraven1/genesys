@@ -1,7 +1,7 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {Path} from '../../services/Path';
+import {LorePath, Path} from '../../services/Path';
 import AllTalentsView from '../talents/AllTalentsViewTable';
 import TalentView from '../talents/TalentView';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
@@ -18,8 +18,9 @@ import EditArmor from '../equipment/armor/EditArmor';
 import ViewArmor from '../equipment/armor/ViewArmor';
 import * as React from 'react';
 import Dashboard from "./Dashboard";
-import LoreMenu from "../lore/LoreMenu";
+import LoreMenu from "../lore/common/LoreMenu";
 import {Lore} from "../../models/lore/Lore";
+import {ViewAllLore} from "../lore/common/ViewAllLore";
 
 export default function App() {
 
@@ -28,6 +29,7 @@ export default function App() {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
+                    <Route path="/" element={<Navigate replace to="/home" />} />
                     <Route path={Path.Home} element={<Dashboard/>} />
                     <Route path={Path.Talent} element={<AllTalentsView />} />
                     <Route path={Path.Talent + ':name'} element={<TalentView />} />
@@ -43,7 +45,9 @@ export default function App() {
                     <Route path={Path.Armor} element={<ViewAllArmor/>} />
                     <Route path={Path.Armor + ':name/edit'} element={<EditArmor/>} />
                     <Route path={Path.Armor + ':name/view'} element={<ViewArmor/>} />
-                    <Route path={Path.Organization} element={<LoreMenu title={Lore.ORGANIZATION}/>} />
+                    // Lore Routes
+                    <Route path={Path.Lore} element={<ViewAllLore />} />
+                    <Route path={LorePath.Organization} element={<LoreMenu lore={Lore.ORGANIZATION}/>} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

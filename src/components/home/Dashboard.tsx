@@ -1,17 +1,25 @@
-import {Path} from "../../services/Path";
+import {LorePath, Path} from "../../services/Path";
 import {useNavigate} from "react-router-dom";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {Lore} from "../../models/lore/Lore";
 
 export default function Dashboard(): JSX.Element {
+    let navigate = useNavigate()
+
+    const onClick = () => {
+        navigate(Path.Lore)
+    }
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={'Dashboard'} />
             <CardContent>
                 <Grid container justifyContent={'center'}>
+                    <Button color='primary' variant='contained' onClick={onClick}>Lore</Button>
+                </Grid>
+                <Grid container justifyContent={'center'}>
                     <Grid item xs>
-                        <DashboardButton path={Path.Organization} title={Lore.ORGANIZATION} />
+                        <DashboardButton path={LorePath.Organization} title={Lore.ORGANIZATION} />
                     </Grid>
                 </Grid>
             </CardContent>
@@ -20,7 +28,7 @@ export default function Dashboard(): JSX.Element {
 }
 
 interface DashboardProps {
-    path: Path
+    path: LorePath
     title: string
 }
 
