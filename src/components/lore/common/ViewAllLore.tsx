@@ -15,7 +15,7 @@ export function ViewAllLore(): JSX.Element {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell colSpan={2} style={{textAlign: "center"}}>Lore</TableCell>
+                        <TableCell colSpan={3} style={{textAlign: "center"}}>Lore</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableHead>
