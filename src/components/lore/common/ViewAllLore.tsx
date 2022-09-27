@@ -22,6 +22,7 @@ export function ViewAllLore(): JSX.Element {
                     <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Type</TableCell>
+                        <TableCell>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

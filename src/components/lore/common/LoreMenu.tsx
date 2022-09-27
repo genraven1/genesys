@@ -1,13 +1,17 @@
-import {Card, CardActionArea, CardHeader} from "@mui/material";
+import {Button, Card, CardActionArea, CardHeader} from "@mui/material";
 import {ViewAllLoreOfType} from "./ViewAllLore";
 import {Lore} from "../../../models/lore/Lore";
+import {useNavigate} from "react-router-dom";
+import {LorePath} from "../../../services/Path";
 
-export interface Props {
+export interface MenuProps {
     lore: Lore
+    path: LorePath
 }
 
-export default function LoreMenu(props: Props): JSX.Element {
-    const {lore} = props
+export default function LoreMenu(props: MenuProps): JSX.Element {
+    const {lore,path} = props
+
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={lore}/>
@@ -15,5 +19,16 @@ export default function LoreMenu(props: Props): JSX.Element {
                 <ViewAllLoreOfType lore={lore} />
             </CardActionArea>
         </Card>
+    )
+}
+
+function CreateButton(): JSX.Element {
+    let navigate = useNavigate()
+
+    const onCreate = (path: LorePath) => {
+        navigate(path + 'create')
+    }
+    return (
+        <Button></Button>
     )
 }

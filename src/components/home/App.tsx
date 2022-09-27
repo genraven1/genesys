@@ -47,7 +47,7 @@ export default function App() {
                     <Route path={Path.Armor + ':name/view'} element={<ViewArmor/>} />
                     // Lore Routes
                     <Route path={Path.Lore} element={<ViewAllLore />} />
-                    <Route path={LorePath.Organization} element={<LoreMenu lore={Lore.ORGANIZATION}/>} />
+                    <Route path={LorePath.Organization} element={<LoreMenu lore={Lore.ORGANIZATION} path={LorePath.Organization}/>} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
