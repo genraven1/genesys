@@ -1,13 +1,14 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import * as React from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import * as React from 'react';
+import EditIcon from '@mui/icons-material/Edit';
 import EquipmentService from "../../../services/EquipmentService";
-import {Path} from "../../../services/Path";
-import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
+import {Armor, DefaultArmor} from "../../../models/equipment/Equipment";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
+import {Path} from "../../../services/Path";
+
 
 export default function ViewArmor() {
     const { name } = useParams<{ name: string }>();

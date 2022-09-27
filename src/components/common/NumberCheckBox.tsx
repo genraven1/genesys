@@ -1,8 +1,8 @@
 import {Card, Divider, Grid, IconButton, Typography} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
-import InputNumberRangeSelectField from "../input/InputNumberRangeSelect";
 import EditPriceCard from "./EditPriceCard";
+import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 
 interface ViewProps {
     title: string

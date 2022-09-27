@@ -1,7 +1,8 @@
-import { ClickAwayListener, TextField } from "@mui/material";
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
-import EditField from "../input/EditField";
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import {ChangeEvent, InputHTMLAttributes, useState} from "react";
+import EditField from "./EditField";
+import GenesysDescriptionTypography from "./GenesysDescriptionTypography";
+import {ClickAwayListener, TextField} from "@mui/material";
+
 
 interface Props {
     defaultValue: number,

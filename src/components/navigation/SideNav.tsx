@@ -34,7 +34,7 @@ export default function SideNav() {
                         <MenuIcon />
                     </IconButton>
                     <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                        <ListMenuItemLink name='Home' to='' />
+                        <ListMenuItemLink name='Home' to={Path.Home} />
                         <ExpandedList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent} dialogTitle={'Create Talent'} onClick={(): void => setOpenTalentCreationDialog(true)} />
                         <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
                         <ExpandedList header={'Armor'} viewTitle={'View All Armor'} to={Path.Armor} dialogTitle={'Create Armor'} onClick={(): void => setOpenEquipmentCreationDialog(true)} />
