@@ -2,7 +2,7 @@ import {LorePath, Path} from "../../services/Path";
 import {useNavigate} from "react-router-dom";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import {Lore} from "../../models/lore/Lore";
+import {LoreType} from "../../models/lore/Lore";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
@@ -19,7 +19,7 @@ export default function Dashboard(): JSX.Element {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item xs>
-                        <DashboardButton path={LorePath.Organization} title={Lore.ORGANIZATION} />
+                        <DashboardButton path={LorePath.Organization} title={LoreType.ORGANIZATION} />
                     </Grid>
                 </Grid>
             </CardContent>

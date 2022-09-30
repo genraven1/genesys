@@ -19,8 +19,10 @@ import ViewArmor from '../equipment/armor/ViewArmor';
 import * as React from 'react';
 import Dashboard from "./Dashboard";
 import LoreMenu from "../lore/common/LoreMenu";
-import {Lore} from "../../models/lore/Lore";
+import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
+import OrganizationView from "../lore/organization/OrganizationView";
+import OrganizationEdit from "../lore/organization/OrganizationEdit";
 
 export default function App() {
 
@@ -47,7 +49,9 @@ export default function App() {
                     <Route path={Path.Armor + ':name/view'} element={<ViewArmor/>} />
                     // Lore Routes
                     <Route path={Path.Lore} element={<ViewAllLore />} />
-                    <Route path={LorePath.Organization} element={<LoreMenu lore={Lore.ORGANIZATION} path={LorePath.Organization}/>} />
+                    <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />
+                    <Route path={LorePath.Organization + ':name/view'} element={<OrganizationView/>} />
+                    <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationEdit/>} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

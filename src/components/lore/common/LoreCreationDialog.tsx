@@ -1,4 +1,4 @@
-import {Lore} from "../../../models/lore/Lore";
+import {LoreType} from "../../../models/lore/Lore";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LorePath} from "../../../services/Path";
@@ -9,7 +9,7 @@ import LoreService from "../../../services/LoreService";
 interface Props {
     open: boolean
     onClose: () => void
-    lore: Lore
+    lore: LoreType
     path: LorePath
 }
 
