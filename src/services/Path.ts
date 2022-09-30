@@ -10,5 +10,5 @@ export enum Path {
 }
 
 export enum LorePath {
-    Organization = '/organization/'
+    Organization = '/lore/organizations/'
 }
