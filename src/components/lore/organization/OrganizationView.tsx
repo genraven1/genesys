@@ -1,11 +1,12 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import Organization, {DefaultOrganization} from "../../../models/lore/Organization";
+import {Organization, DefaultOrganization} from "../../../models/lore/Organization";
 import {LorePath} from "../../../services/Path";
-import {Card, CardContent, CardHeader, Divider, IconButton} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";
 import LoreService from "../../../services/LoreService";
+import {ViewFieldCard, ViewNumberFieldCard} from "../../common/ViewFieldCard";
 
 export default function OrganizationView() {
     const { name } = useParams<{ name: string }>()
@@ -53,7 +54,14 @@ export default function OrganizationView() {
             </CardHeader>
             <Divider />
             <CardContent>
-
+                <Grid container justifyContent={'center'}>
+                    <Grid container spacing={10}>
+                        <ViewFieldCard name={'Type of Organization'} value={getOrganization(organization).orgType} />
+                    </Grid>
+                    <Grid container spacing={10}>
+                        <ViewNumberFieldCard name={'Founding Date'} value={getOrganization(organization).founded} />
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
     )

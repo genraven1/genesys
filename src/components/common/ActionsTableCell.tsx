@@ -23,10 +23,10 @@ export default function ActionsTableCell(props: Props): JSX.Element {
 
     return  (
         <Box component='span'>
-            <IconButton title='View' size='small' onClick={handleView}>
+            <IconButton title='View' size='small' component={handleView}>
                 <PreviewIcon color='primary' fontSize='small' />
             </IconButton>
-            <IconButton title='Edit' size='small' onClick={handleEdit}>
+            <IconButton title='Edit' size='small' component={handleEdit}>
                 <EditIcon color='primary' fontSize='small' />
             </IconButton>
         </Box>

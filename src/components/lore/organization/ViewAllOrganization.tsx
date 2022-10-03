@@ -1,10 +1,8 @@
-import Organization from "../../../models/lore/Organization";
-import {Link, LinkProps, useLocation} from "react-router-dom";
-import {forwardRef, Fragment, useEffect, useMemo, useState} from "react";
+import {Organization} from "../../../models/lore/Organization";
+import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {Button} from "@mui/material";
 import {LorePath} from "../../../services/Path";
 import LoreService from "../../../services/LoreService";
 import TableContainer from "@mui/material/TableContainer";
@@ -12,21 +10,17 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
+import ActionsTableCell from "../../common/ActionsTableCell";
 
 function OrganizationRow(props: { row: Organization }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}${row.name}/edit`} ref={ref} {...itemProps} />
-    )),[pathname, row.name])
+    const { row } = props
 
     return (
         <Fragment>
             <TableRow>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>
-                    <Button component={renderLink}>Edit</Button>
+                    <ActionsTableCell name={row.name} />
                 </TableCell>
             </TableRow>
         </Fragment>
@@ -39,7 +33,7 @@ interface Props {
 
 export function ViewAllOrganizations(props: Props): JSX.Element {
     const {path} = props
-    const [organizations, setOrganizations] = useState<Organization[]>([]);
+    const [organizations, setOrganizations] = useState<Organization[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {

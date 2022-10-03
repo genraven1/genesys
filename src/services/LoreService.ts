@@ -1,6 +1,6 @@
 import axios from "axios";
 import {LorePath, Path} from "./Path";
-import Organization from "../models/lore/Organization";
+import {Organization} from "../models/lore/Organization";
 import Lore from "../models/lore/Lore";
 
 
@@ -11,11 +11,11 @@ export default class LoreService {
     }
 
     static async getLore(name: string, path: LorePath): Promise<any> {
-        return await axios.post(path + name);
+        return (await axios.get(path + name)).data
     }
 
     static async getAllLore(): Promise<Lore[]> {
-        return await axios.get(Path.Lore);
+        return (await axios.get(Path.Lore)).data
     }
 
     static async getAllLoreOfType(path: LorePath): Promise<any[]> {

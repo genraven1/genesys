@@ -3,6 +3,7 @@ import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import InlineTextField from "./InlineTextField";
 import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./GenesysDescriptionTypography";
+import Typography from "@mui/material/Typography";
 
 interface ViewProps {
     name: string
@@ -17,6 +18,24 @@ export function ViewFieldCard(props: ViewProps): JSX.Element {
                 <CardHeader title={name} style={{ textAlign: 'center' }} />
                 <Divider />
                 <GenesysDescriptionTypography text={value}/>
+            </Card>
+        </Grid>
+    )
+}
+
+interface ViewNumberProps {
+    name: string
+    value: number
+}
+
+export function ViewNumberFieldCard(props: ViewNumberProps): JSX.Element {
+    const {name, value} = props
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={name} style={{ textAlign: 'center' }} />
+                <Divider />
+                <Typography>{value}</Typography>
             </Card>
         </Grid>
     )
