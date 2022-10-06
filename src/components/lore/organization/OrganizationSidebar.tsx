@@ -13,12 +13,12 @@ export default function OrganizationSidebar(props: Props): JSX.Element {
     return (
         <Fragment>
             <Typography>{'Organization Type'}</Typography>
-            <Typography>{organization.orgType}</Typography>
+            <Typography>{organization?.orgType}</Typography>
             <Typography>{'Founding Date'}</Typography>
-            <Typography>{organization.founded}</Typography>
+            <Typography>{organization?.founded}</Typography>
             <Typography>{'Alternative Name'}</Typography>
-            <Typography>{organization.nickname}</Typography>
-            <Typography>{'Members are referred to as ' + organization.membersName}</Typography>
+            <Typography>{organization?.nickname}</Typography>
+            <Typography>{'Members are referred to as ' + organization?.membersName}</Typography>
         </Fragment>
     )
 }

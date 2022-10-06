@@ -24,7 +24,7 @@ export default function OrganizationView(props: Props) {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={organization.name}
+                title={name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

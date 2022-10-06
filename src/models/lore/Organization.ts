@@ -1,4 +1,4 @@
-import Lore, {LoreType} from "./Lore";
+import Lore from "./Lore";
 
 export enum OrgType {
     Religious = 'Religious',
@@ -24,18 +24,4 @@ export enum OrgKey {
     disbanded = 'disbanded',
     nickname = 'nickname',
     membersName = 'membersName'
-}
-
-export class DefaultOrganization {
-    static create(): Organization {
-        return {
-            name: '',
-            type: LoreType.ORGANIZATION,
-            orgType: OrgType.Religious,
-            founded: 0,
-            disbanded: 0,
-            nickname: '',
-            membersName: ''
-        }
-    }
 }
