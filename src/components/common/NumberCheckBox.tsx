@@ -1,7 +1,7 @@
 import {Card, Divider, Grid, IconButton, Typography} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
-import EditPriceCard from "./EditPriceCard";
+import EditNumberCard from "./EditNumberCard";
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 
 interface ViewProps {
@@ -118,7 +118,7 @@ export function EditPriceCheckBoxCard(props: EditPriceProps): JSX.Element {
             <Card>
                 <Grid container spacing={0}>
                     <Grid item xs>
-                        <EditPriceCard value={value} onChange={onNumberChange} />
+                        <EditNumberCard value={value} onChange={onNumberChange} title={'Price'}/>
                     </Grid>
                     <Grid item xs>
                         <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>

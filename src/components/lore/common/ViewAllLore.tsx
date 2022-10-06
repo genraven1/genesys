@@ -1,4 +1,3 @@
-import {Lore} from "../../../models/lore/Lore";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -22,29 +21,6 @@ export function ViewAllLore(): JSX.Element {
                     <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Type</TableCell>
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-
-                </TableBody>
-            </Table>
-        </TableContainer>
-    )
-}
-
-interface Props {
-    lore: Lore
-}
-
-export function ViewAllLoreOfType(props: Props): JSX.Element {
-    const {lore} = props
-    return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
                         <TableCell>Actions</TableCell>
                     </TableRow>
                 </TableHead>

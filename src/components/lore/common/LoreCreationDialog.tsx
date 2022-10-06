@@ -1,4 +1,4 @@
-import {Lore} from "../../../models/lore/Lore";
+import {LoreType} from "../../../models/lore/Lore";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LorePath} from "../../../services/Path";
@@ -9,14 +9,14 @@ import LoreService from "../../../services/LoreService";
 interface Props {
     open: boolean
     onClose: () => void
-    lore: Lore
+    lore: LoreType
     path: LorePath
 }
 
 export default function LoreCreationDialog(props: Props): JSX.Element {
     const {open,onClose,lore,path} = props
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         await LoreService.createLore(name, path)
@@ -26,7 +26,7 @@ export default function LoreCreationDialog(props: Props): JSX.Element {
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     const getTitle = ():string => {

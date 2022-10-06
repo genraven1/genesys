@@ -68,7 +68,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 export default function ViewAllArmor() {
