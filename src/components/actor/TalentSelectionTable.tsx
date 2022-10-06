@@ -21,7 +21,7 @@ interface RowProps {
 function TalentNameRow(props: RowProps): JSX.Element {
     const {name, actor} = props;
     const [talent, setTalent] = useState<Talent>()
-    const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false);
+    const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     useEffect(() => {
         if (!name) {

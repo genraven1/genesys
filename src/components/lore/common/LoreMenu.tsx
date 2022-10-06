@@ -3,8 +3,8 @@ import {LoreType} from "../../../models/lore/Lore";
 import {LorePath} from "../../../services/Path";
 import * as React from "react";
 import {useState} from "react";
-import LoreCreationDialog from "./LoreCreationDialog";
 import {ViewAllOrganizations} from "../organization/ViewAllOrganization";
+import LoreCreationDialog from "./LoreCreationDialog";
 
 export interface MenuProps {
     lore: LoreType
@@ -25,7 +25,7 @@ export default function LoreMenu(props: MenuProps): JSX.Element {
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={lore} action={<Button color='primary' variant='contained' onClick={(): void => setOpenLoreCreationDialog(true)}>CREATE</Button>}/>
-            {openLoreCreationDialog && <LoreCreationDialog open={openLoreCreationDialog} onClose={(): void => setOpenLoreCreationDialog(false)} lore={lore} path={path}/>}
+            {openLoreCreationDialog && <LoreCreationDialog open={openLoreCreationDialog} onClose={(): void => setOpenLoreCreationDialog(false)} lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>}
             <CardContent>
                 {getLoreTable(lore)}
             </CardContent>

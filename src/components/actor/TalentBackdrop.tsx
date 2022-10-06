@@ -13,11 +13,8 @@ export default function TalentBackdrop(props: Props) {
     const {talent, open, onClose} = props
 
     return (
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open} onClick={onClose}
-            >
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
                 <TalentViewOnly talent={talent}/>
             </Backdrop>
-    );
+    )
 }

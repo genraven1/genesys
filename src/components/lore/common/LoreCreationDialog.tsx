@@ -15,8 +15,8 @@ interface Props {
 
 export default function LoreCreationDialog(props: Props): JSX.Element {
     const {open,onClose,lore,path} = props
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         await LoreService.createLore(name, path)
@@ -26,7 +26,7 @@ export default function LoreCreationDialog(props: Props): JSX.Element {
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     const getTitle = ():string => {
