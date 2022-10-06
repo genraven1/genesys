@@ -6,22 +6,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import {Organization, OrgKey, OrgType} from "../../../models/lore/Organization";
 import LoreService from "../../../services/LoreService";
-import InputSelectField from "../../common/InputSelectField";
+import InputSelectField, {Option} from "../../common/InputSelectField";
 import EditNumberCard from "../../common/EditNumberCard";
 import InputTextFieldCard from "../../common/InputTextFieldCard";
 
-const ORG_TYPE_OPTIONS = orgTypeOptions()
-
-function orgTypeOptions() {
-    const array = []
-
-    for (const [key, value] of Object.entries(OrgType)) {
-        if (!Number.isNaN(Number(key))) {
-            continue
-        }
-        array.push({ value: key, label: value })
-    }
-    return array
+const getOrgTypes = (): Option[] => {
+    return Object.values(OrgType).map((value) => ({value}))
 }
 
 interface Props {
@@ -30,7 +20,7 @@ interface Props {
 
 export default function OrganizationEdit(props: Props) {
     const {org} = props
-    const { name } = useParams<{ name: string }>()
+    const {name} = useParams<{ name: string }>()
     const path = LorePath.Organization
     const [organization, setOrganization] = useState(org)
     const [errors, setErrors] = useState({} as any)
@@ -89,7 +79,7 @@ export default function OrganizationEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={organization.name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}>
             </CardHeader>
@@ -101,21 +91,21 @@ export default function OrganizationEdit(props: Props) {
                             <Card>
                                 <CardHeader title={'Type of Organization'} style={{ textAlign: 'center' }} />
                                 <Divider />
-                                <InputSelectField defaultValue={organization?.orgType!!} options={ORG_TYPE_OPTIONS} onCommit={(value: string): void => { onChange(OrgKey.orgType, value) }} />
+                                <InputSelectField defaultValue={organization.orgType} options={getOrgTypes()} onCommit={(value: string): void => { onChange(OrgKey.orgType, value) }} />
                             </Card>
                         </Grid>
                     </Grid>
                     <Grid container spacing={10}>
                         <Grid item xs>
-                            <EditNumberCard title={'Founding Year'} value={organization?.founded!!} onChange={(value: number): void => { onNumberChange(OrgKey.founded, value)}} />
+                            <EditNumberCard title={'Founding Year'} value={organization.founded} onChange={(value: number): void => { onNumberChange(OrgKey.founded, value)}} />
                         </Grid>
                     </Grid>
                     <Grid container spacing={10}>
                         <Grid item xs>
-                            <InputTextFieldCard defaultValue={organization?.nickname!!} onCommit={(value: string): void => { onChange(OrgKey.nickname, value) }} title={'Alternative Name'}  helperText={'Other Names the Organization goes by'} placeholder={'Pirates Republic'}/>
+                            <InputTextFieldCard defaultValue={organization.nickname} onCommit={(value: string): void => { onChange(OrgKey.nickname, value) }} title={'Alternative Name'}  helperText={'Other Names the Organization goes by'} placeholder={'Pirates Republic'}/>
                         </Grid>
                         <Grid item xs>
-                            <InputTextFieldCard defaultValue={organization?.membersName!!} onCommit={(value: string): void => { onChange(OrgKey.membersName, value) }} title={'Name of Members'} helperText={'How members are referred to'} placeholder={'Pirates'} />
+                            <InputTextFieldCard defaultValue={organization.membersName} onCommit={(value: string): void => { onChange(OrgKey.membersName, value) }} title={'Name of Members'} helperText={'How members are referred to'} placeholder={'Pirates'} />
                         </Grid>
                     </Grid>
                 </Grid>

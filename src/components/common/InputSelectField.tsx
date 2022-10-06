@@ -2,9 +2,9 @@ import { ClickAwayListener, MenuItem, TextField, Typography } from "@mui/materia
 import { ChangeEvent, useState } from "react";
 import EditField from "./EditField";
 
-interface Option {
+export interface Option {
     value: string
-    label: string
+    label?: string
 }
 
 interface Props {
