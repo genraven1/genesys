@@ -5,18 +5,18 @@ import CheckIcon from '@mui/icons-material/Check';
 import { ReactNode } from "react";
 
 interface Props {
-    edit: boolean,
-    editable?: boolean,
-    viewElement: ReactNode | null,
-    editElement: ReactNode | null,
-    onEdit: () => void,
-    onCancel: () => void,
-    onCommit: () => void,
+    edit: boolean
+    editable?: boolean
+    viewElement: ReactNode | null
+    editElement: ReactNode | null
+    onEdit: () => void
+    onCancel: () => void
+    onCommit: () => void
 }
 
 export default function EditField(props: Props): JSX.Element {
-    const { edit, editable, viewElement, editElement, onEdit, onCancel, onCommit } = props;
-    let isEditable = editable ?? true;
+    const { edit, editable, viewElement, editElement, onEdit, onCancel, onCommit } = props
+    let isEditable = editable ?? true
 
     const editButton = (
         <IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
