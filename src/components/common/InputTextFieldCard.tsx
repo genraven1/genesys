@@ -3,12 +3,12 @@ import InlineTextField from "./InlineTextField"
 import InlineTextRowsField from "./InlineTextRowsField";
 
 interface TextProps {
-    defaultValue: string,
-    onCommit: (value: string) => void,
-    title: string,
-    helperText: string,
-    placeholder: string,
-    errorText?: string,
+    defaultValue: string
+    onCommit: (value: string) => void
+    title: string
+    helperText: string
+    placeholder: string
+    errorText?: string
 }
 
 export function InputTextFieldCard(props: TextProps): JSX.Element {

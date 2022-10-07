@@ -9,7 +9,6 @@ import NemesisEdit from '../actor/npc/nemesis/NemesisEdit';
 import NemesisView from '../actor/npc/nemesis/NemesisView';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import ViewAllSkills from '../skills/ViewAllSkills';
-import SkillView from '../skills/SkillView';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import RivalView from '../actor/npc/rival/RivalView';
 import ViewAllArmor from '../equipment/armor/ViewAllArmor';
@@ -22,6 +21,7 @@ import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
+import SkillWorkflow from "../skills/SkillWorkflow";
 
 export default function App() {
 
@@ -41,7 +41,8 @@ export default function App() {
                     <Route path={Path.Nemesis + ':name/view'} element={<NemesisView />} />
                     <Route path={Path.Nemesis} element={<AllNemesesView />} />
                     <Route path={Path.Skills} element={<ViewAllSkills />} />
-                    <Route path={Path.Skills + ':name'} element={<SkillView />} />
+                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
                     <Route path={Path.Rival} element={<AllRivalsView />} />
                     <Route path={Path.Rival + ':name'} element={<RivalView />} />
                     <Route path={Path.Armor} element={<ViewAllArmor/>} />
