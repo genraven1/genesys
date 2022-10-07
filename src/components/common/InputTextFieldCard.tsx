@@ -1,7 +1,8 @@
 import { Card, CardHeader, Divider, Grid } from "@mui/material"
 import InlineTextField from "./InlineTextField"
+import InlineTextRowsField from "./InlineTextRowsField";
 
-interface Props {
+interface TextProps {
     defaultValue: string,
     onCommit: (value: string) => void,
     title: string,
@@ -10,7 +11,7 @@ interface Props {
     errorText?: string,
 }
 
-export default function InputTextFieldCard(props: Props): JSX.Element {
+export function InputTextFieldCard(props: TextProps): JSX.Element {
     const { defaultValue, onCommit, title, helperText, placeholder, errorText } = props;
     return (
         <Grid item xs>
@@ -18,6 +19,29 @@ export default function InputTextFieldCard(props: Props): JSX.Element {
                 <CardHeader title={title} style={{ textAlign: 'center' }} />
                 <Divider />
                 <InlineTextField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={helperText} placeholder={placeholder} errorText={errorText} />
+            </Card>
+        </Grid>
+    )
+}
+
+interface RowProps {
+    defaultValue: string
+    onCommit: (value: string) => void
+    title: string
+    helperText: string
+    placeholder: string
+    errorText?: string
+    rows: number
+}
+
+export function InputTextRowsFieldCard(props: RowProps): JSX.Element {
+    const { defaultValue, onCommit, title, helperText, placeholder, errorText, rows } = props;
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <Divider />
+                <InlineTextRowsField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={helperText} placeholder={placeholder} errorText={errorText} rows={rows}/>
             </Card>
         </Grid>
     )

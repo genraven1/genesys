@@ -36,16 +36,3 @@ export enum TalentKey {
     Summary= 'summary',
     Description= 'description'
 }
-
-export class DefaultTalent {
-    static create(): Talent {
-        return {
-            name: '',
-            ranked: Ranked.No,
-            activation: Activation.Passive,
-            tier: Tier.First,
-            summary: '',
-            description: ''
-        };
-    }
-}

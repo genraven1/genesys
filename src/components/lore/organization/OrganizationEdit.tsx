@@ -8,7 +8,7 @@ import {Organization, OrgKey, OrgType} from "../../../models/lore/Organization";
 import LoreService from "../../../services/LoreService";
 import InputSelectField, {Option} from "../../common/InputSelectField";
 import EditNumberCard from "../../common/EditNumberCard";
-import InputTextFieldCard from "../../common/InputTextFieldCard";
+import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 
 const getOrgTypes = (): Option[] => {
     return Object.values(OrgType).map((value) => ({value}))

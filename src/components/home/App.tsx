@@ -3,7 +3,6 @@ import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {LorePath, Path} from '../../services/Path';
 import AllTalentsView from '../talents/AllTalentsViewTable';
-import TalentView from '../talents/TalentView';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import PlayerView from '../actor/player/PlayerView';
 import NemesisEdit from '../actor/npc/nemesis/NemesisEdit';
@@ -22,6 +21,7 @@ import LoreMenu from "../lore/common/LoreMenu";
 import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
+import TalentWorkflow from "../talents/TalentWorkflow";
 
 export default function App() {
 
@@ -33,7 +33,8 @@ export default function App() {
                     <Route path="/" element={<Navigate replace to="/home" />} />
                     <Route path={Path.Home} element={<Dashboard/>} />
                     <Route path={Path.Talent} element={<AllTalentsView />} />
-                    <Route path={Path.Talent + ':name'} element={<TalentView />} />
+                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow />} />
                     <Route path={Path.Player} element={<ViewAllPlayers />} />
                     <Route path={Path.Player + ':name'} element={<PlayerView />} />
                     <Route path={Path.Nemesis + ':name/edit'} element={<NemesisEdit />} />

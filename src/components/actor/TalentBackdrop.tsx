@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import TalentViewOnly from "../talents/TalentViewOnly";
+import TalentView from "../talents/TalentView";
 import Talent from "../../models/Talent";
 
 interface Props {
@@ -14,7 +14,7 @@ export default function TalentBackdrop(props: Props) {
 
     return (
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-                <TalentViewOnly talent={talent}/>
+                <TalentView talent={talent}/>
             </Backdrop>
     )
 }
