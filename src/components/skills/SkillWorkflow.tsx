@@ -3,6 +3,7 @@ import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import {useLocation, useParams} from "react-router-dom";
 import SkillEdit from "./SkillEdit";
+import SkillView from "./SkillView";
 
 
 function useFetchSkill(name: string): Skill {
@@ -26,7 +27,7 @@ export default function SkillWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <Fragment/>
+            return <SkillView skill={skill} />
         }
         else if (pathname.endsWith('/edit')) {
             return <SkillEdit sk={skill}/>
