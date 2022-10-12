@@ -20,7 +20,7 @@ export default function LoreCreationDialog(props: Props): JSX.Element {
 
     const handleCreate = async (): Promise<void> => {
         await LoreService.createLore(name, path)
-        navigate(path + name + '/edit')
+        navigate(path + name + '/view')
         onClose()
     }
 

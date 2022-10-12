@@ -2,33 +2,32 @@ import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextFiel
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import TalentService from "../../services/TalentService";
+import {Path} from "../../services/Path";
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
+    open: boolean
+    onClose: () => void
 }
 
 export default function TalentDialog(props: Props) {
-    const { open, onClose } = props;
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const {open,onClose} = props
+    const [name,setName] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await TalentService.createTalent(name);
-        navigate('/talents/' + name);
+        await TalentService.createTalent(name)
+        navigate(Path.Talent + name  + '/edit')
         onClose()
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>
-                Name New Talent
-            </DialogTitle>
+            <DialogTitle>Name New Talent</DialogTitle>
             <DialogContentText>
                 <TextField onChange={onChange} value={name} required/>
             </DialogContentText>

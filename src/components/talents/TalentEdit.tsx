@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import { useState } from 'react';
 import Talent, {Activation, Ranked, TalentKey, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
@@ -7,6 +7,8 @@ import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import {Option} from '../common/InputSelectField';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
+import CheckIcon from "@mui/icons-material/Check";
+import * as React from "react";
 
 const getRankedOptions = (): Option[] => {
     return Object.values(Ranked).map((value) => ({value}))
@@ -64,7 +66,10 @@ export default function TalentEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={name} />
+            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                <CheckIcon color='primary' fontSize='small' />
+            </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>

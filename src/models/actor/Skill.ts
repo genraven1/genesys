@@ -15,17 +15,6 @@ export enum SkillType {
     Knowledge = 'Knowledge'
 }
 
-export class DefaultSkill {
-    static create(): Skill {
-        return {
-            active: false,
-            characteristic: CharacteristicType.Brawn,
-            name: '',
-            type: SkillType.General
-        }
-    }
-}
-
 export enum SkillKey {
     Characteristic ='characteristic',
     Active = 'active',
