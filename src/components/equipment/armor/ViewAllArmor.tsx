@@ -7,11 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import {Button} from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import { LinkProps, Link } from "react-router-dom";
 import {Armor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
@@ -19,13 +16,8 @@ import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/ActionsTableCell";
 
 function Row(props: { row: Armor }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-    const [open, setOpen] = useState(false);
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}${row.name}/edit`} ref={ref} {...itemProps} />
-    )),[pathname, row.name]);
+    const { row } = props
+    const [open, setOpen] = useState(false)
 
     const renderPrice = (): JSX.Element => {
         let price = ''
@@ -71,15 +63,15 @@ function Row(props: { row: Armor }): JSX.Element {
 }
 
 export default function ViewAllArmor() {
-    const [armors, setArmors] = useState<Armor[]>([]);
+    const [armors, setArmors] = useState<Armor[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const armorList = await EquipmentService.getArmors();
-            if (!armorList) { return; }
-            setArmors(armorList);
-        })();
-    }, []);
+            const armorList = await EquipmentService.getArmors()
+            if (!armorList) { return }
+            setArmors(armorList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
