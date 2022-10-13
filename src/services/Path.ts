@@ -6,6 +6,7 @@ export enum Path {
     Talent = '/talents/',
     Skills = '/skills/',
     Armor = '/equipment/armor/',
+    Weapon = 'equipment/weapon/',
     Lore = '/lore',
 }
 
