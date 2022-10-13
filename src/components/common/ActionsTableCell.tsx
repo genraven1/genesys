@@ -10,7 +10,7 @@ interface Props {
 
 export default function ActionsTableCell(props: Props): JSX.Element {
     const {name} = props
-    const { pathname } = useLocation()
+    const {pathname} = useLocation()
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
         <Link to={`${pathname}${name}/view`} ref={ref} {...itemProps} />

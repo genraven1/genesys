@@ -7,30 +7,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import { Button } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import { LinkProps, Link } from "react-router-dom";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from '../../../../services/ActorService'
+import ActionsTableCell from "../../../common/ActionsTableCell";
 
 function Row(props: { row: Nemesis }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-    const [open, setOpen] = useState(false);
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
-    )),[pathname, row.name]);
+    const { row } = props
+    const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>
-                    <Button component={renderLink}>Edit</Button>
-                </TableCell>
+                <ActionsTableCell name={row.name}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -45,19 +36,19 @@ function Row(props: { row: Nemesis }): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 export default function AllNemesesView() {
-    const [nemeses, setNemeses] = useState<Nemesis[]>([]);
+    const [nemeses, setNemeses] = useState<Nemesis[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const nemesisList = await ActorService.getNemeses();
-            if (!nemesisList) { return; }
-            setNemeses(nemesisList);
-        })();
-    }, []);
+            const nemesisList = await ActorService.getNemeses()
+            if (!nemesisList) { return }
+            setNemeses(nemesisList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
@@ -75,5 +66,5 @@ export default function AllNemesesView() {
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }

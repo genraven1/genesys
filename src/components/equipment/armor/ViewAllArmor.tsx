@@ -16,6 +16,7 @@ import {Armor} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
+import ActionsTableCell from "../../common/ActionsTableCell";
 
 function Row(props: { row: Armor }): JSX.Element {
     const { row } = props;
@@ -50,9 +51,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
-                <TableCell>
-                    <Button component={renderLink}>Edit</Button>
-                </TableCell>
+                <ActionsTableCell name={row.name} />
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
