@@ -12,15 +12,15 @@ interface Props {
 }
 
 export default function CreateEquipmentDialog(props: Props) {
-    const { open, onClose, type } = props;
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const { open, onClose, type } = props
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case EquipmentType.Armor:
-                await EquipmentService.createArmor(name);
-                navigate(Path.Armor + name + '/edit');
+                await EquipmentService.createArmor(name)
+                navigate(Path.Armor + name + '/view')
                 break
             case EquipmentType.Weapon:
             case EquipmentType.Gear:
@@ -31,7 +31,7 @@ export default function CreateEquipmentDialog(props: Props) {
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     function getTitle():string {

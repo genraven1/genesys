@@ -1,23 +1,41 @@
-import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
+import * as React from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Path} from "../../services/Path";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function TalentView(props: {talent: Talent}) {
     const {talent} = props
+    const { name } = useParams<{ name: string }>()
+    const path = Path.Talent
+    let navigate = useNavigate()
+
+    const onEdit = () => {
+        navigate(path + name + '/edit')
+    }
+
     return (
         <Card>
-            <CardHeader title={talent.name} />
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={name}
+                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
+                    <EditIcon color='primary' fontSize='small' />
+                </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={talent.description} />
+                        <ViewFieldCard name={'Description'} value={talent?.description!!} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Ranked'} value={talent.ranked} />
-                        <ViewFieldCard name={'Activation'} value={talent.activation} />
-                        <ViewFieldCard name={'Tier'} value={talent.tier} />
+                        <ViewFieldCard name={'Ranked'} value={talent?.ranked!!} />
+                        <ViewFieldCard name={'Activation'} value={talent?.activation!!} />
+                        <ViewFieldCard name={'Tier'} value={talent?.tier!!} />
                     </Grid>
                 </Grid>
             </CardContent>

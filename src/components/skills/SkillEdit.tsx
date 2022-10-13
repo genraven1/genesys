@@ -1,18 +1,22 @@
-import {Card, CardContent, CardHeader, Checkbox, Divider, Grid} from '@mui/material';
+import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from '@mui/material';
 import {ChangeEvent, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
-import Skill, {DefaultSkill, SkillKey, SkillType} from '../../models/actor/Skill';
+import Skill, {SkillKey, SkillType} from '../../models/actor/Skill';
 import {Option} from '../common/InputSelectField';
 import {CharacteristicType} from '../../models/actor/Characteristics';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
+import {Path} from "../../services/Path";
+import CheckIcon from "@mui/icons-material/Check";
+import * as React from "react";
 
 const getSkillTypes = (): Option[] => {
     return Object.values(SkillType).map((value) => ({value}))
 }
 
 const getCharacteristicTypes = (): Option[] => {
-    return Object.values(CharacteristicType).map((value) => ({value}))
+    let options = Object.values(CharacteristicType).map((value) => ({value}))
+    return options
 }
 
 interface Props {
@@ -24,13 +28,7 @@ export default function SkillEdit(props: Props) {
     const { name } = useParams<{ name: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
     const [errors, setErrors] = useState({} as any)
-
-    function getSkill(skill: Skill | null): Skill {
-        if (!skill) {
-            return DefaultSkill.create();
-        }
-        return skill
-    }
+    let navigate = useNavigate()
 
     const onChange = async (key: keyof Skill, value: any) => {
         if (value === null || (skill !== null && skill[key] === value)) {
@@ -70,9 +68,16 @@ export default function SkillEdit(props: Props) {
         await SkillService.updateSkill(copySkill.name, copySkill)
     }
 
+    const onView = () => {
+        navigate(Path.Skills + name + '/view');
+    }
+
     return (
         <Card>
-            <CardHeader title={name} />
+            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                <CheckIcon color='primary' fontSize='small' />
+            </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -81,7 +86,7 @@ export default function SkillEdit(props: Props) {
                     <Grid item xs>
                         <CardHeader title={'Active'} style={{ textAlign: 'center' }} />
                         <Divider />
-                        <Checkbox onChange={handleActiveClick} checked={getSkill(skill).active}/>
+                        <Checkbox onChange={handleActiveClick} checked={skill?.active!!}/>
                     </Grid>
                 </Grid>
             </CardContent>

@@ -5,21 +5,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import { Button } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import { LinkProps, Link } from "react-router-dom";
 import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
+import ActionsTableCell from "../common/ActionsTableCell";
 
 function Row(props: { row: Skill }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
-    )),[pathname, row.name]);
+    const {row} = props;
 
     return (
         <Fragment>
@@ -28,9 +21,7 @@ function Row(props: { row: Skill }): JSX.Element {
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.characteristic}</TableCell>
                 <TableCell>{row.active}</TableCell>
-                <TableCell>
-                    <Button component={renderLink}>Edit</Button>
-                </TableCell>
+                <ActionsTableCell name={row.name}/>
             </TableRow>
         </Fragment>
     );

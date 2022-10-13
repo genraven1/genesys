@@ -1,11 +1,14 @@
-import { Card, CardContent, CardHeader, Divider, Grid } from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import { useState } from 'react';
 import Talent, {Activation, Ranked, TalentKey, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import {Option} from '../common/InputSelectField';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
+import {Path} from "../../services/Path";
+import CheckIcon from "@mui/icons-material/Check";
+import * as React from "react";
 
 const getRankedOptions = (): Option[] => {
     return Object.values(Ranked).map((value) => ({value}))
@@ -28,6 +31,7 @@ export default function TalentEdit(props: Props) {
     const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     const [errors, setErrors] = useState({} as any)
+    let navigate = useNavigate()
 
     const onChange = async (key: keyof Talent, value: string) => {
         if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {
@@ -56,9 +60,16 @@ export default function TalentEdit(props: Props) {
         await TalentService.updateTalent(copyTalent.name, copyTalent)
     }
 
+    const onView = () => {
+        navigate(Path.Talent + name + '/view');
+    }
+
     return (
         <Card>
-            <CardHeader title={name} />
+            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                <CheckIcon color='primary' fontSize='small' />
+            </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>

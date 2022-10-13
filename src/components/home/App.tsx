@@ -12,8 +12,6 @@ import ViewAllSkills from '../skills/ViewAllSkills';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import RivalView from '../actor/npc/rival/RivalView';
 import ViewAllArmor from '../equipment/armor/ViewAllArmor';
-import EditArmor from '../equipment/armor/EditArmor';
-import ViewArmor from '../equipment/armor/ViewArmor';
 import * as React from 'react';
 import Dashboard from "./Dashboard";
 import LoreMenu from "../lore/common/LoreMenu";
@@ -22,6 +20,7 @@ import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
 import SkillWorkflow from "../skills/SkillWorkflow";
+import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
 
 export default function App() {
 
@@ -46,8 +45,8 @@ export default function App() {
                     <Route path={Path.Rival} element={<AllRivalsView />} />
                     <Route path={Path.Rival + ':name'} element={<RivalView />} />
                     <Route path={Path.Armor} element={<ViewAllArmor/>} />
-                    <Route path={Path.Armor + ':name/edit'} element={<EditArmor/>} />
-                    <Route path={Path.Armor + ':name/view'} element={<ViewArmor/>} />
+                    <Route path={Path.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
+                    <Route path={Path.Armor + ':name/view'} element={<ArmorWorkflow/>} />
                     // Lore Routes
                     <Route path={Path.Lore} element={<ViewAllLore />} />
                     <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />

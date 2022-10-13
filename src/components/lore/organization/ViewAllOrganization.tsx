@@ -19,9 +19,7 @@ function OrganizationRow(props: { row: Organization }): JSX.Element {
         <Fragment>
             <TableRow>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>
-                    <ActionsTableCell name={row.name} />
-                </TableCell>
+                <ActionsTableCell name={row.name} />
             </TableRow>
         </Fragment>
     )

@@ -9,21 +9,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Talent from '../../models/Talent';
 import TalentService from '../../services/TalentService';
-import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import {Button} from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import {Fragment,useEffect,useState} from 'react';
 import * as React from 'react';
-import { LinkProps, Link } from "react-router-dom";
 import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import ActionsTableCell from "../common/ActionsTableCell";
 
 function Row(props: { row: Talent }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-    const [open, setOpen] = useState(false);
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}${row.name}`} ref={ref} {...itemProps} />
-    )),[pathname, row.name]);
+    const {row} = props
+    const [open,setOpen] = useState(false)
 
     return (
         <Fragment>
@@ -32,9 +25,7 @@ function Row(props: { row: Talent }): JSX.Element {
                 <TableCell>{row.ranked}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
-                <TableCell>
-                    <Button component={renderLink}>Edit</Button>
-                </TableCell>
+                <ActionsTableCell name={row.name}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -54,15 +45,15 @@ function Row(props: { row: Talent }): JSX.Element {
 }
 
 export default function AllTalentsView() {
-    const [talents, setTalents] = useState<Talent[]>([]);
+    const [talents, setTalents] = useState<Talent[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents();
-            if (!talentList) { return; }
-            setTalents(talentList);
-        })();
-    }, []);
+            const talentList = await TalentService.getTalents()
+            if (!talentList) {return}
+            setTalents(talentList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
