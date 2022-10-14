@@ -9,14 +9,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import {Armor} from "../../../models/equipment/Equipment";
+import {Weapon} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/ActionsTableCell";
 
-function Row(props: { row: Armor }): JSX.Element {
-    const { row } = props
+function Row(props: { row: Weapon }): JSX.Element {
+    const {row} = props
     const [open, setOpen] = useState(false)
 
     const renderPrice = (): JSX.Element => {
@@ -38,8 +38,10 @@ function Row(props: { row: Armor }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.defense}</TableCell>
-                <TableCell>{row.soak}</TableCell>
+                <TableCell>{row.skill}</TableCell>
+                <TableCell>{row.damage}</TableCell>
+                <TableCell>{row.critical}</TableCell>
+                <TableCell>{row.range}</TableCell>
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
@@ -62,14 +64,14 @@ function Row(props: { row: Armor }): JSX.Element {
     )
 }
 
-export default function ViewAllArmor() {
-    const [armors, setArmors] = useState<Armor[]>([])
+export default function ViewAllWeapon() {
+    const [weapons, setWeapons] = useState<Weapon[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const armorList = await EquipmentService.getArmors()
-            if (!armorList) { return }
-            setArmors(armorList)
+            const weaponList = await EquipmentService.getWeapons()
+            if (!weaponList) {return}
+            setWeapons(weaponList)
         })()
     }, [])
 
@@ -79,8 +81,10 @@ export default function ViewAllArmor() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
-                        <TableCell>Defense</TableCell>
-                        <TableCell>Soak</TableCell>
+                        <TableCell>Skill</TableCell>
+                        <TableCell>Damage</TableCell>
+                        <TableCell>Critical</TableCell>
+                        <TableCell>Range</TableCell>
                         <TableCell>Encumbrance</TableCell>
                         <TableCell>Price</TableCell>
                         <TableCell>Rarity</TableCell>
@@ -88,7 +92,7 @@ export default function ViewAllArmor() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {armors.map((row: Armor) => (
+                    {weapons.map((row: Weapon) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

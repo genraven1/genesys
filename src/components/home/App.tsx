@@ -21,6 +21,8 @@ import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
 import SkillWorkflow from "../skills/SkillWorkflow";
 import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
+import ViewAllWeapon from "../equipment/weapon/ViewAllWeapon";
+import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 
 export default function App() {
 
@@ -47,6 +49,9 @@ export default function App() {
                     <Route path={Path.Armor} element={<ViewAllArmor/>} />
                     <Route path={Path.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
                     <Route path={Path.Armor + ':name/view'} element={<ArmorWorkflow/>} />
+                    <Route path={Path.Weapon} element={<ViewAllWeapon/>} />
+                    <Route path={Path.Weapon + ':name/edit'} element={<WeaponWorkflow/>} />
+                    <Route path={Path.Weapon + ':name/view'} element={<WeaponWorkflow/>} />
                     // Lore Routes
                     <Route path={Path.Lore} element={<ViewAllLore />} />
                     <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />

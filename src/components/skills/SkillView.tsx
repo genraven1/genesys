@@ -1,13 +1,17 @@
 import Skill from "../../models/actor/Skill";
-import {Card, CardContent, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import {Path} from "../../services/Path";
 import * as React from "react";
-import {CommonCardHeader} from "../common/CommonCardHeader";
+import EditIcon from "@mui/icons-material/Edit";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 export default function SkillView(props: {skill: Skill}): JSX.Element {
     const {skill} = props
+    const { name } = useParams<{ name: string }>()
+    let path = Path.Skills
+    let navigate = useNavigate()
 
     const renderSkillActiveCard = (): JSX.Element => {
         if (skill?.active!!) {
@@ -18,9 +22,19 @@ export default function SkillView(props: {skill: Skill}): JSX.Element {
         }
     }
 
+    const onEdit = () => {
+        navigate(path + name + '/edit')
+    }
+
     return (
         <Card>
-            <CommonCardHeader path={Path.Skills}/>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={name}
+                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
+                    <EditIcon color='primary' fontSize='small' />
+                </IconButton>}>
+            </CardHeader>
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>

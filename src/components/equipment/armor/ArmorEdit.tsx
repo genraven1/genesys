@@ -73,8 +73,6 @@ export default function ArmorEdit(props: {ar: Armor}) {
                 copyArmor.encumbrance = Number(value)
                 break
             case "equipped":
-                copyArmor.equipped = !Boolean(copyArmor.equipped)
-                break
             case 'slot':
             case 'name':
                 break;

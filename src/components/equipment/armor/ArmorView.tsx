@@ -30,7 +30,7 @@ export default function ArmorView(props: {armor: Armor}) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={armor?.description} />
+                        <ViewFieldCard name={'Description'} value={armor?.description!!} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
