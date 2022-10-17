@@ -6,7 +6,7 @@ import ExpandedList, {Anchor} from './ExpandedList';
 import TalentDialog from '../talents/TalentDialog';
 import CreatePlayerDialog from '../actor/player/CreatePlayerDialog';
 import CreateNonPlayerCharacterDialog from "../actor/npc/CreateNonPlayerCharacterDialog";
-import {Path} from "../../services/Path";
+import {Path, EquipmentPath} from "../../services/Path";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import {NonPlayerCharacterType} from "../../models/actor/npc/NonPlayerCharacter";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
@@ -38,8 +38,8 @@ export default function SideNav() {
                         <ListMenuItemLink name='Home' to={Path.Home} />
                         <ExpandedList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent} dialogTitle={'Create Talent'} onClick={(): void => setOpenTalentCreationDialog(true)} />
                         <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
-                        <ExpandedList header={'Armor'} viewTitle={'View All Armor'} to={Path.Armor} dialogTitle={'Create Armor'} onClick={(): void => setOpenArmorCreationDialog(true)} />
-                        <ExpandedList header={'Weapon'} viewTitle={'View All Weapons'} to={Path.Weapon} dialogTitle={'Create Weapon'} onClick={(): void => setOpenWeaponCreationDialog(true)} />
+                        <ExpandedList header={'Armor'} viewTitle={'View All Armor'} to={EquipmentPath.Armor} dialogTitle={'Create Armor'} onClick={(): void => setOpenArmorCreationDialog(true)} />
+                        <ExpandedList header={'Weapon'} viewTitle={'View All Weapons'} to={EquipmentPath.Weapon} dialogTitle={'Create Weapon'} onClick={(): void => setOpenWeaponCreationDialog(true)} />
                         <ExpandedList header={'Player Characters'} viewTitle={'View All Player Characters'} to={Path.Player} dialogTitle={'Create Player Character'} onClick={(): void => setOpenPlayerCreationDialog(true)} />
                         <ExpandedList header={'Nemesis NPCS'} viewTitle={'View All Nemeses'} to={Path.Nemesis} dialogTitle={'Create Nemesis'} onClick={(): void => setOpenNemesisCreationDialog(true)} />
                         <ExpandedList header={'Rival NPCS'} viewTitle={'View All Rivals'} to={Path.Rival} dialogTitle={'Create Rival'} onClick={(): void => setOpenRivalCreationDialog(true)} />

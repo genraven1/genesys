@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Equipment";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {Path} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/Path";
 
 
 export default function ArmorView(props: {armor: Armor}) {
@@ -14,7 +14,7 @@ export default function ArmorView(props: {armor: Armor}) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Armor + name + '/edit');
+        navigate(EquipmentPath.Armor + name + '/edit');
     }
 
     return (

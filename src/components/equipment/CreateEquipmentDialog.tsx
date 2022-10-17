@@ -1,7 +1,7 @@
 import {EquipmentType} from "../../models/equipment/Equipment";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {EquipmentPath} from "../../services/Path";
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField,} from "@mui/material";
 import EquipmentService from "../../services/EquipmentService";
 
@@ -20,11 +20,12 @@ export default function CreateEquipmentDialog(props: Props) {
         switch (type) {
             case EquipmentType.Armor:
                 await EquipmentService.createArmor(name)
-                navigate(Path.Armor + name + '/view')
+                navigate(EquipmentPath.Armor + name + '/view')
                 break
             case EquipmentType.Weapon:
+                console.log(name)
                 await EquipmentService.createWeapon(name)
-                navigate(Path.Weapon + name + '/view')
+                navigate(EquipmentPath.Weapon + name + '/view')
                 break
             case EquipmentType.Gear:
                 break

@@ -5,7 +5,23 @@ import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Weapon} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
-import {Path} from '../../../services/Path';
+import {EquipmentPath} from '../../../services/Path';
+import {InputTextFieldCard} from "../../common/InputTextFieldCard";
+import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
+import {Option} from "../../common/InputSelectField";
+import {Ranked} from "../../../models/Talent";
+import Skill, {SkillType} from "../../../models/actor/Skill";
+import {getActiveSkills} from "../../../models/common/SkillHelper";
+
+const getRequiredSkills = (): Option[] => {
+    let activeSkills = getActiveSkills(SkillType.Combat) as Skill[]
+    let options = []
+    for (const skill in activeSkills) {
+        let name = skill
+        options.push({skill.name})
+    }
+    return options
+}
 
 export default function WeaponEdit(props: {wea: Weapon}) {
     const {wea} = props
@@ -31,7 +47,7 @@ export default function WeaponEdit(props: {wea: Weapon}) {
             case 'description':
             case "equipped":
             case "restricted":
-                break;
+                break
         }
 
         await updateWeapon(copyWeapon)
@@ -61,7 +77,7 @@ export default function WeaponEdit(props: {wea: Weapon}) {
             case "equipped":
             case 'slot':
             case 'name':
-                break;
+                break
         }
 
         await updateWeapon(copyWeapon)
@@ -74,7 +90,7 @@ export default function WeaponEdit(props: {wea: Weapon}) {
     }
 
     const onView = () => {
-        navigate(Path.Weapon + name + '/view');
+        navigate(EquipmentPath.Weapon + name + '/view');
     }
 
     return (
@@ -85,7 +101,11 @@ export default function WeaponEdit(props: {wea: Weapon}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-
+                    <Grid container spacing={10}>
+                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                    </Grid>
+                    <Divider />
+                    <InputSelectFieldCard defaultValue={weapon?.skill!!.name} onCommit={(value: string): void => { onChange('skill', value)}} title={'Required Skill'} options={} />
                 </Grid>
             </CardContent>
         </Card>

@@ -3,13 +3,13 @@ import * as React from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Equipment";
-import {Path} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 export default function WeaponView(props: {weapon: Weapon}) {
     const {weapon} = props
     const {name} = useParams<{ name: string }>()
-    const path = Path.Weapon
+    const path = EquipmentPath.Weapon
     let navigate = useNavigate()
 
     const onEdit = () => {
