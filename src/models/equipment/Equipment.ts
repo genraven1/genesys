@@ -34,6 +34,7 @@ export interface Weapon extends Equipment {
     skill: Skill
     critical: number
     range: Range
+    brawn: boolean
 }
 
 export enum EquipmentType {
