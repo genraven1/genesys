@@ -1,4 +1,5 @@
 import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from '@mui/material';
+import * as React from 'react';
 import {ChangeEvent, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
@@ -8,15 +9,13 @@ import {CharacteristicType} from '../../models/actor/Characteristics';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import * as React from "react";
 
 const getSkillTypes = (): Option[] => {
     return Object.values(SkillType).map((value) => ({value}))
 }
 
 const getCharacteristicTypes = (): Option[] => {
-    let options = Object.values(CharacteristicType).map((value) => ({value}))
-    return options
+    return Object.values(CharacteristicType).map((value) => ({value}))
 }
 
 interface Props {

@@ -1,4 +1,5 @@
 import Skill from "../actor/Skill";
+import {RangeBand} from "../common/RangeBand";
 
 export default interface Equipment {
     name: string
@@ -32,27 +33,12 @@ export interface Weapon extends Equipment {
     damage: number
     skill: Skill
     critical: number
+    range: RangeBand
+    brawn: boolean
 }
 
 export enum EquipmentType {
     Armor='Armor',
     Weapon='Weapon',
     Gear='Gear'
-}
-
-export class DefaultArmor{
-    static create():Armor {
-        return {
-            defense: 0,
-            description: "",
-            encumbrance: 0,
-            name: "",
-            price: 0,
-            rarity: 0,
-            slot: EquipmentSlot.Body,
-            soak: 0,
-            restricted: false,
-            equipped: false
-        }
-    }
 }

@@ -4,7 +4,6 @@ import EditField from "./EditField";
 
 export interface Option {
     value: string
-    label?: string
 }
 
 interface Props {
@@ -40,8 +39,8 @@ export default function InputSelectField(props: Props): JSX.Element {
             <TextField value={option} helperText={helperText} onChange={inputOnChange} select>
                 {
                     options.map((opt) => (
-                        <MenuItem key={opt.value} value={opt.label}>
-                            {opt.label}
+                        <MenuItem key={opt.value} value={opt.value}>
+                            {opt.value}
                         </MenuItem>
                     ))
                 }

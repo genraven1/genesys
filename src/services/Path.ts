@@ -5,10 +5,15 @@ export enum Path {
     Rival = '/actors/rival/',
     Talent = '/talents/',
     Skills = '/skills/',
-    Armor = '/equipment/armor/',
     Lore = '/lore',
 }
 
 export enum LorePath {
     Organization = '/lore/organizations/'
+}
+
+export enum EquipmentPath {
+    Armor = '/equipment/armor/',
+    Weapon = '/equipment/weapon/',
+    Gear = '/equipment/gear/',
 }

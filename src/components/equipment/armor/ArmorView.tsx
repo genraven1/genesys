@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Equipment";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {Path} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/Path";
 
 
 export default function ArmorView(props: {armor: Armor}) {
@@ -14,7 +14,7 @@ export default function ArmorView(props: {armor: Armor}) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Armor + name + '/edit');
+        navigate(EquipmentPath.Armor + name + '/edit');
     }
 
     return (
@@ -30,7 +30,7 @@ export default function ArmorView(props: {armor: Armor}) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={armor?.description} />
+                        <ViewFieldCard name={'Description'} value={armor?.description!!} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>

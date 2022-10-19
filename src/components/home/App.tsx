@@ -1,7 +1,7 @@
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {LorePath, Path} from '../../services/Path';
+import {EquipmentPath, LorePath, Path} from '../../services/Path';
 import AllTalentsView from '../talents/AllTalentsViewTable';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import PlayerView from '../actor/player/PlayerView';
@@ -21,6 +21,8 @@ import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
 import SkillWorkflow from "../skills/SkillWorkflow";
 import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
+import ViewAllWeapon from "../equipment/weapon/ViewAllWeapon";
+import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 
 export default function App() {
 
@@ -44,10 +46,13 @@ export default function App() {
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
                     <Route path={Path.Rival} element={<AllRivalsView />} />
                     <Route path={Path.Rival + ':name'} element={<RivalView />} />
-                    <Route path={Path.Armor} element={<ViewAllArmor/>} />
-                    <Route path={Path.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
-                    <Route path={Path.Armor + ':name/view'} element={<ArmorWorkflow/>} />
-                    // Lore Routes
+                    <Route path={EquipmentPath.Armor} element={<ViewAllArmor/>} />
+                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Weapon} element={<ViewAllWeapon/>} />
+                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>} />
+                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>} />
+                    {/*Lore Path*/}
                     <Route path={Path.Lore} element={<ViewAllLore />} />
                     <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>} />

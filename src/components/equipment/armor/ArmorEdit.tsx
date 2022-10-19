@@ -5,7 +5,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Armor} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
-import {Path} from '../../../services/Path';
+import {EquipmentPath} from '../../../services/Path';
 import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 
@@ -73,8 +73,6 @@ export default function ArmorEdit(props: {ar: Armor}) {
                 copyArmor.encumbrance = Number(value)
                 break
             case "equipped":
-                copyArmor.equipped = !Boolean(copyArmor.equipped)
-                break
             case 'slot':
             case 'name':
                 break;
@@ -90,7 +88,7 @@ export default function ArmorEdit(props: {ar: Armor}) {
     }
 
     const onView = () => {
-        navigate(Path.Armor + name + '/view');
+        navigate(EquipmentPath.Armor + name + '/view');
     }
 
     return (
