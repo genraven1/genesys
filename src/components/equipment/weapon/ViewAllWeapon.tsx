@@ -38,7 +38,7 @@ function Row(props: { row: Weapon }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.skill}</TableCell>
+                <TableCell>{row.skill.name}</TableCell>
                 <TableCell>{row.damage}</TableCell>
                 <TableCell>{row.critical}</TableCell>
                 <TableCell>{row.range}</TableCell>
@@ -64,13 +64,14 @@ function Row(props: { row: Weapon }): JSX.Element {
     )
 }
 
-export default function ViewAllWeapon() {
+export default function ViewAllWeapon(): JSX.Element {
     const [weapons, setWeapons] = useState<Weapon[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
             const weaponList = await EquipmentService.getWeapons()
             if (!weaponList) {return}
+            console.log(weaponList)
             setWeapons(weaponList)
         })()
     }, [])

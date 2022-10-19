@@ -1,5 +1,5 @@
 import Skill from "../actor/Skill";
-import {Range} from "../common/Range";
+import {RangeBand} from "../common/RangeBand";
 
 export default interface Equipment {
     name: string
@@ -33,7 +33,7 @@ export interface Weapon extends Equipment {
     damage: number
     skill: Skill
     critical: number
-    range: Range
+    range: RangeBand
     brawn: boolean
 }
 

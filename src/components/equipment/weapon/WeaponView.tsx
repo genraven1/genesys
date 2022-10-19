@@ -5,6 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Equipment";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
+import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 
 export default function WeaponView(props: {weapon: Weapon}) {
     const {weapon} = props
@@ -32,6 +33,18 @@ export default function WeaponView(props: {weapon: Weapon}) {
                         <ViewFieldCard name={'Description'} value={weapon?.description!!} />
                     </Grid>
                     <Divider />
+                    <Grid container spacing={10}>
+                        <ViewFieldCard name={'Required Skill'} value={String(weapon?.skill?.name!!)} />
+                        <ViewFieldCard name={'Damage'} value={String(weapon?.damage!!)} />
+                        <ViewFieldCard name={'Critical'} value={String(weapon?.critical!!)} />
+                        <ViewFieldCard name={'Range'} value={String(weapon?.range!!)} />
+                    </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <ViewFieldCard name={'Encumbrance'} value={String(weapon?.encumbrance!!)} />
+                        <ViewNumberCheckBoxCard  title={'Price'} check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'}/>
+                        <ViewFieldCard name={'Rarity'} value={String(weapon?.rarity!!)} />
+                    </Grid>
                 </Grid>
             </CardContent>
         </Card>

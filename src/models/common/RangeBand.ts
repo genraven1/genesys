@@ -1,4 +1,4 @@
-export enum Range {
+export enum RangeBand {
     Engaged = 'Engaged',
     Short = 'Short',
     Medium = 'Medium',
