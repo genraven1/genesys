@@ -42,6 +42,7 @@ export interface Gear extends Equipment {
     modifier: boolean
     type: ModifierType
     amount: number
+    range: RangeBand
 }
 
 export enum EquipmentType {

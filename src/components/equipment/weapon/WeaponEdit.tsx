@@ -7,7 +7,7 @@ import {Weapon} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import SkillSelectCard from "../../common/SkillSelectCard";
+import {SkillSelectCard} from "../../common/SkillSelectCard";
 import Skill, {SkillType} from "../../../models/actor/Skill";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 import CheckButtonCard from "../../common/CheckButtonCard";

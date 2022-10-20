@@ -9,13 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import {Weapon} from "../../../models/equipment/Equipment";
+import {Gear} from "../../../models/equipment/Equipment";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/ActionsTableCell";
 
-function Row(props: { row: Weapon }): JSX.Element {
+function Row(props: { row: Gear }): JSX.Element {
     const {row} = props
     const [open, setOpen] = useState(false)
 
@@ -38,10 +38,6 @@ function Row(props: { row: Weapon }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.skill.name}</TableCell>
-                <TableCell>{row.damage}</TableCell>
-                <TableCell>{row.critical}</TableCell>
-                <TableCell>{row.range}</TableCell>
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
@@ -64,14 +60,14 @@ function Row(props: { row: Weapon }): JSX.Element {
     )
 }
 
-export default function ViewAllWeapon(): JSX.Element {
-    const [weapons, setWeapons] = useState<Weapon[]>([])
+export default function ViewAllGear(): JSX.Element {
+    const [gears, setGears] = useState<Gear[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const weaponList = await EquipmentService.getWeapons()
-            if (!weaponList) {return}
-            setWeapons(weaponList)
+            const gearList = await EquipmentService.getGears()
+            if (!gearList) {return}
+            setGears(gearList)
         })()
     }, [])
 
@@ -81,18 +77,14 @@ export default function ViewAllWeapon(): JSX.Element {
                 <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
-                        <TableCell>Skill</TableCell>
-                        <TableCell>Damage</TableCell>
-                        <TableCell>Critical</TableCell>
-                        <TableCell>Range</TableCell>
                         <TableCell>Encumbrance</TableCell>
                         <TableCell>Price</TableCell>
                         <TableCell>Rarity</TableCell>
-                        <TableCell>Edit</TableCell>
+                        <TableCell>View</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {weapons.map((row: Weapon) => (
+                    {gears.map((row: Gear) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

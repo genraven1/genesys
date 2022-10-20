@@ -4,13 +4,13 @@ import {ChangeEvent, useEffect, useState} from "react";
 import EditField from "./EditField";
 import SkillService from "../../services/SkillService";
 
-interface Props {
+interface TypeProps {
     defaultValue: Skill
     onCommit: (value: Skill) => void
     type: SkillType
 }
 
-export default function SkillSelectCard(props: Props): JSX.Element {
+export function SkillSelectCard(props: TypeProps): JSX.Element {
     const { defaultValue, onCommit, type } = props
     const [skills, setSkills] = useState<Skill[]>([])
 
@@ -21,6 +21,34 @@ export default function SkillSelectCard(props: Props): JSX.Element {
             setSkills(skillList.filter((skill) => skill.type === type))
         })()
     }, [type])
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={'Required Skill'} style={{ textAlign: 'center' }} />
+                <Divider />
+                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit} />
+            </Card>
+        </Grid>
+    )
+}
+
+interface AllProps {
+    defaultValue: Skill
+    onCommit: (value: Skill) => void
+}
+
+export function AllSkillsSelectCard(props: AllProps): JSX.Element {
+    const { defaultValue, onCommit } = props
+    const [skills, setSkills] = useState<Skill[]>([])
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const skillList = await SkillService.getSkills()
+            if (!skillList) { return }
+            setSkills(skillList)
+        })()
+    }, [])
 
     return (
         <Grid item xs>

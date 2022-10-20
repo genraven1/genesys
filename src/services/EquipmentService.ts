@@ -45,7 +45,7 @@ export default class EquipmentService {
     }
 
     static async getGear(name: string): Promise<Gear> {
-        return await (await axios.get(EquipmentPath.Weapon + name)).data
+        return await (await axios.get(EquipmentPath.Gear + name)).data
     }
 
     static async updateGear(name: string, gear: Gear): Promise<Gear> {
