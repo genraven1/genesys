@@ -37,8 +37,26 @@ export interface Weapon extends Equipment {
     brawn: boolean
 }
 
+export interface Gear extends Equipment {
+    skill: Skill
+    modifier: boolean
+    type: ModifierType
+    amount: number
+}
+
 export enum EquipmentType {
     Armor='Armor',
     Weapon='Weapon',
     Gear='Gear'
+}
+
+export enum ModifierType {
+    Success = 'Success',
+    Advantage = 'Advantage',
+    Triumph = 'Triumph',
+    Failure = 'Failure',
+    Threat = 'Threat',
+    Despair = 'Despair',
+    Boost = 'Boost',
+    Setback = 'Setback'
 }
