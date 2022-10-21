@@ -52,7 +52,6 @@ export default function GearEdit(props: {gea: Gear}) {
     }
 
     const onChange = async (key: keyof Gear, value: string) => {
-        console.log(value)
         if (value === null || (gear !== null && gear[key] === value)) {
             return;
         }
@@ -63,9 +62,6 @@ export default function GearEdit(props: {gea: Gear}) {
                 break
             case "restricted":
                 copyGear.restricted = !Boolean(copyGear.restricted)
-                break
-            case 'encumbrance':
-                copyGear.encumbrance = Number(value)
                 break
             case "range":
                 copyGear.range = value as RangeBand
@@ -105,9 +101,9 @@ export default function GearEdit(props: {gea: Gear}) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <EditNumberFieldCard value={gear?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
+                        <EditNumberFieldCard value={gear?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onNumberChange('encumbrance', value)}} min={0} max={10} />
                         <EditPriceCheckBoxCard check={gear?.restricted!!} value={gear?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onNumberChange('price', value)}} />
-                        <EditNumberFieldCard value={gear?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
+                        <EditNumberFieldCard value={gear?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onNumberChange('rarity', value)}} min={0} max={11} />
                     </Grid>
                 </Grid>
             </CardContent>
