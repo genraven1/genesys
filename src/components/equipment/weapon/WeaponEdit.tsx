@@ -60,7 +60,6 @@ export default function WeaponEdit(props: {wea: Weapon}) {
     }
 
     const onChange = async (key: keyof Weapon, value: string) => {
-        console.log(value)
         if (value === null || (weapon !== null && weapon[key] === value)) {
             return;
         }
