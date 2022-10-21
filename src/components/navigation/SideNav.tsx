@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Drawer, IconButton} from '@mui/material';
 import ListMenuItemLink from './ListMenuItemLink';
@@ -18,6 +18,7 @@ export default function SideNav() {
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
+    const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
     const [openPlayerCreationDialog, setOpenPlayerCreationDialog] = useState(false)
     const [openNemesisCreationDialog, setOpenNemesisCreationDialog] = useState(false)
     const [openRivalCreationDialog, setOpenRivalCreationDialog] = useState(false)
@@ -40,6 +41,7 @@ export default function SideNav() {
                         <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
                         <ExpandedList header={'Armor'} viewTitle={'View All Armor'} to={EquipmentPath.Armor} dialogTitle={'Create Armor'} onClick={(): void => setOpenArmorCreationDialog(true)} />
                         <ExpandedList header={'Weapon'} viewTitle={'View All Weapons'} to={EquipmentPath.Weapon} dialogTitle={'Create Weapon'} onClick={(): void => setOpenWeaponCreationDialog(true)} />
+                        <ExpandedList header={'Gear'} viewTitle={'View All Gear'} to={EquipmentPath.Gear} dialogTitle={'Create Gear'} onClick={(): void => setOpenGearCreationDialog(true)} />
                         <ExpandedList header={'Player Characters'} viewTitle={'View All Player Characters'} to={Path.Player} dialogTitle={'Create Player Character'} onClick={(): void => setOpenPlayerCreationDialog(true)} />
                         <ExpandedList header={'Nemesis NPCS'} viewTitle={'View All Nemeses'} to={Path.Nemesis} dialogTitle={'Create Nemesis'} onClick={(): void => setOpenNemesisCreationDialog(true)} />
                         <ExpandedList header={'Rival NPCS'} viewTitle={'View All Rivals'} to={Path.Rival} dialogTitle={'Create Rival'} onClick={(): void => setOpenRivalCreationDialog(true)} />
@@ -47,7 +49,9 @@ export default function SideNav() {
                     {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog} onClose={(): void => setOpenTalentCreationDialog(false)} />}
                     {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog} onClose={(): void => setOpenSkillCreationDialog(false)} />}
                     {openArmorCreationDialog && <CreateEquipmentDialog open={openArmorCreationDialog} onClose={(): void => setOpenArmorCreationDialog(false)} type={EquipmentType.Armor}/>}
-                    {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}{openPlayerCreationDialog && <CreatePlayerDialog open={openPlayerCreationDialog} onClose={(): void => setOpenPlayerCreationDialog(false)} />}
+                    {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}
+                    {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog} onClose={(): void => setOpenGearCreationDialog(false)} type={EquipmentType.Gear}/>}
+                    {openPlayerCreationDialog && <CreatePlayerDialog open={openPlayerCreationDialog} onClose={(): void => setOpenPlayerCreationDialog(false)} />}
                     {openNemesisCreationDialog && <CreateNonPlayerCharacterDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)}  type={NonPlayerCharacterType.Nemesis}/>}
                     {openRivalCreationDialog && <CreateNonPlayerCharacterDialog open={openRivalCreationDialog} onClose={(): void => setOpenRivalCreationDialog(false)}  type={NonPlayerCharacterType.Rival}/>}
                 </Fragment>
