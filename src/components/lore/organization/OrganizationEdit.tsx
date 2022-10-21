@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {LorePath} from "../../../services/Path";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
@@ -25,11 +25,6 @@ export default function OrganizationEdit(props: Props) {
     const [organization, setOrganization] = useState<Organization>(org)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
-
-    useEffect(() => {
-        console.log(org)
-        console.log(organization)
-    })
 
     const onNumberChange = async (key: keyof Organization, value: number) => {
         const copyOrg = {...organization} as Organization
