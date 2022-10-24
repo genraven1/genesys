@@ -72,7 +72,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {nemesis.skills.filter((skill) => skill.type === type).map((row: ActorSkill) => (
+                    {(nemesis?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
                         <SkillRow key={row.name} skill={row} nemesis={nemesis}/>
                     ))}
                 </TableBody>

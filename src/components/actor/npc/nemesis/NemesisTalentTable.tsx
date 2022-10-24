@@ -53,7 +53,7 @@ export default function NemesisTalentTable(props: TableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {nemesis.talents.map((row: ActorTalent) => (
+                    {(nemesis?.talents!! || []).map((row: ActorTalent) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

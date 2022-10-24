@@ -18,12 +18,12 @@ export default function StatsCard(props: Props) {
                 <Divider />
                 <Grid container spacing={10}>
                     <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }} >{stats.max}</Typography>
+                        <Typography style={{ textAlign: 'center' }} >{stats?.max!!}</Typography>
                     </Grid>
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={stats.max} min={1} max={25} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={stats?.max!!} min={1} max={25} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

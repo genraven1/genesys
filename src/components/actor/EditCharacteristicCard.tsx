@@ -16,9 +16,9 @@ export default function EditCharacteristicCard(props: Props): JSX.Element {
             <Card>
                 <CardHeader title={type} style={{ textAlign: 'center' }} />
                 <Divider />
-                <Typography style={{ textAlign: 'center' }} >{characteristic.current}</Typography>
+                <Typography style={{ textAlign: 'center' }} >{characteristic?.current!!}</Typography>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={characteristic.current} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={characteristic?.current!!} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
                 </CardActions>
             </Card>
         </Grid>

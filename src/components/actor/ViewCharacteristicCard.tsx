@@ -12,7 +12,7 @@ export default function ViewCharacteristicCard(props: Props): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={characteristic.current} style={{ textAlign: 'center' }} />
+                <CardHeader title={characteristic?.current!!} style={{ textAlign: 'center' }} />
                 <Divider />
                 <CardContent>
                     <Typography style={{ textAlign: 'center' }} >{type}</Typography>
