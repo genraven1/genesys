@@ -15,7 +15,7 @@ export default function ViewStatsCard(props: Props) {
                 <CardHeader title={type + ' Threshold'} style={{ textAlign: 'center' }} />
                 <Divider />
                 <CardContent>
-                    <Typography style={{ textAlign: 'center' }} >{stats.max}</Typography>
+                    <Typography style={{ textAlign: 'center' }} >{stats?.max}</Typography>
                 </CardContent>
             </Card>
         </Grid>

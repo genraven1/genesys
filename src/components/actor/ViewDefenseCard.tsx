@@ -15,7 +15,7 @@ export default function ViewDefenseCard(props: Props) {
                 <CardHeader title={type} style={{ textAlign: 'center' }} />
                 <Divider />
                 <CardContent>
-                    <Typography style={{ textAlign: 'center' }} >{defense.current}</Typography>
+                    <Typography style={{ textAlign: 'center' }} >{defense?.current!!}</Typography>
                 </CardContent>
             </Card>
         </Grid>

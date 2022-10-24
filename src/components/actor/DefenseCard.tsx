@@ -18,12 +18,12 @@ export default function DefenseCard(props: Props) {
                 <Divider />
                 <Grid container spacing={10}>
                     <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }} >{defense.current}</Typography>
+                        <Typography style={{ textAlign: 'center' }} >{defense?.current!!}</Typography>
                     </Grid>
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={defense.current} min={1} max={5} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={defense?.current!!} min={1} max={5} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

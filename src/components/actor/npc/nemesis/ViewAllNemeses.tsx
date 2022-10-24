@@ -55,8 +55,8 @@ export default function AllNemesesView() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>NPC Name</TableCell>
-                        <TableCell>Edit</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>View</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
