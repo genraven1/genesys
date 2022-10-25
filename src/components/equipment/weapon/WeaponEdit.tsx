@@ -34,34 +34,9 @@ export default function WeaponEdit(props: {wea: Weapon}) {
         await updateWeapon(copyWeapon)
     }
 
-    const onNumberChange = async (key: keyof Weapon, value: number) => {
-        const copyWeapon = {...weapon} as Weapon
-        switch (key) {
-            case 'rarity':
-                copyWeapon.rarity = value
-                break
-            case 'price':
-                copyWeapon.price = value
-                break;
-            case 'encumbrance':
-                copyWeapon.encumbrance = value
-                break
-            case "damage":
-                copyWeapon.damage = value
-                break
-            case "critical":
-                copyWeapon.critical = value
-                break
-            default:
-                break
-        }
-
-        await updateWeapon(copyWeapon)
-    }
-
     const onChange = async (key: keyof Weapon, value: string) => {
         if (value === null || (weapon !== null && weapon[key] === value)) {
-            return;
+            return
         }
         const copyWeapon = {...weapon} as Weapon
         switch (key) {
@@ -79,6 +54,18 @@ export default function WeaponEdit(props: {wea: Weapon}) {
                 break
             case "range":
                 copyWeapon.range = value as RangeBand
+                break
+            case 'rarity':
+                copyWeapon.rarity = Number(value)
+                break
+            case 'price':
+                copyWeapon.price = Number(value)
+                break;
+            case "damage":
+                copyWeapon.damage = Number(value)
+                break
+            case "critical":
+                copyWeapon.critical = Number(value)
                 break
             default:
                 break
@@ -111,15 +98,15 @@ export default function WeaponEdit(props: {wea: Weapon}) {
                     <Divider />
                     <Grid container spacing={10}>
                         <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} type={SkillType.Combat} />
-                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!} onChange={(value: number): void => {onNumberChange('damage', value)}} min={0} max={20} />
+                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!} onChange={(value: number): void => {onChange('damage', String(value))}} min={0} max={20} />
                         <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!} onChange={(value: boolean): void => {onChange('brawn', String(value))}} />
-                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onNumberChange('critical', value)}} min={1} max={7} />
+                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onChange('critical', String(value))}} min={1} max={7} />
                         <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
                         <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
-                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onNumberChange('price', value)}} />
+                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
                 </Grid>
