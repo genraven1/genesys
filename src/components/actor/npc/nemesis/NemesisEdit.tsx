@@ -27,65 +27,6 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
-    const onCharacteristicChange = (copyNemesis: Nemesis, value: number, type: CharacteristicType) => {
-        switch (type) {
-            case CharacteristicType.Brawn:
-                copyNemesis.brawn.current = value
-                break
-            case CharacteristicType.Agility:
-                copyNemesis.agility.current = value
-                break
-            case CharacteristicType.Intellect:
-                copyNemesis.intellect.current = value
-                break
-            case CharacteristicType.Cunning:
-                copyNemesis.cunning.current = value
-                break
-            case CharacteristicType.Willpower:
-                copyNemesis.willpower.current = value
-                break
-            case CharacteristicType.Presence:
-                copyNemesis.presence.current = value
-                break
-        }
-    }
-
-    const onStatChange = (copyNemesis: Nemesis, value: number, type: StatsType) => {
-        switch (type) {
-            case StatsType.Wounds:
-                copyNemesis.wounds.max = value
-                break
-            case StatsType.Strain:
-                copyNemesis.strain.max = value
-                break
-        }
-    }
-
-    const onDefenseChange = (copyNemesis: Nemesis, value: number, type: DefenseType) => {
-        switch (type) {
-            case DefenseType.Melee:
-                copyNemesis.melee.current = value
-                break
-            case DefenseType.Ranged:
-                copyNemesis.ranged.current = value
-                break
-        }
-    }
-
-    const onRatingChange = (copyNemesis: Nemesis, value: number, type: RatingType) => {
-        switch (type) {
-            case RatingType.Combat:
-                copyNemesis.combat = value
-                break
-            case RatingType.Social:
-                copyNemesis.social = value
-                break
-            case RatingType.General:
-                copyNemesis.general = value
-                break
-        }
-    }
-
     const onChange = async (key: keyof Nemesis, value: number) => {
         if (value === null || (nemesis !== null && nemesis[key] === value)) {
             return
@@ -93,50 +34,48 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
         const copyNemesis = {...nemesis} as Nemesis
         switch (key) {
             case "brawn":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Brawn)
+                copyNemesis.brawn.current = value
                 break
             case "agility":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Agility)
+                copyNemesis.agility.current = value
                 break
             case "intellect":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Intellect)
+                copyNemesis.intellect.current = value
                 break
             case "cunning":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Cunning)
+                copyNemesis.cunning.current = value
                 break
             case "willpower":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Willpower)
+                copyNemesis.willpower.current = value
                 break
             case "presence":
-                onCharacteristicChange(copyNemesis, value, CharacteristicType.Presence)
-                break
-            case 'talents':
+                copyNemesis.presence.current = value
                 break
             case "soak":
                 copyNemesis.soak = copyNemesis.brawn.current
                 break
             case "melee":
-                onDefenseChange(copyNemesis, value, DefenseType.Melee)
+                copyNemesis.melee.current = value
                 break
             case "ranged":
-                onDefenseChange(copyNemesis, value, DefenseType.Ranged)
+                copyNemesis.ranged.current = value
                 break
             case "wounds":
-                onStatChange(copyNemesis, value, StatsType.Wounds)
+                copyNemesis.wounds.max = value
                 break
             case "strain":
-                onStatChange(copyNemesis, value, StatsType.Strain)
+                copyNemesis.strain.max = value
                 break
             case "combat":
-                onRatingChange(copyNemesis, value, RatingType.Combat)
+                copyNemesis.combat = value
                 break
             case "social":
-                onRatingChange(copyNemesis, value, RatingType.Social)
+                copyNemesis.social = value
                 break
             case "general":
-                onRatingChange(copyNemesis, value, RatingType.General)
+                copyNemesis.general = value
                 break
-            case "name":
+            default:
                 break
         }
 

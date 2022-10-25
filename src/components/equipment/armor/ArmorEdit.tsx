@@ -15,35 +15,6 @@ export default function ArmorEdit(props: {ar: Armor}) {
     const [armor, setArmor] = useState<Armor>(ar)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
-
-    const onNumberChange = async (key: keyof Armor, value: number) => {
-        const copyArmor = {...armor} as Armor
-        switch (key) {
-            case 'defense':
-                copyArmor.defense = value
-                break
-            case 'soak':
-                copyArmor.soak = value
-                break
-            case 'rarity':
-                copyArmor.rarity = value
-                break
-            case 'price':
-                copyArmor.price = value
-                break;
-            case 'encumbrance':
-                copyArmor.encumbrance = value
-                break
-            case 'slot':
-            case 'name':
-            case 'description':
-            case "equipped":
-            case "restricted":
-                break;
-        }
-
-        await updateArmor(copyArmor)
-    }
     
     const onChange = async (key: keyof Armor, value: string) => {
         if (value === null || (armor !== null && armor[key] === value)) {
@@ -72,10 +43,8 @@ export default function ArmorEdit(props: {ar: Armor}) {
             case 'encumbrance':
                 copyArmor.encumbrance = Number(value)
                 break
-            case "equipped":
-            case 'slot':
-            case 'name':
-                break;
+            default:
+                break
         }
 
         await updateArmor(copyArmor)
@@ -107,7 +76,7 @@ export default function ArmorEdit(props: {ar: Armor}) {
                         <EditNumberFieldCard value={armor?.soak!!} title={'Soak'} onChange={(value: number): void => { onChange('soak', String(value))}} min={0} max={6} />
                         <EditNumberFieldCard value={armor?.defense!!} title={'Defense'} onChange={(value: number): void => { onChange('defense', String(value))}} min={0} max={5} />
                         <EditNumberFieldCard value={armor?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
-                        <EditPriceCheckBoxCard check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onNumberChange('price', value)}} />
+                        <EditPriceCheckBoxCard check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={armor?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
                 </Grid>
