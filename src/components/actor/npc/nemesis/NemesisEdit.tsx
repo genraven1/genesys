@@ -3,21 +3,22 @@ import * as React from "react"
 import {useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
 import ActorService from "../../../../services/ActorService"
-import Nemesis, {NemesisKey} from "../../../../models/actor/npc/Nemesis"
+import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/actor/Characteristics"
 import {DefenseType} from "../../../../models/actor/Defense"
 import {StatsType} from "../../../../models/actor/Stats"
 import EditCharacteristicCard from "../../EditCharacteristicCard"
 import RatingCard from "../RatingCard"
-import {RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
+import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
 import SoakCard from "../../SoakCard"
 import StatsCard from "../../StatsCard"
 import DefenseCard from "../../DefenseCard"
 import SkillTable from "./NemesisSkillTable"
 import NemesisTalentTable from "./NemesisTalentTable"
-import NPCTalentSelectionDialog from "../NPCTalentSelectionDialog"
+import TalentSelectionDialog from "../TalentSelectionDialog"
 import {Path} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
+import { ActorKey } from "../../../../models/actor/Actor"
 
 export default function NemesisEdit(props: {nem: Nemesis}) {
     const {nem} = props
@@ -50,9 +51,6 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
                 break
             case "presence":
                 copyNemesis.presence.current = value
-                break
-            case "soak":
-                copyNemesis.soak = copyNemesis.brawn.current
                 break
             case "melee":
                 copyNemesis.melee.current = value
@@ -102,32 +100,32 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <EditCharacteristicCard characteristic={nemesis?.brawn!!} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(NemesisKey.Brawn, value) }}/>
-                        <EditCharacteristicCard characteristic={nemesis?.agility!!} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(NemesisKey.Agility, value) }}/>
-                        <EditCharacteristicCard characteristic={nemesis?.intellect!!} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(NemesisKey.Intellect, value) }}/>
-                        <EditCharacteristicCard characteristic={nemesis?.cunning!!} type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(NemesisKey.Cunning, value) }}/>
-                        <EditCharacteristicCard characteristic={nemesis?.willpower!!} type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(NemesisKey.Willpower, value) }}/>
-                        <EditCharacteristicCard characteristic={nemesis?.presence!!} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(NemesisKey.Presence, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.brawn!!} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(ActorKey.Brawn, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.agility!!} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(ActorKey.Agility, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.intellect!!} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(ActorKey.Intellect, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.cunning!!} type={CharacteristicType.Cunning} onChange={(value: number): void => { onChange(ActorKey.Cunning, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.willpower!!} type={CharacteristicType.Willpower} onChange={(value: number): void => { onChange(ActorKey.Willpower, value) }}/>
+                        <EditCharacteristicCard characteristic={nemesis?.presence!!} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(ActorKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={nemesis?.soak!!} />
-                        <StatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(NemesisKey.Wounds, value) }}/>
-                        <StatsCard stats={nemesis?.strain!!} type={StatsType.Strain} onChange={(value: number): void => { onChange(NemesisKey.Strain, value) }}/>
-                        <DefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(NemesisKey.Melee, value) }}/>
-                        <DefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(NemesisKey.Ranged, value) }}/>
+                        <StatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
+                        <StatsCard stats={nemesis?.strain!!} type={StatsType.Strain} onChange={(value: number): void => { onChange(ActorKey.Strain, value) }}/>
+                        <DefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(ActorKey.Melee, value) }}/>
+                        <DefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(ActorKey.Ranged, value) }}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <RatingCard  rating={nemesis?.combat!!} type={RatingType.Combat} onChange={(value: number): void => { onChange(NemesisKey.Combat, value) }}/>
-                        <RatingCard  rating={nemesis?.social!!} type={RatingType.Social} onChange={(value: number): void => { onChange(NemesisKey.Social, value) }}/>
-                        <RatingCard  rating={nemesis?.general!!} type={RatingType.General} onChange={(value: number): void => { onChange(NemesisKey.General, value) }}/>
+                        <RatingCard  rating={nemesis?.combat!!} type={RatingType.Combat} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.Combat, value) }}/>
+                        <RatingCard  rating={nemesis?.social!!} type={RatingType.Social} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.Social, value) }}/>
+                        <RatingCard  rating={nemesis?.general!!} type={RatingType.General} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.General, value) }}/>
                     </Grid>
                     <Divider />
                     <SkillTable  nemesis={nemesis}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <NPCTalentSelectionDialog nemesis={nemesis} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
+                    {openSelectTalentDialog && <TalentSelectionDialog actor={nemesis} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NemesisTalentTable nemesis={nemesis}/>
                 </Grid>
             </CardContent>

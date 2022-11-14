@@ -17,3 +17,9 @@ export enum NonPlayerCharacterType {
     Rival = 'Rival',
     Nemesis = 'Nemesis',
 }
+
+export enum NonPlayerCharacterKey {
+    Combat = 'combat',
+    General = 'general',
+    Social = 'social'
+}

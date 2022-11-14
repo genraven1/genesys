@@ -85,7 +85,7 @@ interface TableProps {
     nemesis: Nemesis
 }
 
-export default function ViewSkillTable(props: TableProps) {
+export default function ViewNemesisSkillTable(props: TableProps) {
     const {nemesis} = props;
     return (
         <Fragment>

@@ -4,7 +4,6 @@ import {createTheme, ThemeProvider} from '@mui/material';
 import {EquipmentPath, LorePath, Path} from '../../services/Path';
 import AllTalentsView from '../talents/AllTalentsViewTable';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
-import PlayerView from '../actor/player/PlayerView';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import ViewAllSkills from '../skills/ViewAllSkills';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
@@ -24,6 +23,7 @@ import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 import GearWorkflow from "../equipment/gear/GearWorkflow";
 import ViewAllGear from "../equipment/gear/ViewAllGear";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
+import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 
 export default function App() {
 
@@ -42,7 +42,8 @@ export default function App() {
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
                     {/*Actor Routes*/}
                     <Route path={Path.Player} element={<ViewAllPlayers />} />
-                    <Route path={Path.Player + ':name'} element={<PlayerView />} />
+                    <Route path={Path.Player + ':name/edit'} element={<PlayerWorkflow />} />
+                    <Route path={Path.Player + ':name/view'} element={<PlayerWorkflow />} />
 
                     <Route path={Path.Nemesis} element={<AllNemesesView />} />
                     <Route path={Path.Nemesis + ':name/edit'} element={<NemesisWorkflow />} />

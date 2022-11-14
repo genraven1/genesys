@@ -1,8 +1,8 @@
-import {Characteristic, CharacteristicType} from './Characteristics';
+import {Characteristic} from './Characteristics';
 import { Defense } from './Defense';
 import Talent from '../Talent';
 import Stats from './Stats';
-import Skill, {SkillType} from "./Skill";
+import Skill from "./Skill";
 
 export default interface Actor {
     name: string,
@@ -32,14 +32,19 @@ export interface PlayerSkill extends ActorSkill {
     career: boolean
 }
 
-export class DefaultActorSkill {
-    static create(): ActorSkill {
-        return {
-            active: false,
-            characteristic: CharacteristicType.Brawn,
-            name: '',
-            type: SkillType.General,
-            ranks: 0
-        }
-    }
+export enum ActorKey {
+    Agility = 'agility',
+    Brawn = 'brawn',
+    Cunning = 'cunning',
+    Intellect = 'intellect',
+    Melee = 'melee',
+    Name = 'name',
+    Presence = 'presence',
+    Ranged = 'ranged',
+    Soak = 'soak',
+    Talents = 'talents',
+    Willpower = 'willpower',
+    Wounds = 'wounds',
+    Strain = 'strain',
+    Skills = 'skills'
 }

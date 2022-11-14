@@ -7,12 +7,3 @@ export enum StatsType {
     Wounds= 'Wounds',
     Strain = 'Strain'
 }
-
-export class DefaultStats {
-    static create(): Stats {
-        return {
-            current: 0,
-            max: 1,
-        }
-    }
-}
