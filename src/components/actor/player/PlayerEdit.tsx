@@ -10,12 +10,12 @@ import { useState } from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
-import SkillTable from "../npc/nemesis/NemesisSkillTable";
 import StatsCard from "../StatsCard";
 import SoakCard from "../SoakCard";
 import TalentSelectionDialog from "../npc/TalentSelectionDialog";
 import DefenseCard from "../DefenseCard";
 import { ActorKey } from '../../../models/actor/Actor';
+import PlayerEditSkillTable from "./PlayerEditSkillTable";
 
 export default function PlayerView(props: {play: Player}) {
     const {play} = props
@@ -103,7 +103,7 @@ export default function PlayerView(props: {play: Player}) {
                         <DefenseCard defense={player?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(ActorKey.Ranged, value) }}/>
                     </Grid>
                     <Divider />
-                    <SkillTable player={player}/>
+                    <PlayerEditSkillTable player={player}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={player} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
