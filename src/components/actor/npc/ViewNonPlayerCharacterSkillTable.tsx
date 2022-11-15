@@ -1,26 +1,25 @@
-import Nemesis from "../../../../models/actor/npc/Nemesis";
 import * as React from "react";
 import {Fragment} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {ActorSkill} from "../../../../models/actor/Actor";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Grid, Typography} from "@mui/material";
-import {SkillType} from "../../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../../common/GenesysSkillDiceTypography";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
+import NonPlayerCharacter, { NonPlayerCharacterSkill } from "../../../models/actor/npc/NonPlayerCharacter";
+import { CharacteristicType } from "../../../models/actor/Characteristics";
+import GenesysSkillDiceTypography from "../../common/GenesysSkillDiceTypography";
+import { SkillType } from "../../../models/actor/Skill";
 
 interface RowProps {
-    skill: ActorSkill,
-    nemesis: Nemesis
+    skill: NonPlayerCharacterSkill,
+    npc: NonPlayerCharacter
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const { skill, nemesis } = props;
+    const { skill, npc } = props
 
     const setName = (): string => {
         return skill.name + '(' + skill.characteristic + ')'
@@ -29,17 +28,17 @@ function SkillRow(props: RowProps): JSX.Element {
     const getCharacteristicRanks = (): number => {
         switch (skill.characteristic) {
             case CharacteristicType.Agility:
-                return nemesis.agility.current
+                return npc.agility.current
             case CharacteristicType.Brawn:
-                return nemesis.brawn.current
+                return npc.brawn.current
             case CharacteristicType.Cunning:
-                return nemesis.cunning.current
+                return npc.cunning.current
             case CharacteristicType.Intellect:
-                return nemesis.intellect.current
+                return npc.intellect.current
             case CharacteristicType.Presence:
-                return nemesis.presence.current
+                return npc.presence.current
             case CharacteristicType.Willpower:
-                return nemesis.willpower.current
+                return npc.willpower.current
         }
     }
 
@@ -52,16 +51,16 @@ function SkillRow(props: RowProps): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 interface GroupProps {
-    nemesis: Nemesis,
+    npc: NonPlayerCharacter,
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {nemesis, type} = props
+    const {npc, type} = props
 
     return (
         <Fragment>
@@ -72,8 +71,8 @@ export function SkillTypeGroup(props: GroupProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(nemesis?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
-                        <SkillRow key={row.name} skill={row} nemesis={nemesis}/>
+                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
+                            <SkillRow key={row.name} skill={row} npc={npc}/>
                     ))}
                 </TableBody>
             </Table>
@@ -82,11 +81,11 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    nemesis: Nemesis
+    npc: NonPlayerCharacter
 }
 
-export default function ViewSkillTable(props: TableProps) {
-    const {nemesis} = props;
+export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
+    const {npc} = props;
     return (
         <Fragment>
             <Typography>{'Skills'}</Typography>
@@ -95,8 +94,8 @@ export default function ViewSkillTable(props: TableProps) {
                     <TableContainer component={Paper}>
                         <Table aria-label="collapsible table">
                             <TableBody>
-                                <SkillTypeGroup nemesis={nemesis} type={SkillType.General}/>
-                                <SkillTypeGroup nemesis={nemesis} type={SkillType.Magic}/>
+                                <SkillTypeGroup npc={npc} type={SkillType.General}/>
+                                <SkillTypeGroup npc={npc} type={SkillType.Magic}/>
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -105,9 +104,9 @@ export default function ViewSkillTable(props: TableProps) {
                     <TableContainer component={Paper}>
                         <Table aria-label="collapsible table">
                             <TableBody>
-                                <SkillTypeGroup nemesis={nemesis} type={SkillType.Combat}/>
-                                <SkillTypeGroup nemesis={nemesis} type={SkillType.Social}/>
-                                <SkillTypeGroup nemesis={nemesis} type={SkillType.Knowledge}/>
+                                <SkillTypeGroup npc={npc} type={SkillType.Combat}/>
+                                <SkillTypeGroup npc={npc} type={SkillType.Social}/>
+                                <SkillTypeGroup npc={npc} type={SkillType.Knowledge}/>
                             </TableBody>
                         </Table>
                     </TableContainer>

@@ -7,30 +7,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
-import { Button } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import { LinkProps, Link } from "react-router-dom";
 import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
+import ActionsTableCell from '../../common/ActionsTableCell';
 
 function Row(props: { row: Player }): JSX.Element {
-    const { row } = props;
-    const { pathname } = useLocation()
-    const [open, setOpen] = useState(false);
-
-    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${pathname}/${row.name}`} ref={ref} {...itemProps} />
-    )),[pathname, row.name]);
+    const { row } = props
+    const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>
-                    <Button component={renderLink}>Edit</Button>
-                </TableCell>
+                <ActionsTableCell name={row.name}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -45,19 +36,19 @@ function Row(props: { row: Player }): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 export default function AllTalentsView() {
-    const [players, setPlayers] = useState<Player[]>([]);
+    const [players, setPlayers] = useState<Player[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const playerList = await ActorService.getPlayers();
-            if (!playerList) { return; }
-            setPlayers(playerList);
-        })();
-    }, []);
+            const playerList = await ActorService.getPlayers()
+            if (!playerList) { return }
+            setPlayers(playerList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
@@ -75,5 +66,5 @@ export default function AllTalentsView() {
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }

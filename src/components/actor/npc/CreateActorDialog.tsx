@@ -1,32 +1,36 @@
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ActorService from "../../../services/ActorService";
-import {NonPlayerCharacterType} from "../../../models/actor/npc/NonPlayerCharacter";
 import {Path} from "../../../services/Path";
+import {ActorType} from "../../../models/actor/Actor";
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
-    type: NonPlayerCharacterType
+    open: boolean
+    onClose: () => void
+    type: ActorType
 }
 
-export default function CreateNonPlayerCharacterDialog(props: Props) {
-    const { open, onClose, type } = props;
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+export default function CreateActorDialog(props: Props) {
+    const { open, onClose, type } = props
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         switch (type) {
-            case NonPlayerCharacterType.Minion:
+            case ActorType.Minion:
                 break
-            case NonPlayerCharacterType.Rival:
-                await ActorService.createRival(name);
-                navigate(Path.Rival + name + '/edit');
+            case ActorType.Rival:
+                await ActorService.createRival(name)
+                navigate(Path.Rival + name + '/edit')
                 break
-            case NonPlayerCharacterType.Nemesis:
-                await ActorService.createNemesis(name);
-                navigate(Path.Nemesis + name + '/edit');
+            case ActorType.Nemesis:
+                await ActorService.createNemesis(name)
+                navigate(Path.Nemesis + name + '/edit')
+                break
+            case ActorType.Player:
+                await ActorService.createPlayer(name)
+                navigate(Path.Player + name + '/edit')
                 break
         }
         onClose()
@@ -34,7 +38,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     const getTitle = ():string => {

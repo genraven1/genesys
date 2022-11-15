@@ -12,6 +12,7 @@ import TalentBackdrop from "./TalentBackdrop";
 import Talent from "../../models/Talent";
 import ActorService from "../../services/ActorService";
 import Actor, {ActorTalent} from "../../models/actor/Actor";
+import Player from "../../models/actor/player/Player";
 
 interface RowProps {
     name: string
@@ -24,14 +25,12 @@ function TalentNameRow(props: RowProps): JSX.Element {
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     useEffect(() => {
-        if (!name) {
-            return;
-        }
+        if (!name) {return}
         (async (): Promise<void> => {
-            const talentData = await TalentService.getTalent(name);
-            if (!talentData) { return; }
+            const talentData = await TalentService.getTalent(name)
+            if (!talentData) { return }
             setTalent(talentData)
-        })();
+        })()
     }, [name])
 
     const addTalent = async () => {
@@ -50,20 +49,24 @@ function TalentNameRow(props: RowProps): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
-export default function TalentSelectionTable(props: {actor: Actor}) {
+interface TableProps {
+    actor: Actor
+}
+
+export default function TalentSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<string[]>([]);
+    const [names, setNames] = useState<string[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalentNames();
-            if (!talentList) { return; }
-            setNames(talentList);
-        })();
-    }, []);
+            const talentList = await TalentService.getTalentNames()
+            if (!talentList) { return }
+            setNames(talentList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
@@ -81,5 +84,5 @@ export default function TalentSelectionTable(props: {actor: Actor}) {
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }

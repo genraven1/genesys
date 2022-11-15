@@ -1,4 +1,5 @@
 import Actor from "../Actor";
+import Skill from "../Skill";
 
 export enum RatingType {
     Combat = 'Combat',
@@ -10,10 +11,15 @@ export default interface NonPlayerCharacter extends Actor {
     combat: number,
     social: number,
     general: number,
+    skills: NonPlayerCharacterSkill[]
 }
 
-export enum NonPlayerCharacterType {
-    Minion = 'Minion',
-    Rival = 'Rival',
-    Nemesis = 'Nemesis',
+export interface NonPlayerCharacterSkill extends Skill {
+    ranks: number
+}
+
+export enum NonPlayerCharacterKey {
+    Combat = 'combat',
+    General = 'general',
+    Social = 'social'
 }

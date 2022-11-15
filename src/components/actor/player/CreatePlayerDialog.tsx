@@ -5,23 +5,23 @@ import ActorService from "../../../services/ActorService";
 import {Path} from "../../../services/Path";
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
+    open: boolean
+    onClose: () => void
 }
 
 export default function CreatePlayerDialog(props: Props) {
-    const { open, onClose } = props;
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const { open, onClose } = props
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await ActorService.createPlayer(name);
-        navigate(Path.Player + name);
+        await ActorService.createPlayer(name)
+        navigate(Path.Player + name + '/edit')
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     return (
