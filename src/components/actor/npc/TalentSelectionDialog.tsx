@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function TalentSelectionDialog(props: Props) {
-    const {actor, open, onClose} = props;
+    const {actor, open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>

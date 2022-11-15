@@ -1,22 +1,22 @@
 import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
-import {ActorSkill} from "../../models/actor/Actor";
-import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
-import ActorService from "../../services/ActorService";
+import {NonPlayerCharacterSkill} from "../../../../models/actor/npc/NonPlayerCharacter";
+import InputNumberRangeSelectField from "../../../common/InputNumberRangeSelect";
+import ActorService from "../../../../services/ActorService";
 
 interface Props {
     open: boolean
     name: string
-    actorSkill: ActorSkill
+    actorSkill: NonPlayerCharacterSkill
     onClose: () => void
 }
 
-export default function EditSkillDialog(props: Props) {
+export default function NemesisEditSkillDialog(props: Props) {
     const { open, actorSkill, name, onClose } = props;
-    const [skill, setSkill] = useState<ActorSkill>(actorSkill);
+    const [skill, setSkill] = useState<NonPlayerCharacterSkill>(actorSkill);
 
     const handleEdit = async (ranks: number): Promise<void> => {
-        const copySkill = {...skill} as ActorSkill
+        const copySkill = {...skill} as NonPlayerCharacterSkill
         copySkill.ranks = ranks
         setSkill(copySkill)
         await ActorService.updateNemesisSkill(name, copySkill)

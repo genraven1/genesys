@@ -103,7 +103,7 @@ export default function PlayerView(props: {play: Player}) {
                         <DefenseCard defense={player?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(ActorKey.Ranged, value) }}/>
                     </Grid>
                     <Divider />
-                    <SkillTable  player={player}/>
+                    <SkillTable player={player}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={player} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}

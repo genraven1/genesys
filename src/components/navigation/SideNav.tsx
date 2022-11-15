@@ -5,12 +5,12 @@ import ListMenuItemLink from './ListMenuItemLink';
 import ExpandedList, {Anchor} from './ExpandedList';
 import TalentDialog from '../talents/TalentDialog';
 import CreatePlayerDialog from '../actor/player/CreatePlayerDialog';
-import CreateNonPlayerCharacterDialog from "../actor/npc/CreateNonPlayerCharacterDialog";
+import CreateActorDialog from "../actor/npc/CreateActorDialog";
 import {Path, EquipmentPath} from "../../services/Path";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
-import {NonPlayerCharacterType} from "../../models/actor/npc/NonPlayerCharacter";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
+import {ActorType} from "../../models/actor/Actor";
 
 export default function SideNav() {
     const [state, setState] = useState({ left: false });
@@ -52,8 +52,8 @@ export default function SideNav() {
                     {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}
                     {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog} onClose={(): void => setOpenGearCreationDialog(false)} type={EquipmentType.Gear}/>}
                     {openPlayerCreationDialog && <CreatePlayerDialog open={openPlayerCreationDialog} onClose={(): void => setOpenPlayerCreationDialog(false)} />}
-                    {openNemesisCreationDialog && <CreateNonPlayerCharacterDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)}  type={NonPlayerCharacterType.Nemesis}/>}
-                    {openRivalCreationDialog && <CreateNonPlayerCharacterDialog open={openRivalCreationDialog} onClose={(): void => setOpenRivalCreationDialog(false)}  type={NonPlayerCharacterType.Rival}/>}
+            {openNemesisCreationDialog && <CreateActorDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)} type={ActorType.Nemesis}/>}
+                    {openRivalCreationDialog && <CreateActorDialog open={openRivalCreationDialog} onClose={(): void => setOpenRivalCreationDialog(false)} type={ActorType.Rival}/>}
                 </Fragment>
             ))}
         </div>

@@ -3,21 +3,21 @@ import * as React from "react";
 import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {ActorSkill} from "../../../../models/actor/Actor";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../../models/actor/Skill";
-import EditSkillDialog from "../../../skills/EditSkillDialog";
 import GenesysSkillDiceTypography from "../../../common/GenesysSkillDiceTypography";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
+import {NonPlayerCharacterSkill} from "../../../../models/actor/npc/NonPlayerCharacter";
+import NemesisEditSkillDialog from "./NemesisEditSkillDialog";
 
 interface RowProps {
-    skill: ActorSkill
+    skill: NonPlayerCharacterSkill
     nemesis: Nemesis
 }
 
@@ -58,7 +58,7 @@ function SkillRow(props: RowProps): JSX.Element {
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
             </TableRow>
-            {openEditSkillDialog && <EditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}  actorSkill={skill!!} name={nemesis.name}/>}
+            {openEditSkillDialog && <NemesisEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}  actorSkill={skill!!} name={nemesis.name}/>}
         </Fragment>
     )
 }
@@ -91,7 +91,7 @@ export function SkillTypeGroup(props: GroupProps) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {(nemesis?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
+                                    {(nemesis?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
                                         <SkillRow key={row.name} skill={row} nemesis={nemesis}/>
                                     ))}
                                 </TableBody>

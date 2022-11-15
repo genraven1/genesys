@@ -1,9 +1,10 @@
 import axios from "axios";
-import Player from "../models/actor/player/Player";
+import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {Path} from "./Path";
 import Rival from "../models/actor/npc/Rival";
-import {ActorSkill, ActorTalent} from "../models/actor/Actor";
+import {ActorTalent} from "../models/actor/Actor";
+import {NonPlayerCharacterSkill} from "../models/actor/npc/NonPlayerCharacter";
 
 export default class ActorService {
 
@@ -23,6 +24,14 @@ export default class ActorService {
         return await axios.put(Path.Player + name, player);
     }
 
+    static async updatePlayerSkill(name: string, skill: PlayerSkill): Promise<Player> {
+        return await axios.put(Path.Player + name + '/skill', skill);
+    }
+
+    static async addPlayerTalent(name: string, talent: ActorTalent): Promise<Player> {
+        return await axios.put(Path.Player + name + '/talent', talent);
+    }
+
     static async createNemesis(name: string): Promise<Nemesis> {
         return await axios.post( Path.Nemesis + name);
     }
@@ -39,7 +48,7 @@ export default class ActorService {
         return await axios.put(Path.Nemesis + name, nemesis);
     }
 
-    static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
+    static async updateNemesisSkill(name: string, skill: NonPlayerCharacterSkill): Promise<Nemesis> {
         return await axios.put(Path.Nemesis + name + '/skill', skill);
     }
     

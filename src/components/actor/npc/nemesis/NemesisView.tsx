@@ -11,9 +11,9 @@ import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
-import ViewNemesisSkillTable from "./ViewNemesisSkills";
 import EditIcon from "@mui/icons-material/Edit";
 import {Path} from "../../../../services/Path";
+import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -58,7 +58,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                         <ViewDefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider />
-                    <ViewNemesisSkillTable nemesis={nemesis}/>
+                    <ViewNonPlayerCharacterSkillTable npc={nemesis}/>
                     <Divider />
                     <NemesisTalentTable nemesis={nemesis}/>
                 </Grid>

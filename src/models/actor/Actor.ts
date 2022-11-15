@@ -2,10 +2,10 @@ import {Characteristic} from './Characteristics';
 import { Defense } from './Defense';
 import Talent from '../Talent';
 import Stats from './Stats';
-import Skill from "./Skill";
 
 export default interface Actor {
     name: string,
+    type: ActorType,
     brawn: Characteristic,
     agility: Characteristic,
     intellect: Characteristic,
@@ -16,20 +16,18 @@ export default interface Actor {
     melee: Defense,
     ranged: Defense,
     wounds: Stats,
-    talents: ActorTalent[],
-    skills: ActorSkill[]
+    talents: ActorTalent[]
 }
 
 export interface ActorTalent extends Talent {
     ranks: number
 }
 
-export interface ActorSkill extends Skill {
-    ranks: number
-}
-
-export interface PlayerSkill extends ActorSkill {
-    career: boolean
+export enum ActorType {
+    Minion = 'Minion',
+    Rival = 'Rival',
+    Nemesis = 'Nemesis',
+    Player = 'Player'
 }
 
 export enum ActorKey {
