@@ -12,7 +12,6 @@ import TalentBackdrop from "./TalentBackdrop";
 import Talent from "../../models/Talent";
 import ActorService from "../../services/ActorService";
 import Actor, {ActorTalent} from "../../models/actor/Actor";
-import Player from "../../models/actor/player/Player";
 
 interface RowProps {
     name: string
