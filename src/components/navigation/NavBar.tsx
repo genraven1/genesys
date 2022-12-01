@@ -15,11 +15,11 @@ export default function ButtonAppBar() {
 
     const onRoll = async () => {
         let roll: Roll = {
-            boost: 3,
+            boost: 1,
             ability: 2,
-            proficiency: 0,
+            proficiency: 1,
             setback: 0,
-            difficulty: 0,
+            difficulty: 2,
             challenge: 0,
             success: 0,
             advantage: 0,
@@ -37,9 +37,9 @@ export default function ButtonAppBar() {
             <Toolbar>
                 <SideNav />
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>GENESYS</Typography>
-                <Button color='primary' variant='contained' onClick={onRoll}>Roll</Button>
-                {/*<Button color='primary' variant='contained' onClick={(): void => setOpenCustomRollBackDrop(true)}>Roll</Button>*/}
-                {/*{openCustomRollBackDrop && <CustomRollBackdrop open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}*/}
+                {/*<Button color='primary' variant='contained' onClick={onRoll}>Roll</Button>*/}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenCustomRollBackDrop(true)}>Roll</Button>
+                {openCustomRollBackDrop && <CustomRollBackdrop open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
             </Toolbar>
           </AppBar>
         </Box>
