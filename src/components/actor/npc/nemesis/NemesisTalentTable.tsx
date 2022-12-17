@@ -17,7 +17,7 @@ interface Props {
 }
 
 function Row(props: Props): JSX.Element {
-    const {row,skillRanks} = props;
+    const {row,skillRanks} = props
 
     return (
         <Fragment>
@@ -28,7 +28,7 @@ function Row(props: Props): JSX.Element {
                 </TableCell>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 interface TableProps {
@@ -36,7 +36,7 @@ interface TableProps {
 }
 
 export default function NemesisTalentTable(props: TableProps) {
-    const {nemesis} = props;
+    const {nemesis} = props
 
     return (
         <TableContainer component={Paper}>
@@ -59,5 +59,5 @@ export default function NemesisTalentTable(props: TableProps) {
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }

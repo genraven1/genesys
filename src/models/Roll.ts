@@ -15,3 +15,12 @@ export interface Results {
     threat: number
     despair: number
 }
+
+export enum DieType {
+    Boost= 'boost',
+    Ability = 'ability',
+    Proficiency = 'proficiency',
+    Setback = 'setback',
+    Difficulty = 'difficulty',
+    Challenge = 'challenge'
+}
