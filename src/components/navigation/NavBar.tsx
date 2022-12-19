@@ -5,31 +5,11 @@ import Typography from '@mui/material/Typography';
 import SideNav from './SideNav';
 import {Button} from "@mui/material";
 import * as React from "react";
-import CustomRollBackdrop from "../roll/CustomRollBackdrop";
+import CustomRollDialog from "../roll/CustomRollDialog";
 import {useState} from "react";
-import RollService from "../../services/RollService";
-import Roll from "../../models/Roll";
 
 export default function ButtonAppBar() {
     const [openCustomRollBackDrop, setOpenCustomRollBackDrop] = useState(false)
-
-    const onRoll = async () => {
-        let roll: Roll = {
-            boost: 1,
-            ability: 2,
-            proficiency: 1,
-            setback: 0,
-            difficulty: 2,
-            challenge: 0,
-            success: 0,
-            advantage: 0,
-            triumph: 0,
-            failure: 0,
-            threat: 0,
-            despair: 0
-        }
-        console.log(await RollService.roll(roll))
-    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -37,9 +17,8 @@ export default function ButtonAppBar() {
             <Toolbar>
                 <SideNav />
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>GENESYS</Typography>
-                {/*<Button color='primary' variant='contained' onClick={onRoll}>Roll</Button>*/}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenCustomRollBackDrop(true)}>Roll</Button>
-                {openCustomRollBackDrop && <CustomRollBackdrop open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
+                {openCustomRollBackDrop && <CustomRollDialog open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
             </Toolbar>
           </AppBar>
         </Box>

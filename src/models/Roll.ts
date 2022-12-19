@@ -17,10 +17,29 @@ export interface Results {
 }
 
 export enum DieType {
-    Boost= 'boost',
-    Ability = 'ability',
-    Proficiency = 'proficiency',
-    Setback = 'setback',
-    Difficulty = 'difficulty',
-    Challenge = 'challenge'
+    Boost= '[boost]',
+    Ability = '[ability]',
+    Proficiency = '[proficiency]',
+    Setback = '[setback]',
+    Difficulty = '[difficulty]',
+    Challenge = '[challenge]'
+}
+
+export class DefaultRoll {
+    static create(): Roll {
+        return {
+            ability: 0,
+            advantage: 0,
+            boost: 0,
+            challenge: 0,
+            despair: 0,
+            difficulty: 0,
+            failure: 0,
+            proficiency: 0,
+            setback: 0,
+            success: 0,
+            threat: 0,
+            triumph: 0
+        }
+    }
 }
