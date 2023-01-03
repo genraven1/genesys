@@ -19,8 +19,8 @@ export default function CustomRollDialog(props: Props) {
         setRoll(diceRoll)
     }
 
-    const onClick = () => {
-        let results = RollService.roll(roll)
+    const onClick = async () => {
+        let results = await RollService.roll(roll)
         console.log(results)
     }
 
@@ -29,7 +29,7 @@ export default function CustomRollDialog(props: Props) {
             <DialogTitle title={'Assemble Dice Roll'} style={{textAlign:'center'}}/>
             <DialogContent>
                 <ViewRollTable roll={roll} onChange={onChange}/>
-                <GenesysDescriptionTypography text={''}/>
+                <GenesysDescriptionTypography text={'dice'}/>
             </DialogContent>
             <DialogActions>
                 <Button color='primary' variant='contained' onClick={onClick}>Roll</Button>
