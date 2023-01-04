@@ -6,10 +6,11 @@ export enum Path {
     Talent = '/talents/',
     Skills = '/skills/',
     Lore = '/lore',
+    Roll = '/roll',
 }
 
 export enum LorePath {
-    Organization = '/lore/organizations/'
+    Organization = '/lore/organizations/',
 }
 
 export enum EquipmentPath {
