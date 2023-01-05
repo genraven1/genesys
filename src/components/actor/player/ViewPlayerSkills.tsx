@@ -28,17 +28,17 @@ function SkillRow(props: RowProps): JSX.Element {
     const getCharacteristicRanks = (): number => {
         switch (skill.characteristic) {
         case CharacteristicType.Agility:
-            return player.agility.current
+            return player?.agility?.current
         case CharacteristicType.Brawn:
-            return player.brawn.current
+            return player?.brawn?.current
         case CharacteristicType.Cunning:
-            return player.cunning.current
+            return player?.cunning?.current
         case CharacteristicType.Intellect:
-            return player.intellect.current
+            return player?.intellect?.current
         case CharacteristicType.Presence:
-            return player.presence.current
+            return player?.presence?.current
         case CharacteristicType.Willpower:
-            return player.willpower.current
+            return player?.willpower?.current
         }
     }
 
