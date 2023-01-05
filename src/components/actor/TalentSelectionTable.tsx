@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import TalentService from "../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -37,17 +37,15 @@ function TalentNameRow(props: RowProps): JSX.Element {
     }
 
     return (
-        <Fragment>
-            <TableRow>
-                <TableCell>
-                    <Button onClick={(): void => setOpenTalentBackDrop(true)}>{name}</Button>
-                    {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
-                </TableCell>
-                <TableCell>
-                    <Button onClick={addTalent}>Add</Button>
-                </TableCell>
-            </TableRow>
-        </Fragment>
+        <TableRow>
+            <TableCell>
+                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{name}</Button>
+                {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
+            </TableCell>
+            <TableCell>
+                <Button onClick={addTalent}>Add</Button>
+            </TableCell>
+        </TableRow>
     )
 }
 

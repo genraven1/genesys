@@ -4,6 +4,7 @@ import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import {useNavigate, useParams} from "react-router-dom";
 import Career from "../../models/actor/player/Career";
+import CareerSkillTable from "./CareerSkillTable";
 
 
 export default function CareerView(props: {career: Career}): JSX.Element {
@@ -27,6 +28,7 @@ export default function CareerView(props: {career: Career}): JSX.Element {
             </CardHeader>
             <Divider />
             <CardContent>
+                <CareerSkillTable/>
             </CardContent>
         </Card>
     )

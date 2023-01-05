@@ -22,8 +22,8 @@ export default function InputSelectField(props: Props): JSX.Element {
     const [edit, setEdit] = useState(defaultEdit ?? false)
 
     const handleOnCommit = (): void => {
-        setEdit(!edit);
-        onCommit(option);
+        setEdit(!edit)
+        onCommit(option)
     }
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {

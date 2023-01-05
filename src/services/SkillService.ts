@@ -12,6 +12,10 @@ export default class SkillService {
         return await (await axios.get(Path.Skills + name)).data;
     }
 
+    static async getSkillNames(): Promise<string[]> {
+        return await (await axios.get(Path.Skills + 'names')).data;
+    }
+
     static async getSkills(): Promise<Skill[]> {
         return await (await axios.get(Path.Skills)).data;
     }

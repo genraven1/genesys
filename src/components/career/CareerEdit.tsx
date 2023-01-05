@@ -6,6 +6,7 @@ import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import Career from "../../models/actor/player/Career";
 import CareerService from "../../services/CareerService";
+import CareerSkillTable from "./CareerSkillTable";
 
 interface Props {
     car: Career
@@ -49,6 +50,7 @@ export default function CareerEdit(props: Props) {
             </CardHeader>
             <Divider />
             <CardContent>
+                <CareerSkillTable/>
             </CardContent>
         </Card>
     )
