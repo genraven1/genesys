@@ -24,6 +24,8 @@ import GearWorkflow from "../equipment/gear/GearWorkflow";
 import ViewAllGear from "../equipment/gear/ViewAllGear";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
+import CareerWorkflow from "../career/CareerWorkflow";
+import ViewAllCareers from "../career/ViewAllCareers";
 
 export default function App() {
 
@@ -40,6 +42,9 @@ export default function App() {
                     <Route path={Path.Skills} element={<ViewAllSkills />} />
                     <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
+                    <Route path={Path.Career} element={<ViewAllCareers />} />
+                    <Route path={Path.Career + ':name/edit'} element={<CareerWorkflow />} />
+                    <Route path={Path.Career + ':name/view'} element={<CareerWorkflow />} />
                     {/*Actor Routes*/}
                     <Route path={Path.Player} element={<ViewAllPlayers />} />
                     <Route path={Path.Player + ':name/edit'} element={<PlayerWorkflow />} />

@@ -7,6 +7,7 @@ export enum Path {
     Skills = '/skills/',
     Lore = '/lore',
     Roll = '/roll',
+    Career = '/career/'
 }
 
 export enum LorePath {
