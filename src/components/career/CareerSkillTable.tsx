@@ -5,11 +5,13 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
-import InputSelectField, {Option} from "../common/InputSelectField";
 import SkillService from "../../services/SkillService";
 import {Fragment, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import {Button} from "@mui/material";
+import {Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from "@mui/material";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import {CareerSkill} from "../../models/actor/player/Career";
 
 export default function CareerSkillTable(): JSX.Element {
     const useCareerSkillSelection = (): JSX.Element => {
@@ -49,42 +51,36 @@ export function CareerSkillTableView(): JSX.Element {
 }
 
 export function CareerSkillTableEdit(): JSX.Element {
-    const [skills, setSkills] = useState<string[]>([])
-    const [names, setNames] = useState<string[]>([])
+    const [skills, setSkills] = useState<CareerSkill[]>([])
+    const [state, setState] = useState<CareerSkill[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            let name_list = await SkillService.getSkillNames()
-            setNames(name_list)
+            let names = await SkillService.getSkillNames()
+            if (!names) { return }
+            let list = new Array<CareerSkill>()
+            for (let name in names) {
+                list.push({name: name, active: false})
+            }
+            setSkills(list)
         })()
     }, [])
 
-    const getSkillNameOptions = (): Option[] => {
-        return names.map((value) => ({value}))
-    }
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {setState({...state, [event.target.name]: event.target.checked,})}
 
-    const addSkill = () => {
-
-    }
+    const error = [...skills.values()].filter((v) => v).length !== 8
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Skill Name</TableCell>
-                        <TableCell>Add</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableCell>
-
-                    </TableCell>
-                    <TableCell>
-                        <Button onClick={addSkill}>Select</Button>
-                    </TableCell>
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Box sx={{ display: 'flex' }}>
+            <FormControl required error={error} component="fieldset" sx={{ m: 3 }} variant="standard">
+                <FormLabel component="legend">Pick Eight Skills</FormLabel>
+                <FormGroup>
+                    {skills.map((skill: CareerSkill) => (
+                        <FormControlLabel control={<Checkbox checked={skill.active} onChange={handleChange} name={skill.name} />} label={skill.name}/>
+                    ))}
+                </FormGroup>
+                <FormHelperText>You must select eight skills</FormHelperText>
+            </FormControl>
+        </Box>
     )
 }
