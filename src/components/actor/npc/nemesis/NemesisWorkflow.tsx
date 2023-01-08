@@ -15,7 +15,7 @@ function useFetchNemesis(name: string): Nemesis {
                 if (nemesisData) {setNemesis(nemesisData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, nemesis])
     return nemesis as Nemesis
 }
 

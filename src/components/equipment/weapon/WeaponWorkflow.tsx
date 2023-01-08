@@ -16,7 +16,7 @@ function useFetchWeapon(name: string): Weapon {
                 if (weaponData) {setWeapon(weaponData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, weapon])
     return weapon as Weapon
 }
 

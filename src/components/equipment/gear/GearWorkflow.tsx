@@ -16,7 +16,7 @@ function useFetchGear(name: string): Gear {
                 if (gearData) {setGear(gearData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, gear])
     return gear as Gear
 }
 
