@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
-import {ChangeEvent, useState} from 'react';
+import {useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {SkillKey, SkillType} from '../../models/actor/Skill';
@@ -36,7 +36,7 @@ export default function SkillEdit(props: Props) {
         const copySkill = {...skill} as Skill
         switch (key) {
             case 'active':
-                copySkill.active = value;
+                copySkill.active = value
                 break
             case 'characteristic':
                 copySkill.characteristic = value
@@ -50,16 +50,6 @@ export default function SkillEdit(props: Props) {
         }
 
         await updateSkill(copySkill)
-    }
-
-    const handleActiveClick = (event: ChangeEvent<HTMLInputElement>): void => {
-        const value = event.target.value
-        if (value === 'on') {
-            onChange(SkillKey.Active, true)
-        }
-        else {
-            onChange(SkillKey.Active, false)
-        }
     }
 
     const updateSkill = async (copySkill: Skill) => {
@@ -85,7 +75,7 @@ export default function SkillEdit(props: Props) {
                     <Grid item xs>
                         <CardHeader title={'Active'} style={{ textAlign: 'center' }} />
                         <Divider />
-                        <Checkbox onChange={handleActiveClick} checked={skill?.active!!}/>
+                        <Checkbox onChange={(): void => {onChange(SkillKey.Active, !skill?.active!!)}} checked={skill?.active!!}/>
                     </Grid>
                 </Grid>
             </CardContent>
