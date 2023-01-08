@@ -12,7 +12,16 @@ import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/ActionsTableCell";
 
 function Row(props: { row: Skill }): JSX.Element {
-    const {row} = props;
+    const {row} = props
+
+    const renderSkillActiveTableCell = (): JSX.Element => {
+        if (row?.active!!) {
+            return <TableCell>True</TableCell>
+        }
+        else {
+            return <TableCell>False</TableCell>
+        }
+    }
 
     return (
         <Fragment>
@@ -20,23 +29,23 @@ function Row(props: { row: Skill }): JSX.Element {
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.characteristic}</TableCell>
-                <TableCell>{row.active}</TableCell>
+                {renderSkillActiveTableCell()}
                 <ActionsTableCell name={row.name}/>
             </TableRow>
         </Fragment>
-    );
+    )
 }
 
 export default function ViewAllSkills() {
-    const [players, setSkills] = useState<Skill[]>([]);
+    const [skills, setSkills] = useState<Skill[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const playerList = await SkillService.getSkills();
-            if (!playerList) { return; }
-            setSkills(playerList);
-        })();
-    }, []);
+            const skillList = await SkillService.getSkills()
+            if (!skillList) { return }
+            setSkills(skillList)
+        })()
+    }, [])
 
     return (
         <TableContainer component={Paper}>
@@ -51,11 +60,11 @@ export default function ViewAllSkills() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {players.map((row: Skill) => (
+                    {skills.map((row: Skill) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
-    );
+    )
 }
