@@ -6,7 +6,7 @@ import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import NemesisTalentTable from "./NemesisTalentTable";
+import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
@@ -60,7 +60,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     <Divider />
                     <ViewNonPlayerCharacterSkillTable npc={nemesis}/>
                     <Divider />
-                    <NemesisTalentTable nemesis={nemesis}/>
+                    <NonPlayerCharacterTalentTable npc={nemesis}/>
                 </Grid>
             </CardContent>
         </Card>

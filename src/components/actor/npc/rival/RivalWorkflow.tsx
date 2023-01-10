@@ -1,35 +1,35 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import NemesisEdit from "./NemesisEdit";
-import NemesisView from "./NemesisView";
-import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from "../../../../services/ActorService";
+import Rival from "../../../../models/actor/npc/Rival";
+import RivalEdit from "./RivalEdit";
+import RivalView from "./RivalView";
 
-function useFetchNemesis(name: string): Nemesis {
-    const [nemesis, setNemesis] = useState<Nemesis>()
+function useFetchRival(name: string): Rival {
+    const [rival, setRival] = useState<Rival>()
     useEffect(() => {
         if(!name) {return}
         (async (): Promise<void> => {
             try {
-                const nemesisData = await ActorService.getNemesis(name)
-                if (nemesisData) {setNemesis(nemesisData)}
+                const rivalData = await ActorService.getRival(name)
+                if (rivalData) {setRival(rivalData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setNemesis])
-    return nemesis as Nemesis
+    },[name])
+    return rival as Rival
 }
 
-export default function NemesisWorkflow(): JSX.Element {
+export default function RivalWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
-    const nemesis = useFetchNemesis(name!!)
+    const rival = useFetchRival(name!!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <NemesisView  nemesis={nemesis}/>
+            return <RivalView  rival={rival}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <NemesisEdit nem={nemesis}/>
+            return <RivalEdit riv={rival}/>
         }
         else {return <Fragment/>}
     }

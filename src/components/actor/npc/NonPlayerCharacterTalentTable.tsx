@@ -7,9 +7,9 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
-import {ActorTalent} from "../../../../models/actor/Actor";
-import Nemesis from "../../../../models/actor/npc/Nemesis";
-import GenesysTalentTypography from "../../../common/GenesysTalentTypography";
+import {ActorTalent} from "../../../models/actor/Actor";
+import GenesysTalentTypography from "../../common/GenesysTalentTypography";
+import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
 
 interface Props {
     row: ActorTalent
@@ -32,11 +32,11 @@ function Row(props: Props): JSX.Element {
 }
 
 interface TableProps {
-    nemesis: Nemesis
+    npc: NonPlayerCharacter
 }
 
-export default function NemesisTalentTable(props: TableProps) {
-    const {nemesis} = props
+export default function NonPlayerCharacterTalentTable(props: TableProps) {
+    const {npc} = props
 
     return (
         <TableContainer component={Paper}>
@@ -53,7 +53,7 @@ export default function NemesisTalentTable(props: TableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(nemesis?.talents!! || []).map((row: ActorTalent) => (
+                    {(npc?.talents!! || []).map((row: ActorTalent) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>
