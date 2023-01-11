@@ -7,7 +7,6 @@ import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import ViewAllSkills from '../skills/ViewAllSkills';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
-import RivalView from '../actor/npc/rival/RivalView';
 import ViewAllArmor from '../equipment/armor/ViewAllArmor';
 import * as React from 'react';
 import Dashboard from "./Dashboard";
@@ -24,6 +23,7 @@ import GearWorkflow from "../equipment/gear/GearWorkflow";
 import ViewAllGear from "../equipment/gear/ViewAllGear";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
+import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 
 export default function App() {
 
@@ -50,7 +50,8 @@ export default function App() {
                     <Route path={Path.Nemesis + ':name/view'} element={<NemesisWorkflow />} />
 
                     <Route path={Path.Rival} element={<AllRivalsView />} />
-                    <Route path={Path.Rival + ':name'} element={<RivalView />} />
+                    <Route path={Path.Rival + ':name/edit'} element={<RivalWorkflow />} />
+                    <Route path={Path.Rival + ':name/view'} element={<RivalWorkflow />} />
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ViewAllArmor/>} />
                     <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
