@@ -60,7 +60,7 @@ export default function ViewAllSkills() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {skills.map((row: Skill) => (
+                    {skills.sort((a, b) => a.name.localeCompare(b.name)).map((row: Skill) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>

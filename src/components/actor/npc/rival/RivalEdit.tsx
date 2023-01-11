@@ -1,5 +1,5 @@
 import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
@@ -27,6 +27,8 @@ export default function RivalEdit(props: {riv: Rival}) {
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setRival(riv)}, [riv])
 
     const onChange = async (key: keyof Rival, value: number) => {
         if (value === null) {

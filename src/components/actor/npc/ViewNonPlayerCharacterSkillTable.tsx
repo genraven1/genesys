@@ -71,7 +71,10 @@ export function SkillTypeGroup(props: GroupProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
+                    {(npc?.skills!! || [])
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .filter((skill) => skill.type === type)
+                        .map((row: NonPlayerCharacterSkill) => (
                             <SkillRow key={row.name} skill={row} npc={npc}/>
                     ))}
                 </TableBody>
