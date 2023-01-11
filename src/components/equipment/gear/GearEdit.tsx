@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Gear} from '../../../models/equipment/Equipment';
@@ -25,6 +25,8 @@ export default function GearEdit(props: {gea: Gear}) {
     const [gear, setGear] = useState<Gear>(gea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setGear(gea)}, [gea])
 
     const onSkillChange = async (value: Skill) => {
         const copyGear = {...gear} as Gear
