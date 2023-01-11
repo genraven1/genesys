@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {SkillKey, SkillType} from '../../models/actor/Skill';
@@ -28,6 +28,8 @@ export default function SkillEdit(props: Props) {
     const [skill, setSkill] = useState<Skill>(sk)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setSkill(sk)}, [sk])
 
     const onChange = async (key: keyof Skill, value: any) => {
         if (value === null || (skill !== null && skill[key] === value)) {

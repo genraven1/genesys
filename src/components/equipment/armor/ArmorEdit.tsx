@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Armor} from '../../../models/equipment/Equipment';
@@ -15,6 +15,8 @@ export default function ArmorEdit(props: {ar: Armor}) {
     const [armor, setArmor] = useState<Armor>(ar)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setArmor(ar)}, [ar])
     
     const onChange = async (key: keyof Armor, value: string) => {
         if (value === null || (armor !== null && armor[key] === value)) {
