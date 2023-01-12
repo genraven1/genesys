@@ -92,7 +92,7 @@ export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
     const {npc} = props;
     return (
         <Fragment>
-            <Typography>{'Skills'}</Typography>
+            {/*<Typography>{'Skills'}</Typography>*/}
             <Grid container>
                 <Grid item xs={6}>
                     <TableContainer component={Paper}>
