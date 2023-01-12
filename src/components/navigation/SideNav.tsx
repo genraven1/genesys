@@ -11,6 +11,7 @@ import CreateSkillDialog from "../skills/CreateSkillDialog";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
 import {ActorType} from "../../models/actor/Actor";
+import ExpandedMenuList from "./ExpandedMenuList";
 
 export default function SideNav() {
     const [state, setState] = useState({ left: false });
@@ -24,12 +25,12 @@ export default function SideNav() {
     const [openRivalCreationDialog, setOpenRivalCreationDialog] = useState(false)
 
     const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) { return; }
+        if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) { return }
         setState({ ...state, [anchor]: open })
     }
 
     return (
-        <div>
+        <Fragment>
             {(['left'] as const).map((anchor) => (
                 <Fragment>
                     <IconButton onClick={toggleDrawer(anchor, true)}>
@@ -45,6 +46,7 @@ export default function SideNav() {
                         <ExpandedList header={'Player Characters'} viewTitle={'View All Player Characters'} to={Path.Player} dialogTitle={'Create Player Character'} onClick={(): void => setOpenPlayerCreationDialog(true)} />
                         <ExpandedList header={'Nemesis NPCS'} viewTitle={'View All Nemeses'} to={Path.Nemesis} dialogTitle={'Create Nemesis'} onClick={(): void => setOpenNemesisCreationDialog(true)} />
                         <ExpandedList header={'Rival NPCS'} viewTitle={'View All Rivals'} to={Path.Rival} dialogTitle={'Create Rival'} onClick={(): void => setOpenRivalCreationDialog(true)} />
+                        <ExpandedMenuList  header={'Test'} viewTitle={'Test View'}/>
                     </Drawer>
                     {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog} onClose={(): void => setOpenTalentCreationDialog(false)} />}
                     {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog} onClose={(): void => setOpenSkillCreationDialog(false)} />}
@@ -52,10 +54,10 @@ export default function SideNav() {
                     {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}
                     {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog} onClose={(): void => setOpenGearCreationDialog(false)} type={EquipmentType.Gear}/>}
                     {openPlayerCreationDialog && <CreatePlayerDialog open={openPlayerCreationDialog} onClose={(): void => setOpenPlayerCreationDialog(false)} />}
-            {openNemesisCreationDialog && <CreateActorDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)} type={ActorType.Nemesis}/>}
+                    {openNemesisCreationDialog && <CreateActorDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)} type={ActorType.Nemesis}/>}
                     {openRivalCreationDialog && <CreateActorDialog open={openRivalCreationDialog} onClose={(): void => setOpenRivalCreationDialog(false)} type={ActorType.Rival}/>}
                 </Fragment>
             ))}
-        </div>
+        </Fragment>
     )
 }
