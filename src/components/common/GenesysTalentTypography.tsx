@@ -31,7 +31,6 @@ export default function GenesysTalentTypography(props: Props): JSX.Element {
         if (text === null || text === undefined) {
             return '';
         }
-
         const string = text.split(' ');
         const array = string.map((word: string) => {
             const target = word.toLowerCase();

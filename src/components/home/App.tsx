@@ -24,6 +24,8 @@ import ViewAllGear from "../equipment/gear/ViewAllGear";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
+import AllMinionsView from "../actor/npc/minion/ViewAllMinion";
+import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 
 export default function App() {
 
@@ -52,6 +54,10 @@ export default function App() {
                     <Route path={Path.Rival} element={<AllRivalsView />} />
                     <Route path={Path.Rival + ':name/edit'} element={<RivalWorkflow />} />
                     <Route path={Path.Rival + ':name/view'} element={<RivalWorkflow />} />
+
+                    <Route path={Path.Minion} element={<AllMinionsView />} />
+                    <Route path={Path.Minion + ':name/edit'} element={<MinionWorkflow />} />
+                    <Route path={Path.Minion + ':name/view'} element={<MinionWorkflow />} />
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ViewAllArmor/>} />
                     <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />

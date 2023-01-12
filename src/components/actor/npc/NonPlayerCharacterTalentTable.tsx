@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import {ActorTalent} from "../../../models/actor/Actor";
 import GenesysTalentTypography from "../../common/GenesysTalentTypography";
 import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
+import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 
 interface Props {
     row: ActorTalent
@@ -19,12 +20,21 @@ interface Props {
 function Row(props: Props): JSX.Element {
     const {row,skillRanks} = props
 
+    const renderTypography = (): JSX.Element => {
+        if (row.ranks === 0 || row.ranks === undefined) {
+            return <GenesysDescriptionTypography text={row.summary}/>
+        }
+        else {
+            return <GenesysTalentTypography text={row.summary} ranks={row.ranks} secondRanks={skillRanks}/>
+        }
+    }
+
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 <TableCell>
-                    <GenesysTalentTypography text={row.summary} ranks={row.ranks} secondRanks={skillRanks}/>
+                    {renderTypography()}
                 </TableCell>
             </TableRow>
         </Fragment>
