@@ -16,7 +16,7 @@ function useFetchSkill(name: string): Skill {
                 if (skillData) {setSkill(skillData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, skill])
+    },[name, setSkill])
     return skill as Skill
 }
 

@@ -16,7 +16,7 @@ function useFetchTalent(name: string): Talent {
                 if (talentData) {setTalent(talentData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, talent])
+    },[name, setTalent])
     return talent as Talent
 }
 

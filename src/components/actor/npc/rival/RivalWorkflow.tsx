@@ -15,7 +15,7 @@ function useFetchRival(name: string): Rival {
                 if (rivalData) {setRival(rivalData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setRival])
     return rival as Rival
 }
 
