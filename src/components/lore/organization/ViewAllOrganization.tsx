@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
-import ActionsTableCell from "../../common/ActionsTableCell";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
 
 function OrganizationRow(props: { row: Organization }): JSX.Element {
     const { row } = props

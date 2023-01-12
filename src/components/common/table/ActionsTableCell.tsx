@@ -19,7 +19,7 @@ export default function ActionsTableCell(props: Props): JSX.Element {
     return  (
         <TableCell>
             <Box component='span'>
-                <IconButton title='View' size='small' component={handleView}>
+                <IconButton title='View' size='small' component={handleView} style={{ textAlign: 'center' }}>
                     <PreviewIcon color='primary' fontSize='small' />
                 </IconButton>
             </Box>

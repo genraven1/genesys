@@ -11,8 +11,8 @@ import Talent from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import {Fragment,useEffect,useState} from 'react';
 import * as React from 'react';
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
-import ActionsTableCell from "../common/ActionsTableCell";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import ActionsTableCell from "../common/table/ActionsTableCell";
 
 function Row(props: { row: Talent }): JSX.Element {
     const {row} = props

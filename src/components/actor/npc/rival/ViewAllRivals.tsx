@@ -11,7 +11,7 @@ import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
 import Rival from "../../../../models/actor/npc/Rival";
-import ActionsTableCell from "../../../common/ActionsTableCell";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
 
 function Row(props: { row: Rival }): JSX.Element {
     const { row } = props

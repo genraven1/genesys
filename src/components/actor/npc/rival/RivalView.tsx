@@ -6,7 +6,7 @@ import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
-import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";

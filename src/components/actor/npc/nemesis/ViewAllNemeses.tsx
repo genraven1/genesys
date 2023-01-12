@@ -11,7 +11,7 @@ import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from '../../../../services/ActorService'
-import ActionsTableCell from "../../../common/ActionsTableCell";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
 
 function Row(props: { row: Nemesis }): JSX.Element {
     const { row } = props

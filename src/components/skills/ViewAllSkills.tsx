@@ -9,7 +9,7 @@ import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
-import ActionsTableCell from "../common/ActionsTableCell";
+import ActionsTableCell from "../common/table/ActionsTableCell";
 
 function Row(props: { row: Skill }): JSX.Element {
     const {row} = props
