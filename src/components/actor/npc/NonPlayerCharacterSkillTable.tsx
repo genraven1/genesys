@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../common/GenesysSkillDiceTypography";
+import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
 import {CharacteristicType} from "../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";

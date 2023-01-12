@@ -11,9 +11,9 @@ import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
-import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
-import ActionsTableCell from "../../common/ActionsTableCell";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
 
 function Row(props: { row: Gear }): JSX.Element {
     const {row} = props

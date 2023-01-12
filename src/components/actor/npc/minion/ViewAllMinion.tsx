@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
-import ActionsTableCell from "../../../common/ActionsTableCell";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
 
 function Row(props: { row: Minion }): JSX.Element {
