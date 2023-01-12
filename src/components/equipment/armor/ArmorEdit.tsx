@@ -3,11 +3,11 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Armor} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
+import {Armor} from "../../../models/equipment/Armor";
 
 export default function ArmorEdit(props: {ar: Armor}) {
     const {ar} = props

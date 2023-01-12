@@ -3,7 +3,6 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Gear} from '../../../models/equipment/Equipment';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
@@ -14,6 +13,7 @@ import {RangeBand} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
+import {Gear} from "../../../models/equipment/Gear";
 
 const getRangeOptions = (): Option[] => {
     return Object.values(RangeBand).map((value) => ({value}))

@@ -3,7 +3,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
-import {Armor} from "../../../models/equipment/Equipment";
+import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {EquipmentPath} from "../../../services/Path";
 

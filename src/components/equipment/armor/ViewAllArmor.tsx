@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import {Armor} from "../../../models/equipment/Equipment";
+import {Armor} from "../../../models/equipment/Armor";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
@@ -28,9 +28,7 @@ function Row(props: { row: Armor }): JSX.Element {
             price = String(row.price)
         }
         return (
-            <Fragment>
-                <Typography>{price}</Typography>
-            </Fragment>
+            <Typography>{price}</Typography>
         )
     }
 

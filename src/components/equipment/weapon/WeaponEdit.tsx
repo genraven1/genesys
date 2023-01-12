@@ -3,7 +3,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Weapon} from '../../../models/equipment/Equipment';
+import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";

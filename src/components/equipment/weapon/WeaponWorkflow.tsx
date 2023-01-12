@@ -1,6 +1,6 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Weapon} from "../../../models/equipment/Equipment";
+import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import WeaponView from "./WeaponView";
 import WeaponEdit from "./WeaponEdit";
