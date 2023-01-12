@@ -16,7 +16,7 @@ function useFetchArmor(name: string): Armor {
                 if (armorData) {setArmor(armorData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, armor])
+    },[name, setArmor])
     return armor as Armor
 }
 
