@@ -12,11 +12,12 @@ import GenesysSkillDiceTypography from "../../common/GenesysSkillDiceTypography"
 import {CharacteristicType} from "../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter, {NonPlayerCharacterSkill} from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
 import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
+import {ActorSkill} from "../../../models/actor/Actor";
 
 interface RowProps {
-    skill: NonPlayerCharacterSkill
+    skill: ActorSkill
     npc: NonPlayerCharacter
 }
 
@@ -90,7 +91,7 @@ export function SkillTypeGroup(props: GroupProps) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
+                                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
                                         <SkillRow key={row.name} skill={row} npc={npc}/>
                                     ))}
                                 </TableBody>

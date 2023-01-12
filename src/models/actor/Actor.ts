@@ -2,6 +2,7 @@ import {Characteristic} from './Characteristics';
 import { Defense } from './Defense';
 import Talent from '../Talent';
 import Stats from './Stats';
+import Skill from "./Skill";
 
 export default interface Actor {
     name: string,
@@ -20,6 +21,10 @@ export default interface Actor {
 }
 
 export interface ActorTalent extends Talent {
+    ranks: number
+}
+
+export interface ActorSkill extends Skill {
     ranks: number
 }
 
