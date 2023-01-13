@@ -7,10 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import * as React from 'react';
 import {Weapon} from "../../../models/equipment/Weapon";
-import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/ActionsTableCell";
@@ -64,16 +63,13 @@ function Row(props: { row: Weapon }): JSX.Element {
     )
 }
 
-export default function ViewAllWeapon(): JSX.Element {
-    const [weapons, setWeapons] = useState<Weapon[]>([])
+interface Props {
+    weaponList: Weapon[]
+}
 
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const weaponList = await EquipmentService.getWeapons()
-            if (!weaponList) {return}
-            setWeapons(weaponList)
-        })()
-    }, [])
+export default function ViewAllWeapon(props: Props): JSX.Element {
+    const {weaponList} = props
+    const [weapons, setWeapons] = useState<Weapon[]>(weaponList)
 
     return (
         <TableContainer component={Paper}>
@@ -92,7 +88,7 @@ export default function ViewAllWeapon(): JSX.Element {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {weapons.map((row: Weapon) => (
+                    {weaponList.map((row: Weapon) => (
                         <Row key={row.name} row={row} />
                     ))}
                 </TableBody>
