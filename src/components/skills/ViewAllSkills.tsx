@@ -10,6 +10,7 @@ import * as React from 'react';
 import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/table/ActionsTableCell";
+import {Path} from "../../services/Path";
 
 function Row(props: { row: Skill }): JSX.Element {
     const {row} = props
@@ -30,7 +31,7 @@ function Row(props: { row: Skill }): JSX.Element {
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.characteristic}</TableCell>
                 {renderSkillActiveTableCell()}
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={Path.Skills}/>
             </TableRow>
         </Fragment>
     )

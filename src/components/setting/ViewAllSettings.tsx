@@ -8,8 +8,9 @@ import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import SettingService from "../../services/SettingService";
-import ActionsTableCell from "../common/ActionsTableCell";
 import Setting from "../../models/Setting";
+import ActionsTableCell from "../common/table/ActionsTableCell";
+import {Path} from "../../services/Path";
 
 function Row(props: { row: Setting }): JSX.Element {
     const {row} = props
@@ -28,7 +29,7 @@ function Row(props: { row: Setting }): JSX.Element {
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
                 {renderSettingMagicTableCell()}
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={Path.Setting}/>
             </TableRow>
         </Fragment>
     )
