@@ -9,7 +9,7 @@ export default class SettingService {
     }
 
     static async setCurrentSetting(name: string): Promise<Setting> {
-        return await (await axios.post(Path.Setting + 'current', name)).data;
+        return await (await axios.post(Path.Setting + 'current/' + name)).data;
     }
 
     static async getSettings(): Promise<Setting[]> {

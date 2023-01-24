@@ -1,6 +1,5 @@
-import {Dialog, DialogActions, DialogTitle} from "@mui/material";
+import {Dialog, DialogActions, DialogTitle, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useEffect, useState} from "react";
-import SettingSelectionField from "./SettingSelectionField";
 import * as React from "react";
 import SettingService from "../../services/SettingService";
 
@@ -33,14 +32,23 @@ export default function SettingSelectionDialog(props: Props) {
     }, [setSetting])
 
     const getTitle = (): string => {
-        return 'Current Setting: ' + current
+        console.log('Current Setting: ' + setting!!)
+        return 'Current Setting: ' + setting!!
+    }
+
+    const onSettingChange = async (event: SelectChangeEvent) => {
+        let set = await SettingService.setCurrentSetting(event.target.value as string)
+        if (!set) {return}
+        setSetting(set.name)
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={getTitle()}/>
             <DialogActions>
-                <SettingSelectionField settings={settings!!} setting={setting!!}/>
+                <Select value={current} onChange={onSettingChange}>
+                    {settings.map((opt) => (<MenuItem key={opt} value={opt}>{opt}</MenuItem>))}
+                </Select>
             </DialogActions>
         </Dialog>
     )
