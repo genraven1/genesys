@@ -13,7 +13,7 @@ import StatsCard from "../../StatsCard";
 import DefenseCard from "../../DefenseCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
-import {Path} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import TalentSelectionDialog from "../TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
@@ -87,7 +87,7 @@ export default function RivalEdit(props: {riv: Rival}) {
     }
 
     const onView = () => {
-        navigate(Path.Rival + name + '/view')
+        navigate(ActorPath.Rival + name + '/view')
     }
 
     return (

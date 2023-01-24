@@ -12,6 +12,7 @@ import * as React from 'react';
 import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import ActionsTableCell from '../../common/table/ActionsTableCell';
+import {ActorPath} from "../../../services/Path";
 
 function Row(props: { row: Player }): JSX.Element {
     const { row } = props
@@ -21,7 +22,7 @@ function Row(props: { row: Player }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={ActorPath.Player}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

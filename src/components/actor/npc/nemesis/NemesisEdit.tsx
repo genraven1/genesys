@@ -16,7 +16,7 @@ import DefenseCard from "../../DefenseCard"
 import NonPlayerCharacterSkillTable from "../NonPlayerCharacterSkillTable"
 import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable"
 import TalentSelectionDialog from "../TalentSelectionDialog"
-import {Path} from "../../../../services/Path"
+import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import { ActorKey } from "../../../../models/actor/Actor"
 
@@ -90,7 +90,7 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
     }
 
     const onView = () => {
-        navigate(Path.Nemesis + name + '/view')
+        navigate(ActorPath.Nemesis + name + '/view')
     }
 
     return (

@@ -4,7 +4,7 @@ import Player from '../../../models/actor/player/Player';
 import {CharacteristicType} from '../../../models/actor/Characteristics';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
-import { Path } from '../../../services/Path';
+import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewCharacteristicCard from '../ViewCharacteristicCard';
 import SoakCard from '../SoakCard';
@@ -19,7 +19,7 @@ export default function PlayerView(props: {player: Player}) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Player + name + '/edit')
+        navigate(ActorPath.Player + name + '/edit')
     }
 
     return (

@@ -14,6 +14,7 @@ import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {EquipmentPath} from "../../../services/Path";
 
 function Row(props: { row: Gear }): JSX.Element {
     const {row} = props
@@ -41,7 +42,7 @@ function Row(props: { row: Gear }): JSX.Element {
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
-                <ActionsTableCell name={row.name} />
+                <ActionsTableCell name={row.name} path={EquipmentPath.Gear}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

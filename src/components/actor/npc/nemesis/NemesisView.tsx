@@ -12,7 +12,7 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
-import {Path} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/Path";
 import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
@@ -25,7 +25,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
     }
 
     const onEdit = () => {
-        navigate(Path.Nemesis + name + '/edit')
+        navigate(ActorPath.Nemesis + name + '/edit')
     }
 
     return (

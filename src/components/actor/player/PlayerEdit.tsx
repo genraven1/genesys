@@ -5,7 +5,7 @@ import ActorService from '../../../services/ActorService';
 import {CharacteristicType} from '../../../models/actor/Characteristics';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
-import { Path } from '../../../services/Path';
+import {ActorPath} from '../../../services/Path';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerTalentTable from "./PlayerTalentTable";
@@ -77,7 +77,7 @@ export default function PlayerView(props: {play: Player}) {
     }
 
     const onView = () => {
-        navigate(Path.Player + name + '/view')
+        navigate(ActorPath.Player + name + '/view')
     }
 
     return (
