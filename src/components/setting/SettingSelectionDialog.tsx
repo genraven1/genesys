@@ -32,8 +32,7 @@ export default function SettingSelectionDialog(props: Props) {
     }, [setSetting])
 
     const getTitle = (): string => {
-        console.log('Current Setting: ' + setting!!)
-        return 'Current Setting: ' + setting!!
+        return 'Current: ' + setting!!
     }
 
     const onSettingChange = async (event: SelectChangeEvent) => {
@@ -44,7 +43,7 @@ export default function SettingSelectionDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle title={getTitle()}/>
+            <DialogTitle>{getTitle()}</DialogTitle>
             <DialogActions>
                 <Select value={current} onChange={onSettingChange}>
                     {settings.map((opt) => (<MenuItem key={opt} value={opt}>{opt}</MenuItem>))}
