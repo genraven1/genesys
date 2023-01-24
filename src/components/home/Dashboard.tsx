@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {LoreType} from "../../models/lore/Lore";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ExpandedList from "../navigation/ExpandedList";
 import CreateSettingDialog from "../setting/CreateSettingDialog";
 import TalentDialog from "../talents/TalentDialog";
@@ -12,6 +12,10 @@ import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
 import CreateActorDialog from "../actor/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
+import SettingSelectionField from "../setting/SettingSelectionField";
+import SettingService from "../../services/SettingService";
+import Setting from "../../models/Setting";
+import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
@@ -22,19 +26,28 @@ export default function Dashboard(): JSX.Element {
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
     const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
-    const [openPlayerCreationDialog, setOpenPlayerCreationDialog] = useState(false)
-    const [openNemesisCreationDialog, setOpenNemesisCreationDialog] = useState(false)
-    const [openRivalCreationDialog, setOpenRivalCreationDialog] = useState(false)
-    const [openMinionCreationDialog, setOpenMinionCreationDialog] = useState(false)
+    const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
+    const [setting, setSetting] = useState<Setting>()
 
-    const onClick = () => {
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const current = await SettingService.getCurrentSetting()
+            if (!current) { return }
+            setSetting(current)
+        })()
+    }, [setSetting])
+
+    const onLoreClick = () => {
         navigate(Path.Lore)
+    }
+
+    const getSubHeader = (): string => {
+        return 'Current Setting: ' + setting?.name!!
     }
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'Dashboard'} />
-            <CardHeader style={{textAlign: 'center'}} title={'Current Setting: Android'} />
+            <CardHeader style={{textAlign: 'center'}} title={'Dashboard'} subheader={getSubHeader()}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
@@ -71,7 +84,11 @@ export default function Dashboard(): JSX.Element {
                     </Card>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained' onClick={onClick}>Lore</Button>
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
+                    {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog} onClose={(): void => setOpenSettingSelectionDialog(false)}  current={setting?.name!!}/>}
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    <Button color='primary' variant='contained' onClick={onLoreClick}>Lore</Button>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item xs>
@@ -86,10 +103,6 @@ export default function Dashboard(): JSX.Element {
             {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}
             {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog} onClose={(): void => setOpenGearCreationDialog(false)} type={EquipmentType.Gear}/>}
             {openActorCreationDialog && <CreateActorDialog open={openActorCreationDialog} onClose={(): void => setOpenActorCreationDialog(false)}/>}
-            {openPlayerCreationDialog && <CreateActorDialog open={openPlayerCreationDialog} onClose={(): void => setOpenPlayerCreationDialog(false)}/>}
-            {openNemesisCreationDialog && <CreateActorDialog open={openNemesisCreationDialog} onClose={(): void => setOpenNemesisCreationDialog(false)} />}
-            {openRivalCreationDialog && <CreateActorDialog open={openRivalCreationDialog} onClose={(): void => setOpenRivalCreationDialog(false)}/>}
-            {openMinionCreationDialog && <CreateActorDialog open={openMinionCreationDialog} onClose={(): void => setOpenMinionCreationDialog(false)}/>}
         </Card>
     )
 }
