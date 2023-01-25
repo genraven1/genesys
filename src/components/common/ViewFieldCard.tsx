@@ -2,7 +2,7 @@
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import InlineTextField from "./InlineTextField";
 import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
-import GenesysDescriptionTypography from "./GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 
 interface ViewProps {

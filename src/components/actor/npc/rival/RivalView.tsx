@@ -6,11 +6,11 @@ import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
-import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
-import {Path} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/Path";
 import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 import Rival from "../../../../models/actor/npc/Rival";
 import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
@@ -25,7 +25,7 @@ export default function RivalView(props: {rival: Rival}) {
     }
 
     const onEdit = () => {
-        navigate(Path.Rival + name + '/edit')
+        navigate(ActorPath.Rival + name + '/edit')
     }
 
     return (

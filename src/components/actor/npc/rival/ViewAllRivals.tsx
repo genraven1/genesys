@@ -11,7 +11,8 @@ import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
 import Rival from "../../../../models/actor/npc/Rival";
-import ActionsTableCell from "../../../common/ActionsTableCell";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
+import {ActorPath} from "../../../../services/Path";
 
 function Row(props: { row: Rival }): JSX.Element {
     const { row } = props
@@ -21,7 +22,7 @@ function Row(props: { row: Rival }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={ActorPath.Rival}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

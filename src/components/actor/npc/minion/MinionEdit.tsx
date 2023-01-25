@@ -12,7 +12,7 @@ import SoakCard from "../../SoakCard";
 import StatsCard from "../../StatsCard";
 import DefenseCard from "../../DefenseCard";
 import * as React from "react";
-import {Path} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import TalentSelectionDialog from "../TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
@@ -87,7 +87,7 @@ export default function MinionEdit(props: {min: Minion}) {
     }
 
     const onView = () => {
-        navigate(Path.Minion + name + '/view')
+        navigate(ActorPath.Minion + name + '/view')
     }
 
     return (

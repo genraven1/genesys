@@ -8,9 +8,9 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
 import {ActorTalent} from "../../../models/actor/Actor";
-import GenesysTalentTypography from "../../common/GenesysTalentTypography";
+import GenesysTalentTypography from "../../common/typography/GenesysTalentTypography";
 import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
-import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 
 interface Props {
     row: ActorTalent

@@ -22,8 +22,8 @@ export default function InputSelectField(props: Props): JSX.Element {
     const [edit, setEdit] = useState(defaultEdit ?? false)
 
     const handleOnCommit = (): void => {
-        setEdit(!edit);
-        onCommit(option);
+        setEdit(!edit)
+        onCommit(option)
     }
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -53,7 +53,7 @@ export default function InputSelectField(props: Props): JSX.Element {
     const onCancel = (): void => {
         setEdit(!edit)
         setOption(defaultValue)
-    };
+    }
 
     return (
         <EditField viewElement={viewElement} edit={edit} editable={editable} editElement={editElement} onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit}/>

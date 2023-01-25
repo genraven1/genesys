@@ -6,11 +6,11 @@ import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
-import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
-import {Path} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/Path";
 import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
 import Minion from "../../../../models/actor/npc/Minion";
@@ -25,7 +25,7 @@ export default function MinionView(props: {minion: Minion}) {
     }
 
     const onEdit = () => {
-        navigate(Path.Minion + name + '/edit')
+        navigate(ActorPath.Minion + name + '/edit')
     }
 
     return (

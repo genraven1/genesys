@@ -1,22 +1,23 @@
 import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField } from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import ActorService from "../../../services/ActorService";
-import {Path} from "../../../services/Path";
+import SettingService from "../../services/SettingService";
+import {Path} from "../../services/Path";
 
 interface Props {
     open: boolean
     onClose: () => void
 }
 
-export default function CreatePlayerDialog(props: Props) {
-    const { open, onClose } = props
-    const [ name, setName ] = useState('')
+export default function SettingDialog(props: Props) {
+    const {open,onClose} = props
+    const [name,setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await ActorService.createPlayer(name)
-        navigate(Path.Player + name + '/edit')
+        await SettingService.createSetting(name)
+        navigate(Path.Setting + name  + '/edit')
+        onClose()
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -26,7 +27,7 @@ export default function CreatePlayerDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Create Player</DialogTitle>
+            <DialogTitle>Name New Setting</DialogTitle>
             <DialogContentText>
                 <TextField onChange={onChange} value={name} required/>
             </DialogContentText>

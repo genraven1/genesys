@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import Player, { PlayerSkill } from "../../../models/actor/player/Player";
 import { SkillType } from "../../../models/actor/Skill";
 import { CharacteristicType } from "../../../models/actor/Characteristics";
-import GenesysSkillDiceTypography from "../../common/GenesysSkillDiceTypography";
+import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
 
 interface RowProps {
     skill: PlayerSkill
