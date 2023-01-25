@@ -20,23 +20,9 @@ function useFetchWeapon(name: string): Weapon {
     return weapon as Weapon
 }
 
-function useAllWeaponsEndpoint(): Weapon[] {
-    const [weapons, setWeapons] = useState<Weapon[]>([])
-    useEffect(() => {
-        (async (): Promise<void> => {
-            try {
-                const weaponData = await EquipmentService.getWeapons()
-                if (weaponData) {setWeapons(weaponData)}
-            } catch (err) {console.log(err)}
-        })()
-    },[setWeapons])
-    return weapons as Weapon[]
-}
-
 export default function WeaponWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const weapon = useFetchWeapon(name!!)
-    const weapons = useAllWeaponsEndpoint()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
@@ -46,7 +32,7 @@ export default function WeaponWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <WeaponEdit wea={weapon}/>
         }
-        else {return <ViewAllWeapon weaponList={weapons}/>}
+        else {return <ViewAllWeapon/>}
     }
 
     return (
