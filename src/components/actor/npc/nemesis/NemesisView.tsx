@@ -6,16 +6,15 @@ import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 import NonPlayerCharacterSkillCard from "../NonPlayerCharacterSkillCard";
 import NonPlayerCharacterTalentCard from "../NonPlayerCharacterTalentCard";
+import ViewActorWeaponCard from "../../ViewActorWeaponCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -62,6 +61,8 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     <Divider />
                     <NonPlayerCharacterSkillCard npc={nemesis}/>
                     <NonPlayerCharacterTalentCard npc={nemesis}/>
+                    <Divider />
+                    <ViewActorWeaponCard weapons={nemesis?.weapons!!}/>
                 </Grid>
             </CardContent>
         </Card>
