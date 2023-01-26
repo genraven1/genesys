@@ -62,7 +62,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     <NonPlayerCharacterSkillCard npc={nemesis}/>
                     <NonPlayerCharacterTalentCard npc={nemesis}/>
                     <Divider />
-                    <ViewActorWeaponCard weapons={nemesis?.weapons!!}/>
+                    <ViewActorWeaponCard weapons={nemesis?.weapons!!} brawn={nemesis?.brawn?.current!!}/>
                 </Grid>
             </CardContent>
         </Card>

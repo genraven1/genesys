@@ -17,7 +17,6 @@ import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
 import SkillWorkflow from "../skills/SkillWorkflow";
 import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
-import ViewAllWeapon from "../equipment/weapon/ViewAllWeapon";
 import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 import GearWorkflow from "../equipment/gear/GearWorkflow";
 import ViewAllGear from "../equipment/gear/ViewAllGear";
@@ -28,7 +27,7 @@ import AllMinionsView from "../actor/npc/minion/ViewAllMinion";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import ViewAllSettings from "../setting/ViewAllSettings";
-import ViewAllActors from "../ViewAllActors";
+import ViewAllActors from "../actor/ViewAllActors";
 
 export default function App() {
 

@@ -16,16 +16,17 @@ import {TypographyCenterTableCell, TypographyLeftTableCell} from "../common/tabl
 
 interface Props {
     weapons: ActorWeapon[]
+    brawn: number
 }
 
 export default function ViewActorWeaponCard(props: Props): JSX.Element {
-    const {weapons} = props
+    const {weapons,brawn} = props
 
     const renderTableBody = () => {
         if(!weapons) {return}
         else {
-            return weapons.map((row: ActorWeapon) => (
-                <Row key={row.name} row={row} />
+            return weapons.map((weapon: ActorWeapon) => (
+                <Row key={weapon.name} weapon={weapon} brawn={brawn} />
             ))
         }
     }
@@ -58,20 +59,25 @@ export default function ViewActorWeaponCard(props: Props): JSX.Element {
     )
 }
 
-function Row(props: { row: ActorWeapon }): JSX.Element {
-    const {row} = props
+interface RowProps {
+    weapon: ActorWeapon
+    brawn: number
+}
+
+function Row(props: RowProps): JSX.Element {
+    const {weapon,brawn} = props
     const [open, setOpen] = useState(false)
 
     const renderDamage = (): string => {
         let damage = ''
-        if (row.brawn) {damage = 'Brawn + ' + row.damage}
-        else {damage = String(row.damage)}
+        if (weapon.brawn) {damage = String(weapon.damage + brawn)}
+        else {damage = String(weapon.damage)}
         return damage
     }
 
     const renderEquipped = (): string => {
         let equip = ''
-        if (row.equipped) {equip = 'True'}
+        if (weapon.equipped) {equip = 'True'}
         else {equip='False'}
         return equip
     }
@@ -79,14 +85,14 @@ function Row(props: { row: ActorWeapon }): JSX.Element {
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TypographyLeftTableCell value={row.name}/>
+                <TypographyLeftTableCell value={weapon.name}/>
                 <TypographyCenterTableCell value={renderEquipped()}/>
-                <TypographyCenterTableCell value={row.skill.name}/>
+                <TypographyCenterTableCell value={weapon.skill.name}/>
                 <TypographyCenterTableCell value={renderDamage()}/>
-                <TypographyCenterTableCell value={String(row.critical)}/>
-                <TypographyCenterTableCell value={row.range}/>
-                <TypographyCenterTableCell value={String(row.encumbrance)}/>
-                <TypographyCenterTableCell value={row.slot}/>
+                <TypographyCenterTableCell value={String(weapon.critical)}/>
+                <TypographyCenterTableCell value={weapon.range}/>
+                <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
+                <TypographyCenterTableCell value={weapon.slot}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -94,7 +100,7 @@ function Row(props: { row: ActorWeapon }): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={row.description}/>
+                                    <GenesysDescriptionTypography text={weapon.description}/>
                                 </TableBody>
                             </Table>
                         </Box>
