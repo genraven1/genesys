@@ -12,16 +12,17 @@ import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
 import CreateActorDialog from "../actor/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import SettingSelectionField from "../setting/SettingSelectionField";
 import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
+import CreateCareerDialog from "../career/CreateCareerDialog";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
+    const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
@@ -57,6 +58,7 @@ export default function Dashboard(): JSX.Element {
                                 <ExpandedList header={'Settings'} viewTitle={'View All Settings'} to={Path.Setting} dialogTitle={'Create Setting'} onClick={(): void => setOpenSettingCreationDialog(true)}/>
                                 <ExpandedList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent} dialogTitle={'Create Talent'} onClick={(): void => setOpenTalentCreationDialog(true)} />
                                 <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
+                                <ExpandedList header={'Careers'} viewTitle={'View All Careers'} to={Path.Career} dialogTitle={'Create Career'} onClick={(): void => setOpenCareerCreationDialog(true)} />
                             </Grid>
                         </CardContent>
                     </Card>
@@ -99,6 +101,7 @@ export default function Dashboard(): JSX.Element {
             {openSettingCreationDialog && <CreateSettingDialog open={openSettingCreationDialog} onClose={(): void => setOpenSettingCreationDialog(false)} />}
             {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog} onClose={(): void => setOpenTalentCreationDialog(false)} />}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog} onClose={(): void => setOpenSkillCreationDialog(false)} />}
+            {openCareerCreationDialog && <CreateCareerDialog open={openCareerCreationDialog} onClose={(): void => setOpenCareerCreationDialog(false)} />}
             {openArmorCreationDialog && <CreateEquipmentDialog open={openArmorCreationDialog} onClose={(): void => setOpenArmorCreationDialog(false)} type={EquipmentType.Armor}/>}
             {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}
             {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog} onClose={(): void => setOpenGearCreationDialog(false)} type={EquipmentType.Gear}/>}

@@ -4,6 +4,7 @@ import Career from "../../models/actor/player/Career";
 import CareerService from "../../services/CareerService";
 import CareerView from "./CareerView";
 import CareerEdit from "./CareerEdit";
+import ViewAllCareers from "./ViewAllCareers";
 
 
 function useFetchCareer(name: string): Career {
@@ -16,7 +17,7 @@ function useFetchCareer(name: string): Career {
                 if (careerData) {setCareer(careerData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setCareer])
     return career as Career
 }
 
@@ -32,7 +33,7 @@ export default function CareerWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <CareerEdit car={career}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllCareers/>}
     }
 
     return (
