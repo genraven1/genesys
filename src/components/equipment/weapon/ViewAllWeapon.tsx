@@ -85,7 +85,7 @@ export default function ViewAllWeapon(): JSX.Element {
             if (!weaponList) {return}
             setWeapons(weaponList)
         })()
-    }, [])
+    }, [setWeapons])
 
     return (
         <TableContainer component={Paper}>

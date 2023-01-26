@@ -4,7 +4,7 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import WeaponView from "./WeaponView";
 import WeaponEdit from "./WeaponEdit";
-
+import ViewAllWeapon from "./ViewAllWeapon";
 
 function useFetchWeapon(name: string): Weapon {
     const [weapon, setWeapon] = useState<Weapon>()
@@ -32,7 +32,7 @@ export default function WeaponWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <WeaponEdit wea={weapon}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllWeapon/>}
     }
 
     return (

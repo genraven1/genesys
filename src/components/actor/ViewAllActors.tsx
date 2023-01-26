@@ -7,10 +7,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
-import Actor, {ActorType} from "../models/actor/Actor";
-import ActionsTableCell from "./common/table/ActionsTableCell";
-import ActorService from "../services/ActorService";
-import {ActorPath} from "../services/Path";
+import Actor, {ActorType} from "../../models/actor/Actor";
+import ActionsTableCell from "../common/table/ActionsTableCell";
+import ActorService from "../../services/ActorService";
+import {ActorPath} from "../../services/Path";
 
 function Row(props: { row: Actor }): JSX.Element {
     const {row} = props
@@ -46,7 +46,7 @@ export default function ViewAllActors() {
             if (!actorList) { return }
             setActors(actorList)
         })()
-    }, [])
+    }, [setActors])
 
     return (
         <TableContainer component={Paper}>

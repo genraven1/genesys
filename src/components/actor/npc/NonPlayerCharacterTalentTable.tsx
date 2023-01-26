@@ -53,11 +53,6 @@ export default function NonPlayerCharacterTalentTable(props: TableProps) {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell colSpan={2} style={{textAlign: "center"}}>Talents</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableHead>
-                    <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Summary</TableCell>
                     </TableRow>
