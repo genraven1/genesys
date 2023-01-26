@@ -4,6 +4,6 @@ export default interface Career {
 }
 
 export interface CareerSkill {
-    name: string,
+    name: string
     active: boolean
 }

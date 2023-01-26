@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import SkillService from "../../services/SkillService";
@@ -12,15 +11,32 @@ import {Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, Form
 import * as React from "react";
 import Box from "@mui/material/Box";
 import {CareerSkill} from "../../models/actor/player/Career";
+import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+
+interface Props {
+    skillList: CareerSkill[]
+}
 
 export default function CareerSkillTable(): JSX.Element {
+    const [skills, setSkills] = useState<CareerSkill[]>([])
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            let names = await SkillService.getSkillNames()
+            if (!names) { return }
+            let list = new Array<CareerSkill>()
+            names.forEach((name) => list.push({name: name, active: false}))
+            setSkills(list)
+        })()
+    }, [setSkills])
+
     const useCareerSkillSelection = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <CareerSkillTableView />
+            return <CareerSkillTableView  skillList={skills}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <CareerSkillTableEdit />
+            return <CareerSkillTableEdit skillList={skills} />
         }
         else {return <Fragment/>}
     }
@@ -32,41 +48,41 @@ export default function CareerSkillTable(): JSX.Element {
     )
 }
 
-export function CareerSkillTableView(): JSX.Element {
+export function CareerSkillTableView(props: Props): JSX.Element {
+    const {skillList} = props
 
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Skill Name</TableCell>
-                        <TableCell>Add</TableCell>
+                        <TypographyCenterTableCell value={'Skill'} />
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    <TableRow>
+                        {skillList.map((value) => {
+                            <TypographyCenterTableCell value={value.name} />
+                        })}
+                    </TableRow>
                 </TableBody>
             </Table>
         </TableContainer>
     )
 }
 
-export function CareerSkillTableEdit(): JSX.Element {
-    const [skills, setSkills] = useState<CareerSkill[]>([])
+export function CareerSkillTableEdit(props: Props): JSX.Element {
+    const {skillList} = props
+    const [skills, setSkills] = useState<CareerSkill[]>(skillList)
     const [state, setState] = useState<CareerSkill[]>([])
 
-    useEffect(() => {
-        (async (): Promise<void> => {
-            let names = await SkillService.getSkillNames()
-            if (!names) { return }
-            let list = new Array<CareerSkill>()
-            for (let name in names) {
-                list.push({name: name, active: false})
-            }
-            setSkills(list)
-        })()
-    }, [])
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({...state, [event.target.name]: event.target.checked})
+    }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {setState({...state, [event.target.name]: event.target.checked,})}
+    const onChange = () => {
+
+    }
 
     const error = [...skills.values()].filter((v) => v).length !== 8
 
@@ -75,7 +91,7 @@ export function CareerSkillTableEdit(): JSX.Element {
             <FormControl required error={error} component="fieldset" sx={{ m: 3 }} variant="standard">
                 <FormLabel component="legend">Pick Eight Skills</FormLabel>
                 <FormGroup>
-                    {skills.map((skill: CareerSkill) => (
+                    {skillList.map((skill: CareerSkill) => (
                         <FormControlLabel control={<Checkbox checked={skill.active} onChange={handleChange} name={skill.name} />} label={skill.name}/>
                     ))}
                 </FormGroup>
