@@ -1,10 +1,10 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Weapon} from "../../../models/equipment/Equipment";
+import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import WeaponView from "./WeaponView";
 import WeaponEdit from "./WeaponEdit";
-
+import ViewAllWeapon from "./ViewAllWeapon";
 
 function useFetchWeapon(name: string): Weapon {
     const [weapon, setWeapon] = useState<Weapon>()
@@ -16,7 +16,7 @@ function useFetchWeapon(name: string): Weapon {
                 if (weaponData) {setWeapon(weaponData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setWeapon])
     return weapon as Weapon
 }
 
@@ -32,7 +32,7 @@ export default function WeaponWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <WeaponEdit wea={weapon}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllWeapon/>}
     }
 
     return (

@@ -16,7 +16,7 @@ function useFetchOrganization(name: string, path: LorePath): Organization {
                 if (orgData) {setOrganization(orgData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, path])
+    },[name, organization, path])
     return organization as Organization
 }
 

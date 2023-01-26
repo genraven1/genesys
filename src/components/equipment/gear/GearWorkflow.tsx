@@ -1,6 +1,6 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Gear} from "../../../models/equipment/Equipment";
+import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
 import GearView from "./GearView";
 import GearEdit from "./GearEdit";
@@ -16,7 +16,7 @@ function useFetchGear(name: string): Gear {
                 if (gearData) {setGear(gearData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setGear])
     return gear as Gear
 }
 

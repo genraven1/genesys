@@ -15,7 +15,7 @@ function useFetchPlayer(name: string): Player {
                 if (playerData) {setPlayer(playerData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setPlayer])
     return player as Player
 }
 

@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Talent, {Activation, Ranked, TalentKey, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import {useNavigate, useParams} from 'react-router-dom';
@@ -32,6 +32,8 @@ export default function TalentEdit(props: Props) {
     const [talent, setTalent] = useState<Talent>(tal)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setTalent(tal)}, [tal])
 
     const onChange = async (key: keyof Talent, value: string) => {
         if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {

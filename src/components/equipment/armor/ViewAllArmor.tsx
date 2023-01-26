@@ -9,11 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import {Armor} from "../../../models/equipment/Equipment";
+import {Armor} from "../../../models/equipment/Armor";
 import EquipmentService from "../../../services/EquipmentService";
-import GenesysDescriptionTypography from "../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
-import ActionsTableCell from "../../common/ActionsTableCell";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {EquipmentPath} from "../../../services/Path";
 
 function Row(props: { row: Armor }): JSX.Element {
     const { row } = props
@@ -28,9 +29,7 @@ function Row(props: { row: Armor }): JSX.Element {
             price = String(row.price)
         }
         return (
-            <Fragment>
-                <Typography>{price}</Typography>
-            </Fragment>
+            <Typography>{price}</Typography>
         )
     }
 
@@ -43,7 +42,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
-                <ActionsTableCell name={row.name} />
+                <ActionsTableCell name={row.name} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

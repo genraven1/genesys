@@ -8,13 +8,14 @@ import TableBody from "@mui/material/TableBody";
 import {Grid, Typography} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter, { NonPlayerCharacterSkill } from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
 import { CharacteristicType } from "../../../models/actor/Characteristics";
-import GenesysSkillDiceTypography from "../../common/GenesysSkillDiceTypography";
+import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
 import { SkillType } from "../../../models/actor/Skill";
+import {ActorSkill} from "../../../models/actor/Actor";
 
 interface RowProps {
-    skill: NonPlayerCharacterSkill,
+    skill: ActorSkill,
     npc: NonPlayerCharacter
 }
 
@@ -71,7 +72,10 @@ export function SkillTypeGroup(props: GroupProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
+                    {(npc?.skills!! || [])
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .filter((skill) => skill.type === type)
+                        .map((row: ActorSkill) => (
                             <SkillRow key={row.name} skill={row} npc={npc}/>
                     ))}
                 </TableBody>
@@ -88,7 +92,7 @@ export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
     const {npc} = props;
     return (
         <Fragment>
-            <Typography>{'Skills'}</Typography>
+            {/*<Typography>{'Skills'}</Typography>*/}
             <Grid container>
                 <Grid item xs={6}>
                     <TableContainer component={Paper}>

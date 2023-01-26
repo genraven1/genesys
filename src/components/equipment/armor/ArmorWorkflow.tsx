@@ -1,6 +1,6 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Armor} from "../../../models/equipment/Equipment";
+import {Armor} from "../../../models/equipment/Armor";
 import EquipmentService from "../../../services/EquipmentService";
 import ArmorView from "./ArmorView";
 import ArmorEdit from "./ArmorEdit";
@@ -16,7 +16,7 @@ function useFetchArmor(name: string): Armor {
                 if (armorData) {setArmor(armorData)}
             } catch (err) {console.log(err)}
         })()
-    },[name])
+    },[name, setArmor])
     return armor as Armor
 }
 

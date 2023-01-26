@@ -1,15 +1,15 @@
-import Skill from "../actor/Skill";
-import {RangeBand} from "../common/RangeBand";
-
 export default interface Equipment {
     name: string
     description: string
     price: number
     restricted: boolean
     encumbrance: number
-    slot: EquipmentSlot
     rarity: number
+}
+
+export interface ActorEquipment extends Equipment {
     equipped: boolean
+    slot: EquipmentSlot
 }
 
 export enum EquipmentSlot {
@@ -17,32 +17,6 @@ export enum EquipmentSlot {
     Off='Off Hand',
     Both='Both Hands',
     Body='Body'
-}
-
-export interface Encumbrance {
-    value: number
-    worn: boolean
-}
-
-export interface Armor extends Equipment {
-    soak: number
-    defense: number
-}
-
-export interface Weapon extends Equipment {
-    damage: number
-    skill: Skill
-    critical: number
-    range: RangeBand
-    brawn: boolean
-}
-
-export interface Gear extends Equipment {
-    skill: Skill
-    modifier: boolean
-    type: ModifierType
-    amount: number
-    range: RangeBand
 }
 
 export enum EquipmentType {

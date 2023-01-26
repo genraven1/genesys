@@ -6,14 +6,15 @@ import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import NemesisTalentTable from "./NemesisTalentTable";
 import ViewCharacteristicCard from "../../ViewCharacteristicCard";
-import GenesysDescriptionTypography from "../../../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
-import {Path} from "../../../../services/Path";
-import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
+import {ActorPath} from "../../../../services/Path";
+import NonPlayerCharacterSkillCard from "../NonPlayerCharacterSkillCard";
+import NonPlayerCharacterTalentCard from "../NonPlayerCharacterTalentCard";
+import ViewActorWeaponCard from "../../ViewActorWeaponCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -25,7 +26,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
     }
 
     const onEdit = () => {
-        navigate(Path.Nemesis + name + '/edit')
+        navigate(ActorPath.Nemesis + name + '/edit')
     }
 
     return (
@@ -58,9 +59,10 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                         <ViewDefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider />
-                    <ViewNonPlayerCharacterSkillTable npc={nemesis}/>
+                    <NonPlayerCharacterSkillCard npc={nemesis}/>
+                    <NonPlayerCharacterTalentCard npc={nemesis}/>
                     <Divider />
-                    <NemesisTalentTable nemesis={nemesis}/>
+                    <ViewActorWeaponCard weapons={nemesis?.weapons!!} brawn={nemesis?.brawn?.current!!}/>
                 </Grid>
             </CardContent>
         </Card>

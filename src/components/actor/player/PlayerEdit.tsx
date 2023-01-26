@@ -5,8 +5,8 @@ import ActorService from '../../../services/ActorService';
 import {CharacteristicType} from '../../../models/actor/Characteristics';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
-import { Path } from '../../../services/Path';
-import { useState } from 'react';
+import {ActorPath} from '../../../services/Path';
+import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
@@ -23,6 +23,8 @@ export default function PlayerView(props: {play: Player}) {
     const [player, setPlayer] = useState<Player>(play)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
+
+    useEffect(() => {setPlayer(play)}, [play])
 
     const onChange = async (key: keyof Player, value: number) => {
         if (value === null || (player !== null && player[key] === value)) {
@@ -75,7 +77,7 @@ export default function PlayerView(props: {play: Player}) {
     }
 
     const onView = () => {
-        navigate(Path.Player + name + '/view')
+        navigate(ActorPath.Player + name + '/view')
     }
 
     return (

@@ -1,4 +1,3 @@
-import Nemesis from "../../../../models/actor/npc/Nemesis";
 import * as React from "react";
 import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
@@ -8,21 +7,22 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import {SkillType} from "../../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../../common/GenesysSkillDiceTypography";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
+import {SkillType} from "../../../models/actor/Skill";
+import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
+import {CharacteristicType} from "../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {NonPlayerCharacterSkill} from "../../../../models/actor/npc/NonPlayerCharacter";
-import NonPlayerCharacterEditSkillDialog from "../NonPlayerCharacterEditSkillDialog";
+import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
+import {ActorSkill} from "../../../models/actor/Actor";
 
 interface RowProps {
-    skill: NonPlayerCharacterSkill
-    nemesis: Nemesis
+    skill: ActorSkill
+    npc: NonPlayerCharacter
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const { skill, nemesis } = props
+    const { skill, npc } = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
     const setName = (): string => {
@@ -32,17 +32,17 @@ function SkillRow(props: RowProps): JSX.Element {
     const getCharacteristicRanks = (): number => {
         switch (skill.characteristic) {
             case CharacteristicType.Agility:
-                return nemesis.agility.current
+                return npc.agility.current
             case CharacteristicType.Brawn:
-                return nemesis.brawn.current
+                return npc.brawn.current
             case CharacteristicType.Cunning:
-                return nemesis.cunning.current
+                return npc.cunning.current
             case CharacteristicType.Intellect:
-                return nemesis.intellect.current
+                return npc.intellect.current
             case CharacteristicType.Presence:
-                return nemesis.presence.current
+                return npc.presence.current
             case CharacteristicType.Willpower:
-                return nemesis.willpower.current
+                return npc.willpower.current
         }
     }
 
@@ -58,18 +58,18 @@ function SkillRow(props: RowProps): JSX.Element {
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
             </TableRow>
-            {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={nemesis.name}/>}
+            {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={npc.name}/>}
         </Fragment>
     )
 }
 
 interface GroupProps {
-    nemesis: Nemesis
+    npc: NonPlayerCharacter
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {nemesis, type} = props
+    const {npc, type} = props
     const [open, setOpen] = useState(false)
 
     return (
@@ -91,8 +91,8 @@ export function SkillTypeGroup(props: GroupProps) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {(nemesis?.skills!! || []).filter((skill) => skill.type === type).map((row: NonPlayerCharacterSkill) => (
-                                        <SkillRow key={row.name} skill={row} nemesis={nemesis}/>
+                                    {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
+                                        <SkillRow key={row.name} skill={row} npc={npc}/>
                                     ))}
                                 </TableBody>
                             </Table>
@@ -105,11 +105,11 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    nemesis: Nemesis
+    npc: NonPlayerCharacter
 }
 
-export default function SkillTable(props: TableProps) {
-    const {nemesis} = props
+export default function NonPlayerCharacterSkillTable(props: TableProps) {
+    const {npc} = props
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -119,11 +119,11 @@ export default function SkillTable(props: TableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <SkillTypeGroup nemesis={nemesis!!} type={SkillType.General}/>
-                    <SkillTypeGroup nemesis={nemesis!!} type={SkillType.Magic}/>
-                    <SkillTypeGroup nemesis={nemesis!!} type={SkillType.Combat}/>
-                    <SkillTypeGroup nemesis={nemesis!!} type={SkillType.Social}/>
-                    <SkillTypeGroup nemesis={nemesis!!} type={SkillType.Knowledge}/>
+                    <SkillTypeGroup npc={npc!!} type={SkillType.General}/>
+                    <SkillTypeGroup npc={npc!!} type={SkillType.Magic}/>
+                    <SkillTypeGroup npc={npc!!} type={SkillType.Combat}/>
+                    <SkillTypeGroup npc={npc!!} type={SkillType.Social}/>
+                    <SkillTypeGroup npc={npc!!} type={SkillType.Knowledge}/>
                 </TableBody>
             </Table>
         </TableContainer>

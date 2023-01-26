@@ -1,6 +1,8 @@
 import axios from "axios";
 import {EquipmentPath} from "./Path";
-import {Weapon, Armor, Gear} from "../models/equipment/Equipment";
+import {Armor} from "../models/equipment/Armor";
+import {Gear} from "../models/equipment/Gear";
+import {Weapon} from "../models/equipment/Weapon";
 
 export default class EquipmentService {
 

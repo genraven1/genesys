@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Fragment, useState} from "react";
 import Roll, {DieType} from "../../models/Roll";
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";

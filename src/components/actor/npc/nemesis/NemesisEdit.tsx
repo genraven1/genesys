@@ -1,6 +1,6 @@
 import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material"
 import * as React from "react"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
 import ActorService from "../../../../services/ActorService"
 import Nemesis from "../../../../models/actor/npc/Nemesis"
@@ -13,10 +13,10 @@ import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/No
 import SoakCard from "../../SoakCard"
 import StatsCard from "../../StatsCard"
 import DefenseCard from "../../DefenseCard"
-import SkillTable from "./NemesisSkillTable"
-import NemesisTalentTable from "./NemesisTalentTable"
+import NonPlayerCharacterSkillTable from "../NonPlayerCharacterSkillTable"
+import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable"
 import TalentSelectionDialog from "../TalentSelectionDialog"
-import {Path} from "../../../../services/Path"
+import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import { ActorKey } from "../../../../models/actor/Actor"
 
@@ -28,8 +28,10 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
+    useEffect(() => {setNemesis(nem)}, [nem])
+
     const onChange = async (key: keyof Nemesis, value: number) => {
-        if (value === null || (nemesis !== null && nemesis[key] === value)) {
+        if (value === null) {
             return
         }
         const copyNemesis = {...nemesis} as Nemesis
@@ -88,7 +90,7 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
     }
 
     const onView = () => {
-        navigate(Path.Nemesis + name + '/view')
+        navigate(ActorPath.Nemesis + name + '/view')
     }
 
     return (
@@ -122,11 +124,11 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
                         <RatingCard  rating={nemesis?.general!!} type={RatingType.General} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.General, value) }}/>
                     </Grid>
                     <Divider />
-                    <SkillTable  nemesis={nemesis}/>
+                    <NonPlayerCharacterSkillTable npc={nemesis}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={nemesis} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
-                    <NemesisTalentTable nemesis={nemesis}/>
+                    <NonPlayerCharacterTalentTable npc={nemesis}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -23,7 +23,7 @@ export default function DefenseCard(props: Props) {
                 </Grid>
                 <Divider />
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={defense?.current!!} min={1} max={5} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={defense?.current!!} min={0} max={5} onCommit={onChange} />
                 </CardActions>
             </Card>
         </Grid>

@@ -1,5 +1,4 @@
-import Actor from "../Actor";
-import Skill from "../Skill";
+import Actor, {ActorSkill} from "../Actor";
 import Stats from "../Stats";
 
 export default interface Player extends Actor {
@@ -7,7 +6,6 @@ export default interface Player extends Actor {
     skills: PlayerSkill[]
 }
 
-export interface PlayerSkill extends Skill {
+export interface PlayerSkill extends ActorSkill {
     career: boolean
-    ranks: number
 }

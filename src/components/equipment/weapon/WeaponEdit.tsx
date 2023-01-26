@@ -1,9 +1,9 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import {Weapon} from '../../../models/equipment/Equipment';
+import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
@@ -27,6 +27,8 @@ export default function WeaponEdit(props: {wea: Weapon}) {
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
+
+    useEffect(() => {setWeapon(wea)}, [wea])
 
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon

@@ -11,8 +11,9 @@ import Talent from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import {Fragment,useEffect,useState} from 'react';
 import * as React from 'react';
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
-import ActionsTableCell from "../common/ActionsTableCell";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import ActionsTableCell from "../common/table/ActionsTableCell";
+import {Path} from "../../services/Path";
 
 function Row(props: { row: Talent }): JSX.Element {
     const {row} = props
@@ -25,7 +26,7 @@ function Row(props: { row: Talent }): JSX.Element {
                 <TableCell>{row.ranked}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={Path.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

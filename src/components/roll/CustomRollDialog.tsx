@@ -3,7 +3,7 @@ import ViewRollTable from "./ViewRollTable";
 import Roll, {DefaultRoll} from "../../models/Roll";
 import {useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@mui/material";
-import GenesysDescriptionTypography from "../common/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import RollService from "../../services/RollService";
 
 interface Props {
