@@ -7,9 +7,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import ActionsTableCell from "../common/ActionsTableCell";
+import ActionsTableCell from "../common/table/ActionsTableCell";
 import Career from "../../models/actor/player/Career";
 import CareerService from "../../services/CareerService";
+import {Path} from "../../services/Path";
 
 function Row(props: { row: Career }): JSX.Element {
     const {row} = props
@@ -18,7 +19,7 @@ function Row(props: { row: Career }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell name={row.name}/>
+                <ActionsTableCell name={row.name} path={Path.Career}/>
             </TableRow>
         </Fragment>
     )
@@ -33,7 +34,7 @@ export default function ViewAllCareers() {
             if (!careerList) { return }
             setCareers(careerList)
         })()
-    }, [])
+    }, [setCareers])
 
     return (
         <TableContainer component={Paper}>
