@@ -1,5 +1,4 @@
 export default interface Talent {
-    id: number
     name: string
     ranked: Ranked
     activation: Activation
