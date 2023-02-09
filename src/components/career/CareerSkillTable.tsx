@@ -26,6 +26,7 @@ export default function CareerSkillTable(): JSX.Element {
             if (!names) { return }
             let list = new Array<CareerSkill>()
             names.forEach((name) => list.push({name: name, active: false}))
+            list.sort((a, b) => a.name.localeCompare(b.name))
             setSkills(list)
         })()
     }, [setSkills])
@@ -80,8 +81,12 @@ export function CareerSkillTableEdit(props: Props): JSX.Element {
         setState({...state, [event.target.name]: event.target.checked})
     }
 
-    const onChange = () => {
-
+    const onChange = (skill: CareerSkill) => {
+        let names = new Array<string>()
+        skills.forEach((careerSkill) => names.push(careerSkill.name))
+        if(names.includes(skill.name)) {
+            
+        }
     }
 
     const error = [...skills.values()].filter((v) => v).length !== 8
