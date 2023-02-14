@@ -41,9 +41,9 @@ export default function App() {
                     <Route path={Path.Setting} element={<ViewAllSettings />} />
                     <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow />} />
                     <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow />} />
-                    <Route path={Path.Talent} element={<AllTalentsView />} />
-                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow />} />
-                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent + ':id/view'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent + ':id/edit'} element={<TalentWorkflow />} />
                     <Route path={Path.Skills} element={<ViewAllSkills />} />
                     <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />

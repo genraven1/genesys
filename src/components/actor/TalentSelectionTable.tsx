@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import TalentService from "../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -14,40 +14,38 @@ import ActorService from "../../services/ActorService";
 import Actor, {ActorTalent} from "../../models/actor/Actor";
 
 interface RowProps {
-    name: string
+    id: number
    actor: Actor
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {name, actor} = props;
+    const {id, actor} = props;
     const [talent, setTalent] = useState<Talent>()
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     useEffect(() => {
-        if (!name) {return}
+        if (!id) {return}
         (async (): Promise<void> => {
-            const talentData = await TalentService.getTalent(name)
+            const talentData = await TalentService.getTalent(id)
             if (!talentData) { return }
             setTalent(talentData)
         })()
-    }, [name])
+    }, [id])
 
     const addTalent = async () => {
         await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
     }
 
     return (
-        <Fragment>
-            <TableRow>
-                <TableCell>
-                    <Button onClick={(): void => setOpenTalentBackDrop(true)}>{name}</Button>
-                    {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
-                </TableCell>
-                <TableCell>
-                    <Button onClick={addTalent}>Add</Button>
-                </TableCell>
-            </TableRow>
-        </Fragment>
+        <TableRow>
+            <TableCell>
+                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{id}</Button>
+                {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
+            </TableCell>
+            <TableCell>
+                <Button onClick={addTalent}>Add</Button>
+            </TableCell>
+        </TableRow>
     )
 }
 
@@ -57,11 +55,11 @@ interface TableProps {
 
 export default function TalentSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<string[]>([])
+    const [names, setNames] = useState<number[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalentNames()
+            const talentList = await TalentService.getTalentIds()
             if (!talentList) { return }
             setNames(talentList)
         })()
@@ -77,8 +75,8 @@ export default function TalentSelectionTable(props: TableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {names.map((name: string) => (
-                        <TalentNameRow name={name} actor={actor}/>
+                    {names.map((id: number) => (
+                        <TalentNameRow id={id} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>

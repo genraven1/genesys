@@ -8,19 +8,19 @@ import EditIcon from "@mui/icons-material/Edit";
 
 export default function TalentView(props: {talent: Talent}) {
     const {talent} = props
-    const { name } = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = Path.Talent
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={talent?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
