@@ -5,24 +5,24 @@ import SkillService from "../../services/SkillService";
 import {Path} from "../../services/Path";
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
+    open: boolean
+    onClose: () => void
 }
 
 export default function CreateSkillDialog(props: Props) {
-    const { open, onClose } = props;
-    const [ name, setName ] = useState('');
-    let navigate = useNavigate();
+    const { open, onClose } = props
+    const [ name, setName ] = useState('')
+    let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await SkillService.createSkill(name)
-        navigate(Path.Skills + name  + '/view')
+        let skill = await SkillService.createSkill(name)
+        navigate(Path.Skills + skill?.id!!  + '/edit')
         onClose()
     }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target
-        setName(value);
+        setName(value)
     }
 
     return (

@@ -24,7 +24,7 @@ interface Props {
 
 export default function SkillEdit(props: Props) {
     const {sk} = props
-    const { name } = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -56,16 +56,16 @@ export default function SkillEdit(props: Props) {
 
     const updateSkill = async (copySkill: Skill) => {
         setSkill(copySkill)
-        await SkillService.updateSkill(copySkill.name, copySkill)
+        await SkillService.updateSkill(copySkill.id, copySkill)
     }
 
     const onView = () => {
-        navigate(Path.Skills + name + '/view');
+        navigate(Path.Skills + id + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={skill?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}>
             </CardHeader>
