@@ -16,7 +16,7 @@ export default function TalentDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let talent = await TalentService.createTalent(name)
-        navigate(Path.Talent + talent.id + '/edit')
+        navigate(Path.Talent + talent?.id!! + '/edit')
         onClose()
     }
 

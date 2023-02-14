@@ -2,7 +2,6 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
-import AllTalentsView from '../talents/AllTalentsViewTable';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import ViewAllSkills from '../skills/ViewAllSkills';
