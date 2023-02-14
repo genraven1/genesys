@@ -26,7 +26,7 @@ function Row(props: { row: Talent }): JSX.Element {
                 <TableCell>{row.ranked}</TableCell>
                 <TableCell>{row.activation}</TableCell>
                 <TableCell>{row.tier}</TableCell>
-                <ActionsTableCell name={row.name} path={Path.Talent}/>
+                <ActionsTableCell name={String(row.id)} path={Path.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

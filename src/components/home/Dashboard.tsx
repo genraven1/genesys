@@ -12,7 +12,6 @@ import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
 import CreateActorDialog from "../actor/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import SettingSelectionField from "../setting/SettingSelectionField";
 import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";

@@ -1,9 +1,10 @@
 export default interface Talent {
-    name: string,
-    ranked: Ranked,
-    activation: Activation,
-    tier: Tier,
-    summary: string,
+    id: number
+    name: string
+    ranked: Ranked
+    activation: Activation
+    tier: Tier
+    summary: string
     description: string
 }
 

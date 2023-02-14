@@ -4,25 +4,26 @@ import TalentService from "../../services/TalentService";
 import {useLocation, useParams} from "react-router-dom";
 import TalentView from "./TalentView";
 import TalentEdit from "./TalentEdit";
+import AllTalentsView from "./AllTalentsViewTable";
 
 
-function useFetchTalent(name: string): Talent {
+function useFetchTalent(id: number): Talent {
     const [talent, setTalent] = useState<Talent>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const talentData = await TalentService.getTalent(name)
+                const talentData = await TalentService.getTalent(id)
                 if (talentData) {setTalent(talentData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setTalent])
+    },[id, setTalent])
     return talent as Talent
 }
 
 export default function TalentWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
-    const talent = useFetchTalent(name!!)
+    const { id } = useParams<{ id?: string }>()
+    const talent = useFetchTalent(Number(id!!))
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
@@ -32,7 +33,7 @@ export default function TalentWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <TalentEdit tal={talent}/>
         }
-        else {return <Fragment/>}
+        else {return <AllTalentsView/>}
     }
 
     return (

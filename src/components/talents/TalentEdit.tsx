@@ -28,7 +28,7 @@ interface Props {
 
 export default function TalentEdit(props: Props) {
     const {tal} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -59,16 +59,16 @@ export default function TalentEdit(props: Props) {
         }
         setTalent(copyTalent)
 
-        await TalentService.updateTalent(copyTalent.name, copyTalent)
+        await TalentService.updateTalent(Number(copyTalent.id), copyTalent)
     }
 
     const onView = () => {
-        navigate(Path.Talent + name + '/view');
+        navigate(Path.Talent + id + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={talent?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}>
             </CardHeader>
