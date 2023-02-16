@@ -4,25 +4,26 @@ import SkillService from "../../services/SkillService";
 import {useLocation, useParams} from "react-router-dom";
 import SkillEdit from "./SkillEdit";
 import SkillView from "./SkillView";
+import ViewAllSkills from "./ViewAllSkills";
 
 
-function useFetchSkill(name: string): Skill {
+function useFetchSkill(id: number): Skill {
     const [skill, setSkill] = useState<Skill>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const skillData = await SkillService.getSkill(name)
+                const skillData = await SkillService.getSkill(id)
                 if (skillData) {setSkill(skillData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setSkill])
+    },[id, setSkill])
     return skill as Skill
 }
 
 export default function SkillWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
-    const skill = useFetchSkill(name!!)
+    const { id } = useParams<{ id?: string }>()
+    const skill = useFetchSkill(Number(id!!))
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
@@ -32,7 +33,7 @@ export default function SkillWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <SkillEdit sk={skill}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllSkills/>}
     }
 
     return (

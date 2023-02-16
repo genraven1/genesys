@@ -4,7 +4,6 @@ import {createTheme, ThemeProvider} from '@mui/material';
 import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
-import ViewAllSkills from '../skills/ViewAllSkills';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import ViewAllArmor from '../equipment/armor/ViewAllArmor';
 import * as React from 'react';
@@ -43,9 +42,9 @@ export default function App() {
                     <Route path={Path.Talent} element={<TalentWorkflow />} />
                     <Route path={Path.Talent + ':id/view'} element={<TalentWorkflow />} />
                     <Route path={Path.Talent + ':id/edit'} element={<TalentWorkflow />} />
-                    <Route path={Path.Skills} element={<ViewAllSkills />} />
-                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
-                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills + ':id/edit'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills + ':id/view'} element={<SkillWorkflow />} />
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Actor} element={<ViewAllActors />} />
 
