@@ -84,7 +84,7 @@ export default function Dashboard(): JSX.Element {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Button color='primary' variant='contained' onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
-                    {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog} onClose={(): void => setOpenSettingSelectionDialog(false)}  current={setting?.name!!}/>}
+                    {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog} onClose={(): void => setOpenSettingSelectionDialog(false)}  current={setting!!}/>}
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Button color='primary' variant='contained' onClick={onLoreClick}>Lore</Button>

@@ -15,8 +15,8 @@ export default function SettingDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await SettingService.createSetting(name)
-        navigate(Path.Setting + name  + '/edit')
+        let setting = await SettingService.createSetting(name)
+        navigate(Path.Setting + setting?.id!!  + '/edit')
         onClose()
     }
 

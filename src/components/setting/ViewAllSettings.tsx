@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
@@ -25,13 +25,11 @@ function Row(props: { row: Setting }): JSX.Element {
     }
 
     return (
-        <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                {renderSettingMagicTableCell()}
-                <ActionsTableCell name={row.name} path={Path.Setting}/>
-            </TableRow>
-        </Fragment>
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+            <TableCell component="th" scope="row">{row.name}</TableCell>
+            {renderSettingMagicTableCell()}
+            <ActionsTableCell name={String(row.id)} path={Path.Setting}/>
+        </TableRow>
     )
 }
 
@@ -58,7 +56,7 @@ export default function ViewAllSettings() {
                 </TableHead>
                 <TableBody>
                     {settings.map((row: Setting) => (
-                        <Row key={row.name} row={row} />
+                        <Row key={row.id} row={row} />
                     ))}
                 </TableBody>
             </Table>

@@ -2,22 +2,23 @@ import {Dialog, DialogActions, DialogTitle, MenuItem, Select, SelectChangeEvent}
 import {useEffect, useState} from "react";
 import * as React from "react";
 import SettingService from "../../services/SettingService";
+import Setting from "../../models/Setting";
 
 interface Props {
     open: boolean
     onClose: () => void
-    current: string
+    current: Setting
 }
 
 export default function SettingSelectionDialog(props: Props) {
     const {open,onClose,current} = props
-    const [settings, setSettings] = useState<string[]>([])
-    const [setting, setSetting] = useState<string>(current)
+    const [settings, setSettings] = useState<Setting[]>([])
+    const [setting, setSetting] = useState<Setting>(current)
 
     useEffect(() => {
         (async (): Promise<void> => {
             if (settings.length > 0) {return}
-            const settingList = await SettingService.getSettingNames()
+            const settingList = await SettingService.getSettings()
             if (!settingList) {return}
             setSettings(settingList)
         })()
@@ -27,7 +28,7 @@ export default function SettingSelectionDialog(props: Props) {
         (async (): Promise<void> => {
             const currentSetting = await SettingService.getCurrentSetting()
             if (!currentSetting) { return }
-            setSetting(currentSetting.name)
+            setSetting(currentSetting)
         })()
     }, [setSetting])
 
@@ -36,17 +37,17 @@ export default function SettingSelectionDialog(props: Props) {
     }
 
     const onSettingChange = async (event: SelectChangeEvent) => {
-        let set = await SettingService.setCurrentSetting(event.target.value as string)
+        let set = await SettingService.setCurrentSetting(Number(event.target.value))
         if (!set) {return}
-        setSetting(set.name)
+        setSetting(set)
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>{getTitle()}</DialogTitle>
             <DialogActions>
-                <Select value={current} onChange={onSettingChange}>
-                    {settings.map((opt) => (<MenuItem key={opt} value={opt}>{opt}</MenuItem>))}
+                <Select value={current?.name!!} onChange={onSettingChange}>
+                    {settings.map((set) => (<MenuItem key={set.id} value={set.id}>{set.name}</MenuItem>))}
                 </Select>
             </DialogActions>
         </Dialog>
