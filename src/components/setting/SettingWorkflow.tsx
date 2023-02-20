@@ -4,25 +4,26 @@ import SettingService from "../../services/SettingService";
 import {useLocation, useParams} from "react-router-dom";
 import SettingEdit from "./SettingEdit";
 import SettingView from "./SettingView";
+import ViewAllSettings from "./ViewAllSettings";
 
 
-function useFetchSetting(name: string): Setting {
+function useFetchSetting(id: number): Setting {
     const [setting, setSetting] = useState<Setting>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const settingData = await SettingService.getSetting(name)
+                const settingData = await SettingService.getSetting(id)
                 if (settingData) {setSetting(settingData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setSetting])
+    },[id, setSetting])
     return setting as Setting
 }
 
 export default function SettingWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
-    const setting = useFetchSetting(name!!)
+    const { id } = useParams<{ id?: string }>()
+    const setting = useFetchSetting(Number(id!!))
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
@@ -32,7 +33,7 @@ export default function SettingWorkflow(): JSX.Element {
         else if (pathname.endsWith('/edit')) {
             return <SettingEdit set={setting}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllSettings/>}
     }
 
     return (

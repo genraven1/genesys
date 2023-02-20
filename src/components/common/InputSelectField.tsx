@@ -6,6 +6,10 @@ export interface Option {
     value: string
 }
 
+export interface ObjectOption extends Option {
+    id: number
+}
+
 interface Props {
     defaultValue: string
     options: Option[]

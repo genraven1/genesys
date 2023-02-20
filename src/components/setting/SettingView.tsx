@@ -9,19 +9,19 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function SettingView(props: {setting: Setting}) {
     const {setting} = props
-    const { name } = useParams<{ name: string }>()
+    const { id } = useParams<{ id: string }>()
     const path = Path.Setting
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={setting?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

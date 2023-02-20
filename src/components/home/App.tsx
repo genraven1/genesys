@@ -24,7 +24,6 @@ import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import AllMinionsView from "../actor/npc/minion/ViewAllMinion";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
-import ViewAllSettings from "../setting/ViewAllSettings";
 import ViewAllActors from "../actor/ViewAllActors";
 
 export default function App() {
@@ -36,9 +35,9 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home" />} />
                     <Route path={Path.Home} element={<Dashboard/>} />
-                    <Route path={Path.Setting} element={<ViewAllSettings />} />
-                    <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow />} />
-                    <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting + ':id/view'} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting + ':id/edit'} element={<SettingWorkflow />} />
                     <Route path={Path.Talent} element={<TalentWorkflow />} />
                     <Route path={Path.Talent + ':id/view'} element={<TalentWorkflow />} />
                     <Route path={Path.Talent + ':id/edit'} element={<TalentWorkflow />} />
