@@ -27,6 +27,7 @@ export default function SettingEdit(props: Props) {
         const copySetting = { ...setting } as Setting
         switch (key) {
             case "magic":
+                copySetting.magic = !setting?.magic!!
                 break
         }
         setSetting(copySetting)

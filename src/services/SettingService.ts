@@ -21,10 +21,10 @@ export default class SettingService {
     }
 
     static async createSetting(name: string): Promise<Setting> {
-        return await axios.post(Path.Setting + name);
+        return await (await axios.post(Path.Setting + name)).data;
     }
 
     static async updateSetting(id: number, setting: Setting): Promise<Setting> {
-        return await axios.put(Path.Setting + id, setting);
+        return await (await axios.put(Path.Setting + id, setting)).data;
     }
 }
