@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import {ViewFieldCard} from "../common/ViewFieldCard";
+import {ViewFieldCard, ViewSettingFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
 import * as React from "react";
 import {useNavigate, useParams} from "react-router-dom";
@@ -36,6 +36,10 @@ export default function TalentView(props: {talent: Talent}) {
                         <ViewFieldCard name={'Ranked'} value={talent?.ranked!!} />
                         <ViewFieldCard name={'Activation'} value={talent?.activation!!} />
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!} />
+                    </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <ViewSettingFieldCard name={'Setting'} settings={talent?.settings!!} />
                     </Grid>
                 </Grid>
             </CardContent>
