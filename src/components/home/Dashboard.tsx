@@ -14,8 +14,8 @@ import CreateActorDialog from "../actor/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
-import {getCurrentSetting} from "../setting/SettingWorkflow";
 import {NavigateFunction} from "react-router";
+import SettingService from "../../services/SettingService";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
@@ -30,7 +30,11 @@ export default function Dashboard(): JSX.Element {
     const [setting, setSetting] = useState<Setting>()
 
     useEffect(() => {
-        getCurrentSetting(setSetting)
+        (async (): Promise<void> => {
+            const current = await SettingService.getCurrentSetting()
+            if (!current) { return }
+            setSetting(current)
+        })()
     }, [setSetting])
 
     const getSubHeader = (): string => {

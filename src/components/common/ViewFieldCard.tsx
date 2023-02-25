@@ -1,11 +1,11 @@
-
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import InlineTextField from "./InlineTextField";
 import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import Setting from "../../models/Setting";
-import {forEach} from "lodash";
+import Talent from "../../models/Talent";
+import * as React from "react";
 
 interface ViewProps {
     name: string
@@ -20,33 +20,6 @@ export function ViewFieldCard(props: ViewProps): JSX.Element {
                 <CardHeader title={name} style={{ textAlign: 'center' }} />
                 <Divider />
                 <GenesysDescriptionTypography text={value}/>
-            </Card>
-        </Grid>
-    )
-}
-
-interface ViewSettingProps {
-    name: string
-    settings: Setting[]
-}
-
-export function ViewSettingFieldCard(props: ViewSettingProps): JSX.Element {
-    const {name,settings} = props
-
-    const getSettingNames = (): string => {
-        let names = ''
-        let list = new Array<string>()
-        settings.forEach((setting) => list.push(setting?.name!!))
-        list.sort((a, b) => a.localeCompare(b))
-        return ''
-    }
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CardHeader title={name} style={{ textAlign: 'center' }} />
-                <Divider />
-                <GenesysDescriptionTypography text={getSettingNames()}/>
             </Card>
         </Grid>
     )

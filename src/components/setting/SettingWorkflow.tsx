@@ -6,14 +6,6 @@ import SettingEdit from "./SettingEdit";
 import SettingView from "./SettingView";
 import ViewAllSettings from "./ViewAllSettings";
 
-export function getCurrentSetting(setSetting: (setting: Setting) => void) {
-    (async (): Promise<void> => {
-        const current = await SettingService.getCurrentSetting()
-        if (!current) {return}
-        setSetting(current)
-    })()
-}
-
 function useFetchSetting(id: number): Setting {
     const [setting, setSetting] = useState<Setting>()
     useEffect(() => {

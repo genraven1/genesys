@@ -8,7 +8,7 @@ export default interface Talent {
     tier: Tier
     summary: string
     description: string
-    settings: Setting[]
+    settings: number[]
 }
 
 export enum Ranked {
