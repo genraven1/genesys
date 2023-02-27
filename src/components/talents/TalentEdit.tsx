@@ -9,6 +9,7 @@ import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
+import Setting from "../../models/Setting";
 
 const getRankedOptions = (): Option[] => {
     return Object.values(Ranked).map((value) => ({value}))
@@ -24,6 +25,7 @@ const getTierOptions = (): Option[] => {
 
 interface Props {
     tal: Talent
+    allSettings: Setting[]
 }
 
 export default function TalentEdit(props: Props) {

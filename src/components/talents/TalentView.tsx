@@ -1,4 +1,4 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton, Typography} from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
 import * as React from "react";
@@ -7,24 +7,18 @@ import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
-import {Fragment, useEffect, useState} from "react";
-import SettingService from "../../services/SettingService";
+import {Fragment} from "react";
 
-export default function TalentView(props: {talent: Talent}) {
-    const {talent} = props
+interface Props {
+    talent: Talent
+    allSettings: Setting[]
+}
+
+export default function TalentView(props: Props) {
+    const {talent, allSettings} = props
     const {id} = useParams<{ id: string }>()
     const path = Path.Talent
     let navigate = useNavigate()
-    const [settings, setSettings] = useState<Setting[]>([])
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            if (settings.length > 0) {return}
-            const settingList = await SettingService.getSettings()
-            if (!settingList) {return}
-            setSettings(settingList)
-        })()
-    }, [settings.length, setSettings])
 
     const onEdit = () => {
         navigate(path + id + '/edit')
@@ -35,7 +29,7 @@ export default function TalentView(props: {talent: Talent}) {
             return <Fragment/>
         }
         let settingList = []
-        for (let setting of settings) {
+        for (let setting of allSettings) {
             if (talent?.settings.includes(setting.id)) {
                 settingList.push(setting)
             }

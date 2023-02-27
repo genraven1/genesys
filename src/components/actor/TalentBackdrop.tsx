@@ -2,6 +2,7 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import TalentView from "../talents/TalentView";
 import Talent from "../../models/Talent";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
     talent: Talent
@@ -14,7 +15,7 @@ export default function TalentBackdrop(props: Props) {
 
     return (
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-                <TalentView talent={talent}/>
+                <TalentView talent={talent} allSettings={useFetchAllSettings()}/>
             </Backdrop>
     )
 }
