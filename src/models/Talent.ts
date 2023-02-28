@@ -1,3 +1,5 @@
+import Setting from "./Setting";
+
 export default interface Talent {
     id: number
     name: string
@@ -6,6 +8,7 @@ export default interface Talent {
     tier: Tier
     summary: string
     description: string
+    settings: number[]
 }
 
 export enum Ranked {

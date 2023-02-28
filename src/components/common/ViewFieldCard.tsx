@@ -1,9 +1,11 @@
-
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import InlineTextField from "./InlineTextField";
 import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
+import Setting from "../../models/Setting";
+import Talent from "../../models/Talent";
+import * as React from "react";
 
 interface ViewProps {
     name: string

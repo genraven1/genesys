@@ -12,9 +12,10 @@ import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
 import CreateActorDialog from "../actor/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
+import {NavigateFunction} from "react-router";
+import SettingService from "../../services/SettingService";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
@@ -35,10 +36,6 @@ export default function Dashboard(): JSX.Element {
             setSetting(current)
         })()
     }, [setSetting])
-
-    const onLoreClick = () => {
-        navigate(Path.Lore)
-    }
 
     const getSubHeader = (): string => {
         return 'Current Setting: ' + setting?.name!!
@@ -87,11 +84,11 @@ export default function Dashboard(): JSX.Element {
                     {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog} onClose={(): void => setOpenSettingSelectionDialog(false)}  current={setting!!}/>}
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained' onClick={onLoreClick}>Lore</Button>
+                    <Button color='primary' variant='contained' onClick={() => navigate(Path.Lore)}>Lore</Button>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item xs>
-                        <DashboardButton path={LorePath.Organization} title={LoreType.ORGANIZATION} />
+                        <DashboardButton path={LorePath.Organization} title={LoreType.ORGANIZATION} navigate={navigate}/>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -109,16 +106,12 @@ export default function Dashboard(): JSX.Element {
 interface DashboardProps {
     path: LorePath
     title: string
+    navigate: NavigateFunction
 }
 
 function DashboardButton(props: DashboardProps): JSX.Element {
-    let navigate = useNavigate()
-
-    const onClick = () => {
-        navigate(props.path)
-    }
-
+    const {path,title,navigate} = props
     return (
-        <Button color='primary' variant='contained' onClick={onClick}>{props.title}</Button>
+        <Button color='primary' variant='contained' onClick={() => navigate(path)}>{title}</Button>
     )
 }

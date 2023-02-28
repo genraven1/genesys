@@ -39,7 +39,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
     return (
         <TableRow>
             <TableCell>
-                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{id}</Button>
+                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{talent?.name!!}</Button>
                 {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
             </TableCell>
             <TableCell>
@@ -63,7 +63,7 @@ export default function TalentSelectionTable(props: TableProps) {
             if (!talentList) { return }
             setNames(talentList)
         })()
-    }, [])
+    }, [setNames])
 
     return (
         <TableContainer component={Paper}>
