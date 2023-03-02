@@ -1,5 +1,3 @@
-import Setting from "./Setting";
-
 export default interface Talent {
     id: number
     name: string
