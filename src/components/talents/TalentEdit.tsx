@@ -61,7 +61,7 @@ export default function TalentEdit(props: Props) {
         }
         setTalent(copyTalent)
 
-        await TalentService.updateTalent(Number(copyTalent.id), copyTalent)
+        await TalentService.updateTalent(copyTalent.id, copyTalent)
     }
 
     const onView = () => {

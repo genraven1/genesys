@@ -16,14 +16,20 @@ import {RangeBand} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
+import Setting from "../../../models/Setting";
 
 const getRangeOptions = (): Option[] => {
     return Object.values(RangeBand).map((value) => ({value}))
 }
 
-export default function WeaponEdit(props: {wea: Weapon}) {
+interface Props {
+    wea: Weapon
+    allSettings: Setting[]
+}
+
+export default function WeaponEdit(props: Props) {
     const {wea} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -33,7 +39,8 @@ export default function WeaponEdit(props: {wea: Weapon}) {
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
-        await updateWeapon(copyWeapon)
+        setWeapon(copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
     }
 
     const onChange = async (key: keyof Weapon, value: string) => {
@@ -72,23 +79,17 @@ export default function WeaponEdit(props: {wea: Weapon}) {
             default:
                 break
         }
-
-        await updateWeapon(copyWeapon)
-    }
-
-    const updateWeapon = async (copyWeapon: Weapon): Promise<Weapon> => {
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(name!!, copyWeapon)
-        return weapon!!
+        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Weapon + name + '/view');
+        navigate(EquipmentPath.Weapon + id + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={weapon?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}/>
             <Divider />
