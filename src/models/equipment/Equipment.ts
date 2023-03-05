@@ -5,9 +5,11 @@ export default interface Equipment {
     restricted: boolean
     encumbrance: number
     rarity: number
+    id: number
+    settings: number[]
 }
 
-export interface ActorEquipment extends Equipment {
+export interface ActorEquipment {
     equipped: boolean
     slot: EquipmentSlot
 }
