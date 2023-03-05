@@ -24,10 +24,16 @@ export default function TalentView(props: Props) {
         navigate(path + id + '/edit')
     }
 
+    const renderRanked = ():JSX.Element => {
+        if(talent?.ranked!! === undefined) {return <Fragment/>}
+        let ranked = ''
+        if(talent?.ranked!!) {ranked = 'Yes'}
+        else {ranked = 'No'}
+        return <ViewFieldCard name={'Ranked'} value={ranked}/>
+    }
+
     const renderSettings = ():JSX.Element => {
-        if (talent?.settings!! === undefined) {
-            return <Fragment/>
-        }
+        if (talent?.settings!! === undefined) {return <Fragment/>}
         let settingList = []
         for (let setting of allSettings) {
             if (talent?.settings.includes(setting.id)) {
@@ -60,7 +66,7 @@ export default function TalentView(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Ranked'} value={talent?.ranked!!} />
+                        {renderRanked()}
                         <ViewFieldCard name={'Activation'} value={talent?.activation!!} />
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!} />
                     </Grid>

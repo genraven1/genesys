@@ -19,13 +19,21 @@ function Row(props: { row: Talent }): JSX.Element {
     const {row} = props
     const [open,setOpen] = useState(false)
 
+    const renderRanked = ():JSX.Element => {
+        if(row?.ranked!! === undefined) {return <Fragment/>}
+        let ranked = ''
+        if(row?.ranked!!) {ranked = 'Yes'}
+        else {ranked = 'No'}
+        return <GenesysDescriptionTypography text={ranked}/>
+    }
+
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.ranked}</TableCell>
-                <TableCell>{row.activation}</TableCell>
-                <TableCell>{row.tier}</TableCell>
+                <TableCell style={{textAlign:'center'}}>{row.name}</TableCell>
+                <TableCell style={{textAlign:'center'}}>{renderRanked()}</TableCell>
+                <TableCell style={{textAlign:'center'}}>{row.activation}</TableCell>
+                <TableCell style={{textAlign:'center'}}>{row.tier}</TableCell>
                 <ActionsTableCell name={String(row.id)} path={Path.Talent}/>
             </TableRow>
             <TableRow>
@@ -61,11 +69,11 @@ export default function AllTalentsView() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Talent Name</TableCell>
-                        <TableCell>Ranked</TableCell>
-                        <TableCell>Activation</TableCell>
-                        <TableCell>Tier</TableCell>
-                        <TableCell>Edit</TableCell>
+                        <TableCell style={{textAlign:'center'}}>Talent Name</TableCell>
+                        <TableCell style={{textAlign:'center'}}>Ranked</TableCell>
+                        <TableCell style={{textAlign:'center'}}>Activation</TableCell>
+                        <TableCell style={{textAlign:'center'}}>Tier</TableCell>
+                        <TableCell style={{textAlign:'center'}}>View</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

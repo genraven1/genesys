@@ -28,7 +28,7 @@ interface Props {
 }
 
 export default function WeaponEdit(props: Props) {
-    const {wea} = props
+    const {wea, allSettings} = props
     const {id} = useParams<{ id: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)

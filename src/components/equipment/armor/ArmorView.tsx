@@ -6,22 +6,49 @@ import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {EquipmentPath} from "../../../services/Path";
+import Setting from "../../../models/Setting";
+import {Fragment} from "react";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 
+interface Props {
+    armor: Armor
+    allSettings: Setting[]
+}
 
-export default function ArmorView(props: {armor: Armor}) {
-    const {armor} = props
-    const { name } = useParams<{ name: string }>()
+export default function ArmorView(props: Props) {
+    const {armor, allSettings} = props
+    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + name + '/edit');
+        navigate(EquipmentPath.Armor + id!! + '/edit');
+    }
+
+    const renderSettings = ():JSX.Element => {
+        if (armor?.settings!! === undefined) {
+            return <Fragment/>
+        }
+        let settingList = []
+        for (let setting of allSettings) {
+            if (armor?.settings.includes(setting.id)) {
+                settingList.push(setting)
+            }
+        }
+        console.log(settingList)
+        return (
+            <Fragment>
+                {(settingList || []).map((setting: Setting):JSX.Element => {
+                    return <GenesysDescriptionTypography text={setting?.name!!}/>
+                })}
+            </Fragment>
+        )
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={armor?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
@@ -39,6 +66,18 @@ export default function ArmorView(props: {armor: Armor}) {
                         <ViewFieldCard name={'Encumbrance'} value={String(armor?.encumbrance!!)} />
                         <ViewNumberCheckBoxCard  title={'Price'} check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'}/>
                         <ViewFieldCard name={'Rarity'} value={String(armor?.rarity!!)} />
+                    </Grid>
+                </Grid>
+                <Divider />
+                <Grid container spacing={10}>
+                    <Grid item xs>
+                        <Card>
+                            <CardHeader title={'Settings'} style={{ textAlign: 'center' }} />
+                            <Divider />
+                            <CardContent>
+                                {renderSettings()}
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Grid>
             </CardContent>

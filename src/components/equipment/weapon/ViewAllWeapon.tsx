@@ -22,15 +22,9 @@ function Row(props: { row: Weapon }): JSX.Element {
 
     const renderDamage = (): JSX.Element => {
         let damage = ''
-        if (row.brawn) {
-            damage = 'Brawn + ' + row.damage
-        }
-        else {
-            damage = String(row.damage)
-        }
-        return (
-            <Typography>{damage}</Typography>
-        )
+        if (row.brawn) {damage = 'Brawn + ' + row.damage}
+        else {damage = String(row.damage)}
+        return <GenesysDescriptionTypography text={damage}/>
     }
 
     const renderPrice = (): JSX.Element => {
