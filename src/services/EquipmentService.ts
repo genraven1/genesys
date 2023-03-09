@@ -7,7 +7,7 @@ import {Weapon} from "../models/equipment/Weapon";
 export default class EquipmentService {
 
     static async createArmor(name: string): Promise<Armor> {
-        return await axios.post( EquipmentPath.Armor + name)
+        return await (await axios.post( EquipmentPath.Armor + name)).data
     }
 
     static async getArmors(): Promise<Armor[]> {
@@ -39,18 +39,18 @@ export default class EquipmentService {
     }
 
     static async createGear(name: string): Promise<Gear> {
-        return await axios.post( EquipmentPath.Gear + name)
+        return await (await axios.post( EquipmentPath.Gear + name)).data
     }
 
     static async getGears(): Promise<Gear[]> {
         return await (await axios.get(EquipmentPath.Gear)).data
     }
 
-    static async getGear(name: string): Promise<Gear> {
-        return await (await axios.get(EquipmentPath.Gear + name)).data
+    static async getGear(id: number): Promise<Gear> {
+        return await (await axios.get(EquipmentPath.Gear + id)).data
     }
 
-    static async updateGear(name: string, gear: Gear): Promise<Gear> {
-        return await axios.put(EquipmentPath.Gear + name, gear)
+    static async updateGear(id: number, gear: Gear): Promise<Gear> {
+        return await axios.put(EquipmentPath.Gear + id, gear)
     }
 }
