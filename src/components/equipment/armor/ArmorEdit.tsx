@@ -54,13 +54,12 @@ export default function ArmorEdit(props: Props) {
             default:
                 break
         }
-        console.log(copyArmor)
         setArmor(copyArmor)
         await EquipmentService.updateArmor(copyArmor.id, copyArmor)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Armor + id!! + '/view');
+        navigate(EquipmentPath.Armor + id + '/view');
     }
 
     return (

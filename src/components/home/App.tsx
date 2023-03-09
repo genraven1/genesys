@@ -63,8 +63,8 @@ export default function App() {
                     <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow />} />
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':id/edit'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':id/view'} element={<ArmorWorkflow/>} />
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/edit'} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/view'} element={<WeaponWorkflow/>} />

@@ -21,7 +21,7 @@ export default function ArmorView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + id!! + '/edit');
+        navigate(EquipmentPath.Armor + id + '/edit');
     }
 
     const renderSettings = ():JSX.Element => {
@@ -34,7 +34,6 @@ export default function ArmorView(props: Props) {
                 settingList.push(setting)
             }
         }
-        console.log(settingList)
         return (
             <Fragment>
                 {(settingList || []).map((setting: Setting):JSX.Element => {
