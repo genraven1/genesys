@@ -8,10 +8,16 @@ import {EquipmentPath} from '../../../services/Path';
 import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
+import Setting from "../../../models/Setting";
 
-export default function ArmorEdit(props: {ar: Armor}) {
-    const {ar} = props
-    const { name } = useParams<{ name: string }>()
+interface Props {
+    ar: Armor
+    allSettings: Setting[]
+}
+
+export default function ArmorEdit(props: Props) {
+    const {ar, allSettings} = props
+    const {id} = useParams<{ id: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -19,7 +25,7 @@ export default function ArmorEdit(props: {ar: Armor}) {
     useEffect(() => {setArmor(ar)}, [ar])
     
     const onChange = async (key: keyof Armor, value: string) => {
-        if (value === null || (armor !== null && armor[key] === value)) {
+        if (value === null) {
             return;
         }
         const copyArmor = {...armor} as Armor
@@ -48,23 +54,17 @@ export default function ArmorEdit(props: {ar: Armor}) {
             default:
                 break
         }
-
-        await updateArmor(copyArmor)
-    }
-
-    const updateArmor = async (copyArmor: Armor): Promise<Armor> => {
         setArmor(copyArmor)
-        await EquipmentService.updateArmor(copyArmor.name, copyArmor)
-        return armor!!
+        await EquipmentService.updateArmor(copyArmor.id, copyArmor)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Armor + name + '/view');
+        navigate(EquipmentPath.Armor + id + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={armor?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}/>
             <Divider />

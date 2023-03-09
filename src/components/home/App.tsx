@@ -5,7 +5,6 @@ import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
-import ViewAllArmor from '../equipment/armor/ViewAllArmor';
 import * as React from 'react';
 import Dashboard from "./Dashboard";
 import LoreMenu from "../lore/common/LoreMenu";
@@ -63,9 +62,9 @@ export default function App() {
                     <Route path={ActorPath.Minion + ':name/edit'} element={<MinionWorkflow />} />
                     <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow />} />
                     {/*Equipment Routes*/}
-                    <Route path={EquipmentPath.Armor} element={<ViewAllArmor/>} />
-                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':id/edit'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':id/view'} element={<ArmorWorkflow/>} />
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/edit'} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/view'} element={<WeaponWorkflow/>} />

@@ -1,7 +1,7 @@
 export default interface Talent {
     id: number
     name: string
-    ranked: Ranked
+    ranked: boolean
     activation: Activation
     tier: Tier
     summary: string
@@ -28,13 +28,4 @@ export enum Tier {
     Third = 'Third',
     Fourth = 'Fourth',
     Fifth = 'Fifth'
-}
-
-export enum TalentKey {
-    Name= 'name',
-    Ranked= 'ranked',
-    Activation= 'activation',
-    Tier= 'tier',
-    Summary= 'summary',
-    Description= 'description'
 }

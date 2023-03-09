@@ -42,7 +42,7 @@ function Row(props: { row: Armor }): JSX.Element {
                 <TableCell>{row.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
                 <TableCell>{row.rarity}</TableCell>
-                <ActionsTableCell name={row.name} path={EquipmentPath.Armor}/>
+                <ActionsTableCell name={String(row.id)} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

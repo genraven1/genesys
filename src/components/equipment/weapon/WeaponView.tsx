@@ -9,6 +9,7 @@ import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
 import {Fragment} from "react";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
+import Typography from "@mui/material/Typography";
 
 interface Props {
     weapon: Weapon
@@ -23,6 +24,19 @@ export default function WeaponView(props: Props) {
 
     const onEdit = () => {
         navigate(path + id + '/edit')
+    }
+
+    const renderDamage = (): JSX.Element => {
+        let damage = ''
+        if (weapon?.brawn!!) {
+            damage = 'Brawn + ' + weapon?.damage!!
+        }
+        else {
+            damage = String(weapon?.damage!!)
+        }
+        return (
+            <Typography>{damage}</Typography>
+        )
     }
 
     const renderSettings = ():JSX.Element => {
@@ -62,7 +76,7 @@ export default function WeaponView(props: Props) {
                     <Divider />
                     <Grid container spacing={10}>
                         <ViewFieldCard name={'Required Skill'} value={String(weapon?.skill?.name!!)} />
-                        <ViewFieldCard name={'Damage'} value={String(weapon?.damage!!)} />
+                        {renderDamage()}
                         <ViewFieldCard name={'Critical'} value={String(weapon?.critical!!)} />
                         <ViewFieldCard name={'Range'} value={String(weapon?.range!!)} />
                     </Grid>

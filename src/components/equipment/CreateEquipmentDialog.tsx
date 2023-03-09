@@ -19,16 +19,16 @@ export default function CreateEquipmentDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case EquipmentType.Armor:
-                await EquipmentService.createArmor(name)
-                navigate(EquipmentPath.Armor + name + '/view')
+                let armor = await EquipmentService.createArmor(name)
+                navigate(EquipmentPath.Armor + armor?.id!! + '/view')
                 break
             case EquipmentType.Weapon:
-                await EquipmentService.createWeapon(name)
-                navigate(EquipmentPath.Weapon + name + '/view')
+                let weapon = await EquipmentService.createWeapon(name)
+                navigate(EquipmentPath.Weapon + weapon?.id!! + '/view')
                 break
             case EquipmentType.Gear:
-                await EquipmentService.createGear(name)
-                navigate(EquipmentPath.Gear + name + '/view')
+                let gear = await EquipmentService.createGear(name)
+                navigate(EquipmentPath.Gear + gear?.id!! + '/view')
                 break
         }
         onClose()
