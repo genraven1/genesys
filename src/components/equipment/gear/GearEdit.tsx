@@ -8,20 +8,21 @@ import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import {AllSkillsSelectCard} from "../../common/SkillSelectCard";
 import Skill from "../../../models/actor/Skill";
-import {Option} from "../../common/InputSelectField";
-import {RangeBand} from "../../../models/common/RangeBand";
+import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
+import Setting from "../../../models/Setting";
 
-const getRangeOptions = (): Option[] => {
-    return Object.values(RangeBand).map((value) => ({value}))
+interface Props {
+    gea: Gear
+    allSettings: Setting[]
 }
 
-export default function GearEdit(props: {gea: Gear}) {
-    const {gea} = props
-    const {name} = useParams<{ name: string }>()
+export default function GearEdit(props: Props) {
+    const {gea, allSettings} = props
+    const {id} = useParams<{ id: string }>()
     const [gear, setGear] = useState<Gear>(gea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -31,7 +32,8 @@ export default function GearEdit(props: {gea: Gear}) {
     const onSkillChange = async (value: Skill) => {
         const copyGear = {...gear} as Gear
         copyGear.skill = value
-        await updateGear(copyGear)
+        setGear(copyGear)
+        await EquipmentService.updateGear(copyGear.id, copyGear)
     }
 
     const onChange = async (key: keyof Gear, value: string) => {
@@ -61,23 +63,17 @@ export default function GearEdit(props: {gea: Gear}) {
             default:
                 break
         }
-
-        await updateGear(copyGear)
-    }
-
-    const updateGear = async (copyGear: Gear): Promise<Gear> => {
         setGear(copyGear)
-        await EquipmentService.updateGear(name!!, copyGear)
-        return gear!!
+        await EquipmentService.updateGear(copyGear.id, copyGear)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Gear + name + '/view');
+        navigate(EquipmentPath.Gear + id + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={gear?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}/>
             <Divider />

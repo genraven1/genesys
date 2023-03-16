@@ -11,16 +11,11 @@ import {SkillSelectCard} from "../../common/SkillSelectCard";
 import Skill, {SkillType} from "../../../models/actor/Skill";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 import CheckButtonCard from "../../common/CheckButtonCard";
-import {Option} from "../../common/InputSelectField";
-import {RangeBand} from "../../../models/common/RangeBand";
+import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
-
-const getRangeOptions = (): Option[] => {
-    return Object.values(RangeBand).map((value) => ({value}))
-}
 
 interface Props {
     wea: Weapon
