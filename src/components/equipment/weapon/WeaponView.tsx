@@ -7,9 +7,8 @@ import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
-import {Fragment} from "react";
-import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
+import ViewSettingsCard from "../../common/ViewSettingsCard";
 
 interface Props {
     weapon: Weapon
@@ -19,11 +18,10 @@ interface Props {
 export default function WeaponView(props: Props) {
     const {weapon, allSettings} = props
     const {id} = useParams<{ id: string }>()
-    const path = EquipmentPath.Weapon
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(EquipmentPath.Weapon + id + '/edit')
     }
 
     const renderDamage = (): JSX.Element => {
@@ -36,25 +34,6 @@ export default function WeaponView(props: Props) {
         }
         return (
             <Typography>{damage}</Typography>
-        )
-    }
-
-    const renderSettings = ():JSX.Element => {
-        if (weapon?.settings!! === undefined) {
-            return <Fragment/>
-        }
-        let settingList = []
-        for (let setting of allSettings) {
-            if (weapon?.settings.includes(setting.id)) {
-                settingList.push(setting)
-            }
-        }
-        return (
-            <Fragment>
-                {(settingList || []).map((setting: Setting):JSX.Element => {
-                    return <GenesysDescriptionTypography text={setting?.name!!}/>
-                })}
-            </Fragment>
         )
     }
 
@@ -88,15 +67,7 @@ export default function WeaponView(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <Grid item xs>
-                            <Card>
-                                <CardHeader title={'Settings'} style={{ textAlign: 'center' }} />
-                                <Divider />
-                                <CardContent>
-                                    {renderSettings()}
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings} />
                     </Grid>
                 </Grid>
             </CardContent>

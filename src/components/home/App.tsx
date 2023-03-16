@@ -16,7 +16,6 @@ import SkillWorkflow from "../skills/SkillWorkflow";
 import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
 import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 import GearWorkflow from "../equipment/gear/GearWorkflow";
-import ViewAllGear from "../equipment/gear/ViewAllGear";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
@@ -68,9 +67,9 @@ export default function App() {
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/edit'} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Weapon + ':id/view'} element={<WeaponWorkflow/>} />
-                    <Route path={EquipmentPath.Gear} element={<ViewAllGear/>} />
-                    <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>} />
-                    <Route path={EquipmentPath.Gear + ':name/view'} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear + ':id/edit'} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear + ':id/view'} element={<GearWorkflow/>} />
                     {/*Lore Routes*/}
                     <Route path={Path.Lore} element={<ViewAllLore />} />
                     <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />

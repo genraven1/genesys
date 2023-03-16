@@ -4,35 +4,38 @@ import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
 import GearView from "./GearView";
 import GearEdit from "./GearEdit";
+import ViewAllGear from "./ViewAllGear";
+import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 
-function useFetchGear(name: string): Gear {
+function useFetchGear(id: number): Gear {
     const [gear, setGear] = useState<Gear>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const gearData = await EquipmentService.getGear(name)
+                const gearData = await EquipmentService.getGear(id)
                 if (gearData) {setGear(gearData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setGear])
+    },[id, setGear])
     return gear as Gear
 }
 
 export default function GearWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const Gear = useFetchGear(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const Gear = useFetchGear(Number(id!!))
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <GearView  gear={Gear}/>
+            return <GearView  gear={Gear} allSettings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <GearEdit gea={Gear}/>
+            return <GearEdit gea={Gear} allSettings={settings}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllGear/>}
     }
 
     return (

@@ -6,22 +6,29 @@ import {Gear} from "../../../models/equipment/Gear";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
+import Setting from "../../../models/Setting";
+import ViewSettingsCard from "../../common/ViewSettingsCard";
 
-export default function GearView(props: {gear: Gear}) {
-    const {gear} = props
-    const {name} = useParams<{ name: string }>()
+interface Props {
+    gear: Gear
+    allSettings: Setting[]
+}
+
+export default function GearView(props: Props) {
+    const {gear, allSettings} = props
+    const {id} = useParams<{ id: string }>()
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={gear?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
@@ -42,6 +49,10 @@ export default function GearView(props: {gear: Gear}) {
                         <ViewFieldCard name={'Encumbrance'} value={String(gear?.encumbrance!!)} />
                         <ViewNumberCheckBoxCard  title={'Price'} check={gear?.restricted!!} value={gear?.price!!} checkTitle={'Restricted'}/>
                         <ViewFieldCard name={'Rarity'} value={String(gear?.rarity!!)} />
+                    </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <ViewSettingsCard settingIds={gear?.settings!!} allSettings={allSettings} />
                     </Grid>
                 </Grid>
             </CardContent>
