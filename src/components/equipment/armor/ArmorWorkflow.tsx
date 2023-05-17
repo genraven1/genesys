@@ -8,23 +8,23 @@ import ViewAllArmor from "./ViewAllArmor";
 import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 
-function useFetchArmor(id: number): Armor {
+function useFetchArmor(name: string): Armor {
     const [armor, setArmor] = useState<Armor>()
     useEffect(() => {
-        if(!id) {return}
+        if(!name) {return}
         (async (): Promise<void> => {
             try {
-                const armorData = await EquipmentService.getArmor(id)
+                const armorData = await EquipmentService.getArmor(name)
                 if (armorData) {setArmor(armorData)}
             } catch (err) {console.log(err)}
         })()
-    },[id, setArmor])
+    },[name, setArmor])
     return armor as Armor
 }
 
 export default function ArmorWorkflow(): JSX.Element {
-    const { id } = useParams<{ id?: string }>()
-    const armor = useFetchArmor(Number(id!!))
+    const { name } = useParams<{ name?: string }>()
+    const armor = useFetchArmor(name!!)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {

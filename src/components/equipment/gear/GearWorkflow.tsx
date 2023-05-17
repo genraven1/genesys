@@ -8,23 +8,23 @@ import ViewAllGear from "./ViewAllGear";
 import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 
-function useFetchGear(id: number): Gear {
+function useFetchGear(name: string): Gear {
     const [gear, setGear] = useState<Gear>()
     useEffect(() => {
-        if(!id) {return}
+        if(!name) {return}
         (async (): Promise<void> => {
             try {
-                const gearData = await EquipmentService.getGear(id)
+                const gearData = await EquipmentService.getGear(name)
                 if (gearData) {setGear(gearData)}
             } catch (err) {console.log(err)}
         })()
-    },[id, setGear])
+    },[name, setGear])
     return gear as Gear
 }
 
 export default function GearWorkflow(): JSX.Element {
-    const {id} = useParams<{ id?: string }>()
-    const Gear = useFetchGear(Number(id!!))
+    const {name} = useParams<{ name?: string }>()
+    const Gear = useFetchGear(name!!)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {

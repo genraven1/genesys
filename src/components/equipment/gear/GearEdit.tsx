@@ -22,7 +22,7 @@ interface Props {
 
 export default function GearEdit(props: Props) {
     const {gea, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [gear, setGear] = useState<Gear>(gea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -33,7 +33,7 @@ export default function GearEdit(props: Props) {
         const copyGear = {...gear} as Gear
         copyGear.skill = value
         setGear(copyGear)
-        await EquipmentService.updateGear(copyGear.id, copyGear)
+        await EquipmentService.updateGear(copyGear.name, copyGear)
     }
 
     const onChange = async (key: keyof Gear, value: string) => {
@@ -64,11 +64,11 @@ export default function GearEdit(props: Props) {
                 break
         }
         setGear(copyGear)
-        await EquipmentService.updateGear(copyGear.id, copyGear)
+        await EquipmentService.updateGear(copyGear.name, copyGear)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Gear + id + '/view');
+        navigate(EquipmentPath.Gear + name + '/view');
     }
 
     return (

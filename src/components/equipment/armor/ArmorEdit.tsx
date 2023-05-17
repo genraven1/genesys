@@ -17,7 +17,7 @@ interface Props {
 
 export default function ArmorEdit(props: Props) {
     const {ar, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -55,11 +55,11 @@ export default function ArmorEdit(props: Props) {
                 break
         }
         setArmor(copyArmor)
-        await EquipmentService.updateArmor(copyArmor.id, copyArmor)
+        await EquipmentService.updateArmor(copyArmor.name, copyArmor)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Armor + id + '/view');
+        navigate(EquipmentPath.Armor + name + '/view');
     }
 
     return (

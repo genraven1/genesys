@@ -5,20 +5,20 @@ import Setting from "../../models/Setting";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 
 interface Props {
-    settingIds: number[]
+    settingIds: string[]
     allSettings: Setting[]
 }
 
 export default function ViewSettingsCard(props: Props): JSX.Element {
     const {settingIds, allSettings} = props
 
-    const renderSettings = (settings: number[]):JSX.Element => {
+    const renderSettings = (settings: string[]):JSX.Element => {
         if (settings === undefined) {
             return <Fragment/>
         }
         let settingList = []
         for (let setting of allSettings) {
-            if (settings.includes(setting.id)) {
+            if (settings.includes(setting.name)) {
                 settingList.push(setting)
             }
         }

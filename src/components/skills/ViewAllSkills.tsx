@@ -31,7 +31,7 @@ function Row(props: { row: Skill }): JSX.Element {
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.characteristic}</TableCell>
                 {renderSkillActiveTableCell()}
-                <ActionsTableCell name={String(row.id)} path={Path.Skills}/>
+                <ActionsTableCell name={row.name} path={Path.Skills}/>
             </TableRow>
         </Fragment>
     )

@@ -14,23 +14,23 @@ import ActorService from "../../services/ActorService";
 import Actor, {ActorTalent} from "../../models/actor/Actor";
 
 interface RowProps {
-    id: number
+    name: string
    actor: Actor
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {id, actor} = props;
+    const {name, actor} = props;
     const [talent, setTalent] = useState<Talent>()
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     useEffect(() => {
-        if (!id) {return}
+        if (!name) {return}
         (async (): Promise<void> => {
-            const talentData = await TalentService.getTalent(id)
+            const talentData = await TalentService.getTalent(name)
             if (!talentData) { return }
             setTalent(talentData)
         })()
-    }, [id])
+    }, [name])
 
     const addTalent = async () => {
         await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
@@ -55,11 +55,11 @@ interface TableProps {
 
 export default function TalentSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<number[]>([])
+    const [names, setNames] = useState<string[]>([])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalentIds()
+            const talentList = await TalentService.getTalentNames()
             if (!talentList) { return }
             setNames(talentList)
         })()
@@ -75,8 +75,8 @@ export default function TalentSelectionTable(props: TableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {names.map((id: number) => (
-                        <TalentNameRow id={id} actor={actor}/>
+                    {names.map((name: string) => (
+                        <TalentNameRow name={name} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>

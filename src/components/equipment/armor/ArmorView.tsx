@@ -17,11 +17,11 @@ interface Props {
 
 export default function ArmorView(props: Props) {
     const {armor, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + id + '/edit');
+        navigate(EquipmentPath.Armor + name + '/edit');
     }
 
     const renderSettings = ():JSX.Element => {
@@ -30,7 +30,7 @@ export default function ArmorView(props: Props) {
         }
         let settingList = []
         for (let setting of allSettings) {
-            if (armor?.settings.includes(setting.id)) {
+            if (armor?.settings.includes(setting.name)) {
                 settingList.push(setting)
             }
         }

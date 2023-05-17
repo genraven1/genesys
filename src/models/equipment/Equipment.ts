@@ -5,8 +5,7 @@ export default interface Equipment {
     restricted: boolean
     encumbrance: number
     rarity: number
-    id: number
-    settings: number[]
+    settings: string[]
 }
 
 export interface ActorEquipment {
