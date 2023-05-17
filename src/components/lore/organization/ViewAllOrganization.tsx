@@ -1,5 +1,5 @@
 import {Organization} from "../../../models/lore/Organization";
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
@@ -16,12 +16,10 @@ function OrganizationRow(props: { row: Organization }): JSX.Element {
     const { row } = props
 
     return (
-        <Fragment>
-            <TableRow>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell name={row.name} path={LorePath.Organization}/>
-            </TableRow>
-        </Fragment>
+        <TableRow>
+            <TableCell component="th" scope="row">{row.name}</TableCell>
+            <ActionsTableCell name={row.name} path={LorePath.Organization}/>
+        </TableRow>
     )
 }
 
