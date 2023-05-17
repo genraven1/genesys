@@ -27,7 +27,7 @@ interface Props {
 
 export default function TalentEdit(props: Props) {
     const {tal} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -58,11 +58,11 @@ export default function TalentEdit(props: Props) {
         }
         setTalent(copyTalent)
 
-        await TalentService.updateTalent(copyTalent.id, copyTalent)
+        await TalentService.updateTalent(copyTalent.name, copyTalent)
     }
 
     const onView = () => {
-        navigate(Path.Talent + id!! + '/view');
+        navigate(Path.Talent + name!! + '/view');
     }
 
     return (

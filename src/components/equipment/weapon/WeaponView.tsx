@@ -17,11 +17,11 @@ interface Props {
 
 export default function WeaponView(props: Props) {
     const {weapon, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(EquipmentPath.Weapon + id + '/edit')
+        navigate(EquipmentPath.Weapon + name + '/edit')
     }
 
     const renderDamage = (): JSX.Element => {

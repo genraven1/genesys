@@ -1,17 +1,11 @@
 export default interface Talent {
-    id: number
     name: string
     ranked: boolean
     activation: Activation
     tier: Tier
     summary: string
     description: string
-    settings: number[]
-}
-
-export enum Ranked {
-    No = 'No',
-    Yes = 'Yes'
+    settings: string[]
 }
 
 export enum Activation {

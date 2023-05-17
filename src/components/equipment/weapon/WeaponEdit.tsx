@@ -24,7 +24,7 @@ interface Props {
 
 export default function WeaponEdit(props: Props) {
     const {wea, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -35,7 +35,7 @@ export default function WeaponEdit(props: Props) {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
     }
 
     const onChange = async (key: keyof Weapon, value: string) => {
@@ -75,11 +75,11 @@ export default function WeaponEdit(props: Props) {
                 break
         }
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Weapon + id + '/view');
+        navigate(EquipmentPath.Weapon + name + '/view');
     }
 
     return (

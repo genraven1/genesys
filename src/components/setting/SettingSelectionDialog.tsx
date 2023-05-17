@@ -37,7 +37,7 @@ export default function SettingSelectionDialog(props: Props) {
     }
 
     const onSettingChange = async (event: SelectChangeEvent) => {
-        let set = await SettingService.setCurrentSetting(Number(event.target.value))
+        let set = await SettingService.setCurrentSetting(event.target.value)
         if (!set) {return}
         setSetting(set)
     }
@@ -47,7 +47,7 @@ export default function SettingSelectionDialog(props: Props) {
             <DialogTitle>{getTitle()}</DialogTitle>
             <DialogActions>
                 <Select value={current?.name!!} onChange={onSettingChange}>
-                    {settings.map((set) => (<MenuItem key={set.id} value={set.id}>{set.name}</MenuItem>))}
+                    {settings.map((set) => (<MenuItem key={set.name} value={set.name}>{set.name}</MenuItem>))}
                 </Select>
             </DialogActions>
         </Dialog>

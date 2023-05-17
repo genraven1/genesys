@@ -9,7 +9,7 @@ import {useNavigate, useParams} from "react-router-dom";
 
 export default function SkillView(props: {skill: Skill}): JSX.Element {
     const {skill} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     let path = Path.Skills
     let navigate = useNavigate()
 
@@ -23,7 +23,7 @@ export default function SkillView(props: {skill: Skill}): JSX.Element {
     }
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + name + '/edit')
     }
 
     return (

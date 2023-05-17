@@ -16,12 +16,12 @@ interface Props {
 
 export default function TalentView(props: Props) {
     const {talent, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const path = Path.Talent
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + name + '/edit')
     }
 
     const renderRanked = ():JSX.Element => {
@@ -36,7 +36,7 @@ export default function TalentView(props: Props) {
         if (talent?.settings!! === undefined) {return <Fragment/>}
         let settingList = []
         for (let setting of allSettings) {
-            if (talent?.settings.includes(setting.id)) {
+            if (talent?.settings.includes(setting.name)) {
                 settingList.push(setting)
             }
         }

@@ -7,23 +7,23 @@ import SkillView from "./SkillView";
 import ViewAllSkills from "./ViewAllSkills";
 
 
-function useFetchSkill(id: number): Skill {
+function useFetchSkill(name: string): Skill {
     const [skill, setSkill] = useState<Skill>()
     useEffect(() => {
-        if(!id) {return}
+        if(!name) {return}
         (async (): Promise<void> => {
             try {
-                const skillData = await SkillService.getSkill(id)
+                const skillData = await SkillService.getSkill(name)
                 if (skillData) {setSkill(skillData)}
             } catch (err) {console.log(err)}
         })()
-    },[id, setSkill])
+    },[name, setSkill])
     return skill as Skill
 }
 
 export default function SkillWorkflow(): JSX.Element {
-    const { id } = useParams<{ id?: string }>()
-    const skill = useFetchSkill(Number(id!!))
+    const { name } = useParams<{ name?: string }>()
+    const skill = useFetchSkill(name!!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname

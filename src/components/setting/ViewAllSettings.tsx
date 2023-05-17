@@ -28,7 +28,7 @@ function Row(props: { row: Setting }): JSX.Element {
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
             <TableCell component="th" scope="row">{row.name}</TableCell>
             {renderSettingMagicTableCell()}
-            <ActionsTableCell name={String(row.id)} path={Path.Setting}/>
+            <ActionsTableCell name={row.name} path={Path.Setting}/>
         </TableRow>
     )
 }
@@ -56,7 +56,7 @@ export default function ViewAllSettings() {
                 </TableHead>
                 <TableBody>
                     {settings.map((row: Setting) => (
-                        <Row key={row.id} row={row} />
+                        <Row key={row.name} row={row} />
                     ))}
                 </TableBody>
             </Table>

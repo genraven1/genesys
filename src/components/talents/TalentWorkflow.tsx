@@ -8,23 +8,23 @@ import AllTalentsView from "./AllTalentsViewTable";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
-function useFetchTalent(id: number): Talent {
+function useFetchTalent(name: string): Talent {
     const [talent, setTalent] = useState<Talent>()
     useEffect(() => {
-        if(!id) {return}
+        if(!name) {return}
         (async (): Promise<void> => {
             try {
-                const talentData = await TalentService.getTalent(id)
+                const talentData = await TalentService.getTalent(name)
                 if (talentData) {setTalent(talentData)}
             } catch (err) {console.log(err)}
         })()
-    },[id, setTalent])
+    },[name, setTalent])
     return talent as Talent
 }
 
 export default function TalentWorkflow(): JSX.Element {
-    const { id } = useParams<{ id?: string }>()
-    const talent = useFetchTalent(Number(id!!))
+    const { name } = useParams<{ name?: string }>()
+    const talent = useFetchTalent(name!!)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {

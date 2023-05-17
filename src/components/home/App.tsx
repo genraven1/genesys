@@ -34,14 +34,14 @@ export default function App() {
                     <Route path="/" element={<Navigate replace to="/home" />} />
                     <Route path={Path.Home} element={<Dashboard/>} />
                     <Route path={Path.Setting} element={<SettingWorkflow />} />
-                    <Route path={Path.Setting + ':id/view'} element={<SettingWorkflow />} />
-                    <Route path={Path.Setting + ':id/edit'} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow />} />
                     <Route path={Path.Talent} element={<TalentWorkflow />} />
-                    <Route path={Path.Talent + ':id/view'} element={<TalentWorkflow />} />
-                    <Route path={Path.Talent + ':id/edit'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow />} />
                     <Route path={Path.Skills} element={<SkillWorkflow />} />
-                    <Route path={Path.Skills + ':id/edit'} element={<SkillWorkflow />} />
-                    <Route path={Path.Skills + ':id/view'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Actor} element={<ViewAllActors />} />
 
@@ -62,14 +62,14 @@ export default function App() {
                     <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow />} />
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':id/edit'} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':id/view'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>} />
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>} />
-                    <Route path={EquipmentPath.Weapon + ':id/edit'} element={<WeaponWorkflow/>} />
-                    <Route path={EquipmentPath.Weapon + ':id/view'} element={<WeaponWorkflow/>} />
+                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>} />
+                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>} />
                     <Route path={EquipmentPath.Gear} element={<GearWorkflow/>} />
-                    <Route path={EquipmentPath.Gear + ':id/edit'} element={<GearWorkflow/>} />
-                    <Route path={EquipmentPath.Gear + ':id/view'} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear + ':name/view'} element={<GearWorkflow/>} />
                     {/*Lore Routes*/}
                     <Route path={Path.Lore} element={<ViewAllLore />} />
                     <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />

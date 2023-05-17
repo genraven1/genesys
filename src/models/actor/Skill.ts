@@ -5,7 +5,6 @@ export default interface Skill {
     active: boolean
     type: SkillType
     name: string
-    id: number
 }
 
 export enum SkillType {

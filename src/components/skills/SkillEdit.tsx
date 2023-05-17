@@ -24,7 +24,7 @@ interface Props {
 
 export default function SkillEdit(props: Props) {
     const {sk} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
@@ -56,11 +56,11 @@ export default function SkillEdit(props: Props) {
 
     const updateSkill = async (copySkill: Skill) => {
         setSkill(copySkill)
-        await SkillService.updateSkill(copySkill.id, copySkill)
+        await SkillService.updateSkill(copySkill.name, copySkill)
     }
 
     const onView = () => {
-        navigate(Path.Skills + id + '/view');
+        navigate(Path.Skills + name + '/view');
     }
 
     return (
