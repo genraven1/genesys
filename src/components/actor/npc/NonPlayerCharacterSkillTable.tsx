@@ -58,7 +58,7 @@ function SkillRow(props: RowProps): JSX.Element {
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
             </TableRow>
-            {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={npc.name}/>}
+            {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={npc.name} type={npc.type}/>}
         </Fragment>
     )
 }

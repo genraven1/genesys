@@ -37,7 +37,7 @@ export default class ActorService {
     }
 
     static async createNemesis(name: string): Promise<Nemesis> {
-        return await axios.post( ActorPath.Nemesis + name);
+        return await (await axios.post( ActorPath.Nemesis + name)).data;
     }
 
     static async getNemesis(name: string): Promise<Nemesis> {
@@ -61,7 +61,7 @@ export default class ActorService {
     }
 
     static async createRival(name: string): Promise<Rival> {
-        return await axios.post( ActorPath.Rival + name);
+        return await (await axios.post( ActorPath.Rival + name)).data;
     }
 
     static async getRival(name: string): Promise<Rival> {
@@ -73,15 +73,15 @@ export default class ActorService {
     }
 
     static async updateRival(name: string, rival: Rival): Promise<Rival> {
-        return await axios.put(ActorPath.Rival + name, rival);
+        return await (await axios.put(ActorPath.Rival + name, rival)).data;
     }
 
     static async updateRivalSkill(name: string, skill: ActorSkill): Promise<Rival> {
-        return await axios.put(ActorPath.Rival + name + '/skills', skill);
+        return await (await axios.put(ActorPath.Rival + name + '/skills', skill)).data;
     }
 
     static async addRivalTalent(name: string, talent: ActorTalent): Promise<Rival> {
-        return await axios.put(ActorPath.Rival + name + '/talents', talent);
+        return await (await axios.put(ActorPath.Rival + name + '/talents', talent)).data;
     }
 
     static async createMinion(name: string): Promise<Minion> {

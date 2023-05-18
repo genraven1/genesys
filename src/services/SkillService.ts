@@ -17,6 +17,6 @@ export default class SkillService {
     }
 
     static async updateSkill(name: string, skill: Skill): Promise<Skill> {
-        return await axios.put(Path.Skills + name, skill);
+        return await (await axios.put(Path.Skills + name, skill)).data;
     }
 }
