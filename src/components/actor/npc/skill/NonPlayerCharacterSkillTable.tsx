@@ -7,14 +7,14 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import {SkillType} from "../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
-import {CharacteristicType} from "../../../models/actor/Characteristics";
+import {SkillType} from "../../../../models/actor/Skill";
+import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
+import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
 import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
-import {ActorSkill} from "../../../models/actor/Actor";
+import {ActorSkill} from "../../../../models/actor/Actor";
 
 interface RowProps {
     skill: ActorSkill

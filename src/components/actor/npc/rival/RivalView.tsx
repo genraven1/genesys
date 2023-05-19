@@ -11,9 +11,11 @@ import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
 import Rival from "../../../../models/actor/npc/Rival";
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
+import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 
 export default function RivalView(props: {rival: Rival}) {
     const {rival} = props
@@ -56,10 +58,12 @@ export default function RivalView(props: {rival: Rival}) {
                         <ViewDefenseCard defense={rival?.melee!!} type={DefenseType.Melee}/>
                         <ViewDefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
-                    <Divider />
-                    <ViewNonPlayerCharacterSkillTable npc={rival}/>
-                    <Divider />
-                    <NonPlayerCharacterTalentTable npc={rival}/>
+                    <Divider/>
+                    <NonPlayerCharacterSkillCard npc={rival}/>
+                    <Divider/>
+                    <ViewNonPlayerCharacterEquipmentCard npc={rival}/>
+                    <Divider/>
+                    <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
             </CardContent>
         </Card>

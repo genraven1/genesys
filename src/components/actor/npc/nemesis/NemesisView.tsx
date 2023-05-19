@@ -12,9 +12,9 @@ import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import NonPlayerCharacterSkillCard from "../NonPlayerCharacterSkillCard";
-import NonPlayerCharacterTalentCard from "../NonPlayerCharacterTalentCard";
-import ViewActorWeaponCard from "../../ViewActorWeaponCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -60,9 +60,10 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     </Grid>
                     <Divider />
                     <NonPlayerCharacterSkillCard npc={nemesis}/>
-                    <NonPlayerCharacterTalentCard npc={nemesis}/>
+                    <Divider/>
+                    <ViewNonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider />
-                    <ViewActorWeaponCard weapons={nemesis?.weapons!!} brawn={nemesis?.brawn?.current!!}/>
+                    <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -1,4 +1,3 @@
-import {Card, CardContent, CardHeader} from "@mui/material";
 import {ActorWeapon} from "../../models/equipment/Weapon";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -19,43 +18,39 @@ interface Props {
     brawn: number
 }
 
-export default function ViewActorWeaponCard(props: Props): JSX.Element {
-    const {weapons,brawn} = props
+export default function ViewActorWeaponTable(props: Props): JSX.Element {
+    const {weapons, brawn} = props
 
     const renderTableBody = () => {
-        if(!weapons) {return}
-        else {
+        if (!weapons) {
+            return
+        } else {
             return weapons.map((weapon: ActorWeapon) => (
-                <Row key={weapon.name} weapon={weapon} brawn={brawn} />
+                <Row key={weapon.name} weapon={weapon} brawn={brawn}/>
             ))
         }
     }
 
-    return(
-        <Card>
-            <CardHeader title={'Weapons'} style={{ textAlign: 'center' }}/>
-            <CardContent>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TypographyLeftTableCell value={'Name'}/>
-                                <TypographyCenterTableCell value={'Equipped'}/>
-                                <TypographyCenterTableCell value={'Skill'}/>
-                                <TypographyCenterTableCell value={'Damage'}/>
-                                <TypographyCenterTableCell value={'Critical'}/>
-                                <TypographyCenterTableCell value={'Range'}/>
-                                <TypographyCenterTableCell value={'Encumbrance'}/>
-                                <TypographyCenterTableCell value={'Slot'}/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {renderTableBody()}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </CardContent>
-        </Card>
+    return (
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TypographyLeftTableCell value={'Name'}/>
+                        <TypographyCenterTableCell value={'Equipped'}/>
+                        <TypographyCenterTableCell value={'Skill'}/>
+                        <TypographyCenterTableCell value={'Damage'}/>
+                        <TypographyCenterTableCell value={'Critical'}/>
+                        <TypographyCenterTableCell value={'Range'}/>
+                        <TypographyCenterTableCell value={'Encumbrance'}/>
+                        <TypographyCenterTableCell value={'Slot'}/>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {renderTableBody()}
+                </TableBody>
+            </Table>
+        </TableContainer>
     )
 }
 
@@ -65,26 +60,32 @@ interface RowProps {
 }
 
 function Row(props: RowProps): JSX.Element {
-    const {weapon,brawn} = props
+    const {weapon, brawn} = props
     const [open, setOpen] = useState(false)
 
     const renderDamage = (): string => {
         let damage = ''
-        if (weapon.brawn) {damage = String(weapon.damage + brawn)}
-        else {damage = String(weapon.damage)}
+        if (weapon.brawn) {
+            damage = String(weapon.damage + brawn)
+        } else {
+            damage = String(weapon.damage)
+        }
         return damage
     }
 
     const renderEquipped = (): string => {
         let equip = ''
-        if (weapon.equipped) {equip = 'True'}
-        else {equip='False'}
+        if (weapon.equipped) {
+            equip = 'True'
+        } else {
+            equip = 'False'
+        }
         return equip
     }
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyLeftTableCell value={weapon.name}/>
                 <TypographyCenterTableCell value={renderEquipped()}/>
                 <TypographyCenterTableCell value={weapon.skill.name}/>
@@ -95,9 +96,9 @@ function Row(props: RowProps): JSX.Element {
                 <TypographyCenterTableCell value={weapon.slot}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={weapon.description}/>

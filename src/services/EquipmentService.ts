@@ -19,7 +19,7 @@ export default class EquipmentService {
     }
 
     static async updateArmor(name: string, armor: Armor): Promise<Armor> {
-        return await axios.put(EquipmentPath.Armor + name, armor)
+        return await (await axios.put(EquipmentPath.Armor + name, armor)).data
     }
 
     static async createWeapon(name: string): Promise<Weapon> {
@@ -35,7 +35,7 @@ export default class EquipmentService {
     }
 
     static async updateWeapon(name: string, weapon: Weapon): Promise<Weapon> {
-        return await axios.put(EquipmentPath.Weapon + name, weapon)
+        return await (await axios.put(EquipmentPath.Weapon + name, weapon)).data
     }
 
     static async createGear(name: string): Promise<Gear> {
@@ -51,6 +51,6 @@ export default class EquipmentService {
     }
 
     static async updateGear(name: string, gear: Gear): Promise<Gear> {
-        return await axios.put(EquipmentPath.Gear + name, gear)
+        return await (await axios.put(EquipmentPath.Gear + name, gear)).data
     }
 }

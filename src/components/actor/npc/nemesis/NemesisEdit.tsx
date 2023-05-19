@@ -13,12 +13,13 @@ import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/No
 import SoakCard from "../../SoakCard"
 import StatsCard from "../../StatsCard"
 import DefenseCard from "../../DefenseCard"
-import NonPlayerCharacterSkillTable from "../NonPlayerCharacterSkillTable"
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable"
-import TalentSelectionDialog from "../TalentSelectionDialog"
+import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
+import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
+import TalentSelectionDialog from "../../TalentSelectionDialog"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import { ActorKey } from "../../../../models/actor/Actor"
+import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 
 export default function NemesisEdit(props: {nem: Nemesis}) {
     const {nem} = props
@@ -125,6 +126,8 @@ export default function NemesisEdit(props: {nem: Nemesis}) {
                     </Grid>
                     <Divider />
                     <NonPlayerCharacterSkillTable npc={nemesis}/>
+                    <Divider/>
+                    <NonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={nemesis} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
