@@ -37,7 +37,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         if (npc?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc.brawn.current} />
+        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc?.brawn?.current!!} />
     }
 
     const addArmor = () => {
@@ -54,7 +54,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (npc?.weapons!!.length === 0) {
+        if (npc?.armor!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
         return <Fragment/>
@@ -74,7 +74,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderGearTable = (): JSX.Element => {
-        if (npc?.weapons!!.length === 0) {
+        if (npc?.gear!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
         return <Fragment/>

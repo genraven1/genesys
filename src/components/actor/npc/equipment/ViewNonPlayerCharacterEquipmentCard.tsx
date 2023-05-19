@@ -32,7 +32,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         if (npc?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc.brawn.current} />
+        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc?.brawn?.current!!} />
     }
 
     const renderArmorTab = (): JSX.Element => {

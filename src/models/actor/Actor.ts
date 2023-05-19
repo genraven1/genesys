@@ -4,6 +4,8 @@ import Talent from '../Talent';
 import Stats from './Stats';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
+import {Armor} from "../equipment/Armor";
+import {Gear} from "../equipment/Gear";
 
 export default interface Actor {
     name: string,
@@ -19,7 +21,9 @@ export default interface Actor {
     ranged: Defense,
     wounds: Stats,
     talents: ActorTalent[],
-    weapons: ActorWeapon[]
+    weapons: ActorWeapon[],
+    armor: Armor[],
+    gear: Gear[]
 }
 
 export interface ActorTalent extends Talent {
