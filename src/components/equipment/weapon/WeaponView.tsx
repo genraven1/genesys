@@ -7,7 +7,6 @@ import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
-import Typography from "@mui/material/Typography";
 import ViewSettingsCard from "../../common/ViewSettingsCard";
 
 interface Props {
@@ -33,7 +32,7 @@ export default function WeaponView(props: Props) {
             damage = String(weapon?.damage!!)
         }
         return (
-            <Typography>{damage}</Typography>
+            <ViewFieldCard name={'Damage'} value={damage} />
         )
     }
 

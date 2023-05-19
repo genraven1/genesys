@@ -12,8 +12,8 @@ import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import NonPlayerCharacterSkillCard from "../NonPlayerCharacterSkillCard";
-import NonPlayerCharacterTalentCard from "../NonPlayerCharacterTalentCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import ViewActorWeaponCard from "../../ViewActorWeaponCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {

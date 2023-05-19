@@ -15,10 +15,10 @@ import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import TalentSelectionDialog from "../TalentSelectionDialog";
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
+import TalentSelectionDialog from "../../TalentSelectionDialog";
+import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
-import NonPlayerCharacterSkillTable from "../NonPlayerCharacterSkillTable";
+import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 
 export default function RivalEdit(props: {riv: Rival}) {
     const {riv} = props

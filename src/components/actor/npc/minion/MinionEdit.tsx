@@ -14,10 +14,10 @@ import DefenseCard from "../../DefenseCard";
 import * as React from "react";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import TalentSelectionDialog from "../TalentSelectionDialog";
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
+import TalentSelectionDialog from "../../TalentSelectionDialog";
+import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
-import NonPlayerCharacterSkillTable from "../NonPlayerCharacterSkillTable";
+import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 import Minion from "../../../../models/actor/npc/Minion";
 
 export default function MinionEdit(props: {min: Minion}) {

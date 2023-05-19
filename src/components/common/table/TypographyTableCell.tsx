@@ -1,7 +1,11 @@
 import React from "react";
 import {TableCell, Typography} from "@mui/material";
 
-export function TypographyLeftTableCell(props: {value: string}): JSX.Element {
+interface LeftProps {
+    value: string
+}
+
+export function TypographyLeftTableCell(props: LeftProps): JSX.Element {
     const {value} = props
     return (
         <TableCell style={{textAlign:'left'}}>
@@ -10,10 +14,15 @@ export function TypographyLeftTableCell(props: {value: string}): JSX.Element {
     )
 }
 
-export function TypographyCenterTableCell(props: {value: string}): JSX.Element {
-    const {value} = props
+interface CenterProps {
+    value: string
+    span?: number
+}
+
+export function TypographyCenterTableCell(props: CenterProps): JSX.Element {
+    const {value, span} = props
     return (
-        <TableCell style={{textAlign:'center'}}>
+        <TableCell style={{textAlign:'center'}} colSpan={span}>
             <Typography>{value}</Typography>
         </TableCell>
     )

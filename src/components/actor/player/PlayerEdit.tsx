@@ -12,7 +12,7 @@ import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
 import StatsCard from "../StatsCard";
 import SoakCard from "../SoakCard";
-import TalentSelectionDialog from "../npc/TalentSelectionDialog";
+import TalentSelectionDialog from "../TalentSelectionDialog";
 import DefenseCard from "../DefenseCard";
 import { ActorKey } from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./PlayerEditSkillTable";

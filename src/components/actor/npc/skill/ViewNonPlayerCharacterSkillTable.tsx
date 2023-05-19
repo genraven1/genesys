@@ -8,11 +8,11 @@ import TableBody from "@mui/material/TableBody";
 import {Grid, Typography} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
-import { CharacteristicType } from "../../../models/actor/Characteristics";
-import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
-import { SkillType } from "../../../models/actor/Skill";
-import {ActorSkill} from "../../../models/actor/Actor";
+import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import { CharacteristicType } from "../../../../models/actor/Characteristics";
+import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
+import { SkillType } from "../../../../models/actor/Skill";
+import {ActorSkill} from "../../../../models/actor/Actor";
 
 interface RowProps {
     skill: ActorSkill,

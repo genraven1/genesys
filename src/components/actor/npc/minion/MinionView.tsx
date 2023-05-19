@@ -11,8 +11,8 @@ import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import ViewNonPlayerCharacterSkillTable from "../ViewNonPlayerCharacterSkillTable";
-import NonPlayerCharacterTalentTable from "../NonPlayerCharacterTalentTable";
+import ViewNonPlayerCharacterSkillTable from "../skill/ViewNonPlayerCharacterSkillTable";
+import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import Minion from "../../../../models/actor/npc/Minion";
 
 export default function MinionView(props: {minion: Minion}) {
