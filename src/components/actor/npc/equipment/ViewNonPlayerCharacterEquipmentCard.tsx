@@ -1,5 +1,5 @@
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Tab from '@mui/material/Tab';
@@ -20,15 +20,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         setValue(newValue)
     }
 
-    const addWeapons = () => {
-
-    }
-
     const renderWeaponsTab = (): JSX.Element => {
         return (
             <Fragment>
                 {renderWeaponsTable()}
-                <Button color='primary' variant='contained' onClick={addWeapons}>Add Weapon</Button>
             </Fragment>
         )
     }
@@ -40,15 +35,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc.brawn.current} />
     }
 
-    const addArmor = () => {
-
-    }
-
     const renderArmorTab = (): JSX.Element => {
         return (
             <Fragment>
                 {renderArmorTable()}
-                <Button color='primary' variant='contained' onClick={addArmor}>Add Armor</Button>
             </Fragment>
         )
     }
@@ -60,15 +50,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return <Fragment/>
     }
 
-    const addGear = () => {
-
-    }
-
     const renderGearTab = (): JSX.Element => {
         return (
             <Fragment>
                 {renderGearTable()}
-                <Button color='primary' variant='contained' onClick={addGear}>Add Gear</Button>
             </Fragment>
         )
     }

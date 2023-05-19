@@ -19,6 +19,7 @@ import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTab
 import {ActorKey} from "../../../../models/actor/Actor";
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 import Minion from "../../../../models/actor/npc/Minion";
+import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 
 export default function MinionEdit(props: {min: Minion}) {
     const {min} = props
@@ -121,6 +122,8 @@ export default function MinionEdit(props: {min: Minion}) {
                     </Grid>
                     <Divider />
                     <NonPlayerCharacterSkillTable npc={minion}/>
+                    <Divider/>
+                    <NonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider />
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={minion} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}

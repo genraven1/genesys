@@ -14,7 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
-import ViewActorWeaponCard from "../../ViewActorWeaponCard";
+import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -60,9 +60,10 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     </Grid>
                     <Divider />
                     <NonPlayerCharacterSkillCard npc={nemesis}/>
-                    <NonPlayerCharacterTalentCard npc={nemesis}/>
+                    <Divider/>
+                    <ViewNonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider />
-                    <ViewActorWeaponCard weapons={nemesis?.weapons!!} brawn={nemesis?.brawn?.current!!}/>
+                    <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -19,6 +19,7 @@ import TalentSelectionDialog from "../../TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
+import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 
 export default function RivalEdit(props: {riv: Rival}) {
     const {riv} = props
@@ -119,9 +120,11 @@ export default function RivalEdit(props: {riv: Rival}) {
                         <RatingCard  rating={rival?.social!!} type={RatingType.Social} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.Social, value) }}/>
                         <RatingCard  rating={rival?.general!!} type={RatingType.General} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.General, value) }}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <NonPlayerCharacterSkillTable npc={rival}/>
-                    <Divider />
+                    <Divider/>
+                    <NonPlayerCharacterEquipmentCard npc={rival}/>
+                    <Divider/>
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={rival} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={rival}/>
