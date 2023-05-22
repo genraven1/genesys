@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import TalentView from "../talents/TalentView";
-import Talent from "../../models/Talent";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
+import TalentView from "../../../talents/TalentView";
+import Talent from "../../../../models/Talent";
+import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
 interface Props {
     talent: Talent

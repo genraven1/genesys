@@ -9,10 +9,10 @@ import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import Player, {PlayerSkill} from "../../../models/actor/player/Player";
-import {CharacteristicType} from "../../../models/actor/Characteristics";
-import GenesysSkillDiceTypography from "../../common/typography/GenesysSkillDiceTypography";
-import {SkillType} from "../../../models/actor/Skill";
+import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
+import {CharacteristicType} from "../../../../models/actor/Characteristics";
+import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
+import {SkillType} from "../../../../models/actor/Skill";
 import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
 
 interface RowProps {

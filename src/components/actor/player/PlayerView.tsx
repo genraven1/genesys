@@ -10,8 +10,9 @@ import ViewCharacteristicCard from '../ViewCharacteristicCard';
 import SoakCard from '../SoakCard';
 import ViewStatsCard from '../ViewStatsCard';
 import ViewDefenseCard from '../ViewDefenseCard';
-import ViewPlayerSkillTable from './ViewPlayerSkills';
+import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import PlayerTalentTable from './PlayerTalentTable';
+import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 
 export default function PlayerView(props: {player: Player}) {
     const {player} = props
@@ -33,7 +34,7 @@ export default function PlayerView(props: {player: Player}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <ViewCharacteristicCard characteristic={player?.brawn!!} type={CharacteristicType.Brawn} />
                         <ViewCharacteristicCard characteristic={player?.agility!!} type={CharacteristicType.Agility}/>
                         <ViewCharacteristicCard characteristic={player?.intellect!!} type={CharacteristicType.Intellect}/>
@@ -42,7 +43,7 @@ export default function PlayerView(props: {player: Player}) {
                         <ViewCharacteristicCard characteristic={player?.presence!!} type={CharacteristicType.Presence}/>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!} />
                         <ViewStatsCard stats={player?.wounds!!} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player?.strain!!} type={StatsType.Strain}/>
@@ -51,6 +52,8 @@ export default function PlayerView(props: {player: Player}) {
                     </Grid>
                     <Divider />
                     <ViewPlayerSkillTable  player={player}/>
+                    <Divider />
+                    <ViewPlayerEquipmentCard player={player}/>
                     <Divider />
                     <PlayerTalentTable player={player}/>
                 </Grid>

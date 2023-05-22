@@ -12,10 +12,11 @@ import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
 import StatsCard from "../StatsCard";
 import SoakCard from "../SoakCard";
-import TalentSelectionDialog from "../TalentSelectionDialog";
+import TalentSelectionDialog from "../common/talent/TalentSelectionDialog";
 import DefenseCard from "../DefenseCard";
 import { ActorKey } from '../../../models/actor/Actor';
-import PlayerEditSkillTable from "./PlayerEditSkillTable";
+import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
+import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 
 export default function PlayerView(props: {play: Player}) {
     const {play} = props
@@ -88,7 +89,7 @@ export default function PlayerView(props: {play: Player}) {
                 <Divider />
                 <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <EditCharacteristicCard characteristic={player?.brawn!!} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(ActorKey.Brawn, value) }}/>
                         <EditCharacteristicCard characteristic={player?.agility!!} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(ActorKey.Agility, value) }}/>
                         <EditCharacteristicCard characteristic={player?.intellect!!} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(ActorKey.Intellect, value) }}/>
@@ -97,7 +98,7 @@ export default function PlayerView(props: {play: Player}) {
                         <EditCharacteristicCard characteristic={player?.presence!!} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(ActorKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!} />
                         <StatsCard stats={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
                         <StatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => { onChange(ActorKey.Strain, value) }}/>
@@ -107,6 +108,8 @@ export default function PlayerView(props: {play: Player}) {
                     <Divider />
                     <PlayerEditSkillTable player={player}/>
                     <Divider />
+                    <PlayerEquipmentCard player={player}/>
+                    <Divider/>
                     <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                     {openSelectTalentDialog && <TalentSelectionDialog actor={player} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <PlayerTalentTable player={player}/>

@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
-import InputNumberRangeSelectField from "../../common/InputNumberRangeSelect";
-import ActorService from "../../../services/ActorService";
-import {PlayerSkill} from "../../../models/actor/player/Player";
+import InputNumberRangeSelectField from "../../../common/InputNumberRangeSelect";
+import ActorService from "../../../../services/ActorService";
+import {PlayerSkill} from "../../../../models/actor/player/Player";
 
 interface Props {
     open: boolean
