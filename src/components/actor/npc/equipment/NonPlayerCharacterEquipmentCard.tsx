@@ -7,9 +7,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
-import ViewActorWeaponTable from "../../ViewActorWeaponTable";
-import TalentSelectionDialog from "../../TalentSelectionDialog";
-import CreateWeaponDialog from "./CreateWeaponDialog";
+import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
+import CreateWeaponDialog from "./weapon/CreateWeaponDialog";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -26,9 +25,9 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const renderWeaponsTab = (): JSX.Element => {
         return (
             <Fragment>
+                {renderWeaponsTable()}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Add Weapon</Button>
                 {openCreateWeaponDialog && <CreateWeaponDialog actor={npc} open={openCreateWeaponDialog} onClose={(): void => setOpenCreateWeaponDialog(false)}/>}
-                {/*{renderWeaponsTable()}*/}
             </Fragment>
         )
     }
@@ -67,7 +66,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const renderGearTab = (): JSX.Element => {
         return (
             <Fragment>
-                {renderGearTable()}
+                {/*{renderGearTable()}*/}
                 <Button color='primary' variant='contained' onClick={addGear}>Add Gear</Button>
             </Fragment>
         )

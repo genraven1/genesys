@@ -1,16 +1,16 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
-import Actor from "../../../../models/actor/Actor";
-import {SkillSelectCard} from "../../../common/SkillSelectCard";
-import Skill, {SkillType} from "../../../../models/actor/Skill";
-import NumberRangeSelectCard from "../../../common/NumberRangeSelectCard";
-import CheckButtonCard from "../../../common/CheckButtonCard";
-import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
-import {getRangeOptions, RangeBand} from "../../../../models/common/RangeBand";
+import Actor from "../../../../../models/actor/Actor";
+import {SkillSelectCard} from "../../../../common/SkillSelectCard";
+import Skill, {SkillType} from "../../../../../models/actor/Skill";
+import NumberRangeSelectCard from "../../../../common/NumberRangeSelectCard";
+import CheckButtonCard from "../../../../common/CheckButtonCard";
+import InputSelectFieldCard from "../../../../common/InlineSelectFieldCard";
+import {getRangeOptions, RangeBand} from "../../../../../models/common/RangeBand";
 import * as React from "react";
 import {useState} from "react";
-import {ActorWeapon} from "../../../../models/equipment/Weapon";
-import ActorService from "../../../../services/ActorService";
-import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
+import {ActorWeapon} from "../../../../../models/equipment/Weapon";
+import ActorService from "../../../../../services/ActorService";
+import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 
 interface Props {
     actor: Actor
@@ -22,11 +22,15 @@ export default function CreateWeaponDialog(props: Props) {
     const {actor, open, onClose} = props
     const [weapon, setWeapon] = useState<ActorWeapon>()
 
+    const onCreate = async (): Promise<void> => {
+        await ActorService.createRivalWeapon(actor.name, weapon!!)
+        onClose()
+    }
+
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as ActorWeapon
         copyWeapon.skill = value
         setWeapon(copyWeapon)
-        await ActorService.createRivalWeapon(actor.name, copyWeapon)
     }
 
     const onChange = async (key: keyof ActorWeapon, value: string) => {
@@ -54,13 +58,12 @@ export default function CreateWeaponDialog(props: Props) {
                 break
         }
         setWeapon(copyWeapon)
-        await ActorService.createRivalWeapon(actor.name, copyWeapon)
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>
-                Add Talent
+                Add Custom Weapon
             </DialogTitle>
             <DialogContent>
                 <Grid container spacing={10}>
@@ -76,7 +79,7 @@ export default function CreateWeaponDialog(props: Props) {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button color='primary' variant='contained' onClick={onClose}>CREATE</Button>
+                <Button color='primary' variant='contained' onClick={onCreate}>CREATE</Button>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
             </DialogActions>
         </Dialog>

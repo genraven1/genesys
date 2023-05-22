@@ -7,7 +7,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
-import ViewActorWeaponTable from "../../ViewActorWeaponTable";
+import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
 
 interface Props {
     npc: NonPlayerCharacter
