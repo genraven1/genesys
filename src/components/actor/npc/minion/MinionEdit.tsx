@@ -14,7 +14,7 @@ import DefenseCard from "../../DefenseCard";
 import * as React from "react";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import TalentSelectionDialog from "../../TalentSelectionDialog";
+import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";

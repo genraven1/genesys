@@ -1,5 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import Actor from "../../models/actor/Actor";
+import Actor from "../../../../models/actor/Actor";
 import TalentSelectionTable from "./TalentSelectionTable";
 
 interface Props {

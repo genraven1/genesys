@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import TalentService from "../../services/TalentService";
+import TalentService from "../../../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -9,9 +9,9 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent from "../../models/Talent";
-import ActorService from "../../services/ActorService";
-import Actor, {ActorTalent} from "../../models/actor/Actor";
+import Talent from "../../../../models/Talent";
+import ActorService from "../../../../services/ActorService";
+import Actor, {ActorTalent} from "../../../../models/actor/Actor";
 
 interface RowProps {
     name: string

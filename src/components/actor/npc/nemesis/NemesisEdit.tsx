@@ -15,7 +15,7 @@ import StatsCard from "../../StatsCard"
 import DefenseCard from "../../DefenseCard"
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
-import TalentSelectionDialog from "../../TalentSelectionDialog"
+import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import { ActorKey } from "../../../../models/actor/Actor"
