@@ -18,7 +18,7 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
         (async (): Promise<void> => {
             const skillList = await SkillService.getSkills()
             if (!skillList) { return }
-            setSkills(skillList.filter((skill) => skill.type === type))
+            setSkills(skillList.filter((skill) => skill.type === type).filter((skill) => skill.active))
         })()
     }, [type])
 
