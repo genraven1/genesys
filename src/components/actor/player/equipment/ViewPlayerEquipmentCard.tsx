@@ -8,6 +8,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
 import ViewPlayerWeaponTable from "./ViewPlayerWeaponTable";
+import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
 
 interface Props {
     player: Player
@@ -47,7 +48,7 @@ export default function ViewPlayerEquipmentCard(props: Props): JSX.Element {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <Fragment/>
+        return <ViewPlayerArmorTable armor={player?.armor!!}/>
     }
 
     const renderGearTab = (): JSX.Element => {

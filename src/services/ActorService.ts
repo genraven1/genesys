@@ -6,6 +6,7 @@ import Rival from "../models/actor/npc/Rival";
 import Actor, {ActorTalent, ActorSkill} from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
+import {ActorArmor} from "../models/equipment/Armor";
 
 export default class ActorService {
 
@@ -14,7 +15,7 @@ export default class ActorService {
     }
 
     static async createPlayer(name: string): Promise<Player> {
-        return await axios.post( ActorPath.Player + name);
+        return await (await axios.post( ActorPath.Player + name)).data;
     }
 
     static async getPlayer(name: string): Promise<Player> {
@@ -26,19 +27,23 @@ export default class ActorService {
     }
 
     static async updatePlayer(name: string, player: Player): Promise<Player> {
-        return await axios.put(ActorPath.Player + name, player);
+        return await (await axios.put(ActorPath.Player + name, player)).data;
     }
 
     static async updatePlayerSkill(name: string, skill: PlayerSkill): Promise<Player> {
-        return await axios.put(ActorPath.Player + name + '/skill', skill);
+        return await (await axios.put(ActorPath.Player + name + '/skill', skill)).data;
     }
 
     static async addPlayerTalent(name: string, talent: ActorTalent): Promise<Player> {
-        return await axios.put(ActorPath.Player + name + '/talent', talent);
+        return await (await axios.put(ActorPath.Player + name + '/talent', talent)).data;
     }
 
     static async createPlayerWeapon(name: string, weapon: ActorWeapon): Promise<Player> {
         return await (await axios.post(ActorPath.Player + name + '/weapons', weapon)).data;
+    }
+
+    static async createPlayerArmor(name: string, armor: ActorArmor): Promise<Player> {
+        return await (await axios.post(ActorPath.Player + name + '/armor', armor)).data;
     }
 
     static async createNemesis(name: string): Promise<Nemesis> {
@@ -54,15 +59,15 @@ export default class ActorService {
     }
 
     static async updateNemesis(name: string, nemesis: Nemesis): Promise<Nemesis> {
-        return await axios.put(ActorPath.Nemesis + name, nemesis);
+        return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
 
     static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
-        return await axios.put(ActorPath.Nemesis + name + '/skills', skill);
+        return await (await axios.put(ActorPath.Nemesis + name + '/skills', skill)).data;
     }
     
     static async addNemesisTalent(name: string, talent: ActorTalent): Promise<Nemesis> {
-        return await axios.put(ActorPath.Nemesis + name + '/talents', talent);
+        return await (await axios.put(ActorPath.Nemesis + name + '/talents', talent)).data;
     }
 
     static async createNemesisWeapon(name: string, weapon: ActorWeapon): Promise<Nemesis> {
@@ -98,7 +103,7 @@ export default class ActorService {
     }
 
     static async createMinion(name: string): Promise<Minion> {
-        return await axios.post( ActorPath.Minion + name);
+        return await (await axios.post( ActorPath.Minion + name)).data;
     }
 
     static async getMinion(name: string): Promise<Minion> {
@@ -110,15 +115,15 @@ export default class ActorService {
     }
 
     static async updateMinion(name: string, minion: Minion): Promise<Minion> {
-        return await axios.put(ActorPath.Minion + name, minion);
+        return await (await axios.put(ActorPath.Minion + name, minion)).data;
     }
 
     static async updateMinionSkill(name: string, skill: ActorSkill): Promise<Minion> {
-        return await axios.put(ActorPath.Minion + name + '/skills', skill);
+        return await (await axios.put(ActorPath.Minion + name + '/skills', skill)).data;
     }
 
     static async addMinionTalent(name: string, talent: ActorTalent): Promise<Minion> {
-        return await axios.put(ActorPath.Minion + name + '/talents', talent);
+        return await (await axios.put(ActorPath.Minion + name + '/talents', talent)).data;
     }
 
     static async createMinionWeapon(name: string, weapon: ActorWeapon): Promise<Minion> {
