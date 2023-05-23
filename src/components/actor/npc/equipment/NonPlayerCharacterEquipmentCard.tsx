@@ -9,6 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
 import CreateWeaponDialog from "./weapon/CreateWeaponDialog";
+import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -17,6 +18,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const {npc} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
+    const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
@@ -26,8 +28,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return (
             <Fragment>
                 {renderWeaponsTable()}
-                <Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Add Weapon</Button>
+                <Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Create Weapon</Button>
                 {openCreateWeaponDialog && <CreateWeaponDialog actor={npc} open={openCreateWeaponDialog} onClose={(): void => setOpenCreateWeaponDialog(false)}/>}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponDialog(true)}>Add Weapon</Button>
+                {openAddWeaponDialog && <WeaponSelectionDialog actor={npc} open={openAddWeaponDialog} onClose={(): void => setOpenAddWeaponDialog(false)}/>}
             </Fragment>
         )
     }
