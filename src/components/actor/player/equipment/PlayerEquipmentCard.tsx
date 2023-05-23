@@ -9,6 +9,8 @@ import {Fragment, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
 import ViewPlayerWeaponTable from "./ViewPlayerWeaponTable";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
+import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
+import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
 
 interface Props {
     player: Player
@@ -17,6 +19,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const {player} = props
     const [value, setValue] = useState('1')
     const [openSelectWeaponDialog, setOpenSelectWeaponDialog] = useState(false)
+    const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
@@ -39,15 +42,12 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         return <ViewPlayerWeaponTable weapons={player?.weapons!!} brawn={player?.brawn?.current!!} />
     }
 
-    const addArmor = () => {
-
-    }
-
     const renderArmorTab = (): JSX.Element => {
         return (
             <Fragment>
-                {/*{renderArmorTable()}*/}
-                <Button color='primary' variant='contained' onClick={addArmor}>Add Armor</Button>
+                {renderArmorTable()}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add Armor</Button>
+                {openSelectArmorDialog && <ArmorSelectionDialog actor={player} open={openSelectArmorDialog} onClose={(): void => setOpenSelectArmorDialog(false)}/>}
             </Fragment>
         )
     }
@@ -56,7 +56,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         if (player?.armor!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <Fragment/>
+        return <ViewPlayerArmorTable armor={player?.armor!!}/>
     }
 
     const addGear = () => {

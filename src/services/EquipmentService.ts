@@ -14,6 +14,10 @@ export default class EquipmentService {
         return await (await axios.get(EquipmentPath.Armor)).data
     }
 
+    static async getArmorNames(): Promise<string[]> {
+        return await (await axios.get(EquipmentPath.Armor + '/names')).data
+    }
+
     static async getArmor(name: string): Promise<Armor> {
         return await (await axios.get(EquipmentPath.Armor + name)).data
     }
