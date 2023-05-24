@@ -15,6 +15,7 @@ import ViewNonPlayerCharacterSkillTable from "../skill/ViewNonPlayerCharacterSki
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
+import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 
 export default function MinionView(props: {minion: Minion}) {
     const {minion} = props
@@ -62,6 +63,8 @@ export default function MinionView(props: {minion: Minion}) {
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider />
+                    <ViewNonPlayerCharacterAbilityCard npc={minion}/>
+                    <Divider/>
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
             </CardContent>

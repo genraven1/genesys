@@ -15,6 +15,7 @@ import {ActorPath} from "../../../../services/Path";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
+import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -63,6 +64,8 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider />
+                    <ViewNonPlayerCharacterAbilityCard npc={nemesis}/>
+                    <Divider/>
                     <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
             </CardContent>
