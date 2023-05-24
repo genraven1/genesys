@@ -10,6 +10,8 @@ import {Fragment, useState} from "react";
 import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
 import CreateWeaponDialog from "./weapon/CreateWeaponDialog";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
+import ViewActorArmorTable from "./ViewActorArmorTable";
+import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -19,6 +21,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
+    const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
@@ -43,15 +46,12 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc?.brawn?.current!!} />
     }
 
-    const addArmor = () => {
-
-    }
-
     const renderArmorTab = (): JSX.Element => {
         return (
             <Fragment>
-                {/*{renderArmorTable()}*/}
-                <Button color='primary' variant='contained' onClick={addArmor}>Add Armor</Button>
+                {renderArmorTable()}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add Armor</Button>
+                {openSelectArmorDialog && <ArmorSelectionDialog actor={npc} open={openSelectArmorDialog} onClose={(): void => setOpenSelectArmorDialog(false)}/>}
             </Fragment>
         )
     }
@@ -60,7 +60,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         if (npc?.armor!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <Fragment/>
+        return <ViewActorArmorTable armor={npc?.armor!!}/>
     }
 
     const addGear = () => {

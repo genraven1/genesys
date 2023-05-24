@@ -8,6 +8,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
+import ViewActorArmorTable from "./ViewActorArmorTable";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -44,10 +45,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (npc?.weapons!!.length === 0) {
+        if (npc?.armor!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <Fragment/>
+        return <ViewActorArmorTable armor={npc?.armor!!}/>
     }
 
     const renderGearTab = (): JSX.Element => {
@@ -59,7 +60,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderGearTable = (): JSX.Element => {
-        if (npc?.weapons!!.length === 0) {
+        if (npc?.gear!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
         return <Fragment/>
