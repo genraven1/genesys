@@ -12,6 +12,7 @@ import CreateWeaponDialog from "./weapon/CreateWeaponDialog";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewActorArmorTable from "./ViewActorArmorTable";
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
+import CreateArmorDialog from "./CreateArmorDialog";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -20,6 +21,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const {npc} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
+    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
 
@@ -50,6 +52,8 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return (
             <Fragment>
                 {renderArmorTable()}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create Weapon</Button>
+                {openCreateArmorDialog && <CreateArmorDialog actor={npc} open={openCreateArmorDialog} onClose={(): void => setOpenCreateArmorDialog(false)}/>}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add Armor</Button>
                 {openSelectArmorDialog && <ArmorSelectionDialog actor={npc} open={openSelectArmorDialog} onClose={(): void => setOpenSelectArmorDialog(false)}/>}
             </Fragment>

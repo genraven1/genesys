@@ -74,6 +74,10 @@ export default class ActorService {
         return await (await axios.post(ActorPath.Nemesis + name + '/weapons', weapon)).data;
     }
 
+    static async createNemesisArmor(name: string, armor: ActorArmor): Promise<Nemesis> {
+        return await (await axios.post(ActorPath.Nemesis + name + '/armor', armor)).data;
+    }
+
     static async createRival(name: string): Promise<Rival> {
         return await (await axios.post( ActorPath.Rival + name)).data;
     }
@@ -102,6 +106,10 @@ export default class ActorService {
         return await (await axios.post(ActorPath.Rival + name + '/weapons', weapon)).data;
     }
 
+    static async createRivalArmor(name: string, armor: ActorArmor): Promise<Rival> {
+        return await (await axios.post(ActorPath.Rival + name + '/armor', armor)).data;
+    }
+
     static async createMinion(name: string): Promise<Minion> {
         return await (await axios.post( ActorPath.Minion + name)).data;
     }
@@ -128,5 +136,9 @@ export default class ActorService {
 
     static async createMinionWeapon(name: string, weapon: ActorWeapon): Promise<Minion> {
         return await (await axios.post(ActorPath.Minion + name + '/weapons', weapon)).data;
+    }
+
+    static async createMinionArmor(name: string, armor: ActorArmor): Promise<Minion> {
+        return await (await axios.post(ActorPath.Minion + name + '/armor', armor)).data;
     }
 }
