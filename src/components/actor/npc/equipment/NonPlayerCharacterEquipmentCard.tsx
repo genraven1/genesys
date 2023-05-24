@@ -52,7 +52,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         return (
             <Fragment>
                 {renderArmorTable()}
-                <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create Weapon</Button>
+                <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create Armor</Button>
                 {openCreateArmorDialog && <CreateArmorDialog actor={npc} open={openCreateArmorDialog} onClose={(): void => setOpenCreateArmorDialog(false)}/>}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add Armor</Button>
                 {openSelectArmorDialog && <ArmorSelectionDialog actor={npc} open={openSelectArmorDialog} onClose={(): void => setOpenSelectArmorDialog(false)}/>}

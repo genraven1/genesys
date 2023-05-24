@@ -1,24 +1,15 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useEffect, useState} from 'react';
-import Talent, {Activation, Tier} from '../../models/Talent';
+import Talent, {Activation, getActivationOptions, getTierOptions, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import {useNavigate, useParams} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
-import {Option} from '../common/InputSelectField';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
-
-const getActivationOptions = (): Option[] => {
-    return Object.values(Activation).map((value) => ({value}))
-}
-
-const getTierOptions = (): Option[] => {
-    return Object.values(Tier).map((value) => ({value}))
-}
 
 interface Props {
     tal: Talent

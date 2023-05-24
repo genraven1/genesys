@@ -13,11 +13,10 @@ import Ability from "../../../../models/Ability";
 
 interface Props {
     row: Ability
-    skillRanks?: number
 }
 
 function Row(props: Props): JSX.Element {
-    const {row, skillRanks} = props
+    const {row} = props
 
     const renderTypography = (): JSX.Element => {
         return <GenesysDescriptionTypography text={row.description}/>

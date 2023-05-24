@@ -14,8 +14,8 @@ import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
-import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
+import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 
 export default function RivalView(props: {rival: Rival}) {
     const {rival} = props
@@ -62,6 +62,8 @@ export default function RivalView(props: {rival: Rival}) {
                     <NonPlayerCharacterSkillCard npc={rival}/>
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={rival}/>
+                    <Divider/>
+                    <ViewNonPlayerCharacterAbilityCard npc={rival}/>
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
