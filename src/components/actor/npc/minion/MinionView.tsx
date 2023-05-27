@@ -1,11 +1,9 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
@@ -16,6 +14,7 @@ import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTab
 import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
+import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 
 export default function MinionView(props: {minion: Minion}) {
     const {minion} = props
@@ -43,14 +42,7 @@ export default function MinionView(props: {minion: Minion}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <ViewCharacteristicCard characteristic={minion?.brawn!!} type={CharacteristicType.Brawn} />
-                        <ViewCharacteristicCard characteristic={minion?.agility!!} type={CharacteristicType.Agility}/>
-                        <ViewCharacteristicCard characteristic={minion?.intellect!!} type={CharacteristicType.Intellect}/>
-                        <ViewCharacteristicCard characteristic={minion?.cunning!!} type={CharacteristicType.Cunning}/>
-                        <ViewCharacteristicCard characteristic={minion?.willpower!!} type={CharacteristicType.Willpower}/>
-                        <ViewCharacteristicCard characteristic={minion?.presence!!} type={CharacteristicType.Presence}/>
-                    </Grid>
+                    <ViewCharacteristicRow actor={minion}/>
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={minion?.soak!!} />

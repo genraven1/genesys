@@ -1,12 +1,10 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
@@ -16,6 +14,7 @@ import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
+import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
@@ -43,14 +42,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <ViewCharacteristicCard characteristic={nemesis?.brawn!!} type={CharacteristicType.Brawn} />
-                        <ViewCharacteristicCard characteristic={nemesis?.agility!!} type={CharacteristicType.Agility}/>
-                        <ViewCharacteristicCard characteristic={nemesis?.intellect!!} type={CharacteristicType.Intellect}/>
-                        <ViewCharacteristicCard characteristic={nemesis?.cunning!!} type={CharacteristicType.Cunning}/>
-                        <ViewCharacteristicCard characteristic={nemesis?.willpower!!} type={CharacteristicType.Willpower}/>
-                        <ViewCharacteristicCard characteristic={nemesis?.presence!!} type={CharacteristicType.Presence}/>
-                    </Grid>
+                    <ViewCharacteristicRow actor={nemesis}/>
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={nemesis?.soak!!} />

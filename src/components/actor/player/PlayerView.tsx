@@ -1,18 +1,17 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate, useParams} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
-import {CharacteristicType} from '../../../models/actor/Characteristics';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
-import ViewCharacteristicCard from '../ViewCharacteristicCard';
 import SoakCard from '../SoakCard';
 import ViewStatsCard from '../ViewStatsCard';
 import ViewDefenseCard from '../ViewDefenseCard';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
+import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 
 export default function PlayerView(props: {player: Player}) {
     const {player} = props
@@ -34,14 +33,7 @@ export default function PlayerView(props: {player: Player}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={2}>
-                        <ViewCharacteristicCard characteristic={player?.brawn!!} type={CharacteristicType.Brawn} />
-                        <ViewCharacteristicCard characteristic={player?.agility!!} type={CharacteristicType.Agility}/>
-                        <ViewCharacteristicCard characteristic={player?.intellect!!} type={CharacteristicType.Intellect}/>
-                        <ViewCharacteristicCard characteristic={player?.cunning!!} type={CharacteristicType.Cunning}/>
-                        <ViewCharacteristicCard characteristic={player?.willpower!!} type={CharacteristicType.Willpower}/>
-                        <ViewCharacteristicCard characteristic={player?.presence!!} type={CharacteristicType.Presence}/>
-                    </Grid>
+                    <ViewCharacteristicRow actor={player}/>
                     <Divider />
                     <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!} />

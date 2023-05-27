@@ -1,11 +1,9 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
-import ViewCharacteristicCard from "../../ViewCharacteristicCard";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
@@ -16,6 +14,7 @@ import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
+import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 
 export default function RivalView(props: {rival: Rival}) {
     const {rival} = props
@@ -43,14 +42,7 @@ export default function RivalView(props: {rival: Rival}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <ViewCharacteristicCard characteristic={rival?.brawn!!} type={CharacteristicType.Brawn} />
-                        <ViewCharacteristicCard characteristic={rival?.agility!!} type={CharacteristicType.Agility}/>
-                        <ViewCharacteristicCard characteristic={rival?.intellect!!} type={CharacteristicType.Intellect}/>
-                        <ViewCharacteristicCard characteristic={rival?.cunning!!} type={CharacteristicType.Cunning}/>
-                        <ViewCharacteristicCard characteristic={rival?.willpower!!} type={CharacteristicType.Willpower}/>
-                        <ViewCharacteristicCard characteristic={rival?.presence!!} type={CharacteristicType.Presence}/>
-                    </Grid>
+                    <ViewCharacteristicRow actor={rival}/>
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={rival?.soak!!} />
