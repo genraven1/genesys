@@ -16,11 +16,13 @@ import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 import {NavigateFunction} from "react-router";
 import SettingService from "../../services/SettingService";
+import QualityDialog from "../qualities/QualityDialog";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
+    const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
@@ -52,6 +54,7 @@ export default function Dashboard(): JSX.Element {
                             <Grid container justifyContent={'center'}>
                                 <ExpandedList header={'Settings'} viewTitle={'View All Settings'} to={Path.Setting} dialogTitle={'Create Setting'} onClick={(): void => setOpenSettingCreationDialog(true)}/>
                                 <ExpandedList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent} dialogTitle={'Create Talent'} onClick={(): void => setOpenTalentCreationDialog(true)} />
+                                <ExpandedList header={'Qualities'} viewTitle={'View All Qualities'} to={Path.Qualities} dialogTitle={'Create Quality'} onClick={(): void => setOpenQualityCreationDialog(true)}/>
                                 <ExpandedList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills} dialogTitle={'Create Skill'} onClick={(): void => setOpenSkillCreationDialog(true)} />
                             </Grid>
                         </CardContent>
@@ -94,6 +97,7 @@ export default function Dashboard(): JSX.Element {
             </CardContent>
             {openSettingCreationDialog && <CreateSettingDialog open={openSettingCreationDialog} onClose={(): void => setOpenSettingCreationDialog(false)} />}
             {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog} onClose={(): void => setOpenTalentCreationDialog(false)} />}
+            {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog} onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog} onClose={(): void => setOpenSkillCreationDialog(false)} />}
             {openArmorCreationDialog && <CreateEquipmentDialog open={openArmorCreationDialog} onClose={(): void => setOpenArmorCreationDialog(false)} type={EquipmentType.Armor}/>}
             {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog} onClose={(): void => setOpenWeaponCreationDialog(false)} type={EquipmentType.Weapon}/>}

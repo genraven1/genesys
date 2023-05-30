@@ -1,0 +1,74 @@
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import {InputTextFieldCard} from '../common/InputTextFieldCard';
+import {Path} from "../../services/Path";
+import CheckIcon from "@mui/icons-material/Check";
+import * as React from "react";
+import Setting from "../../models/Setting";
+import CheckButtonCard from "../common/CheckButtonCard";
+import Quality from "../../models/Quality";
+import QualityService from "../../services/QualityService";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
+
+interface Props {
+    qual: Quality
+    allSettings: Setting[]
+}
+
+export default function QualityEdit(props: Props) {
+    const {qual} = props
+    const {name} = useParams<{ name: string }>()
+    const [quality, setQuality] = useState<Quality>(qual)
+    const [errors, setErrors] = useState({} as any)
+    let navigate = useNavigate()
+
+    useEffect(() => {setQuality(qual)}, [qual])
+
+    const onChange = async (key: keyof Quality, value: string) => {
+        if (value.trim().length === 0 || (quality !== null && quality!![key] === value)) {
+            return
+        }
+        const copyQuality = { ...quality } as Quality;
+        switch (key) {
+            case 'description':
+                copyQuality.description = value
+                break
+            case "passive":
+                copyQuality.passive = !Boolean(copyQuality.passive)
+                break
+            case "cost":
+                copyQuality.cost = Number(value)
+                break
+        }
+        setQuality(copyQuality)
+
+        await QualityService.updateQuality(copyQuality.name, copyQuality)
+    }
+
+    const onView = () => {
+        navigate(Path.Qualities + name!! + '/view');
+    }
+
+    return (
+        <Card>
+            <CardHeader title={quality?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                <CheckIcon color='primary' fontSize='small' />
+            </IconButton>}>
+            </CardHeader>
+            <Divider />
+            <CardContent>
+                <Grid container justifyContent={'center'}>
+                    <Grid container spacing={10}>
+                        <InputTextFieldCard defaultValue={quality?.description!!} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                    </Grid>
+                    <Divider />
+                    <Grid container spacing={10}>
+                        <CheckButtonCard title={'Passive Quality'} value={quality?.passive!!} onChange={(value: boolean): void => {onChange('passive', String(value))}} />
+                        <InputNumberRangeSelectField defaultValue={quality?.cost!!} min={0} max={4} onCommit={(value: number): void => {onChange('cost', String(value))}}/>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    )
+}

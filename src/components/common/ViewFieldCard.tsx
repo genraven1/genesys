@@ -4,6 +4,8 @@ import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import Quality from "../../models/Quality";
+import GenesysQualityTypography from "./typography/GenesysQualityTypography";
 
 interface ViewProps {
     name: string
@@ -80,6 +82,29 @@ export function EditNumberFieldCard(props: EditNumberProps): JSX.Element {
                 <CardActions>
                     <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange} />
                 </CardActions>
+            </Card>
+        </Grid>
+    )
+}
+
+interface QualityActivationProps {
+    quality: Quality
+}
+
+export function ViewQualityActivationCard(props: QualityActivationProps): JSX.Element {
+    const {quality} = props
+
+    const renderActivation = (): JSX.Element => {
+        if(quality?.passive!!) {return <GenesysDescriptionTypography text={'Passive'}/>}
+        else {return <GenesysQualityTypography ranks={quality?.cost}/>}
+    }
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={quality?.name!!} style={{ textAlign: 'center' }} />
+                <Divider />
+                {renderActivation()}
             </Card>
         </Grid>
     )
