@@ -29,7 +29,7 @@ export default function QualityDialog(props: Props) {
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Name New Equipment Quality</DialogTitle>
             <DialogContentText>
-                <TextField onChange={onChange} value={name} required/>
+                <TextField onChange={onChange} value={name} required fullWidth/>
             </DialogContentText>
             <DialogActions>
                 <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
