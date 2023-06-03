@@ -7,3 +7,7 @@ export default interface Quality {
     armor: boolean
     weapon: boolean
 }
+
+export interface EquipmentQuality extends Quality {
+    ranks: number
+}

@@ -16,6 +16,8 @@ import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
+import Quality from "../../../models/Quality";
+import WeaponQualityCard from "./WeaponQualityCard";
 
 interface Props {
     wea: Weapon
@@ -106,6 +108,10 @@ export default function WeaponEdit(props: Props) {
                         <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
                         <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
+                    </Grid>
+                    <Divider/>
+                    <Grid container>
+                        <WeaponQualityCard weapon={weapon}/>
                     </Grid>
                 </Grid>
             </CardContent>
