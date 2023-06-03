@@ -3,6 +3,7 @@ import {EquipmentPath} from "./Path";
 import {Armor} from "../models/equipment/Armor";
 import {Gear} from "../models/equipment/Gear";
 import {Weapon} from "../models/equipment/Weapon";
+import Quality from "../models/Quality";
 
 export default class EquipmentService {
 
@@ -44,6 +45,10 @@ export default class EquipmentService {
 
     static async updateWeapon(name: string, weapon: Weapon): Promise<Weapon> {
         return await (await axios.put(EquipmentPath.Weapon + name, weapon)).data
+    }
+
+    static async addWeaponQuality(name: string, quality: Quality): Promise<Weapon> {
+        return await (await axios.put(EquipmentPath.Weapon + name + '/quality', quality)).data;
     }
 
     static async createGear(name: string): Promise<Gear> {

@@ -12,6 +12,14 @@ export default class QualityService {
         return await (await axios.get(Path.Qualities + '/names')).data;
     }
 
+    static async getArmorQualityNames(): Promise<string[]> {
+        return await (await axios.get(Path.Qualities + '/names/armor')).data;
+    }
+
+    static async getWeaponQualityNames(): Promise<string[]> {
+        return await (await axios.get(Path.Qualities + '/names/weapon')).data;
+    }
+
     static async getQuality(name: string): Promise<Quality> {
         return await (await axios.get(Path.Qualities + name)).data;
     }
