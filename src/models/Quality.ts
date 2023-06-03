@@ -4,4 +4,6 @@ export default interface Quality {
     passive: boolean
     cost: number
     settings: string[]
+    armor: boolean
+    weapon: boolean
 }

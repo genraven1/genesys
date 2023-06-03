@@ -24,6 +24,15 @@ export default function QualityView(props: Props) {
         navigate(path + name + '/edit')
     }
 
+    const renderUsable = ():JSX.Element => {
+        if(quality?.weapon!! === undefined && quality?.armor!! === undefined) {return <Fragment/>}
+        let usable = ''
+        if(quality?.weapon!! && !Boolean(quality?.armor!!)) {usable = 'Weapons'}
+        else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {usable = 'Armor'}
+        else {usable = 'Weapons and Armor'}
+        return <ViewFieldCard name={'Quality Used on'} value={usable}/>
+    }
+
     const renderSettings = ():JSX.Element => {
         if (quality?.settings!! === undefined) {return <Fragment/>}
         let settingList = []
@@ -58,6 +67,7 @@ export default function QualityView(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
+                        {renderUsable()}
                         <ViewQualityActivationCard quality={quality}/>
                     </Grid>
                     <Divider />
