@@ -11,8 +11,7 @@ import {useState} from "react";
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
-import WeaponQualityCard from "../../../../equipment/weapon/WeaponQualityCard";
-import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
+import ActorWeaponQualityCard from "./ActorWeaponQualityCard";
 
 interface Props {
     actor: Actor
@@ -81,7 +80,7 @@ export default function CreateWeaponDialog(props: Props) {
                 </Grid>
                 <Divider/>
                 <Grid container>
-                    <NonPlayerCharacterWeaponQualityCard weapon={weapon!!}/>
+                    <ActorWeaponQualityCard weapon={weapon!!}/>
                 </Grid>
             </DialogContent>
             <DialogActions>

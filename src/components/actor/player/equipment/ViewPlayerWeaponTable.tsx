@@ -37,6 +37,7 @@ export default function ViewPlayerWeaponTable(props: Props): JSX.Element {
                         <TypographyCenterTableCell value={'Damage'}/>
                         <TypographyCenterTableCell value={'Critical'}/>
                         <TypographyCenterTableCell value={'Range'}/>
+                        <TypographyCenterTableCell value={'Special Qualities'}/>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -66,6 +67,17 @@ function Row(props: RowProps): JSX.Element {
         return damage
     }
 
+    const renderQualities = (): string => {
+        let qualities = ''
+        if (weapon?.qualities!!.length > 0) {
+            for (const quality of weapon.qualities.sort((a, b) => a.name.localeCompare(b.name))) {
+                qualities = qualities.concat(quality.name + ' ' + quality.ranks + ' ')
+            }
+        }
+        else {qualities = 'None'}
+        return qualities
+    }
+
     // const renderEquipped = (): string => {
     //     let equip = ''
     //     if (weapon.equipped) {
@@ -84,6 +96,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyCenterTableCell value={renderDamage()}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
+            <TypographyCenterTableCell value={renderQualities()}/>
         </TableRow>
     )
 }

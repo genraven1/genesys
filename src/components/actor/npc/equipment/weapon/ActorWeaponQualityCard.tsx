@@ -10,7 +10,7 @@ interface Props {
     weapon: ActorWeapon
 }
 
-export default function NonPlayerCharacterWeaponQualityCard(props: Props): JSX.Element {
+export default function ActorWeaponQualityCard(props: Props): JSX.Element {
     const {weapon} = props
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 
@@ -23,7 +23,7 @@ export default function NonPlayerCharacterWeaponQualityCard(props: Props): JSX.E
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Abilities'} style={{textAlign: 'center'}}/>
+            <CardHeader title={'Weapon Special Qualities'} style={{textAlign: 'center'}}/>
             <CardContent>
                 {renderTable()}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponQualityDialog(true)}>Add

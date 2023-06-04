@@ -23,7 +23,7 @@ export default function WeaponQualityCard(props: Props): JSX.Element {
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Abilities'} style={{textAlign: 'center'}}/>
+            <CardHeader title={'Weapon Special Qualities'} style={{textAlign: 'center'}}/>
             <CardContent>
                 {renderTable()}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponQualityDialog(true)}>Add
