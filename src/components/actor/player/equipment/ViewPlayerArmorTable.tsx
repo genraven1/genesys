@@ -8,6 +8,8 @@ import * as React from "react";
 import {useState} from "react";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
 import {ActorArmor} from "../../../../models/equipment/Armor";
+import {renderHeaders} from "../../../common/table/TableRenders";
+import {renderArmorQualities, renderSoak} from "../../../../models/equipment/EquipmentHelper";
 
 interface Props {
     armor: ActorArmor[]
@@ -15,6 +17,7 @@ interface Props {
 
 export default function ViewPlayerArmorTable(props: Props): JSX.Element {
     const {armor} = props
+    const headers = ['Name', 'Defense', 'Soak', 'Special Qualities']
 
     const renderTableBody = () => {
         if (!armor) {
@@ -30,11 +33,7 @@ export default function ViewPlayerArmorTable(props: Props): JSX.Element {
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TypographyLeftTableCell value={'Name'}/>
-                        <TypographyCenterTableCell value={'Defense'}/>
-                        <TypographyCenterTableCell value={'Soak'}/>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
                     {renderTableBody()}
@@ -50,11 +49,6 @@ interface RowProps {
 
 function Row(props: RowProps): JSX.Element {
     const {armor} = props
-    const [open, setOpen] = useState(false)
-
-    const renderSoak = (): string => {
-        return '+' + String(armor.soak)
-    }
 
     // const renderEquipped = (): string => {
     //     let equip = ''
@@ -67,10 +61,11 @@ function Row(props: RowProps): JSX.Element {
     // }
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
+        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
             <TypographyLeftTableCell value={armor.name}/>
             <TypographyCenterTableCell value={String(armor.defense)}/>
-            <TypographyCenterTableCell value={renderSoak()}/>
+            <TypographyCenterTableCell value={renderSoak(armor)}/>
+            <TypographyCenterTableCell value={renderArmorQualities(armor)}/>
         </TableRow>
     )
 }
