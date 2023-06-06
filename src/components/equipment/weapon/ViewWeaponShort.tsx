@@ -1,12 +1,7 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid} from '@mui/material';
 import * as React from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
-import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -17,29 +12,28 @@ import TableContainer from "@mui/material/TableContainer";
 
 interface Props {
     weapon: Weapon
-    allSettings: Setting[]
 }
 
-export default function WeaponView(props: Props) {
-    const {weapon, allSettings} = props
-    const {name} = useParams<{ name: string }>()
-    let navigate = useNavigate()
-
-    const onEdit = () => {
-        navigate(EquipmentPath.Weapon + name + '/edit')
-    }
+export default function WeaponViewShort(props: Props) {
+    const {weapon} = props
 
     const renderDamage = (): string => {
         let damage = ''
-        if (weapon?.brawn!!) {damage = 'Brawn + ' + weapon?.damage!!}
-        else {damage = String(weapon?.damage!!)}
+        if (weapon?.brawn!!) {
+            damage = 'Brawn + ' + weapon?.damage!!
+        } else {
+            damage = String(weapon?.damage!!)
+        }
         return damage
     }
 
     const renderPrice = (): string => {
         let price = ''
-        if (weapon?.restricted!!) {price = weapon?.price!! + '(R)'}
-        else {price = String(weapon?.price!!)}
+        if (weapon?.restricted!!) {
+            price = weapon?.price!! + '(R)'
+        } else {
+            price = String(weapon?.price!!)
+        }
         return price
     }
 
@@ -49,8 +43,9 @@ export default function WeaponView(props: Props) {
             for (const quality of weapon.qualities.sort((a, b) => a.name.localeCompare(b.name))) {
                 qualities = qualities.concat(quality.name + ' ' + quality.ranks + ' ')
             }
+        } else {
+            qualities = 'None'
         }
-        else {qualities = 'None'}
         return qualities
     }
 
@@ -58,18 +53,15 @@ export default function WeaponView(props: Props) {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={weapon?.name!!}
-                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
-                </IconButton>}>
+                title={weapon?.name!!}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={weapon?.description!!} />
+                        <ViewFieldCard name={'Description'} value={weapon?.description!!}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -96,10 +88,6 @@ export default function WeaponView(props: Props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Divider />
-                    <Grid container spacing={10}>
-                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings} />
-                    </Grid>
                 </Grid>
             </CardContent>
         </Card>

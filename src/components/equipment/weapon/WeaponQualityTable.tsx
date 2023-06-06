@@ -6,7 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
-import Quality, {EquipmentQuality} from "../../../models/Quality";
+import {EquipmentQuality} from "../../../models/Quality";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";

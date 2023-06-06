@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 import {Weapon} from "../../../../models/equipment/Weapon";
-import WeaponView from "../../../equipment/weapon/WeaponView";
+import WeaponViewShort from '../../../equipment/weapon/ViewWeaponShort';
 
 interface Props {
     weapon: Weapon
@@ -15,7 +14,7 @@ export default function WeaponBackdrop(props: Props) {
 
     return (
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-            <WeaponView weapon={weapon} allSettings={useFetchAllSettings()}/>
+            <WeaponViewShort weapon={weapon}/>
         </Backdrop>
     )
 }

@@ -16,7 +16,6 @@ import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
-import Quality from "../../../models/Quality";
 import WeaponQualityCard from "./WeaponQualityCard";
 
 interface Props {

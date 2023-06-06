@@ -11,6 +11,7 @@ import {useState} from "react";
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
+import ActorWeaponQualityCard from "./ActorWeaponQualityCard";
 
 interface Props {
     actor: Actor
@@ -76,6 +77,10 @@ export default function CreateWeaponDialog(props: Props) {
                     <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!} onChange={(value: boolean): void => {onChange('brawn', String(value))}} />
                     <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onChange('critical', String(value))}} min={1} max={7} />
                     <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
+                </Grid>
+                <Divider/>
+                <Grid container>
+                    <ActorWeaponQualityCard weapon={weapon!!}/>
                 </Grid>
             </DialogContent>
             <DialogActions>

@@ -2,20 +2,20 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
-import {Weapon} from "../../../models/equipment/Weapon";
-import WeaponQualityTable from "./WeaponQualityTable";
-import WeaponQualitySelectionDialog from "./WeaponQualitySelectionDialog";
+import {ActorWeapon} from "../../../../../models/equipment/Weapon";
+import WeaponQualitySelectionDialog from "../../../../equipment/weapon/WeaponQualitySelectionDialog";
+import WeaponQualityTable from "../../../../equipment/weapon/WeaponQualityTable";
 
 interface Props {
-    weapon: Weapon
+    weapon: ActorWeapon
 }
 
-export default function WeaponQualityCard(props: Props): JSX.Element {
+export default function ActorWeaponQualityCard(props: Props): JSX.Element {
     const {weapon} = props
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 
     const renderTable = (): JSX.Element => {
-        if (weapon?.qualities!!.length === 0) {
+        if (!weapon?.qualities!! || weapon?.qualities!!.length === 0)  {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <WeaponQualityTable weapon={weapon}/>
