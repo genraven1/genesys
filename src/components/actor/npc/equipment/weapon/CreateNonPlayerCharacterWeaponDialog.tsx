@@ -1,5 +1,4 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
-import Actor from "../../../../../models/actor/Actor";
 import {SkillSelectCard} from "../../../../common/SkillSelectCard";
 import Skill, {SkillType} from "../../../../../models/actor/Skill";
 import NumberRangeSelectCard from "../../../../common/NumberRangeSelectCard";
@@ -11,20 +10,21 @@ import {useState} from "react";
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
-import ActorWeaponQualityCard from "./ActorWeaponQualityCard";
+import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
+import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
 
 interface Props {
-    actor: Actor
+    npc: NonPlayerCharacter
     open: boolean
     onClose: () => void
 }
 
-export default function CreateWeaponDialog(props: Props) {
-    const {actor, open, onClose} = props
+export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
+    const {npc, open, onClose} = props
     const [weapon, setWeapon] = useState<ActorWeapon>()
 
     const onCreate = async (): Promise<void> => {
-        await ActorService.createRivalWeapon(actor.name, weapon!!)
+        await ActorService.createRivalWeapon(npc.name, weapon!!)
         onClose()
     }
 
@@ -80,7 +80,7 @@ export default function CreateWeaponDialog(props: Props) {
                 </Grid>
                 <Divider/>
                 <Grid container>
-                    <ActorWeaponQualityCard weapon={weapon!!}/>
+                    <NonPlayerCharacterWeaponQualityCard weapon={weapon!!}/>
                 </Grid>
             </DialogContent>
             <DialogActions>
