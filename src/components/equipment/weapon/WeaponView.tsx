@@ -26,7 +26,7 @@ export default function WeaponView(props: Props) {
     const {weapon, allSettings} = props
     const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
-    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities']
+    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
         navigate(EquipmentPath.Weapon + name + '/edit')

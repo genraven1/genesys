@@ -49,15 +49,15 @@ export const renderWeaponQualities = (weapon: Weapon): string => {
 }
 
 export const renderSoak = (armor: Armor): string => {
-    return '+' + String(armor.soak)
+    return '+' + String(armor?.soak!!)
 }
 
 export const renderActorDamage = (weapon: Weapon, brawn: number): string => {
     let damage = ''
-    if (weapon.brawn) {
-        damage = String(weapon.damage + brawn)
+    if (weapon?.brawn!!) {
+        damage = String(weapon?.damage!! + brawn)
     } else {
-        damage = String(weapon.damage)
+        damage = String(weapon?.damage!!)
     }
     return damage
 }
