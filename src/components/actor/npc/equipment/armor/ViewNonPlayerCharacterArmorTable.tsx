@@ -6,16 +6,16 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useState} from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
-import {ActorArmor} from "../../../../models/equipment/Armor";
-import {renderHeaders} from "../../../common/table/TableRenders";
-import {renderArmorQualities, renderSoak} from "../../../../models/equipment/EquipmentHelper";
+import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {ActorArmor} from "../../../../../models/equipment/Armor";
+import {renderArmorQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
+import {renderHeaders} from "../../../../common/table/TableRenders";
 
 interface Props {
     armor: ActorArmor[]
 }
 
-export default function ViewPlayerArmorTable(props: Props): JSX.Element {
+export default function ViewNonPlayerCharacterArmorTable(props: Props): JSX.Element {
     const {armor} = props
     const headers = ['Name', 'Defense', 'Soak', 'Special Qualities']
 
@@ -50,20 +50,10 @@ interface RowProps {
 function Row(props: RowProps): JSX.Element {
     const {armor} = props
 
-    // const renderEquipped = (): string => {
-    //     let equip = ''
-    //     if (weapon.equipped) {
-    //         equip = 'True'
-    //     } else {
-    //         equip = 'False'
-    //     }
-    //     return equip
-    // }
-
     return (
         <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TypographyLeftTableCell value={armor.name}/>
-            <TypographyCenterTableCell value={String(armor.defense)}/>
+            <TypographyLeftTableCell value={armor?.name!!}/>
+            <TypographyCenterTableCell value={String(armor?.defense!!)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
             <TypographyCenterTableCell value={renderArmorQualities(armor)}/>
         </TableRow>

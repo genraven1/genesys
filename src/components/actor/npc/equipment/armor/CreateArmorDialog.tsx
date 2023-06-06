@@ -1,11 +1,11 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import {ActorArmor} from "../../../../models/equipment/Armor";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import ActorService from "../../../../services/ActorService";
-import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
-import NumberRangeSelectCard from "../../../common/NumberRangeSelectCard";
+import {ActorArmor} from "../../../../../models/equipment/Armor";
+import Actor, {ActorType} from "../../../../../models/actor/Actor";
+import ActorService from "../../../../../services/ActorService";
+import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
+import NumberRangeSelectCard from "../../../../common/NumberRangeSelectCard";
 
 interface Props {
     actor: Actor
