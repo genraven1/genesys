@@ -31,15 +31,15 @@ export default function WeaponView(props: Props) {
 
     const renderDamage = (): string => {
         let damage = ''
-        if (weapon.brawn) {damage = 'Brawn + ' + weapon?.damage!!}
-        else {damage = String(weapon.damage)}
+        if (weapon?.brawn!!) {damage = 'Brawn + ' + weapon?.damage!!}
+        else {damage = String(weapon?.damage!!)}
         return damage
     }
 
     const renderPrice = (): string => {
         let price = ''
-        if (weapon.restricted) {price = weapon.price + '(R)'}
-        else {price = String(weapon.price)}
+        if (weapon?.restricted!!) {price = weapon?.price!! + '(R)'}
+        else {price = String(weapon?.price!!)}
         return price
     }
 
@@ -85,11 +85,11 @@ export default function WeaponView(props: Props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-                                    <TypographyLeftTableCell value={weapon.name}/>
-                                    <TypographyCenterTableCell value={weapon.skill.name}/>
+                                    <TypographyLeftTableCell value={weapon?.name!!}/>
+                                    <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
                                     <TypographyCenterTableCell value={renderDamage()}/>
-                                    <TypographyCenterTableCell value={String(weapon.critical)}/>
-                                    <TypographyCenterTableCell value={weapon.range}/>
+                                    <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
+                                    <TypographyCenterTableCell value={weapon?.range!!}/>
                                     <TypographyCenterTableCell value={renderPrice()}/>
                                     <TypographyCenterTableCell value={renderQualities()}/>
                                 </TableRow>

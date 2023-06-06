@@ -19,15 +19,21 @@ export default function WeaponViewShort(props: Props) {
 
     const renderDamage = (): string => {
         let damage = ''
-        if (weapon.brawn) {damage = 'Brawn + ' + weapon?.damage!!}
-        else {damage = String(weapon.damage)}
+        if (weapon?.brawn!!) {
+            damage = 'Brawn + ' + weapon?.damage!!
+        } else {
+            damage = String(weapon?.damage!!)
+        }
         return damage
     }
 
     const renderPrice = (): string => {
         let price = ''
-        if (weapon.restricted) {price = weapon.price + '(R)'}
-        else {price = String(weapon.price)}
+        if (weapon?.restricted!!) {
+            price = weapon?.price!! + '(R)'
+        } else {
+            price = String(weapon?.price!!)
+        }
         return price
     }
 
@@ -37,8 +43,9 @@ export default function WeaponViewShort(props: Props) {
             for (const quality of weapon.qualities.sort((a, b) => a.name.localeCompare(b.name))) {
                 qualities = qualities.concat(quality.name + ' ' + quality.ranks + ' ')
             }
+        } else {
+            qualities = 'None'
         }
-        else {qualities = 'None'}
         return qualities
     }
 
@@ -48,13 +55,13 @@ export default function WeaponViewShort(props: Props) {
                 style={{textAlign: 'center'}}
                 title={weapon?.name!!}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={weapon?.description!!} />
+                        <ViewFieldCard name={'Description'} value={weapon?.description!!}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -70,11 +77,11 @@ export default function WeaponViewShort(props: Props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-                                    <TypographyLeftTableCell value={weapon.name}/>
-                                    <TypographyCenterTableCell value={weapon.skill.name}/>
+                                    <TypographyLeftTableCell value={weapon?.name!!}/>
+                                    <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
                                     <TypographyCenterTableCell value={renderDamage()}/>
-                                    <TypographyCenterTableCell value={String(weapon.critical)}/>
-                                    <TypographyCenterTableCell value={weapon.range}/>
+                                    <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
+                                    <TypographyCenterTableCell value={weapon?.range!!}/>
                                     <TypographyCenterTableCell value={renderPrice()}/>
                                     <TypographyCenterTableCell value={renderQualities()}/>
                                 </TableRow>
