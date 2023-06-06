@@ -7,10 +7,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
-import ViewPlayerWeaponTable from "./ViewPlayerWeaponTable";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
+import ViewActorWeaponTable from "../../npc/equipment/weapon/ViewActorWeaponTable";
 
 interface Props {
     player: Player
@@ -39,7 +39,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewPlayerWeaponTable weapons={player?.weapons!!} brawn={player?.brawn?.current!!} />
+        return <ViewActorWeaponTable weapons={player?.weapons!!} brawn={player?.brawn?.current!!}/>
     }
 
     const renderArmorTab = (): JSX.Element => {
