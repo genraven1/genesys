@@ -27,6 +27,10 @@ export default class EquipmentService {
         return await (await axios.put(EquipmentPath.Armor + name, armor)).data
     }
 
+    static async addArmorQuality(name: string, quality: Quality): Promise<Armor> {
+        return await (await axios.put(EquipmentPath.Armor + name + '/quality', quality)).data;
+    }
+
     static async createWeapon(name: string): Promise<Weapon> {
         return await (await axios.post( EquipmentPath.Weapon + name)).data
     }

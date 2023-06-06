@@ -8,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useState} from "react";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {renderActorDamage, renderWeaponQualities} from "../../../../../models/equipment/EquipmentHelper";
+import {renderHeaders} from "../../../../common/table/TableRenders";
 
 interface Props {
     weapons: ActorWeapon[]
@@ -16,6 +18,7 @@ interface Props {
 
 export default function ViewActorWeaponTable(props: Props): JSX.Element {
     const {weapons, brawn} = props
+    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities']
 
     const renderTableBody = () => {
         if (!weapons) {
@@ -31,14 +34,7 @@ export default function ViewActorWeaponTable(props: Props): JSX.Element {
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TypographyLeftTableCell value={'Name'}/>
-                        <TypographyCenterTableCell value={'Skill'}/>
-                        <TypographyCenterTableCell value={'Damage'}/>
-                        <TypographyCenterTableCell value={'Critical'}/>
-                        <TypographyCenterTableCell value={'Range'}/>
-                        <TypographyCenterTableCell value={'Special Qualities'}/>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
                     {renderTableBody()}
@@ -57,27 +53,6 @@ function Row(props: RowProps): JSX.Element {
     const {weapon, brawn} = props
     const [open, setOpen] = useState(false)
 
-    const renderDamage = (): string => {
-        let damage = ''
-        if (weapon.brawn) {
-            damage = String(weapon.damage + brawn)
-        } else {
-            damage = String(weapon.damage)
-        }
-        return damage
-    }
-
-    const renderQualities = (): string => {
-        let qualities = ''
-        if (weapon?.qualities!!.length > 0) {
-            for (const quality of weapon.qualities.sort((a, b) => a.name.localeCompare(b.name))) {
-                qualities = qualities.concat(quality.name + ' ' + quality.ranks + ' ')
-            }
-        }
-        else {qualities = 'None'}
-        return qualities
-    }
-
     // const renderEquipped = (): string => {
     //     let equip = ''
     //     if (weapon.equipped) {
@@ -93,10 +68,10 @@ function Row(props: RowProps): JSX.Element {
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
             <TypographyCenterTableCell value={weapon.skill.name}/>
-            <TypographyCenterTableCell value={renderDamage()}/>
+            <TypographyCenterTableCell value={renderActorDamage(weapon, brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
-            <TypographyCenterTableCell value={renderQualities()}/>
+            <TypographyCenterTableCell value={renderWeaponQualities(weapon)}/>
         </TableRow>
     )
 }

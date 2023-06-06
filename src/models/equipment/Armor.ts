@@ -1,10 +1,10 @@
 import Equipment, {ActorEquipment} from "./Equipment";
-import Quality from "../Quality";
+import {EquipmentQuality} from "../Quality";
 
 export interface Armor extends Equipment {
     soak: number
     defense: number
-    qualities: Quality[]
+    qualities: EquipmentQuality[]
 }
 
 export interface ActorArmor extends ActorEquipment, Armor {}

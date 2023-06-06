@@ -12,45 +12,39 @@ import * as React from 'react';
 import {Armor} from "../../../models/equipment/Armor";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import { renderHeaders } from '../../common/table/TableRenders';
+import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';
 
-function Row(props: { row: Armor }): JSX.Element {
-    const { row } = props
+interface Props {
+    row: Armor
+    columns: number
+}
+
+function Row(props: Props): JSX.Element {
+    const { row, columns } = props
     const [open, setOpen] = useState(false)
-
-    const renderPrice = (): JSX.Element => {
-        let price = ''
-        if (row.restricted) {
-            price = row.price + '(R)'
-        }
-        else {
-            price = String(row.price)
-        }
-        return (
-            <Typography>{price}</Typography>
-        )
-    }
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.defense}</TableCell>
-                <TableCell>{row.soak}</TableCell>
-                <TableCell>{row.encumbrance}</TableCell>
-                <TableCell>{renderPrice()}</TableCell>
-                <TableCell>{row.rarity}</TableCell>
+                <TypographyCenterTableCell value={row.name}/>
+                <TypographyCenterTableCell value={String(row.defense)}/>
+                <TypographyCenterTableCell value={renderSoak(row)}/>
+                <TypographyCenterTableCell value={String(row.encumbrance)}/>
+                <TypographyCenterTableCell value={renderPrice(row)}/>
+                <TypographyCenterTableCell value={String(row.rarity)}/>
                 <ActionsTableCell name={row.name} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={row.description}/>
+                                    <GenesysDescriptionTypography text={row?.description!!}/>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -63,6 +57,7 @@ function Row(props: { row: Armor }): JSX.Element {
 
 export default function ViewAllArmor() {
     const [armors, setArmors] = useState<Armor[]>([])
+    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -76,19 +71,11 @@ export default function ViewAllArmor() {
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Defense</TableCell>
-                        <TableCell>Soak</TableCell>
-                        <TableCell>Encumbrance</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell>Rarity</TableCell>
-                        <TableCell>Edit</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
                     {armors.map((row: Armor) => (
-                        <Row key={row.name} row={row} />
+                        <Row key={row.name} row={row} columns={headers.length}/>
                     ))}
                 </TableBody>
             </Table>
