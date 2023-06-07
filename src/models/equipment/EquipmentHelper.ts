@@ -1,6 +1,7 @@
 import Equipment from "./Equipment";
 import {Armor} from "./Armor";
 import {Weapon} from "./Weapon";
+import {EquipmentQuality} from "../Quality";
 
 export const renderPrice = (equipment: Equipment): string => {
     let price = ''
@@ -30,10 +31,10 @@ export const renderArmorQualities = (armor: Armor): string => {
     return qualities
 }
 
-export const renderWeaponQualities = (weapon: Weapon): string => {
+export const renderQualities = (equipmentQualities: EquipmentQuality[]): string => {
     let qualities = ''
-    if (weapon?.qualities!!.length > 0) {
-        let qualityList = weapon.qualities.sort((a, b) => a.name.localeCompare(b.name))
+    if (equipmentQualities.length > 0) {
+        let qualityList = equipmentQualities.sort((a, b) => a.name.localeCompare(b.name))
         for (let i = 0; i < qualityList.length; i++){
             const quality = qualityList[i];
             if (i !== qualityList.length - 1) {

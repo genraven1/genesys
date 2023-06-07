@@ -5,10 +5,9 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {useState} from "react";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
 import {ActorArmor} from "../../../../../models/equipment/Armor";
-import {renderArmorQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
+import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../../../common/table/TableRenders";
 
 interface Props {
@@ -55,7 +54,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyLeftTableCell value={armor?.name!!}/>
             <TypographyCenterTableCell value={String(armor?.defense!!)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
-            <TypographyCenterTableCell value={renderArmorQualities(armor)}/>
+            <TypographyCenterTableCell value={renderQualities(armor?.qualities!!)}/>
         </TableRow>
     )
 }

@@ -14,7 +14,7 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
-import {renderDamage, renderPrice, renderWeaponQualities} from "../../../models/equipment/EquipmentHelper";
+import {renderDamage, renderPrice, renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
@@ -38,16 +38,16 @@ export default function WeaponView(props: Props) {
                 style={{textAlign: 'center'}}
                 title={weapon?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
+                    <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={weapon?.description!!} />
+                        <ViewFieldCard name={'Description'} value={weapon?.description!!}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -61,14 +61,14 @@ export default function WeaponView(props: Props) {
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
                                     <TypographyCenterTableCell value={weapon?.range!!}/>
                                     <TypographyCenterTableCell value={renderPrice(weapon)}/>
-                                    <TypographyCenterTableCell value={renderWeaponQualities(weapon)}/>
+                                    <TypographyCenterTableCell value={renderQualities(weapon?.qualities!!)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
-                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings} />
+                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings}/>
                     </Grid>
                 </Grid>
             </CardContent>
