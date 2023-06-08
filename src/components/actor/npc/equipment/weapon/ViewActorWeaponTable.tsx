@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useState} from "react";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
-import {renderActorDamage, renderWeaponQualities} from "../../../../../models/equipment/EquipmentHelper";
+import {renderActorDamage, renderQualities,} from "../../../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../../../common/table/TableRenders";
 
 interface Props {
@@ -71,7 +71,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyCenterTableCell value={renderActorDamage(weapon, brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
-            <TypographyCenterTableCell value={renderWeaponQualities(weapon)}/>
+            <TypographyCenterTableCell value={renderQualities(weapon?.qualities!!)}/>
         </TableRow>
     )
 }
