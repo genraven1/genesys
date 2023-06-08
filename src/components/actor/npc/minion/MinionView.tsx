@@ -15,15 +15,12 @@ import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
 
 export default function MinionView(props: {minion: Minion}) {
     const {minion} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
-
-    const getRatings = ():string => {
-        return '[combat] ' + String(minion?.combat!!) + ' [social] ' + String(minion?.social!!) + ' [general] ' + String(minion?.general!!)
-    }
 
     const onEdit = () => {
         navigate(ActorPath.Minion + name + '/edit')
@@ -34,7 +31,7 @@ export default function MinionView(props: {minion: Minion}) {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={name}
-                subheader={<GenesysDescriptionTypography text={getRatings()} />}
+                subheader={<GenesysDescriptionTypography text={getRatings(minion)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

@@ -20,3 +20,11 @@ export enum NonPlayerCharacterKey {
     General = 'general',
     Social = 'social'
 }
+
+export const getRatings = (npc: NonPlayerCharacter): string => {
+    return '[combat] ' + String(npc?.combat!!) + ' [social] ' + String(npc?.social!!) + ' [general] ' + String(npc?.general!!)
+}
+
+export const combat = '[combat]'
+export const social = '[social]'
+export const general = '[general]'

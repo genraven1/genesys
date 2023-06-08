@@ -24,72 +24,75 @@ import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
+import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
 
 
 export default function App() {
 
     return (
-        <ThemeProvider theme={createTheme({palette: {mode: 'light'}})} >
+        <ThemeProvider theme={createTheme({palette: {mode: 'light'}})}>
             <BrowserRouter>
-                <NavBar />
+                <NavBar/>
                 <Routes>
-                    <Route path="/" element={<Navigate replace to="/home" />} />
-                    <Route path={Path.Home} element={<Dashboard/>} />
+                    <Route path="/" element={<Navigate replace to="/home"/>}/>
+                    <Route path={Path.Home} element={<Dashboard/>}/>
 
-                    <Route path={Path.Setting} element={<SettingWorkflow />} />
-                    <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow />} />
-                    <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow />} />
+                    <Route path={Path.Setting} element={<SettingWorkflow/>}/>
+                    <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow/>}/>
+                    <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow/>}/>
 
-                    <Route path={Path.Talent} element={<TalentWorkflow />} />
-                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow />} />
-                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow />} />
+                    <Route path={Path.Talent} element={<TalentWorkflow/>}/>
+                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow/>}/>
+                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow/>}/>
 
-                    <Route path={Path.Qualities} element={<QualityWorkflow />} />
-                    <Route path={Path.Qualities + ':name/view'} element={<QualityWorkflow />} />
-                    <Route path={Path.Qualities + ':name/edit'} element={<QualityWorkflow />} />
+                    <Route path={Path.Qualities} element={<QualityWorkflow/>}/>
+                    <Route path={Path.Qualities + ':name/view'} element={<QualityWorkflow/>}/>
+                    <Route path={Path.Qualities + ':name/edit'} element={<QualityWorkflow/>}/>
 
-                    <Route path={Path.Skills} element={<SkillWorkflow />} />
-                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow />} />
-                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow />} />
+                    <Route path={Path.Skills} element={<SkillWorkflow/>}/>
+                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
+                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
 
                     {/*Actor Routes*/}
-                    <Route path={ActorPath.Actor} element={<ViewAllActors />} />
+                    <Route path={ActorPath.Actor} element={<ViewAllActors/>}/>
+                    <Route path={ActorPath.Npc} element={<ViewAllNonPlayerCharacters/>}/>
 
-                    <Route path={ActorPath.Player} element={<ViewAllPlayers />} />
-                    <Route path={ActorPath.Player + ':name/edit'} element={<PlayerWorkflow />} />
-                    <Route path={ActorPath.Player + ':name/view'} element={<PlayerWorkflow />} />
+                    <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
+                    <Route path={ActorPath.Player + ':name/edit'} element={<PlayerWorkflow/>}/>
+                    <Route path={ActorPath.Player + ':name/view'} element={<PlayerWorkflow/>}/>
 
-                    <Route path={ActorPath.Nemesis} element={<AllNemesesView />} />
-                    <Route path={ActorPath.Nemesis + ':name/edit'} element={<NemesisWorkflow />} />
-                    <Route path={ActorPath.Nemesis + ':name/view'} element={<NemesisWorkflow />} />
+                    <Route path={ActorPath.Nemesis} element={<AllNemesesView/>}/>
+                    <Route path={ActorPath.Nemesis + ':name/edit'} element={<NemesisWorkflow/>}/>
+                    <Route path={ActorPath.Nemesis + ':name/view'} element={<NemesisWorkflow/>}/>
 
-                    <Route path={ActorPath.Rival} element={<AllRivalsView />} />
-                    <Route path={ActorPath.Rival + ':name/edit'} element={<RivalWorkflow />} />
-                    <Route path={ActorPath.Rival + ':name/view'} element={<RivalWorkflow />} />
+                    <Route path={ActorPath.Rival} element={<AllRivalsView/>}/>
+                    <Route path={ActorPath.Rival + ':name/edit'} element={<RivalWorkflow/>}/>
+                    <Route path={ActorPath.Rival + ':name/view'} element={<RivalWorkflow/>}/>
 
-                    <Route path={ActorPath.Minion} element={<AllMinionsView />} />
-                    <Route path={ActorPath.Minion + ':name/edit'} element={<MinionWorkflow />} />
-                    <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow />} />
+                    <Route path={ActorPath.Minion} element={<AllMinionsView/>}/>
+                    <Route path={ActorPath.Minion + ':name/edit'} element={<MinionWorkflow/>}/>
+                    <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow/>}/>
 
                     {/*Equipment Routes*/}
-                    <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>} />
-                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>} />
+                    <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>}/>
+                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>}/>
+                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>}/>
 
-                    <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>} />
-                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>} />
-                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>} />
+                    <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>}/>
 
-                    <Route path={EquipmentPath.Gear} element={<GearWorkflow/>} />
-                    <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>} />
-                    <Route path={EquipmentPath.Gear + ':name/view'} element={<GearWorkflow/>} />
+                    <Route path={EquipmentPath.Gear} element={<GearWorkflow/>}/>
+                    <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>}/>
+                    <Route path={EquipmentPath.Gear + ':name/view'} element={<GearWorkflow/>}/>
 
                     {/*Lore Routes*/}
-                    <Route path={Path.Lore} element={<ViewAllLore />} />
+                    <Route path={Path.Lore} element={<ViewAllLore/>}/>
 
-                    <Route path={LorePath.Organization} element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>} />
-                    <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>} />
-                    <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>} />
+                    <Route path={LorePath.Organization}
+                           element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>}/>
+                    <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
+                    <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
