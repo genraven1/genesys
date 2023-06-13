@@ -1,14 +1,14 @@
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ActorService from "../../services/ActorService";
-import {ActorPath} from "../../services/Path";
-import Actor, {ActorType} from "../../models/actor/Actor";
-import InputSelectField, {Option} from "../common/InputSelectField";
-import Player from "../../models/actor/player/Player";
-import Nemesis from "../../models/actor/npc/Nemesis";
-import Minion from "../../models/actor/npc/Minion";
-import Rival from "../../models/actor/npc/Rival";
+import ActorService from "../../../services/ActorService";
+import {ActorPath} from "../../../services/Path";
+import {ActorType} from "../../../models/actor/Actor";
+import InputSelectField, {Option} from "../../common/InputSelectField";
+import Nemesis from "../../../models/actor/npc/Nemesis";
+import Minion from "../../../models/actor/npc/Minion";
+import Rival from "../../../models/actor/npc/Rival";
+import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
 
 interface Props {
     open: boolean
@@ -19,14 +19,14 @@ const getActorTypes = (): Option[] => {
     return Object.values(ActorType).map((value) => ({value}))
 }
 
-export default function CreateActorDialog(props: Props) {
+export default function CreateNonPlayerCharacterDialog(props: Props) {
     const {open, onClose} = props
-    const [ name, setName ] = useState('')
+    const [name, setName] = useState('')
     const [type, setType] = useState<ActorType>(ActorType.Minion)
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let copyActor = {} as Actor
+        let copyActor = {} as NonPlayerCharacter
         switch (type) {
             case ActorType.Minion:
                 copyActor = {...await ActorService.createMinion(name)}
@@ -47,10 +47,6 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Nemesis + name + '/edit')
                 break
             case ActorType.Player:
-                copyActor = {...await ActorService.createPlayer(name)}
-                copyActor.type = type
-                await ActorService.updatePlayer(name, copyActor as Player)
-                navigate(ActorPath.Player + name + '/edit')
                 break
         }
         onClose()
@@ -61,11 +57,11 @@ export default function CreateActorDialog(props: Props) {
     }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 
-    const getTitle = ():string => {
+    const getTitle = (): string => {
         return 'Create ' + type
     }
 
@@ -74,8 +70,11 @@ export default function CreateActorDialog(props: Props) {
             <DialogTitle>{getTitle()}</DialogTitle>
             <DialogContentText>
                 <TextField onChange={onNameChange} value={name} required/>
-                <Divider />
-                <InputSelectField defaultValue={ActorType.Minion} options={getActorTypes()} onCommit={(value: string) => {onTypeChange(value as ActorType)}} />
+                <Divider/>
+                <InputSelectField defaultValue={ActorType.Minion} options={getActorTypes()}
+                                  onCommit={(value: string) => {
+                                      onTypeChange(value as ActorType)
+                                  }}/>
             </DialogContentText>
             <DialogActions>
                 <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>

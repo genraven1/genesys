@@ -15,15 +15,12 @@ import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
 
 export default function RivalView(props: {rival: Rival}) {
     const {rival} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
-
-    const getRatings = ():string => {
-        return '[combat] ' + String(rival?.combat!!) + ' [social] ' + String(rival?.social!!) + ' [general] ' + String(rival?.general!!)
-    }
 
     const onEdit = () => {
         navigate(ActorPath.Rival + name + '/edit')
@@ -34,7 +31,7 @@ export default function RivalView(props: {rival: Rival}) {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={name}
-                subheader={<GenesysDescriptionTypography text={getRatings()} />}
+                subheader={<GenesysDescriptionTypography text={getRatings(rival)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

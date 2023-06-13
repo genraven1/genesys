@@ -15,15 +15,12 @@ import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
 
 export default function NemesisView(props: {nemesis: Nemesis}) {
     const {nemesis} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
-
-    const getRatings = ():string => {
-        return '[combat] ' + String(nemesis?.combat!!) + ' [social] ' + String(nemesis?.social!!) + ' [general] ' + String(nemesis?.general!!)
-    }
 
     const onEdit = () => {
         navigate(ActorPath.Nemesis + name + '/edit')
@@ -34,7 +31,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={name}
-                subheader={<GenesysDescriptionTypography text={getRatings()} />}
+                subheader={<GenesysDescriptionTypography text={getRatings(nemesis)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
