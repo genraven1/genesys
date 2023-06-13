@@ -18,7 +18,6 @@ import {
     TypographyCenterTableCell
 } from "../../common/table/TypographyTableCell";
 import Collapse from "@mui/material/Collapse";
-import Box from "@mui/material/Box";
 
 interface RowProps {
     npc: NonPlayerCharacter
@@ -44,28 +43,23 @@ function Row(props: RowProps): JSX.Element {
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={npc.name}/>
                 <TypographyCenterTableCell value={npc.type}/>
                 <ActionsTableCell name={npc.name} path={getPathFromType()}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                            <Table size="small">
-                                <TableBody>
-                                    <TableRow>
-                                        <GenesysDescriptionTypographyCenterTableCell value={combat}/>
-                                        <GenesysDescriptionTypographyCenterTableCell value={String(npc.combat)}/>
-                                        <GenesysDescriptionTypographyCenterTableCell value={social}/>
-                                        <GenesysDescriptionTypographyCenterTableCell value={String(npc.social)}/>
-                                        <GenesysDescriptionTypographyCenterTableCell value={general}/>
-                                        <GenesysDescriptionTypographyCenterTableCell value={String(npc.general)}/>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </Box>
+                        <Table size="small">
+                            <TableBody>
+                                <TableRow>
+                                    <GenesysDescriptionTypographyCenterTableCell value={combat + ' ' + String(npc.combat)}/>
+                                    <GenesysDescriptionTypographyCenterTableCell value={social + ' ' + String(npc.social)}/>
+                                    <GenesysDescriptionTypographyCenterTableCell value={general + ' ' + String(npc.general)}/>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
                     </Collapse>
                 </TableCell>
             </TableRow>
@@ -80,7 +74,9 @@ export default function ViewAllNonPlayerCharacters() {
     useEffect(() => {
         (async (): Promise<void> => {
             const actorList = await ActorService.getNonPlayerCharacters()
-            if (!actorList) { return }
+            if (!actorList) {
+                return
+            }
             setNonPlayerCharacters(actorList)
         })()
     }, [setNonPlayerCharacters])
