@@ -1,6 +1,5 @@
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -11,22 +10,25 @@ import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
+import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import SettingDialog from "./SettingDialog";
 
 function Row(props: { row: Setting }): JSX.Element {
     const {row} = props
 
     const renderSettingMagicTableCell = (): JSX.Element => {
         if (row?.magic!!) {
-            return <TableCell>True</TableCell>
+            return <TypographyCenterTableCell value={'True'}/>
         }
         else {
-            return <TableCell>False</TableCell>
+            return <TypographyCenterTableCell value={'False'}/>
         }
     }
 
     return (
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
+        <TableRow>
+            <TypographyCenterTableCell value={row.name}/>
             {renderSettingMagicTableCell()}
             <ActionsTableCell name={row.name} path={Path.Setting}/>
         </TableRow>
@@ -35,6 +37,7 @@ function Row(props: { row: Setting }): JSX.Element {
 
 export default function ViewAllSettings() {
     const [settings, setSettings] = useState<Setting[]>([])
+    const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -45,21 +48,32 @@ export default function ViewAllSettings() {
     }, [])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Setting Name</TableCell>
-                        <TableCell>Magic</TableCell>
-                        <TableCell>Edit</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {settings.map((row: Setting) => (
-                        <Row key={row.name} row={row} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Settings'}
+                action={<Button color='primary' variant='contained' onClick={(): void => setOpenSettingCreationDialog(true)}>Create Setting</Button>}>
+            </CardHeader>
+            <Divider />
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table aria-label="collapsible table">
+                        <TableHead>
+                            <TableRow>
+                                <TypographyCenterTableCell value={'Name'}/>
+                                <TypographyCenterTableCell value={'Magic'}/>
+                                <TypographyCenterTableCell value={'View'}/>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {settings.map((row: Setting) => (
+                                <Row key={row.name} row={row} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+            {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog} onClose={(): void => setOpenSettingCreationDialog(false)}/>}
+        </Card>
     )
 }

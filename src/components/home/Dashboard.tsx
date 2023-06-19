@@ -4,7 +4,7 @@ import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {LoreType} from "../../models/lore/Lore";
 import {useEffect, useState} from "react";
-import CreateSettingDialog from "../setting/CreateSettingDialog";
+import SettingDialog from "../setting/SettingDialog";
 import TalentDialog from "../talents/TalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
@@ -122,7 +122,7 @@ export default function Dashboard(): JSX.Element {
                     </Grid>
                 </Grid>
             </CardContent>
-            {openSettingCreationDialog && <CreateSettingDialog open={openSettingCreationDialog}
+            {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
                                                                onClose={(): void => setOpenSettingCreationDialog(false)}/>}
             {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
