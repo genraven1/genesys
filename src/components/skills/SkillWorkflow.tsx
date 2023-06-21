@@ -5,6 +5,7 @@ import {useLocation, useParams} from "react-router-dom";
 import SkillEdit from "./SkillEdit";
 import SkillView from "./SkillView";
 import ViewAllSkills from "./ViewAllSkills";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
 function useFetchSkill(name: string): Skill {
@@ -24,14 +25,15 @@ function useFetchSkill(name: string): Skill {
 export default function SkillWorkflow(): JSX.Element {
     const { name } = useParams<{ name?: string }>()
     const skill = useFetchSkill(name!!)
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <SkillView skill={skill} />
+            return <SkillView skill={skill} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <SkillEdit sk={skill}/>
+            return <SkillEdit sk={skill} settings={settings}/>
         }
         else {return <ViewAllSkills/>}
     }

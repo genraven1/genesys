@@ -5,12 +5,12 @@ import Setting from "../../models/Setting";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 
 interface Props {
-    settingIds: string[]
+    settingNames: string[]
     allSettings: Setting[]
 }
 
 export default function ViewSettingsCard(props: Props): JSX.Element {
-    const {settingIds, allSettings} = props
+    const {settingNames, allSettings} = props
 
     const renderSettings = (settings: string[]):JSX.Element => {
         if (settings === undefined) {
@@ -37,7 +37,7 @@ export default function ViewSettingsCard(props: Props): JSX.Element {
                 <CardHeader title={'Settings'} style={{ textAlign: 'center' }} />
                 <Divider />
                 <CardContent>
-                    {renderSettings(settingIds)}
+                    {renderSettings(settingNames)}
                 </CardContent>
             </Card>
         </Grid>

@@ -19,11 +19,11 @@ import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
     weapon: Weapon
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function WeaponView(props: Props) {
-    const {weapon, allSettings} = props
+    const {weapon, settings} = props
     const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
@@ -68,7 +68,7 @@ export default function WeaponView(props: Props) {
                     </TableContainer>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings}/>
+                        <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
                     </Grid>
                 </Grid>
             </CardContent>
