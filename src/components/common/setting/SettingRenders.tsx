@@ -5,7 +5,7 @@ import * as React from "react";
 
 export const renderSettings = (settings: string[], allSettings: Setting[]):JSX.Element => {
     if (settings === undefined) {
-        return <Fragment/>
+        return <GenesysDescriptionTypography text={'None'}/>
     }
     let settingList = []
     for (let setting of allSettings) {

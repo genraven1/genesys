@@ -11,25 +11,32 @@ import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
 import {renderHeaders} from "../common/table/TableRenders";
-import {renderSettings} from "../common/setting/SettingRenders";
 import Setting from "../../models/Setting";
 import SettingService from "../../services/SettingService";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 
 interface Props {
     skill: Skill
-    settings: Setting[]
+    setting: Setting
 }
 
 function Row(props: Props): JSX.Element {
-    const {skill, settings} = props
+    const {skill, setting} = props
+
+    const renderSettingTableCell = ():JSX.Element => {
+        let value = "No"
+        if (skill?.settings!!.includes(setting?.name!!)) {
+            value = "Yes"
+        }
+        return <TypographyCenterTableCell value={value}/>
+    }
 
     return (
         <TableRow>
             <TypographyCenterTableCell value={skill.name}/>
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
-            {renderSettings(skill.settings, settings)}
+            {renderSettingTableCell()}
             <ActionsTableCell name={skill.name} path={Path.Skills}/>
         </TableRow>
     )
@@ -37,8 +44,8 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
-    const [settings, setSettings] = useState<Setting[]>([])
-    const headers = ['Name', 'Type', 'Linked Characteristic', 'Settings', 'View']
+    const [setting, setSetting] = useState<Setting>()
+    const headers = ['Name', 'Type', 'Linked Characteristic', 'Active', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -52,12 +59,13 @@ export default function ViewAllSkills() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            if (settings.length > 0) {return}
-            const settingList = await SettingService.getSettings()
-            if (!settingList) {return}
-            setSettings(settingList)
+            const currentSetting = await SettingService.getCurrentSetting()
+            if (!currentSetting) {
+                return
+            }
+            setSetting(currentSetting)
         })()
-    }, [settings.length, setSettings])
+    }, [setSetting])
 
     return (
         <TableContainer component={Paper}>
@@ -67,7 +75,7 @@ export default function ViewAllSkills() {
                 </TableHead>
                 <TableBody>
                     {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                        <Row key={skill.name} skill={skill} settings={settings}/>
+                        <Row key={skill.name} skill={skill} setting={setting!!}/>
                     ))}
                 </TableBody>
             </Table>
