@@ -54,7 +54,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyLeftTableCell value={armor?.name!!}/>
             <TypographyCenterTableCell value={String(armor?.defense!!)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
-            <TypographyCenterTableCell value={renderQualities(armor?.qualities!!)}/>
+            <TypographyCenterTableCell value={renderQualities(armor!!)}/>
         </TableRow>
     )
 }

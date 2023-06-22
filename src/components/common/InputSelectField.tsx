@@ -1,7 +1,6 @@
 import {ClickAwayListener, MenuItem, TextField, Typography} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import EditField from "./EditField";
-import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 
 export interface Option {
     value: string

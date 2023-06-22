@@ -2,10 +2,7 @@ import Skill, {SkillType} from "../../models/actor/Skill";
 import {
     Card,
     CardContent,
-    CardHeader,
     ClickAwayListener,
-    Divider,
-    Grid,
     MenuItem,
     TextField,
     Typography

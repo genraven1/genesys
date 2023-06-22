@@ -1,7 +1,6 @@
 import Equipment from "./Equipment";
 import {Armor} from "./Armor";
 import {Weapon} from "./Weapon";
-import {EquipmentQuality} from "../Quality";
 
 export const renderPrice = (equipment: Equipment): string => {
     let price = ''
@@ -13,39 +12,21 @@ export const renderPrice = (equipment: Equipment): string => {
     return price
 }
 
-export const renderArmorQualities = (armor: Armor): string => {
+export const renderQualities = (equipment: Equipment): string => {
     let qualities = ''
-    if (armor?.qualities!!.length > 0) {
-        let qualityList = armor.qualities.sort((a, b) => a.name.localeCompare(b.name))
-        for (let i = 0; i < qualityList.length; i++){
+    if (equipment?.qualities!!.length > 0) {
+        let qualityList = equipment?.qualities!!.sort((a, b) => a.name.localeCompare(b.name))
+        for (let i = 0; i < qualityList.length; i++) {
             const quality = qualityList[i];
             if (i !== qualityList.length - 1) {
                 qualities = qualities.concat(quality.name + ' ' + quality.ranks + ', ')
-            }
-            else {
+            } else {
                 qualities = qualities.concat(quality.name + ' ' + quality.ranks)
             }
         }
+    } else {
+        qualities = 'None'
     }
-    else {qualities = 'None'}
-    return qualities
-}
-
-export const renderQualities = (equipmentQualities: EquipmentQuality[]): string => {
-    let qualities = ''
-    if (equipmentQualities!!.length > 0) {
-        let qualityList = equipmentQualities.sort((a, b) => a.name.localeCompare(b.name))
-        for (let i = 0; i < qualityList.length; i++){
-            const quality = qualityList[i];
-            if (i !== qualityList.length - 1) {
-                qualities = qualities.concat(quality.name + ' ' + quality.ranks + ', ')
-            }
-            else {
-                qualities = qualities.concat(quality.name + ' ' + quality.ranks)
-            }
-        }
-    }
-    else {qualities = 'None'}
     return qualities
 }
 
@@ -65,7 +46,10 @@ export const renderActorDamage = (weapon: Weapon, brawn: number): string => {
 
 export const renderDamage = (weapon: Weapon): string => {
     let damage = ''
-    if (weapon?.brawn!!) {damage = 'Brawn + ' + weapon?.damage!!}
-    else {damage = String(weapon?.damage!!)}
+    if (weapon?.brawn!!) {
+        damage = 'Brawn + ' + weapon?.damage!!
+    } else {
+        damage = String(weapon?.damage!!)
+    }
     return damage
 }
