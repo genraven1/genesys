@@ -33,7 +33,7 @@ export const renderArmorQualities = (armor: Armor): string => {
 
 export const renderQualities = (equipmentQualities: EquipmentQuality[]): string => {
     let qualities = ''
-    if (equipmentQualities.length > 0) {
+    if (equipmentQualities!!.length > 0) {
         let qualityList = equipmentQualities.sort((a, b) => a.name.localeCompare(b.name))
         for (let i = 0; i < qualityList.length; i++){
             const quality = qualityList[i];

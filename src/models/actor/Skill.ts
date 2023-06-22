@@ -2,7 +2,6 @@ import {CharacteristicType} from './Characteristics';
 
 export default interface Skill {
     characteristic: CharacteristicType
-    active: boolean
     type: SkillType
     name: string
     settings: string[]
