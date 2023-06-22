@@ -67,9 +67,7 @@ export default function WeaponView(props: Props) {
                         </Table>
                     </TableContainer>
                     <Divider/>
-                    <Grid container spacing={10}>
-                        <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
-                    </Grid>
+                    <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

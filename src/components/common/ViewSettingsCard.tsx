@@ -13,7 +13,7 @@ export default function ViewSettingsCard(props: Props): JSX.Element {
     const {settingNames, allSettings} = props
 
     return (
-        <Card>
+        <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Settings'}/>
             <Divider/>
             <CardContent>
