@@ -61,15 +61,13 @@ export default function WeaponView(props: Props) {
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
                                     <TypographyCenterTableCell value={weapon?.range!!}/>
                                     <TypographyCenterTableCell value={renderPrice(weapon)}/>
-                                    <TypographyCenterTableCell value={renderQualities(weapon?.qualities!!)}/>
+                                    <TypographyCenterTableCell value={renderQualities(weapon!!)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <Divider/>
-                    <Grid container spacing={10}>
-                        <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
-                    </Grid>
+                    <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>
