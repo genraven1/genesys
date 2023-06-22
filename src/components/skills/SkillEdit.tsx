@@ -1,14 +1,16 @@
-import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from '@mui/material';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
-import Skill, {SkillKey, SkillType} from '../../models/actor/Skill';
+import Skill, {SkillType} from '../../models/actor/Skill';
 import {Option} from '../common/InputSelectField';
 import {CharacteristicType} from '../../models/actor/Characteristics';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
+import EditSettingsCard from "../common/EditSettingsCard";
+import Setting from "../../models/Setting";
 
 const getSkillTypes = (): Option[] => {
     return Object.values(SkillType).map((value) => ({value}))
@@ -20,16 +22,35 @@ const getCharacteristicTypes = (): Option[] => {
 
 interface Props {
     sk: Skill
+    settings: Setting[]
 }
 
 export default function SkillEdit(props: Props) {
-    const {sk} = props
+    const {sk, settings} = props
     const {name} = useParams<{ name: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
-    useEffect(() => {setSkill(sk)}, [sk])
+    useEffect(() => {
+        setSkill(sk)
+    }, [sk])
+
+    const onSettingAddition = async (setting: string) => {
+        const copySkill = {...skill} as Skill
+        copySkill.settings = copySkill.settings.concat(setting)
+        await updateSkill(copySkill)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copySkill = {...skill} as Skill
+        copySkill.settings.forEach((set, index) => {
+            if (set === setting) {
+                copySkill.settings.splice(index, 1)
+            }
+        })
+        await updateSkill(copySkill)
+    }
 
     const onChange = async (key: keyof Skill, value: any) => {
         if (value === null || (skill !== null && skill[key] === value)) {
@@ -37,9 +58,6 @@ export default function SkillEdit(props: Props) {
         }
         const copySkill = {...skill} as Skill
         switch (key) {
-            case 'active':
-                copySkill.active = value
-                break
             case 'characteristic':
                 copySkill.characteristic = value
                 break
@@ -65,20 +83,22 @@ export default function SkillEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={skill?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
-                <CheckIcon color='primary' fontSize='small' />
-            </IconButton>}>
+            <CardHeader title={skill?.name!!} style={{textAlign: 'center'}}
+                        action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                            <CheckIcon color='primary' fontSize='small'/>
+                        </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <InputSelectFieldCard defaultValue={skill?.type!!} onCommit={(value: string): void => { onChange(SkillKey.Type, value) }} title={'Skill Type'} options={getSkillTypes()} />
-                    <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => { onChange(SkillKey.Characteristic, value) }} title={'Linked Characteristic'} options={getCharacteristicTypes()} />
-                    <Grid item xs>
-                        <CardHeader title={'Active'} style={{ textAlign: 'center' }} />
-                        <Divider />
-                        <Checkbox onChange={(): void => {onChange(SkillKey.Active, !skill?.active!!)}} checked={skill?.active!!}/>
-                    </Grid>
+                    <InputSelectFieldCard defaultValue={skill?.type!!} onCommit={(value: string): void => {
+                        onChange('type', value)
+                    }} title={'Skill Type'} options={getSkillTypes()}/>
+                    <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => {
+                        onChange('characteristic', value)
+                    }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
+                    <EditSettingsCard names={skill?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

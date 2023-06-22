@@ -52,7 +52,7 @@ export default function GearView(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <ViewSettingsCard settingIds={gear?.settings!!} allSettings={allSettings} />
+                        <ViewSettingsCard settingNames={gear?.settings!!} allSettings={allSettings} />
                     </Grid>
                 </Grid>
             </CardContent>
