@@ -10,20 +10,37 @@ import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
+import EditSettingsCard from "../common/EditSettingsCard";
 
 interface Props {
     tal: Talent
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function TalentEdit(props: Props) {
-    const {tal} = props
+    const {tal, settings} = props
     const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {setTalent(tal)}, [tal])
+
+    const onSettingAddition = async (setting: string) => {
+        const copyTalent = {...talent} as Talent
+        copyTalent.settings = copyTalent.settings.concat(setting)
+        await updateTalent(copyTalent)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyTalent = {...talent} as Talent
+        copyTalent.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyTalent.settings.splice(index, 1)
+            }
+        })
+        await updateTalent(copyTalent)
+    }
 
     const onChange = async (key: keyof Talent, value: string) => {
         if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {
@@ -47,8 +64,11 @@ export default function TalentEdit(props: Props) {
                 copyTalent.tier = value as Tier
                 break
         }
-        setTalent(copyTalent)
+        await updateTalent(copyTalent)
+    }
 
+    const updateTalent = async (copyTalent: Talent) => {
+        setTalent(copyTalent)
         await TalentService.updateTalent(copyTalent.name, copyTalent)
     }
 
@@ -77,6 +97,7 @@ export default function TalentEdit(props: Props) {
                         <InputSelectFieldCard defaultValue={talent?.activation!!} onCommit={(value: string): void => { onChange('activation', value) }} title={'Activation'} options={getActivationOptions()} />
                         <InputSelectFieldCard defaultValue={talent?.tier!!} onCommit={(value: string): void => { onChange('tier', value) }} title={'Tier'} options={getTierOptions()} />
                     </Grid>
+                    <EditSettingsCard names={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>
