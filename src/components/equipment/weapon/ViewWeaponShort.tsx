@@ -1,4 +1,4 @@
-import {Card, CardContent, CardHeader, Divider, Grid} from '@mui/material';
+import {Card, CardContent, Divider, Grid} from '@mui/material';
 import * as React from "react";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
@@ -6,9 +6,11 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../common/table/TypographyTableCell";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import {renderHeaders} from '../../common/table/TableRenders';
 
 interface Props {
     weapon: Weapon
@@ -16,6 +18,7 @@ interface Props {
 
 export default function WeaponViewShort(props: Props) {
     const {weapon} = props
+    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const renderDamage = (): string => {
         let damage = ''
@@ -51,10 +54,7 @@ export default function WeaponViewShort(props: Props) {
 
     return (
         <Card>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={weapon?.name!!}>
-            </CardHeader>
+            <CenteredCardHeader title={weapon?.name!!}/>
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -65,19 +65,11 @@ export default function WeaponViewShort(props: Props) {
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
-                                <TableRow>
-                                    <TypographyLeftTableCell value={'Name'}/>
-                                    <TypographyCenterTableCell value={'Skill'}/>
-                                    <TypographyCenterTableCell value={'Damage'}/>
-                                    <TypographyCenterTableCell value={'Critical'}/>
-                                    <TypographyCenterTableCell value={'Range'}/>
-                                    <TypographyCenterTableCell value={'Price'}/>
-                                    <TypographyCenterTableCell value={'Special Qualities'}/>
-                                </TableRow>
+                                {renderHeaders(headers)}
                             </TableHead>
                             <TableBody>
-                                <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-                                    <TypographyLeftTableCell value={weapon?.name!!}/>
+                                <TableRow>
+                                    <TypographyCenterTableCell value={weapon?.name!!}/>
                                     <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
                                     <TypographyCenterTableCell value={renderDamage()}/>
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
-import ArmorView from "../../../equipment/armor/ArmorView";
 import {Armor} from "../../../../models/equipment/Armor";
+import ArmorViewShort from "../../../equipment/armor/ViewArmorShort";
 
 interface Props {
     armor: Armor
@@ -15,7 +14,7 @@ export default function ArmorBackdrop(props: Props) {
 
     return (
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-            <ArmorView armor={armor} settings={useFetchAllSettings()}/>
+            <ArmorViewShort armor={armor}/>
         </Backdrop>
     )
 }
