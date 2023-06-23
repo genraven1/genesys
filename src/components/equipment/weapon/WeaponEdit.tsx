@@ -17,14 +17,15 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
+import EditSettingsCard from "../../common/EditSettingsCard";
 
 interface Props {
     wea: Weapon
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function WeaponEdit(props: Props) {
-    const {wea, allSettings} = props
+    const {wea, settings} = props
     const {name} = useParams<{ name: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)
@@ -32,11 +33,26 @@ export default function WeaponEdit(props: Props) {
 
     useEffect(() => {setWeapon(wea)}, [wea])
 
+    const onSettingAddition = async (setting: string) => {
+        const copyWeapon = {...weapon} as Weapon
+        copyWeapon.settings = copyWeapon.settings.concat(setting)
+        await updateWeapon(copyWeapon)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyWeapon = {...weapon} as Weapon
+        copyWeapon.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyWeapon.settings.splice(index, 1)
+            }
+        })
+        await updateWeapon(copyWeapon)
+    }
+
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
-        setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
+        await updateWeapon(copyWeapon)
     }
 
     const onChange = async (key: keyof Weapon, value: string) => {
@@ -75,6 +91,11 @@ export default function WeaponEdit(props: Props) {
             default:
                 break
         }
+
+        await updateWeapon(copyWeapon)
+    }
+
+    const updateWeapon = async (copyWeapon: Weapon) => {
         setWeapon(copyWeapon)
         await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
     }
@@ -112,6 +133,8 @@ export default function WeaponEdit(props: Props) {
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
+                    <EditSettingsCard names={weapon?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -6,8 +6,6 @@ import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {EquipmentPath} from "../../../services/Path";
 import Setting from "../../../models/Setting";
-import {Fragment} from "react";
-import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -17,39 +15,21 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderHeaders} from "../../common/table/TableRenders";
 import {renderPrice, renderSoak} from "../../../models/equipment/EquipmentHelper";
+import ViewSettingsCard from "../../common/ViewSettingsCard";
 
 interface Props {
     armor: Armor
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function ArmorView(props: Props) {
-    const {armor, allSettings} = props
+    const {armor, settings} = props
     const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity']
 
     const onEdit = () => {
         navigate(EquipmentPath.Armor + name + '/edit');
-    }
-
-    const renderSettings = (): JSX.Element => {
-        if (armor?.settings!! === undefined) {
-            return <Fragment/>
-        }
-        let settingList = []
-        for (let setting of allSettings) {
-            if (armor?.settings.includes(setting.name)) {
-                settingList.push(setting)
-            }
-        }
-        return (
-            <Fragment>
-                {(settingList || []).map((setting: Setting): JSX.Element => {
-                    return <GenesysDescriptionTypography text={setting?.name!!}/>
-                })}
-            </Fragment>
-        )
     }
 
     return (
@@ -87,17 +67,7 @@ export default function ArmorView(props: Props) {
                     </TableContainer>
                 </Grid>
                 <Divider/>
-                <Grid container spacing={10}>
-                    <Grid item xs>
-                        <Card>
-                            <CardHeader title={'Settings'} style={{textAlign: 'center'}}/>
-                            <Divider/>
-                            <CardContent>
-                                {renderSettings()}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
+                <ViewSettingsCard settingNames={armor?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

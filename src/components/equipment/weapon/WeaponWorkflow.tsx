@@ -32,7 +32,7 @@ export default function WeaponWorkflow(): JSX.Element {
             return <WeaponView  weapon={weapon} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <WeaponEdit wea={weapon} allSettings={settings}/>
+            return <WeaponEdit wea={weapon} settings={settings}/>
         }
         else {return <ViewAllWeapon/>}
     }

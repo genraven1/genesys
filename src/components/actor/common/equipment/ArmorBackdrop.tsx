@@ -15,7 +15,7 @@ export default function ArmorBackdrop(props: Props) {
 
     return (
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-            <ArmorView armor={armor} allSettings={useFetchAllSettings()}/>
+            <ArmorView armor={armor} settings={useFetchAllSettings()}/>
         </Backdrop>
     )
 }

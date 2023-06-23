@@ -14,20 +14,37 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
 import Setting from "../../../models/Setting";
+import EditSettingsCard from "../../common/EditSettingsCard";
 
 interface Props {
     gea: Gear
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function GearEdit(props: Props) {
-    const {gea, allSettings} = props
+    const {gea, settings} = props
     const {name} = useParams<{ name: string }>()
     const [gear, setGear] = useState<Gear>(gea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {setGear(gea)}, [gea])
+
+    const onSettingAddition = async (setting: string) => {
+        const copyGear = {...gear} as Gear
+        copyGear.settings = copyGear.settings.concat(setting)
+        await updateGear(copyGear)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyGear = {...gear} as Gear
+        copyGear.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyGear.settings.splice(index, 1)
+            }
+        })
+        await updateGear(copyGear)
+    }
 
     const onSkillChange = async (value: Skill) => {
         const copyGear = {...gear} as Gear
@@ -63,6 +80,10 @@ export default function GearEdit(props: Props) {
             default:
                 break
         }
+
+    }
+
+    const updateGear = async (copyGear: Gear) => {
         setGear(copyGear)
         await EquipmentService.updateGear(copyGear.name, copyGear)
     }
@@ -93,6 +114,8 @@ export default function GearEdit(props: Props) {
                         <EditPriceCheckBoxCard check={gear?.restricted!!} value={gear?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={gear?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
+                    <EditSettingsCard names={gear?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>
