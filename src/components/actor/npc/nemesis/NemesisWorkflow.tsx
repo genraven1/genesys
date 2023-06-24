@@ -28,10 +28,10 @@ export default function NemesisWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <NemesisView  nemesis={nemesis}/>
+            return <NemesisView  nemesis={nemesis} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <NemesisEdit nem={nemesis}/>
+            return <NemesisEdit nem={nemesis} settings={settings}/>
         }
         else {return <Fragment/>}
     }
