@@ -4,6 +4,7 @@ import NemesisEdit from "./NemesisEdit";
 import NemesisView from "./NemesisView";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from "../../../../services/ActorService";
+import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
 function useFetchNemesis(name: string): Nemesis {
     const [nemesis, setNemesis] = useState<Nemesis>()
@@ -22,6 +23,7 @@ function useFetchNemesis(name: string): Nemesis {
 export default function NemesisWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const nemesis = useFetchNemesis(name!!)
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
