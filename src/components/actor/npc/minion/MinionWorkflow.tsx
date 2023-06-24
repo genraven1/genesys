@@ -9,14 +9,20 @@ import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 function useFetchMinion(name: string): Minion {
     const [minion, setMinion] = useState<Minion>()
     useEffect(() => {
-        if(!name) {return}
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
             try {
                 const minionData = await ActorService.getMinion(name)
-                if (minionData) {setMinion(minionData)}
-            } catch (err) {console.log(err)}
+                if (minionData) {
+                    setMinion(minionData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[name, setMinion])
+    }, [name, setMinion])
     return minion as Minion
 }
 
@@ -28,12 +34,12 @@ export default function MinionWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <MinionView  minion={minion}/>
+            return <MinionView minion={minion} settings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
+            return <MinionEdit min={minion} settings={settings}/>
+        } else {
+            return <Fragment/>
         }
-        else if (pathname.endsWith('/edit')) {
-            return <MinionEdit min={minion}/>
-        }
-        else {return <Fragment/>}
     }
 
     return (
