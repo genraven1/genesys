@@ -4,6 +4,7 @@ import ActorService from "../../../../services/ActorService";
 import Rival from "../../../../models/actor/npc/Rival";
 import RivalEdit from "./RivalEdit";
 import RivalView from "./RivalView";
+import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
 function useFetchRival(name: string): Rival {
     const [rival, setRival] = useState<Rival>()
@@ -22,14 +23,15 @@ function useFetchRival(name: string): Rival {
 export default function RivalWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const rival = useFetchRival(name!!)
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <RivalView  rival={rival}/>
+            return <RivalView  rival={rival} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <RivalEdit riv={rival}/>
+            return <RivalEdit riv={rival} settings={settings}/>
         }
         else {return <Fragment/>}
     }

@@ -4,6 +4,7 @@ import ActorService from "../../../../services/ActorService";
 import Minion from "../../../../models/actor/npc/Minion";
 import MinionView from "./MinionView";
 import MinionEdit from "./MinionEdit";
+import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
 function useFetchMinion(name: string): Minion {
     const [minion, setMinion] = useState<Minion>()
@@ -22,6 +23,7 @@ function useFetchMinion(name: string): Minion {
 export default function MinionWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const minion = useFetchMinion(name!!)
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname

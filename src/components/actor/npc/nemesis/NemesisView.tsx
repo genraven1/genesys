@@ -16,9 +16,16 @@ import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerChara
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
+import Setting from "../../../../models/Setting";
+import ViewSettingsCard from "../../../common/ViewSettingsCard";
 
-export default function NemesisView(props: {nemesis: Nemesis}) {
-    const {nemesis} = props
+interface Props {
+    nemesis: Nemesis
+    settings: Setting[]
+}
+
+export default function NemesisView(props: Props) {
+    const {nemesis, settings} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
 
@@ -57,6 +64,7 @@ export default function NemesisView(props: {nemesis: Nemesis}) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
+                <ViewSettingsCard settingNames={nemesis?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

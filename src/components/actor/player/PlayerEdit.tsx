@@ -44,13 +44,13 @@ export default function PlayerView(props: Props) {
     }
 
     const onSettingRemoval = async (setting: string) => {
-        const copyplayer = {...player} as Player
-        copyplayer.settings.forEach((set, index) => {
+        const copyPlayer = {...player} as Player
+        copyPlayer.settings.forEach((set, index) => {
             if (set === setting) {
-                copyplayer.settings.splice(index, 1)
+                copyPlayer.settings.splice(index, 1)
             }
         })
-        await updatePlayer(copyplayer)
+        await updatePlayer(copyPlayer)
     }
 
     const onChange = async (key: keyof Player, value: number) => {
