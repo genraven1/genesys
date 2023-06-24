@@ -4,7 +4,7 @@ import TalentService from "../../services/TalentService";
 import {useLocation, useParams} from "react-router-dom";
 import TalentView from "./TalentView";
 import TalentEdit from "./TalentEdit";
-import AllTalentsView from "./AllTalentsViewTable";
+import ViewAllTalents from "./ViewAllTalents";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
@@ -33,9 +33,9 @@ export default function TalentWorkflow(): JSX.Element {
             return <TalentView  talent={talent} allSettings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <TalentEdit tal={talent} allSettings={settings}/>
+            return <TalentEdit tal={talent} settings={settings}/>
         }
-        else {return <AllTalentsView/>}
+        else {return <ViewAllTalents/>}
     }
 
     return (
