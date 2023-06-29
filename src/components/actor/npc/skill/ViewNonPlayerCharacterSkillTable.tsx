@@ -50,7 +50,7 @@ export function SkillTypeGroup(props: GroupProps) {
         <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell colSpan={2} style={{textAlign: "center"}}>{type}</TableCell>
+                    <TypographyCenterTableCell value={type} span={2}/>
                 </TableRow>
                 {renderHeaders(headers)}
             </TableHead>
@@ -134,7 +134,7 @@ export function MinionSkillGroupTable(props: SkillGroupProps) {
         <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell colSpan={2} style={{textAlign: "center"}}>{type}</TableCell>
+                    <TypographyCenterTableCell value={type} span={2}/>
                 </TableRow>
                 {renderHeaders(headers)}
             </TableHead>

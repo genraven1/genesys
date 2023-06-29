@@ -17,12 +17,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
-import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 import Minion from "../../../../models/actor/npc/Minion";
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/EditSettingsCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 
 interface Props {
     min: Minion
@@ -182,7 +182,7 @@ export default function MinionEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillTable npc={minion}/>
+                    <NonPlayerCharacterSkillCard npc={minion}/>
                     <Divider/>
                     <NonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider/>

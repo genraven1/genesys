@@ -22,7 +22,7 @@ interface RowProps {
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const { skill, npc } = props
+    const {skill, npc} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
     const setName = (): string => {
@@ -47,19 +47,21 @@ function SkillRow(props: RowProps): JSX.Element {
     }
 
     return (
-        <Fragment>
-            <TableRow>
-                <TableCell>{setName()}</TableCell>
-                <TableCell>{skill?.ranks!!}</TableCell>
-                <TableCell>
-                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()} skillRanks={skill?.ranks!!} />
-                </TableCell>
-                <TableCell>
-                    <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
-                </TableCell>
-            </TableRow>
-            {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={npc.name} type={npc.type}/>}
-        </Fragment>
+        <TableRow>
+            <TableCell>{setName()}</TableCell>
+            <TableCell>{skill?.ranks!!}</TableCell>
+            <TableCell>
+                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()}
+                                            skillRanks={skill?.ranks!!}/>
+            </TableCell>
+            <TableCell>
+                <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
+                {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog}
+                                                                           onClose={(): void => setOpenEditSkillDialog(false)}
+                                                                           actorSkill={skill!!} name={npc.name}
+                                                                           type={npc.type}/>}
+            </TableCell>
+        </TableRow>
     )
 }
 
@@ -75,12 +77,12 @@ export function SkillTypeGroup(props: GroupProps) {
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row" style={{ textAlign: 'center' }}>{type}</TableCell>
+                <TableCell component="th" scope="row" style={{textAlign: 'center'}}>{type}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
