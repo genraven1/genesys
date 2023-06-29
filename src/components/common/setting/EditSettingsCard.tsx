@@ -1,14 +1,14 @@
 import {Card, CardContent} from "@mui/material";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import CenteredCardHeader from "../card/CenteredCardHeader";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "./table/TypographyTableCell";
-import CheckboxTableCell from "./table/CheckboxTableCell";
-import Setting from "../../models/Setting";
+import {TypographyCenterTableCell} from "../table/TypographyTableCell";
+import CheckboxTableCell from "../table/CheckboxTableCell";
+import Setting from "../../../models/Setting";
 
 interface Props {
     names: string[]

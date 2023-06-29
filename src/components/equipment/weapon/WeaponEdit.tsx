@@ -17,7 +17,7 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
-import EditSettingsCard from "../../common/EditSettingsCard";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
 
 interface Props {
     wea: Weapon

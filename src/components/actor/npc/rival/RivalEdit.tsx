@@ -22,7 +22,7 @@ import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
-import EditSettingsCard from "../../../common/EditSettingsCard";
+import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 
 interface Props {
     riv: Rival

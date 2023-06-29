@@ -18,7 +18,7 @@ import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import Setting from "../../../models/Setting";
-import EditSettingsCard from "../../common/EditSettingsCard";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import * as React from "react";
 
 interface Props {

@@ -1,4 +1,4 @@
-import {Characteristic} from './Characteristics';
+import {Characteristic, CharacteristicType} from './Characteristics';
 import { Defense } from './Defense';
 import Talent from '../Talent';
 import Stats from './Stats';
@@ -33,6 +33,27 @@ export interface ActorTalent extends Talent {
 
 export interface ActorSkill extends Skill {
     ranks: number
+}
+
+export const setSkillName = (skill: ActorSkill): string => {
+    return skill.name + '(' + skill.characteristic + ')'
+}
+
+export const getCharacteristicRanks = (actor: Actor, skill: ActorSkill): number => {
+    switch (skill.characteristic) {
+        case CharacteristicType.Agility:
+            return actor.agility.current
+        case CharacteristicType.Brawn:
+            return actor.brawn.current
+        case CharacteristicType.Cunning:
+            return actor.cunning.current
+        case CharacteristicType.Intellect:
+            return actor.intellect.current
+        case CharacteristicType.Presence:
+            return actor.presence.current
+        case CharacteristicType.Willpower:
+            return actor.willpower.current
+    }
 }
 
 export enum ActorType {

@@ -14,7 +14,7 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
 import Setting from "../../../models/Setting";
-import EditSettingsCard from "../../common/EditSettingsCard";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
 
 interface Props {
     gea: Gear

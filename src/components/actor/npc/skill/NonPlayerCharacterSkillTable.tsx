@@ -9,12 +9,13 @@ import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../../models/actor/Skill";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
 import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
-import {ActorSkill} from "../../../../models/actor/Actor";
+import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
+import {renderHeaders} from "../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 
 interface RowProps {
     skill: ActorSkill
@@ -25,33 +26,12 @@ function SkillRow(props: RowProps): JSX.Element {
     const {skill, npc} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
-    const setName = (): string => {
-        return skill.name + '(' + skill.characteristic + ')'
-    }
-
-    const getCharacteristicRanks = (): number => {
-        switch (skill.characteristic) {
-            case CharacteristicType.Agility:
-                return npc.agility.current
-            case CharacteristicType.Brawn:
-                return npc.brawn.current
-            case CharacteristicType.Cunning:
-                return npc.cunning.current
-            case CharacteristicType.Intellect:
-                return npc.intellect.current
-            case CharacteristicType.Presence:
-                return npc.presence.current
-            case CharacteristicType.Willpower:
-                return npc.willpower.current
-        }
-    }
-
     return (
         <TableRow>
-            <TableCell>{setName()}</TableCell>
-            <TableCell>{skill?.ranks!!}</TableCell>
+            <TypographyCenterTableCell value={setSkillName(skill)}/>
+            <TypographyCenterTableCell value={String(skill?.ranks!!)}/>
             <TableCell>
-                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()}
+                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, skill)}
                                             skillRanks={skill?.ranks!!}/>
             </TableCell>
             <TableCell>
@@ -73,11 +53,12 @@ interface GroupProps {
 export function SkillTypeGroup(props: GroupProps) {
     const {npc, type} = props
     const [open, setOpen] = useState(false)
+    const headers = ['Name', 'Ranks', 'Dice Pool', 'Edit']
 
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row" style={{textAlign: 'center'}}>{type}</TableCell>
+                <TypographyCenterTableCell value={type}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}}>
@@ -85,12 +66,7 @@ export function SkillTypeGroup(props: GroupProps) {
                         <Box sx={{margin: 1}}>
                             <Table>
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell>Skill</TableCell>
-                                        <TableCell>Ranks</TableCell>
-                                        <TableCell>Dice Pool</TableCell>
-                                        <TableCell>Edit</TableCell>
-                                    </TableRow>
+                                    {renderHeaders(headers)}
                                 </TableHead>
                                 <TableBody>
                                     {(npc?.skills!! || []).filter((skill) => skill.type === type).map((row: ActorSkill) => (
@@ -112,21 +88,27 @@ interface TableProps {
 
 export default function NonPlayerCharacterSkillTable(props: TableProps) {
     const {npc} = props
+    const headers = ['Skills']
+
+    const renderTableBody = () => {
+        return (
+            <TableBody>
+                <SkillTypeGroup npc={npc!!} type={SkillType.General}/>
+                <SkillTypeGroup npc={npc!!} type={SkillType.Magic}/>
+                <SkillTypeGroup npc={npc!!} type={SkillType.Combat}/>
+                <SkillTypeGroup npc={npc!!} type={SkillType.Social}/>
+                <SkillTypeGroup npc={npc!!} type={SkillType.Knowledge}/>
+            </TableBody>
+        )
+    }
+
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell style={{textAlign: "center"}}>Skills</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
-                <TableBody>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.General}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Magic}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Combat}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Social}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Knowledge}/>
-                </TableBody>
+                {renderTableBody()}
             </Table>
         </TableContainer>
     )

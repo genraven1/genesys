@@ -5,7 +5,7 @@ import {Path} from "../../services/Path";
 import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import {useNavigate, useParams} from "react-router-dom";
-import ViewSettingsCard from "../common/ViewSettingsCard";
+import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 import Setting from "../../models/Setting";
 
 interface Props {

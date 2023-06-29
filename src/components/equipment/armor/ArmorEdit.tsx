@@ -9,7 +9,7 @@ import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCa
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
 import Setting from "../../../models/Setting";
-import EditSettingsCard from "../../common/EditSettingsCard";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
 
 interface Props {
     ar: Armor
