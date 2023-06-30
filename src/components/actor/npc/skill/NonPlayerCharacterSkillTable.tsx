@@ -18,7 +18,6 @@ import {renderHeaders} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
 import CheckboxTableCell from "../../../common/table/CheckboxTableCell";
-import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from "../../../../services/ActorService";
 
 interface GroupSkillRowProps {
@@ -32,7 +31,7 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     const onSettingAddition = async (skill: string) => {
         const copyMinion = {...minion} as Minion
         copyMinion.group = copyMinion.group.concat(skill)
-        await ActorService.updateMinion(minion?.name!!, minion)
+        await ActorService.updateMinion(minion?.name!!, copyMinion)
     }
 
     const onSettingRemoval = async (skill: string) => {
@@ -42,7 +41,7 @@ function GroupSkillRow(props: GroupSkillRowProps) {
                 copyMinion.group.splice(index, 1)
             }
         })
-        await ActorService.updateMinion(minion?.name!!, minion)
+        await ActorService.updateMinion(minion?.name!!, copyMinion)
     }
 
     return (
@@ -120,10 +119,12 @@ export function SkillTypeGroup(props: GroupProps) {
                                     {renderTableHeaders()}
                                 </TableHead>
                                 <TableBody>
-                                    {(npc?.skills!! || []).filter((skill) => skill.type === type)
+                                    {(npc?.skills!! || [])
+                                        .sort((a, b) => a.name.localeCompare(b.name))
+                                        .filter((skill) => skill.type === type)
                                         .map((skill: ActorSkill) => (
-                                        renderSkillRow(skill, npc)
-                                    ))}
+                                            renderSkillRow(skill, npc)
+                                        ))}
                                 </TableBody>
                             </Table>
                         </Box>
