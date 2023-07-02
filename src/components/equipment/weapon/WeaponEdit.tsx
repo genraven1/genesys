@@ -19,6 +19,7 @@ import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 
+
 interface Props {
     wea: Weapon
     settings: Setting[]
@@ -31,7 +32,9 @@ export default function WeaponEdit(props: Props) {
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
-    useEffect(() => {setWeapon(wea)}, [wea])
+    useEffect(() => {
+        setWeapon(wea)
+    }, [wea])
 
     const onSettingAddition = async (setting: string) => {
         const copyWeapon = {...weapon} as Weapon
@@ -106,28 +109,55 @@ export default function WeaponEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={weapon?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
-                <CheckIcon color='primary' fontSize='small' />
-            </IconButton>}/>
-            <Divider />
+            <CardHeader title={weapon?.name!!} style={{textAlign: 'center'}}
+                        action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                            <CheckIcon color='primary' fontSize='small'/>
+                        </IconButton>}/>
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => {
+                            onChange('description', value)
+                        }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
-                    <Divider />
-                    <Grid container spacing={2}>
-                        <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} type={SkillType.Combat} />
-                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!} onChange={(value: number): void => {onChange('damage', String(value))}} min={0} max={20} />
-                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!} onChange={(value: boolean): void => {onChange('brawn', String(value))}} />
-                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onChange('critical', String(value))}} min={1} max={7} />
-                        <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
+                    <Divider/>
+                    <Grid container spacing={10}>
+                        <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
+                            onSkillChange(value)
+                        }} type={SkillType.Combat}/>
+                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
+                                               onChange={(value: number): void => {
+                                                   onChange('damage', String(value))
+                                               }} min={0} max={20}/>
+                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
+                                         onChange={(value: boolean): void => {
+                                             onChange('brawn', String(value))
+                                         }}/>
+                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!}
+                                               onChange={(value: number): void => {
+                                                   onChange('critical', String(value))
+                                               }} min={1} max={7}/>
+                        <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => {
+                            onChange('range', value)
+                        }} title={'Range'} options={getRangeOptions()}/>
                     </Grid>
-                    <Divider />
-                    <Grid container spacing={2}>
-                        <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
-                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
-                        <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
+                    <Divider/>
+                    <Grid container spacing={10}>
+                        <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'}
+                                             onChange={(value: number): void => {
+                                                 onChange('encumbrance', String(value))
+                                             }} min={0} max={10}/>
+                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!}
+                                               checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => {
+                            onChange('restricted', String(value))
+                        }} onNumberChange={(value: number): void => {
+                            onChange('price', String(value))
+                        }}/>
+                        <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'}
+                                             onChange={(value: number): void => {
+                                                 onChange('rarity', String(value))
+                                             }} min={0} max={11}/>
                     </Grid>
                     <Divider/>
                     <Grid container>

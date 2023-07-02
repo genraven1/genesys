@@ -1,6 +1,8 @@
 import React from "react";
 import {TableCell, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
+import Actor, {ActorSkill, getCharacteristicRanks} from "../../../models/actor/Actor";
+import GenesysSkillDiceTypography from "../typography/GenesysSkillDiceTypography";
 
 interface LeftProps {
     value: string
@@ -39,6 +41,21 @@ export function GenesysDescriptionTypographyCenterTableCell(props: DescriptionCe
     return (
         <TableCell style={{textAlign: 'center'}} colSpan={span}>
             <GenesysDescriptionTypography text={value}/>
+        </TableCell>
+    )
+}
+
+interface SkillCenterProps {
+    actor: Actor
+    skill: ActorSkill
+}
+
+export function GenesysDicePoolCenterTableCell(props: SkillCenterProps): JSX.Element {
+    const {actor, skill} = props
+    return (
+        <TableCell style={{textAlign: 'center'}}>
+            <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(actor, skill)}
+                                        skillRanks={skill.ranks}/>
         </TableCell>
     )
 }

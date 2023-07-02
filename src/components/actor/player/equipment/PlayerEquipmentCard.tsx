@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Button, Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Tab from '@mui/material/Tab';
@@ -10,7 +10,8 @@ import Player from "../../../../models/actor/player/Player";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
-import ViewActorWeaponTable from "../../npc/equipment/weapon/ViewActorWeaponTable";
+import ViewPlayerWeaponTable from "./ViewPlayerWeaponTable";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     player: Player
@@ -39,7 +40,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={player?.weapons!!} brawn={player?.brawn?.current!!}/>
+        return <ViewPlayerWeaponTable weapons={player?.weapons!!} player={player!!}/>
     }
 
     const renderArmorTab = (): JSX.Element => {
@@ -66,7 +67,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const renderGearTab = (): JSX.Element => {
         return (
             <Fragment>
-                {/*{renderGearTable()}*/}
+                {renderGearTable()}
                 <Button color='primary' variant='contained' onClick={addGear}>Add Gear</Button>
             </Fragment>
         )
@@ -81,7 +82,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Equipment'} style={{textAlign:'center'}}/>
+            <CenteredCardHeader title={'Equipment'}/>
             <CardContent>
                 <Grid sx={{ width: 1}}>
                     <TabContext value={value}>
