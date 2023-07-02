@@ -8,7 +8,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
 import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
-import ViewActorWeaponTable from "../../npc/equipment/weapon/ViewActorWeaponTable";
+import ViewPlayerWeaponTable from "./ViewPlayerWeaponTable";
 
 interface Props {
     player: Player
@@ -22,29 +22,13 @@ export default function ViewPlayerEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderWeaponsTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderWeaponsTable()}
-            </Fragment>
-        )
-    }
-
-    const renderWeaponsTable = (): JSX.Element => {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={player?.weapons!!} brawn={player?.brawn?.current!!}/>
+        return <ViewPlayerWeaponTable weapons={player?.weapons!!} player={player!!}/>
     }
 
     const renderArmorTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderArmorTable()}
-            </Fragment>
-        )
-    }
-
-    const renderArmorTable = (): JSX.Element => {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
@@ -52,14 +36,6 @@ export default function ViewPlayerEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderGearTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderGearTable()}
-            </Fragment>
-        )
-    }
-
-    const renderGearTable = (): JSX.Element => {
         if (player?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
