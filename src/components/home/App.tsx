@@ -25,6 +25,7 @@ import SettingWorkflow from "../setting/SettingWorkflow";
 import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
+import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 
 
 export default function App() {
@@ -52,6 +53,10 @@ export default function App() {
                     <Route path={Path.Skills} element={<SkillWorkflow/>}/>
                     <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
+
+                    <Route path={Path.Archetype} element={<ArchetypeWorkflow/>}/>
+                    <Route path={Path.Archetype + ':name/edit'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={Path.Archetype + ':name/view'} element={<ArchetypeWorkflow/>}/>
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Actor} element={<ViewAllActors/>}/>

@@ -17,6 +17,7 @@ import {NavigateFunction} from "react-router";
 import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CreatePlayerDialog from "../actor/player/CreatePlayerDialog";
+import CreateArchetypeDialog from "../archetype/CreateArchetypeDialog";
 
 export default function Dashboard(): JSX.Element {
     let navigate = useNavigate()
@@ -24,6 +25,7 @@ export default function Dashboard(): JSX.Element {
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
+    const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
@@ -67,6 +69,9 @@ export default function Dashboard(): JSX.Element {
                                 <ExpansionList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills}
                                                dialogTitle={'Create Skill'}
                                                onClick={(): void => setOpenSkillCreationDialog(true)}/>
+                                <ExpansionList header={'Archetypes'} viewTitle={'View All Archetypes'}
+                                               to={Path.Archetype} dialogTitle={'Create Archetype'}
+                                               onClick={(): void => setOpenArchetypeCreationDialog(true)}/>
                             </Grid>
                         </CardContent>
                     </Card>
@@ -123,13 +128,15 @@ export default function Dashboard(): JSX.Element {
                 </Grid>
             </CardContent>
             {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
-                                                               onClose={(): void => setOpenSettingCreationDialog(false)}/>}
+                                                         onClose={(): void => setOpenSettingCreationDialog(false)}/>}
             {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
                                                            onClose={(): void => setOpenSkillCreationDialog(false)}/>}
+            {openArchetypeCreationDialog && <CreateArchetypeDialog open={openArchetypeCreationDialog}
+                                                                   onClose={(): void => setOpenArchetypeCreationDialog(false)}/>}
             {openArmorCreationDialog && <CreateEquipmentDialog open={openArmorCreationDialog}
                                                                onClose={(): void => setOpenArmorCreationDialog(false)}
                                                                type={EquipmentType.Armor}/>}

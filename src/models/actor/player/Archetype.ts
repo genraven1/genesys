@@ -12,4 +12,5 @@ export default interface Archetype {
     cunning: number
     willpower: number
     presence: number
+    settings: string[]
 }
