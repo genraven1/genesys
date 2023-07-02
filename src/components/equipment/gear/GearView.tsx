@@ -7,7 +7,7 @@ import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     gear: Gear

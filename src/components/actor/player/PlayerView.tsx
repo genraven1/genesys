@@ -13,7 +13,7 @@ import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     player: Player

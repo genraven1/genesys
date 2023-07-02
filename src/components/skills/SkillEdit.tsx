@@ -9,7 +9,7 @@ import {CharacteristicType} from '../../models/actor/Characteristics';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import EditSettingsCard from "../common/EditSettingsCard";
+import EditSettingsCard from "../common/setting/EditSettingsCard";
 import Setting from "../../models/Setting";
 
 const getSkillTypes = (): Option[] => {

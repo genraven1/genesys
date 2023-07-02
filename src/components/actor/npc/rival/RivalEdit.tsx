@@ -22,7 +22,7 @@ import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
-import EditSettingsCard from "../../../common/EditSettingsCard";
+import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 
 interface Props {
     riv: Rival
@@ -122,7 +122,7 @@ export default function RivalEdit(props: Props) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <EditCharacteristicCard characteristic={rival?.brawn!!} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(ActorKey.Brawn, value) }}/>
                         <EditCharacteristicCard characteristic={rival?.agility!!} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(ActorKey.Agility, value) }}/>
                         <EditCharacteristicCard characteristic={rival?.intellect!!} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(ActorKey.Intellect, value) }}/>
@@ -131,7 +131,7 @@ export default function RivalEdit(props: Props) {
                         <EditCharacteristicCard characteristic={rival?.presence!!} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(ActorKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <SoakCard soak={rival?.soak!!} />
                         <StatsCard stats={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
                         <DefenseCard defense={rival?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(ActorKey.Melee, value) }}/>

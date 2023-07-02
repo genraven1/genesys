@@ -1,8 +1,8 @@
 import {Card, CardContent, Divider} from "@mui/material";
 import * as React from "react";
-import Setting from "../../models/Setting";
-import {renderSettings} from "./setting/SettingRenders";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import Setting from "../../../models/Setting";
+import {renderSettings} from "./SettingRenders";
+import CenteredCardHeader from "../card/CenteredCardHeader";
 
 interface Props {
     settingNames: string[]

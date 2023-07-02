@@ -10,7 +10,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
-import EditSettingsCard from "../common/EditSettingsCard";
+import EditSettingsCard from "../common/setting/EditSettingsCard";
 
 interface Props {
     tal: Talent

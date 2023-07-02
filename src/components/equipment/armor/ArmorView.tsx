@@ -15,7 +15,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderHeaders} from "../../common/table/TableRenders";
 import {renderPrice, renderSoak} from "../../../models/equipment/EquipmentHelper";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     armor: Armor

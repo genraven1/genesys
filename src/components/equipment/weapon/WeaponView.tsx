@@ -6,7 +6,7 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";

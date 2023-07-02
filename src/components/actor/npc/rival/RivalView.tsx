@@ -17,7 +17,7 @@ import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacter
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
 import Setting from "../../../../models/Setting";
-import ViewSettingsCard from "../../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 
 interface Props {
     rival: Rival
