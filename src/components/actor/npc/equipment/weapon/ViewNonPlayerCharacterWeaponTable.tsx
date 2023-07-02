@@ -7,25 +7,31 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useState} from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {
+    GenesysDicePoolCenterTableCell,
+    TypographyCenterTableCell,
+    TypographyLeftTableCell
+} from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities,} from "../../../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../../../common/table/TableRenders";
+import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
+import {ActorSkill} from "../../../../../models/actor/Actor";
 
 interface Props {
     weapons: ActorWeapon[]
-    brawn: number
+    npc: NonPlayerCharacter
 }
 
-export default function ViewActorWeaponTable(props: Props): JSX.Element {
-    const {weapons, brawn} = props
-    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities']
+export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Element {
+    const {weapons, npc} = props
+    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool']
 
     const renderTableBody = () => {
         if (!weapons) {
             return
         } else {
             return weapons.map((weapon: ActorWeapon) => (
-                <Row key={weapon.name} weapon={weapon} brawn={brawn}/>
+                <Row key={weapon.name} weapon={weapon} npc={npc}/>
             ))
         }
     }
@@ -46,11 +52,11 @@ export default function ViewActorWeaponTable(props: Props): JSX.Element {
 
 interface RowProps {
     weapon: ActorWeapon
-    brawn: number
+    npc: NonPlayerCharacter
 }
 
 function Row(props: RowProps): JSX.Element {
-    const {weapon, brawn} = props
+    const {weapon, npc} = props
     const [open, setOpen] = useState(false)
 
     // const renderEquipped = (): string => {
@@ -63,15 +69,26 @@ function Row(props: RowProps): JSX.Element {
     //     return equip
     // }
 
+    const getActorSkill = (): ActorSkill => {
+        let actorSkill = {} as ActorSkill
+        for (let skill of npc.skills) {
+            if (skill.name === weapon.skill.name) {
+                actorSkill = skill as ActorSkill
+            }
+        }
+        return actorSkill
+    }
+
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
+        <TableRow onClick={() => setOpen(!open)}>
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
             <TypographyCenterTableCell value={weapon.skill.name}/>
-            <TypographyCenterTableCell value={renderActorDamage(weapon, brawn)}/>
+            <TypographyCenterTableCell value={renderActorDamage(weapon, npc.brawn.current)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
             <TypographyCenterTableCell value={renderQualities(weapon!!)}/>
+            <GenesysDicePoolCenterTableCell actor={npc} skill={getActorSkill()}/>
         </TableRow>
     )
 }
