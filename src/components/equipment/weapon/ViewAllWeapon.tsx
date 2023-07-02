@@ -15,6 +15,7 @@ import GenesysDescriptionTypography from "../../common/typography/GenesysDescrip
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
     row: Weapon
@@ -43,7 +44,7 @@ function Row(props: Props): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={row.name}/>
-                <TypographyCenterTableCell value={row.skill.name}/>
+                <TypographyCenterTableCell value={row?.skill?.name!!}/>
                 <TypographyCenterTableCell value={renderDamage()}/>
                 <TypographyCenterTableCell value={String(row.critical)}/>
                 <TypographyCenterTableCell value={row.range}/>
@@ -81,21 +82,11 @@ export default function ViewAllWeapon(): JSX.Element {
         })()
     }, [setWeapons])
 
-    const renderHeaders = (): JSX.Element => {
-        return (
-            <TableRow>
-                {headers.map((header: string) => (
-                    <TypographyCenterTableCell value={header}/>
-                ))}
-            </TableRow>
-        )
-    }
-
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    {renderHeaders()}
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
                     {weapons.map((row: Weapon) => (

@@ -12,6 +12,7 @@ import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
 import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
+import {ActorType} from "../../../../../models/actor/Actor";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -24,7 +25,17 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
     const [weapon, setWeapon] = useState<ActorWeapon>()
 
     const onCreate = async (): Promise<void> => {
-        await ActorService.createRivalWeapon(npc.name, weapon!!)
+        switch (npc.type) {
+            case ActorType.Rival:
+                await ActorService.createRivalWeapon(npc.name, weapon!!)
+                break
+            case ActorType.Nemesis:
+                await ActorService.createNemesisWeapon(npc.name, weapon!!)
+                break
+            case ActorType.Minion:
+                await ActorService.createMinionWeapon(npc.name, weapon!!)
+                break
+        }
         onClose()
     }
 
@@ -68,15 +79,30 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
             </DialogTitle>
             <DialogContent>
                 <Grid container spacing={10}>
-                    <InputTextFieldCard defaultValue={weapon?.name!!} onCommit={(value: string): void => { onChange('name', value) }} title={'Name'} helperText={'Name'} placeholder={'Name'} />
+                    <InputTextFieldCard defaultValue={weapon?.name!!} onCommit={(value: string): void => {
+                        onChange('name', value)
+                    }} title={'Name'} helperText={'Name'} placeholder={'Name'}/>
                 </Grid>
-                <Divider />
+                <Divider/>
                 <Grid container spacing={10}>
-                    <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} type={SkillType.Combat} />
-                    <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!} onChange={(value: number): void => {onChange('damage', String(value))}} min={0} max={20} />
-                    <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!} onChange={(value: boolean): void => {onChange('brawn', String(value))}} />
-                    <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onChange('critical', String(value))}} min={1} max={7} />
-                    <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
+                    <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
+                        onSkillChange(value)
+                    }} type={SkillType.Combat}/>
+                    <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
+                                           onChange={(value: number): void => {
+                                               onChange('damage', String(value))
+                                           }} min={0} max={20}/>
+                    <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
+                                     onChange={(value: boolean): void => {
+                                         onChange('brawn', String(value))
+                                     }}/>
+                    <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!}
+                                           onChange={(value: number): void => {
+                                               onChange('critical', String(value))
+                                           }} min={1} max={7}/>
+                    <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => {
+                        onChange('range', value)
+                    }} title={'Range'} options={getRangeOptions()}/>
                 </Grid>
                 <Divider/>
                 <Grid container>

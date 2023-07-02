@@ -2,7 +2,7 @@ import Skill, {SkillType} from "../../models/actor/Skill";
 import {
     Card,
     CardContent,
-    ClickAwayListener,
+    ClickAwayListener, Grid,
     MenuItem,
     TextField,
     Typography
@@ -46,12 +46,14 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
     }, [setting?.name, type])
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Required Skill'}/>
-            <CardContent>
-                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
-            </CardContent>
-        </Card>
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={'Required Skill'}/>
+                <CardContent>
+                    <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 

@@ -31,7 +31,7 @@ export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Ele
             return
         } else {
             return weapons.map((weapon: ActorWeapon) => (
-                <Row key={weapon.name} weapon={weapon} npc={npc}/>
+                <Row key={weapon?.name!!} weapon={weapon!!} npc={npc!!}/>
             ))
         }
     }
@@ -72,7 +72,7 @@ function Row(props: RowProps): JSX.Element {
     const getActorSkill = (): ActorSkill => {
         let actorSkill = {} as ActorSkill
         for (let skill of npc.skills) {
-            if (skill.name === weapon.skill.name) {
+            if (skill.name === weapon?.skill?.name!!) {
                 actorSkill = skill as ActorSkill
             }
         }
@@ -83,7 +83,7 @@ function Row(props: RowProps): JSX.Element {
         <TableRow onClick={() => setOpen(!open)}>
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
-            <TypographyCenterTableCell value={weapon.skill.name}/>
+            <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
             <TypographyCenterTableCell value={renderActorDamage(weapon, npc.brawn.current)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
