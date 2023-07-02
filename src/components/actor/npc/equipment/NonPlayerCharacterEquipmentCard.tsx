@@ -7,7 +7,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
-import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
+import ViewNonPlayerCharacterWeaponTable from "./weapon/ViewNonPlayerCharacterWeaponTable";
 import CreateNonPlayerCharacterWeaponDialog from "./weapon/CreateNonPlayerCharacterWeaponDialog";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmorTable";
@@ -46,7 +46,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         if (npc?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc?.brawn?.current!!} />
+        return <ViewNonPlayerCharacterWeaponTable weapons={npc?.weapons!!} npc={npc!!} />
     }
 
     const renderArmorTab = (): JSX.Element => {
