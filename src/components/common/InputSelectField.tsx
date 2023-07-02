@@ -1,5 +1,5 @@
-import { ClickAwayListener, MenuItem, TextField, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import {ClickAwayListener, MenuItem, TextField, Typography} from "@mui/material";
+import {ChangeEvent, useState} from "react";
 import EditField from "./EditField";
 
 export interface Option {
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function InputSelectField(props: Props): JSX.Element {
-    const { defaultValue, defaultEdit, options, editable, onChange, onCommit, helperText } = props
+    const {defaultValue, defaultEdit, options, editable, onChange, onCommit, helperText} = props
     const [option, setOption] = useState(defaultValue)
     const [edit, setEdit] = useState(defaultEdit ?? false)
 
@@ -52,7 +52,7 @@ export default function InputSelectField(props: Props): JSX.Element {
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography style={{ wordWrap: 'break-word' }}>{option}</Typography>
+    const viewElement = <Typography style={{ wordWrap: 'break-word', textAlign: 'center' }}>{option}</Typography>
 
     const onCancel = (): void => {
         setEdit(!edit)
@@ -60,6 +60,7 @@ export default function InputSelectField(props: Props): JSX.Element {
     }
 
     return (
-        <EditField viewElement={viewElement} edit={edit} editable={editable} editElement={editElement} onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit}/>
+        <EditField viewElement={viewElement} edit={edit} editable={editable} editElement={editElement}
+                   onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit}/>
     )
 }

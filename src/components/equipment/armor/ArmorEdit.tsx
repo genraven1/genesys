@@ -9,20 +9,37 @@ import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCa
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
 import Setting from "../../../models/Setting";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
 
 interface Props {
     ar: Armor
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function ArmorEdit(props: Props) {
-    const {ar, allSettings} = props
+    const {ar, settings} = props
     const {name} = useParams<{ name: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {setArmor(ar)}, [ar])
+
+    const onSettingAddition = async (setting: string) => {
+        const copyArmor = {...armor} as Armor
+        copyArmor.settings = copyArmor.settings.concat(setting)
+        await updateArmor(copyArmor)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyArmor = {...armor} as Armor
+        copyArmor.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyArmor.settings.splice(index, 1)
+            }
+        })
+        await updateArmor(copyArmor)
+    }
     
     const onChange = async (key: keyof Armor, value: string) => {
         if (value === null) {
@@ -54,6 +71,11 @@ export default function ArmorEdit(props: Props) {
             default:
                 break
         }
+
+        await updateArmor(copyArmor)
+    }
+
+    const updateArmor = async (copyArmor: Armor) => {
         setArmor(copyArmor)
         await EquipmentService.updateArmor(copyArmor.name, copyArmor)
     }
@@ -81,6 +103,8 @@ export default function ArmorEdit(props: Props) {
                         <EditPriceCheckBoxCard check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={armor?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
+                    <EditSettingsCard names={armor?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

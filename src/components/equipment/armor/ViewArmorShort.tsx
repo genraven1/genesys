@@ -1,11 +1,7 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Card, CardContent, Divider, Grid} from '@mui/material';
 import * as React from 'react';
-import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {EquipmentPath} from "../../../services/Path";
-import Setting from "../../../models/Setting";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -15,32 +11,19 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderHeaders} from "../../common/table/TableRenders";
 import {renderPrice, renderSoak} from "../../../models/equipment/EquipmentHelper";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface Props {
     armor: Armor
-    settings: Setting[]
 }
 
-export default function ArmorView(props: Props) {
-    const {armor, settings} = props
-    const {name} = useParams<{ name: string }>()
-    let navigate = useNavigate()
+export default function ArmorViewShort(props: Props) {
+    const {armor} = props
     const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity']
-
-    const onEdit = () => {
-        navigate(EquipmentPath.Armor + name + '/edit');
-    }
 
     return (
         <Card>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={armor?.name!!}
-                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>}>
-            </CardHeader>
+            <CenteredCardHeader title={armor?.name!!}/>
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -49,7 +32,7 @@ export default function ArmorView(props: Props) {
                     </Grid>
                     <Divider/>
                     <TableContainer component={Paper}>
-                        <Table aria-label="collapsible table">
+                        <Table>
                             <TableHead>
                                 {renderHeaders(headers)}
                             </TableHead>
@@ -66,8 +49,6 @@ export default function ArmorView(props: Props) {
                         </Table>
                     </TableContainer>
                 </Grid>
-                <Divider/>
-                <ViewSettingsCard settingNames={armor?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

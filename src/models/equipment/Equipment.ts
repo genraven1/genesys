@@ -1,3 +1,5 @@
+import {EquipmentQuality} from "../Quality";
+
 export default interface Equipment {
     name: string
     description: string
@@ -5,6 +7,7 @@ export default interface Equipment {
     restricted: boolean
     encumbrance: number
     rarity: number
+    qualities: EquipmentQuality[]
     settings: string[]
 }
 

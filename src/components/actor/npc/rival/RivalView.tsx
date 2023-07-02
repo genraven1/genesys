@@ -16,9 +16,16 @@ import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerChara
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
+import Setting from "../../../../models/Setting";
+import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 
-export default function RivalView(props: {rival: Rival}) {
-    const {rival} = props
+interface Props {
+    rival: Rival
+    settings: Setting[]
+}
+
+export default function RivalView(props: Props) {
+    const {rival, settings} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
 
@@ -56,6 +63,7 @@ export default function RivalView(props: {rival: Rival}) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
+                <ViewSettingsCard settingNames={rival?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

@@ -6,7 +6,7 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/ViewSettingsCard";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -19,11 +19,11 @@ import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
     weapon: Weapon
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function WeaponView(props: Props) {
-    const {weapon, allSettings} = props
+    const {weapon, settings} = props
     const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
@@ -61,15 +61,13 @@ export default function WeaponView(props: Props) {
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
                                     <TypographyCenterTableCell value={weapon?.range!!}/>
                                     <TypographyCenterTableCell value={renderPrice(weapon)}/>
-                                    <TypographyCenterTableCell value={renderQualities(weapon?.qualities!!)}/>
+                                    <TypographyCenterTableCell value={renderQualities(weapon!!)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <Divider/>
-                    <Grid container spacing={10}>
-                        <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={allSettings}/>
-                    </Grid>
+                    <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

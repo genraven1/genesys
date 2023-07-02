@@ -30,10 +30,10 @@ export default function ArmorWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <ArmorView  armor={armor} allSettings={settings}/>
+            return <ArmorView  armor={armor} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <ArmorEdit ar={armor} allSettings={settings}/>
+            return <ArmorEdit ar={armor} settings={settings}/>
         }
         else {return <ViewAllArmor/>}
     }

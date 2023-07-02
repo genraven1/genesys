@@ -1,5 +1,5 @@
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Button, Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Tab from '@mui/material/Tab';
@@ -7,12 +7,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
-import ViewActorWeaponTable from "./weapon/ViewActorWeaponTable";
+import ViewNonPlayerCharacterWeaponTable from "./weapon/ViewNonPlayerCharacterWeaponTable";
 import CreateNonPlayerCharacterWeaponDialog from "./weapon/CreateNonPlayerCharacterWeaponDialog";
 import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmorTable";
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
 import CreateArmorDialog from "./armor/CreateArmorDialog";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -45,7 +46,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
         if (npc?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
-        return <ViewActorWeaponTable weapons={npc?.weapons!!} brawn={npc?.brawn?.current!!} />
+        return <ViewNonPlayerCharacterWeaponTable weapons={npc?.weapons!!} npc={npc!!} />
     }
 
     const renderArmorTab = (): JSX.Element => {
@@ -74,7 +75,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     const renderGearTab = (): JSX.Element => {
         return (
             <Fragment>
-                {/*{renderGearTable()}*/}
+                {renderGearTable()}
                 <Button color='primary' variant='contained' onClick={addGear}>Add Gear</Button>
             </Fragment>
         )
@@ -89,7 +90,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Equipment'} style={{textAlign:'center'}}/>
+            <CenteredCardHeader title={'Equipment'}/>
             <CardContent>
                 <Grid sx={{ width: 1}}>
                     <TabContext value={value}>

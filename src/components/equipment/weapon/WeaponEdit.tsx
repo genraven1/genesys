@@ -17,26 +17,45 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
+import EditSettingsCard from "../../common/setting/EditSettingsCard";
+
 
 interface Props {
     wea: Weapon
-    allSettings: Setting[]
+    settings: Setting[]
 }
 
 export default function WeaponEdit(props: Props) {
-    const {wea, allSettings} = props
+    const {wea, settings} = props
     const {name} = useParams<{ name: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
-    useEffect(() => {setWeapon(wea)}, [wea])
+    useEffect(() => {
+        setWeapon(wea)
+    }, [wea])
+
+    const onSettingAddition = async (setting: string) => {
+        const copyWeapon = {...weapon} as Weapon
+        copyWeapon.settings = copyWeapon.settings.concat(setting)
+        await updateWeapon(copyWeapon)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyWeapon = {...weapon} as Weapon
+        copyWeapon.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyWeapon.settings.splice(index, 1)
+            }
+        })
+        await updateWeapon(copyWeapon)
+    }
 
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
-        setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
+        await updateWeapon(copyWeapon)
     }
 
     const onChange = async (key: keyof Weapon, value: string) => {
@@ -75,6 +94,11 @@ export default function WeaponEdit(props: Props) {
             default:
                 break
         }
+
+        await updateWeapon(copyWeapon)
+    }
+
+    const updateWeapon = async (copyWeapon: Weapon) => {
         setWeapon(copyWeapon)
         await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
     }
@@ -85,33 +109,62 @@ export default function WeaponEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={weapon?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
-                <CheckIcon color='primary' fontSize='small' />
-            </IconButton>}/>
-            <Divider />
+            <CardHeader title={weapon?.name!!} style={{textAlign: 'center'}}
+                        action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                            <CheckIcon color='primary' fontSize='small'/>
+                        </IconButton>}/>
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => {
+                            onChange('description', value)
+                        }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
-                        <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} type={SkillType.Combat} />
-                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!} onChange={(value: number): void => {onChange('damage', String(value))}} min={0} max={20} />
-                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!} onChange={(value: boolean): void => {onChange('brawn', String(value))}} />
-                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!} onChange={(value: number): void => {onChange('critical', String(value))}} min={1} max={7} />
-                        <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
+                        <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
+                            onSkillChange(value)
+                        }} type={SkillType.Combat}/>
+                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
+                                               onChange={(value: number): void => {
+                                                   onChange('damage', String(value))
+                                               }} min={0} max={20}/>
+                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
+                                         onChange={(value: boolean): void => {
+                                             onChange('brawn', String(value))
+                                         }}/>
+                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!}
+                                               onChange={(value: number): void => {
+                                                   onChange('critical', String(value))
+                                               }} min={1} max={7}/>
+                        <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => {
+                            onChange('range', value)
+                        }} title={'Range'} options={getRangeOptions()}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
-                        <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
-                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
-                        <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
+                        <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'}
+                                             onChange={(value: number): void => {
+                                                 onChange('encumbrance', String(value))
+                                             }} min={0} max={10}/>
+                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!}
+                                               checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => {
+                            onChange('restricted', String(value))
+                        }} onNumberChange={(value: number): void => {
+                            onChange('price', String(value))
+                        }}/>
+                        <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'}
+                                             onChange={(value: number): void => {
+                                                 onChange('rarity', String(value))
+                                             }} min={0} max={11}/>
                     </Grid>
                     <Divider/>
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
+                    <EditSettingsCard names={weapon?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

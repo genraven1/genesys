@@ -4,24 +4,29 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 interface Props {
     value: boolean
-    onChange: (value: boolean) => void
+    onAddition: (value: boolean) => void
+    onRemoval: (value: boolean) => void
 }
 
 export default function CheckboxTableCell(props: Props): JSX.Element {
-    const {value, onChange} = props
+    const {value, onAddition, onRemoval} = props
 
-    const handleClick = () => {
-        onChange(value)
+    const handleClickOnAddition = () => {
+        onAddition(value)
+    }
+
+    const handleClickOnRemoval = () => {
+        onRemoval(value)
     }
 
     const checkIsTrue = (
-        <IconButton title='True' size='small' onClick={(): void => handleClick()}>
+        <IconButton title='True' size='small' onClick={(): void => handleClickOnRemoval()}>
             <CheckIcon color='primary' fontSize='small'/>
         </IconButton>
     )
 
     const checkIsFalse = (
-        <IconButton title='False' size='small' onClick={(): void => handleClick()}>
+        <IconButton title='False' size='small' onClick={(): void => handleClickOnAddition()}>
             <CancelIcon color='primary' fontSize='small'/>
         </IconButton>
     )

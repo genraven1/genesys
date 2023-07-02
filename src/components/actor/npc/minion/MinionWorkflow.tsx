@@ -4,34 +4,42 @@ import ActorService from "../../../../services/ActorService";
 import Minion from "../../../../models/actor/npc/Minion";
 import MinionView from "./MinionView";
 import MinionEdit from "./MinionEdit";
+import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
 function useFetchMinion(name: string): Minion {
     const [minion, setMinion] = useState<Minion>()
     useEffect(() => {
-        if(!name) {return}
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
             try {
                 const minionData = await ActorService.getMinion(name)
-                if (minionData) {setMinion(minionData)}
-            } catch (err) {console.log(err)}
+                if (minionData) {
+                    setMinion(minionData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[name, setMinion])
+    }, [name, setMinion])
     return minion as Minion
 }
 
 export default function MinionWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const minion = useFetchMinion(name!!)
+    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <MinionView  minion={minion}/>
+            return <MinionView minion={minion} settings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
+            return <MinionEdit min={minion} settings={settings}/>
+        } else {
+            return <Fragment/>
         }
-        else if (pathname.endsWith('/edit')) {
-            return <MinionEdit min={minion}/>
-        }
-        else {return <Fragment/>}
     }
 
     return (

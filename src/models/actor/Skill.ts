@@ -2,9 +2,9 @@ import {CharacteristicType} from './Characteristics';
 
 export default interface Skill {
     characteristic: CharacteristicType
-    active: boolean
     type: SkillType
     name: string
+    settings: string[]
 }
 
 export enum SkillType {
@@ -13,11 +13,4 @@ export enum SkillType {
     Social = 'Social',
     Combat = 'Combat',
     Knowledge = 'Knowledge'
-}
-
-export enum SkillKey {
-    Characteristic ='characteristic',
-    Active = 'active',
-    Type = 'type',
-    Name = 'name'
 }

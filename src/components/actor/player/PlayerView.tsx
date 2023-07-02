@@ -12,9 +12,16 @@ import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
+import Setting from "../../../models/Setting";
+import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
-export default function PlayerView(props: {player: Player}) {
-    const {player} = props
+interface Props {
+    player: Player
+    settings: Setting[]
+}
+
+export default function PlayerView(props: Props) {
+    const {player, settings} = props
     const { name } = useParams<{ name: string }>()
     let navigate = useNavigate()
 
@@ -49,6 +56,7 @@ export default function PlayerView(props: {player: Player}) {
                     <Divider />
                     <PlayerTalentTable player={player}/>
                 </Grid>
+                <ViewSettingsCard settingNames={player?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

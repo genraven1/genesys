@@ -9,17 +9,24 @@ import ViewStatsCard from "../../ViewStatsCard";
 import ViewDefenseCard from "../../ViewDefenseCard";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import ViewNonPlayerCharacterSkillTable from "../skill/ViewNonPlayerCharacterSkillTable";
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
-import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
+import {getRatings} from "../../../../models/actor/npc/NonPlayerCharacter";
+import Setting from "../../../../models/Setting";
+import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 
-export default function MinionView(props: {minion: Minion}) {
-    const {minion} = props
-    const { name } = useParams<{ name: string }>()
+interface Props {
+    minion: Minion
+    settings: Setting[]
+}
+
+export default function MinionView(props: Props) {
+    const {minion, settings} = props
+    const {name} = useParams<{ name: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -31,31 +38,32 @@ export default function MinionView(props: {minion: Minion}) {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={name}
-                subheader={<GenesysDescriptionTypography text={getRatings(minion)} />}
+                subheader={<GenesysDescriptionTypography text={getRatings(minion)}/>}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
+                    <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <ViewCharacteristicRow actor={minion}/>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
-                        <SoakCard soak={minion?.soak!!} />
+                        <SoakCard soak={minion?.soak!!}/>
                         <ViewStatsCard stats={minion?.wounds!!} type={StatsType.Wounds}/>
                         <ViewDefenseCard defense={minion?.melee!!} type={DefenseType.Melee}/>
                         <ViewDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
-                    <Divider />
-                    <ViewNonPlayerCharacterSkillTable npc={minion}/>
+                    <Divider/>
+                    <NonPlayerCharacterSkillCard npc={minion}/>
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
-                    <Divider />
+                    <Divider/>
                     <ViewNonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
+                <ViewSettingsCard settingNames={minion?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

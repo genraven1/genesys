@@ -30,10 +30,10 @@ export default function GearWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <GearView  gear={Gear} allSettings={settings}/>
+            return <GearView  gear={Gear} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <GearEdit gea={Gear} allSettings={settings}/>
+            return <GearEdit gea={Gear} settings={settings}/>
         }
         else {return <ViewAllGear/>}
     }

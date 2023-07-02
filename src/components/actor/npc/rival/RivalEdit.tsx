@@ -21,9 +21,16 @@ import {ActorKey} from "../../../../models/actor/Actor";
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
+import Setting from "../../../../models/Setting";
+import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 
-export default function RivalEdit(props: {riv: Rival}) {
-    const {riv} = props
+interface Props {
+    riv: Rival
+    settings: Setting[]
+}
+
+export default function RivalEdit(props: Props) {
+    const {riv, settings} = props
     const { name } = useParams<{ name: string }>()
     const [rival, setRival] = useState<Rival>(riv)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
@@ -31,6 +38,22 @@ export default function RivalEdit(props: {riv: Rival}) {
     let navigate = useNavigate()
 
     useEffect(() => {setRival(riv)}, [riv])
+
+    const onSettingAddition = async (setting: string) => {
+        const copyRival = {...rival} as Rival
+        copyRival.settings = copyRival.settings.concat(setting)
+        await updateRival(copyRival)
+    }
+
+    const onSettingRemoval = async (setting: string) => {
+        const copyRival = {...rival} as Rival
+        copyRival.settings.forEach((set, index) => {
+            if (set === setting) {
+                copyRival.settings.splice(index, 1)
+            }
+        })
+        await updateRival(copyRival)
+    }
 
     const onChange = async (key: keyof Rival, value: number) => {
         if (value === null) {
@@ -81,11 +104,10 @@ export default function RivalEdit(props: {riv: Rival}) {
         await updateRival(copyRival)
     }
 
-    const updateRival = async (copyRival: Rival): Promise<Rival> => {
+    const updateRival = async (copyRival: Rival) => {
         copyRival.soak = copyRival.brawn.current
         setRival(copyRival)
         await ActorService.updateRival(copyRival.name, copyRival)
-        return rival!!
     }
 
     const onView = () => {
@@ -100,7 +122,7 @@ export default function RivalEdit(props: {riv: Rival}) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <EditCharacteristicCard characteristic={rival?.brawn!!} type={CharacteristicType.Brawn} onChange={(value: number): void => { onChange(ActorKey.Brawn, value) }}/>
                         <EditCharacteristicCard characteristic={rival?.agility!!} type={CharacteristicType.Agility} onChange={(value: number): void => { onChange(ActorKey.Agility, value) }}/>
                         <EditCharacteristicCard characteristic={rival?.intellect!!} type={CharacteristicType.Intellect} onChange={(value: number): void => { onChange(ActorKey.Intellect, value) }}/>
@@ -109,7 +131,7 @@ export default function RivalEdit(props: {riv: Rival}) {
                         <EditCharacteristicCard characteristic={rival?.presence!!} type={CharacteristicType.Presence} onChange={(value: number): void => { onChange(ActorKey.Presence, value) }}/>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <SoakCard soak={rival?.soak!!} />
                         <StatsCard stats={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
                         <DefenseCard defense={rival?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(ActorKey.Melee, value) }}/>
@@ -132,6 +154,8 @@ export default function RivalEdit(props: {riv: Rival}) {
                     {openSelectTalentDialog && <TalentSelectionDialog actor={rival} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={rival}/>
                 </Grid>
+                <EditSettingsCard names={rival?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>
         </Card>
     )
