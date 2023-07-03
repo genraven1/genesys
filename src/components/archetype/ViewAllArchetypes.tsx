@@ -42,19 +42,19 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={archetype.name}/>
                 {renderSettingTableCell()}
-                <ActionsTableCell name={archetype.name} path={Path.Talent}/>
+                <ActionsTableCell name={archetype.name} path={Path.Archetype}/>
             </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
-                            <TableBody>
-                                {/*<GenesysDescriptionTypography text={talent.description}/>*/}
-                            </TableBody>
-                        </Table>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
+            {/*<TableRow>*/}
+            {/*    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>*/}
+            {/*        <Collapse in={open} timeout="auto" unmountOnExit>*/}
+            {/*            <Table sx={{ margin: 1 }}>*/}
+            {/*                <TableBody>*/}
+            {/*                    /!*<GenesysDescriptionTypography text={talent.description}/>*!/*/}
+            {/*                </TableBody>*/}
+            {/*            </Table>*/}
+            {/*        </Collapse>*/}
+            {/*    </TableCell>*/}
+            {/*</TableRow>*/}
         </Fragment>
     );
 }
