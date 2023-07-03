@@ -26,6 +26,6 @@ export default class ArchetypeService {
     }
 
     static async createArchetypeAbility(name: string, ability: Ability): Promise<Archetype> {
-        return await (await axios.post(Path.Archetype + name + '/abilities', ability)).data
+        return await (await axios.post(Path.Archetype + name + '/ability', ability)).data
     }
 }
