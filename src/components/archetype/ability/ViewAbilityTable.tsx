@@ -11,7 +11,7 @@ import {
     TypographyCenterTableCell
 } from "../../common/table/TypographyTableCell";
 import Archetype from "../../../models/actor/player/Archetype";
-import {renderHeaders, renderTableHeader} from "../../common/table/TableRenders";
+import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
     ability: Ability
@@ -40,7 +40,6 @@ export default function ViewAbilityTable(props: TableProps) {
         <TableContainer component={Paper}>
             <Table>
                 <TableHead>
-                    {renderTableHeader('Abilities', 2)}
                     {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
