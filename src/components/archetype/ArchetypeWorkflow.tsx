@@ -4,6 +4,8 @@ import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import ViewAllArchetypes from "./ViewAllArchetypes";
 import ArchetypeService from "../../services/ArchetypeService";
 import Archetype from "../../models/actor/player/Archetype";
+import ArchetypeView from "./ViewArchetype";
+import ArchetypeEdit from "./ArchetypeEdit";
 
 
 function useFetchArchetype(name: string): Archetype {
@@ -33,13 +35,13 @@ export default function ArchetypeWorkflow(): JSX.Element {
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
-        // if (pathname.endsWith('/view')) {
-        //     return <ArchetypeView talent={talent} allSettings={settings}/>
-        // } else if (pathname.endsWith('/edit')) {
-        //     return <ArchetypeEdit tal={talent} settings={settings}/>
-        // } else {
+        if (pathname.endsWith('/view')) {
+            return <ArchetypeView archetype={archetype} settings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
+            return <ArchetypeEdit arch={archetype} settings={settings}/>
+        } else {
             return <ViewAllArchetypes/>
-        // }
+        }
     }
 
     return (

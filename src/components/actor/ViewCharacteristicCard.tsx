@@ -1,5 +1,7 @@
-import {Grid, Card, CardHeader, Divider, Typography, CardContent} from "@mui/material";
+import {Grid, Card, Divider, CardContent} from "@mui/material";
 import {Characteristic, CharacteristicType} from "../../models/actor/Characteristics";
+import {CenteredGenesysTypography} from "../common/typography/GenesysTypography";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
 
 interface Props {
     characteristic: Characteristic
@@ -12,10 +14,10 @@ export default function ViewCharacteristicCard(props: Props): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={characteristic?.current!!} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={String(characteristic?.current!!)}/>
                 <Divider />
                 <CardContent>
-                    <Typography style={{ textAlign: 'center' }} >{type}</Typography>
+                    <CenteredGenesysTypography value={type}/>
                 </CardContent>
             </Card>
         </Grid>

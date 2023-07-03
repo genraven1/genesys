@@ -130,14 +130,14 @@ export default function WeaponEdit(props: Props) {
                                                onChange={(value: number): void => {
                                                    onChange('damage', String(value))
                                                }} min={0} max={20}/>
-                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
-                                         onChange={(value: boolean): void => {
-                                             onChange('brawn', String(value))
-                                         }}/>
                         <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!}
                                                onChange={(value: number): void => {
                                                    onChange('critical', String(value))
                                                }} min={1} max={7}/>
+                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
+                                         onChange={(value: boolean): void => {
+                                             onChange('brawn', String(value))
+                                         }}/>
                         <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => {
                             onChange('range', value)
                         }} title={'Range'} options={getRangeOptions()}/>

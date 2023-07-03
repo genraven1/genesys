@@ -3,6 +3,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditNumberCard from "./EditNumberCard";
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
+import {ViewBooleanFieldCard, ViewNumberFieldCard} from "./ViewFieldCard";
 
 interface ViewProps {
     title: string
@@ -18,18 +19,8 @@ export function ViewNumberCheckBoxCard(props: ViewProps): JSX.Element {
         <Grid item xs>
             <Card>
                 <Grid container spacing={0}>
-                    <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }}>{title}</Typography>
-                        <Divider />
-                        <Typography style={{ textAlign: 'center' }}>{value || 0}</Typography>
-                    </Grid>
-                    <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
-                        <Divider />
-                        <Typography style={{ textAlign: 'center' }}>
-                            {check ? <CheckIcon color='primary' fontSize='small' />: <CancelIcon color='primary' fontSize='small' />}
-                        </Typography>
-                    </Grid>
+                    <ViewNumberFieldCard name={title} value={value || 0}/>
+                    <ViewBooleanFieldCard name={checkTitle} value={check}/>
                 </Grid>
             </Card>
         </Grid>
@@ -54,13 +45,13 @@ export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
 
     const checkIsTrue = (
         <IconButton title='Commit' size='small' onClick={(): void => handleClick()}>
-            <CheckIcon color='primary' fontSize='small' />
+            <CheckIcon color='primary' fontSize='small'/>
         </IconButton>
     )
 
     const checkIsFalse = (
         <IconButton title='Cancel' size='small' onClick={(): void => handleClick()}>
-            <CancelIcon color='primary' fontSize='small' />
+            <CancelIcon color='primary' fontSize='small'/>
         </IconButton>
     )
 
@@ -69,14 +60,14 @@ export function EditNumberCheckBoxCard(props: EditProps): JSX.Element {
             <Card>
                 <Grid container spacing={0}>
                     <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }}>{title}</Typography>
-                        <Divider />
-                        <InputNumberRangeSelectField defaultValue={value} min={0} max={11} onCommit={onNumberChange} />
+                        <Typography style={{textAlign: 'center'}}>{title}</Typography>
+                        <Divider/>
+                        <InputNumberRangeSelectField defaultValue={value} min={0} max={11} onCommit={onNumberChange}/>
                     </Grid>
                     <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
-                        <Divider />
-                        <Typography style={{ textAlign: 'center' }}>
+                        <Typography style={{textAlign: 'center'}}>{checkTitle}</Typography>
+                        <Divider/>
+                        <Typography style={{textAlign: 'center'}}>
                             {check ? checkIsTrue : checkIsFalse}
                         </Typography>
                     </Grid>
@@ -103,13 +94,13 @@ export function EditPriceCheckBoxCard(props: EditPriceProps): JSX.Element {
 
     const checkIsTrue = (
         <IconButton title='Commit' size='small' onClick={(): void => handleClick()}>
-            <CheckIcon color='primary' fontSize='small' />
+            <CheckIcon color='primary' fontSize='small'/>
         </IconButton>
     )
 
     const checkIsFalse = (
         <IconButton title='Cancel' size='small' onClick={(): void => handleClick()}>
-            <CancelIcon color='primary' fontSize='small' />
+            <CancelIcon color='primary' fontSize='small'/>
         </IconButton>
     )
 
@@ -117,13 +108,11 @@ export function EditPriceCheckBoxCard(props: EditPriceProps): JSX.Element {
         <Grid item xs>
             <Card>
                 <Grid container spacing={0}>
+                    <EditNumberCard value={value} onChange={onNumberChange} title={'Price'}/>
                     <Grid item xs>
-                        <EditNumberCard value={value} onChange={onNumberChange} title={'Price'}/>
-                    </Grid>
-                    <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }}>{checkTitle}</Typography>
-                        <Divider />
-                        <Typography style={{ textAlign: 'center' }}>
+                        <Typography style={{textAlign: 'center'}}>{checkTitle}</Typography>
+                        <Divider/>
+                        <Typography style={{textAlign: 'center'}}>
                             {check ? checkIsTrue : checkIsFalse}
                         </Typography>
                     </Grid>

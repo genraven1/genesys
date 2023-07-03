@@ -1,11 +1,14 @@
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import InlineTextField from "./InlineTextField";
-import {Card, CardActions, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardActions, CardContent, CardHeader, Divider, Grid, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Quality from "../../models/Quality";
 import GenesysQualityTypography from "./typography/GenesysQualityTypography";
+import CenteredCardHeader from "./card/CenteredCardHeader";
+import {CenteredGenesysTypography} from "./typography/GenesysTypography";
+import CheckIcon from "@mui/icons-material/Check";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 interface ViewProps {
     name: string
@@ -17,9 +20,11 @@ export function ViewFieldCard(props: ViewProps): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={name} style={{ textAlign: 'center' }} />
-                <Divider />
-                <GenesysDescriptionTypography text={value}/>
+                <CenteredCardHeader title={name}/>
+                <Divider/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={value}/>
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -35,9 +40,34 @@ export function ViewNumberFieldCard(props: ViewNumberProps): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={name} style={{ textAlign: 'center' }} />
-                <Divider />
-                <Typography>{value}</Typography>
+                <CenteredCardHeader title={name}/>
+                <Divider/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={String(value)}/>
+                </CardContent>
+            </Card>
+        </Grid>
+    )
+}
+
+interface ViewBooleanProps {
+    name: string
+    value: boolean
+}
+
+export function ViewBooleanFieldCard(props: ViewBooleanProps): JSX.Element {
+    const {name, value} = props
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={name}/>
+                <Divider/>
+                <CardContent>
+                    <Typography style={{ textAlign: 'center' }}>
+                        {value ? <CheckIcon color='primary' fontSize='small' />: <CancelIcon color='primary' fontSize='small' />}
+                    </Typography>
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -51,13 +81,14 @@ interface EditStringProps {
 }
 
 export function EditStringFieldCard(props: EditStringProps): JSX.Element {
-    const { defaultValue, onCommit, title, errorText } = props;
+    const {defaultValue, onCommit, title, errorText} = props;
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
-                <InlineTextField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={defaultValue} placeholder={defaultValue} errorText={errorText} />
+                <CardHeader title={title} style={{textAlign: 'center'}}/>
+                <Divider/>
+                <InlineTextField defaultValue={defaultValue} editable={true} onCommit={onCommit}
+                                 helperText={defaultValue} placeholder={defaultValue} errorText={errorText}/>
             </Card>
         </Grid>
     )
@@ -72,15 +103,15 @@ interface EditNumberProps {
 }
 
 export function EditNumberFieldCard(props: EditNumberProps): JSX.Element {
-    const { value, title, onChange, min, max } = props;
+    const {value, title, onChange, min, max} = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
+                <CenteredCardHeader title={title}/>
+                <Divider/>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange}/>
                 </CardActions>
             </Card>
         </Grid>
@@ -95,16 +126,21 @@ export function ViewQualityActivationCard(props: QualityActivationProps): JSX.El
     const {quality} = props
 
     const renderActivation = (): JSX.Element => {
-        if(quality?.passive!!) {return <GenesysDescriptionTypography text={'Passive'}/>}
-        else {return <GenesysQualityTypography ranks={quality?.cost}/>}
+        if (quality?.passive!!) {
+            return <CenteredGenesysTypography value={'Passive'}/>
+        } else {
+            return <GenesysQualityTypography ranks={quality?.cost}/>
+        }
     }
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={quality?.name!!} style={{ textAlign: 'center' }} />
-                <Divider />
-                {renderActivation()}
+                <CenteredCardHeader title={quality?.name!!}/>
+                <Divider/>
+                <CardContent>
+                    {renderActivation()}
+                </CardContent>
             </Card>
         </Grid>
     )
