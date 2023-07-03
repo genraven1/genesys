@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useEffect, useState} from 'react';
-import Talent, {Activation, getActivationOptions, getTierOptions, Tier} from '../../models/Talent';
+import Talent, {getTierOptions, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
 import {useNavigate, useParams} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
@@ -11,6 +11,7 @@ import * as React from "react";
 import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
+import {Activation, getActivationOptions} from "../../models/common/Activation";
 
 interface Props {
     tal: Talent
@@ -24,7 +25,9 @@ export default function TalentEdit(props: Props) {
     const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
-    useEffect(() => {setTalent(tal)}, [tal])
+    useEffect(() => {
+        setTalent(tal)
+    }, [tal])
 
     const onSettingAddition = async (setting: string) => {
         const copyTalent = {...talent} as Talent
@@ -46,7 +49,7 @@ export default function TalentEdit(props: Props) {
         if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {
             return
         }
-        const copyTalent = { ...talent } as Talent;
+        const copyTalent = {...talent} as Talent;
         switch (key) {
             case 'summary':
                 copyTalent.summary = value
@@ -78,26 +81,39 @@ export default function TalentEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={talent?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
-                <CheckIcon color='primary' fontSize='small' />
-            </IconButton>}>
+            <CardHeader title={talent?.name!!} style={{textAlign: 'center'}}
+                        action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                            <CheckIcon color='primary' fontSize='small'/>
+                        </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={talent?.description!!} onCommit={(value: string): void => { onChange('description', value) }} title={'Description'} helperText={'Description'} placeholder={'Description'} />
+                        <InputTextFieldCard defaultValue={talent?.description!!} onCommit={(value: string): void => {
+                            onChange('description', value)
+                        }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={talent?.summary!!} onCommit={(value: string): void => { onChange('summary', value) }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'} />
+                        <InputTextFieldCard defaultValue={talent?.summary!!} onCommit={(value: string): void => {
+                            onChange('summary', value)
+                        }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
-                        <CheckButtonCard title={'Ranked Talent'} value={talent?.ranked!!} onChange={(value: boolean): void => {onChange('ranked', String(value))}} />
-                        <InputSelectFieldCard defaultValue={talent?.activation!!} onCommit={(value: string): void => { onChange('activation', value) }} title={'Activation'} options={getActivationOptions()} />
-                        <InputSelectFieldCard defaultValue={talent?.tier!!} onCommit={(value: string): void => { onChange('tier', value) }} title={'Tier'} options={getTierOptions()} />
+                        <CheckButtonCard title={'Ranked Talent'} value={talent?.ranked!!}
+                                         onChange={(value: boolean): void => {
+                                             onChange('ranked', String(value))
+                                         }}/>
+                        <InputSelectFieldCard defaultValue={talent?.activation!!} onCommit={(value: string): void => {
+                            onChange('activation', value)
+                        }} title={'Activation'} options={getActivationOptions()}/>
+                        <InputSelectFieldCard defaultValue={talent?.tier!!} onCommit={(value: string): void => {
+                            onChange('tier', value)
+                        }} title={'Tier'} options={getTierOptions()}/>
                     </Grid>
-                    <EditSettingsCard names={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    <EditSettingsCard names={talent?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

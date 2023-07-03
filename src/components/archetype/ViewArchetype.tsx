@@ -7,6 +7,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 import Setting from "../../models/Setting";
 import Archetype from "../../models/actor/player/Archetype";
+import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 
 interface Props {
     archetype: Archetype
@@ -42,13 +43,16 @@ export default function ArchetypeView(props: Props): JSX.Element {
                     <ViewNumberFieldCard name={'Willpower'} value={archetype?.willpower!!} />
                     <ViewNumberFieldCard name={'Presence'} value={archetype?.presence!!} />
                 </Grid>
+                <Divider/>
                 <Grid container justifyContent={'center'}>
                     <ViewNumberFieldCard name={'Wounds'} value={archetype?.wounds!!} />
                     <ViewNumberFieldCard name={'Strain'} value={archetype?.strain!!} />
                     <ViewNumberFieldCard name={'Experience'} value={archetype?.experience!!} />
                 </Grid>
+                <Divider/>
+                <ArchetypeAbilityCard archetype={archetype!!}/>
+                <Divider/>
                 {/*<ViewFieldCard name={'Linked Characteristic'} value={archetype?.skills!!} />*/}
-                {/*<ViewFieldCard name={'Linked Characteristic'} value={archetype?.abilities!!} />*/}
                 <ViewSettingsCard settingNames={archetype?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>

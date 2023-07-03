@@ -7,8 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../common/table/TypographyTableCell";
 import Ability from "../../../../models/Ability";
 
 interface Props {
@@ -18,16 +20,14 @@ interface Props {
 function Row(props: Props): JSX.Element {
     const {row} = props
 
-    const renderTypography = (): JSX.Element => {
-        return <GenesysDescriptionTypography text={row.description}/>
+    const renderDescriptionCell = (): JSX.Element => {
+        return <GenesysDescriptionTypographyCenterTableCell value={row.description}/>
     }
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
-            <TableCell>
-                {renderTypography()}
-            </TableCell>
+        <TableRow>
+            <TableCell>{row.name}</TableCell>
+            {renderDescriptionCell()}
         </TableRow>
     )
 }
@@ -41,7 +41,7 @@ export default function NonPlayerCharacterAbilityTable(props: TableProps) {
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell colSpan={2} style={{textAlign: "center"}}>Abilities</TableCell>

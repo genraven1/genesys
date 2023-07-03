@@ -11,3 +11,11 @@ export const renderHeaders = (headers: string[]): JSX.Element => {
         </TableRow>
     )
 }
+
+export const renderTableHeader = (header: string, span: number):JSX.Element => {
+    return (
+        <TableRow>
+            <TypographyCenterTableCell value={header} span={span}/>
+        </TableRow>
+    )
+}

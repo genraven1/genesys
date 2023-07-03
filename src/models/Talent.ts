@@ -1,4 +1,5 @@
 import {Option} from "../components/common/InputSelectField";
+import {Activation} from "./common/Activation";
 
 export default interface Talent {
     name: string
@@ -8,18 +9,6 @@ export default interface Talent {
     summary: string
     description: string
     settings: string[]
-}
-
-export enum Activation {
-    Passive = 'Passive',
-    ActiveAction = 'Active (Action)',
-    ActiveManeuver = 'Active (Maneuver)',
-    ActiveIncidental = 'Active (Incidental)',
-    ActiveIncidentalOutOfTurn = 'Active (Incidental, Out of Turn)'
-}
-
-export const getActivationOptions = (): Option[] => {
-    return Object.values(Activation).map((value) => ({value}))
 }
 
 export enum Tier {

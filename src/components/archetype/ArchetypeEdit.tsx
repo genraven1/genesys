@@ -10,6 +10,7 @@ import Archetype from "../../models/actor/player/Archetype";
 import ArchetypeService from "../../services/ArchetypeService";
 import {EditNumberFieldCard} from "../common/ViewFieldCard";
 import EditNumberCard from "../common/EditNumberCard";
+import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 
 interface Props {
     arch: Archetype
@@ -110,11 +111,15 @@ export default function ArchetypeEdit(props: Props) {
                     <EditNumberFieldCard value={archetype?.willpower!!} title={'Willpower'} onChange={(value: number) => onChange('willpower', value)} min={1} max={6}/>
                     <EditNumberFieldCard value={archetype?.presence!!} title={'Presence'} onChange={(value: number) => onChange('presence', value)} min={1} max={6}/>
                 </Grid>
+                <Divider/>
                 <Grid container justifyContent={'center'}>
                     <EditNumberFieldCard value={archetype?.wounds!!} title={'Wounds'} onChange={(value: number) => onChange('wounds', value)} min={1} max={16}/>
                     <EditNumberFieldCard value={archetype?.strain!!} title={'Strain'} onChange={(value: number) => onChange('strain', value)} min={1} max={16}/>
                     <EditNumberCard title={'Starting Experience'} value={archetype?.experience!!} onChange={(value: number) => onChange('experience', value)}/>
                 </Grid>
+                <Divider/>
+                <ArchetypeAbilityCard archetype={archetype!!}/>
+                <Divider/>
                 <EditSettingsCard names={archetype?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>

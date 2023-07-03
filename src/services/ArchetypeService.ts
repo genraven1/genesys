@@ -1,6 +1,7 @@
 import axios from "axios";
 import {Path} from "./Path";
 import Archetype from "../models/actor/player/Archetype";
+import Ability from "../models/Ability";
 
 export default class ArchetypeService {
 
@@ -20,7 +21,11 @@ export default class ArchetypeService {
         return await (await axios.post(Path.Archetype + name)).data
     }
 
-    static async updateArchetype(name: string, talent: Archetype): Promise<Archetype> {
-        return await axios.put(Path.Archetype + name, talent);
+    static async updateArchetype(name: string, archetype: Archetype): Promise<Archetype> {
+        return await (await axios.put(Path.Archetype + name, archetype)).data;
+    }
+
+    static async createArchetypeAbility(name: string, ability: Ability): Promise<Archetype> {
+        return await (await axios.post(Path.Archetype + name + '/abilities', ability)).data
     }
 }

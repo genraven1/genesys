@@ -1,4 +1,5 @@
-import {Activation} from "./Talent";
+import {Activation} from "./common/Activation";
+
 
 export default interface Ability {
     name: string

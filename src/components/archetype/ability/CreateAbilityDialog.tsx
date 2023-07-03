@@ -1,35 +1,25 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import ActorService from "../../../../services/ActorService";
-import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
-import Ability from "../../../../models/Ability";
-import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
-import {Activation, getActivationOptions} from "../../../../models/common/Activation";
+import Ability from "../../../models/Ability";
+import ArchetypeService from "../../../services/ArchetypeService";
+import Archetype from "../../../models/actor/player/Archetype";
+import {Activation, getActivationOptions} from "../../../models/common/Activation";
+import {InputTextFieldCard} from "../../common/InputTextFieldCard";
+import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 
 interface Props {
-    actor: Actor
+    archetype: Archetype
     open: boolean
     onClose: () => void
 }
 
 export default function CreateAbilityDialog(props: Props) {
-    const {actor, open, onClose} = props
+    const {archetype, open, onClose} = props
     const [ability, setAbility] = useState<Ability>()
 
     const onCreate = async (): Promise<void> => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionAbility(actor.name, ability!!)
-                break
-            case ActorType.Rival:
-                await ActorService.createRivalAbility(actor.name, ability!!)
-                break
-            case ActorType.Nemesis:
-                await ActorService.createNemesisAbility(actor.name, ability!!)
-                break
-        }
+        await ArchetypeService.createArchetypeAbility(archetype.name, ability!!)
         onClose()
     }
 
