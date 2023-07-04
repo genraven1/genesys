@@ -25,7 +25,7 @@ export default function GearEdit(props: Props) {
     const {gea, settings} = props
     const {name} = useParams<{ name: string }>()
     const [gear, setGear] = useState<Gear>(gea)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {setGear(gea)}, [gea])

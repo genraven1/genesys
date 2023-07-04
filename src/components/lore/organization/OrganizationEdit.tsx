@@ -23,7 +23,7 @@ export default function OrganizationEdit(props: Props) {
     const {name} = useParams<{ name: string }>()
     const path = LorePath.Organization
     const [organization, setOrganization] = useState<Organization>(org)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {setOrganization(org)}, [org])

@@ -34,7 +34,6 @@ export default function NemesisEdit(props: Props) {
     const {name} = useParams<{ name: string }>()
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
-    const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {

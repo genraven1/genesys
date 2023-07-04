@@ -21,7 +21,6 @@ export default function TalentEdit(props: Props) {
     const {tal, settings} = props
     const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
-    const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {setTalent(tal)}, [tal])

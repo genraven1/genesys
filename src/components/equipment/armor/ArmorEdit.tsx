@@ -20,7 +20,7 @@ export default function ArmorEdit(props: Props) {
     const {ar, settings} = props
     const {name} = useParams<{ name: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {setArmor(ar)}, [ar])

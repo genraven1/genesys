@@ -29,7 +29,7 @@ export default function SkillEdit(props: Props) {
     const {sk, settings} = props
     const {name} = useParams<{ name: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {

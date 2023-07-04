@@ -15,7 +15,7 @@ export default function SettingEdit(props: Props) {
     const {set} = props
     const {name} = useParams<{ name: string }>()
     const [setting, setSetting] = useState<Setting>(set)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {setSetting(set)}, [set])
