@@ -29,7 +29,6 @@ export default function WeaponEdit(props: Props) {
     const {wea, settings} = props
     const {name} = useParams<{ name: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
-    const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {

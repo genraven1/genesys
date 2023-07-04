@@ -83,7 +83,7 @@ export function AllSkillsSelectCard(props: AllProps): JSX.Element {
             }
             setSkills(skillList.filter((skill) => skill.settings.includes(setting?.name!!)))
         })()
-    }, [])
+    }, [setting?.name])
 
     return (
         <Card>
