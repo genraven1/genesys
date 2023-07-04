@@ -23,7 +23,7 @@ export default function GenesysTalentTypography(props: Props): JSX.Element {
             case 5:
                 return die + ' ' + die + ' ' + die + ' ' + die + ' ' + die
             default:
-                return ''
+                return String(secondRanks)
         }
     }
 

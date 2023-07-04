@@ -4,11 +4,10 @@ import {Typography} from "@mui/material";
 interface Props {
     characteristicRanks: number
     skillRanks: number
-    modifier?: string
 }
 
 export default function GenesysSkillDiceTypography(props: Props): JSX.Element {
-    let {characteristicRanks,skillRanks,modifier} = props;
+    let {characteristicRanks,skillRanks} = props;
 
     const generateSkillDice = () => {
         let text = ''
