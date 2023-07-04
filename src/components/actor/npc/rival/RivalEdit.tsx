@@ -34,7 +34,7 @@ export default function RivalEdit(props: Props) {
     const { name } = useParams<{ name: string }>()
     const [rival, setRival] = useState<Rival>(riv)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {setRival(riv)}, [riv])

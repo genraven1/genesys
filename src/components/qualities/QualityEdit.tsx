@@ -20,7 +20,7 @@ export default function QualityEdit(props: Props) {
     const {qual} = props
     const {name} = useParams<{ name: string }>()
     const [quality, setQuality] = useState<Quality>(qual)
-    const [errors, setErrors] = useState({} as any)
+
     let navigate = useNavigate()
 
     useEffect(() => {

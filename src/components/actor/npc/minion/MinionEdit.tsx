@@ -34,7 +34,6 @@ export default function MinionEdit(props: Props) {
     const {name} = useParams<{ name: string }>()
     const [minion, setMinion] = useState<Minion>(min)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
-    const [errors, setErrors] = useState({} as any)
     let navigate = useNavigate()
 
     useEffect(() => {
