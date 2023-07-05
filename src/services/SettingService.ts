@@ -5,7 +5,8 @@ import Setting from "../models/Setting";
 export default class SettingService {
 
     static async getCurrentSetting(): Promise<Setting> {
-        return await (await axios.get(Path.Setting + 'current')).data;
+        return await (await fetch(`/api/settings/current`)).json()
+        // return await (await axios.get(Path.Setting + 'current')).data;
     }
 
     static async setCurrentSetting(name: string): Promise<Setting> {
