@@ -5,7 +5,7 @@ flask_app = Flask(__name__)
 
 @flask_app.get("/settings/current") 
 def getCurrentSetting(): 
-    return {"name": "Setting"}
+    return Response({"name": "Setting"}, mimetype='application/json')
 
 @flask_app.get("/talents/{name}") 
 def getTalent(name: str): 
