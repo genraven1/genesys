@@ -1,27 +1,15 @@
-import azure.functions as func
-import logging
+import azure.functions as func 
+from flask import Flask, request, Response, redirect, url_for 
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+flask_app = Flask(__name__) 
 
-@app.function_name(name="Talent")
-@app.route(route="/talents/{name}", methods=['POST', 'GET', 'PUT'])
-def HandleTalent(req: func.HttpRequest, name) -> func.HttpResponse:
-    if req.method == 'POST':
-        result = {"name": name}
+@flask_app.get("/talents/{name}") 
+def getTalent(name: str): 
+    return
 
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
+@flask_app.post("/talents/{name}")
+def createTalent(name: str): 
+    return
 
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-    else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
+app = func.WsgiFunctionApp(app=flask_app.wsgi_app, 
+                           http_auth_level=func.AuthLevel.ANONYMOUS)
