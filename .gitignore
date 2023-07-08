@@ -24,3 +24,27 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python
+# Environments
+/api/.env
+/api/.venv
+/api/env/
+/api/venv/
+/api/ENV/
+/api/env.bak/
+/api/venv.bak/
+
+/api/__pycache__/
+
+# Azure Functions artifacts
+/api/bin
+/api/obj
+/api/appsettings.json
+/api/local.settings.json
+
+# Azurite artifacts
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json
+.python_packages
