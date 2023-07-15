@@ -11,5 +11,6 @@ export async function GetCurrentSetting(request: HttpRequest, context: Invocatio
 app.http('GetCurrentSetting', {
     methods: ['GET'],
     authLevel: 'anonymous',
+    route: 'setting/current',
     handler: GetCurrentSetting
 });
