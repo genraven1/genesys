@@ -1,11 +1,13 @@
 import axios from "axios";
 import {Path} from "./Path";
-import Setting from "../models/Setting";
+import Setting, {converter, CurrentSetting} from "../models/Setting";
+import firebase from "firebase/compat";
 
 export default class SettingService {
 
-    static async getCurrentSetting(): Promise<Setting> {
-        return await (await axios.get(Path.Setting + 'current')).data;
+    static async getCurrentSetting(): Promise<CurrentSetting> {
+        return (await firebase.firestore().collection('settings').withConverter(converter).doc().get()).data()! as CurrentSetting;
+        // return await (await axios.get(Path.Setting + 'current')).data;
     }
 
     static async setCurrentSetting(name: string): Promise<Setting> {
