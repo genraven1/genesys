@@ -6,11 +6,14 @@ import firebase from "firebase/compat";
 export default class SettingService {
 
     static async getCurrentSetting(): Promise<CurrentSetting> {
-        return (await firebase.firestore().collection('settings').withConverter(converter).doc().get()).data()! as CurrentSetting;
+        return (await firebase.firestore().collection('settings').withConverter(converter).doc('current').get()).data()! as CurrentSetting;
         // return await (await axios.get(Path.Setting + 'current')).data;
     }
 
     static async setCurrentSetting(name: string): Promise<Setting> {
+
+
+        //return (await firebase.firestore().collection('settigns').withConverter(converter).doc('current').set()).data() as Setting
         return await (await axios.post(Path.Setting + 'current/' + name)).data;
     }
 
