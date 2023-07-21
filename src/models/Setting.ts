@@ -1,5 +1,4 @@
-import { WithFieldValue } from "firebase/firestore";
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 import QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 import FirestoreDataConverter = firebase.firestore.FirestoreDataConverter;
 

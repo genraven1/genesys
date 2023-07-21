@@ -1,7 +1,7 @@
 import axios from "axios";
 import {Path} from "./Path";
 import Setting, {converter, CurrentSetting} from "../models/Setting";
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 
 export default class SettingService {
 
