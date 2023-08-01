@@ -16,8 +16,10 @@ public class Setting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
+    @Column(name = "name")
     private String name;
     
+    @Column(name = "magic")
     private boolean magic;
 
     protected Setting() {}
