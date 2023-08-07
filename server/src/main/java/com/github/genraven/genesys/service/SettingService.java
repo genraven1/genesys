@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class SettingService {
     
     @Autowired
-    SettingRepository settingRepository;
+    private SettingRepository settingRepository;
     
     public Setting getCurrentSetting() {
-        
+        return new Setting("");
     }
 }
