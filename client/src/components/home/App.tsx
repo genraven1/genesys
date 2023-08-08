@@ -1,4 +1,4 @@
-import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
@@ -31,7 +31,7 @@ export default function App() {
 
     return (
         <ThemeProvider theme={createTheme({palette: {mode: 'light'}})}>
-            <BrowserRouter>
+            <HashRouter>
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
@@ -94,7 +94,7 @@ export default function App() {
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </ThemeProvider>
     )
 }
