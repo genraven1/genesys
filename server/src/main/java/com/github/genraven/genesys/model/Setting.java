@@ -1,11 +1,13 @@
 package com.github.genraven.genesys.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "setting")
-@Data
+@Getter
+@Setter
 public class Setting {
     
     public Setting(final String name) {
@@ -21,6 +23,9 @@ public class Setting {
     
     @Column(name = "magic")
     private boolean magic;
+
+    @Column(name = "current")
+    private boolean current;
 
     protected Setting() {}
 }
