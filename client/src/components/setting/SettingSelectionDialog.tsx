@@ -16,7 +16,7 @@ export default function SettingSelectionDialog(props: Props) {
     const [setting, setSetting] = useState<Setting>(current)
 
     const getTitle = (): string => {
-        return 'Current: ' + setting!!
+        return 'Current: ' + setting?.name!!
     }
 
     const onSettingChange = async (event: SelectChangeEvent) => {
