@@ -1,6 +1,7 @@
 import {CharacteristicType} from './Characteristics';
 
 export default interface Skill {
+    id: number
     characteristic: CharacteristicType
     type: SkillType
     name: string
