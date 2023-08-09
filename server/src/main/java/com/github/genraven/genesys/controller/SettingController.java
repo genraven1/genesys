@@ -30,7 +30,7 @@ public class SettingController {
         return ResponseEntity.ok(settingService.getCurrentSetting());
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<Setting>> getSettings() {
         return ResponseEntity.ok(settingService.getSettings());
     }
@@ -43,5 +43,10 @@ public class SettingController {
     @GetMapping("/{name}")
     public ResponseEntity<Setting> getSetting(@PathVariable final String name) {
         return ResponseEntity.ok(settingService.getSetting(name));
+    }
+
+    @PutMapping("/{name}")
+    public ResponseEntity<Setting> updateSetting(@PathVariable final String name, @RequestBody final Setting setting) {
+        return ResponseEntity.ok(settingService.updateSetting(setting));
     }
 }
