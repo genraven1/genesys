@@ -74,7 +74,7 @@ export default function SkillEdit(props: Props) {
 
     const updateSkill = async (copySkill: Skill) => {
         setSkill(copySkill)
-        await SkillService.updateSkill(copySkill.name, copySkill)
+        await SkillService.updateSkill(copySkill.id, copySkill)
     }
 
     const onView = () => {

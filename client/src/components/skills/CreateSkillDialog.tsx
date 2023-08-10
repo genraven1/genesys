@@ -16,7 +16,7 @@ export default function CreateSkillDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let skill = await SkillService.createSkill(name)
-        navigate(Path.Skills + skill?.name!!  + '/edit')
+        navigate(Path.Skills + skill?.id!!  + '/edit')
         onClose()
     }
 
