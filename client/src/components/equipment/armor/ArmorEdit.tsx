@@ -25,13 +25,13 @@ export default function ArmorEdit(props: Props) {
 
     useEffect(() => {setArmor(ar)}, [ar])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyArmor = {...armor} as Armor
         copyArmor.settings = copyArmor.settings.concat(setting)
         await updateArmor(copyArmor)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyArmor = {...armor} as Armor
         copyArmor.settings.forEach((set, index) => {
             if (set === setting) {
@@ -103,7 +103,7 @@ export default function ArmorEdit(props: Props) {
                         <EditPriceCheckBoxCard check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={armor?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
-                    <EditSettingsCard names={armor?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard ids={armor?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>

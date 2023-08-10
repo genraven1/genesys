@@ -25,13 +25,13 @@ export default function TalentEdit(props: Props) {
 
     useEffect(() => {setTalent(tal)}, [tal])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyTalent = {...talent} as Talent
         copyTalent.settings = copyTalent.settings.concat(setting)
         await updateTalent(copyTalent)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyTalent = {...talent} as Talent
         copyTalent.settings.forEach((set, index) => {
             if (set === setting) {
@@ -96,7 +96,7 @@ export default function TalentEdit(props: Props) {
                         <InputSelectFieldCard defaultValue={talent?.activation!!} onCommit={(value: string): void => { onChange('activation', value) }} title={'Activation'} options={getActivationOptions()} />
                         <InputSelectFieldCard defaultValue={talent?.tier!!} onCommit={(value: string): void => { onChange('tier', value) }} title={'Tier'} options={getTierOptions()} />
                     </Grid>
-                    <EditSettingsCard names={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    <EditSettingsCard ids={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

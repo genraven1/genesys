@@ -21,17 +21,17 @@ public class SettingService {
         return findAllSettings().stream().filter(Setting::isCurrent).findFirst().orElse(new Setting(""));
     }
 
-    public Setting setCurrentSetting(final String name) {
+    public Setting setCurrentSetting(final Long id) {
         Setting current = null;
         for (final Setting setting : findAllSettings()) {
-            if (setting.getName().equals(name)) {
+            if (setting.getId() == id) {
                 setting.setCurrent(true);
                 current = setting;
             }
             else {
                 setting.setCurrent(false);
             }
-            updateSetting(setting);
+            updateSetting(setting.getId(), setting);
         }
         return current;
     }
@@ -44,12 +44,15 @@ public class SettingService {
         return settingRepository.save(new Setting(name));
     }
 
-    public Setting updateSetting(final Setting setting) {
+    public Setting updateSetting(final Long id, final Setting setting) {
+        final Setting oldSetting = getSetting(id);
+        oldSetting.setMagic(setting.isMagic());
+        oldSetting.setCurrent(setting.isCurrent());
         return settingRepository.save(setting);
     }
 
-    public Setting getSetting(final String name) {
-        return settingRepository.findByName(name);
+    public Setting getSetting(final Long id) {
+        return settingRepository.findById(id).orElse(new Setting(""));
     }
 
     public List<Setting> getSettings() {

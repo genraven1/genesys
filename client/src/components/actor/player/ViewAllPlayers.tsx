@@ -24,7 +24,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow>
             <TypographyCenterTableCell value={player.name}/>
-            <ActionsTableCell name={player.name} path={ActorPath.Player}/>
+            <ActionsTableCell id={String(player.id)} path={ActorPath.Player}/>
         </TableRow>
     )
 }

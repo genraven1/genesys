@@ -40,13 +40,13 @@ export default function MinionEdit(props: Props) {
         setMinion(min)
     }, [min])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyMinion = {...minion} as Minion
         copyMinion.settings = copyMinion.settings.concat(setting)
         await updateMinion(copyMinion)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyMinion = {...minion} as Minion
         copyMinion.settings.forEach((set, index) => {
             if (set === setting) {
@@ -192,7 +192,7 @@ export default function MinionEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
-                <EditSettingsCard names={minion?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard ids={minion?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>
         </Card>

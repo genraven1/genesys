@@ -16,8 +16,8 @@ export default class SettingService {
         return await (await axios.get(Path.Setting)).data;
     }
 
-    static async getSetting(name: string): Promise<Setting> {
-        return await (await axios.get(Path.Setting + name)).data;
+    static async getSetting(id: number): Promise<Setting> {
+        return await (await axios.get(Path.Setting + id)).data;
     }
 
     static async createSetting(name: string): Promise<Setting> {

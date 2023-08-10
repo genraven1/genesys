@@ -25,7 +25,7 @@ function Row(props: Props): JSX.Element {
 
     const renderSettingTableCell = ():JSX.Element => {
         let value = "No"
-        if (skill?.settings!!.includes(setting?.name!!)) {
+        if (skill?.settings!!.includes(setting?.id!!)) {
             value = "Yes"
         }
         return <TypographyCenterTableCell value={value}/>
@@ -37,7 +37,7 @@ function Row(props: Props): JSX.Element {
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
             {renderSettingTableCell()}
-            <ActionsTableCell name={skill.name} path={Path.Skills}/>
+            <ActionsTableCell id={String(skill.id)} path={Path.Skills}/>
         </TableRow>
     )
 }

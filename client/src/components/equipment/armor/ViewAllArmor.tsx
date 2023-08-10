@@ -19,24 +19,24 @@ import { renderHeaders } from '../../common/table/TableRenders';
 import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';
 
 interface Props {
-    row: Armor
+    armor: Armor
     columns: number
 }
 
 function Row(props: Props): JSX.Element {
-    const { row, columns } = props
+    const { armor, columns } = props
     const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TypographyCenterTableCell value={row.name}/>
-                <TypographyCenterTableCell value={String(row.defense)}/>
-                <TypographyCenterTableCell value={renderSoak(row)}/>
-                <TypographyCenterTableCell value={String(row.encumbrance)}/>
-                <TypographyCenterTableCell value={renderPrice(row)}/>
-                <TypographyCenterTableCell value={String(row.rarity)}/>
-                <ActionsTableCell name={row.name} path={EquipmentPath.Armor}/>
+                <TypographyCenterTableCell value={armor.name}/>
+                <TypographyCenterTableCell value={String(armor.defense)}/>
+                <TypographyCenterTableCell value={renderSoak(armor)}/>
+                <TypographyCenterTableCell value={String(armor.encumbrance)}/>
+                <TypographyCenterTableCell value={renderPrice(armor)}/>
+                <TypographyCenterTableCell value={String(armor.rarity)}/>
+                <ActionsTableCell id={String(armor.id)} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
@@ -44,7 +44,7 @@ function Row(props: Props): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={row?.description!!}/>
+                                    <GenesysDescriptionTypography text={armor?.description!!}/>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -74,8 +74,8 @@ export default function ViewAllArmor() {
                     {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {armors.map((row: Armor) => (
-                        <Row key={row.name} row={row} columns={headers.length}/>
+                    {armors.map((armor: Armor) => (
+                        <Row key={armor.name} armor={armor} columns={headers.length}/>
                     ))}
                 </TableBody>
             </Table>

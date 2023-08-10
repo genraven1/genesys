@@ -35,13 +35,13 @@ export default function WeaponEdit(props: Props) {
         setWeapon(wea)
     }, [wea])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.settings = copyWeapon.settings.concat(setting)
         await updateWeapon(copyWeapon)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.settings.forEach((set, index) => {
             if (set === setting) {
@@ -162,7 +162,7 @@ export default function WeaponEdit(props: Props) {
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
-                    <EditSettingsCard names={weapon?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard ids={weapon?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>

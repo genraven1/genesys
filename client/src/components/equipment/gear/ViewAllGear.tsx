@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Fragment, useEffect, useState } from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
@@ -16,17 +16,20 @@ import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
 
-function Row(props: { row: Gear }): JSX.Element {
-    const {row} = props
+interface Props {
+    gear: Gear
+}
+
+function Row(props: Props): JSX.Element {
+    const {gear} = props
     const [open, setOpen] = useState(false)
 
     const renderPrice = (): JSX.Element => {
         let price = ''
-        if (row.restricted) {
-            price = row.price + '(R)'
-        }
-        else {
-            price = String(row.price)
+        if (gear.restricted) {
+            price = gear.price + '(R)'
+        } else {
+            price = String(gear.price)
         }
         return (
             <Fragment>
@@ -37,20 +40,20 @@ function Row(props: { row: Gear }): JSX.Element {
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell>{row.encumbrance}</TableCell>
+            <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
+                <TableCell component="th" scope="row">{gear.name}</TableCell>
+                <TableCell>{gear.encumbrance}</TableCell>
                 <TableCell>{renderPrice()}</TableCell>
-                <TableCell>{row.rarity}</TableCell>
-                <ActionsTableCell name={row.name} path={EquipmentPath.Gear}/>
+                <TableCell>{gear.rarity}</TableCell>
+                <ActionsTableCell id={String(gear.id)} path={EquipmentPath.Gear}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={row.description}/>
+                                    <GenesysDescriptionTypography text={gear.description}/>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -67,7 +70,9 @@ export default function ViewAllGear(): JSX.Element {
     useEffect(() => {
         (async (): Promise<void> => {
             const gearList = await EquipmentService.getGears()
-            if (!gearList) {return}
+            if (!gearList) {
+                return
+            }
             setGears(gearList)
         })()
     }, [])
@@ -85,8 +90,8 @@ export default function ViewAllGear(): JSX.Element {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {gears.map((row: Gear) => (
-                        <Row key={row.name} row={row} />
+                    {gears.map((gear: Gear) => (
+                        <Row key={gear.name} gear={gear}/>
                     ))}
                 </TableBody>
             </Table>

@@ -5,7 +5,6 @@ import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
-import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
 import Quality from "../../models/Quality";
 import QualityService from "../../services/QualityService";
@@ -13,7 +12,6 @@ import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 
 interface Props {
     qual: Quality
-    allSettings: Setting[]
 }
 
 export default function QualityEdit(props: Props) {

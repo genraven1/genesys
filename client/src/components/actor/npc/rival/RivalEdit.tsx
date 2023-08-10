@@ -39,13 +39,13 @@ export default function RivalEdit(props: Props) {
 
     useEffect(() => {setRival(riv)}, [riv])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyRival = {...rival} as Rival
         copyRival.settings = copyRival.settings.concat(setting)
         await updateRival(copyRival)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyRival = {...rival} as Rival
         copyRival.settings.forEach((set, index) => {
             if (set === setting) {
@@ -154,7 +154,7 @@ export default function RivalEdit(props: Props) {
                     {openSelectTalentDialog && <TalentSelectionDialog actor={rival} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={rival}/>
                 </Grid>
-                <EditSettingsCard names={rival?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard ids={rival?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>
         </Card>

@@ -5,7 +5,7 @@ export default interface Skill {
     characteristic: CharacteristicType
     type: SkillType
     name: string
-    settings: string[]
+    settings: number[]
 }
 
 export enum SkillType {

@@ -40,13 +40,13 @@ export default function NemesisEdit(props: Props) {
         setNemesis(nem)
     }, [nem])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyNemesis = {...nemesis} as Nemesis
         copyNemesis.settings = copyNemesis.settings.concat(setting)
         await updateNemesis(copyNemesis)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyNemesis = {...nemesis} as Nemesis
         copyNemesis.settings.forEach((set, index) => {
             if (set === setting) {
@@ -200,7 +200,7 @@ export default function NemesisEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={nemesis}/>
                 </Grid>
-                <EditSettingsCard names={nemesis?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard ids={nemesis?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>
         </Card>

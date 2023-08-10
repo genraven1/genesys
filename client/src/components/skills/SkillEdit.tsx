@@ -36,13 +36,13 @@ export default function SkillEdit(props: Props) {
         setSkill(sk)
     }, [sk])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copySkill = {...skill} as Skill
         copySkill.settings = copySkill.settings.concat(setting)
         await updateSkill(copySkill)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copySkill = {...skill} as Skill
         copySkill.settings.forEach((set, index) => {
             if (set === setting) {
@@ -97,7 +97,7 @@ export default function SkillEdit(props: Props) {
                     <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => {
                         onChange('characteristic', value)
                     }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
-                    <EditSettingsCard names={skill?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard ids={skill?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>

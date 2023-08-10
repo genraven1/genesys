@@ -38,7 +38,7 @@ export default function SkillView(props: Props): JSX.Element {
                     <ViewFieldCard name={'Skill Type'} value={skill?.type!!} />
                     <ViewFieldCard name={'Linked Characteristic'} value={skill?.characteristic!!} />
                 </Grid>
-                <ViewSettingsCard settingNames={skill?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settingIds={skill?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

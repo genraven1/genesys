@@ -37,13 +37,13 @@ export default function PlayerView(props: Props) {
         setPlayer(play)
     }, [play])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyPlayer = {...player} as Player
         copyPlayer.settings = copyPlayer.settings.concat(setting)
         await updatePlayer(copyPlayer)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyPlayer = {...player} as Player
         copyPlayer.settings.forEach((set, index) => {
             if (set === setting) {
@@ -169,7 +169,7 @@ export default function PlayerView(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <PlayerTalentTable player={player}/>
                 </Grid>
-                <EditSettingsCard names={player?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard ids={player?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} settings={settings}/>
             </CardContent>
         </Card>

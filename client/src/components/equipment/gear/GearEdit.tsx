@@ -30,13 +30,13 @@ export default function GearEdit(props: Props) {
 
     useEffect(() => {setGear(gea)}, [gea])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (setting: number) => {
         const copyGear = {...gear} as Gear
         copyGear.settings = copyGear.settings.concat(setting)
         await updateGear(copyGear)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (setting: number) => {
         const copyGear = {...gear} as Gear
         copyGear.settings.forEach((set, index) => {
             if (set === setting) {
@@ -114,7 +114,7 @@ export default function GearEdit(props: Props) {
                         <EditPriceCheckBoxCard check={gear?.restricted!!} value={gear?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={gear?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
-                    <EditSettingsCard names={gear?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard ids={gear?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} settings={settings}/>
                 </Grid>
             </CardContent>

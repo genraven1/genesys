@@ -1,6 +1,7 @@
 import {EquipmentQuality} from "../Quality";
 
 export default interface Equipment {
+    id: number
     name: string
     description: string
     price: number
@@ -8,7 +9,7 @@ export default interface Equipment {
     encumbrance: number
     rarity: number
     qualities: EquipmentQuality[]
-    settings: string[]
+    settings: number[]
 }
 
 export interface ActorEquipment {
