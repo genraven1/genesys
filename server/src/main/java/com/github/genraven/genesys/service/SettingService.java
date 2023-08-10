@@ -18,12 +18,12 @@ public class SettingService {
     }
 
     public Setting getCurrentSetting() {
-        return findAllSettings().stream().filter(Setting::isCurrent).findFirst().orElse(new Setting(""));
+        return getSettings().stream().filter(Setting::isCurrent).findFirst().orElse(new Setting(""));
     }
 
     public Setting setCurrentSetting(final Long id) {
         Setting current = null;
-        for (final Setting setting : findAllSettings()) {
+        for (final Setting setting : getSettings()) {
             if (setting.getId() == id) {
                 setting.setCurrent(true);
                 current = setting;
@@ -34,10 +34,6 @@ public class SettingService {
             updateSetting(setting.getId(), setting);
         }
         return current;
-    }
-
-    public List<Setting> findAllSettings() {
-        return settingRepository.findAll();
     }
 
     public Setting createSetting(final String name) {
