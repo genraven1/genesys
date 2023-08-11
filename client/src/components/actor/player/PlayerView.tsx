@@ -56,7 +56,7 @@ export default function PlayerView(props: Props) {
                     <Divider />
                     <PlayerTalentTable player={player}/>
                 </Grid>
-                <ViewSettingsCard settingIds={player?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={player?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

@@ -1,4 +1,5 @@
 import {Option} from "../components/common/InputSelectField";
+import Setting from "./Setting";
 
 export default interface Talent {
     id: number
@@ -8,7 +9,7 @@ export default interface Talent {
     tier: Tier
     summary: string
     description: string
-    settings: number[]
+    settings: Setting[]
 }
 
 export enum Activation {

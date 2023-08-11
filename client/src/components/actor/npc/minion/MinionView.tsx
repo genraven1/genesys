@@ -63,7 +63,7 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
-                <ViewSettingsCard settingIds={minion?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={minion?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

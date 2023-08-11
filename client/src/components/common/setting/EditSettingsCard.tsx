@@ -11,14 +11,14 @@ import CheckboxTableCell from "../table/CheckboxTableCell";
 import Setting from "../../../models/Setting";
 
 interface Props {
-    ids: number[]
+    settings: Setting[]
     onSettingAddition: (id: number) => void
     onSettingRemoval: (id: number) => void
-    settings: Setting[]
+    allSettings: Setting[]
 }
 
 export default function EditSettingsCard(props: Props): JSX.Element {
-    const {ids, onSettingAddition, onSettingRemoval, settings} = props
+    const {settings, onSettingAddition, onSettingRemoval, allSettings} = props
 
     return (
         <Card sx={{"width": 1}}>
@@ -27,10 +27,10 @@ export default function EditSettingsCard(props: Props): JSX.Element {
                 <TableContainer component={Paper}>
                     <Table>
                         <TableBody>
-                            {(settings || [])!!.map((setting: Setting) => (
+                            {(allSettings || [])!!.map((setting: Setting) => (
                                 <TableRow>
                                     <TypographyCenterTableCell value={setting.name}/>
-                                    <CheckboxTableCell value={ids!!.includes(setting.id)}
+                                    <CheckboxTableCell value={settings!!.includes(setting)}
                                                        onAddition={() => onSettingAddition(setting.id)}
                                                        onRemoval={() => onSettingRemoval(setting.id)}/>
                                 </TableRow>

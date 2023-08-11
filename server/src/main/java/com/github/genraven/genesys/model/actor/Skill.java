@@ -1,11 +1,13 @@
 package com.github.genraven.genesys.model.actor;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.genraven.genesys.model.Setting;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -45,7 +47,7 @@ public class Skill {
                     referencedColumnName = "id"
             )
     )
-    private List<Setting> settings;
+    private List<Setting> settings= new ArrayList<>();
 
     @AllArgsConstructor
     @Getter
@@ -56,6 +58,7 @@ public class Skill {
         KNOWLEDGE("Knowledge"),
         COMBAT("Combat");
 
+        @JsonValue
         private final String label;
     }
 }

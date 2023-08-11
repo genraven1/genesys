@@ -3,13 +3,13 @@ import Setting from "../../../models/Setting";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 import * as React from "react";
 
-export const renderSettings = (settings: number[], allSettings: Setting[]):JSX.Element => {
+export const renderSettings = (settings: Setting[], allSettings: Setting[]):JSX.Element => {
     if (settings === undefined) {
         return <GenesysDescriptionTypography text={'None'}/>
     }
     let settingList = []
     for (let setting of allSettings) {
-        if (settings.includes(setting.id)) {
+        if (settings.includes(setting)) {
             settingList.push(setting)
         }
     }

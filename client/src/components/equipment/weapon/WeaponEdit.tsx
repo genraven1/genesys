@@ -18,6 +18,7 @@ import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
+import SettingService from "../../../services/SettingService";
 
 
 interface Props {
@@ -35,16 +36,17 @@ export default function WeaponEdit(props: Props) {
         setWeapon(wea)
     }, [wea])
 
-    const onSettingAddition = async (setting: number) => {
+    const onSettingAddition = async (id: number) => {
         const copyWeapon = {...weapon} as Weapon
+        let setting = await SettingService.getSetting(id)
         copyWeapon.settings = copyWeapon.settings.concat(setting)
         await updateWeapon(copyWeapon)
     }
 
-    const onSettingRemoval = async (setting: number) => {
+    const onSettingRemoval = async (id: number) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyWeapon.settings.splice(index, 1)
             }
         })
@@ -162,8 +164,8 @@ export default function WeaponEdit(props: Props) {
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
-                    <EditSettingsCard ids={weapon?.settings!!} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    <EditSettingsCard settings={weapon?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

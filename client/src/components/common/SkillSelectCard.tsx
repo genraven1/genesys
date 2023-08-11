@@ -41,9 +41,9 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
             if (!skillList) {
                 return
             }
-            setSkills(skillList.filter((skill) => skill.type === type).filter((skill) => skill.settings.includes(setting?.id!!)))
+            setSkills(skillList.filter((skill) => skill.type === type).filter((skill) => skill.settings.includes(setting!!)))
         })()
-    }, [setting?.id, type])
+    }, [setting, type])
 
     return (
         <Card>
@@ -81,7 +81,7 @@ export function AllSkillsSelectCard(props: AllProps): JSX.Element {
             if (!skillList) {
                 return
             }
-            setSkills(skillList.filter((skill) => skill.settings.includes(setting?.id!!)))
+            setSkills(skillList.filter((skill) => skill.settings.includes(setting!!)))
         })()
     }, [setting?.id])
 

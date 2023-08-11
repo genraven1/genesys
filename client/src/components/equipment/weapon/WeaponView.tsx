@@ -67,7 +67,7 @@ export default function WeaponView(props: Props) {
                         </Table>
                     </TableContainer>
                     <Divider/>
-                    <ViewSettingsCard settingIds={weapon?.settings!!} allSettings={settings}/>
+                    <ViewSettingsCard settings={weapon?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

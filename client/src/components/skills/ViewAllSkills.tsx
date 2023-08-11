@@ -25,7 +25,7 @@ function Row(props: Props): JSX.Element {
 
     const renderSettingTableCell = ():JSX.Element => {
         let value = "No"
-        if (skill?.settings!!.includes(setting?.id!!)) {
+        if (skill?.settings!!.includes(setting!!)) {
             value = "Yes"
         }
         return <TypographyCenterTableCell value={value}/>

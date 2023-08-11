@@ -23,6 +23,7 @@ import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityC
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import SettingService from "../../../../services/SettingService";
 
 interface Props {
     min: Minion
@@ -40,16 +41,17 @@ export default function MinionEdit(props: Props) {
         setMinion(min)
     }, [min])
 
-    const onSettingAddition = async (setting: number) => {
+    const onSettingAddition = async (id: number) => {
         const copyMinion = {...minion} as Minion
+        let setting = await SettingService.getSetting(id)
         copyMinion.settings = copyMinion.settings.concat(setting)
         await updateMinion(copyMinion)
     }
 
-    const onSettingRemoval = async (setting: number) => {
+    const onSettingRemoval = async (id: number) => {
         const copyMinion = {...minion} as Minion
         copyMinion.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyMinion.settings.splice(index, 1)
             }
         })
@@ -192,8 +194,8 @@ export default function MinionEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
-                <EditSettingsCard ids={minion?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

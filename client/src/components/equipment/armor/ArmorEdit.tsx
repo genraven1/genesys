@@ -10,6 +10,7 @@ import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
 import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
+import SettingService from "../../../services/SettingService";
 
 interface Props {
     ar: Armor
@@ -25,16 +26,17 @@ export default function ArmorEdit(props: Props) {
 
     useEffect(() => {setArmor(ar)}, [ar])
 
-    const onSettingAddition = async (setting: number) => {
+    const onSettingAddition = async (id: number) => {
         const copyArmor = {...armor} as Armor
+        let setting = await SettingService.getSetting(id)
         copyArmor.settings = copyArmor.settings.concat(setting)
         await updateArmor(copyArmor)
     }
 
-    const onSettingRemoval = async (setting: number) => {
+    const onSettingRemoval = async (id: number) => {
         const copyArmor = {...armor} as Armor
         copyArmor.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyArmor.settings.splice(index, 1)
             }
         })
@@ -103,8 +105,8 @@ export default function ArmorEdit(props: Props) {
                         <EditPriceCheckBoxCard check={armor?.restricted!!} value={armor?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={armor?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
-                    <EditSettingsCard ids={armor?.settings!!} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    <EditSettingsCard settings={armor?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -20,9 +20,7 @@ public class SkillService {
     }
 
     public Skill updateSkill(final Long id, final Skill skill) {
-        final Skill oldSkill = getSkill(id);
-
-        return skillRepository.save(oldSkill);
+        return skillRepository.save(skill);
     }
 
     public Skill getSkill(final Long id) {

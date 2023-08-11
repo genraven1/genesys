@@ -20,6 +20,7 @@ import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import * as React from "react";
+import SettingService from "../../../services/SettingService";
 
 interface Props {
     play: Player
@@ -37,16 +38,17 @@ export default function PlayerView(props: Props) {
         setPlayer(play)
     }, [play])
 
-    const onSettingAddition = async (setting: number) => {
+    const onSettingAddition = async (id: number) => {
         const copyPlayer = {...player} as Player
+        let setting = await SettingService.getSetting(id)
         copyPlayer.settings = copyPlayer.settings.concat(setting)
         await updatePlayer(copyPlayer)
     }
 
-    const onSettingRemoval = async (setting: number) => {
+    const onSettingRemoval = async (id: number) => {
         const copyPlayer = {...player} as Player
         copyPlayer.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyPlayer.settings.splice(index, 1)
             }
         })
@@ -169,8 +171,8 @@ export default function PlayerView(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <PlayerTalentTable player={player}/>
                 </Grid>
-                <EditSettingsCard ids={player?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={player?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

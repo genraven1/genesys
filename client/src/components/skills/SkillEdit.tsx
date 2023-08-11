@@ -11,6 +11,7 @@ import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
 import Setting from "../../models/Setting";
+import SettingService from "../../services/SettingService";
 
 const getSkillTypes = (): Option[] => {
     return Object.values(SkillType).map((value) => ({value}))
@@ -27,7 +28,7 @@ interface Props {
 
 export default function SkillEdit(props: Props) {
     const {sk, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
 
     let navigate = useNavigate()
@@ -36,16 +37,17 @@ export default function SkillEdit(props: Props) {
         setSkill(sk)
     }, [sk])
 
-    const onSettingAddition = async (setting: number) => {
+    const onSettingAddition = async (id: number) => {
         const copySkill = {...skill} as Skill
+        let setting = await SettingService.getSetting(id)
         copySkill.settings = copySkill.settings.concat(setting)
         await updateSkill(copySkill)
     }
 
-    const onSettingRemoval = async (setting: number) => {
+    const onSettingRemoval = async (id: number) => {
         const copySkill = {...skill} as Skill
         copySkill.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copySkill.settings.splice(index, 1)
             }
         })
@@ -78,7 +80,7 @@ export default function SkillEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Skills + name + '/view');
+        navigate(Path.Skills + id + '/view');
     }
 
     return (
@@ -97,8 +99,9 @@ export default function SkillEdit(props: Props) {
                     <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => {
                         onChange('characteristic', value)
                     }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
-                    <EditSettingsCard ids={skill?.settings!!} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    {console.log(skill!!)}
+                    <EditSettingsCard settings={skill?.settings!!} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

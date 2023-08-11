@@ -67,7 +67,7 @@ export default function ArmorView(props: Props) {
                     </TableContainer>
                 </Grid>
                 <Divider/>
-                <ViewSettingsCard settingIds={armor?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={armor?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )
