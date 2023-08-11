@@ -30,6 +30,7 @@ export default function EditSettingsCard(props: Props): JSX.Element {
                             {(allSettings || [])!!.map((setting: Setting) => (
                                 <TableRow>
                                     <TypographyCenterTableCell value={setting.name}/>
+                                    {console.log(settings)}
                                     <CheckboxTableCell value={settings!!.includes(setting)}
                                                        onAddition={() => onSettingAddition(setting.id)}
                                                        onRemoval={() => onSettingRemoval(setting.id)}/>

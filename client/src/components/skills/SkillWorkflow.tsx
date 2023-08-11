@@ -19,6 +19,7 @@ function useFetchSkill(id: number): Skill {
             } catch (err) {console.log(err)}
         })()
     },[id, setSkill])
+    console.log('skill' + skill)
     return skill as Skill
 }
 
