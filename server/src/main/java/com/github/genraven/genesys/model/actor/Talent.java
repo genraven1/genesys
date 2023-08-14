@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "talent")
 @Getter
 @Setter
-public class Skill {
+public class Talent {
 
-    public Skill(final String name) {
+    public Talent(final String name) {
         this.name = name;
     }
 
-    protected Skill(){}
+    protected Talent(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,17 +29,26 @@ public class Skill {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
-    private Type type;
+    @Column(name = "ranked")
+    private boolean ranked;
 
-    @Column(name="characteristic")
-    private Characteristic characteristic;
+    @Column(name = "activation")
+    private Activation activation;
+
+    @Column(name = "tier")
+    private Tier tier;
+
+    @Column(name = "summary")
+    private String summary;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany
     @JoinTable(
-            name = "skill_settings",
+            name = "talent_settings",
             joinColumns = @JoinColumn(
-                    name = "skill_id",
+                    name = "talent_id",
                     referencedColumnName = "id"
             ),
             inverseJoinColumns = @JoinColumn(
@@ -51,12 +60,12 @@ public class Skill {
 
     @AllArgsConstructor
     @Getter
-    public enum Type {
-        GENERAL("General"),
-        MAGIC("Magic"),
-        SOCIAL("Social"),
-        KNOWLEDGE("Knowledge"),
-        COMBAT("Combat");
+    public enum Tier {
+        FIRST("First"),
+        SECOND("Second"),
+        THIRD("Third"),
+        FOURTH("Fourth"),
+        FIFTH("Fifth");
 
         @JsonValue
         private final String label;
