@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.model.actor;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,5 +14,6 @@ public enum Characteristic {
     WILLPOWER("Willpower"),
     PRESENCE("Presence");
 
+    @JsonValue
     private final String label;
 }

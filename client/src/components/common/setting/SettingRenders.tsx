@@ -9,7 +9,7 @@ export const renderSettings = (settings: Setting[], allSettings: Setting[]):JSX.
     }
     let settingList = []
     for (let setting of allSettings) {
-        if (settings.includes(setting)) {
+        if (settings.some(set => set.id === setting.id)) {
             settingList.push(setting)
         }
     }
