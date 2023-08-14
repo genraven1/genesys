@@ -6,8 +6,10 @@ import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
+import Setting from "../Setting";
 
 export default interface Actor {
+    id: number
     name: string,
     type: ActorType,
     brawn: Characteristic,
@@ -24,7 +26,7 @@ export default interface Actor {
     weapons: ActorWeapon[],
     armor: ActorArmor[],
     gear: ActorGear[],
-    settings: string[]
+    settings: Setting[]
 }
 
 export interface ActorTalent extends Talent {

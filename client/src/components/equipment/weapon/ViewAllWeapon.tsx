@@ -17,40 +17,40 @@ import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 
 interface Props {
-    row: Weapon
+    weapon: Weapon
     columns: number
 }
 
 function Row(props: Props): JSX.Element {
-    const {row, columns} = props
+    const {weapon, columns} = props
     const [open, setOpen] = useState(false)
 
     const renderDamage = (): string => {
         let damage = ''
-        if (row.brawn) {damage = 'Brawn + ' + row.damage}
-        else {damage = String(row.damage)}
+        if (weapon.brawn) {damage = 'Brawn + ' + weapon.damage}
+        else {damage = String(weapon.damage)}
         return damage
     }
 
     const renderPrice = (): string => {
         let price = ''
-        if (row.restricted) {price = row.price + '(R)'}
-        else {price = String(row.price)}
+        if (weapon.restricted) {price = weapon.price + '(R)'}
+        else {price = String(weapon.price)}
         return price
     }
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TypographyCenterTableCell value={row.name}/>
-                <TypographyCenterTableCell value={row.skill.name}/>
+                <TypographyCenterTableCell value={weapon.name}/>
+                <TypographyCenterTableCell value={weapon.skill.name}/>
                 <TypographyCenterTableCell value={renderDamage()}/>
-                <TypographyCenterTableCell value={String(row.critical)}/>
-                <TypographyCenterTableCell value={row.range}/>
-                <TypographyCenterTableCell value={String(row.encumbrance)}/>
+                <TypographyCenterTableCell value={String(weapon.critical)}/>
+                <TypographyCenterTableCell value={weapon.range}/>
+                <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice()}/>
-                <TypographyCenterTableCell value={String(row.rarity)}/>
-                <ActionsTableCell name={row.name} path={EquipmentPath.Weapon}/>
+                <TypographyCenterTableCell value={String(weapon.rarity)}/>
+                <ActionsTableCell id={String(weapon.id)} path={EquipmentPath.Weapon}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
@@ -58,7 +58,7 @@ function Row(props: Props): JSX.Element {
                         <Box sx={{ margin: 1 }}>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={row.description}/>
+                                    <GenesysDescriptionTypography text={weapon.description}/>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -99,7 +99,7 @@ export default function ViewAllWeapon(): JSX.Element {
                 </TableHead>
                 <TableBody>
                     {weapons.map((row: Weapon) => (
-                        <Row key={row.name} row={row} columns={headers.length}/>
+                        <Row key={row.name} weapon={row} columns={headers.length}/>
                     ))}
                 </TableBody>
             </Table>

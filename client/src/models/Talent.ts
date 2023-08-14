@@ -1,13 +1,15 @@
 import {Option} from "../components/common/InputSelectField";
+import Setting from "./Setting";
 
 export default interface Talent {
+    id: number
     name: string
     ranked: boolean
     activation: Activation
     tier: Tier
     summary: string
     description: string
-    settings: string[]
+    settings: Setting[]
 }
 
 export enum Activation {

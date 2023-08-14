@@ -11,6 +11,7 @@ import * as React from "react";
 import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
+import SettingService from "../../services/SettingService";
 
 interface Props {
     tal: Talent
@@ -25,16 +26,17 @@ export default function TalentEdit(props: Props) {
 
     useEffect(() => {setTalent(tal)}, [tal])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (id: number) => {
         const copyTalent = {...talent} as Talent
+        let setting = await SettingService.getSetting(id)
         copyTalent.settings = copyTalent.settings.concat(setting)
         await updateTalent(copyTalent)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (id: number) => {
         const copyTalent = {...talent} as Talent
         copyTalent.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyTalent.settings.splice(index, 1)
             }
         })
@@ -96,7 +98,7 @@ export default function TalentEdit(props: Props) {
                         <InputSelectFieldCard defaultValue={talent?.activation!!} onCommit={(value: string): void => { onChange('activation', value) }} title={'Activation'} options={getActivationOptions()} />
                         <InputSelectFieldCard defaultValue={talent?.tier!!} onCommit={(value: string): void => { onChange('tier', value) }} title={'Tier'} options={getTierOptions()} />
                     </Grid>
-                    <EditSettingsCard names={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} settings={settings}/>
+                    <EditSettingsCard settings={talent?.settings!!} onSettingAddition={onSettingAddition} onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

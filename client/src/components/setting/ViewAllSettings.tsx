@@ -14,11 +14,15 @@ import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import SettingDialog from "./SettingDialog";
 
-function Row(props: { row: Setting }): JSX.Element {
-    const {row} = props
+interface Props {
+    setting: Setting
+}
+
+function Row(props: Props): JSX.Element {
+    const {setting} = props
 
     const renderSettingMagicTableCell = (): JSX.Element => {
-        if (row?.magic!!) {
+        if (setting?.magic!!) {
             return <TypographyCenterTableCell value={'True'}/>
         }
         else {
@@ -28,9 +32,9 @@ function Row(props: { row: Setting }): JSX.Element {
 
     return (
         <TableRow>
-            <TypographyCenterTableCell value={row.name}/>
+            <TypographyCenterTableCell value={setting.name}/>
             {renderSettingMagicTableCell()}
-            <ActionsTableCell name={row.name} path={Path.Setting}/>
+            <ActionsTableCell id={String(setting.id)} path={Path.Setting}/>
         </TableRow>
     )
 }
@@ -66,8 +70,8 @@ export default function ViewAllSettings() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {settings.map((row: Setting) => (
-                                <Row key={row.name} row={row} />
+                            {settings.map((setting: Setting) => (
+                                <Row key={setting.name} setting={setting} />
                             ))}
                         </TableBody>
                     </Table>

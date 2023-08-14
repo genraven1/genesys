@@ -20,9 +20,9 @@ public class SettingController {
         this.settingService = settingService;
     }
 
-    @PostMapping("/current/{name}")
-    public ResponseEntity<Setting> setCurrentSetting(@PathVariable final String name) {
-        return ResponseEntity.ok(settingService.setCurrentSetting(name));
+    @PostMapping("/current/{id}")
+    public ResponseEntity<Setting> setCurrentSetting(@PathVariable final Long id) {
+        return ResponseEntity.ok(settingService.setCurrentSetting(id));
     }
 
     @GetMapping("/current")
@@ -40,13 +40,13 @@ public class SettingController {
         return ResponseEntity.ok(settingService.createSetting(name));
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Setting> getSetting(@PathVariable final String name) {
-        return ResponseEntity.ok(settingService.getSetting(name));
+    @GetMapping("/{id}")
+    public ResponseEntity<Setting> getSetting(@PathVariable final Long id) {
+        return ResponseEntity.ok(settingService.getSetting(id));
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<Setting> updateSetting(@PathVariable final String name, @RequestBody final Setting setting) {
-        return ResponseEntity.ok(settingService.updateSetting(setting));
+    @PutMapping("/{id}")
+    public ResponseEntity<Setting> updateSetting(@PathVariable final Long id, @RequestBody final Setting setting) {
+        return ResponseEntity.ok(settingService.updateSetting(id, setting));
     }
 }

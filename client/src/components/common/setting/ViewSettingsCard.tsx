@@ -5,19 +5,19 @@ import {renderSettings} from "./SettingRenders";
 import CenteredCardHeader from "../card/CenteredCardHeader";
 
 interface Props {
-    settingNames: string[]
+    settings: Setting[]
     allSettings: Setting[]
 }
 
 export default function ViewSettingsCard(props: Props): JSX.Element {
-    const {settingNames, allSettings} = props
+    const {settings, allSettings} = props
 
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Settings'}/>
             <Divider/>
             <CardContent>
-                {renderSettings(settingNames, allSettings)}
+                {renderSettings(settings, allSettings)}
             </CardContent>
         </Card>
     )

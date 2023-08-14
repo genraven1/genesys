@@ -63,7 +63,7 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
-                <ViewSettingsCard settingNames={rival?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={rival?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

@@ -9,23 +9,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Setting {
-    
+
     public Setting(final String name) {
         this.name = name;
     }
-    
+
+    protected Setting() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "magic")
     private boolean magic;
 
     @Column(name = "current")
     private boolean current;
-
-    protected Setting() {}
 }

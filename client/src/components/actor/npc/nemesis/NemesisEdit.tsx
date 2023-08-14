@@ -23,6 +23,7 @@ import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEqui
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
+import SettingService from "../../../../services/SettingService";
 
 interface Props {
     nem: Nemesis
@@ -40,16 +41,17 @@ export default function NemesisEdit(props: Props) {
         setNemesis(nem)
     }, [nem])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (id: number) => {
         const copyNemesis = {...nemesis} as Nemesis
+        let setting = await SettingService.getSetting(id)
         copyNemesis.settings = copyNemesis.settings.concat(setting)
         await updateNemesis(copyNemesis)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (id: number) => {
         const copyNemesis = {...nemesis} as Nemesis
         copyNemesis.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyNemesis.settings.splice(index, 1)
             }
         })
@@ -200,8 +202,8 @@ export default function NemesisEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={nemesis}/>
                 </Grid>
-                <EditSettingsCard names={nemesis?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={nemesis?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

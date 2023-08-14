@@ -15,12 +15,12 @@ interface Props {
 
 export default function SkillView(props: Props): JSX.Element {
     const {skill, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     let path = Path.Skills
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
@@ -38,7 +38,7 @@ export default function SkillView(props: Props): JSX.Element {
                     <ViewFieldCard name={'Skill Type'} value={skill?.type!!} />
                     <ViewFieldCard name={'Linked Characteristic'} value={skill?.characteristic!!} />
                 </Grid>
-                <ViewSettingsCard settingNames={skill?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={skill?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

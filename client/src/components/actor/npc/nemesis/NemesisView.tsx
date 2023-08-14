@@ -64,7 +64,7 @@ export default function NemesisView(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
-                <ViewSettingsCard settingNames={nemesis?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={nemesis?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

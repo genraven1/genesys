@@ -40,7 +40,7 @@ function Row(props: Props): JSX.Element {
 
     const renderSettingTableCell = ():JSX.Element => {
         let value = "No"
-        if (talent?.settings!!.includes(setting?.name!!)) {
+        if (talent?.settings!!.includes(setting!!)) {
             value = "Yes"
         }
         return <TypographyCenterTableCell value={value}/>
@@ -54,7 +54,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
                 {renderSettingTableCell()}
-                <ActionsTableCell name={talent.name} path={Path.Talent}/>
+                <ActionsTableCell id={String(talent.id)} path={Path.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

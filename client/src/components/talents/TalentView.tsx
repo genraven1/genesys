@@ -36,7 +36,7 @@ export default function TalentView(props: Props) {
         if (talent?.settings!! === undefined) {return <Fragment/>}
         let settingList = []
         for (let setting of allSettings) {
-            if (talent?.settings.includes(setting.name)) {
+            if (talent?.settings.includes(setting)) {
                 settingList.push(setting)
             }
         }

@@ -23,6 +23,7 @@ import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEqui
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
+import SettingService from "../../../../services/SettingService";
 
 interface Props {
     riv: Rival
@@ -39,16 +40,17 @@ export default function RivalEdit(props: Props) {
 
     useEffect(() => {setRival(riv)}, [riv])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (id: number) => {
         const copyRival = {...rival} as Rival
+        let setting = await SettingService.getSetting(id)
         copyRival.settings = copyRival.settings.concat(setting)
         await updateRival(copyRival)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (id: number) => {
         const copyRival = {...rival} as Rival
         copyRival.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyRival.settings.splice(index, 1)
             }
         })
@@ -154,8 +156,8 @@ export default function RivalEdit(props: Props) {
                     {openSelectTalentDialog && <TalentSelectionDialog actor={rival} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={rival}/>
                 </Grid>
-                <EditSettingsCard names={rival?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={rival?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

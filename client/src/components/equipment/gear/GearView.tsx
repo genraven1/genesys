@@ -52,7 +52,7 @@ export default function GearView(props: Props) {
                         <ViewFieldCard name={'Rarity'} value={String(gear?.rarity!!)}/>
                     </Grid>
                     <Divider/>
-                    <ViewSettingsCard settingNames={gear?.settings!!} allSettings={settings}/>
+                    <ViewSettingsCard settings={gear?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

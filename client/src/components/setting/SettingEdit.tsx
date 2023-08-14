@@ -32,7 +32,7 @@ export default function SettingEdit(props: Props) {
         }
         setSetting(copySetting)
 
-        await SettingService.updateSetting(copySetting.name, copySetting)
+        await SettingService.updateSetting(copySetting.id, copySetting)
     }
 
     const onView = () => {

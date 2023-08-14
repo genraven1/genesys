@@ -30,7 +30,7 @@ function LoreRow(props: RowProps): JSX.Element {
         <TableRow>
             <TableCell component="th" scope="row">{lore.name}</TableCell>
             <TableCell>{lore.type}</TableCell>
-            <ActionsTableCell name={lore.name} path={getLorePath()}/>
+            <ActionsTableCell id={String(lore.id)} path={getLorePath()}/>
         </TableRow>
     )
 }

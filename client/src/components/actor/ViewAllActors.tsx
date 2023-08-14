@@ -12,11 +12,15 @@ import ActionsTableCell from "../common/table/ActionsTableCell";
 import ActorService from "../../services/ActorService";
 import {ActorPath} from "../../services/Path";
 
-function Row(props: { row: Actor }): JSX.Element {
-    const {row} = props
+interface Props {
+    actor: Actor
+}
+
+function Row(props: Props): JSX.Element {
+    const {actor} = props
 
     const getPathFromType = (): string => {
-        switch (row.type) {
+        switch (actor.type) {
             case ActorType.Minion:
                 return ActorPath.Minion
             case ActorType.Rival:
@@ -30,9 +34,9 @@ function Row(props: { row: Actor }): JSX.Element {
 
     return (
         <TableRow>
-            <TableCell>{row.name}</TableCell>
-            <TableCell>{row.type}</TableCell>
-            <ActionsTableCell name={row.name} path={getPathFromType()}/>
+            <TableCell>{actor.name}</TableCell>
+            <TableCell>{actor.type}</TableCell>
+            <ActionsTableCell id={String(actor.id)} path={getPathFromType()}/>
         </TableRow>
     )
 }
@@ -59,8 +63,8 @@ export default function ViewAllActors() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {actors.map((row: Actor) => (
-                        <Row key={row.name} row={row} />
+                    {actors.map((actor: Actor) => (
+                        <Row key={actor.name} actor={actor} />
                     ))}
                 </TableBody>
             </Table>

@@ -22,7 +22,7 @@ function Row(props: { row: Minion }): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell name={row.name} path={ActorPath.Minion}/>
+                <ActionsTableCell id={String(row.id)} path={ActorPath.Minion}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
