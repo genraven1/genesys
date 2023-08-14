@@ -12,8 +12,10 @@ import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
 import {renderHeaders} from "../common/table/TableRenders";
 import Setting from "../../models/Setting";
-import SettingService from "../../services/SettingService";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import CreateSkillDialog from "./CreateSkillDialog";
+import {useFetchCurrentSetting} from "../setting/SettingWorkflow";
 
 interface Props {
     skill: Skill
@@ -23,7 +25,7 @@ interface Props {
 function Row(props: Props): JSX.Element {
     const {skill, setting} = props
 
-    const renderSettingTableCell = ():JSX.Element => {
+    const renderSettingTableCell = (): JSX.Element => {
         let value = "No"
         if (skill?.settings!!.includes(setting!!)) {
             value = "Yes"
@@ -44,7 +46,8 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
-    const [setting, setSetting] = useState<Setting>()
+    const setting = useFetchCurrentSetting()
+    const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const headers = ['Name', 'Type', 'Linked Characteristic', 'Active', 'View']
 
     useEffect(() => {
@@ -57,28 +60,31 @@ export default function ViewAllSkills() {
         })()
     }, [])
 
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
-        })()
-    }, [setSetting])
-
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
-                <TableBody>
-                    {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                        <Row key={skill.name} skill={skill} setting={setting!!}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Skills'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenSkillCreationDialog(true)}>Create Skill</Button>}>
+            </CardHeader>
+            <Divider/>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {renderHeaders(headers)}
+                        </TableHead>
+                        <TableBody>
+                            {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
+                                <Row key={skill.name} skill={skill} setting={setting!!}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+            {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
+                                                           onClose={(): void => setOpenSkillCreationDialog(false)}/>}
+        </Card>
     )
 }
