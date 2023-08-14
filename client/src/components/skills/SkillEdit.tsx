@@ -99,7 +99,6 @@ export default function SkillEdit(props: Props) {
                     <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => {
                         onChange('characteristic', value)
                     }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
-                    {console.log(skill!!)}
                     <EditSettingsCard settings={skill?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
