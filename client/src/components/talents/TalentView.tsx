@@ -24,11 +24,16 @@ export default function TalentView(props: Props) {
         navigate(path + id + '/edit')
     }
 
-    const renderRanked = ():JSX.Element => {
-        if(talent?.ranked!! === undefined) {return <Fragment/>}
-        let ranked = ''
-        if(talent?.ranked!!) {ranked = 'Yes'}
-        else {ranked = 'No'}
+    const renderRanked = (): JSX.Element => {
+        if (talent?.ranked!! === undefined) {
+            return <Fragment/>
+        }
+        let ranked: string
+        if (talent?.ranked!!) {
+            ranked = 'Yes'
+        } else {
+            ranked = 'No'
+        }
         return <ViewFieldCard name={'Ranked'} value={ranked}/>
     }
 
@@ -38,28 +43,23 @@ export default function TalentView(props: Props) {
                 style={{textAlign: 'center'}}
                 title={talent?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
+                    <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={talent?.description!!} />
+                    <Grid container spacing={2}>
+                        <ViewFieldCard name={'Description'} value={talent?.description!!}/>
                     </Grid>
-                    <Divider />
-                    <Grid container spacing={10}>
+                    <Divider/>
+                    <Grid container spacing={2}>
                         {renderRanked()}
-                        <ViewFieldCard name={'Activation'} value={talent?.activation!!} />
-                        <ViewFieldCard name={'Tier'} value={talent?.tier!!} />
-                    </Grid>
-                    <Divider />
-                    <Grid container spacing={10}>
-                        <Grid item xs>
-                            <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
-                        </Grid>
+                        <ViewFieldCard name={'Activation'} value={talent?.activation!!}/>
+                        <ViewFieldCard name={'Tier'} value={talent?.tier!!}/>
                     </Grid>
                 </Grid>
+                <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
             </CardContent>
         </Card>
     )

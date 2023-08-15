@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../table/TypographyTableCell";
 import CheckboxTableCell from "../table/CheckboxTableCell";
 import Setting from "../../../models/Setting";
+import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 
 interface Props {
     settings: Setting[]
@@ -20,22 +21,32 @@ interface Props {
 export default function EditSettingsCard(props: Props): JSX.Element {
     const {settings, onSettingAddition, onSettingRemoval, allSettings} = props
 
+    const renderTableBody = (): JSX.Element => {
+        if (!settings) {
+            return <GenesysDescriptionTypography text={'None'}/>
+        } else {
+            return (
+                <TableBody>
+                    {(allSettings || [])!!.map((setting: Setting) => (
+                        <TableRow>
+                            <TypographyCenterTableCell value={setting.name}/>
+                            <CheckboxTableCell value={settings!!.some(set => set.id === setting.id)}
+                                               onAddition={() => onSettingAddition(setting.id)}
+                                               onRemoval={() => onSettingRemoval(setting.id)}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            )
+        }
+    }
+
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Settings'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableBody>
-                            {(allSettings || [])!!.map((setting: Setting) => (
-                                <TableRow>
-                                    <TypographyCenterTableCell value={setting.name}/>
-                                    <CheckboxTableCell value={settings.some(set => set.id === setting.id)}
-                                                       onAddition={() => onSettingAddition(setting.id)}
-                                                       onRemoval={() => onSettingRemoval(setting.id)}/>
-                                </TableRow>
-                            ))}
-                        </TableBody>
+                        {renderTableBody()}
                     </Table>
                 </TableContainer>
             </CardContent>

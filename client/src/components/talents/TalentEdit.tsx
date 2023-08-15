@@ -89,18 +89,18 @@ export default function TalentEdit(props: Props) {
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <InputTextFieldCard defaultValue={talent?.description!!} onCommit={(value: string): void => {
                             onChange('description', value)
                         }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <InputTextFieldCard defaultValue={talent?.summary!!} onCommit={(value: string): void => {
                             onChange('summary', value)
                         }} title={'Player Summary'} helperText={'Summary'} placeholder={'Summary'}/>
                     </Grid>
                     <Divider/>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <CheckButtonCard title={'Ranked Talent'} value={talent?.ranked!!}
                                          onChange={(value: boolean): void => {
                                              onChange('ranked', String(value))
