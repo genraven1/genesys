@@ -13,7 +13,7 @@ interface Props {
 
 export default function SettingEdit(props: Props) {
     const {set} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [setting, setSetting] = useState<Setting>(set)
 
     let navigate = useNavigate()
@@ -36,7 +36,7 @@ export default function SettingEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Setting + name + '/view')
+        navigate(Path.Setting + id + '/view')
     }
 
     return (

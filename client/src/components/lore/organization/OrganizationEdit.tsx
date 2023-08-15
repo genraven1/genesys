@@ -20,7 +20,7 @@ interface Props {
 
 export default function OrganizationEdit(props: Props) {
     const {org} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = LorePath.Organization
     const [organization, setOrganization] = useState<Organization>(org)
 
@@ -75,17 +75,17 @@ export default function OrganizationEdit(props: Props) {
 
     const updateOrganization = async (copyOrg: Organization): Promise<Organization> => {
         setOrganization(copyOrg)
-        await LoreService.updateOrganization(name as string, copyOrg)
+        await LoreService.updateOrganization(id as string, copyOrg)
         return organization!!
     }
 
     const onView = () => {
-        navigate(path + name + '/view')
+        navigate(path + id + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={organization?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}>
             </CardHeader>

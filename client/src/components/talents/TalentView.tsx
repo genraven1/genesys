@@ -6,8 +6,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import {Fragment} from "react";
+import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 
 interface Props {
     talent: Talent
@@ -16,12 +16,12 @@ interface Props {
 
 export default function TalentView(props: Props) {
     const {talent, allSettings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = Path.Talent
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     const renderRanked = ():JSX.Element => {
@@ -30,23 +30,6 @@ export default function TalentView(props: Props) {
         if(talent?.ranked!!) {ranked = 'Yes'}
         else {ranked = 'No'}
         return <ViewFieldCard name={'Ranked'} value={ranked}/>
-    }
-
-    const renderSettings = ():JSX.Element => {
-        if (talent?.settings!! === undefined) {return <Fragment/>}
-        let settingList = []
-        for (let setting of allSettings) {
-            if (talent?.settings.includes(setting)) {
-                settingList.push(setting)
-            }
-        }
-        return (
-            <Fragment>
-                {(settingList || []).map((setting: Setting):JSX.Element => {
-                    return <GenesysDescriptionTypography text={setting?.name!!}/>
-                })}
-            </Fragment>
-        )
     }
 
     return (
@@ -73,13 +56,7 @@ export default function TalentView(props: Props) {
                     <Divider />
                     <Grid container spacing={10}>
                         <Grid item xs>
-                            <Card>
-                                <CardHeader title={'Settings'} style={{ textAlign: 'center' }} />
-                                <Divider />
-                                <CardContent>
-                                    {renderSettings()}
-                                </CardContent>
-                            </Card>
+                            <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
                         </Grid>
                     </Grid>
                 </Grid>

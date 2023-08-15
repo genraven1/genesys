@@ -16,7 +16,7 @@ interface Props {
 
 export default function QualityEdit(props: Props) {
     const {qual} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [quality, setQuality] = useState<Quality>(qual)
 
     let navigate = useNavigate()
@@ -53,7 +53,7 @@ export default function QualityEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Qualities + name!! + '/view');
+        navigate(Path.Qualities + id!! + '/view');
     }
 
     return (

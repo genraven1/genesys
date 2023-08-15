@@ -26,18 +26,18 @@ interface Props {
 
 export default function NemesisView(props: Props) {
     const {nemesis, settings} = props
-    const { name } = useParams<{ name: string }>()
+    const { id } = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Nemesis + name + '/edit')
+        navigate(ActorPath.Nemesis + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={nemesis?.name!!}
                 subheader={<GenesysDescriptionTypography text={getRatings(nemesis)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />

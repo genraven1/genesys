@@ -26,18 +26,18 @@ interface Props {
 
 export default function MinionView(props: Props) {
     const {minion, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Minion + name + '/edit')
+        navigate(ActorPath.Minion + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={minion?.name!!}
                 subheader={<GenesysDescriptionTypography text={getRatings(minion)}/>}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>

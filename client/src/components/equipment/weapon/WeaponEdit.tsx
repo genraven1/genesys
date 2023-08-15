@@ -28,7 +28,7 @@ interface Props {
 
 export default function WeaponEdit(props: Props) {
     const {wea, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     let navigate = useNavigate()
 
@@ -105,7 +105,7 @@ export default function WeaponEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Weapon + name + '/view');
+        navigate(EquipmentPath.Weapon + id + '/view');
     }
 
     return (

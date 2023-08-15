@@ -16,12 +16,12 @@ interface Props {
 
 export default function GearView(props: Props) {
     const {gear, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (

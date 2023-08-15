@@ -24,7 +24,7 @@ interface Props {
 
 export default function GearEdit(props: Props) {
     const {gea, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [gear, setGear] = useState<Gear>(gea)
 
     let navigate = useNavigate()
@@ -91,7 +91,7 @@ export default function GearEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Gear + name + '/view');
+        navigate(EquipmentPath.Gear + id + '/view');
     }
 
     return (

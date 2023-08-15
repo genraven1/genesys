@@ -32,7 +32,7 @@ interface Props {
 
 export default function MinionEdit(props: Props) {
     const {min, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [minion, setMinion] = useState<Minion>(min)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
@@ -114,12 +114,12 @@ export default function MinionEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Minion + name + '/view')
+        navigate(ActorPath.Minion + id + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{textAlign: 'center'}}
+            <CardHeader title={minion?.name!!} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>

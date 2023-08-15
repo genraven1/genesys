@@ -19,7 +19,7 @@ interface Props {
 
 export default function ArmorEdit(props: Props) {
     const {ar, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
 
     let navigate = useNavigate()
@@ -83,7 +83,7 @@ export default function ArmorEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Armor + name + '/view');
+        navigate(EquipmentPath.Armor + id + '/view');
     }
 
     return (
