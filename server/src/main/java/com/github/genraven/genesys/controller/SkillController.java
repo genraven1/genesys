@@ -26,17 +26,17 @@ public class SkillController {
     }
 
     @PostMapping("/{name}")
-    public ResponseEntity<Skill> createSetting(@PathVariable final String name) {
+    public ResponseEntity<Skill> createSkill(@PathVariable final String name) {
         return ResponseEntity.ok(skillService.createSkill(name));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Skill> getSetting(@PathVariable final Long id) {
+    public ResponseEntity<Skill> getSkill(@PathVariable final Long id) {
         return ResponseEntity.ok(skillService.getSkill(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Skill> updateSetting(@PathVariable final Long id, @RequestBody final Skill setting) {
+    public ResponseEntity<Skill> updateSkill(@PathVariable final Long id, @RequestBody final Skill setting) {
         return ResponseEntity.ok(skillService.updateSkill(id, setting));
     }
 }

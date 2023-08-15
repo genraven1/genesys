@@ -32,7 +32,7 @@ interface Props {
 
 export default function NemesisEdit(props: Props) {
     const {nem, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
@@ -117,12 +117,12 @@ export default function NemesisEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Nemesis + name + '/view')
+        navigate(ActorPath.Nemesis + id + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{textAlign: 'center'}}
+            <CardHeader title={nemesis?.name!!} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>

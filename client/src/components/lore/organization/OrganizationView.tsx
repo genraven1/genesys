@@ -12,19 +12,19 @@ interface Props {
 
 export default function OrganizationView(props: Props) {
     const {organization} = props
-    const { name } = useParams<{ name: string }>()
+    const { id } = useParams<{ id: string }>()
     const path = LorePath.Organization
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={id}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

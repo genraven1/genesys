@@ -12,25 +12,16 @@ import TalentBackdrop from "./TalentBackdrop";
 import Talent from "../../../../models/Talent";
 import ActorService from "../../../../services/ActorService";
 import Actor, {ActorTalent} from "../../../../models/actor/Actor";
+import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
-    name: string
-   actor: Actor
+    talent: Talent
+    actor: Actor
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {name, actor} = props;
-    const [talent, setTalent] = useState<Talent>()
+    const {talent, actor} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
-
-    useEffect(() => {
-        if (!name) {return}
-        (async (): Promise<void> => {
-            const talentData = await TalentService.getTalent(name)
-            if (!talentData) { return }
-            setTalent(talentData)
-        })()
-    }, [name])
 
     const addTalent = async () => {
         await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
@@ -40,7 +31,9 @@ function TalentNameRow(props: RowProps): JSX.Element {
         <TableRow>
             <TableCell>
                 <Button onClick={(): void => setOpenTalentBackDrop(true)}>{talent?.name!!}</Button>
-                {openTalentBackDrop && <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)} talent={talent!!}/>}
+                {openTalentBackDrop &&
+                    <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)}
+                                    talent={talent!!}/>}
             </TableCell>
             <TableCell>
                 <Button onClick={addTalent}>Add</Button>
@@ -55,28 +48,28 @@ interface TableProps {
 
 export default function TalentSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<string[]>([])
+    const [talents, setTalents] = useState<Talent[]>([])
+    const headers = ['Talent Name', 'Add']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalentNames()
-            if (!talentList) { return }
-            setNames(talentList)
+            const talentList = await TalentService.getTalents()
+            if (!talentList) {
+                return
+            }
+            setTalents(talentList)
         })()
-    }, [setNames])
+    }, [setTalents])
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Talent Name</TableCell>
-                        <TableCell>Add</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {names.map((name: string) => (
-                        <TalentNameRow name={name} actor={actor}/>
+                    {talents.map((talent: Talent) => (
+                        <TalentNameRow talent={talent} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>

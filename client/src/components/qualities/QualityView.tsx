@@ -13,12 +13,12 @@ interface Props {
 
 export default function QualityView(props: Props) {
     const {quality} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = Path.Qualities
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     const renderUsable = (): JSX.Element => {
