@@ -23,10 +23,10 @@ export default function CustomRollDialog(props: Props) {
     }
 
     const onClick = async () => {
-        console.log(roll)
+        console.log('ROLE: ' + roll)
         let results = await RollService.roll(roll)
         setResults(true)
-        console.log(results)
+        console.log('RESULTS: ' + results)
     }
 
     const viewRoll = <GenesysDescriptionTypography text={rollText}/>
