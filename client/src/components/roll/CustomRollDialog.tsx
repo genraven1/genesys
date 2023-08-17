@@ -1,10 +1,11 @@
 import * as React from 'react';
 import ViewRollTable from "./ViewRollTable";
-import Roll, {DefaultRoll} from "../../models/Roll";
+import Roll, {DefaultRoll, Results} from "../../models/Roll";
 import {useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import RollService from "../../services/RollService";
+import {GenesysResultsConversion, GenesysRollConversion} from "./GenesysRollConversion";
 
 interface Props {
     open: boolean
@@ -15,8 +16,7 @@ export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
     const rollText ='dice'
-    const resultsText = 'results'
-    const [results, setResults] = useState(false)
+    const [results, setResults] = useState<Results>()
 
     const onChange = (diceRoll: Roll) => {
         setRoll(diceRoll)
@@ -24,14 +24,14 @@ export default function CustomRollDialog(props: Props) {
 
     const onClick = async () => {
         console.log('ROLE: ' + roll)
-        let results = await RollService.roll(roll)
-        setResults(true)
-        console.log('RESULTS: ' + results)
+        let rollResults = await RollService.roll(roll)
+        setResults(rollResults)
+        console.log('RESULTS: ' + rollResults)
     }
 
-    const viewRoll = <GenesysDescriptionTypography text={rollText}/>
+    const viewRoll = <GenesysRollConversion roll={roll}/>
 
-    const viewResults = <GenesysDescriptionTypography text={resultsText}/>
+    const viewResults = <GenesysResultsConversion results={results!}/>
 
     return (
         <Dialog open={open} onClose={onClose}>
