@@ -15,7 +15,6 @@ interface Props {
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
-    const rollText ='dice'
     const [results, setResults] = useState<Results>()
 
     const onChange = (diceRoll: Roll) => {
