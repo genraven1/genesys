@@ -22,7 +22,6 @@ export default function ViewRollTable(props: TableProps): JSX.Element {
 
     const onAddDiceChange = (type: DieType) => {
         let copyDiceRoll = diceRoll
-        console.log('Add Dice: ' + copyDiceRoll)
         switch (type) {
             case DieType.Boost:
                 copyDiceRoll.boost = copyDiceRoll.boost + 1

@@ -43,19 +43,13 @@ public class RollService {
             switch (side) {
                 case 1, 2 -> {
                 }
-                case 3 -> {
-                    results.addSuccess(1);
-                }
+                case 3 -> results.addSuccess(1);
                 case 4 -> {
                     results.addSuccess(1);
                     results.addAdvantages(1);
                 }
-                case 5 -> {
-                    results.addAdvantages(2);
-                }
-                case 6 -> {
-                    results.addAdvantages(1);
-                }
+                case 5 -> results.addAdvantages(2);
+                case 6 -> results.addAdvantages(1);
                 default -> throw new IllegalStateException("Unexpected value: " + side);
             }
         }
@@ -69,22 +63,14 @@ public class RollService {
             switch (side) {
                 case 1 -> {
                 }
-                case 2, 3 -> {
-                    results.addSuccess(1);
-                }
-                case 4 -> {
-                    results.addSuccess(2);
-                }
-                case 5, 6 -> {
-                    results.addAdvantages(1);
-                }
+                case 2, 3 -> results.addSuccess(1);
+                case 4 -> results.addSuccess(2);
+                case 5, 6 -> results.addAdvantages(1);
                 case 7 -> {
                     results.addSuccess(1);
                     results.addAdvantages(1);
                 }
-                case 8 -> {
-                    results.addAdvantages(2);
-                }
+                case 8 -> results.addAdvantages(2);
                 default -> throw new IllegalStateException("Unexpected value: " + side);
             }
         }
@@ -98,22 +84,14 @@ public class RollService {
             switch (side) {
                 case 1 -> {
                 }
-                case 2, 3 -> {
-                    results.addSuccess(1);
-                }
-                case 4, 5 -> {
-                    results.addSuccess(2);
-                }
-                case 6 -> {
-                    results.addAdvantages(1);
-                }
+                case 2, 3 -> results.addSuccess(1);
+                case 4, 5 -> results.addSuccess(2);
+                case 6 -> results.addAdvantages(1);
                 case 7, 8, 9 -> {
                     results.addSuccess(1);
                     results.addAdvantages(1);
                 }
-                case 10, 11 -> {
-                    results.addAdvantages(2);
-                }
+                case 10, 11 -> results.addAdvantages(2);
                 case 12 -> {
                     results.addSuccess(1);
                     results.addTriumphs(1);
@@ -131,12 +109,8 @@ public class RollService {
             switch (side) {
                 case 1, 2 -> {
                 }
-                case 3, 4 -> {
-                    results.addFailures(1);
-                }
-                case 5, 6 -> {
-                    results.addThreats(1);
-                }
+                case 3, 4 -> results.addFailures(1);
+                case 5, 6 -> results.addThreats(1);
                 default -> throw new IllegalStateException("Unexpected value: " + side);
             }
         }
@@ -150,15 +124,9 @@ public class RollService {
             switch (side) {
                 case 1 -> {
                 }
-                case 2, 8 -> {
-                    results.addFailures(1);
-                }
-                case 3 -> {
-                    results.addFailures(2);
-                }
-                case 4, 5, 6 -> {
-                    results.addThreats(1);
-                }
+                case 2, 8 -> results.addFailures(1);
+                case 3 -> results.addFailures(2);
+                case 4, 5, 6 -> results.addThreats(1);
                 case 7 -> {
                     results.addSuccess(1);
                     results.addAdvantages(1);
@@ -176,22 +144,14 @@ public class RollService {
             switch (side) {
                 case 1 -> {
                 }
-                case 2, 3 -> {
-                    results.addFailures(1);
-                }
-                case 4, 5 -> {
-                    results.addFailures(2);
-                }
-                case 6, 7 -> {
-                    results.addThreats(1);
-                }
+                case 2, 3 -> results.addFailures(1);
+                case 4, 5 -> results.addFailures(2);
+                case 6, 7 -> results.addThreats(1);
                 case 8, 9 -> {
                     results.addFailures(1);
                     results.addThreats(1);
                 }
-                case 10, 11 -> {
-                    results.addThreats(2);
-                }
+                case 10, 11 -> results.addThreats(2);
                 case 12 -> {
                     results.addFailures(1);
                     results.addDespairs(1);
@@ -203,7 +163,38 @@ public class RollService {
     }
 
     private RollResults resolveRollResults(final RollResults results) {
-
+        resolveSuccessAndFailure(results);
+        resolveAdvantageAndThreat(results);
         return results;
+    }
+
+    private void resolveSuccessAndFailure(final RollResults results) {
+        if (results.getSuccess() == results.getFailure()) {
+            results.setSuccess(0);
+            results.setFailure(0);
+        }
+        else if (results.getSuccess() > results.getFailure()) {
+            results.setSuccess(results.getSuccess() - results.getFailure());
+            results.setFailure(0);
+        }
+        else {
+            results.setFailure(results.getFailure() - results.getSuccess());
+            results.setSuccess(0);
+        }
+    }
+
+    private void resolveAdvantageAndThreat(final RollResults results) {
+        if (results.getAdvantage() == results.getThreat()) {
+            results.setAdvantage(0);
+            results.setThreat(0);
+        }
+        else if (results.getAdvantage() > results.getThreat()) {
+            results.setAdvantage(results.getAdvantage() - results.getThreat());
+            results.setThreat(0);
+        }
+        else {
+            results.setThreat(results.getThreat() - results.getAdvantage());
+            results.setAdvantage(0);
+        }
     }
 }
