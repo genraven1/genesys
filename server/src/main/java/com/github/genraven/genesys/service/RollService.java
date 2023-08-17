@@ -11,7 +11,6 @@ public class RollService {
 
     public RollResults getResults(final Roll roll) {
         final RollResults results = setInitialRollResults(roll);
-        System.out.println(roll.getBoost());
         results.addResults(getBoostResults(roll.getBoost()));
         results.addResults(getAbilityResults(roll.getAbility()));
         results.addResults(getProficiencyResults(roll.getProficiency()));
