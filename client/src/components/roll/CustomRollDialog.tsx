@@ -22,7 +22,7 @@ interface Props {
 
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
-    const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
+    const [roll, setRoll] = useState<Roll>()
     const [results, setResults] = useState<Results>()
 
     const onChange = (diceRoll: Roll) => {
@@ -31,12 +31,12 @@ export default function CustomRollDialog(props: Props) {
 
     const onClick = async () => {
         console.log('ROLE: ' + roll)
-        let rollResults = await RollService.roll(roll)
+        let rollResults = await RollService.roll(roll!)
         setResults(rollResults)
         console.log('RESULTS: ' + rollResults)
     }
 
-    const viewRoll = <GenesysRollConversion roll={roll}/>
+    const viewRoll = <GenesysRollConversion roll={roll!}/>
 
     const viewResults = <GenesysResultsConversion results={results!}/>
 
@@ -45,7 +45,7 @@ export default function CustomRollDialog(props: Props) {
             <DialogTitle title={'Assemble Dice Roll'} style={{textAlign:'center'}}/>
             <DialogContent>
                 <Card>
-                    <ViewRollTable roll={roll} onChange={onChange}/>
+                    <ViewRollTable roll={roll!} onChange={onChange}/>
                     <Divider/>
                     <CardContent>
                         {results ? viewResults:viewRoll}
