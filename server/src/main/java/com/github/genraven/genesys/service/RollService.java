@@ -79,7 +79,7 @@ public class RollService {
     private RollResults getProficiencyResults(final int dice) {
         final RollResults results = new RollResults();
         for (int i = 0; i < dice; i++) {
-            final int side = rollDie(8);
+            final int side = rollDie(12);
             switch (side) {
                 case 1 -> {
                 }
@@ -139,7 +139,7 @@ public class RollService {
     private RollResults getChallengeResults(final int dice) {
         final RollResults results = new RollResults();
         for (int i = 0; i < dice; i++) {
-            final int side = rollDie(8);
+            final int side = rollDie(12);
             switch (side) {
                 case 1 -> {
                 }
