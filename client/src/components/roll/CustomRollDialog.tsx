@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ViewRollTable from "./ViewRollTable";
-import Roll, {DefaultRoll, Results} from "../../models/Roll";
+import Roll, {DefaultResults, DefaultRoll, Results} from "../../models/Roll";
 import {useState} from "react";
 import {
     Button,
@@ -23,11 +23,12 @@ interface Props {
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
-    const [results, setResults] = useState<Results>()
+    const [diceResults, serDiceResults] = useState(false)
+    const [results, setResults] = useState<Results>(DefaultResults.create)
 
     const onChange = (diceRoll: Roll) => {
-        console.log('ROLE: ' + roll.proficiency)
         setRoll(diceRoll)
+        serDiceResults(true)
     }
 
     const onClick = async () => {
@@ -47,7 +48,7 @@ export default function CustomRollDialog(props: Props) {
                     <ViewRollTable roll={roll!} onChange={onChange}/>
                     <Divider/>
                     <CardContent>
-                        {results ? viewResults:viewRoll}
+                        {diceResults ? viewResults:viewRoll}
                     </CardContent>
                 </Card>
             </DialogContent>

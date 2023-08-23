@@ -10,8 +10,7 @@ export function GenesysRollConversion(props: RollProps): JSX.Element {
     const {roll} = props
     const [text, setText] = useState('')
 
-    const generateResultText = ():string => {
-        console.log(text)
+    const generateRollText = ():string => {
         if (!roll) {
             return text
         }
@@ -67,7 +66,7 @@ export function GenesysRollConversion(props: RollProps): JSX.Element {
     }
 
     return (
-        <GenesysDescriptionTypography text={generateResultText()}/>
+        <GenesysDescriptionTypography text={generateRollText()}/>
     )
 }
 
@@ -80,7 +79,6 @@ export function GenesysResultsConversion(props: ResultsProps): JSX.Element {
 
     const generateResultText = ():string => {
         let text = ''
-        console.log(results)
         while (results.success > 0) {
             text = text.concat('[success] ')
             results.success--
@@ -105,7 +103,6 @@ export function GenesysResultsConversion(props: ResultsProps): JSX.Element {
             text = text.concat('[despair] ')
             results.despair--
         }
-        console.log(text)
         return text;
     }
 
