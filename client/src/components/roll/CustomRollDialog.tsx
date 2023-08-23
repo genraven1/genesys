@@ -22,18 +22,17 @@ interface Props {
 
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
-    const [roll, setRoll] = useState<Roll>()
+    const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
     const [results, setResults] = useState<Results>()
 
     const onChange = (diceRoll: Roll) => {
+        console.log('ROLE: ' + roll.proficiency)
         setRoll(diceRoll)
     }
 
     const onClick = async () => {
-        console.log('ROLE: ' + roll)
         let rollResults = await RollService.roll(roll!)
         setResults(rollResults)
-        console.log('RESULTS: ' + rollResults)
     }
 
     const viewRoll = <GenesysRollConversion roll={roll!}/>

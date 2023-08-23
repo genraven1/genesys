@@ -1,5 +1,6 @@
 import Roll, {Results} from "../../models/Roll";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import {useState} from "react";
 
 interface RollProps {
     roll: Roll
@@ -7,59 +8,61 @@ interface RollProps {
 
 export function GenesysRollConversion(props: RollProps): JSX.Element {
     const {roll} = props
+    const [text, setText] = useState('')
 
     const generateResultText = ():string => {
-        let text = ''
-        console.log(roll)
+        console.log(text)
+        if (!roll) {
+            return text
+        }
         while (roll.proficiency > 0) {
-            text = text.concat('[proficiency] ')
+            setText(text.concat('[proficiency] '))
             roll.proficiency--
         }
         while (roll.ability > 0) {
-            text = text.concat('[ability] ')
+            setText(text.concat('[ability] '))
             roll.ability--
         }
         while (roll.boost > 0) {
-            text = text.concat('[boost] ')
+            setText(text.concat('[boost] '))
             roll.boost--
         }
         while (roll.challenge > 0) {
-            text = text.concat('[challenge] ')
+            setText(text.concat('[challenge] '))
             roll.challenge--
         }
         while (roll.difficulty > 0) {
-            text = text.concat('[difficulty] ')
+            setText(text.concat('[difficulty] '))
             roll.difficulty--
         }
         while (roll.setback > 0) {
-            text = text.concat('[setback] ')
+            setText(text.concat('[setback] '))
             roll.setback--
         }
         while (roll.success > 0) {
-            text = text.concat('[success] ')
+            setText(text.concat('[success] '))
             roll.success--
         }
         while (roll.failure > 0) {
-            text = text.concat('[failure] ')
+            setText(text.concat('[failure] '))
             roll.failure--
         }
         while (roll.advantage > 0) {
-            text = text.concat('[advantage] ')
+            setText(text.concat('[advantage] '))
             roll.advantage--
         }
         while (roll.threat > 0) {
-            text = text.concat('[threat] ')
+            setText(text.concat('[threat] '))
             roll.threat--
         }
         while (roll.triumph > 0) {
-            text = text.concat('[triumph] ')
+            setText(text.concat('[triumph] '))
             roll.triumph--
         }
         while (roll.despair > 0) {
-            text = text.concat('[despair] ')
+            setText(text.concat('[despair] '))
             roll.despair--
         }
-        console.log(text)
         return text;
     }
 
