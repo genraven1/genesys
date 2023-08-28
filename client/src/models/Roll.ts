@@ -25,6 +25,19 @@ export enum DieType {
     Challenge = '[challenge]'
 }
 
+export class DefaultResults {
+    static create(): Results {
+        return {
+            advantage: 0,
+            despair: 0,
+            failure: 0,
+            success: 0,
+            threat: 0,
+            triumph: 0
+        }
+    }
+}
+
 export class DefaultRoll {
     static create(): Roll {
         return {

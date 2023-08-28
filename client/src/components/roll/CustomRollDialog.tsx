@@ -1,10 +1,19 @@
 import * as React from 'react';
 import ViewRollTable from "./ViewRollTable";
-import Roll, {DefaultRoll} from "../../models/Roll";
+import Roll, {DefaultResults, DefaultRoll, Results} from "../../models/Roll";
 import {useState} from "react";
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@mui/material";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import {
+    Button,
+    Card,
+    CardContent,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Divider
+} from "@mui/material";
 import RollService from "../../services/RollService";
+import {GenesysResultsConversion, GenesysRollConversion} from "./GenesysRollConversion";
 
 interface Props {
     open: boolean
@@ -14,34 +23,34 @@ interface Props {
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
-    const rollText ='dice'
-    const resultsText = 'results'
-    const [results, setResults] = useState(false)
+    const [diceResults, serDiceResults] = useState(false)
+    const [results, setResults] = useState<Results>(DefaultResults.create)
 
     const onChange = (diceRoll: Roll) => {
         setRoll(diceRoll)
+        serDiceResults(true)
     }
 
     const onClick = async () => {
-        let results = await RollService.roll(roll)
-        setResults(true)
-        console.log(results)
+        let rollResults = await RollService.roll(roll!)
+        setResults(rollResults)
     }
 
-    const viewRoll = <GenesysDescriptionTypography text={rollText}/>
+    const viewRoll = <GenesysRollConversion roll={roll!}/>
 
-    const viewResults = <GenesysDescriptionTypography text={resultsText}/>
+    const viewResults = <GenesysResultsConversion results={results!}/>
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={'Assemble Dice Roll'} style={{textAlign:'center'}}/>
             <DialogContent>
-                <ViewRollTable roll={roll} onChange={onChange}/>
-                <Grid container justifyContent={'center'}>
-                    <Grid item>
-                        {results ? viewResults:viewRoll}
-                    </Grid>
-                </Grid>
+                <Card>
+                    <ViewRollTable roll={roll!} onChange={onChange}/>
+                    <Divider/>
+                    <CardContent>
+                        {diceResults ? viewResults:viewRoll}
+                    </CardContent>
+                </Card>
             </DialogContent>
             <DialogActions>
                 <Button color='primary' variant='contained' onClick={onClick}>ROLL</Button>
