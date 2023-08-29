@@ -43,8 +43,8 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
             case ActorType.Nemesis:
                 copyActor = {...await ActorService.createNemesis(name)}
                 copyActor.type = type
-                await ActorService.updateNemesis(name, copyActor as Nemesis)
-                navigate(ActorPath.Nemesis + name + '/edit')
+                await ActorService.updateNemesis(copyActor.id, copyActor as Nemesis)
+                navigate(ActorPath.Nemesis + copyActor.id + '/edit')
                 break
             case ActorType.Player:
                 break

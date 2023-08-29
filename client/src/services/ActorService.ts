@@ -56,36 +56,36 @@ export default class ActorService {
         return await (await axios.post( ActorPath.Nemesis + name)).data;
     }
 
-    static async getNemesis(name: string): Promise<Nemesis> {
-        return await (await axios.get(ActorPath.Nemesis + name)).data;
+    static async getNemesis(id: number): Promise<Nemesis> {
+        return await (await axios.get(ActorPath.Nemesis + id)).data;
     }
 
     static async getNemeses(): Promise<Nemesis[]> {
         return await (await axios.get(ActorPath.Nemesis)).data;
     }
 
-    static async updateNemesis(name: string, nemesis: Nemesis): Promise<Nemesis> {
-        return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
+    static async updateNemesis(id: number, nemesis: Nemesis): Promise<Nemesis> {
+        return await (await axios.put(ActorPath.Nemesis + id, nemesis)).data;
     }
 
-    static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
-        return await (await axios.put(ActorPath.Nemesis + name + '/skills', skill)).data;
+    static async updateNemesisSkill(id: number, skill: ActorSkill): Promise<Nemesis> {
+        return await (await axios.put(ActorPath.Nemesis + id + '/skills', skill)).data;
     }
     
-    static async addNemesisTalent(name: string, talent: ActorTalent): Promise<Nemesis> {
-        return await (await axios.put(ActorPath.Nemesis + name + '/talents', talent)).data;
+    static async addNemesisTalent(id: number, talent: ActorTalent): Promise<Nemesis> {
+        return await (await axios.put(ActorPath.Nemesis + id + '/talents', talent)).data;
     }
 
-    static async createNemesisWeapon(name: string, weapon: ActorWeapon): Promise<Nemesis> {
-        return await (await axios.post(ActorPath.Nemesis + name + '/weapons', weapon)).data;
+    static async createNemesisWeapon(id: number, weapon: ActorWeapon): Promise<Nemesis> {
+        return await (await axios.post(ActorPath.Nemesis + id + '/weapons', weapon)).data;
     }
 
-    static async createNemesisArmor(name: string, armor: ActorArmor): Promise<Nemesis> {
-        return await (await axios.post(ActorPath.Nemesis + name + '/armor', armor)).data;
+    static async createNemesisArmor(id: number, armor: ActorArmor): Promise<Nemesis> {
+        return await (await axios.post(ActorPath.Nemesis + id + '/armor', armor)).data;
     }
 
-    static async createNemesisAbility(name: string, ability: Ability): Promise<Nemesis> {
-        return await (await axios.post(ActorPath.Nemesis + name + '/ability', ability)).data;
+    static async createNemesisAbility(id: number, ability: Ability): Promise<Nemesis> {
+        return await (await axios.post(ActorPath.Nemesis + id + '/ability', ability)).data;
     }
 
     static async createRival(name: string): Promise<Rival> {
@@ -104,8 +104,8 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Rival + name, rival)).data;
     }
 
-    static async updateRivalSkill(name: string, skill: ActorSkill): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name + '/skills', skill)).data;
+    static async updateRivalSkill(id: number, skill: ActorSkill): Promise<Rival> {
+        return await (await axios.put(ActorPath.Rival + id + '/skills', skill)).data;
     }
 
     static async addRivalTalent(name: string, talent: ActorTalent): Promise<Rival> {
@@ -140,8 +140,8 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Minion + name, minion)).data;
     }
 
-    static async updateMinionSkill(name: string, skill: ActorSkill): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name + '/skills', skill)).data;
+    static async updateMinionSkill(id: number, skill: ActorSkill): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + id + '/skills', skill)).data;
     }
 
     static async addMinionTalent(name: string, talent: ActorTalent): Promise<Minion> {

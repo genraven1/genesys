@@ -24,7 +24,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     const addTalent = async () => {
-        await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
+        await ActorService.addNemesisTalent(actor.id, {...talent!!} as ActorTalent)
     }
 
     return (

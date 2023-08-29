@@ -6,14 +6,14 @@ import {ActorSkill, ActorType} from "../../../../models/actor/Actor";
 
 interface Props {
     open: boolean
-    name: string
+    id: number
     type: ActorType
     actorSkill: ActorSkill
     onClose: () => void
 }
 
 export default function NonPlayerCharacterEditSkillDialog(props: Props) {
-    const { open, actorSkill, name, type, onClose } = props
+    const { open, actorSkill, id, type, onClose } = props
     const [skill, setSkill] = useState<ActorSkill>(actorSkill)
 
     const handleEdit = async (ranks: number): Promise<void> => {
@@ -22,13 +22,13 @@ export default function NonPlayerCharacterEditSkillDialog(props: Props) {
         setSkill(copySkill)
         switch (type) {
             case ActorType.Minion:
-                await ActorService.updateMinionSkill(name, copySkill)
+                await ActorService.updateMinionSkill(id, copySkill)
                 break
             case ActorType.Rival:
-                await ActorService.updateRivalSkill(name, copySkill)
+                await ActorService.updateRivalSkill(id, copySkill)
                 break
             case ActorType.Nemesis:
-                await ActorService.updateNemesisSkill(name, copySkill)
+                await ActorService.updateNemesisSkill(id, copySkill)
                 break
         }
         onClose()

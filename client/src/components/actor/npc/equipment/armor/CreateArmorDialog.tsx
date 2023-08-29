@@ -26,7 +26,7 @@ export default function CreateArmorDialog(props: Props) {
                 await ActorService.createRivalArmor(actor.name, armor!!)
                 break
             case ActorType.Nemesis:
-                await ActorService.createNemesisArmor(actor.name, armor!!)
+                await ActorService.createNemesisArmor(actor.id, armor!!)
                 break
         }
         onClose()

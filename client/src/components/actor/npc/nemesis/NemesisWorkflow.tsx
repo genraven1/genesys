@@ -6,23 +6,23 @@ import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from "../../../../services/ActorService";
 import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
-function useFetchNemesis(name: string): Nemesis {
+function useFetchNemesis(id: number): Nemesis {
     const [nemesis, setNemesis] = useState<Nemesis>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const nemesisData = await ActorService.getNemesis(name)
+                const nemesisData = await ActorService.getNemesis(id)
                 if (nemesisData) {setNemesis(nemesisData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setNemesis])
+    },[id, setNemesis])
     return nemesis as Nemesis
 }
 
 export default function NemesisWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const nemesis = useFetchNemesis(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const nemesis = useFetchNemesis(Number(id!!))
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
