@@ -62,22 +62,22 @@ export default function PlayerView(props: Props) {
         const copyPlayer = {...player} as Player
         switch (key) {
             case 'brawn':
-                copyPlayer.brawn.current = value
+                copyPlayer.brawn = value
                 break;
             case 'agility':
-                copyPlayer.agility.current = value
+                copyPlayer.agility = value
                 break;
             case 'intellect':
-                copyPlayer.intellect.current = value
+                copyPlayer.intellect = value
                 break;
             case 'cunning':
-                copyPlayer.cunning.current = value
+                copyPlayer.cunning = value
                 break;
             case 'willpower':
-                copyPlayer.willpower.current = value
+                copyPlayer.willpower = value
                 break;
             case 'presence':
-                copyPlayer.presence.current = value
+                copyPlayer.presence = value
                 break;
             case 'melee':
                 copyPlayer.melee.current = value
@@ -99,7 +99,7 @@ export default function PlayerView(props: Props) {
     }
 
     const updatePlayer = async (copyPlayer: Player) => {
-        copyPlayer.soak = copyPlayer.brawn.current
+        copyPlayer.soak = copyPlayer.brawn
         setPlayer(copyPlayer)
         await ActorService.updatePlayer(copyPlayer.name, copyPlayer)
     }

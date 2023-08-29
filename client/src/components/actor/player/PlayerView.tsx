@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import SoakCard from '../SoakCard';
 import ViewStatsCard from '../ViewStatsCard';
 import ViewDefenseCard from '../ViewDefenseCard';
-import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
+import ViewPlayerSkillTable from './skill/ViewPlayerSkillTable';
 import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";

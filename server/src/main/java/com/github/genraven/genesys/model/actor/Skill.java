@@ -2,6 +2,7 @@ package com.github.genraven.genesys.model.actor;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.genraven.genesys.model.Setting;
+import com.github.genraven.genesys.model.actor.characteristic.CharacteristicType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class Skill {
     private Type type;
 
     @Column(name="characteristic")
-    private Characteristic characteristic;
+    private CharacteristicType characteristicType;
 
     @OneToMany
     @JoinTable(

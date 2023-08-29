@@ -14,6 +14,7 @@ import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
 import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
+import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
     skill: PlayerSkill
@@ -21,7 +22,7 @@ interface RowProps {
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const { skill, player } = props
+    const {skill, player} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
     const setName = (): string => {
@@ -31,17 +32,17 @@ function SkillRow(props: RowProps): JSX.Element {
     const getCharacteristicRanks = (): number => {
         switch (skill.characteristic) {
             case CharacteristicType.Agility:
-                return player?.agility?.current
+                return player?.agility
             case CharacteristicType.Brawn:
-                return player?.brawn?.current
+                return player?.brawn
             case CharacteristicType.Cunning:
-                return player?.cunning?.current
+                return player?.cunning
             case CharacteristicType.Intellect:
-                return player?.intellect?.current
+                return player?.intellect
             case CharacteristicType.Presence:
-                return player?.presence?.current
+                return player?.presence
             case CharacteristicType.Willpower:
-                return player?.willpower?.current
+                return player?.willpower
         }
     }
 
@@ -51,13 +52,16 @@ function SkillRow(props: RowProps): JSX.Element {
                 <TableCell>{setName()}</TableCell>
                 <TableCell>{skill?.ranks!!}</TableCell>
                 <TableCell>
-                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()} skillRanks={skill?.ranks!!} />
+                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()}
+                                                skillRanks={skill?.ranks!!}/>
                 </TableCell>
                 <TableCell>
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>
             </TableRow>
-            {openEditSkillDialog && <PlayerEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)} actorSkill={skill!!} name={player.name}/>}
+            {openEditSkillDialog &&
+                <PlayerEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}
+                                       actorSkill={skill!!} name={player.name}/>}
         </Fragment>
     )
 }
@@ -70,24 +74,20 @@ interface GroupProps {
 export function SkillTypeGroup(props: GroupProps) {
     const {player, type} = props
     const [open, setOpen] = useState(false)
+    const headers = ['Skill', 'Ranks', 'Dice Pool', 'Edit']
 
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row" style={{ textAlign: 'center' }}>{type}</TableCell>
+                <TableCell component="th" scope="row" style={{textAlign: 'center'}}>{type}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Table>
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell>Skill</TableCell>
-                                        <TableCell>Ranks</TableCell>
-                                        <TableCell>Dice Pool</TableCell>
-                                        <TableCell>Edit</TableCell>
-                                    </TableRow>
+                                    {renderHeaders(headers)}
                                 </TableHead>
                                 <TableBody>
                                     {(player?.skills!! || []).filter((skill) => skill.type === type).map((row: PlayerSkill) => (
@@ -109,13 +109,13 @@ interface TableProps {
 
 export default function PlayerEditSkillTable(props: TableProps) {
     const {player} = props
+    const headers = ['Skills']
+
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell style={{textAlign: "center"}}>Skills</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
                     <SkillTypeGroup player={player!!} type={SkillType.General}/>

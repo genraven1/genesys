@@ -1,24 +1,30 @@
-import { Grid, Card, CardHeader, Divider, Typography, CardActions } from "@mui/material";
-import {Characteristic, CharacteristicType} from "../../models/actor/Characteristics";
+import {Grid, Card, CardActions, CardContent} from "@mui/material";
+import {CharacteristicType} from "../../models/actor/Characteristics";
 import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 
 interface Props {
-    characteristic: Characteristic,
+    characteristic: number,
     type: CharacteristicType,
     onChange: (value: number) => void,
 }
 
 export default function EditCharacteristicCard(props: Props): JSX.Element {
-    const { characteristic, type, onChange } = props;
+    const {characteristic, type, onChange} = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={type} style={{ textAlign: 'center' }} />
-                <Divider />
-                <Typography style={{ textAlign: 'center' }} >{characteristic?.current!!}</Typography>
+                <CenteredCardHeader title={type}/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={String(characteristic!!)}/>
+                </CardContent>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={characteristic?.current!!} min={1} max={6} onCommit={(value: number): void => { onChange(value) }} />
+                    <InputNumberRangeSelectField defaultValue={characteristic!!} min={1} max={6}
+                                                 onCommit={(value: number): void => {
+                                                     onChange(value)
+                                                 }}/>
                 </CardActions>
             </Card>
         </Grid>

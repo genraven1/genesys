@@ -1,21 +1,22 @@
-import {Grid, Card, CardHeader, Divider, Typography, CardContent} from "@mui/material";
-import {Characteristic, CharacteristicType} from "../../models/actor/Characteristics";
+import {Grid, Card, CardContent} from "@mui/material";
+import {CharacteristicType} from "../../models/actor/Characteristics";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 
 interface Props {
-    characteristic: Characteristic
+    characteristic: number
     type: CharacteristicType
 }
 
 export default function ViewCharacteristicCard(props: Props): JSX.Element {
-    const { characteristic, type } = props;
+    const {characteristic, type} = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={characteristic?.current!!} style={{ textAlign: 'center' }} />
-                <Divider />
+                <CenteredCardHeader title={String(characteristic)}/>
                 <CardContent>
-                    <Typography style={{ textAlign: 'center' }} >{type}</Typography>
+                    <GenesysDescriptionTypography text={type}/>
                 </CardContent>
             </Card>
         </Grid>

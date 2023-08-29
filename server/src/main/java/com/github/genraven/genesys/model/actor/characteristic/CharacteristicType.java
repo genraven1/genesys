@@ -1,4 +1,4 @@
-package com.github.genraven.genesys.model.actor;
+package com.github.genraven.genesys.model.actor.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Characteristic {
+public enum CharacteristicType {
     BRAWN("Brawn"),
     AGILITY("Agility"),
     INTELLIGENT("Intelligent"),
