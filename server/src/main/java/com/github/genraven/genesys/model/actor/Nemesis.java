@@ -26,4 +26,28 @@ public class Nemesis {
 
     @Column(name = "type")
     private Type type = Type.NEMESIS;
+
+    @Column(name = "brawn")
+    private int brawn;
+
+    @Column(name = "agility")
+    private int agility;
+
+    @Column(name = "intellect")
+    private int intellect;
+
+    @Column(name = "cunning")
+    private int cunning;
+
+    @Column(name = "willpower")
+    private int willpower;
+
+    @Column(name = "presence")
+    private int presence;
+
+    private int soak = determineSoak();
+
+    private int determineSoak() {
+        return brawn;
+    }
 }

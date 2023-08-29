@@ -2,18 +2,18 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate, useParams} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import {StatsType} from '../../../models/actor/Stats';
-import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import SoakCard from '../SoakCard';
 import ViewStatsCard from '../ViewStatsCard';
-import ViewDefenseCard from '../ViewDefenseCard';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkillTable';
 import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 import Setting from "../../../models/Setting";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
+import ViewDefenseCard from "../ViewDefenseCard";
+import * as React from "react";
 
 interface Props {
     player: Player
@@ -46,8 +46,7 @@ export default function PlayerView(props: Props) {
                         <SoakCard soak={player?.soak!!} />
                         <ViewStatsCard stats={player?.wounds!!} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player?.strain!!} type={StatsType.Strain}/>
-                        <ViewDefenseCard defense={player?.melee!!} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}/>
+                        <ViewDefenseCard melee={player?.melee!!} ranged={player?.ranged!!}/>
                     </Grid>
                     <Divider />
                     <ViewPlayerSkillTable  player={player}/>

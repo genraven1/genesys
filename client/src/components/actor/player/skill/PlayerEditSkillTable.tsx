@@ -10,11 +10,11 @@ import Collapse from "@mui/material/Collapse";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
 import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
 import {renderHeaders} from "../../../common/table/TableRenders";
+import {getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
 
 interface RowProps {
     skill: PlayerSkill
@@ -25,34 +25,13 @@ function SkillRow(props: RowProps): JSX.Element {
     const {skill, player} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
-    const setName = (): string => {
-        return skill.name + '(' + skill.characteristic + ')'
-    }
-
-    const getCharacteristicRanks = (): number => {
-        switch (skill.characteristic) {
-            case CharacteristicType.Agility:
-                return player?.agility
-            case CharacteristicType.Brawn:
-                return player?.brawn
-            case CharacteristicType.Cunning:
-                return player?.cunning
-            case CharacteristicType.Intellect:
-                return player?.intellect
-            case CharacteristicType.Presence:
-                return player?.presence
-            case CharacteristicType.Willpower:
-                return player?.willpower
-        }
-    }
-
     return (
         <Fragment>
             <TableRow>
-                <TableCell>{setName()}</TableCell>
+                <TableCell>{setSkillName(skill!!)}</TableCell>
                 <TableCell>{skill?.ranks!!}</TableCell>
                 <TableCell>
-                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()}
+                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(player, skill!!)}
                                                 skillRanks={skill?.ranks!!}/>
                 </TableCell>
                 <TableCell>

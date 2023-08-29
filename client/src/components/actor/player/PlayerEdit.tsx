@@ -4,7 +4,6 @@ import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {CharacteristicType} from '../../../models/actor/Characteristics';
 import {StatsType} from '../../../models/actor/Stats';
-import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
@@ -13,7 +12,7 @@ import EditCharacteristicCard from '../EditCharacteristicCard';
 import StatsCard from "../StatsCard";
 import SoakCard from "../SoakCard";
 import TalentSelectionDialog from "../common/talent/TalentSelectionDialog";
-import DefenseCard from "../DefenseCard";
+import EditDefenseCard from "../EditDefenseCard";
 import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
@@ -80,10 +79,10 @@ export default function PlayerView(props: Props) {
                 copyPlayer.presence = value
                 break;
             case 'melee':
-                copyPlayer.melee.current = value
+                copyPlayer.melee = value
                 break;
             case 'ranged':
-                copyPlayer.ranged.current = value
+                copyPlayer.ranged = value
                 break;
             case 'wounds':
                 copyPlayer.wounds.max = value
@@ -152,14 +151,12 @@ export default function PlayerView(props: Props) {
                         <StatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
                             onChange(ActorKey.Strain, value)
                         }}/>
-                        <DefenseCard defense={player?.melee!!} type={DefenseType.Melee}
-                                     onChange={(value: number): void => {
+                        <EditDefenseCard melee={player?.melee!!} ranged={player?.ranged!!}
+                                     onMeleeChange={(value: number): void => {
                                          onChange(ActorKey.Melee, value)
-                                     }}/>
-                        <DefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Ranged, value)
-                                     }}/>
+                                     }} onRangedChange={(value: number): void => {
+                            onChange(ActorKey.Ranged, value)
+                        }}/>
                     </Grid>
                     <Divider/>
                     <PlayerEditSkillTable player={player}/>

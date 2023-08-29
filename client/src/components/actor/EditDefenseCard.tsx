@@ -1,16 +1,19 @@
-import {Card, CardContent, Grid} from "@mui/material";
+import {Card, CardActions, CardContent, Grid} from "@mui/material";
+import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 import {DefenseType} from "../../models/actor/Defense";
-import {Fragment} from "react";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import {Fragment} from "react";
 
 interface Props {
     melee: number
     ranged: number
+    onMeleeChange: (value: number) => void
+    onRangedChange: (value: number) => void
 }
 
-export default function ViewDefenseCard(props: Props) {
-    const {melee, ranged} = props;
+export default function EditDefenseCard(props: Props) {
+    const {melee, ranged, onMeleeChange, onRangedChange} = props;
 
     return (
         <Fragment>
@@ -20,6 +23,9 @@ export default function ViewDefenseCard(props: Props) {
                     <CardContent>
                         <GenesysDescriptionTypography text={String(melee)}/>
                     </CardContent>
+                    <CardActions>
+                        <InputNumberRangeSelectField defaultValue={melee} min={0} max={5} onCommit={onMeleeChange}/>
+                    </CardActions>
                 </Card>
             </Grid>
             <Grid item xs>
@@ -28,6 +34,9 @@ export default function ViewDefenseCard(props: Props) {
                     <CardContent>
                         <GenesysDescriptionTypography text={String(ranged)}/>
                     </CardContent>
+                    <CardActions>
+                        <InputNumberRangeSelectField defaultValue={ranged} min={0} max={5} onCommit={onRangedChange}/>
+                    </CardActions>
                 </Card>
             </Grid>
         </Fragment>

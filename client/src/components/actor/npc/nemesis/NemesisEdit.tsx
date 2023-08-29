@@ -5,14 +5,12 @@ import {useNavigate, useParams} from "react-router-dom"
 import ActorService from "../../../../services/ActorService"
 import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/actor/Characteristics"
-import {DefenseType} from "../../../../models/actor/Defense"
 import {StatsType} from "../../../../models/actor/Stats"
 import EditCharacteristicCard from "../../EditCharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
 import SoakCard from "../../SoakCard"
 import StatsCard from "../../StatsCard"
-import DefenseCard from "../../DefenseCard"
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
 import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog"
@@ -24,6 +22,7 @@ import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityC
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
+import EditDefenseCard from "../../EditDefenseCard";
 
 interface Props {
     nem: Nemesis
@@ -83,10 +82,10 @@ export default function NemesisEdit(props: Props) {
                 copyNemesis.presence = value
                 break
             case "melee":
-                copyNemesis.melee.current = value
+                copyNemesis.melee = value
                 break
             case "ranged":
-                copyNemesis.ranged.current = value
+                copyNemesis.ranged = value
                 break
             case "wounds":
                 copyNemesis.wounds.max = value
@@ -166,14 +165,12 @@ export default function NemesisEdit(props: Props) {
                                    onChange={(value: number): void => {
                                        onChange(ActorKey.Strain, value)
                                    }}/>
-                        <DefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee}
-                                     onChange={(value: number): void => {
+                        <EditDefenseCard melee={nemesis?.melee!!} ranged={nemesis?.ranged!!}
+                                     onMeleeChange={(value: number): void => {
                                          onChange(ActorKey.Melee, value)
-                                     }}/>
-                        <DefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Ranged, value)
-                                     }}/>
+                                     }} onRangedChange={(value: number): void => {
+                            onChange(ActorKey.Ranged, value)
+                        }}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
