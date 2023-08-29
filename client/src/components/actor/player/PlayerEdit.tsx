@@ -9,7 +9,7 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
-import StatsCard from "../StatsCard";
+import EditStatsCard from "../EditStatsCard";
 import SoakCard from "../SoakCard";
 import TalentSelectionDialog from "../common/talent/TalentSelectionDialog";
 import EditDefenseCard from "../EditDefenseCard";
@@ -85,10 +85,10 @@ export default function PlayerView(props: Props) {
                 copyPlayer.ranged = value
                 break;
             case 'wounds':
-                copyPlayer.wounds.max = value
+                copyPlayer.wounds = value
                 break
             case 'strain':
-                copyPlayer.strain.max = value
+                copyPlayer.strain = value
                 break
             default:
                 break
@@ -145,10 +145,10 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!}/>
-                        <StatsCard stats={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
+                        <EditStatsCard stat={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
-                        <StatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
+                        <EditStatsCard stat={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
                             onChange(ActorKey.Strain, value)
                         }}/>
                         <EditDefenseCard melee={player?.melee!!} ranged={player?.ranged!!}

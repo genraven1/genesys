@@ -44,8 +44,8 @@ export default function PlayerView(props: Props) {
                     <Divider />
                     <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!} />
-                        <ViewStatsCard stats={player?.wounds!!} type={StatsType.Wounds}/>
-                        <ViewStatsCard stats={player?.strain!!} type={StatsType.Strain}/>
+                        <ViewStatsCard stat={player?.wounds!!} type={StatsType.Wounds}/>
+                        <ViewStatsCard stat={player?.strain!!} type={StatsType.Strain}/>
                         <ViewDefenseCard melee={player?.melee!!} ranged={player?.ranged!!}/>
                     </Grid>
                     <Divider />

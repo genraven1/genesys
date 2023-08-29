@@ -1,8 +1,13 @@
 package com.github.genraven.genesys.model.actor;
 
+import com.github.genraven.genesys.model.Setting;
+import com.github.genraven.genesys.model.actor.talent.Talent;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "nemesis")
@@ -45,7 +50,50 @@ public class Nemesis {
     @Column(name = "presence")
     private int presence;
 
+    @Column(name = "wound")
+    private int wound;
+
+    @Column(name = "strain")
+    private int strain;
+
+    @Column(name = "combat")
+    private int combat;
+
+    @Column(name = "social")
+    private int social;
+
+    @Column(name = "general")
+    private int general;
+
     private int soak = determineSoak();
+
+    @OneToMany
+    @JoinTable(
+            name = "nemesis_talents",
+            joinColumns = @JoinColumn(
+                    name = "nemesis_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "talent_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private List<Talent> talents = new ArrayList<>();
+
+    @OneToMany
+    @JoinTable(
+            name = "nemesis_settings",
+            joinColumns = @JoinColumn(
+                    name = "nemesis_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "setting_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private List<Setting> settings = new ArrayList<>();
 
     private int determineSoak() {
         return brawn;

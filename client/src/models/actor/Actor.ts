@@ -1,6 +1,5 @@
 import {CharacteristicType} from './Characteristics';
 import Talent from '../Talent';
-import Stats from './Stats';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
@@ -20,7 +19,7 @@ export default interface Actor {
     soak: number,
     melee: number,
     ranged: number,
-    wounds: Stats,
+    wounds: number,
     talents: ActorTalent[],
     weapons: ActorWeapon[],
     armor: ActorArmor[],

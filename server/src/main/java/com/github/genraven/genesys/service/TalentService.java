@@ -1,6 +1,6 @@
 package com.github.genraven.genesys.service;
 
-import com.github.genraven.genesys.model.actor.Talent;
+import com.github.genraven.genesys.model.actor.talent.Talent;
 import com.github.genraven.genesys.repository.TalentRepository;
 import org.springframework.stereotype.Service;
 

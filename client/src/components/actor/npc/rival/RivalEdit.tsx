@@ -8,7 +8,7 @@ import EditCharacteristicCard from "../../EditCharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
+import EditStatsCard from "../../EditStatsCard";
 import EditDefenseCard from "../../EditDefenseCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
@@ -89,7 +89,7 @@ export default function RivalEdit(props: Props) {
                 copyRival.ranged = value
                 break
             case "wounds":
-                copyRival.wounds.max = value
+                copyRival.wounds = value
                 break
             case "combat":
                 copyRival.combat = value
@@ -155,7 +155,7 @@ export default function RivalEdit(props: Props) {
                     <Divider/>
                     <Grid container spacing={2}>
                         <SoakCard soak={rival?.soak!!}/>
-                        <StatsCard stats={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
+                        <EditStatsCard stat={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
                         <EditDefenseCard melee={rival?.melee!!} ranged={rival?.ranged!!}

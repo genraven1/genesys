@@ -8,7 +8,7 @@ import EditCharacteristicCard from "../../EditCharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
+import EditStatsCard from "../../EditStatsCard";
 import * as React from "react";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
@@ -88,7 +88,7 @@ export default function MinionEdit(props: Props) {
                 copyMinion.ranged = value
                 break
             case "wounds":
-                copyMinion.wounds.max = value
+                copyMinion.wounds = value
                 break
             case "combat":
                 copyMinion.combat = value
@@ -154,7 +154,7 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <Grid container spacing={10}>
                         <SoakCard soak={minion?.soak!!}/>
-                        <StatsCard stats={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
+                        <EditStatsCard stat={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
                         <EditDefenseCard melee={minion?.melee!!} ranged={minion?.ranged!!}

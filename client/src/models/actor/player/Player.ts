@@ -1,8 +1,7 @@
 import Actor, {ActorSkill} from "../Actor";
-import Stats from "../Stats";
 
 export default interface Player extends Actor {
-    strain: Stats
+    strain: number
     skills: PlayerSkill[]
 }
 

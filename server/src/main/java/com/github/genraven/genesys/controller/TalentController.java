@@ -1,6 +1,6 @@
 package com.github.genraven.genesys.controller;
 
-import com.github.genraven.genesys.model.actor.Talent;
+import com.github.genraven.genesys.model.actor.talent.Talent;
 import com.github.genraven.genesys.service.TalentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

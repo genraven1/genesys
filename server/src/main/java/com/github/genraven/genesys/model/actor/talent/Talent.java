@@ -1,7 +1,8 @@
-package com.github.genraven.genesys.model.actor;
+package com.github.genraven.genesys.model.actor.talent;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.genraven.genesys.model.Setting;
+import com.github.genraven.genesys.model.actor.Activation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

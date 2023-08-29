@@ -49,7 +49,7 @@ export default function RivalView(props: Props) {
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard soak={rival?.soak!!} />
-                        <ViewStatsCard stats={rival?.wounds!!} type={StatsType.Wounds}/>
+                        <ViewStatsCard stat={rival?.wounds!!} type={StatsType.Wounds}/>
                         <ViewDefenseCard melee={rival?.melee!!} ranged={rival?.ranged!!}/>
                     </Grid>
                     <Divider/>

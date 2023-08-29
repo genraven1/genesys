@@ -10,7 +10,7 @@ import EditCharacteristicCard from "../../EditCharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
 import SoakCard from "../../SoakCard"
-import StatsCard from "../../StatsCard"
+import EditStatsCard from "../../EditStatsCard"
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
 import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog"
@@ -88,10 +88,10 @@ export default function NemesisEdit(props: Props) {
                 copyNemesis.ranged = value
                 break
             case "wounds":
-                copyNemesis.wounds.max = value
+                copyNemesis.wounds = value
                 break
             case "strain":
-                copyNemesis.strain.max = value
+                copyNemesis.strain = value
                 break
             case "combat":
                 copyNemesis.combat = value
@@ -157,12 +157,12 @@ export default function NemesisEdit(props: Props) {
                     <Divider/>
                     <Grid container spacing={10}>
                         <SoakCard soak={nemesis?.soak!!}/>
-                        <StatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}
-                                   onChange={(value: number): void => {
+                        <EditStatsCard stat={nemesis?.wounds!!} type={StatsType.Wounds}
+                                       onChange={(value: number): void => {
                                        onChange(ActorKey.Wounds, value)
                                    }}/>
-                        <StatsCard stats={nemesis?.strain!!} type={StatsType.Strain}
-                                   onChange={(value: number): void => {
+                        <EditStatsCard stat={nemesis?.strain!!} type={StatsType.Strain}
+                                       onChange={(value: number): void => {
                                        onChange(ActorKey.Strain, value)
                                    }}/>
                         <EditDefenseCard melee={nemesis?.melee!!} ranged={nemesis?.ranged!!}
