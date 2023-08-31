@@ -55,7 +55,6 @@ export default function WeaponViewShort(props: Props) {
     return (
         <Card>
             <CenteredCardHeader title={weapon?.name!!}/>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>

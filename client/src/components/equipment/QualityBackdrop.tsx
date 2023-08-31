@@ -13,7 +13,7 @@ export default function QualityBackdrop(props: Props) {
     const {quality, open, onClose} = props
 
     return (
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
+        <Backdrop sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}} open={open} onClick={onClose}>
             <QualityView quality={quality}/>
         </Backdrop>
     )

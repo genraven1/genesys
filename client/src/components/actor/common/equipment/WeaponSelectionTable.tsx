@@ -12,25 +12,16 @@ import ActorService from "../../../../services/ActorService";
 import Actor, {ActorType} from "../../../../models/actor/Actor";
 import EquipmentService from "../../../../services/EquipmentService";
 import {ActorWeapon, Weapon} from "../../../../models/equipment/Weapon";
+import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
-    name: string
+    weapon: Weapon
     actor: Actor
 }
 
 function WeaponNameRow(props: RowProps): JSX.Element {
-    const {name, actor} = props;
-    const [weapon, setWeapon] = useState<Weapon>()
+    const {weapon, actor} = props;
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
-
-    useEffect(() => {
-        if (!name) {return}
-        (async (): Promise<void> => {
-            const weaponData = await EquipmentService.getWeapon(name)
-            if (!weaponData) { return }
-            setWeapon(weaponData)
-        })()
-    }, [name])
 
     const addWeapon = async () => {
         switch (actor.type) {
@@ -46,16 +37,16 @@ function WeaponNameRow(props: RowProps): JSX.Element {
             case ActorType.Player:
                 await ActorService.createPlayerWeapon(actor.name, {...weapon} as ActorWeapon)
                 break
-
         }
-
     }
 
     return (
         <TableRow>
             <TableCell>
                 <Button onClick={(): void => setOpenWeaponBackDrop(true)}>{weapon?.name!!}</Button>
-                {openWeaponBackDrop && <WeaponBackdrop open={openWeaponBackDrop} onClose={(): void => setOpenWeaponBackDrop(false)} weapon={weapon!!}/>}
+                {openWeaponBackDrop &&
+                    <WeaponBackdrop open={openWeaponBackDrop} onClose={(): void => setOpenWeaponBackDrop(false)}
+                                    weapon={weapon!!}/>}
             </TableCell>
             <TableCell>
                 <Button onClick={addWeapon}>Add</Button>
@@ -70,28 +61,28 @@ interface TableProps {
 
 export default function WeaponSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<string[]>([])
+    const [weapons, setWeapons] = useState<Weapon[]>([])
+    const headers = ['Name', 'Add']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const weaponList = await EquipmentService.getWeaponsNames()
-            if (!weaponList) { return }
-            setNames(weaponList)
+            const weaponList = await EquipmentService.getWeapons()
+            if (!weaponList) {
+                return
+            }
+            setWeapons(weaponList)
         })()
-    }, [setNames])
+    }, [setWeapons])
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Weapon Name</TableCell>
-                        <TableCell>Add</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {names.map((name: string) => (
-                        <WeaponNameRow name={name} actor={actor}/>
+                    {weapons.map((weapon: Weapon) => (
+                        <WeaponNameRow weapon={weapon} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>
