@@ -49,7 +49,7 @@ interface TableProps {
 export default function TalentSelectionTable(props: TableProps) {
     const {actor} = props
     const [talents, setTalents] = useState<Talent[]>([])
-    const headers = ['Talent Name', 'Add']
+    const headers = ['Name', 'Add']
 
     useEffect(() => {
         (async (): Promise<void> => {

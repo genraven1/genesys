@@ -24,21 +24,6 @@ public class QualityController {
         return ResponseEntity.ok(qualityService.getQualities());
     }
 
-    @GetMapping("/names")
-    public ResponseEntity<List<String>> getQualityNames() {
-        return ResponseEntity.ok(qualityService.getQualityNames());
-    }
-
-    @GetMapping("/names/armor")
-    public ResponseEntity<List<String>> getArmorQualityNames() {
-        return ResponseEntity.ok(qualityService.getArmorQualityNames());
-    }
-
-    @GetMapping("/names/weapon")
-    public ResponseEntity<List<String>> getWeaponQualityNames() {
-        return ResponseEntity.ok(qualityService.getWeaponQualityNames());
-    }
-
     @PostMapping("/{name}")
     public ResponseEntity<Quality> createQuality(@PathVariable final String name) {
         return ResponseEntity.ok(qualityService.createQuality(name));

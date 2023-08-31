@@ -24,11 +24,6 @@ public class TalentController {
         return ResponseEntity.ok(talentService.getTalents());
     }
 
-    @GetMapping("/names")
-    public ResponseEntity<List<String>> getTalentNames() {
-        return ResponseEntity.ok(talentService.getTalentNames());
-    }
-
     @PostMapping("/{name}")
     public ResponseEntity<Talent> createTalent(@PathVariable final String name) {
         return ResponseEntity.ok(talentService.createTalent(name));
