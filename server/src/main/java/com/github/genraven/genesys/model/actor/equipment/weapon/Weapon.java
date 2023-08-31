@@ -1,7 +1,6 @@
 package com.github.genraven.genesys.model.actor.equipment.weapon;
 
 import com.github.genraven.genesys.model.Setting;
-import com.github.genraven.genesys.model.actor.equipment.Quality;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +42,8 @@ public class Weapon {
     @Column(name = "restricted")
     private boolean restricted;
 
-    private List<Quality> qualities = new ArrayList<>();
+    @OneToMany
+    private List<WeaponQuality> qualities = new ArrayList<>();
 
     @OneToMany
     @JoinTable(
