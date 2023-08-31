@@ -67,7 +67,7 @@ public class Nemesis {
 
     private int soak = determineSoak();
 
-
+    @OneToMany
     private List<NemesisTalent> talents = new ArrayList<>();
 
     @OneToMany

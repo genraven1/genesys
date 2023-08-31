@@ -1,8 +1,10 @@
 package com.github.genraven.genesys.model.actor.talent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.genraven.genesys.model.Setting;
 import com.github.genraven.genesys.model.actor.Activation;
+import com.github.genraven.genesys.model.actor.Nemesis;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -58,6 +60,10 @@ public class Talent {
             )
     )
     private List<Setting> settings = new ArrayList<>();
+
+    @OneToMany
+    @JsonIgnore
+    private List<Nemesis> nemesis;
 
     @AllArgsConstructor
     @Getter

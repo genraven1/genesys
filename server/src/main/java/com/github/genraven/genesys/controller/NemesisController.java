@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping(value="/actor/nemesis")
+@RequestMapping(value="/actors/nemesis")
 public class NemesisController {
 
     private final NemesisService nemesisService;
