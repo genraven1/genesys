@@ -43,18 +43,6 @@ public class Weapon {
     @Column(name = "restricted")
     private boolean restricted;
 
-    @OneToMany
-    @JoinTable(
-            name = "weapon_quality",
-            joinColumns = @JoinColumn(
-                    name = "weapon_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "quality_id",
-                    referencedColumnName = "id"
-            )
-    )
     private List<Quality> qualities = new ArrayList<>();
 
     @OneToMany
