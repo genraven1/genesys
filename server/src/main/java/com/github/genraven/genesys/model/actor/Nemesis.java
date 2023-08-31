@@ -1,7 +1,7 @@
 package com.github.genraven.genesys.model.actor;
 
 import com.github.genraven.genesys.model.Setting;
-import com.github.genraven.genesys.model.actor.talent.Talent;
+import com.github.genraven.genesys.model.actor.talent.NemesisTalent;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,19 +67,8 @@ public class Nemesis {
 
     private int soak = determineSoak();
 
-    @OneToMany
-    @JoinTable(
-            name = "nemesis_talents",
-            joinColumns = @JoinColumn(
-                    name = "nemesis_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "talent_id",
-                    referencedColumnName = "id"
-            )
-    )
-    private List<Talent> talents = new ArrayList<>();
+
+    private List<NemesisTalent> talents = new ArrayList<>();
 
     @OneToMany
     @JoinTable(
