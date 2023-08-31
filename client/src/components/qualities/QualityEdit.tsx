@@ -49,7 +49,7 @@ export default function QualityEdit(props: Props) {
         }
         setQuality(copyQuality)
 
-        await QualityService.updateQuality(copyQuality.name, copyQuality)
+        await QualityService.updateQuality(copyQuality.id, copyQuality)
     }
 
     const onView = () => {
