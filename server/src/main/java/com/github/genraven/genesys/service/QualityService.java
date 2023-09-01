@@ -5,7 +5,6 @@ import com.github.genraven.genesys.repository.QualityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class QualityService {
@@ -29,17 +28,5 @@ public class QualityService {
 
     public List<Quality> getQualities() {
         return qualityRepository.findAll();
-    }
-
-    public List<String> getQualityNames() {
-        return getQualities().stream().map(Quality::getName).collect(Collectors.toList());
-    }
-
-    public List<String> getWeaponQualityNames() {
-        return getQualities().stream().filter(Quality::isWeapon).map(Quality::getName).collect(Collectors.toList());
-    }
-
-    public List<String> getArmorQualityNames() {
-        return getQualities().stream().filter(Quality::isArmor).map(Quality::getName).collect(Collectors.toList());
     }
 }
