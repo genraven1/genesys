@@ -40,7 +40,7 @@ public class WeaponController {
         return ResponseEntity.ok(weaponService.updateWeapon(id, weapon));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/quality")
     public ResponseEntity<Weapon> updateWeaponQuality(@PathVariable final Long id, @RequestBody final Quality quality) {
         return ResponseEntity.ok(weaponService.updateWeaponQuality(id, quality));
     }
