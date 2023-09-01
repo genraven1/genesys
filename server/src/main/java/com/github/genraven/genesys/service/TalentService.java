@@ -5,7 +5,6 @@ import com.github.genraven.genesys.repository.TalentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TalentService {
@@ -29,9 +28,5 @@ public class TalentService {
 
     public List<Talent> getTalents() {
         return talentRepository.findAll();
-    }
-
-    public List<String> getTalentNames() {
-        return getTalents().stream().map(Talent::getName).collect(Collectors.toList());
     }
 }

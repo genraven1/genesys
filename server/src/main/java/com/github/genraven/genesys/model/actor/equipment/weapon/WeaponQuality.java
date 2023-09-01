@@ -11,6 +11,13 @@ import lombok.Setter;
 @Setter
 public class WeaponQuality {
 
+    public WeaponQuality(final Weapon weapon, final Quality quality, final int ranks) {
+        this.weapon = weapon;
+        this.quality = quality;
+        this.ranks = ranks;
+    }
+    protected WeaponQuality(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -25,4 +32,8 @@ public class WeaponQuality {
 
     @Column(name = "ranks")
     private int ranks;
+
+    public void addRanks() {
+        this.setRanks(getRanks() + 1);
+    }
 }
