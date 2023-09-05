@@ -2,7 +2,7 @@ import Skill, {SkillType} from "../../models/actor/Skill";
 import {
     Card,
     CardContent,
-    ClickAwayListener,
+    ClickAwayListener, Grid,
     MenuItem,
     TextField,
     Typography
@@ -41,17 +41,29 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
             if (!skillList) {
                 return
             }
-            setSkills(skillList.filter((skill) => skill.type === type).filter((skill) => skill.settings.includes(setting!!)))
+            let typedSkillList = skillList.filter((skill) => skill.type === type)
+            let typedActiveSkillList = [] as Skill[]
+            for (const skill of typedSkillList) {
+                for (const set of skill.settings) {
+                    if (set.id === setting?.id!!) {
+                        typedActiveSkillList.push(skill)
+                    }
+                }
+            }
+            console.log(typedActiveSkillList)
+            setSkills(typedActiveSkillList)
         })()
     }, [setting, type])
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Required Skill'}/>
-            <CardContent>
-                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
-            </CardContent>
-        </Card>
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={'Required Skill'}/>
+                <CardContent>
+                    <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
@@ -86,12 +98,14 @@ export function AllSkillsSelectCard(props: AllProps): JSX.Element {
     }, [setting?.id])
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Required Skill'}/>
-            <CardContent>
-                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
-            </CardContent>
-        </Card>
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={'Required Skill'}/>
+                <CardContent>
+                    <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 

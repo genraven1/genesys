@@ -1,8 +1,12 @@
 package com.github.genraven.genesys.model.actor.equipment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.genraven.genesys.model.actor.equipment.weapon.WeaponQuality;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "quality")
@@ -17,7 +21,7 @@ public class Quality {
     protected Quality(){}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")
@@ -37,4 +41,8 @@ public class Quality {
 
     @Column(name = "weapon")
     private boolean weapon;
+
+    @OneToMany
+    @JsonIgnore
+    private List<WeaponQuality> weaponQuality;
 }

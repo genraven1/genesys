@@ -7,14 +7,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import CreateEquipmentDialog from "../CreateEquipmentDialog";
+import {EquipmentType} from "../../../models/equipment/Equipment";
+import {renderHeaders} from "../../common/table/TableRenders";
+import {renderDamage, renderPrice} from "../../../models/equipment/EquipmentHelper";
 
 interface Props {
     weapon: Weapon
@@ -25,38 +30,24 @@ function Row(props: Props): JSX.Element {
     const {weapon, columns} = props
     const [open, setOpen] = useState(false)
 
-    const renderDamage = (): string => {
-        let damage = ''
-        if (weapon.brawn) {damage = 'Brawn + ' + weapon.damage}
-        else {damage = String(weapon.damage)}
-        return damage
-    }
-
-    const renderPrice = (): string => {
-        let price = ''
-        if (weapon.restricted) {price = weapon.price + '(R)'}
-        else {price = String(weapon.price)}
-        return price
-    }
-
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={weapon.name}/>
                 <TypographyCenterTableCell value={weapon.skill.name}/>
-                <TypographyCenterTableCell value={renderDamage()}/>
+                <TypographyCenterTableCell value={renderDamage(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.critical)}/>
                 <TypographyCenterTableCell value={weapon.range}/>
                 <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
-                <TypographyCenterTableCell value={renderPrice()}/>
+                <TypographyCenterTableCell value={renderPrice(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.rarity)}/>
                 <ActionsTableCell id={String(weapon.id)} path={EquipmentPath.Weapon}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                            <Table size="small" aria-label="purchases">
+                        <Box sx={{margin: 1}}>
+                            <Table size="small">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={weapon.description}/>
                                 </TableBody>
@@ -71,38 +62,45 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllWeapon(): JSX.Element {
     const [weapons, setWeapons] = useState<Weapon[]>([])
+    const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Encumbrance', 'Price', 'Rarity', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
             const weaponList = await EquipmentService.getWeapons()
-            if (!weaponList) {return}
+            if (!weaponList) {
+                return
+            }
             setWeapons(weaponList)
         })()
     }, [setWeapons])
 
-    const renderHeaders = (): JSX.Element => {
-        return (
-            <TableRow>
-                {headers.map((header: string) => (
-                    <TypographyCenterTableCell value={header}/>
-                ))}
-            </TableRow>
-        )
-    }
-
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    {renderHeaders()}
-                </TableHead>
-                <TableBody>
-                    {weapons.map((row: Weapon) => (
-                        <Row key={row.name} weapon={row} columns={headers.length}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Weapons'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenWeaponCreationDialog(true)}>Create Weapon</Button>}>
+            </CardHeader>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {renderHeaders(headers)}
+                        </TableHead>
+                        <TableBody>
+                            {weapons.map((weapon: Weapon) => (
+                                <Row key={weapon.name} weapon={weapon!!} columns={headers.length}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+            {openWeaponCreationDialog && <CreateEquipmentDialog open={openWeaponCreationDialog}
+                                                                onClose={(): void => setOpenWeaponCreationDialog(false)}
+                                                                type={EquipmentType.Weapon}/>}
+        </Card>
+
     )
 }

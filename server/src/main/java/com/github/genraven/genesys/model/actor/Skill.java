@@ -1,7 +1,9 @@
 package com.github.genraven.genesys.model.actor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.genraven.genesys.model.Setting;
+import com.github.genraven.genesys.model.actor.equipment.weapon.Weapon;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +25,7 @@ public class Skill {
     protected Skill(){}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")
@@ -48,6 +50,10 @@ public class Skill {
             )
     )
     private List<Setting> settings = new ArrayList<>();
+
+    @OneToOne
+    @JsonIgnore
+    private Weapon weapon;
 
     @AllArgsConstructor
     @Getter

@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.model.actor.equipment.weapon;
 
 import com.github.genraven.genesys.model.Setting;
+import com.github.genraven.genesys.model.actor.Skill;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,11 @@ public class Weapon {
         this.name = name;
     }
 
-    protected Weapon(){}
+    protected Weapon() {
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")
@@ -41,6 +43,10 @@ public class Weapon {
 
     @Column(name = "restricted")
     private boolean restricted;
+
+    @OneToOne
+    @JoinColumn(name = "skill_id", referencedColumnName = "id")
+    private Skill skill;
 
     @OneToMany
     private List<WeaponQuality> qualities = new ArrayList<>();

@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping(value="/equipment/weapon")
+@RequestMapping(value = "/equipment/weapon")
 public class WeaponController {
     private final WeaponService weaponService;
 

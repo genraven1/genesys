@@ -16,18 +16,20 @@ public class WeaponQuality {
         this.quality = quality;
         this.ranks = ranks;
     }
-    protected WeaponQuality(){}
+
+    protected WeaponQuality() {
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "weapon_id", referencedColumnName = "id")
     private Weapon weapon;
 
-    @JoinColumn(name = "quality_id", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "qualities_id", referencedColumnName = "id")
+    @ManyToOne
     private Quality quality;
 
     @Column(name = "ranks")

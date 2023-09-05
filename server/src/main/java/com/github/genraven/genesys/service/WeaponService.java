@@ -7,6 +7,7 @@ import com.github.genraven.genesys.repository.WeaponQualityRepository;
 import com.github.genraven.genesys.repository.WeaponRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -37,13 +38,22 @@ public class WeaponService {
 
     public Weapon updateWeaponQuality(final Long id, final Quality quality) {
         final Weapon weapon = getWeapon(id);
-        weapon.getQualities().forEach(weaponQuality -> {
-            if (weaponQuality.getId() == quality.getId()) {
-                weaponQuality.addRanks();
-            } else {
-                weaponQualityRepository.save(new WeaponQuality(weapon, quality, 1));
-            }
-        });
-        return getWeapon(id);
+
+        if (weapon.getQualities().isEmpty()) {
+            final WeaponQuality weaponQuality = new WeaponQuality(weapon, quality, 1);
+            weapon.setQualities(Collections.singletonList(weaponQuality));
+            weaponQualityRepository.save(weaponQuality);
+        }
+        else {
+            weapon.getQualities().forEach(weaponQuality -> {
+                if (weaponQuality.getId() == quality.getId()) {
+                    weaponQuality.addRanks();
+                    weaponQualityRepository.save(weaponQuality);
+                } else {
+                    weaponQualityRepository.save(new WeaponQuality(weapon, quality, 1));
+                }
+            });
+        }
+        return weaponRepository.save(weapon);
     }
 }

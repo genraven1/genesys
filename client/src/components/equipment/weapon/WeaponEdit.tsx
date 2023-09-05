@@ -117,13 +117,13 @@ export default function WeaponEdit(props: Props) {
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => {
                             onChange('description', value)
                         }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
                     <Divider/>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
                             onSkillChange(value)
                         }} type={SkillType.Combat}/>
