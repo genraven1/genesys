@@ -1,11 +1,14 @@
-const mongoose = require('mongoose')
+import { MongoClient } from "mongodb";
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.DATABASE_URI)
-    } catch (err) {
-        console.log(err)
-    }
+const client = new MongoClient(process.env.DATABASE_URI);
+
+let conn;
+try {
+    conn = client.connect();
+} catch(e) {
+    console.error(e);
 }
 
-module.exports = connectDB
+let db = conn.db("genesys");
+
+export default db;
