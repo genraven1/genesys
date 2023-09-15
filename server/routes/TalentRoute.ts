@@ -6,6 +6,8 @@ const router = express.Router()
 
 router.route(TALENT_PATH)
 .get(getAllTalents)
+
+router.route(TALENT_PATH + '/:name')
 .post(createTalent)
 
 router.route(TALENT_PATH + '/:id')

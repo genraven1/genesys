@@ -41,8 +41,8 @@ export const updateSetting = async (req, res) => {
     const updates =  {
         $set: {
             name: req.body.name,
-            position: req.body.position,
-            level: req.body.level
+            magic: req.body.magic,
+            current: false
         }
     };
 
@@ -70,7 +70,7 @@ export const setCurrentSetting = async (req, res) => {
         $set: {
             name: currentSetting.name,
             magic: currentSetting.magic,
-            current: false
+            current: true
         }
     };
     let result = await collection.updateOne({_id: new ObjectId(currentSetting.id)}, updatedCurrentSetting);
