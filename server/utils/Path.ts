@@ -1,2 +1,11 @@
-export const TALENT_PATH = '/talents'
-export const SETTING_PATH = '/settings'
+export const TALENT_PATH = '/talents';
+export const SETTING_PATH = '/settings';
+export const SKILL_PATH = '/skills';
+export const QUALITIY_PATH = '/qualities';
+export const WEAPON_PATH = 'weapons';
+export const ARMOR_PATH = '/armors';
+export const GEAR_PATH = '/gears';
+export const PLAYER_PATH = '/players';
+export const NEMESIS_PATH = '/nemeses';
+export const RIVAL_PATH = '/rivals';
+export const MINION_PATH = '/minions';
