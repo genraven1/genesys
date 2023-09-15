@@ -25,5 +25,15 @@ export const getSkill = (req, res) => {
 }
 
 export const updateSkill = (res, req) => {
-
+    const query = { _id: new ObjectId(req.params.id)};
+    const updates = {
+        $set: {
+            name: req.body.name,
+            characteristic: req.body.characteristic,
+            type: req.body.type
+        }
+    };
+    let collection = await db.collection(SKILL_COLLECTION);
+    let result = await collection.updateOne(query, updates);
+    res.send(result).status(200);
 }
