@@ -4,7 +4,7 @@ const client = new MongoClient(process.env.DATABASE_URI);
 
 let conn;
 try {
-    conn = client.connect();
+    conn = await client.connect();
 } catch(e) {
     console.error(e);
 }

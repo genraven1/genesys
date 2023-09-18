@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
-import db from '../config/Database'
-import {SETTING_COLLECTION} from "../utils/Collections";
-import Setting from "../models/Setting";
+import db from '../config/Database.ts'
+import {SETTING_COLLECTION} from "../utils/Collections.ts";
+import Setting from "../models/Setting.ts";
 
 export const getAllSettings = async (req, res) => {
     let collection = await db.collection(SETTING_COLLECTION);
