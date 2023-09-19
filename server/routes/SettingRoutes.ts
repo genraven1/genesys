@@ -13,6 +13,8 @@ export const settingRouter = express.Router()
 
 settingRouter.route(SETTING_PATH)
 .get(getAllSettings)
+
+settingRouter.route(SETTING_PATH + ':name')
 .post(createSetting)
 
 settingRouter.route(SETTING_PATH + ':id')

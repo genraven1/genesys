@@ -1,4 +1,4 @@
-import Setting from "./Setting"
+import Setting from "./Setting.ts"
 
 export interface Talent {
     id: number

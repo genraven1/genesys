@@ -1,6 +1,6 @@
-export const TALENT_PATH = '/talents';
+export const TALENT_PATH = '/talents/';
 export const SETTING_PATH = '/settings/';
-export const SKILL_PATH = '/skills';
+export const SKILL_PATH = '/skills/';
 export const QUALITIY_PATH = '/qualities';
 export const WEAPON_PATH = 'weapons';
 export const ARMOR_PATH = '/armors';

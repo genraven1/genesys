@@ -1,15 +1,15 @@
 import express from "express";
-import {createTalent, getAllTalents, getTalent, updateTalent} from '../controller/TalentController'
-import {TALENT_PATH} from "../utils/Path";
+import {createTalent, getAllTalents, getTalent, updateTalent} from '../controller/TalentController.ts'
+import {TALENT_PATH} from "../utils/Path.ts";
 
-const router = express.Router()
+export const talentRouter = express.Router()
 
-router.route(TALENT_PATH)
+talentRouterouter.route(TALENT_PATH)
 .get(getAllTalents)
 
-router.route(TALENT_PATH + '/:name')
+talentRouter.route(TALENT_PATH + ':name')
 .post(createTalent)
 
-router.route(TALENT_PATH + '/:id')
+talentRouter.route(TALENT_PATH + ':id')
 .put(updateTalent)
 .get(getTalent)

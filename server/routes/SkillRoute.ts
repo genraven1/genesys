@@ -1,13 +1,14 @@
 import express from "express";
+import {SKILL_PATH} from '../utils/Path.ts'
 
-const router = express.router()
+export const skillRouter = express.router()
 
-router.route(SKILL_PATH)
+skillRouter.route(SKILL_PATH)
 .get(getAllSkills)
 
-router.route(SKILL_PATH + '/:name')
+skillRouter.route(SKILL_PATH + ':name')
 .post(createSkill)
 
-router.route(SKILL_PATH + '/:id')
+skillRouter.route(SKILL_PATH + ':id')
 .put(updateSkill)
 .get(getSkill)
