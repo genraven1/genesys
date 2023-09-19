@@ -30,7 +30,8 @@ export const updateSkill = (res, req) => {
         $set: {
             name: req.body.name,
             characteristic: req.body.characteristic,
-            type: req.body.type
+            type: req.body.type,
+            settings: req.body.settings
         }
     };
     let collection = await db.collection(SKILL_COLLECTION);
