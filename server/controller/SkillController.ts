@@ -1,4 +1,6 @@
-
+import {ObjectId} from 'mongodb';
+import db from '../config/Database.ts';
+import {SKILL_COLLECTION} from '../utils/Collections.ts';
 
 export const getAllSkills = (req, res) => {
     let collection = await db.collection(SKILL_COLLECTION);

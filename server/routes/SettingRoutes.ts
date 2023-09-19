@@ -9,7 +9,7 @@ import {
     updateSetting
 } from "../controller/SettingController.ts";
 
-export const settingRouter = express.Router()
+export const settingRouter = express.Router();
 
 settingRouter.route(SETTING_PATH)
 .get(getAllSettings)
