@@ -31,8 +31,12 @@ export const updateTalent = async (req, res) => {
     const updates =  {
         $set: {
             name: req.body.name,
-            position: req.body.position,
-            level: req.body.level
+            ranked: req.body.ranked,
+            activation: req.body.activation,
+            tier: req.body.tier,
+            summary: req.body.summary,
+            description: req.body.description,
+            settings: req.body.settings
         }
     };
 
