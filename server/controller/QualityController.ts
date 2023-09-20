@@ -2,13 +2,13 @@ import {ObjectId} from 'mongodb';
 import db from '../config/Database.ts';
 import {QUALITY_COLLECTION} from '../utils/Collections.ts';
 
-export const getAllQualities = (req, res) => {
+export const getAllQualities = async (req, res) => {
     let collection = await db.collection(QUALITY_COLLECTION);
     let results = await collection.find({}).toArray();
     res.send(results).status(200);
 }
 
-export const createQuality = (req, res) => {
+export const createQuality = async (req, res) => {
     let newDocument = {
         name: req.params.name
     };
@@ -17,7 +17,7 @@ export const createQuality = (req, res) => {
     res.send(result).status(204);
 }
 
-export const getQuality = (req, res) => {
+export const getQuality = async (req, res) => {
     let collection = await db.collection(QUALITY_COLLECTION);
     let query = {_id: new ObjectId(req.params.id)};
     let result = await collection.findOne(query);
@@ -26,7 +26,7 @@ export const getQuality = (req, res) => {
     else res.send(result).status(200);
 }
 
-export const updateQuality = (req, res) => {
+export const updateQuality = async (req, res) => {
     const query = {_id: new ObjectId(req.params.id)};
     const updates = {
         $set: {

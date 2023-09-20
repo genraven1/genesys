@@ -4,7 +4,7 @@ import {TALENT_PATH} from "../utils/Path.ts";
 
 export const talentRouter = express.Router()
 
-talentRouterouter.route(TALENT_PATH)
+talentRouter.route(TALENT_PATH)
 .get(getAllTalents)
 
 talentRouter.route(TALENT_PATH + ':name')

@@ -2,13 +2,13 @@ import {ObjectId} from 'mongodb';
 import db from '../config/Database.ts';
 import {SKILL_COLLECTION} from '../utils/Collections.ts';
 
-export const getAllSkills = (req, res) => {
+export const getAllSkills = async (req, res) => {
     let collection = await db.collection(SKILL_COLLECTION);
     let results = await collection.find({}).toArray();
     res.send(results).status(200);
 }
 
-export const createSkill = (req, res) => {
+export const createSkill = async (req, res) => {
     let newDocument = {
         name: req.params.name
     };
@@ -17,7 +17,7 @@ export const createSkill = (req, res) => {
     res.send(result).status(204);
 }
 
-export const getSkill = (req, res) => {
+export const getSkill = async (req, res) => {
     let collection = await db.collection(SKILL_COLLECTION);
     let query = {_id: new ObjectId(req.params.id)};
     let result = await collection.findOne(query);
@@ -26,7 +26,7 @@ export const getSkill = (req, res) => {
     else res.send(result).status(200);
 }
 
-export const updateSkill = (res, req) => {
+export const updateSkill = async (res, req) => {
     const query = { _id: new ObjectId(req.params.id)};
     const updates = {
         $set: {

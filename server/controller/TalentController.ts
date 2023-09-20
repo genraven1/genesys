@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import db from '../config/Database'
-import { TALENT_COLLECTION } from '../utils/Collections';
+import db from '../config/Database.ts'
+import { TALENT_COLLECTION } from '../utils/Collections.ts';
 
 export const getAllTalents = async (req, res) => {
     let collection = await db.collection(TALENT_COLLECTION);

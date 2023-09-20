@@ -1,5 +1,6 @@
 import express from "express";
 import {SKILL_PATH} from '../utils/Path.ts'
+import {createSkill, getAllSkills, getSkill, updateSkill } from "../controller/SkillController.ts";
 
 export const skillRouter = express.router()
 
