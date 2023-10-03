@@ -12,13 +12,17 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 
-function OrganizationRow(props: { row: Organization }): JSX.Element {
-    const { row } = props
+interface RowProps {
+    organization: Organization
+}
+
+function OrganizationRow(props: RowProps): JSX.Element {
+    const {organization} = props
 
     return (
         <TableRow>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
-            <ActionsTableCell name={row.name} path={LorePath.Organization}/>
+            <TableCell component="th" scope="row">{organization.name}</TableCell>
+            <ActionsTableCell id={String(organization.id)} path={LorePath.Organization}/>
         </TableRow>
     )
 }
@@ -34,7 +38,9 @@ export function ViewAllOrganizations(props: Props): JSX.Element {
     useEffect(() => {
         (async (): Promise<void> => {
             const loreList = await LoreService.getAllLoreOfType(path)
-            if (!loreList) { return }
+            if (!loreList) {
+                return
+            }
             setOrganizations(loreList)
         })()
     }, [path])
@@ -49,8 +55,8 @@ export function ViewAllOrganizations(props: Props): JSX.Element {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {organizations.map((row: Organization) => (
-                        <OrganizationRow key={row.name} row={row} />
+                    {organizations.map((organization: Organization) => (
+                        <OrganizationRow key={organization.name} organization={organization}/>
                     ))}
                 </TableBody>
             </Table>

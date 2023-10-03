@@ -22,17 +22,17 @@ interface Props {
 
 export default function PlayerView(props: Props) {
     const {player, settings} = props
-    const { name } = useParams<{ name: string }>()
+    const { id } = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Player + name + '/edit')
+        navigate(ActorPath.Player + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
-                style={{textAlign: 'center'}} title={name}
+                style={{textAlign: 'center'}} title={player?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
@@ -56,7 +56,7 @@ export default function PlayerView(props: Props) {
                     <Divider />
                     <PlayerTalentTable player={player}/>
                 </Grid>
-                <ViewSettingsCard settingNames={player?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={player?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

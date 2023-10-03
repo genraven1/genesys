@@ -4,50 +4,36 @@ import * as React from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
-import Setting from "../../models/Setting";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import {Fragment} from "react";
 import Quality from "../../models/Quality";
 
 interface Props {
     quality: Quality
-    allSettings: Setting[]
 }
 
 export default function QualityView(props: Props) {
-    const {quality, allSettings} = props
-    const {name} = useParams<{ name: string }>()
+    const {quality} = props
+    const {id} = useParams<{ id: string }>()
     const path = Path.Qualities
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
-    const renderUsable = ():JSX.Element => {
-        if(quality?.weapon!! === undefined && quality?.armor!! === undefined) {return <Fragment/>}
-        let usable = ''
-        if(quality?.weapon!! && !Boolean(quality?.armor!!)) {usable = 'Weapons'}
-        else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {usable = 'Armor'}
-        else {usable = 'Weapons and Armor'}
-        return <ViewFieldCard name={'Quality Used on'} value={usable}/>
-    }
-
-    const renderSettings = ():JSX.Element => {
-        if (quality?.settings!! === undefined) {return <Fragment/>}
-        let settingList = []
-        for (let setting of allSettings) {
-            if (quality?.settings.includes(setting.name)) {
-                settingList.push(setting)
-            }
+    const renderUsable = (): JSX.Element => {
+        if (quality?.weapon!! === undefined && quality?.armor!! === undefined) {
+            return <Fragment/>
         }
-        return (
-            <Fragment>
-                {(settingList || []).map((setting: Setting):JSX.Element => {
-                    return <GenesysDescriptionTypography text={setting?.name!!}/>
-                })}
-            </Fragment>
-        )
+        let usable = ''
+        if (quality?.weapon!! && !Boolean(quality?.armor!!)) {
+            usable = 'Weapons'
+        } else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {
+            usable = 'Armor'
+        } else {
+            usable = 'Weapons and Armor'
+        }
+        return <ViewFieldCard name={'Quality Used on'} value={usable}/>
     }
 
     return (
@@ -56,31 +42,19 @@ export default function QualityView(props: Props) {
                 style={{textAlign: 'center'}}
                 title={quality?.name!!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
+                    <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={quality?.description!!} />
+                        <ViewFieldCard name={'Description'} value={quality?.description!!}/>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
                         {renderUsable()}
                         <ViewQualityActivationCard quality={quality}/>
-                    </Grid>
-                    <Divider />
-                    <Grid container spacing={10}>
-                        <Grid item xs>
-                            <Card>
-                                <CardHeader title={'Settings'} style={{ textAlign: 'center' }} />
-                                <Divider />
-                                <CardContent>
-                                    {renderSettings()}
-                                </CardContent>
-                            </Card>
-                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>

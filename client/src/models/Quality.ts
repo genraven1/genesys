@@ -1,9 +1,9 @@
 export default interface Quality {
+    id: number
     name: string
     description: string
     passive: boolean
     cost: number
-    settings: string[]
     armor: boolean
     weapon: boolean
 }

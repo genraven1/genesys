@@ -10,43 +10,72 @@ export function useFetchAllSettings(): Setting[] {
     const [settings, setSettings] = useState<Setting[]>([])
     useEffect(() => {
         (async (): Promise<void> => {
-            if (settings.length > 0) {return}
+            if (settings.length > 0) {
+                return
+            }
             try {
                 const settingList = await SettingService.getSettings()
-                if (settingList) {setSettings(settingList)}
-            } catch (err) {console.log(err)}
+                if (settingList) {
+                    setSettings(settingList)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
     }, [settings.length, setSettings])
     return settings
 }
 
-function useFetchSetting(name: string): Setting {
+function useFetchSetting(id: number): Setting {
     const [setting, setSetting] = useState<Setting>()
     useEffect(() => {
-        if(!name) {return}
+        if (!id) {
+            return
+        }
         (async (): Promise<void> => {
             try {
-                const settingData = await SettingService.getSetting(name)
-                if (settingData) {setSetting(settingData)}
-            } catch (err) {console.log(err)}
+                const settingData = await SettingService.getSetting(id)
+                if (settingData) {
+                    setSetting(settingData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[name, setSetting])
+    }, [id, setSetting])
+    return setting as Setting
+}
+
+export function useFetchCurrentSetting(): Setting {
+    const [setting, setSetting] = useState<Setting>()
+    useEffect(() => {
+        (async (): Promise<void> => {
+            try {
+                const currentSetting = await SettingService.getCurrentSetting()
+                if (currentSetting) {
+                    setSetting(currentSetting)
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        })()
+    }, [setSetting])
     return setting as Setting
 }
 
 export default function SettingWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
-    const setting = useFetchSetting(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const setting = useFetchSetting(Number(id!!))
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <SettingView  setting={setting}/>
-        }
-        else if (pathname.endsWith('/edit')) {
+            return <SettingView setting={setting}/>
+        } else if (pathname.endsWith('/edit')) {
             return <SettingEdit set={setting}/>
+        } else {
+            return <ViewAllSettings/>
         }
-        else {return <ViewAllSettings/>}
     }
 
     return (

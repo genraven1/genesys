@@ -24,12 +24,12 @@ interface Props {
 
 export default function WeaponView(props: Props) {
     const {weapon, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Weapon + name + '/edit')
+        navigate(EquipmentPath.Weapon + id + '/edit')
     }
 
     return (
@@ -67,7 +67,7 @@ export default function WeaponView(props: Props) {
                         </Table>
                     </TableContainer>
                     <Divider/>
-                    <ViewSettingsCard settingNames={weapon?.settings!!} allSettings={settings}/>
+                    <ViewSettingsCard settings={weapon?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

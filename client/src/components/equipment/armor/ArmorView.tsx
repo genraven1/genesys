@@ -24,12 +24,12 @@ interface Props {
 
 export default function ArmorView(props: Props) {
     const {armor, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + name + '/edit');
+        navigate(EquipmentPath.Armor + id + '/edit');
     }
 
     return (
@@ -67,7 +67,7 @@ export default function ArmorView(props: Props) {
                     </TableContainer>
                 </Grid>
                 <Divider/>
-                <ViewSettingsCard settingNames={armor?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={armor?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

@@ -9,16 +9,36 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../table/TypographyTableCell";
 import CheckboxTableCell from "../table/CheckboxTableCell";
 import Setting from "../../../models/Setting";
+import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 
 interface Props {
-    names: string[]
-    onSettingAddition: (name: string) => void
-    onSettingRemoval: (name: string) => void
     settings: Setting[]
+    onSettingAddition: (id: number) => void
+    onSettingRemoval: (id: number) => void
+    allSettings: Setting[]
 }
 
 export default function EditSettingsCard(props: Props): JSX.Element {
-    const {names, onSettingAddition, onSettingRemoval, settings} = props
+    const {settings, onSettingAddition, onSettingRemoval, allSettings} = props
+
+    const renderTableBody = (): JSX.Element => {
+        if (!settings) {
+            return <GenesysDescriptionTypography text={'None'}/>
+        } else {
+            return (
+                <TableBody>
+                    {(allSettings || [])!!.map((setting: Setting) => (
+                        <TableRow>
+                            <TypographyCenterTableCell value={setting.name}/>
+                            <CheckboxTableCell value={settings!!.some(set => set.id === setting.id)}
+                                               onAddition={() => onSettingAddition(setting.id)}
+                                               onRemoval={() => onSettingRemoval(setting.id)}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            )
+        }
+    }
 
     return (
         <Card sx={{"width": 1}}>
@@ -26,16 +46,7 @@ export default function EditSettingsCard(props: Props): JSX.Element {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableBody>
-                            {(settings || [])!!.map((setting: Setting) => (
-                                <TableRow>
-                                    <TypographyCenterTableCell value={setting.name}/>
-                                    <CheckboxTableCell value={names!!.includes(setting.name)}
-                                                       onAddition={() => onSettingAddition(setting.name)}
-                                                       onRemoval={() => onSettingRemoval(setting.name)}/>
-                                </TableRow>
-                            ))}
-                        </TableBody>
+                        {renderTableBody()}
                     </Table>
                 </TableContainer>
             </CardContent>

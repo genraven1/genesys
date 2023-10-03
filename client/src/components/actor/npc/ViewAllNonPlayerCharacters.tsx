@@ -46,7 +46,7 @@ function Row(props: RowProps): JSX.Element {
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={npc.name}/>
                 <TypographyCenterTableCell value={npc.type}/>
-                <ActionsTableCell name={npc.name} path={getPathFromType()}/>
+                <ActionsTableCell id={String(npc.id)} path={getPathFromType()}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>

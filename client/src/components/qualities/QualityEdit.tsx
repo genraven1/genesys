@@ -5,7 +5,6 @@ import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
-import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
 import Quality from "../../models/Quality";
 import QualityService from "../../services/QualityService";
@@ -13,12 +12,11 @@ import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
 
 interface Props {
     qual: Quality
-    allSettings: Setting[]
 }
 
 export default function QualityEdit(props: Props) {
     const {qual} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [quality, setQuality] = useState<Quality>(qual)
 
     let navigate = useNavigate()
@@ -51,11 +49,11 @@ export default function QualityEdit(props: Props) {
         }
         setQuality(copyQuality)
 
-        await QualityService.updateQuality(copyQuality.name, copyQuality)
+        await QualityService.updateQuality(copyQuality.id, copyQuality)
     }
 
     const onView = () => {
-        navigate(Path.Qualities + name!! + '/view');
+        navigate(Path.Qualities + id!! + '/view');
     }
 
     return (

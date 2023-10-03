@@ -8,34 +8,40 @@ import ViewAllTalents from "./ViewAllTalents";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
-function useFetchTalent(name: string): Talent {
+function useFetchTalent(id: number): Talent {
     const [talent, setTalent] = useState<Talent>()
     useEffect(() => {
-        if(!name) {return}
+        if (!id) {
+            return
+        }
         (async (): Promise<void> => {
             try {
-                const talentData = await TalentService.getTalent(name)
-                if (talentData) {setTalent(talentData)}
-            } catch (err) {console.log(err)}
+                const talentData = await TalentService.getTalent(id)
+                if (talentData) {
+                    setTalent(talentData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[name, setTalent])
+    }, [id, setTalent])
     return talent as Talent
 }
 
 export default function TalentWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
-    const talent = useFetchTalent(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const talent = useFetchTalent(Number(id!!))
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <TalentView  talent={talent} allSettings={settings}/>
-        }
-        else if (pathname.endsWith('/edit')) {
+            return <TalentView talent={talent} allSettings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
             return <TalentEdit tal={talent} settings={settings}/>
+        } else {
+            return <ViewAllTalents/>
         }
-        else {return <ViewAllTalents/>}
     }
 
     return (

@@ -16,12 +16,12 @@ interface Props {
 
 export default function GearView(props: Props) {
     const {gear, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + name + '/edit')
+        navigate(path + id + '/edit')
     }
 
     return (
@@ -52,7 +52,7 @@ export default function GearView(props: Props) {
                         <ViewFieldCard name={'Rarity'} value={String(gear?.rarity!!)}/>
                     </Grid>
                     <Divider/>
-                    <ViewSettingsCard settingNames={gear?.settings!!} allSettings={settings}/>
+                    <ViewSettingsCard settings={gear?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

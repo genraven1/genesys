@@ -23,6 +23,7 @@ import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEqui
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
+import SettingService from "../../../../services/SettingService";
 
 interface Props {
     nem: Nemesis
@@ -31,7 +32,7 @@ interface Props {
 
 export default function NemesisEdit(props: Props) {
     const {nem, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
@@ -40,16 +41,17 @@ export default function NemesisEdit(props: Props) {
         setNemesis(nem)
     }, [nem])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (id: number) => {
         const copyNemesis = {...nemesis} as Nemesis
+        let setting = await SettingService.getSetting(id)
         copyNemesis.settings = copyNemesis.settings.concat(setting)
         await updateNemesis(copyNemesis)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (id: number) => {
         const copyNemesis = {...nemesis} as Nemesis
         copyNemesis.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyNemesis.settings.splice(index, 1)
             }
         })
@@ -115,12 +117,12 @@ export default function NemesisEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Nemesis + name + '/view')
+        navigate(ActorPath.Nemesis + id + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{textAlign: 'center'}}
+            <CardHeader title={nemesis?.name!!} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>
@@ -200,8 +202,8 @@ export default function NemesisEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={nemesis}/>
                 </Grid>
-                <EditSettingsCard names={nemesis?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={nemesis?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

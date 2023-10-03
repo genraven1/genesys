@@ -26,18 +26,18 @@ interface Props {
 
 export default function RivalView(props: Props) {
     const {rival, settings} = props
-    const { name } = useParams<{ name: string }>()
+    const { id } = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Rival + name + '/edit')
+        navigate(ActorPath.Rival + id + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={name}
+                title={rival?.name!!}
                 subheader={<GenesysDescriptionTypography text={getRatings(rival)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
@@ -63,7 +63,7 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
-                <ViewSettingsCard settingNames={rival?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={rival?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

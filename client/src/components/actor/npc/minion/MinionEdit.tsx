@@ -23,6 +23,7 @@ import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityC
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import SettingService from "../../../../services/SettingService";
 
 interface Props {
     min: Minion
@@ -31,7 +32,7 @@ interface Props {
 
 export default function MinionEdit(props: Props) {
     const {min, settings} = props
-    const {name} = useParams<{ name: string }>()
+    const {id} = useParams<{ id: string }>()
     const [minion, setMinion] = useState<Minion>(min)
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
@@ -40,16 +41,17 @@ export default function MinionEdit(props: Props) {
         setMinion(min)
     }, [min])
 
-    const onSettingAddition = async (setting: string) => {
+    const onSettingAddition = async (id: number) => {
         const copyMinion = {...minion} as Minion
+        let setting = await SettingService.getSetting(id)
         copyMinion.settings = copyMinion.settings.concat(setting)
         await updateMinion(copyMinion)
     }
 
-    const onSettingRemoval = async (setting: string) => {
+    const onSettingRemoval = async (id: number) => {
         const copyMinion = {...minion} as Minion
         copyMinion.settings.forEach((set, index) => {
-            if (set === setting) {
+            if (set.id === id) {
                 copyMinion.settings.splice(index, 1)
             }
         })
@@ -112,12 +114,12 @@ export default function MinionEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Minion + name + '/view')
+        navigate(ActorPath.Minion + id + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={name} style={{textAlign: 'center'}}
+            <CardHeader title={minion?.name!!} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>
@@ -192,8 +194,8 @@ export default function MinionEdit(props: Props) {
                                                                       onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
-                <EditSettingsCard names={minion?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} settings={settings}/>
+                <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
+                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

@@ -1,7 +1,6 @@
 import * as React from "react";
-import {Fragment, useState} from "react";
+import {useState} from "react";
 import Roll, {DieType} from "../../models/Roll";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -10,6 +9,8 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {Box, Card, IconButton} from "@mui/material";
 import {Add, Remove} from "@mui/icons-material";
+import {renderHeaders} from "../common/table/TableRenders";
+import {GenesysDescriptionTypographyCenterTableCell} from "../common/table/TypographyTableCell";
 
 interface TableProps {
     roll: Roll
@@ -19,6 +20,7 @@ interface TableProps {
 export default function ViewRollTable(props: TableProps): JSX.Element {
     const {roll, onChange} = props
     const [diceRoll, setDiceRoll] = useState<Roll>(roll)
+    const headers = ['Die Type', 'Amount', 'Adjust']
 
     const onAddDiceChange = (type: DieType) => {
         let copyDiceRoll = diceRoll
@@ -76,18 +78,20 @@ export default function ViewRollTable(props: TableProps): JSX.Element {
         <TableContainer component={Card}>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Die Type</TableCell>
-                        <TableCell>Adjust</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    <Row type={DieType.Boost} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
-                    <Row type={DieType.Ability} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
-                    <Row type={DieType.Proficiency} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
-                    <Row type={DieType.Setback} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
-                    <Row type={DieType.Difficulty} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
-                    <Row type={DieType.Challenge} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}/>
+                    <Row type={DieType.Boost} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange} roll={roll}/>
+                    <Row type={DieType.Ability} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}
+                         roll={roll}/>
+                    <Row type={DieType.Proficiency} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}
+                         roll={roll}/>
+                    <Row type={DieType.Setback} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}
+                         roll={roll}/>
+                    <Row type={DieType.Difficulty} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}
+                         roll={roll}/>
+                    <Row type={DieType.Challenge} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}
+                         roll={roll}/>
                 </TableBody>
             </Table>
         </TableContainer>
@@ -98,20 +102,43 @@ interface DieRowProps {
     type: DieType
     onAddDie: (type: DieType) => void
     onRemoveDie: (type: DieType) => void
+    roll: Roll
 }
 
 function Row(props: DieRowProps): JSX.Element {
-    const {type, onAddDie, onRemoveDie} = props
+    const {type, onAddDie, onRemoveDie, roll} = props
+
+    const getDiceNumber = (): string => {
+        let number;
+        switch (type) {
+            case DieType.Boost:
+                number = roll.boost
+                break;
+            case DieType.Ability:
+                number = roll.ability
+                break;
+            case DieType.Proficiency:
+                number = roll.proficiency
+                break;
+            case DieType.Setback:
+                number = roll.setback
+                break;
+            case DieType.Difficulty:
+                number = roll.difficulty
+                break;
+            case DieType.Challenge:
+                number = roll.challenge
+                break;
+        }
+        return String(number)
+    }
 
     return (
-        <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell>
-                    <GenesysDescriptionTypography text={type}/>
-                </TableCell>
-                <AdjustValueTableCell type={type} onAddDie={onAddDie} onRemoveDie={onRemoveDie}/>
-            </TableRow>
-        </Fragment>
+        <TableRow>
+            <GenesysDescriptionTypographyCenterTableCell value={type}/>
+            <GenesysDescriptionTypographyCenterTableCell value={getDiceNumber()}/>
+            <AdjustValueTableCell type={type} onAddDie={onAddDie} onRemoveDie={onRemoveDie}/>
+        </TableRow>
     )
 }
 
@@ -122,7 +149,7 @@ interface CellProps {
 }
 
 function AdjustValueTableCell(props: CellProps): JSX.Element {
-    const {type,onAddDie,onRemoveDie} = props
+    const {type, onAddDie, onRemoveDie} = props
 
     const addDie = () => {
         onAddDie(type)
@@ -136,10 +163,10 @@ function AdjustValueTableCell(props: CellProps): JSX.Element {
         <TableCell>
             <Box component='span'>
                 <IconButton title='Add' size='small' onClick={addDie}>
-                    <Add color='primary' fontSize='small' />
+                    <Add color='primary' fontSize='small'/>
                 </IconButton>
                 <IconButton title='Remove' size='small' onClick={removeDie}>
-                    <Remove color='primary' fontSize='small' />
+                    <Remove color='primary' fontSize='small'/>
                 </IconButton>
             </Box>
         </TableCell>
