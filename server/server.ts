@@ -13,9 +13,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(SETTING_PATH, settingRouter);
-app.use(SKILL_PATH, skillRouter);
-app.use(TALENT_PATH, talentRouter);
+app.use(SETTING_PATH, settingRouter());
+app.use(SKILL_PATH, skillRouter());
+app.use(TALENT_PATH, talentRouter());
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

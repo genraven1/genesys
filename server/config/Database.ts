@@ -1,9 +1,10 @@
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient(process.env.DATABASE_URI);
+
 
 let conn;
 try {
+    const client = new MongoClient("mongodb+srv://genesys:b00gercaT@atlascluster.6frdbwn.mongodb.net/?retryWrites=true&w=majority");
     conn = await client.connect();
 } catch(e) {
     console.error(e);
