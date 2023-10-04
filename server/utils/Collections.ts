@@ -1,0 +1,11 @@
+export const TALENT_COLLECTION = 'talents';
+export const SETTING_COLLECTION = 'settings';
+export const SKILL_COLLECTION = 'skills';
+export const QUALITY_COLLECTION = 'qualities';
+export const WEAPON_COLLECTION = 'weapons';
+export const ARMOR_COLLECTION = 'armors';
+export const GEAR_COLLECTION = 'gear';
+export const PLAYER_COLLECTION = 'players';
+export const NEMESIS_COLLECTION = 'nemeses';
+export const RIVAL_COLLECTION = 'rivals';
+export const MINION_COLLECTION = 'minions';
