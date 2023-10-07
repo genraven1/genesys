@@ -5,15 +5,16 @@ import {
     updateSetting
 } from "../controller/SettingController.ts";
 import Router from "express-promise-router";
+import {SETTING_PATH} from "../utils/Path.ts";
 
 export const settingRouter = Router();
 
-settingRouter.route('')
+settingRouter.route(SETTING_PATH)
 .get(getAllSettings)
 
 settingRouter.route(':name')
 .post(createSetting)
 
-settingRouter.route(":id")
+settingRouter.route(`${SETTING_PATH}:id`)
 .put(updateSetting)
 .get(getSetting)
