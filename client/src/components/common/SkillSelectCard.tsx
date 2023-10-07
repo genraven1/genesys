@@ -3,6 +3,7 @@ import {
     Card,
     CardContent,
     ClickAwayListener,
+    Grid,
     MenuItem,
     TextField,
     Typography
@@ -46,12 +47,14 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
     }, [setting, type])
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Required Skill'}/>
-            <CardContent>
-                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
-            </CardContent>
-        </Card>
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={'Required Skill'}/>
+                <CardContent>
+                    <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
@@ -83,15 +86,17 @@ export function AllSkillsSelectCard(props: AllProps): JSX.Element {
             }
             setSkills(skillList.filter((skill) => skill.settings.includes(setting!!)))
         })()
-    }, [setting?.id])
+    }, [setting])
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Required Skill'}/>
-            <CardContent>
-                <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
-            </CardContent>
-        </Card>
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={'Required Skill'}/>
+                <CardContent>
+                    <SkillSelectField defaultValue={defaultValue} skills={skills} onCommit={onCommit}/>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 

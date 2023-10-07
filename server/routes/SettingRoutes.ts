@@ -1,28 +1,19 @@
-import express from "express";
-import {SETTING_PATH} from "../utils/Path.ts";
 import {
     createSetting,
     getAllSettings,
-    getCurrentSetting,
     getSetting,
-    setCurrentSetting,
     updateSetting
 } from "../controller/SettingController.ts";
+import Router from "express-promise-router";
 
-export const settingRouter = express.Router();
+export const settingRouter = Router();
 
-settingRouter.route(SETTING_PATH)
+settingRouter.route('')
 .get(getAllSettings)
 
-settingRouter.route(SETTING_PATH + ':name')
+settingRouter.route(':name')
 .post(createSetting)
 
-settingRouter.route(SETTING_PATH + ':id')
+settingRouter.route(':id')
 .put(updateSetting)
 .get(getSetting)
-
-settingRouter.route(SETTING_PATH + 'current')
-.get(getCurrentSetting)
-
-settingRouter.route(SETTING_PATH + 'current/:id')
-.post(setCurrentSetting)
