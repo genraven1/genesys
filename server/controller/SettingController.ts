@@ -19,5 +19,8 @@ export const createSetting = async (req, res) => {
 };
 
 export const updateSetting = async (req, res) => {
-
+    const { id } = req.params;
+    const { name, magic } = req.body;
+    const result = await pool.query("UPDATE setting SET name = $1, magic = $3 WHERE id = $2 RETURNING *;", [name, id, magic]);
+    res.send(result.rows[0]);
 };
