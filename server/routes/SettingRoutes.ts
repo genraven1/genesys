@@ -14,6 +14,6 @@ settingRouter.route('')
 settingRouter.route(':name')
 .post(createSetting)
 
-settingRouter.route(':id')
+settingRouter.route(":id")
 .put(updateSetting)
 .get(getSetting)

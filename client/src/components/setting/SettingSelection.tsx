@@ -32,7 +32,7 @@ export default function SettingSelection(props: Props): JSX.Element {
 
     return (
         <Select value={setting?.name!!} onChange={onSettingChange}>
-            {settings.map((set) => (<MenuItem key={set.name} value={set.name}>{set.name}</MenuItem>))}
+            {settings.map((set) => (<MenuItem key={set.name} value={set.id}>{set.name}</MenuItem>))}
         </Select>
     )
 }

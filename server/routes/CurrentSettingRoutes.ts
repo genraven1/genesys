@@ -3,8 +3,8 @@ import Router from "express-promise-router";
 
 export const currentSettingRouter = Router();
 
-currentSettingRouter.route('')
+currentSettingRouter.route("")
     .get(getCurrentSetting)
 
-currentSettingRouter.route(':id')
+currentSettingRouter.route(":id")
     .post(setCurrentSetting)

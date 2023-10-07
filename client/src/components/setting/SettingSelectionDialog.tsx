@@ -20,6 +20,7 @@ export default function SettingSelectionDialog(props: Props) {
     }
 
     const onSettingChange = async (event: SelectChangeEvent) => {
+        console.log(event.target.value)
         let set = await SettingService.setCurrentSetting(Number(event.target.value))
         if (!set) {return}
         setSetting(set)
