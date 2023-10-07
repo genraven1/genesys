@@ -1,4 +1,3 @@
-import Setting from "../models/Setting.ts";
 import {pool} from "../config/Database.ts";
 
 export const getAllSettings = async (req, res) => {
@@ -13,7 +12,10 @@ export const getSetting = async (req, res) => {
 };
 
 export const createSetting = async (req, res) => {
-
+    const { name } = req.params;
+    const count = await pool.query("SELECT COUNT(*) FROM setting;");
+    const results = await pool.query("INSERT INTO setting (name, id) VALUES ($1, $2) RETURNING *;", [name, Number(count.rows[0]['count']) + 1]);
+    res.send(results.rows[0]);
 };
 
 export const updateSetting = async (req, res) => {

@@ -12,7 +12,7 @@ export const settingRouter = Router();
 settingRouter.route(SETTING_PATH)
 .get(getAllSettings)
 
-settingRouter.route(':name')
+settingRouter.route(`${SETTING_PATH}:name`)
 .post(createSetting)
 
 settingRouter.route(`${SETTING_PATH}:id`)
