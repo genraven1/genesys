@@ -12,7 +12,7 @@ export const getTalent = async (req, res) => {
     const query = "SELECT * from talents WHERE id = $1;";
     const values = [id];
     const results = await pool.query(query, values);
-    res.send(results.row);
+    res.send(results.rows);
 };
 
 export const createTalent = async (req, res) => {
@@ -37,5 +37,5 @@ export const updateTalent = async (req, res) => {
     const query = "UPDATE talents SET name = $1 WHERE id = $2 RETURNING *;";
     const values = [name, id];
     const results = await pool.query(query, values);
-    res.send(results.row[0]);
+    res.send(results.rows[0]);
 };

@@ -11,7 +11,7 @@ export const getSetting = async (req, res) => {
     const query = "SELECT * FROM setting WHERE id = $1;";
     const values = [id];
     const results = await pool.query(query, values);
-    res.send(results.rows);
+    res.send(results.rows[0]);
 };
 
 export const createSetting = async (req, res) => {

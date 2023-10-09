@@ -21,7 +21,7 @@ export const getSkill = async (req, res) => {
     const query = "SELECT * FROM skills WHERE id = $1;";
     const values = [id];
     const results = await pool.query(query, values);
-    res.send(results.row);
+    res.send(results.rows);
 }
 
 export const updateSkill = async (res, req) => {
@@ -30,5 +30,5 @@ export const updateSkill = async (res, req) => {
     const query = "UPDATE skill SET name = $1, characteristic = $3, type = $4 WHERE id = $2 RETURNING *;";
     const values = [name, id, characteristic, type];
     const results = await pool.query(query, values);
-    res.send(results.row[0]);
+    res.send(results.rows[0]);
 }
