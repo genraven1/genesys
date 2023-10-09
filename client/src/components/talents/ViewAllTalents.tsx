@@ -40,8 +40,10 @@ function Row(props: Props): JSX.Element {
 
     const renderSettingTableCell = ():JSX.Element => {
         let value = "No"
-        if (talent?.settings!!.includes(setting!!)) {
-            value = "Yes"
+        for (const set of talent?.settings!!) {
+            if (setting.id === set.id) {
+                value = "Yes"
+            }
         }
         return <TypographyCenterTableCell value={value}/>
     }
