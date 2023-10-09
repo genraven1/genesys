@@ -1,4 +1,5 @@
 import {pool} from '../config/Database.ts';
+import { getCurrentSettingId } from '../utils/SettingHelper.ts';
 
 export const getAllTalents = async (req, res) => {
     const query = "SELECT * from talents;";
@@ -19,9 +20,15 @@ export const createTalent = async (req, res) => {
     const countQuery = "SELECT COUNT(*) FROM talents;";
     const count = await pool.query(countQuery);
     const insertQuery = "INSERT INTO talents (name, id) VALUES ($1, $2) RETURNING *;";
-    const values = [name, Number(count.rows[0]['count']) + 1];
+    const talent_id = Number(count.rows[0]['count']) + 1;
+    const values = [name, talent_id];
     const results = await pool.query(insertQuery, values);
-    res.send(results.rows[0]);
+    const talent = results.rows[0];
+    const settingQuery = "INSERT INTO talents_setting (talent_id, setting_id) VALUES ($1, $2);";
+    const settingValues = [talent_id, getCurrentSettingId];
+    const settingResults = await pool.query(settingQuery, settingValues);
+    talent['setting_ids'] = [settingResults.rows];
+    res.send(talent);
 };
 
 export const updateTalent = async (req, res) => {
