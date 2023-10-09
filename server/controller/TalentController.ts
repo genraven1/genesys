@@ -1,6 +1,7 @@
 import {pool} from '../config/Database.ts';
 import {getCurrentSettingId, getTalentSettings} from '../utils/SettingHelper.ts';
 import Setting from "../models/Setting.ts";
+import {Talent} from "../models/Talent.ts";
 
 export const getAllTalents = async (req, res) => {
     const query = "SELECT * from talent;";
@@ -10,7 +11,6 @@ export const getAllTalents = async (req, res) => {
         result['settings'] = await getTalentSettings(result['id']) as Setting[];
         talents.push(result);
     }
-    console.log(talents)
     res.send(talents);
 };
 
@@ -37,15 +37,24 @@ export const createTalent = async (req, res) => {
     const settingValues = [talent_id, getCurrentSettingId];
     const settingResults = await pool.query(settingQuery, settingValues);
     talent['settings'] = [settingResults.rows];
-    console.log(talent);
     res.send(talent);
 };
 
 export const updateTalent = async (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
-    const query = "UPDATE talent SET name = $1 WHERE id = $2 RETURNING *;";
-    const values = [name, id];
+    const { name, ranked, activation, tier, summary, description, settings } = req.body;
+    const query = "UPDATE talent SET name = $1, ranked = $3, activation = $4, tier = $5, summary = $6, description = $7 WHERE id = $2 RETURNING *;";
+    const values = [name, id, ranked, activation, tier, summary, description];
     const results = await pool.query(query, values);
+    const oldSettings = await getTalentSettings(id);
+    const newSettings = Array.from(new Set(settings.concat(oldSettings))) as Setting[];
+    // Remove setting
+    if (oldSettings.length > newSettings.length) {
+
+    }
+    // Add Setting
+    else {
+
+    }
     res.send(results.rows[0]);
 };
