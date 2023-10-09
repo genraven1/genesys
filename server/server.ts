@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import {SKILL_PATH, TALENT_PATH} from "./utils/Path.ts";
 import {skillRouter} from './routes/SkillRoutes.ts';
 import {talentRouter} from './routes/TalentRoutes.ts';
 import {settingRouter} from "./routes/SettingRoutes.ts";
@@ -16,8 +15,8 @@ app.use(express.json());
 
 app.use('', currentSettingRouter);
 app.use('', settingRouter);
-app.use(SKILL_PATH, skillRouter);
-app.use(TALENT_PATH, talentRouter);
+app.use('', skillRouter);
+app.use('', talentRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
