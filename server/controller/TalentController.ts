@@ -1,46 +1,69 @@
-import { ObjectId } from 'mongodb';
-import db from '../config/Database.ts'
-import { TALENT_COLLECTION } from '../utils/Collections.ts';
+import {pool} from '../config/Database.ts';
+import {getCurrentSettingId, getTalentSettings} from '../utils/SettingHelper.ts';
+import Setting from "../models/Setting.ts";
 
 export const getAllTalents = async (req, res) => {
-    let collection = await db.collection(TALENT_COLLECTION);
-    let results = await collection.find({}).toArray();
-    res.send(results).status(200);
+    const query = "SELECT * from talent;";
+    const results = await pool.query(query);
+    const talents = []
+    for (const result of results.rows) {
+        result['settings'] = await getTalentSettings(result['id']) as Setting[];
+        talents.push(result);
+    }
+    res.send(talents);
 };
 
 export const getTalent = async (req, res) => {
-    let collection = await db.collection(TALENT_COLLECTION);
-    let query = {_id: new ObjectId(req.params.id)};
-    let result = await collection.findOne(query);
-
-    if (!result) res.send("Not found").status(404);
-    else res.send(result).status(200);
+    const { id } = req.params;
+    const query = "SELECT * from talent WHERE id = $1;";
+    const values = [id];
+    const results = await pool.query(query, values);
+    const talent = results.rows[0];
+    talent['settings'] = await getTalentSettings(id);
+    res.send(talent);
 };
 
 export const createTalent = async (req, res) => {
-    let newDocument = {
-        name: req.params.name,
-    };
-    let collection = await db.collection(TALENT_COLLECTION);
-    let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
+    const { name } = req.params;
+    const countQuery = "SELECT COUNT(*) FROM talent;";
+    const count = await pool.query(countQuery);
+    const insertQuery = "INSERT INTO talent (name, id) VALUES ($1, $2) RETURNING *;";
+    const talent_id = Number(count.rows[0]['count']) + 1;
+    const values = [name, talent_id];
+    const results = await pool.query(insertQuery, values);
+    const talent = results.rows[0];
+    const settingQuery = "INSERT INTO talent_setting (talent_id, setting_id) VALUES ($1, $2);";
+    const settingValues = [talent_id, getCurrentSettingId];
+    const settingResults = await pool.query(settingQuery, settingValues);
+    talent['settings'] = [settingResults.rows];
+    res.send(talent);
 };
 
 export const updateTalent = async (req, res) => {
-    const query = { _id: new ObjectId(req.params.id) };
-    const updates =  {
-        $set: {
-            name: req.body.name,
-            ranked: req.body.ranked,
-            activation: req.body.activation,
-            tier: req.body.tier,
-            summary: req.body.summary,
-            description: req.body.description,
-            settings: req.body.settings
+    const { id } = req.params;
+    const { name, ranked, activation, tier, summary, description, settings } = req.body;
+    const query = "UPDATE talent SET name = $1, ranked = $3, activation = $4, tier = $5, summary = $6, description = $7 WHERE id = $2 RETURNING *;";
+    const values = [name, id, ranked, activation, tier, summary, description];
+    const results = await pool.query(query, values);
+    const talent = results.rows[0];
+    const oldSettings = await getTalentSettings(id);
+    let setting = [];
+    if (oldSettings.length !== settings.length) {
+        // Remove setting
+        if (oldSettings.length > settings.length) {
+            setting = oldSettings.filter(({ name }) => !settings.some((e) => e.name === name));
+            const deleteQuery = "DELETE FROM talent_settings WHERE id = $1;";
+            const deleteValues = [Number(setting[0]['id'])];
+            await pool.query(deleteQuery, deleteValues);
         }
-    };
-
-    let collection = await db.collection(TALENT_COLLECTION);
-    let result = await collection.updateOne(query, updates);
-    res.send(result).status(200);
-}
+        // Add Setting
+        else {
+            setting = settings.filter(({ name }) => !oldSettings.some((e) => e.name === name));
+            const insertQuery = "INSERT INTO talent_settings (talent_id, setting_id) VALUES ($1, $2);";
+            const insertValues = [talent['id'], Number(setting[0]['id'])];
+            await pool.query(insertQuery, insertValues);
+        }
+        talent['settings'] = await getTalentSettings(talent['id']);
+    }
+    res.send(talent);
+};

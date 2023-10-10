@@ -1,78 +1,34 @@
-import { ObjectId } from 'mongodb';
-import db from '../config/Database.ts'
-import {SETTING_COLLECTION} from "../utils/Collections.ts";
-import Setting from "../models/Setting.ts";
+import {pool} from "../config/Database.ts";
 
 export const getAllSettings = async (req, res) => {
-    let collection = await db.collection(SETTING_COLLECTION);
-    let results = await collection.find({}).toArray();
-    res.send(results).status(200);
+    const query = "SELECT * FROM setting;";
+    const results = await pool.query(query);
+    res.send(results.rows);
 };
 
 export const getSetting = async (req, res) => {
-    let collection = await db.collection(SETTING_COLLECTION);
-    let query = {_id: new ObjectId(req.params.id)};
-    let result = await collection.findOne(query);
-
-    if (!result) res.send("Not found").status(404);
-    else res.send(result).status(200);
-};
-
-export const getCurrentSetting = async (req, res) => {
-    let collection = await db.collection(SETTING_COLLECTION);
-    let query = {current: true};
-    let result = await collection.findOne(query);
-
-    if (!result) res.send("Not found").status(404);
-    else res.send(result).status(200);
+    const { id } = req.params;
+    const query = "SELECT * FROM setting WHERE id = $1;";
+    const values = [id];
+    const results = await pool.query(query, values);
+    res.send(results.rows[0]);
 };
 
 export const createSetting = async (req, res) => {
-    let newDocument = {
-        name: req.params.name,
-    };
-    let collection = await db.collection(SETTING_COLLECTION);
-    let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
+    const { name } = req.params;
+    const countQuery = "SELECT COUNT(*) FROM setting;";
+    const count = await pool.query(countQuery);
+    const insertQuery = "INSERT INTO setting (name, id) VALUES ($1, $2) RETURNING *;";
+    const values = [name, Number(count.rows[0]['count']) + 1];
+    const results = await pool.query(insertQuery, values);
+    res.send(results.rows[0]);
 };
 
 export const updateSetting = async (req, res) => {
-    const query = { _id: new ObjectId(req.params.id) };
-    const updates =  {
-        $set: {
-            name: req.body.name,
-            magic: req.body.magic,
-            current: false
-        }
-    };
-
-    let collection = await db.collection(SETTING_COLLECTION);
-    let result = await collection.updateOne(query, updates);
-    res.send(result).status(200);
-}
-
-export const setCurrentSetting = async (req, res) => {
-    let collection = await db.collection(SETTING_COLLECTION);
-    let getQuery = {_id: new ObjectId(req.params.id)};
-    let currentSetting = await collection.findOne(getQuery) as Setting;
-    
-    for (const setting of await collection.find({}).toArray() as Setting[]) {
-        const updatedSetting =  {
-            $set: {
-                name: setting.name,
-                magic: setting.magic,
-                current: false
-            }
-        };
-        collection.updateOne({_id: new ObjectId(setting.id)}, updatedSetting);
-    }
-    const updatedCurrentSetting =  {
-        $set: {
-            name: currentSetting.name,
-            magic: currentSetting.magic,
-            current: true
-        }
-    };
-    let result = await collection.updateOne({_id: new ObjectId(currentSetting.id)}, updatedCurrentSetting);
-    res.send(result).status(200);
-}
+    const { id } = req.params;
+    const { name, magic } = req.body;
+    const query = "UPDATE setting SET name = $1, magic = $3 WHERE id = $2 RETURNING *;";
+    const values = [name, id, magic];
+    const result = await pool.query(query, values);
+    res.send(result.rows[0]);
+};
