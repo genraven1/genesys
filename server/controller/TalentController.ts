@@ -46,15 +46,27 @@ export const updateTalent = async (req, res) => {
     const query = "UPDATE talent SET name = $1, ranked = $3, activation = $4, tier = $5, summary = $6, description = $7 WHERE id = $2 RETURNING *;";
     const values = [name, id, ranked, activation, tier, summary, description];
     const results = await pool.query(query, values);
+    const talent = results.rows[0];
     const oldSettings = await getTalentSettings(id);
-    const newSettings = Array.from(new Set(settings.concat(oldSettings))) as Setting[];
-    // Remove setting
-    if (oldSettings.length > newSettings.length) {
-
+    let setting = [];
+    let updatedSettings = [];
+    if (oldSettings.length !== newSettings.length) {
+        // Remove setting
+        if (oldSettings.length > newSettings.length) {
+            setting = oldSettings.filter(({ name }) => !settings.some((e) => e.name === name));
+            const deleteQuery = "DELETE FROM talent_settings WHERE id = $1;";
+            const deleteValues = [Number(setting[0]['id'])];
+            updatedSettings = await pool.query(deleteQuery, deleteValues);
+            talent['settings'] = updatedSettings.rows;
+        }
+        // Add Setting
+        else {
+            setting = settings.filter(({ name }) => !oldSettings.some((e) => e.name === name));
+            const insertQuery = "INSERT INTO talent_settings (talent_id, setting_id) VALUES ($1, $2);";
+            const insertValues = [talent['id'], Number(setting[0]['id'])];
+            updatedSettings = await pool.query(insertQuery, insertValues);
+        }
+        talent['settings'] = updatedSettings.rows;
     }
-    // Add Setting
-    else {
-
-    }
-    res.send(results.rows[0]);
+    res.send(talent);
 };
