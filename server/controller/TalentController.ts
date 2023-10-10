@@ -56,17 +56,16 @@ export const updateTalent = async (req, res) => {
             setting = oldSettings.filter(({ name }) => !settings.some((e) => e.name === name));
             const deleteQuery = "DELETE FROM talent_settings WHERE id = $1;";
             const deleteValues = [Number(setting[0]['id'])];
-            updatedSettings = await pool.query(deleteQuery, deleteValues);
-            talent['settings'] = updatedSettings.rows;
+            await pool.query(deleteQuery, deleteValues);
         }
         // Add Setting
         else {
             setting = settings.filter(({ name }) => !oldSettings.some((e) => e.name === name));
             const insertQuery = "INSERT INTO talent_settings (talent_id, setting_id) VALUES ($1, $2);";
             const insertValues = [talent['id'], Number(setting[0]['id'])];
-            updatedSettings = await pool.query(insertQuery, insertValues);
+            await pool.query(insertQuery, insertValues);
         }
-        talent['settings'] = updatedSettings.rows;
+        talent['settings'] = getTalentSettings(talent['id']);
     }
     res.send(talent);
 };
