@@ -1,7 +1,6 @@
 import {pool} from '../config/Database.ts';
 import {getCurrentSettingId, getTalentSettings} from '../utils/SettingHelper.ts';
 import Setting from "../models/Setting.ts";
-import {Talent} from "../models/Talent.ts";
 
 export const getAllTalents = async (req, res) => {
     const query = "SELECT * from talent;";
@@ -49,10 +48,9 @@ export const updateTalent = async (req, res) => {
     const talent = results.rows[0];
     const oldSettings = await getTalentSettings(id);
     let setting = [];
-    let updatedSettings = [];
-    if (oldSettings.length !== newSettings.length) {
+    if (oldSettings.length !== settings.length) {
         // Remove setting
-        if (oldSettings.length > newSettings.length) {
+        if (oldSettings.length > settings.length) {
             setting = oldSettings.filter(({ name }) => !settings.some((e) => e.name === name));
             const deleteQuery = "DELETE FROM talent_settings WHERE id = $1;";
             const deleteValues = [Number(setting[0]['id'])];
@@ -65,7 +63,7 @@ export const updateTalent = async (req, res) => {
             const insertValues = [talent['id'], Number(setting[0]['id'])];
             await pool.query(insertQuery, insertValues);
         }
-        talent['settings'] = getTalentSettings(talent['id']);
+        talent['settings'] = await getTalentSettings(talent['id']);
     }
     res.send(talent);
 };
