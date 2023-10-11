@@ -16,6 +16,7 @@ import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import CreateSkillDialog from "./CreateSkillDialog";
 import {useFetchCurrentSetting} from "../setting/SettingWorkflow";
+import SettingTableCell from "../common/table/SettingsTableCell";
 
 interface Props {
     skill: Skill
@@ -25,20 +26,12 @@ interface Props {
 function Row(props: Props): JSX.Element {
     const {skill, setting} = props
 
-    const renderSettingTableCell = (): JSX.Element => {
-        let value = "No"
-        if (skill?.settings!!.includes(setting!!)) {
-            value = "Yes"
-        }
-        return <TypographyCenterTableCell value={value}/>
-    }
-
     return (
         <TableRow>
             <TypographyCenterTableCell value={skill.name}/>
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
-            {renderSettingTableCell()}
+            <SettingTableCell settings={skill.settings} setting={setting}/>
             <ActionsTableCell id={String(skill.id)} path={Path.Skills}/>
         </TableRow>
     )

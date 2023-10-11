@@ -19,6 +19,7 @@ import {renderHeaders} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import TalentDialog from "./TalentDialog";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import SettingTableCell from "../common/table/SettingsTableCell";
 
 interface Props {
     talent: Talent
@@ -38,16 +39,6 @@ function Row(props: Props): JSX.Element {
         return ranked
     }
 
-    const renderSettingTableCell = ():JSX.Element => {
-        let value = "No"
-        for (const set of talent?.settings!!) {
-            if (setting.id === set.id) {
-                value = "Yes"
-            }
-        }
-        return <TypographyCenterTableCell value={value}/>
-    }
-
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
@@ -55,7 +46,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={renderRanked()}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
-                {renderSettingTableCell()}
+                <SettingTableCell settings={talent.settings} setting={setting}/>
                 <ActionsTableCell id={String(talent.id)} path={Path.Talent}/>
             </TableRow>
             <TableRow>
