@@ -9,8 +9,8 @@ import EditCharacteristicCard from "../../EditCharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
-import DefenseCard from "../../DefenseCard";
+import {EditStatsCard} from "../../StatsCard";
+import {EditDefenseCard} from "../../DefenseCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
@@ -82,13 +82,13 @@ export default function RivalEdit(props: Props) {
                 copyRival.presence.current = value
                 break
             case "melee":
-                copyRival.melee.current = value
+                copyRival.melee = value
                 break
             case "ranged":
-                copyRival.ranged.current = value
+                copyRival.ranged = value
                 break
             case "wounds":
-                copyRival.wounds.max = value
+                copyRival.wounds = value
                 break
             case "combat":
                 copyRival.combat = value
@@ -135,9 +135,9 @@ export default function RivalEdit(props: Props) {
                     <Divider />
                     <Grid container spacing={2}>
                         <SoakCard soak={rival?.soak!!} />
-                        <StatsCard stats={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
-                        <DefenseCard defense={rival?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(ActorKey.Melee, value) }}/>
-                        <DefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(ActorKey.Ranged, value) }}/>
+                        <EditStatsCard stats={rival?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => { onChange(ActorKey.Wounds, value) }}/>
+                        <EditDefenseCard defense={rival?.melee!!} type={DefenseType.Melee} onChange={(value: number): void => { onChange(ActorKey.Melee, value) }}/>
+                        <EditDefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged} onChange={(value: number): void => { onChange(ActorKey.Ranged, value) }}/>
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>

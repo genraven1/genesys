@@ -6,14 +6,14 @@ import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import SoakCard from '../SoakCard';
-import ViewStatsCard from '../ViewStatsCard';
-import ViewDefenseCard from '../ViewDefenseCard';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import PlayerTalentTable from './PlayerTalentTable';
 import ViewPlayerEquipmentCard from "./equipment/ViewPlayerEquipmentCard";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 import Setting from "../../../models/Setting";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
+import {ViewStatsCard} from "../StatsCard";
+import {ViewDefenseCard} from "../DefenseCard";
 
 interface Props {
     player: Player

@@ -10,10 +10,9 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerTalentTable from "./PlayerTalentTable";
 import EditCharacteristicCard from '../EditCharacteristicCard';
-import StatsCard from "../StatsCard";
+import {EditStatsCard} from "../StatsCard";
 import SoakCard from "../SoakCard";
 import TalentSelectionDialog from "../common/talent/TalentSelectionDialog";
-import DefenseCard from "../DefenseCard";
 import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
@@ -21,6 +20,7 @@ import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import * as React from "react";
 import SettingService from "../../../services/SettingService";
+import {EditDefenseCard} from "../DefenseCard";
 
 interface Props {
     play: Player
@@ -80,16 +80,16 @@ export default function PlayerView(props: Props) {
                 copyPlayer.presence.current = value
                 break;
             case 'melee':
-                copyPlayer.melee.current = value
+                copyPlayer.melee = value
                 break;
             case 'ranged':
-                copyPlayer.ranged.current = value
+                copyPlayer.ranged = value
                 break;
             case 'wounds':
-                copyPlayer.wounds.max = value
+                copyPlayer.wounds = value
                 break
             case 'strain':
-                copyPlayer.strain.max = value
+                copyPlayer.strain = value
                 break
             default:
                 break
@@ -146,17 +146,17 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!}/>
-                        <StatsCard stats={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
+                        <EditStatsCard stats={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
-                        <StatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
+                        <EditStatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
                             onChange(ActorKey.Strain, value)
                         }}/>
-                        <DefenseCard defense={player?.melee!!} type={DefenseType.Melee}
+                        <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Melee, value)
                                      }}/>
-                        <DefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}
+                        <EditDefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Ranged, value)
                                      }}/>
