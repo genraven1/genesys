@@ -5,7 +5,7 @@ import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import EditCharacteristicCard from "../../EditCharacteristicCard";
+import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
@@ -64,22 +64,22 @@ export default function RivalEdit(props: Props) {
         const copyRival = {...rival} as Rival
         switch (key) {
             case "brawn":
-                copyRival.brawn.current = value
+                copyRival.brawn = value
                 break
             case "agility":
-                copyRival.agility.current = value
+                copyRival.agility = value
                 break
             case "intellect":
-                copyRival.intellect.current = value
+                copyRival.intellect = value
                 break
             case "cunning":
-                copyRival.cunning.current = value
+                copyRival.cunning = value
                 break
             case "willpower":
-                copyRival.willpower.current = value
+                copyRival.willpower = value
                 break
             case "presence":
-                copyRival.presence.current = value
+                copyRival.presence = value
                 break
             case "melee":
                 copyRival.melee = value
@@ -107,7 +107,7 @@ export default function RivalEdit(props: Props) {
     }
 
     const updateRival = async (copyRival: Rival) => {
-        copyRival.soak = copyRival.brawn.current
+        copyRival.soak = copyRival.brawn
         setRival(copyRival)
         await ActorService.updateRival(copyRival.name, copyRival)
     }

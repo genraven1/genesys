@@ -7,7 +7,7 @@ import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/actor/Characteristics"
 import {DefenseType} from "../../../../models/actor/Defense"
 import {StatsType} from "../../../../models/actor/Stats"
-import EditCharacteristicCard from "../../EditCharacteristicCard"
+import {EditCharacteristicCard} from "../../CharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
 import SoakCard from "../../SoakCard"
@@ -65,22 +65,22 @@ export default function NemesisEdit(props: Props) {
         const copyNemesis = {...nemesis} as Nemesis
         switch (key) {
             case "brawn":
-                copyNemesis.brawn.current = value
+                copyNemesis.brawn = value
                 break
             case "agility":
-                copyNemesis.agility.current = value
+                copyNemesis.agility = value
                 break
             case "intellect":
-                copyNemesis.intellect.current = value
+                copyNemesis.intellect = value
                 break
             case "cunning":
-                copyNemesis.cunning.current = value
+                copyNemesis.cunning = value
                 break
             case "willpower":
-                copyNemesis.willpower.current = value
+                copyNemesis.willpower = value
                 break
             case "presence":
-                copyNemesis.presence.current = value
+                copyNemesis.presence = value
                 break
             case "melee":
                 copyNemesis.melee = value
@@ -111,7 +111,7 @@ export default function NemesisEdit(props: Props) {
     }
 
     const updateNemesis = async (copyNemesis: Nemesis) => {
-        copyNemesis.soak = copyNemesis.brawn.current
+        copyNemesis.soak = copyNemesis.brawn
         setNemesis(copyNemesis)
         await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
     }

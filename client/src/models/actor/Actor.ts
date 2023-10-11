@@ -1,4 +1,4 @@
-import {Characteristic, CharacteristicType} from './Characteristics';
+import {CharacteristicType} from './Characteristics';
 import Talent from '../Talent';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
@@ -10,12 +10,12 @@ export default interface Actor {
     id: number
     name: string,
     type: ActorType,
-    brawn: Characteristic,
-    agility: Characteristic,
-    intellect: Characteristic,
-    cunning: Characteristic,
-    willpower: Characteristic,
-    presence: Characteristic,
+    brawn: number,
+    agility: number,
+    intellect: number,
+    cunning: number,
+    willpower: number,
+    presence: number,
     soak: number,
     melee: number,
     ranged: number,
@@ -42,17 +42,17 @@ export const setSkillName = (skill: ActorSkill): string => {
 export const getCharacteristicRanks = (actor: Actor, skill: ActorSkill): number => {
     switch (skill.characteristic) {
         case CharacteristicType.Agility:
-            return actor.agility.current
+            return actor.agility
         case CharacteristicType.Brawn:
-            return actor.brawn.current
+            return actor.brawn
         case CharacteristicType.Cunning:
-            return actor.cunning.current
+            return actor.cunning
         case CharacteristicType.Intellect:
-            return actor.intellect.current
+            return actor.intellect
         case CharacteristicType.Presence:
-            return actor.presence.current
+            return actor.presence
         case CharacteristicType.Willpower:
-            return actor.willpower.current
+            return actor.willpower
     }
 }
 

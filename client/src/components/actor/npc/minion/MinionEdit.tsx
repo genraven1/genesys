@@ -5,7 +5,7 @@ import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import EditCharacteristicCard from "../../EditCharacteristicCard";
+import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
@@ -65,22 +65,22 @@ export default function MinionEdit(props: Props) {
         const copyMinion = {...minion} as Minion
         switch (key) {
             case "brawn":
-                copyMinion.brawn.current = value
+                copyMinion.brawn = value
                 break
             case "agility":
-                copyMinion.agility.current = value
+                copyMinion.agility = value
                 break
             case "intellect":
-                copyMinion.intellect.current = value
+                copyMinion.intellect = value
                 break
             case "cunning":
-                copyMinion.cunning.current = value
+                copyMinion.cunning = value
                 break
             case "willpower":
-                copyMinion.willpower.current = value
+                copyMinion.willpower = value
                 break
             case "presence":
-                copyMinion.presence.current = value
+                copyMinion.presence = value
                 break
             case "melee":
                 copyMinion.melee = value
@@ -108,7 +108,7 @@ export default function MinionEdit(props: Props) {
     }
 
     const updateMinion = async (copyMinion: Minion) => {
-        copyMinion.soak = copyMinion.brawn.current
+        copyMinion.soak = copyMinion.brawn
         setMinion(copyMinion)
         await ActorService.updateMinion(copyMinion.name, copyMinion)
     }

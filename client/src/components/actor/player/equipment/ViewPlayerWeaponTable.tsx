@@ -85,7 +85,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
             <TypographyCenterTableCell value={weapon.skill.name}/>
-            <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn.current)}/>
+            <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
             <TypographyCenterTableCell value={renderQualities(weapon!!)}/>

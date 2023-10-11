@@ -1,8 +1,8 @@
 import Actor from "../../../models/actor/Actor";
 import {Grid} from "@mui/material";
-import ViewCharacteristicCard from "../ViewCharacteristicCard";
 import {CharacteristicType} from "../../../models/actor/Characteristics";
 import * as React from "react";
+import { ViewCharacteristicCard } from "../CharacteristicCard";
 
 interface Props {
     actor: Actor
