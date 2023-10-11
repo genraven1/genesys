@@ -1,5 +1,5 @@
 import {pool} from '../config/Database.ts';
-import {getCurrentSettingId, getSkillSettings, getTalentSettings} from "../utils/SettingHelper.ts";
+import {getCurrentSettingId, getSkillSettings} from "../utils/SettingHelper.ts";
 import Setting from "../models/Setting.ts";
 
 export const getAllSkills = async (req, res) => {
@@ -7,7 +7,7 @@ export const getAllSkills = async (req, res) => {
     const results = await pool.query(query);
     const skills = []
     for (const result of results.rows) {
-        result['settings'] = await getTalentSettings(result['id']) as Setting[];
+        result['settings'] = await getSkillSettings(result['id']) as Setting[];
         skills.push(result);
     }
     res.send(skills);
@@ -35,7 +35,7 @@ export const getSkill = async (req, res) => {
     const values = [id];
     const results = await pool.query(query, values);
     const skill = results.rows[0];
-    skill['settings'] = await getTalentSettings(id);
+    skill['settings'] = await getSkillSettings(id);
     res.send(skill);
 }
 
@@ -63,7 +63,7 @@ export const updateSkill = async (res, req) => {
             const insertValues = [skill['id'], Number(setting[0]['id'])];
             await pool.query(insertQuery, insertValues);
         }
-        skill['settings'] = await getTalentSettings(skill['id']);
+        skill['settings'] = await getSkillSettings(skill['id']);
     }
     res.send(skill);
 }
