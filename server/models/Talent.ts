@@ -10,3 +10,7 @@ export interface Talent {
     description: string
     settings: Setting[]
 }
+
+export interface ActorTalent extends Talent {
+    ranks: number
+}

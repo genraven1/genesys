@@ -19,7 +19,6 @@ import GearWorkflow from "../equipment/gear/GearWorkflow";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
-import AllMinionsView from "../actor/npc/minion/ViewAllMinion";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import ViewAllActors from "../actor/ViewAllActors";
@@ -69,7 +68,7 @@ export default function App() {
                     <Route path={ActorPath.Rival + ':id/edit'} element={<RivalWorkflow/>}/>
                     <Route path={ActorPath.Rival + ':id/view'} element={<RivalWorkflow/>}/>
 
-                    <Route path={ActorPath.Minion} element={<AllMinionsView/>}/>
+                    <Route path={ActorPath.Minion} element={<MinionWorkflow/>}/>
                     <Route path={ActorPath.Minion + ':id/edit'} element={<MinionWorkflow/>}/>
                     <Route path={ActorPath.Minion + ':id/view'} element={<MinionWorkflow/>}/>
 

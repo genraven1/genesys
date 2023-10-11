@@ -110,7 +110,7 @@ export default function MinionEdit(props: Props) {
     const updateMinion = async (copyMinion: Minion) => {
         copyMinion.soak = copyMinion.brawn
         setMinion(copyMinion)
-        await ActorService.updateMinion(copyMinion.name, copyMinion)
+        await ActorService.updateMinion(copyMinion.id, copyMinion)
     }
 
     const onView = () => {

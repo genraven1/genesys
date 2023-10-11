@@ -28,28 +28,28 @@ interface GroupSkillRowProps {
 function GroupSkillRow(props: GroupSkillRowProps) {
     const {skill, minion} = props
 
-    const onSettingAddition = async (skill: string) => {
+    const onSkillAddition = async (skill: string) => {
         const copyMinion = {...minion} as Minion
         copyMinion.group = copyMinion.group.concat(skill)
-        await ActorService.updateMinion(minion?.name!!, copyMinion)
+        await ActorService.updateMinion(minion?.id!!, copyMinion)
     }
 
-    const onSettingRemoval = async (skill: string) => {
+    const onSkillRemoval = async (skill: string) => {
         const copyMinion = {...minion} as Minion
         copyMinion.group.forEach((name, index) => {
             if (name === skill) {
                 copyMinion.group.splice(index, 1)
             }
         })
-        await ActorService.updateMinion(minion?.name!!, copyMinion)
+        await ActorService.updateMinion(minion?.id!!, copyMinion)
     }
 
     return (
         <TableRow>
             <TypographyCenterTableCell value={skill.name}/>
             <CheckboxTableCell value={minion?.group!!.includes(skill.name)}
-                               onAddition={() => onSettingAddition(skill.name)}
-                               onRemoval={() => onSettingRemoval(skill.name)}/>
+                               onAddition={() => onSkillAddition(skill.name)}
+                               onRemoval={() => onSkillRemoval(skill.name)}/>
         </TableRow>
     )
 }
@@ -75,7 +75,7 @@ function SkillRow(props: RowProps): JSX.Element {
                 <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog}
                                                                            onClose={(): void => setOpenEditSkillDialog(false)}
-                                                                           actorSkill={skill!!} name={npc.name}
+                                                                           actorSkill={skill!!} actor={npc}
                                                                            type={npc.type}/>}
             </TableCell>
         </TableRow>

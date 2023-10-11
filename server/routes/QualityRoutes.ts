@@ -1,6 +1,6 @@
 import Router from 'express-promise-router';
-import {QUALITY_PATH} from '../utils/Path.ts';
-import {createQuality, getAllQualitities, getQuality, updateQuality} from '../controller/QualityCollection.ts';
+import {createQuality, getAllQualities, getQuality, updateQuality} from "../controller/QualityController.ts";
+import {QUALITY_PATH} from "../utils/Path.ts";
 
 export const qualityRouter = Router();
 

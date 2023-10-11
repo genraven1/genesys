@@ -20,7 +20,7 @@ export default function CreateArmorDialog(props: Props) {
     const onCreate = async (): Promise<void> => {
         switch (actor.type) {
             case ActorType.Minion:
-                await ActorService.createMinionArmor(actor.name, armor!!)
+                await ActorService.createMinionArmor(actor.id, armor!!)
                 break
             case ActorType.Rival:
                 await ActorService.createRivalArmor(actor.name, armor!!)

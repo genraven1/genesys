@@ -2,18 +2,18 @@ import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
 import InputNumberRangeSelectField from "../../../common/InputNumberRangeSelect";
 import ActorService from "../../../../services/ActorService";
-import {ActorSkill, ActorType} from "../../../../models/actor/Actor";
+import Actor, {ActorSkill, ActorType} from "../../../../models/actor/Actor";
 
 interface Props {
     open: boolean
-    name: string
+    actor: Actor
     type: ActorType
     actorSkill: ActorSkill
     onClose: () => void
 }
 
 export default function NonPlayerCharacterEditSkillDialog(props: Props) {
-    const { open, actorSkill, name, type, onClose } = props
+    const { open, actorSkill, actor, type, onClose } = props
     const [skill, setSkill] = useState<ActorSkill>(actorSkill)
 
     const handleEdit = async (ranks: number): Promise<void> => {
@@ -22,13 +22,13 @@ export default function NonPlayerCharacterEditSkillDialog(props: Props) {
         setSkill(copySkill)
         switch (type) {
             case ActorType.Minion:
-                await ActorService.updateMinionSkill(name, copySkill)
+                await ActorService.updateMinionSkill(actor.id, copySkill)
                 break
             case ActorType.Rival:
-                await ActorService.updateRivalSkill(name, copySkill)
+                await ActorService.updateRivalSkill(actor.name, copySkill)
                 break
             case ActorType.Nemesis:
-                await ActorService.updateNemesisSkill(name, copySkill)
+                await ActorService.updateNemesisSkill(actor.name, copySkill)
                 break
         }
         onClose()

@@ -40,7 +40,7 @@ function Row(props: { row: Minion }): JSX.Element {
     )
 }
 
-export default function AllMinionsView() {
+export default function ViewAllMinions() {
     const [minions, setMinions] = useState<Minion[]>([])
 
     useEffect(() => {
