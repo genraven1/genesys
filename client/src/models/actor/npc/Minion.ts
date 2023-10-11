@@ -1,5 +1,10 @@
 import NonPlayerCharacter from "./NonPlayerCharacter";
+import {ActorSkill} from "../Actor";
 
 export default interface Minion extends NonPlayerCharacter {
-    group: string[]
+    skills: GroupSkill[]
+}
+
+export interface GroupSkill extends ActorSkill {
+    group: boolean
 }

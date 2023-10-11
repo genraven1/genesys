@@ -11,7 +11,6 @@ export default interface NonPlayerCharacter extends Actor {
     combat: number,
     social: number,
     general: number,
-    skills: ActorSkill[],
     abilities: Ability[]
 }
 
