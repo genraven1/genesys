@@ -7,12 +7,11 @@ import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/actor/Characteristics"
 import {DefenseType} from "../../../../models/actor/Defense"
 import {StatsType} from "../../../../models/actor/Stats"
-import EditCharacteristicCard from "../../EditCharacteristicCard"
+import {EditCharacteristicCard} from "../../CharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
 import SoakCard from "../../SoakCard"
-import StatsCard from "../../StatsCard"
-import DefenseCard from "../../DefenseCard"
+import {EditStatsCard} from "../../StatsCard"
 import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
 import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog"
@@ -24,6 +23,7 @@ import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityC
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
+import {EditDefenseCard} from "../../DefenseCard";
 
 interface Props {
     nem: Nemesis
@@ -65,34 +65,34 @@ export default function NemesisEdit(props: Props) {
         const copyNemesis = {...nemesis} as Nemesis
         switch (key) {
             case "brawn":
-                copyNemesis.brawn.current = value
+                copyNemesis.brawn = value
                 break
             case "agility":
-                copyNemesis.agility.current = value
+                copyNemesis.agility = value
                 break
             case "intellect":
-                copyNemesis.intellect.current = value
+                copyNemesis.intellect = value
                 break
             case "cunning":
-                copyNemesis.cunning.current = value
+                copyNemesis.cunning = value
                 break
             case "willpower":
-                copyNemesis.willpower.current = value
+                copyNemesis.willpower = value
                 break
             case "presence":
-                copyNemesis.presence.current = value
+                copyNemesis.presence = value
                 break
             case "melee":
-                copyNemesis.melee.current = value
+                copyNemesis.melee = value
                 break
             case "ranged":
-                copyNemesis.ranged.current = value
+                copyNemesis.ranged = value
                 break
             case "wounds":
-                copyNemesis.wounds.max = value
+                copyNemesis.wounds = value
                 break
             case "strain":
-                copyNemesis.strain.max = value
+                copyNemesis.strain = value
                 break
             case "combat":
                 copyNemesis.combat = value
@@ -111,7 +111,7 @@ export default function NemesisEdit(props: Props) {
     }
 
     const updateNemesis = async (copyNemesis: Nemesis) => {
-        copyNemesis.soak = copyNemesis.brawn.current
+        copyNemesis.soak = copyNemesis.brawn
         setNemesis(copyNemesis)
         await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
     }
@@ -158,19 +158,19 @@ export default function NemesisEdit(props: Props) {
                     <Divider/>
                     <Grid container spacing={10}>
                         <SoakCard soak={nemesis?.soak!!}/>
-                        <StatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}
-                                   onChange={(value: number): void => {
+                        <EditStatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}
+                                       onChange={(value: number): void => {
                                        onChange(ActorKey.Wounds, value)
                                    }}/>
-                        <StatsCard stats={nemesis?.strain!!} type={StatsType.Strain}
-                                   onChange={(value: number): void => {
+                        <EditStatsCard stats={nemesis?.strain!!} type={StatsType.Strain}
+                                       onChange={(value: number): void => {
                                        onChange(ActorKey.Strain, value)
                                    }}/>
-                        <DefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee}
+                        <EditDefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Melee, value)
                                      }}/>
-                        <DefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}
+                        <EditDefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Ranged, value)
                                      }}/>

@@ -10,10 +10,10 @@ import Collapse from "@mui/material/Collapse";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
-import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
 import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
+import {GenesysDicePoolCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
+import {renderSkillName} from "../../../common/table/TableRenders";
 
 interface RowProps {
     skill: PlayerSkill
@@ -24,35 +24,12 @@ function SkillRow(props: RowProps): JSX.Element {
     const { skill, player } = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
-    const setName = (): string => {
-        return skill.name + '(' + skill.characteristic + ')'
-    }
-
-    const getCharacteristicRanks = (): number => {
-        switch (skill.characteristic) {
-            case CharacteristicType.Agility:
-                return player?.agility?.current
-            case CharacteristicType.Brawn:
-                return player?.brawn?.current
-            case CharacteristicType.Cunning:
-                return player?.cunning?.current
-            case CharacteristicType.Intellect:
-                return player?.intellect?.current
-            case CharacteristicType.Presence:
-                return player?.presence?.current
-            case CharacteristicType.Willpower:
-                return player?.willpower?.current
-        }
-    }
-
     return (
         <Fragment>
             <TableRow>
-                <TableCell>{setName()}</TableCell>
-                <TableCell>{skill?.ranks!!}</TableCell>
-                <TableCell>
-                    <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks()} skillRanks={skill?.ranks!!} />
-                </TableCell>
+                {renderSkillName(skill)}
+                <TypographyLeftTableCell value={String(skill?.ranks!!)}/>
+                <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
                 <TableCell>
                     <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 </TableCell>

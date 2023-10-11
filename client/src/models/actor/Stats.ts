@@ -1,6 +1,6 @@
 export default interface Stats {
     current: number,
-    max: number,
+    max: number
 }
 
 export enum StatsType {

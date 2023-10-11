@@ -5,12 +5,11 @@ import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
-import EditCharacteristicCard from "../../EditCharacteristicCard";
+import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
 import SoakCard from "../../SoakCard";
-import StatsCard from "../../StatsCard";
-import DefenseCard from "../../DefenseCard";
+import {EditStatsCard} from "../../StatsCard";
 import * as React from "react";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
@@ -24,6 +23,7 @@ import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import SettingService from "../../../../services/SettingService";
+import {EditDefenseCard} from "../../DefenseCard";
 
 interface Props {
     min: Minion
@@ -65,31 +65,31 @@ export default function MinionEdit(props: Props) {
         const copyMinion = {...minion} as Minion
         switch (key) {
             case "brawn":
-                copyMinion.brawn.current = value
+                copyMinion.brawn = value
                 break
             case "agility":
-                copyMinion.agility.current = value
+                copyMinion.agility = value
                 break
             case "intellect":
-                copyMinion.intellect.current = value
+                copyMinion.intellect = value
                 break
             case "cunning":
-                copyMinion.cunning.current = value
+                copyMinion.cunning = value
                 break
             case "willpower":
-                copyMinion.willpower.current = value
+                copyMinion.willpower = value
                 break
             case "presence":
-                copyMinion.presence.current = value
+                copyMinion.presence = value
                 break
             case "melee":
-                copyMinion.melee.current = value
+                copyMinion.melee = value
                 break
             case "ranged":
-                copyMinion.ranged.current = value
+                copyMinion.ranged = value
                 break
             case "wounds":
-                copyMinion.wounds.max = value
+                copyMinion.wounds = value
                 break
             case "combat":
                 copyMinion.combat = value
@@ -108,7 +108,7 @@ export default function MinionEdit(props: Props) {
     }
 
     const updateMinion = async (copyMinion: Minion) => {
-        copyMinion.soak = copyMinion.brawn.current
+        copyMinion.soak = copyMinion.brawn
         setMinion(copyMinion)
         await ActorService.updateMinion(copyMinion.name, copyMinion)
     }
@@ -155,14 +155,14 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <Grid container spacing={10}>
                         <SoakCard soak={minion?.soak!!}/>
-                        <StatsCard stats={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
+                        <EditStatsCard stats={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
-                        <DefenseCard defense={minion?.melee!!} type={DefenseType.Melee}
+                        <EditDefenseCard defense={minion?.melee!!} type={DefenseType.Melee}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Melee, value)
                                      }}/>
-                        <DefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}
+                        <EditDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}
                                      onChange={(value: number): void => {
                                          onChange(ActorKey.Ranged, value)
                                      }}/>

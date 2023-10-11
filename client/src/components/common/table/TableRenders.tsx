@@ -1,6 +1,7 @@
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "./TypographyTableCell";
+import {TypographyCenterTableCell, TypographyLeftTableCell} from "./TypographyTableCell";
 import * as React from "react";
+import Skill from "../../../models/actor/Skill";
 
 export const renderHeaders = (headers: string[]): JSX.Element => {
     return (
@@ -10,4 +11,8 @@ export const renderHeaders = (headers: string[]): JSX.Element => {
             ))}
         </TableRow>
     )
+}
+
+export const renderSkillName = (skill: Skill): JSX.Element => {
+    return <TypographyLeftTableCell value={skill.name + '(' + skill.characteristic + ')'}/>
 }

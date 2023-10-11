@@ -1,30 +1,48 @@
-import {Card, CardActions, CardHeader, Divider, Grid, Typography} from "@mui/material";
+import {Card, CardActions, CardContent, Grid} from "@mui/material";
 import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
-import {Defense, DefenseType} from "../../models/actor/Defense";
+import {DefenseType} from "../../models/actor/Defense";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 
-interface Props {
-    defense: Defense
+interface EditProps {
+    defense: number
     type: DefenseType
     onChange: (value: number) => void
 }
 
-export default function DefenseCard(props: Props) {
+export function EditDefenseCard(props: EditProps) {
     const { defense, type, onChange } = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={type} style={{ textAlign: 'center' }} />
-                <Divider />
-                <Grid container spacing={10}>
-                    <Grid item xs>
-                        <Typography style={{ textAlign: 'center' }} >{defense?.current!!}</Typography>
-                    </Grid>
-                </Grid>
-                <Divider />
+                <CenteredCardHeader title={type}/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={String(defense)}/>
+                </CardContent>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={defense?.current!!} min={0} max={5} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={defense} min={0} max={5} onCommit={onChange} />
                 </CardActions>
+            </Card>
+        </Grid>
+    )
+}
+
+interface ViewProps {
+    defense: number
+    type: DefenseType
+}
+
+export function ViewDefenseCard(props: ViewProps) {
+    const { defense, type } = props;
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CenteredCardHeader title={type}/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={String(defense)}/>
+                </CardContent>
             </Card>
         </Grid>
     )
