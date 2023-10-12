@@ -14,6 +14,10 @@ export default interface NonPlayerCharacter extends Actor {
     abilities: Ability[]
 }
 
+export interface SingleNonPlayerCharacter extends NonPlayerCharacter {
+    skills: ActorSkill[]
+}
+
 export enum NonPlayerCharacterKey {
     Combat = 'combat',
     General = 'general',

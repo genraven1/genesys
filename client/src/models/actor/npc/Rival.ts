@@ -1,6 +1,4 @@
-import NonPlayerCharacter from "./NonPlayerCharacter";
-import {ActorSkill} from "../Actor";
+import {SingleNonPlayerCharacter} from "./NonPlayerCharacter";
 
-export default interface Rival extends NonPlayerCharacter {
-    skills: ActorSkill[]
+export default interface Rival extends SingleNonPlayerCharacter {
 }

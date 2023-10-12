@@ -1,7 +1,7 @@
-import NonPlayerCharacter from "./NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "./NonPlayerCharacter";
 import {ActorSkill} from "../Actor";
 
-export default interface Nemesis extends NonPlayerCharacter {
+export default interface Nemesis extends SingleNonPlayerCharacter {
     skills: ActorSkill[],
     strain: number
 }

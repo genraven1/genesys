@@ -1,5 +1,5 @@
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Tab from '@mui/material/Tab';
@@ -9,6 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import ViewNonPlayerCharacterWeaponTable from "./weapon/ViewNonPlayerCharacterWeaponTable";
 import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmorTable";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -68,12 +69,12 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Equipment'} style={{textAlign:'center'}}/>
+            <CenteredCardHeader title={'Equipment'}/>
             <CardContent>
                 <Grid sx={{ width: 1}}>
                     <TabContext value={value}>
                         <Grid sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList onChange={handleChange} aria-label="lab API tabs example">
+                            <TabList onChange={handleChange}>
                                 <Tab label="Weapons" value="1" />
                                 <Tab label="Armor" value="2" />
                                 <Tab label="Gear" value="3" />

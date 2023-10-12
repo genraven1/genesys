@@ -7,41 +7,21 @@ import TableBody from "@mui/material/TableBody";
 import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
-import {ActorSkill, ActorType, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
-import Minion from "../../../../models/actor/npc/Minion";
+import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface GroupProps {
-    npc: NonPlayerCharacter,
+    npc: SingleNonPlayerCharacter,
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
     const {npc, type} = props
-
-    const renderSkillTableHeaders = ():JSX.Element => {
-        if (npc?.type!! === ActorType.Minion) {
-            return renderHeaders(['Name', 'Group Skill'])
-        }
-        return renderHeaders(['Name', 'Dice Pool'])
-    }
-
-    const renderSkillRow = (skill: ActorSkill):JSX.Element => {
-        if (npc?.type!! === ActorType.Minion) {
-            let text = 'No'
-            let minion = npc as Minion
-            if (minion.group.includes(skill.name)) {
-                text = 'Yes'
-            }
-            return <TypographyCenterTableCell value={text}/>
-        }
-        return <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, skill)}
-                                           skillRanks={skill.ranks}/>
-    }
+    const headers = ['Name', 'Dice Pool']
 
     return (
         <Table>
@@ -49,7 +29,7 @@ export function SkillTypeGroup(props: GroupProps) {
                 <TableRow>
                     <TypographyCenterTableCell value={type} span={2}/>
                 </TableRow>
-                {renderSkillTableHeaders}
+                {renderHeaders(headers)}
             </TableHead>
             <TableBody>
                 {(npc?.skills!! || [])
@@ -59,7 +39,8 @@ export function SkillTypeGroup(props: GroupProps) {
                         <TableRow>
                             <TypographyCenterTableCell value={setSkillName(actorSkill)}/>
                             <TableCell style={{textAlign: 'center'}}>
-                                {renderSkillRow(actorSkill)}
+                                {<GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, actorSkill)}
+                                                             skillRanks={actorSkill.ranks}/>}
                             </TableCell>
                         </TableRow>
                     ))}
@@ -69,7 +50,7 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    npc: NonPlayerCharacter
+    npc: SingleNonPlayerCharacter
 }
 
 export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {

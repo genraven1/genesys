@@ -14,8 +14,9 @@ import {
 } from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities,} from "../../../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../../../common/table/TableRenders";
-import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
-import {ActorSkill} from "../../../../../models/actor/Actor";
+import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerCharacter";
+import {ActorSkill, ActorType} from "../../../../../models/actor/Actor";
+import Minion from "../../../../../models/actor/npc/Minion";
 
 interface Props {
     weapons: ActorWeapon[]
@@ -71,10 +72,24 @@ function Row(props: RowProps): JSX.Element {
 
     const getActorSkill = (): ActorSkill => {
         let actorSkill = {} as ActorSkill
-        for (let skill of npc.skills) {
-            if (skill.name === weapon.skill.name) {
-                actorSkill = skill as ActorSkill
-            }
+        switch (npc.type) {
+            case ActorType.Minion:
+                let minion = npc as Minion
+                for (let skill of minion.skills) {
+                    if (skill.name === weapon.skill.name) {
+                        actorSkill = skill as ActorSkill
+                    }
+                }
+                break
+            case ActorType.Rival:
+            case ActorType.Nemesis:
+                let single = npc as SingleNonPlayerCharacter
+                for (let skill of single.skills) {
+                    if (skill.name === weapon.skill.name) {
+                        actorSkill = skill as ActorSkill
+                    }
+                }
+                break
         }
         return actorSkill
     }

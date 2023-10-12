@@ -7,10 +7,8 @@ import TableBody from "@mui/material/TableBody";
 import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
-import {ActorSkill, ActorType, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
+import {setSkillName} from "../../../../models/actor/Actor";
 import Minion, {GroupSkill} from "../../../../models/actor/npc/Minion";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {renderHeaders} from "../../../common/table/TableRenders";
@@ -64,7 +62,7 @@ interface TableProps {
     minion: Minion
 }
 
-export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
+export default function ViewMinionSkillTable(props: TableProps) {
     const {minion} = props
 
     return (
