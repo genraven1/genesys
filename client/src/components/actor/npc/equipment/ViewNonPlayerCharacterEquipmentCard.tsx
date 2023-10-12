@@ -23,14 +23,6 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderWeaponsTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderWeaponsTable()}
-            </Fragment>
-        )
-    }
-
-    const renderWeaponsTable = (): JSX.Element => {
         if (npc?.weapons!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
@@ -38,14 +30,6 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderArmorTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderArmorTable()}
-            </Fragment>
-        )
-    }
-
-    const renderArmorTable = (): JSX.Element => {
         if (npc?.armor!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }
@@ -53,14 +37,6 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderGearTab = (): JSX.Element => {
-        return (
-            <Fragment>
-                {renderGearTable()}
-            </Fragment>
-        )
-    }
-
-    const renderGearTable = (): JSX.Element => {
         if (npc?.gear!!.length === 0) {
             return <Typography style={{textAlign:'center'}}>None</Typography>
         }

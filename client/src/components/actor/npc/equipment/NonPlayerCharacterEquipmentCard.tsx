@@ -95,7 +95,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
                 <Grid sx={{ width: 1}}>
                     <TabContext value={value}>
                         <Grid sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList onChange={handleChange} aria-label="lab API tabs example">
+                            <TabList onChange={handleChange}>
                                 <Tab label="Weapons" value="1" />
                                 <Tab label="Armor" value="2" />
                                 <Tab label="Gear" value="3" />
