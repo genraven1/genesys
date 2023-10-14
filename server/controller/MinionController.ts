@@ -1,10 +1,8 @@
 import {pool} from '../config/Database.ts';
-import {getCurrentSettingId} from '../utils/SettingHelper.ts';
 import Setting from "../models/Setting.ts";
 import {
     createMinionSettings,
     createMinionSkills,
-    getGroupSkill,
     getMinionSettings,
     getMinionSkills
 } from "../utils/MinionHelper.ts";

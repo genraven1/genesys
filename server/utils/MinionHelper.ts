@@ -41,6 +41,10 @@ export const createMinionSkills = async (id: number): Promise<GroupSkill[]> => {
     for (const skill of skills) {
         groupSkills.push(getGroupSkill(skill.id, false));
     }
+    const query = "INSERT INTO minion_skills (minion_id, skill_id) VALUES ($1, $2);";
+    for (const skill of groupSkills) {
+        await pool.query(query, [id, skill.id]);
+    }
     return groupSkills;
 };
 
