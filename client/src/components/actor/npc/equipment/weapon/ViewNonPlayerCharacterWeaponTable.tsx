@@ -17,6 +17,7 @@ import {renderHeaders} from "../../../../common/table/TableRenders";
 import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerCharacter";
 import {ActorSkill, ActorType} from "../../../../../models/actor/Actor";
 import Minion from "../../../../../models/actor/npc/Minion";
+import Skill from "../../../../../models/actor/Skill";
 
 interface Props {
     weapons: ActorWeapon[]
@@ -77,7 +78,7 @@ function Row(props: RowProps): JSX.Element {
                 let minion = npc as Minion
                 for (let skill of minion.skills) {
                     if (skill.name === weapon.skill.name) {
-                        actorSkill = skill as ActorSkill
+                        actorSkill = {...{...skill} as Skill, ranks: 0} as ActorSkill
                     }
                 }
                 break

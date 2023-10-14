@@ -1,6 +1,5 @@
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
@@ -48,9 +47,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     .map((actorSkill: GroupSkill) => (
                         <TableRow>
                             <TypographyCenterTableCell value={setSkillName(actorSkill)}/>
-                            <TableCell style={{textAlign: 'center'}}>
-                                {renderSkillRow(actorSkill)}
-                            </TableCell>
+                            {renderSkillRow(actorSkill)}
                         </TableRow>
                     ))}
             </TableBody>

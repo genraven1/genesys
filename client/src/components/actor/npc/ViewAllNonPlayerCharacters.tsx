@@ -83,7 +83,7 @@ export default function ViewAllNonPlayerCharacters() {
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
                     {renderHeaders(headers)}
                 </TableHead>

@@ -1,7 +1,14 @@
 import {pool} from '../config/Database.ts';
-import {getCurrentSettingId, getTalentSettings} from '../utils/SettingHelper.ts';
+import {getCurrentSettingId} from '../utils/SettingHelper.ts';
 import Setting from "../models/Setting.ts";
-import {getMinionSettings} from "../utils/MinionHelper.ts";
+import {
+    createMinionSettings,
+    createMinionSkills,
+    getGroupSkill,
+    getMinionSettings,
+    getMinionSkills
+} from "../utils/MinionHelper.ts";
+import {GroupSkill} from "../models/Minion.ts";
 
 export const getAllMinions = async (req, res) => {
     const query = "SELECT * from minion;";
@@ -9,6 +16,12 @@ export const getAllMinions = async (req, res) => {
     const minions = []
     for (const result of results.rows) {
         result['settings'] = await getMinionSettings(result['id']) as Setting[];
+        result['skills'] = await getMinionSkills(result['id']) as GroupSkill[];
+        result['abilities'] = []
+        result['talents'] = []
+        result['weapons'] = []
+        result['armor'] = []
+        result['gear'] = []
         minions.push(result);
     }
     res.send(minions);
@@ -20,7 +33,13 @@ export const getMinion = async (req, res) => {
     const values = [id];
     const results = await pool.query(query, values);
     const minion = results.rows[0];
-    minion['settings'] = await getMinionSettings(id);
+    minion['settings'] = await getMinionSettings(id) as Setting[];
+    minion['skills'] = await getMinionSkills(id) as GroupSkill[];
+    minion['abilities'] = []
+    minion['talents'] = []
+    minion['weapons'] = []
+    minion['armor'] = []
+    minion['gear'] = []
     res.send(minion);
 };
 
@@ -33,10 +52,13 @@ export const createMinion = async (req, res) => {
     const values = [name, minion_id];
     const results = await pool.query(insertQuery, values);
     const minion = results.rows[0];
-    const settingQuery = "INSERT INTO minion_settings (minion_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [minion_id, getCurrentSettingId];
-    const settingResults = await pool.query(settingQuery, settingValues);
-    minion['settings'] = [settingResults.rows];
+    minion['settings'] = await createMinionSettings(minion_id);
+    minion['skills'] = await createMinionSkills(minion_id);
+    minion['abilities'] = []
+    minion['talents'] = []
+    minion['weapons'] = []
+    minion['armor'] = []
+    minion['gear'] = []
     res.send(minion);
 };
 
@@ -68,3 +90,13 @@ export const updateMinion = async (req, res) => {
     }
     res.send(minion);
 };
+
+export const updateMinionSkill = async (req, res) => {
+    const { id } = req.params;
+    const { group, id: skill_id } = req.body;
+    const query = "UPDATE minion_skills SET group_skill = $1 WHERE minion_id = $2 AND skill_id = $3 RETURNING *;";
+    const values = [group, Number(id), Number(skill_id)];
+    console.log(values)
+    const skills = await pool.query(query, values);
+    res.send(skills.rows[0]);
+}

@@ -21,9 +21,6 @@ export default function NonPlayerCharacterEditSkillDialog(props: Props) {
         copySkill.ranks = ranks
         setSkill(copySkill)
         switch (type) {
-            case ActorType.Minion:
-                await ActorService.updateMinionSkill(actor.id, copySkill)
-                break
             case ActorType.Rival:
                 await ActorService.updateRivalSkill(actor.name, copySkill)
                 break
