@@ -18,10 +18,11 @@ export const getAllMinions = async (): Promise<NonPlayerActor[]> => {
 
 export const createMinionSettings = async (id: number): Promise<Setting[]> => {
     const settingQuery = "INSERT INTO minion_settings (minion_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [id, getCurrentSettingId];
+    const setting_id = await getCurrentSettingId();
+    const settingValues = [id, setting_id];
     const settingResults = await pool.query(settingQuery, settingValues);
     return settingResults.rows as Setting[];
-}
+};
 
 export const getMinionSettings = async (id: number): Promise<Setting[]> => {
     const query = "SELECT setting_id FROM minion_settings WHERE minion_id = $1;";
@@ -37,13 +38,13 @@ export const getMinionSettings = async (id: number): Promise<Setting[]> => {
 
 export const createMinionSkills = async (id: number): Promise<GroupSkill[]> => {
     const skills = await getCurrentSettingSkills() as Skill[];
-    const groupSkills = [];
+    const groupSkills = [] as GroupSkill[];
     for (const skill of skills) {
-        groupSkills.push(getGroupSkill(skill.id, false));
+        groupSkills.push(await getGroupSkill(skill.id, false));
     }
-    const query = "INSERT INTO minion_skills (minion_id, skill_id) VALUES ($1, $2);";
+    const query = "INSERT INTO minion_skills (minion_id, skill_id, group_skill) VALUES ($1, $2, $3);";
     for (const skill of groupSkills) {
-        await pool.query(query, [id, skill.id]);
+        await pool.query(query, [id, skill.id, false]);
     }
     return groupSkills;
 };
@@ -54,7 +55,7 @@ export const getMinionSkills = async (id: number): Promise<ActorSkill[]> => {
     const ids = await pool.query(query, values);
     const skills = [] as GroupSkill[];
     for (const skill_row of ids.rows) {
-        const skill = await getGroupSkill(Number(skill_row['skill_id']), skill_row['group']);
+        const skill = await getGroupSkill(skill_row['skill_id'], skill_row.group_skill);
         skills.push(skill);
     }
     return skills;
@@ -64,7 +65,7 @@ export const getGroupSkill = async (id: number, group: boolean): Promise<GroupSk
     const query = "SELECT * FROM skill WHERE id = $1;";
     const values = [id];
     const result = await pool.query(query, values);
-    let skill = result.rows[0]  as GroupSkill;
-    skill.group = group;
+    let skill = result.rows[0] as GroupSkill;
+    skill.group_skill = group;
     return skill;
 };

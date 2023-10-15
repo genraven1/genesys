@@ -26,7 +26,7 @@ export function SkillTypeGroup(props: GroupProps) {
 
     const renderSkillRow = (skill: GroupSkill):JSX.Element => {
         let text = 'No'
-        if (skill.group) {
+        if (skill.group_skill) {
             text = 'Yes'
         }
         return <TypographyCenterTableCell value={text}/>

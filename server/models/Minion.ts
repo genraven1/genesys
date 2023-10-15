@@ -6,5 +6,5 @@ export default interface Minion extends NonPlayerActor {
 }
 
 export interface GroupSkill extends ActorSkill {
-    group: boolean
+    group_skill: boolean
 }

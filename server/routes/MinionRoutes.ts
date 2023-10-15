@@ -23,16 +23,16 @@ minionRouter.route(`${MINION_PATH}:id/skills`)
     .put(updateMinionSkill)
 
 minionRouter.route(`${MINION_PATH}:id/talents`)
-    .put(updateMinion)
+    .put()
 
 minionRouter.route(`${MINION_PATH}:id/ability`)
-    .put(updateMinion)
+    .put()
 
 minionRouter.route(`${MINION_PATH}:id/weapons`)
-    .put(updateMinion)
+    .put()
 
 minionRouter.route(`${MINION_PATH}:id/armor`)
-    .put(updateMinion)
+    .put()
 
 minionRouter.route(`${MINION_PATH}:id/gear`)
-    .put(updateMinion)
+    .put()
