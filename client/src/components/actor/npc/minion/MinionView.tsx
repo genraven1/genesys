@@ -7,7 +7,6 @@ import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
@@ -18,6 +17,7 @@ import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 
 interface Props {
     minion: Minion
@@ -61,7 +61,7 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <ViewNonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentTable npc={minion}/>
+                    <NonPlayerCharacterTalentCard npc={minion}/>
                 </Grid>
                 <ViewSettingsCard settings={minion?.settings!!} allSettings={settings}/>
             </CardContent>
