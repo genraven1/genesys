@@ -1,6 +1,6 @@
 import {Skill} from "../models/Skill.ts";
 import {pool} from "../config/Database.ts";
-import {getCurrentSettingId, getSkillSettings} from "./SettingHelper.ts";
+import {getCurrentSettingId, getSetting} from "./SettingHelper.ts";
 import Setting from "../models/Setting.ts";
 
 export const getCurrentSettingSkills = async (): Promise<Skill[]> => {
@@ -16,4 +16,16 @@ export const getCurrentSettingSkills = async (): Promise<Skill[]> => {
         }
     }
     return skills;
-}
+};
+
+export const getSkillSettings = async (id: number): Promise<Setting[]> => {
+    const query = "SELECT setting_id FROM skill_settings WHERE skill_id = $1;";
+    const values = [id];
+    const ids = await pool.query(query, values);
+    const settings = [] as Setting[];
+    for (const setting_id of ids.rows) {
+        const setting = await getSetting(Number(setting_id['setting_id']));
+        settings.push(setting);
+    }
+    return settings;
+};
