@@ -15,7 +15,12 @@ export const createQuality = async (req, res) => {
     const talent_id = Number(count.rows[0]['count']) + 1;
     const values = [name, talent_id];
     const results = await pool.query(insertQuery, values);
-    res.send(results.rows[0]);
+    const quality = results.rows[0] as Quality;
+    quality.armor = false;
+    quality.weapon = false;
+    quality.cost = 0;
+    quality.passive = false;
+    res.send();
 };
 
 export const getQuality = async (req, res) => {
