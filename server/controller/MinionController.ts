@@ -46,12 +46,11 @@ export const createMinion = async (req, res) => {
     const {name} = req.params;
     const countQuery = "SELECT COUNT(*) FROM minion;";
     const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO minion (name, id) VALUES ($1, $2) RETURNING *;";
+    const insertQuery = "INSERT INTO minion (name, id, type) VALUES ($1, $2, $3) RETURNING *;";
     const minion_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, minion_id];
+    const values = [name, minion_id, 'Minion'];
     const results = await pool.query(insertQuery, values);
     const minion = results.rows[0] as Minion;
-    minion.type = 'Minion';
     minion.settings = await createMinionSettings(minion_id);
     minion.skills = await createMinionSkills(minion_id);
     minion.abilities = [];
@@ -112,7 +111,6 @@ export const updateMinionSkill = async (req, res) => {
     const {group, id: skill_id} = req.body;
     const query = "UPDATE minion_skills SET group_skill = $1 WHERE minion_id = $2 AND skill_id = $3 RETURNING *;";
     const values = [group, Number(id), Number(skill_id)];
-    console.log(values)
     const skills = await pool.query(query, values);
     res.send(skills.rows[0]);
 };
