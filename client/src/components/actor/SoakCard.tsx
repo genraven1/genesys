@@ -1,4 +1,6 @@
-import { Grid, Card, CardHeader, Divider, CardContent, Typography } from "@mui/material";
+import { Grid, Card, CardContent } from "@mui/material";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 
 interface Props {
     soak: number,
@@ -9,10 +11,9 @@ export default function SoakCard(props: Props): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={'Soak'} style={{ textAlign: 'center' }} />
-                <Divider />
+                <CenteredCardHeader title={'Soak'}/>
                 <CardContent>
-                    <Typography style={{ textAlign: 'center' }}>{soak}</Typography>
+                    <GenesysDescriptionTypography text={String(soak)}/>
                 </CardContent>
             </Card>
         </Grid>
