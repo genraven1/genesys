@@ -4,7 +4,7 @@ import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
 import Actor, {ActorTalent, ActorSkill} from "../models/actor/Actor";
-import Minion from "../models/actor/npc/Minion";
+import Minion, {GroupSkill} from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
@@ -128,35 +128,35 @@ export default class ActorService {
         return await (await axios.post( ActorPath.Minion + name)).data;
     }
 
-    static async getMinion(name: string): Promise<Minion> {
-        return await (await axios.get(ActorPath.Minion + name)).data;
+    static async getMinion(id: number): Promise<Minion> {
+        return await (await axios.get(ActorPath.Minion + id)).data;
     }
 
     static async getMinions(): Promise<Minion[]> {
         return await (await axios.get(ActorPath.Minion)).data;
     }
 
-    static async updateMinion(name: string, minion: Minion): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name, minion)).data;
+    static async updateMinion(id: number, minion: Minion): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + id, minion)).data;
     }
 
-    static async updateMinionSkill(name: string, skill: ActorSkill): Promise<Minion> {
+    static async updateMinionSkill(name: number, skill: GroupSkill): Promise<Minion> {
         return await (await axios.put(ActorPath.Minion + name + '/skills', skill)).data;
     }
 
-    static async addMinionTalent(name: string, talent: ActorTalent): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name + '/talents', talent)).data;
+    static async addMinionTalent(id: number, talent: ActorTalent): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + id + '/talents', talent)).data;
     }
 
-    static async createMinionWeapon(name: string, weapon: ActorWeapon): Promise<Minion> {
-        return await (await axios.post(ActorPath.Minion + name + '/weapons', weapon)).data;
+    static async createMinionWeapon(id: number, weapon: ActorWeapon): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + id + '/weapons', weapon)).data;
     }
 
-    static async createMinionArmor(name: string, armor: ActorArmor): Promise<Minion> {
-        return await (await axios.post(ActorPath.Minion + name + '/armor', armor)).data;
+    static async createMinionArmor(id: number, armor: ActorArmor): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + id + '/armor', armor)).data;
     }
 
-    static async createMinionAbility(name: string, ability: Ability): Promise<Minion> {
-        return await (await axios.post(ActorPath.Minion + name + '/ability', ability)).data;
+    static async createMinionAbility(name: number, ability: Ability): Promise<Minion> {
+        return await (await axios.put(ActorPath.Minion + name + '/ability', ability)).data;
     }
 }

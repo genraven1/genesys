@@ -7,3 +7,7 @@ export interface Skill {
     name: string,
     settings: Setting[]
 }
+
+export interface ActorSkill extends Skill {
+    ranks: number
+}

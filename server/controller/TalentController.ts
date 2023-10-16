@@ -32,7 +32,7 @@ export const createTalent = async (req, res) => {
     const values = [name, talent_id];
     const results = await pool.query(insertQuery, values);
     const talent = results.rows[0];
-    const settingQuery = "INSERT INTO talent_setting (talent_id, setting_id) VALUES ($1, $2);";
+    const settingQuery = "INSERT INTO talent_settings (talent_id, setting_id) VALUES ($1, $2);";
     const settingValues = [talent_id, getCurrentSettingId];
     const settingResults = await pool.query(settingQuery, settingValues);
     talent['settings'] = [settingResults.rows];

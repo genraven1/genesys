@@ -35,7 +35,7 @@ export interface ActorSkill extends Skill {
     ranks: number
 }
 
-export const setSkillName = (skill: ActorSkill): string => {
+export const setSkillName = (skill: Skill): string => {
     return skill.name + '(' + skill.characteristic + ')'
 }
 

@@ -10,7 +10,7 @@ import {ActorTalent} from "../../../../models/actor/Actor";
 import GenesysTalentTypography from "../../../common/typography/GenesysTalentTypography";
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface Props {
     row: ActorTalent
@@ -44,17 +44,17 @@ interface TableProps {
 
 export default function NonPlayerCharacterTalentTable(props: TableProps) {
     const {npc} = props
+    const headers = ['Name', 'Summary']
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell colSpan={2} style={{textAlign: "center"}}>Talents</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TypographyCenterTableCell value={"Name"}/>
-                        <TypographyCenterTableCell value={"Summary"}/>
+                        {renderHeaders(headers)}
                     </TableRow>
                 </TableHead>
                 <TableBody>

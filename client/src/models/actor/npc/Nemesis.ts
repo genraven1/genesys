@@ -1,5 +1,5 @@
-import NonPlayerCharacter from "./NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "./NonPlayerCharacter";
 
-export default interface Nemesis extends NonPlayerCharacter {
+export default interface Nemesis extends SingleNonPlayerCharacter {
     strain: number
 }

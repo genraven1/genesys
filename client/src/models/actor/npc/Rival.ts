@@ -1,4 +1,4 @@
-import NonPlayerCharacter from "./NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "./NonPlayerCharacter";
 
-export default interface Rival extends NonPlayerCharacter {
+export default interface Rival extends SingleNonPlayerCharacter {
 }

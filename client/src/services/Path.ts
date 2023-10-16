@@ -21,8 +21,8 @@ export enum EquipmentPath {
 export enum ActorPath {
     Actor = '/actors/',
     Player = '/actors/players/',
-    Nemesis = '/actors/nemesis/',
-    Rival = '/actors/rival/',
-    Minion = '/actors/minion/',
-    Npc = '/actors/npc'
+    Nemesis = '/actors/nemeses/',
+    Rival = '/actors/rivals/',
+    Minion = '/actors/minions/',
+    Npc = '/actors/npcs'
 }

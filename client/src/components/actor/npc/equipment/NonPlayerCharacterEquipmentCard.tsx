@@ -1,7 +1,6 @@
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
 import {Button, Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -14,6 +13,7 @@ import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmo
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
 import CreateArmorDialog from "./armor/CreateArmorDialog";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -44,7 +44,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
 
     const renderWeaponsTable = (): JSX.Element => {
         if (npc?.weapons!!.length === 0) {
-            return <Typography style={{textAlign:'center'}}>None</Typography>
+            return <GenesysDescriptionTypography text={'None'}/>
         }
         return <ViewNonPlayerCharacterWeaponTable weapons={npc?.weapons!!} npc={npc!!} />
     }
@@ -63,7 +63,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
 
     const renderArmorTable = (): JSX.Element => {
         if (npc?.armor!!.length === 0) {
-            return <Typography style={{textAlign:'center'}}>None</Typography>
+            return <GenesysDescriptionTypography text={'None'}/>
         }
         return <ViewNonPlayerCharacterArmorTable armor={npc?.armor!!}/>
     }
@@ -83,7 +83,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
 
     const renderGearTable = (): JSX.Element => {
         if (npc?.gear!!.length === 0) {
-            return <Typography style={{textAlign:'center'}}>None</Typography>
+            return <GenesysDescriptionTypography text={'None'}/>
         }
         return <Fragment/>
     }
@@ -95,7 +95,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
                 <Grid sx={{ width: 1}}>
                     <TabContext value={value}>
                         <Grid sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList onChange={handleChange} aria-label="lab API tabs example">
+                            <TabList onChange={handleChange} centered>
                                 <Tab label="Weapons" value="1" />
                                 <Tab label="Armor" value="2" />
                                 <Tab label="Gear" value="3" />
