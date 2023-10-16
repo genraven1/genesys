@@ -29,17 +29,17 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     const onSkillAddition = async (skill: GroupSkill) => {
         skill.group_skill = true
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.id, skill))
+        setMin(await ActorService.updateMinionSkill(minion.id, groupSkill))
     }
 
     const onSkillRemoval = async (skill: GroupSkill) => {
         skill.group_skill = false
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.id, skill))
+        setMin(await ActorService.updateMinionSkill(minion.id, groupSkill))
     }
 
     return (
-        <TableRow>
+        <TableRow key={skill.id}>
             <TypographyCenterTableCell value={skill.name}/>
             <CheckboxTableCell value={groupSkill.group_skill}
                                onAddition={() => onSkillAddition(groupSkill)}

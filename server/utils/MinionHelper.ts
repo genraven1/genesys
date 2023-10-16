@@ -19,7 +19,7 @@ export const getAllMinions = async (): Promise<NonPlayerActor[]> => {
 export const createMinionSettings = async (id: number): Promise<Setting[]> => {
     const settingQuery = "INSERT INTO minion_settings (minion_id, setting_id) VALUES ($1, $2);";
     const setting_id = await getCurrentSettingId();
-    const settingValues = [id, setting_id];
+    const settingValues = [id, Number(setting_id)];
     const settingResults = await pool.query(settingQuery, settingValues);
     return settingResults.rows as Setting[];
 };

@@ -108,9 +108,9 @@ export const updateMinion = async (req, res) => {
 
 export const updateMinionSkill = async (req, res) => {
     const {id} = req.params;
-    const {group, id: skill_id} = req.body;
+    const {group_skill, id: skill_id} = req.body;
     const query = "UPDATE minion_skills SET group_skill = $1 WHERE minion_id = $2 AND skill_id = $3 RETURNING *;";
-    const values = [group, Number(id), Number(skill_id)];
+    const values = [group_skill, Number(id), Number(skill_id)];
     const skills = await pool.query(query, values);
     res.send(skills.rows[0]);
 };
