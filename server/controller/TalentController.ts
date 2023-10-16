@@ -1,6 +1,7 @@
 import {pool} from '../config/Database.ts';
-import {getCurrentSettingId, getTalentSettings} from '../utils/SettingHelper.ts';
+import {getCurrentSettingId} from '../utils/SettingHelper.ts';
 import Setting from "../models/Setting.ts";
+import {getTalentSettings} from "../utils/TalentHelper.ts";
 
 export const getAllTalents = async (req, res) => {
     const query = "SELECT * from talent;";

@@ -7,6 +7,7 @@ import {settingRouter} from "./routes/SettingRoutes.ts";
 import {currentSettingRouter} from "./routes/CurrentSettingRoutes.ts";
 import {minionRouter} from "./routes/MinionRoutes.ts";
 import {npaRouter} from "./routes/NonPlayerActorRoutes.ts";
+import {qualityRouter} from "./routes/QualityRoutes.ts";
 
 dotenv.config();
 const PORT = 5050;
@@ -19,6 +20,7 @@ app.use('', currentSettingRouter);
 app.use('', settingRouter);
 app.use('', skillRouter);
 app.use('', talentRouter);
+app.use('', qualityRouter);
 app.use('', npaRouter);
 app.use('', minionRouter);
 
