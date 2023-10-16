@@ -101,7 +101,7 @@ export default function WeaponEdit(props: Props) {
 
     const updateWeapon = async (copyWeapon: Weapon) => {
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
     }
 
     const onView = () => {
