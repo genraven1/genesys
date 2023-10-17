@@ -18,8 +18,8 @@ export const createSetting = async (req, res) => {
     const { name } = req.params;
     const countQuery = "SELECT COUNT(*) FROM setting;";
     const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO setting (name, id) VALUES ($1, $2) RETURNING *;";
-    const values = [name, Number(count.rows[0]['count']) + 1];
+    const insertQuery = "INSERT INTO setting (name, id, magic) VALUES ($1, $2, $3) RETURNING *;";
+    const values = [name, Number(count.rows[0]['count']) + 1, false];
     const results = await pool.query(insertQuery, values);
     res.send(results.rows[0]);
 };
