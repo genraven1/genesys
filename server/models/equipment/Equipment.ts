@@ -1,4 +1,4 @@
-import Setting from "./Setting.ts";
+import Setting from "../Setting.ts";
 import {EquipmentQuality} from "./Quality.ts";
 
 export default interface Equipment {

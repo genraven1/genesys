@@ -1,5 +1,5 @@
 import {pool} from "../config/Database.ts";
-import {Quality} from "../models/Quality.ts";
+import {Quality} from "../models/equipment/Quality.ts";
 
 export const getAllQualities = async (req, res) => {
     const query = "SELECT * from quality;";

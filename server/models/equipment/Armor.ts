@@ -1,4 +1,4 @@
-import Equipment, {ActorEquipment} from "./Equipment";
+import Equipment, {ActorEquipment} from "./Equipment.ts";
 
 export interface Armor extends Equipment {
     soak: number

@@ -1,5 +1,5 @@
-import Equipment, {ActorEquipment} from "./Equipment";
-import {Skill} from "./Skill.ts";
+import Equipment, {ActorEquipment} from "./Equipment.ts";
+import {Skill} from "../Skill.ts";
 
 export interface Gear extends Equipment {
     skill: Skill

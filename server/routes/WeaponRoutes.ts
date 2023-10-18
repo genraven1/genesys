@@ -1,6 +1,12 @@
 import Router from 'express-promise-router';
 import {WEAPON_PATH} from "../utils/Path.ts";
-import {createWeapon, getAllWeapons, getWeapon, updateWeapon} from "../controller/WeaponController.ts";
+import {
+    addWeaponQuality,
+    createWeapon,
+    getAllWeapons,
+    getWeapon,
+    updateWeapon
+} from "../controller/WeaponController.ts";
 
 export const weaponRouter = Router();
 
@@ -15,4 +21,4 @@ weaponRouter.route(`${WEAPON_PATH}:id`)
     .get(getWeapon)
 
 weaponRouter.route(`${WEAPON_PATH}:id/quality`)
-    .put()
+    .put(addWeaponQuality)

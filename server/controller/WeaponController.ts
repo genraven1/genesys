@@ -1,15 +1,17 @@
 import {pool} from "../config/Database.ts";
-import {Weapon} from "../models/Weapon.ts";
-import {getWeaponSettings} from "../utils/WeaponHelper.ts";
+import {Weapon} from "../models/equipment/Weapon.ts";
+import {addQualityToWeapon, getWeaponQualities, getWeaponSettings, retrieveWeapon} from "../utils/WeaponHelper.ts";
 import {getCurrentSettingId} from "../utils/SettingHelper.ts";
 import Setting from "../models/Setting.ts";
+import {EquipmentQuality, Quality} from "../models/equipment/Quality.ts";
 
 export const getAllWeapons = async (req, res) => {
     const query = "SELECT * from weapon;";
     const results = await pool.query(query);
     const weapons = [];
     for (const weapon of results.rows as Weapon[]) {
-        weapon.settings = await getWeaponSettings(weapon['id']) as Setting[];
+        weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
+        weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
         weapons.push(weapon);
     }
     res.send(results.rows as Weapon[]);
@@ -37,7 +39,8 @@ export const getWeapon = async (req, res) => {
     const values = [id];
     const results = await pool.query(query, values);
     const weapon = results.rows[0] as Weapon;
-    weapon.settings = await getWeaponSettings(weapon['id']) as Setting[];
+    weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
+    weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
     res.send(weapon);
 };
 
@@ -67,5 +70,13 @@ export const updateWeapon = async (req, res) => {
         }
         weapon.settings = await getWeaponSettings(weapon['id']);
     }
+    res.send(weapon);
+};
+
+export const addWeaponQuality = async (req, res) => {
+    const { id } = req.params;
+    const { id: quality_id} = req.body as Quality;
+    const weapon = await retrieveWeapon(id);
+    weapon.qualities = await addQualityToWeapon(id, quality_id);
     res.send(weapon);
 };
