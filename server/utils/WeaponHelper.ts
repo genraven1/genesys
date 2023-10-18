@@ -4,12 +4,15 @@ import {getSetting} from "./SettingHelper.ts";
 import {EquipmentQuality} from "../models/equipment/Quality.ts";
 import {Weapon} from "../models/equipment/Weapon.ts";
 import {getQuality} from "./QualityHelper.ts";
+import {Skill} from "../models/Skill.ts";
+import {retrieveSkill} from "./SkillHelper.ts";
 
 export const retrieveWeapon = async (id: number): Promise<Weapon> => {
     const query = "SELECT * from weapon WHERE id = $1;";
     const values = [id];
     const results = await pool.query(query, values);
     const weapon = results.rows[0] as Weapon;
+    weapon.skill = await retrieveSkill(weapon['skill_id']) as Skill;
     weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
     weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
     return weapon;

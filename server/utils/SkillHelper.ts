@@ -29,3 +29,12 @@ export const getSkillSettings = async (id: number): Promise<Setting[]> => {
     }
     return settings;
 };
+
+export const retrieveSkill = async (id: number): Promise<Skill> => {
+    const query = "SELECT * FROM skill WHERE id = $1;";
+    const values = [id];
+    const results = await pool.query(query, values);
+    const skill = results.rows[0] as Skill;
+    skill.settings = await getSkillSettings(id);
+    return skill;
+};

@@ -4,12 +4,16 @@ import {addQualityToWeapon, getWeaponQualities, getWeaponSettings, retrieveWeapo
 import {getCurrentSettingId} from "../utils/SettingHelper.ts";
 import Setting from "../models/Setting.ts";
 import {EquipmentQuality, Quality} from "../models/equipment/Quality.ts";
+import {retrieveSkill} from "../utils/SkillHelper.ts";
+import {Skill} from "../models/Skill.ts";
 
 export const getAllWeapons = async (req, res) => {
     const query = "SELECT * from weapon;";
     const results = await pool.query(query);
     const weapons = [];
     for (const weapon of results.rows as Weapon[]) {
+        weapon.skill = await retrieveSkill(weapon['skill_id']) as Skill;
+        delete weapon['skill_id'];
         weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
         weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
         weapons.push(weapon);
@@ -39,6 +43,8 @@ export const getWeapon = async (req, res) => {
     const values = [id];
     const results = await pool.query(query, values);
     const weapon = results.rows[0] as Weapon;
+    weapon.skill = await retrieveSkill(weapon['skill_id']) as Skill;
+    delete weapon['skill_id'];
     weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
     weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
     res.send(weapon);
