@@ -13,6 +13,7 @@ export const retrieveWeapon = async (id: number): Promise<Weapon> => {
     const results = await pool.query(query, values);
     const weapon = results.rows[0] as Weapon;
     weapon.skill = await retrieveSkill(weapon['skill_id']) as Skill;
+    delete weapon['skill_id'];
     weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
     weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
     return weapon;
