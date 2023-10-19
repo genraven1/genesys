@@ -15,6 +15,7 @@ import GenesysDescriptionTypography from "../../common/typography/GenesysDescrip
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import {renderHeaders} from "../../common/table/TableRenders";
 
 interface Props {
     weapon: Weapon
@@ -81,25 +82,15 @@ export default function ViewAllWeapon(): JSX.Element {
         })()
     }, [setWeapons])
 
-    const renderHeaders = (): JSX.Element => {
-        return (
-            <TableRow>
-                {headers.map((header: string) => (
-                    <TypographyCenterTableCell value={header}/>
-                ))}
-            </TableRow>
-        )
-    }
-
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    {renderHeaders()}
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {weapons.map((row: Weapon) => (
-                        <Row key={row.name} weapon={row} columns={headers.length}/>
+                    {weapons.map((weapon: Weapon) => (
+                        <Row key={weapon?.name!!} weapon={weapon!!} columns={headers.length}/>
                     ))}
                 </TableBody>
             </Table>

@@ -1,8 +1,8 @@
 import Setting from "./Setting.ts";
 import {ActorTalent} from "./Talent.ts";
-import {ActorGear} from "./Gear.ts";
-import {ActorWeapon} from "./Weapon.ts";
-import {ActorArmor} from "./Armor.ts";
+import {ActorGear} from "./equipment/Gear.ts";
+import {ActorWeapon} from "./equipment/Weapon.ts";
+import {ActorArmor} from "./equipment/Armor.ts";
 
 export default interface Actor {
     id: number

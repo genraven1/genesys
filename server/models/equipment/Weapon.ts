@@ -1,6 +1,6 @@
 
-import Equipment, {ActorEquipment} from "./Equipment";
-import {Skill} from "./Skill.ts";
+import Equipment, {ActorEquipment} from "./Equipment.ts";
+import {Skill} from "../Skill.ts";
 
 export interface Weapon extends Equipment {
     damage: number

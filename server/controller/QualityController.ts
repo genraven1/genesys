@@ -1,5 +1,5 @@
 import {pool} from "../config/Database.ts";
-import {Quality} from "../models/Quality.ts";
+import {Quality} from "../models/equipment/Quality.ts";
 
 export const getAllQualities = async (req, res) => {
     const query = "SELECT * from quality;";
@@ -11,16 +11,12 @@ export const createQuality = async (req, res) => {
     const { name } = req.params;
     const countQuery = "SELECT COUNT(*) FROM quality;";
     const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO quality (name, id) VALUES ($1, $2) RETURNING *;";
-    const talent_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, talent_id];
+    const insertQuery = "INSERT INTO quality (name, id, armor, weapon, cost, passive) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;";
+    const quality_id = Number(count.rows[0]['count']) + 1;
+    const values = [name, quality_id, false, false, 0, false];
     const results = await pool.query(insertQuery, values);
     const quality = results.rows[0] as Quality;
-    quality.armor = false;
-    quality.weapon = false;
-    quality.cost = 0;
-    quality.passive = false;
-    res.send();
+    res.send(quality);
 };
 
 export const getQuality = async (req, res) => {
