@@ -29,13 +29,13 @@ export const createTalent = async (req, res) => {
     const { name } = req.params;
     const countQuery = "SELECT COUNT(*) FROM talent;";
     const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO talent (name, id) VALUES ($1, $2) RETURNING *;";
+    const insertQuery = "INSERT INTO talent (name, id, ranked, activation, tier, summary, description) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;";
     const talent_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, talent_id];
+    const values = [name, talent_id, false, 'Passive', 'First', '', ''];
     const results = await pool.query(insertQuery, values);
     const talent = results.rows[0] as Talent;
     const settingQuery = "INSERT INTO talent_settings (talent_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [talent_id, getCurrentSettingId];
+    const settingValues = [talent_id, await getCurrentSettingId()];
     const settingResults = await pool.query(settingQuery, settingValues);
     talent.settings = settingResults.rows;
     res.send(talent);

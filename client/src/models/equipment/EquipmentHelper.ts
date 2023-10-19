@@ -1,9 +1,10 @@
 import Equipment from "./Equipment";
 import {Armor} from "./Armor";
 import {Weapon} from "./Weapon";
+import Quality from "../Quality";
 
 export const renderPrice = (equipment: Equipment): string => {
-    let price = ''
+    let price: string
     if (equipment?.restricted!!) {
         price = equipment?.price!! + '(R)'
     } else {
@@ -35,7 +36,7 @@ export const renderSoak = (armor: Armor): string => {
 }
 
 export const renderActorDamage = (weapon: Weapon, brawn: number): string => {
-    let damage = ''
+    let damage: string
     if (weapon?.brawn!!) {
         damage = String(weapon?.damage!! + brawn)
     } else {
@@ -45,11 +46,26 @@ export const renderActorDamage = (weapon: Weapon, brawn: number): string => {
 }
 
 export const renderDamage = (weapon: Weapon): string => {
-    let damage = ''
+    let damage: string
     if (weapon?.brawn!!) {
         damage = 'Brawn + ' + weapon?.damage!!
     } else {
         damage = String(weapon?.damage!!)
     }
     return damage
+}
+
+export const renderUsable = (quality: Quality): string => {
+    if (quality?.weapon!! === undefined && quality?.armor!! === undefined) {
+        return ''
+    }
+    let usable: string
+    if (quality?.weapon!! && !Boolean(quality?.armor!!)) {
+        usable = 'Weapons'
+    } else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {
+        usable = 'Armor'
+    } else {
+        usable = 'Weapons and Armor'
+    }
+    return usable
 }

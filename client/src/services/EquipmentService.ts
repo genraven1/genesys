@@ -15,20 +15,16 @@ export default class EquipmentService {
         return await (await axios.get(EquipmentPath.Armor)).data
     }
 
-    static async getArmorNames(): Promise<string[]> {
-        return await (await axios.get(EquipmentPath.Armor + '/names')).data
+    static async getArmor(id: number): Promise<Armor> {
+        return await (await axios.get(EquipmentPath.Armor + id)).data
     }
 
-    static async getArmor(name: string): Promise<Armor> {
-        return await (await axios.get(EquipmentPath.Armor + name)).data
+    static async updateArmor(id: number, armor: Armor): Promise<Armor> {
+        return await (await axios.put(EquipmentPath.Armor + id, armor)).data
     }
 
-    static async updateArmor(name: string, armor: Armor): Promise<Armor> {
-        return await (await axios.put(EquipmentPath.Armor + name, armor)).data
-    }
-
-    static async addArmorQuality(name: string, quality: Quality): Promise<Armor> {
-        return await (await axios.put(EquipmentPath.Armor + name + '/quality', quality)).data;
+    static async addArmorQuality(id: number, quality: Quality): Promise<Armor> {
+        return await (await axios.put(EquipmentPath.Armor + id + '/quality', quality)).data;
     }
 
     static async createWeapon(name: string): Promise<Weapon> {

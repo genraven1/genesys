@@ -13,9 +13,9 @@ export enum LorePath {
 }
 
 export enum EquipmentPath {
-    Armor = '/equipment/armor/',
+    Armor = '/equipment/armors/',
     Weapon = '/equipment/weapons/',
-    Gear = '/equipment/gear/',
+    Gear = '/equipment/gears/',
 }
 
 export enum ActorPath {

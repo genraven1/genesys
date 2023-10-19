@@ -6,6 +6,7 @@ import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import {Fragment} from "react";
 import Quality from "../../models/Quality";
+import {renderUsable} from "../../models/equipment/EquipmentHelper";
 
 interface Props {
     quality: Quality
@@ -14,26 +15,17 @@ interface Props {
 export default function QualityView(props: Props) {
     const {quality} = props
     const {id} = useParams<{ id: string }>()
-    const path = Path.Qualities
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(Path.Qualities + id + '/edit')
     }
 
-    const renderUsable = (): JSX.Element => {
+    const renderQualityUsable = (): JSX.Element => {
         if (quality?.weapon!! === undefined && quality?.armor!! === undefined) {
             return <Fragment/>
         }
-        let usable = ''
-        if (quality?.weapon!! && !Boolean(quality?.armor!!)) {
-            usable = 'Weapons'
-        } else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {
-            usable = 'Armor'
-        } else {
-            usable = 'Weapons and Armor'
-        }
-        return <ViewFieldCard name={'Quality Used on'} value={usable}/>
+        return <ViewFieldCard name={'Quality Used on'} value={renderUsable(quality)}/>
     }
 
     return (
@@ -53,7 +45,7 @@ export default function QualityView(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        {renderUsable()}
+                        {renderQualityUsable()}
                         <ViewQualityActivationCard quality={quality}/>
                     </Grid>
                 </Grid>

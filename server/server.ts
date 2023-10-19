@@ -9,6 +9,7 @@ import {minionRouter} from "./routes/MinionRoutes.ts";
 import {npaRouter} from "./routes/NonPlayerActorRoutes.ts";
 import {qualityRouter} from "./routes/QualityRoutes.ts";
 import {weaponRouter} from "./routes/WeaponRoutes.ts";
+import {armorRouter} from "./routes/ArmorRoutes.ts";
 
 dotenv.config();
 const PORT = 5050;
@@ -23,6 +24,7 @@ app.use('', skillRouter);
 app.use('', talentRouter);
 app.use('', qualityRouter);
 app.use('', weaponRouter);
+app.use('', armorRouter);
 app.use('', npaRouter);
 app.use('', minionRouter);
 

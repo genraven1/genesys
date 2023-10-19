@@ -19,6 +19,7 @@ import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import QualityDialog from "./QualityDialog";
 import {renderHeaders} from "../common/table/TableRenders";
+import {renderUsable} from "../../models/equipment/EquipmentHelper";
 
 interface RowProps {
     quality: Quality
@@ -39,34 +40,19 @@ function Row(props: RowProps): JSX.Element {
         }
     }
 
-    const renderUsable = (): JSX.Element => {
-        if (quality?.weapon!! === undefined && quality?.armor!! === undefined) {
-            return <Fragment/>
-        }
-        let usable = ''
-        if (quality?.weapon!! && !Boolean(quality?.armor!!)) {
-            usable = 'Weapons'
-        } else if (quality?.armor!! && !Boolean(quality?.weapon!!)) {
-            usable = 'Armor'
-        } else {
-            usable = 'Weapons and Armor'
-        }
-        return <GenesysDescriptionTypography text={usable}/>
-    }
-
     return (
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={quality.name}/>
                 <TableCell style={{textAlign: 'center'}}>{renderActivation()}</TableCell>
-                <TableCell style={{textAlign: 'center'}}>{renderUsable()}</TableCell>
+                <TypographyCenterTableCell value={renderUsable(quality)}/>
                 <ActionsTableCell id={String(quality.id)} path={Path.Qualities}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
-                            <Table size="small" aria-label="purchases">
+                            <Table size="small">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={quality.description}/>
                                 </TableBody>

@@ -79,7 +79,7 @@ export default function ArmorEdit(props: Props) {
 
     const updateArmor = async (copyArmor: Armor) => {
         setArmor(copyArmor)
-        await EquipmentService.updateArmor(copyArmor.name, copyArmor)
+        await EquipmentService.updateArmor(copyArmor.id, copyArmor)
     }
 
     const onView = () => {

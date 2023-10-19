@@ -19,13 +19,13 @@ export const createSkill = async (req, res) => {
     const { name } = req.params;
     const countQuery = "SELECT COUNT(*) FROM skill;";
     const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO skill (name, id) VALUES ($1, $2) RETURNING *;";
+    const insertQuery = "INSERT INTO skill (name, id, characteristic, type) VALUES ($1, $2, $3, $4) RETURNING *;";
     const skill_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, skill_id];
+    const values = [name, skill_id, 'Brawn', 'General'];
     const results = await pool.query(insertQuery, values);
     const skill = results.rows[0] as Skill;
     const settingQuery = "INSERT INTO skill_settings (skill_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [skill_id, getCurrentSettingId];
+    const settingValues = [skill_id, await getCurrentSettingId()];
     const settingResults = await pool.query(settingQuery, settingValues);
     skill.settings = settingResults.rows;
     res.send(skill);
