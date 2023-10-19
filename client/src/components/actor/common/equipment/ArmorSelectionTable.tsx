@@ -12,25 +12,16 @@ import Actor, {ActorType} from "../../../../models/actor/Actor";
 import EquipmentService from "../../../../services/EquipmentService";
 import {ActorArmor, Armor} from "../../../../models/equipment/Armor";
 import ArmorBackdrop from "./ArmorBackdrop";
+import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
-    name: string
+    armor: Armor
     actor: Actor
 }
 
 function ArmorNameRow(props: RowProps): JSX.Element {
-    const {name, actor} = props;
-    const [armor, setArmor] = useState<Armor>()
+    const {armor, actor} = props;
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
-
-    useEffect(() => {
-        if (!name) {return}
-        (async (): Promise<void> => {
-            const armorData = await EquipmentService.getArmor(name)
-            if (!armorData) { return }
-            setArmor(armorData)
-        })()
-    }, [name])
 
     const addArmor = async () => {
         switch (actor.type) {
@@ -70,28 +61,26 @@ interface TableProps {
 
 export default function ArmorSelectionTable(props: TableProps) {
     const {actor} = props
-    const [names, setNames] = useState<string[]>([])
+    const [armors, setArmors] = useState<Armor[]>([])
+    const headers = ['Name', 'Add']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const armorList = await EquipmentService.getArmorNames()
+            const armorList = await EquipmentService.getArmors()
             if (!armorList) { return }
-            setNames(armorList)
+            setArmors(armorList)
         })()
-    }, [setNames])
+    }, [setArmors])
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Armor Name</TableCell>
-                        <TableCell>Add</TableCell>
-                    </TableRow>
+                    {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {names.map((name: string) => (
-                        <ArmorNameRow name={name} actor={actor}/>
+                    {armors.map((armor: Armor) => (
+                        <ArmorNameRow armor={armor} actor={actor}/>
                     ))}
                 </TableBody>
             </Table>
