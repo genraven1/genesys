@@ -47,7 +47,7 @@ export const addQualityToWeapon = async (weapon_id: number, quality_id: number):
     const weapon = await retrieveWeapon(weapon_id) as Weapon;
     const equipmentQualities= weapon.qualities;
     if (equipmentQualities.find(quality => quality.id === quality_id)) {
-        const query = "UPDATE weapon_qualities SET ranks = ranks + 1 WHERE weapon_id = $2 AND quality_id = $3 RETURNING *;";
+        const query = "UPDATE weapon_qualities SET ranks = ranks + 1 WHERE weapon_id = $1 AND quality_id = $2 RETURNING *;";
         const values = [weapon_id, quality_id];
         const results = await pool.query(query, values)
         return results.rows as EquipmentQuality[];
