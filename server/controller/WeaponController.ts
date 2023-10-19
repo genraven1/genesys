@@ -18,7 +18,7 @@ export const getAllWeapons = async (req, res) => {
         weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
         weapons.push(weapon);
     }
-    res.send(results.rows as Weapon[]);
+    res.send(weapons);
 };
 
 export const createWeapon = async (req, res) => {
