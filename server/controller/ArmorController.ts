@@ -26,8 +26,15 @@ export const createArmor = async (req, res) => {
     const values = [name, armor_id];
     const results = await pool.query(insertQuery, values);
     const armor = results.rows[0] as Armor;
+    armor.soak = 0;
+    armor.defense = 0;
+    armor.description = '';
+    armor.price = 0;
+    armor.rarity = 0;
+    armor.restricted = false;
+    armor.encumbrance = 0;
     const settingQuery = "INSERT INTO armor_settings (armor_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [armor_id, getCurrentSettingId];
+    const settingValues = [armor_id, await getCurrentSettingId()];
     const settingResults = await pool.query(settingQuery, settingValues);
     armor.settings = settingResults.rows;
     res.send(armor);

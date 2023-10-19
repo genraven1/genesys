@@ -30,8 +30,15 @@ export const createWeapon = async (req, res) => {
     const values = [name, weapon_id];
     const results = await pool.query(insertQuery, values);
     const weapon = results.rows[0] as Weapon;
+    weapon.damage = 0;
+    weapon.critical = 0;
+    weapon.description = '';
+    weapon.price = 0;
+    weapon.rarity = 0;
+    weapon.restricted = false;
+    weapon.encumbrance = 0;
     const settingQuery = "INSERT INTO weapon_settings (weapon_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [weapon_id, getCurrentSettingId];
+    const settingValues = [weapon_id, await getCurrentSettingId()];
     const settingResults = await pool.query(settingQuery, settingValues);
     weapon.settings = settingResults.rows;
     res.send(weapon);
