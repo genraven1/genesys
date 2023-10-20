@@ -1,6 +1,12 @@
 import {pool} from "../config/Database.ts";
 import {Weapon} from "../models/equipment/Weapon.ts";
-import {addQualityToWeapon, getWeaponQualities, getWeaponSettings, retrieveWeapon} from "../utils/WeaponHelper.ts";
+import {
+    addQualityToWeapon,
+    createWeaponEquipment,
+    getWeaponQualities,
+    getWeaponSettings,
+    retrieveWeapon
+} from "../utils/WeaponHelper.ts";
 import {getCurrentSettingId} from "../utils/SettingHelper.ts";
 import Setting from "../models/Setting.ts";
 import {EquipmentQuality, Quality} from "../models/equipment/Quality.ts";
@@ -23,25 +29,7 @@ export const getAllWeapons = async (req, res) => {
 
 export const createWeapon = async (req, res) => {
     const { name } = req.params;
-    const countQuery = "SELECT COUNT(*) FROM weapon;";
-    const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO weapon (name, id) VALUES ($1, $2) RETURNING *;";
-    const weapon_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, weapon_id];
-    const results = await pool.query(insertQuery, values);
-    const weapon = results.rows[0] as Weapon;
-    weapon.damage = 0;
-    weapon.critical = 0;
-    weapon.description = '';
-    weapon.price = 0;
-    weapon.rarity = 0;
-    weapon.restricted = false;
-    weapon.encumbrance = 0;
-    const settingQuery = "INSERT INTO weapon_settings (weapon_id, setting_id) VALUES ($1, $2);";
-    const settingValues = [weapon_id, await getCurrentSettingId()];
-    const settingResults = await pool.query(settingQuery, settingValues);
-    weapon.settings = settingResults.rows;
-    res.send(weapon);
+    res.send(await createWeaponEquipment(name));
 };
 
 export const getWeapon = async (req, res) => {

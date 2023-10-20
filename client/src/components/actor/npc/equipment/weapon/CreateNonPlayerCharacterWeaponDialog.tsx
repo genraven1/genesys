@@ -12,6 +12,7 @@ import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
 import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
+import {ActorType} from "../../../../../models/actor/Actor";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -24,7 +25,17 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
     const [weapon, setWeapon] = useState<ActorWeapon>()
 
     const onCreate = async (): Promise<void> => {
-        await ActorService.createRivalWeapon(npc.name, weapon!!)
+        switch (npc.type) {
+            case ActorType.Minion:
+                await ActorService.createMinionWeapon(npc.id, weapon!!)
+                break
+            case ActorType.Rival:
+                await ActorService.createRivalWeapon(npc.name, weapon!!)
+                break
+            case ActorType.Nemesis:
+                await ActorService.createNemesisWeapon(npc.name, weapon!!)
+                break
+        }
         onClose()
     }
 

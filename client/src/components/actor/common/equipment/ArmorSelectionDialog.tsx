@@ -13,9 +13,7 @@ export default function ArmorSelectionDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>
-                Add Armor
-            </DialogTitle>
+            <DialogTitle title={'Add Armor'}/>
             <DialogContent>
                 <ArmorSelectionTable actor={actor}/>
             </DialogContent>

@@ -13,9 +13,7 @@ export default function WeaponSelectionDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>
-                Add Weapon
-            </DialogTitle>
+            <DialogTitle title={'Add Weapon'}/>
             <DialogContent>
                 <WeaponSelectionTable actor={actor}/>
             </DialogContent>
