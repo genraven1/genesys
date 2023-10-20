@@ -1,12 +1,9 @@
 import {pool} from '../config/Database.ts';
 import Setting from "../models/Setting.ts";
-import {
-    createMinionSettings,
-    createMinionSkills,
-    getMinionSettings,
-    getMinionSkills
-} from "../utils/MinionHelper.ts";
+import {createMinionActor, getMinionSettings, getMinionSkills, retrieveMinion} from "../utils/MinionHelper.ts";
 import Minion, {GroupSkill} from "../models/Minion.ts";
+import {Weapon} from "../models/equipment/Weapon.ts";
+import {createCustomWeapon} from "../utils/WeaponHelper.ts";
 
 export const getAllMinions = async (req, res) => {
     const query = "SELECT * from minion;";
@@ -14,8 +11,8 @@ export const getAllMinions = async (req, res) => {
     const minions = [] as Minion[];
     for (const result of results.rows) {
         const minion = result as Minion;
-        minion.settings = await getMinionSettings(result['id']) as Setting[];
-        minion.skills = await getMinionSkills(result['id']) as GroupSkill[];
+        minion.settings = await getMinionSettings(minion.id) as Setting[];
+        minion.skills = await getMinionSkills(minion.id) as GroupSkill[];
         minion.abilities = [];
         minion.talents = [];
         minion.weapons = [];
@@ -28,37 +25,12 @@ export const getAllMinions = async (req, res) => {
 
 export const getMinion = async (req, res) => {
     const {id} = req.params;
-    const query = "SELECT * from minion WHERE id = $1;";
-    const values = [id];
-    const results = await pool.query(query, values);
-    const minion = results.rows[0] as Minion;
-    minion.settings = await getMinionSettings(id) as Setting[];
-    minion.skills = await getMinionSkills(id) as GroupSkill[];
-    minion.abilities = [];
-    minion.talents = [];
-    minion.weapons = [];
-    minion.armor = [];
-    minion.gear = [];
-    res.send(minion);
+    res.send(await retrieveMinion(id));
 };
 
 export const createMinion = async (req, res) => {
     const {name} = req.params;
-    const countQuery = "SELECT COUNT(*) FROM minion;";
-    const count = await pool.query(countQuery);
-    const insertQuery = "INSERT INTO minion (name, id, type) VALUES ($1, $2, $3) RETURNING *;";
-    const minion_id = Number(count.rows[0]['count']) + 1;
-    const values = [name, minion_id, 'Minion'];
-    const results = await pool.query(insertQuery, values);
-    const minion = results.rows[0] as Minion;
-    minion.settings = await createMinionSettings(minion_id);
-    minion.skills = await createMinionSkills(minion_id);
-    minion.abilities = [];
-    minion.talents = [];
-    minion.weapons = [];
-    minion.armor = [];
-    minion.gear = [];
-    res.send(minion);
+    res.send(await createMinionActor(name));
 };
 
 export const updateMinion = async (req, res) => {
@@ -114,3 +86,19 @@ export const updateMinionSkill = async (req, res) => {
     const skills = await pool.query(query, values);
     res.send(skills.rows[0]);
 };
+
+export const addMinionWeapon = async (req, res) => {
+    const {id} = req.params;
+    const weapon = req.body as Weapon;
+    let newWeapon: Weapon;
+    if (!weapon.id) {
+        newWeapon = await createCustomWeapon(weapon);
+    }
+    else {
+        newWeapon = weapon;
+    }
+    const query = "INSERT INTO minion_weapons (minion_id, weapon_id) VALUES ($1, $2);";
+    const values = [id, newWeapon.id];
+    await pool.query(query, values);
+    return await retrieveMinion(id);
+}

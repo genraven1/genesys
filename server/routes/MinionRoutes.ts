@@ -1,6 +1,7 @@
 import Router from "express-promise-router";
 import {MINION_PATH} from "../utils/Path.ts";
 import {
+    addMinionWeapon,
     createMinion,
     getAllMinions,
     getMinion,
@@ -29,7 +30,7 @@ minionRouter.route(`${MINION_PATH}:id/ability`)
     .put()
 
 minionRouter.route(`${MINION_PATH}:id/weapons`)
-    .put()
+    .put(addMinionWeapon)
 
 minionRouter.route(`${MINION_PATH}:id/armor`)
     .put()
