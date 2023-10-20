@@ -1,9 +1,9 @@
 import {pool} from '../config/Database.ts';
-import Setting from "../models/Setting.ts";
 import {createMinionActor, getMinionSettings, getMinionSkills, retrieveMinion} from "../utils/MinionHelper.ts";
-import Minion, {GroupSkill} from "../models/Minion.ts";
+import Minion from "../models/Minion.ts";
 import {Weapon} from "../models/equipment/Weapon.ts";
 import {createCustomWeapon} from "../utils/WeaponHelper.ts";
+import {Armor} from "../models/equipment/Armor.ts";
 
 export const getAllMinions = async (req, res) => {
     const query = "SELECT * from minion;";
@@ -11,8 +11,8 @@ export const getAllMinions = async (req, res) => {
     const minions = [] as Minion[];
     for (const result of results.rows) {
         const minion = result as Minion;
-        minion.settings = await getMinionSettings(minion.id) as Setting[];
-        minion.skills = await getMinionSkills(minion.id) as GroupSkill[];
+        minion.settings = await getMinionSettings(minion.id);
+        minion.skills = await getMinionSkills(minion.id);
         minion.abilities = [];
         minion.talents = [];
         minion.weapons = [];
@@ -101,4 +101,13 @@ export const addMinionWeapon = async (req, res) => {
     const values = [id, newWeapon.id];
     await pool.query(query, values);
     return await retrieveMinion(id);
-}
+};
+
+export const addMinionArmor = async (req, res) => {
+    const {id} = req.params;
+    const armor = req.body as Armor;
+    const query = "INSERT INTO minion_armors (minion_id, armor_id) VALUES ($1, $2);";
+    const values = [id, armor.id];
+    await pool.query(query, values);
+    return await retrieveMinion(id);
+};

@@ -30,7 +30,7 @@ export const createCustomWeapon = async (customWeapon: Weapon): Promise<Weapon> 
     const values = [customWeapon.name, weapon_id, customWeapon.damage, customWeapon.critical, customWeapon.description, customWeapon.range, customWeapon.price, customWeapon.rarity, customWeapon.restricted, customWeapon.encumbrance];
     const results = await pool.query(insertQuery, values);
     return results.rows[0] as Weapon;
-}
+};
 
 export const retrieveWeapon = async (id: number): Promise<Weapon> => {
     const query = "SELECT * from weapon WHERE id = $1;";
@@ -42,7 +42,7 @@ export const retrieveWeapon = async (id: number): Promise<Weapon> => {
     weapon.settings = await getWeaponSettings(weapon.id) as Setting[];
     weapon.qualities = await getWeaponQualities(weapon.id) as EquipmentQuality[];
     return weapon;
-}
+};
 
 export const getWeaponSettings = async (id: number): Promise<Setting[]> => {
     const query = "SELECT setting_id FROM weapon_settings WHERE weapon_id = $1;";
