@@ -26,20 +26,18 @@ function ArmorNameRow(props: RowProps): JSX.Element {
     const addArmor = async () => {
         switch (actor.type) {
             case ActorType.Nemesis:
-                // await ActorService.createNemesisWeapon(actor.name, {...armor} as ActorWeapon)
+                await ActorService.createNemesisArmor(actor.name, {...armor} as ActorArmor)
                 break
             case ActorType.Rival:
-                // await ActorService.createRivalWeapon(actor.name, {...armor} as ActorWeapon)
+                await ActorService.createRivalArmor(actor.name, {...armor} as ActorArmor)
                 break
             case ActorType.Minion:
-                // await ActorService.createMinionWeapon(actor.name, {...armor} as ActorWeapon)
+                await ActorService.createMinionArmor(actor.id, {...armor} as ActorArmor)
                 break
             case ActorType.Player:
                 await ActorService.createPlayerArmor(actor.name, {...armor} as ActorArmor)
                 break
-
         }
-
     }
 
     return (

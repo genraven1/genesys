@@ -1,12 +1,14 @@
 import Setting from "../models/Setting.ts";
 import {pool} from "../config/Database.ts";
 import {getCurrentSettingId, getSetting} from "./SettingHelper.ts";
-import {ActorSkill, Skill} from "../models/Skill.ts";
+import {Skill} from "../models/Skill.ts";
 import Minion, {GroupSkill} from "../models/Minion.ts";
 import NonPlayerActor from "../models/NonPlayerActor.ts";
 import {getCurrentSettingSkills} from "./SkillHelper.ts";
-import {ActorWeapon, Weapon} from "../models/equipment/Weapon.ts";
+import {ActorWeapon} from "../models/equipment/Weapon.ts";
 import {retrieveWeapon} from "./WeaponHelper.ts";
+import {ActorArmor} from "../models/equipment/Armor.ts";
+import {retrieveArmor} from "./ArmorHelper.ts";
 
 export const createMinionActor = async (name: string): Promise<Minion> => {
     const countQuery = "SELECT COUNT(*) FROM minion;";
@@ -45,8 +47,8 @@ export const retrieveMinion = async (id: number): Promise<Minion> => {
     minion.skills = await getMinionSkills(id) as GroupSkill[];
     minion.abilities = [];
     minion.talents = [];
-    minion.weapons = await getMinionWeapons(id) as ActorWeapon[];
-    minion.armor = [];
+    minion.weapons = await getMinionWeapons(id);
+    minion.armor = await getMinionArmors(id);
     minion.gear = [];
     return minion;
 }
@@ -84,7 +86,7 @@ export const createMinionSkills = async (id: number): Promise<GroupSkill[]> => {
     return groupSkills;
 };
 
-export const getMinionSkills = async (id: number): Promise<ActorSkill[]> => {
+export const getMinionSkills = async (id: number): Promise<GroupSkill[]> => {
     const query = "SELECT * FROM minion_skills WHERE minion_id = $1;";
     const values = [id];
     const ids = await pool.query(query, values);
@@ -105,15 +107,26 @@ export const getGroupSkill = async (id: number, group: boolean): Promise<GroupSk
     return skill;
 };
 
-export const getMinionWeapons = async (id: number): Promise<Weapon[]> => {
+export const getMinionWeapons = async (id: number): Promise<ActorWeapon[]> => {
     const query = "SELECT * FROM minion_weapons WHERE minion_id = $1;";
     const values = [id];
     const ids = await pool.query(query, values);
-    const weapons = [] as Weapon[];
+    const weapons = [] as ActorWeapon[];
     for (const weapon_row of ids.rows) {
         let weapon = await retrieveWeapon(Number(weapon_row['weapon_id']));
-        weapons.push(weapon);
+        weapons.push(weapon as ActorWeapon);
     }
     return weapons;
+};
 
-}
+export const getMinionArmors = async (id: number): Promise<ActorArmor[]> => {
+    const query = "SELECT * FROM minion_armors WHERE minion_id = $1;";
+    const values = [id];
+    const ids = await pool.query(query, values);
+    const armors = [] as ActorArmor[];
+    for (const armor_row of ids.rows) {
+        let armor = await retrieveArmor(Number(armor_row['armor_id']));
+        armors.push(armor as ActorArmor);
+    }
+    return armors;
+};

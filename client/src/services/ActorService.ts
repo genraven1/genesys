@@ -153,7 +153,7 @@ export default class ActorService {
     }
 
     static async createMinionArmor(id: number, armor: ActorArmor): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + id + '/armor', armor)).data;
+        return await (await axios.put(ActorPath.Minion + id + '/armors', armor)).data;
     }
 
     static async createMinionAbility(name: number, ability: Ability): Promise<Minion> {
