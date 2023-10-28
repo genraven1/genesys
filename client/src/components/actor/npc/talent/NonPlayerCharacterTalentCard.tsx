@@ -1,15 +1,18 @@
 import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
-import {Card, CardContent} from "@mui/material";
-import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
-import * as React from "react";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
+import {Button, Card, CardContent} from "@mui/material";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import * as React from "react";
+import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
+import {useState} from "react";
 
 interface Props {
     npc: NonPlayerCharacter
 }
 export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element {
     const {npc} = props
+    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
 
     const renderTable = (): JSX.Element => {
         if (npc?.talents!!.length === 0) {
@@ -23,6 +26,9 @@ export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element 
             <CenteredCardHeader title={'Talents'}/>
             <CardContent>
                 {renderTable()}
+                <Button color='primary' variant='contained' onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
+                {openSelectTalentDialog && <TalentSelectionDialog actor={npc} open={openSelectTalentDialog}
+                                                                  onClose={(): void => setOpenSelectTalentDialog(false)}/>}
             </CardContent>
         </Card>
     )

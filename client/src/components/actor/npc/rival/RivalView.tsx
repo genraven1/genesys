@@ -8,7 +8,7 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import ViewNonPlayerCharacterTalentCard from "../talent/ViewNonPlayerCharacterTalentCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
@@ -61,7 +61,7 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <ViewNonPlayerCharacterAbilityCard npc={rival}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={rival}/>
+                    <ViewNonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
                 <ViewSettingsCard settings={rival?.settings!!} allSettings={settings}/>
             </CardContent>

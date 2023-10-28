@@ -17,7 +17,7 @@ import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import ViewNonPlayerCharacterTalentCard from "../talent/ViewNonPlayerCharacterTalentCard";
 
 interface Props {
     minion: Minion
@@ -61,7 +61,7 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <ViewNonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={minion}/>
+                    <ViewNonPlayerCharacterTalentCard npc={minion}/>
                 </Grid>
                 <ViewSettingsCard settings={minion?.settings!!} allSettings={settings}/>
             </CardContent>
