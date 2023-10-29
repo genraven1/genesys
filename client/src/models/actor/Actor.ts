@@ -1,5 +1,4 @@
 import {CharacteristicType} from './Characteristics';
-import Talent from '../Talent';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
@@ -20,15 +19,10 @@ export default interface Actor {
     melee: number,
     ranged: number,
     wounds: number,
-    talents: ActorTalent[],
     weapons: ActorWeapon[],
     armor: ActorArmor[],
     gear: ActorGear[],
     settings: Setting[]
-}
-
-export interface ActorTalent extends Talent {
-    ranks: number
 }
 
 export interface ActorSkill extends Skill {

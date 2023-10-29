@@ -1,11 +1,14 @@
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
 import {Button, Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import * as React from "react";
 import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
-import {useState} from "react";
+import {Fragment, useState} from "react";
+import {ActorType} from "../../../../models/actor/Actor";
+import Minion from "../../../../models/actor/npc/Minion";
+import MinionTalentTable from "../minion/MinionTalentTable";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -15,10 +18,22 @@ export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element 
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
 
     const renderTable = (): JSX.Element => {
-        if (npc?.talents!!.length === 0) {
-            return <GenesysDescriptionTypography text={'None'}/>
+        switch (npc.type) {
+            case ActorType.Minion:
+                let minion = npc as Minion
+                if (minion.talents!!.length === 0){
+                    return <GenesysDescriptionTypography text={'None'}/>
+                }
+                return <MinionTalentTable minion={minion}/>
+            case ActorType.Rival:
+            case ActorType.Nemesis:
+                let single = npc as SingleNonPlayerCharacter
+                if (single?.talents!!.length === 0) {
+                    return <GenesysDescriptionTypography text={'None'}/>
+                }
+                return <NonPlayerCharacterTalentTable npc={single} />
         }
-        return <NonPlayerCharacterTalentTable npc={npc} />
+        return <Fragment/>
     }
 
     return (

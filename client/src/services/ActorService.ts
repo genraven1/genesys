@@ -3,12 +3,13 @@ import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
-import Actor, {ActorTalent, ActorSkill} from "../models/actor/Actor";
+import Actor, {ActorSkill} from "../models/actor/Actor";
 import Minion, {GroupSkill} from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
 import NonPlayerCharacter from "../models/actor/npc/NonPlayerCharacter";
+import {ActorTalent} from "../models/Talent";
 
 export default class ActorService {
 

@@ -1,4 +1,4 @@
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
 import {Card, CardContent} from "@mui/material";
 import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
 import * as React from "react";
@@ -6,7 +6,7 @@ import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: SingleNonPlayerCharacter
 }
 export default function ViewNonPlayerCharacterTalentCard(props: Props): JSX.Element {
     const {npc} = props

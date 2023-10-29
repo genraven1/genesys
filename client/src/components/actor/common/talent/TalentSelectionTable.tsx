@@ -9,9 +9,9 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent from "../../../../models/Talent";
+import Talent, {ActorTalent} from "../../../../models/Talent";
 import ActorService from "../../../../services/ActorService";
-import Actor, {ActorTalent, ActorType} from "../../../../models/actor/Actor";
+import Actor, {ActorType} from "../../../../models/actor/Actor";
 import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
@@ -31,14 +31,10 @@ function TalentNameRow(props: RowProps): JSX.Element {
             case ActorType.Rival:
                 await ActorService.addRivalTalent(actor.name, {...talent!!} as ActorTalent)
                 break
-            case ActorType.Minion:
-                await ActorService.addMinionTalent(actor.id, {...talent!!} as ActorTalent)
-                break
             case ActorType.Player:
                 await ActorService.addPlayerTalent(actor.name, {...talent} as ActorTalent)
                 break
         }
-
     }
 
     return (

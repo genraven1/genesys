@@ -1,7 +1,9 @@
 import NonPlayerCharacter from "./NonPlayerCharacter";
 import Skill from "../Skill";
+import Talent from "../../Talent";
 
 export default interface Minion extends NonPlayerCharacter {
+    talents: Talent[]
     skills: GroupSkill[]
 }
 
