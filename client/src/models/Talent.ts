@@ -35,3 +35,7 @@ export enum Tier {
 export const getTierOptions = (): Option[] => {
     return Object.values(Tier).map((value) => ({value}))
 }
+
+export interface ActorTalent extends Talent {
+    ranks: number
+}

@@ -27,10 +27,6 @@ export default interface Actor {
     settings: Setting[]
 }
 
-export interface ActorTalent extends Talent {
-    ranks: number
-}
-
 export interface ActorSkill extends Skill {
     ranks: number
 }
