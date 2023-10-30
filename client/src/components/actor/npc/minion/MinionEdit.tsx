@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
@@ -10,10 +10,8 @@ import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import SoakCard from "../../SoakCard";
 import {EditStatsCard} from "../../StatsCard";
-import * as React from "react";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
 import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
@@ -189,9 +187,6 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <TalentSelectionDialog actor={minion} open={openSelectTalentDialog}
-                                                                      onClose={(): void => setOpenSelectTalentDialog(false)}/>}
                     <NonPlayerCharacterTalentTable npc={minion}/>
                 </Grid>
                 <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
