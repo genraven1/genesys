@@ -187,7 +187,7 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    {/*<NonPlayerCharacterTalentCard npc={minion}/>*/}
+                    <NonPlayerCharacterTalentCard npc={minion}/>
                 </Grid>
                 <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>

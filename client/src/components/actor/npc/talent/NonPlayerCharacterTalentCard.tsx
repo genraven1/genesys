@@ -9,6 +9,7 @@ import {Fragment, useState} from "react";
 import {ActorType} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
 import MinionTalentTable from "../minion/MinionTalentTable";
+import {useLocation} from "react-router-dom";
 
 interface Props {
     npc: NonPlayerCharacter
@@ -16,9 +17,10 @@ interface Props {
 export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element {
     const {npc} = props
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
+    const pathname = useLocation().pathname
 
     const renderTable = (): JSX.Element => {
-        switch (npc.type) {
+        switch (npc?.type!!) {
             case ActorType.Minion:
                 let minion = npc as Minion
                 if (minion.talents!!.length === 0){
@@ -36,14 +38,26 @@ export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element 
         return <Fragment/>
     }
 
+    const renderButton = (): JSX.Element => {
+        if (pathname.endsWith('/edit')) {
+            return (
+                <Fragment>
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
+                    {openSelectTalentDialog && <TalentSelectionDialog actor={npc} open={openSelectTalentDialog}
+                                                                      onClose={(): void => setOpenSelectTalentDialog(false)}/>}
+                </Fragment>
+            )
+        } else {
+            return <Fragment/>
+        }
+    }
+
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Talents'}/>
             <CardContent>
                 {renderTable()}
-                <Button color='primary' variant='contained' onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                {openSelectTalentDialog && <TalentSelectionDialog actor={npc} open={openSelectTalentDialog}
-                                                                  onClose={(): void => setOpenSelectTalentDialog(false)}/>}
+                {renderButton()}
             </CardContent>
         </Card>
     )

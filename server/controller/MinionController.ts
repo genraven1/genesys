@@ -116,4 +116,8 @@ export const addMinionArmor = async (req, res) => {
 export const addMinionTalent = async (req, res) => {
     const {id} = req.params;
     const talent = req.body as Talent;
+    const query = "INSERT INTO minion_talents (minion_id, talent_id) VALUES ($1, $2);";
+    const values = [id, talent.id];
+    await pool.query(query, values);
+    return await retrieveMinion(id);
 }
