@@ -9,9 +9,9 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent from "../../../../models/Talent";
+import Talent, { ActorTalent } from "../../../../models/Talent";
 import ActorService from "../../../../services/ActorService";
-import Actor, {ActorTalent, ActorType} from "../../../../models/actor/Actor";
+import Actor, {ActorType} from "../../../../models/actor/Actor";
 import {renderHeaders} from "../../../common/table/TableRenders";
 
 interface RowProps {
