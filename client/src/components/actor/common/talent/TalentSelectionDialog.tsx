@@ -13,9 +13,7 @@ export default function TalentSelectionDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>
-                Add Talent
-            </DialogTitle>
+            <DialogTitle title={'Add Talent'}/>
             <DialogContent>
                 <TalentSelectionTable actor={actor}/>
             </DialogContent>
