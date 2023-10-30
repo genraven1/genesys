@@ -4,7 +4,6 @@ import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
 import Setting from "../Setting";
-import { ActorTalent } from '../Talent';
 
 export default interface Actor {
     id: number
@@ -20,7 +19,6 @@ export default interface Actor {
     melee: number,
     ranged: number,
     wounds: number,
-    talents: ActorTalent[],
     weapons: ActorWeapon[],
     armor: ActorArmor[],
     gear: ActorGear[],

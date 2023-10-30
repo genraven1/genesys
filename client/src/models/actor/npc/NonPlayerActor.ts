@@ -1,5 +1,6 @@
 import Actor, {ActorSkill} from "../Actor";
 import Ability from "../../Ability";
+import { ActorTalent } from "../../Talent";
 
 export enum RatingType {
     Combat = 'Combat',
@@ -16,6 +17,7 @@ export default interface NonPlayerActor extends Actor {
 
 export interface SingleNonPlayerCharacter extends NonPlayerActor {
     skills: ActorSkill[]
+    talents: ActorTalent[]
 }
 
 export enum NonPlayerCharacterKey {
