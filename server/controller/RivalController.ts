@@ -1,8 +1,10 @@
 import {pool} from '../config/Database.ts';
-import {Weapon} from "../models/equipment/Weapon.ts";
 import {createCustomWeapon} from "../utils/WeaponHelper.ts";
-import {Armor} from "../models/equipment/Armor.ts";
 import Rival from '../../client/src/models/actor/npc/Rival.ts';
+import {createRivalActor, getRivalSettings, getRivalSkills, retrieveRival} from "../utils/RivalHelper.ts";
+import { ActorSkill } from '../../client/src/models/actor/Actor.ts';
+import { Weapon } from '../../client/src/models/equipment/Weapon.ts';
+import { Armor } from '../../client/src/models/equipment/Armor.ts';
 
 export const getAllRivals = async (req, res) => {
     const query = "SELECT * from rival;";
@@ -79,7 +81,7 @@ export const updateRival = async (req, res) => {
 
 export const updateRivalSkill = async (req, res) => {
     const {id} = req.params;
-    const {ranks, id: skill_id} = req.body as Rival;
+    const {ranks, id: skill_id} = req.body as ActorSkill;
     const query = "UPDATE rival_skills SET ranks = $1 WHERE rival_id = $2 AND skill_id = $3 RETURNING *;";
     const values = [ranks, Number(id), Number(skill_id)];
     const skills = await pool.query(query, values);

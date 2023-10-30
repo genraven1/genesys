@@ -1,5 +1,5 @@
 import {pool} from "../config/Database.ts";
-import {Weapon} from "../models/equipment/Weapon.ts";
+import {Weapon} from '../../client/src/models/equipment/Weapon.ts';
 import {
     addQualityToWeapon,
     createWeaponEquipment,
@@ -7,11 +7,11 @@ import {
     getWeaponSettings,
     retrieveWeapon
 } from "../utils/WeaponHelper.ts";
-import {getCurrentSettingId} from "../utils/SettingHelper.ts";
-import Setting from "../models/Setting.ts";
-import {EquipmentQuality, Quality} from "../models/equipment/Quality.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {retrieveSkill} from "../utils/SkillHelper.ts";
-import {Skill} from "../models/Skill.ts";
+import Skill from "../../client/src/models/actor/Skill.ts";
+import Quality, { EquipmentQuality } from "../../client/src/models/Quality.ts";
+
 
 export const getAllWeapons = async (req, res) => {
     const query = "SELECT * from weapon;";

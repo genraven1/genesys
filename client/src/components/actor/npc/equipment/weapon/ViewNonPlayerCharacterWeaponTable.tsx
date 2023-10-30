@@ -14,14 +14,14 @@ import {
 } from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities,} from "../../../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../../../common/table/TableRenders";
-import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor, {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerActor";
 import {ActorSkill, ActorType} from "../../../../../models/actor/Actor";
 import Minion from "../../../../../models/actor/npc/Minion";
 import Skill from "../../../../../models/actor/Skill";
 
 interface Props {
     weapons: ActorWeapon[]
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 
 export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Element {
@@ -54,7 +54,7 @@ export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Ele
 
 interface RowProps {
     weapon: ActorWeapon
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 
 function Row(props: RowProps): JSX.Element {

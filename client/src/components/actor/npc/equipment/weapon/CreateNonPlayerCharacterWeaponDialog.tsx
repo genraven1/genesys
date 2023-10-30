@@ -11,11 +11,11 @@ import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
-import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../../../models/actor/npc/NonPlayerActor";
 import {ActorType} from "../../../../../models/actor/Actor";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
     open: boolean
     onClose: () => void
 }

@@ -1,15 +1,14 @@
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {pool} from "../config/Database.ts";
 import {getCurrentSettingId, getSetting} from "./SettingHelper.ts";
-import {Skill} from "../models/Skill.ts";
-import NonPlayerActor from "../models/NonPlayerActor.ts";
 import {getCurrentSettingSkills} from "./SkillHelper.ts";
-import {ActorWeapon} from "../models/equipment/Weapon.ts";
 import {retrieveWeapon} from "./WeaponHelper.ts";
-import {ActorArmor} from "../models/equipment/Armor.ts";
 import {retrieveArmor} from "./ArmorHelper.ts";
 import Rival from "../../client/src/models/actor/npc/Rival.ts";
 import { ActorSkill } from "../../client/src/models/actor/Actor.ts";
+import {ActorWeapon} from '../../client/src/models/equipment/Weapon.ts';
+import {ActorArmor} from '../../client/src/models/equipment/Armor.ts';
+import NonPlayerActor from '../../client/src/models/actor/npc/NonPlayerActor.ts';
 
 export const createRivalActor = async (name: string): Promise<Rival> => {
     const countQuery = "SELECT COUNT(*) FROM rival;";
@@ -75,9 +74,9 @@ export const getRivalSettings = async (id: number): Promise<Setting[]> => {
 };
 
 export const createRivalSkills = async (id: number): Promise<ActorSkill[]> => {
-    const skills = await getCurrentSettingSkills() as Skill[];
+    const currentSkills = await getCurrentSettingSkills() as ActorSkill[];
     const skills = [] as ActorSkill[];
-    for (const skill of skills) {
+    for (const skill of currentSkills) {
         skills.push(await getActorSkill(skill.id, 0));
     }
     const query = "INSERT INTO rival_skills (rival_id, skill_id, ranks) VALUES ($1, $2, $3);";

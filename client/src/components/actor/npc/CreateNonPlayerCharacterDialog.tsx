@@ -8,7 +8,7 @@ import InputSelectField, {Option} from "../../common/InputSelectField";
 import Nemesis from "../../../models/actor/npc/Nemesis";
 import Minion from "../../../models/actor/npc/Minion";
 import Rival from "../../../models/actor/npc/Rival";
-import NonPlayerCharacter from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../models/actor/npc/NonPlayerActor";
 
 interface Props {
     open: boolean
@@ -25,7 +25,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
     const [type, setType] = useState<ActorType>(ActorType.Minion)
     let navigate = useNavigate()
 
-    const setActorDefaults = (npc: NonPlayerCharacter): NonPlayerCharacter => {
+    const setActorDefaults = (npc: NonPlayerActor): NonPlayerActor => {
         npc.brawn = 1;
         npc.agility = 1;
         npc.intellect = 1;
@@ -43,7 +43,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
     }
 
     const handleCreate = async (): Promise<void> => {
-        let copyActor = {} as NonPlayerCharacter
+        let copyActor = {} as NonPlayerActor
         switch (type) {
             case ActorType.Minion:
                 copyActor = {...await ActorService.createMinion(name)}

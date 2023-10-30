@@ -1,4 +1,4 @@
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
@@ -12,7 +12,7 @@ import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmo
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Element {
     const {npc} = props

@@ -11,7 +11,7 @@ import {SkillType} from "../../../../models/actor/Skill";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
 import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
 import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
 import {renderHeaders} from "../../../common/table/TableRenders";

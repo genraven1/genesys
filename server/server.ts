@@ -10,7 +10,8 @@ import {npaRouter} from "./routes/NonPlayerActorRoutes.ts";
 import {qualityRouter} from "./routes/QualityRoutes.ts";
 import {weaponRouter} from "./routes/WeaponRoutes.ts";
 import {armorRouter} from "./routes/ArmorRoutes.ts";
-import {rivalRouter} from '.routes/RivalRoutes.ts';
+import {rivalRouter} from "./routes/RivalRoutes.ts";
+
 
 dotenv.config();
 const PORT = 5050;

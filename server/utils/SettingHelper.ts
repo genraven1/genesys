@@ -1,5 +1,5 @@
 import {pool} from "../config/Database.ts";
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 
 export const getCurrentSettingId = async (): Promise<number> => {
     const query = "SELECT id FROM current;";

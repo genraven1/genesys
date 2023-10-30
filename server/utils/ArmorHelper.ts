@@ -1,9 +1,9 @@
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {pool} from "../config/Database.ts";
 import {getSetting} from "./SettingHelper.ts";
-import {EquipmentQuality} from "../models/equipment/Quality.ts";
 import {getQuality} from "./QualityHelper.ts";
-import {Armor} from "../models/equipment/Armor.ts";
+import { Armor } from '../../client/src/models/equipment/Armor.ts';
+import { EquipmentQuality } from '../../client/src/models/Quality.ts';
 
 export const retrieveArmor = async (id: number): Promise<Armor> => {
     const query = "SELECT * from armor WHERE id = $1;";

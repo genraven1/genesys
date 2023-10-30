@@ -7,7 +7,7 @@ import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
-import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
+import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import SoakCard from "../../SoakCard";
 import {EditStatsCard} from "../../StatsCard";
 import {EditDefenseCard} from "../../DefenseCard";

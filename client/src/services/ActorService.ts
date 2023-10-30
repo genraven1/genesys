@@ -8,7 +8,7 @@ import Minion, {GroupSkill} from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
-import NonPlayerCharacter from "../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
 
 export default class ActorService {
 
@@ -16,7 +16,7 @@ export default class ActorService {
         return await (await axios.get(ActorPath.Actor)).data;
     }
 
-    static async getNonPlayerCharacters(): Promise<NonPlayerCharacter[]> {
+    static async getNonPlayerCharacters(): Promise<NonPlayerActor[]> {
         return await (await axios.get(ActorPath.Npc)).data;
     }
 

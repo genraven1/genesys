@@ -1,5 +1,5 @@
+import NonPlayerActor from "../../client/src/models/actor/npc/NonPlayerActor.ts";
 import {getAllMinions} from "../utils/MinionHelper.ts";
-import NonPlayerActor from "../models/NonPlayerActor.ts";
 import { getAllRivals } from "../utils/RivalHelper.ts";
 
 export const getAllNonPlayerActors = async (req, res) => {

@@ -1,11 +1,11 @@
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {pool} from "../config/Database.ts";
 import {getCurrentSettingId, getSetting} from "./SettingHelper.ts";
-import {EquipmentQuality} from "../models/equipment/Quality.ts";
-import {Weapon} from "../models/equipment/Weapon.ts";
 import {getQuality} from "./QualityHelper.ts";
-import {Skill} from "../models/Skill.ts";
 import {retrieveSkill} from "./SkillHelper.ts";
+import { Weapon } from '../../client/src/models/equipment/Weapon.ts';
+import Skill from '../../client/src/models/actor/Skill.ts';
+import { EquipmentQuality } from '../../client/src/models/Quality.ts';
 
 export const createWeaponEquipment = async (name: string): Promise<Weapon> => {
     const countQuery = "SELECT COUNT(*) FROM weapon;";

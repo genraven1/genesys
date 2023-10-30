@@ -13,7 +13,7 @@ import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
-import { getRatings } from "../../../../models/actor/npc/NonPlayerCharacter";
+import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
