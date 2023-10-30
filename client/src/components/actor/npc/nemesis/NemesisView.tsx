@@ -9,7 +9,6 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
@@ -18,6 +17,7 @@ import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 
 interface Props {
     nemesis: Nemesis
