@@ -12,7 +12,6 @@ import SoakCard from "../../SoakCard";
 import {EditStatsCard} from "../../StatsCard";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
@@ -22,6 +21,7 @@ import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 
 interface Props {
     min: Minion
@@ -32,7 +32,6 @@ export default function MinionEdit(props: Props) {
     const {min, settings} = props
     const {id} = useParams<{ id: string }>()
     const [minion, setMinion] = useState<Minion>(min)
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -187,7 +186,7 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentTable npc={minion}/>
+                    <NonPlayerCharacterTalentCard npc={minion}/>
                 </Grid>
                 <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>
