@@ -25,48 +25,26 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
     const [type, setType] = useState<ActorType>(ActorType.Minion)
     let navigate = useNavigate()
 
-    const setActorDefaults = (npc: NonPlayerActor): NonPlayerActor => {
-        npc.brawn = 1;
-        npc.agility = 1;
-        npc.intellect = 1;
-        npc.cunning = 1;
-        npc.willpower = 1;
-        npc.presence = 1;
-        npc.wounds = 1;
-        npc.combat = 1;
-        npc.social = 1;
-        npc.general = 1;
-        npc.soak = npc.brawn;
-        npc.melee = 0;
-        npc.ranged = 0;
-        return npc;
-    }
-
     const handleCreate = async (): Promise<void> => {
         let copyActor = {} as NonPlayerActor
         switch (type) {
             case ActorType.Minion:
                 copyActor = {...await ActorService.createMinion(name)}
                 copyActor.type = type
-                const minion = setActorDefaults(copyActor) as Minion
-                console.log(minion)
-                await ActorService.updateMinion(copyActor.id, minion)
+                await ActorService.updateMinion(copyActor.id, copyActor as Minion)
                 navigate(ActorPath.Minion + copyActor.id + '/edit')
                 break
             case ActorType.Rival:
                 copyActor = {...await ActorService.createRival(name)}
                 copyActor.type = type
-                const rival = setActorDefaults(copyActor) as Rival
-                await ActorService.updateRival(name, rival)
-                navigate(ActorPath.Rival + name + '/edit')
+                await ActorService.updateRival(copyActor.id, copyActor as Rival)
+                navigate(ActorPath.Rival + copyActor.id + '/edit')
                 break
             case ActorType.Nemesis:
                 copyActor = {...await ActorService.createNemesis(name)}
                 copyActor.type = type
-                const nemesis = setActorDefaults(copyActor) as Nemesis
-                nemesis.strain = 1;
-                await ActorService.updateNemesis(name, nemesis)
-                navigate(ActorPath.Nemesis + name + '/edit')
+                await ActorService.updateNemesis(name, copyActor as Nemesis)
+                navigate(ActorPath.Nemesis + copyActor.id + '/edit')
                 break
             case ActorType.Player:
                 break

@@ -29,7 +29,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
                 await ActorService.createNemesisArmor(actor.name, {...armor} as ActorArmor)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalArmor(actor.name, {...armor} as ActorArmor)
+                await ActorService.createRivalArmor(actor.id, {...armor} as ActorArmor)
                 break
             case ActorType.Minion:
                 await ActorService.createMinionArmor(actor.id, {...armor} as ActorArmor)

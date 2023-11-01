@@ -93,36 +93,36 @@ export default class ActorService {
         return await (await axios.post( ActorPath.Rival + name)).data;
     }
 
-    static async getRival(name: string): Promise<Rival> {
-        return await (await axios.get(ActorPath.Rival + name)).data;
+    static async getRival(id: number): Promise<Rival> {
+        return await (await axios.get(ActorPath.Rival + id)).data;
     }
 
     static async getRivals(): Promise<Rival[]> {
         return await (await axios.get(ActorPath.Rival)).data;
     }
 
-    static async updateRival(name: string, rival: Rival): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name, rival)).data;
+    static async updateRival(id: number, rival: Rival): Promise<Rival> {
+        return await (await axios.put(ActorPath.Rival + id, rival)).data;
     }
 
-    static async updateRivalSkill(name: string, skill: ActorSkill): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name + '/skills', skill)).data;
+    static async updateRivalSkill(id: number, skill: ActorSkill): Promise<Rival> {
+        return await (await axios.put(ActorPath.Rival + id + '/skills', skill)).data;
     }
 
-    static async addRivalTalent(name: string, talent: ActorTalent): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name + '/talents', talent)).data;
+    static async addRivalTalent(id: number, talent: ActorTalent): Promise<Rival> {
+        return await (await axios.put(ActorPath.Rival + id + '/talents', talent)).data;
     }
 
-    static async createRivalWeapon(name: string, weapon: ActorWeapon): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/weapons', weapon)).data;
+    static async createRivalWeapon(id: number, weapon: ActorWeapon): Promise<Rival> {
+        return await (await axios.post(ActorPath.Rival + id + '/weapons', weapon)).data;
     }
 
-    static async createRivalArmor(name: string, armor: ActorArmor): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/armor', armor)).data;
+    static async createRivalArmor(id: number, armor: ActorArmor): Promise<Rival> {
+        return await (await axios.post(ActorPath.Rival + id + '/armor', armor)).data;
     }
 
-    static async createRivalAbility(name: string, ability: Ability): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/ability', ability)).data;
+    static async createRivalAbility(id: number, ability: Ability): Promise<Rival> {
+        return await (await axios.post(ActorPath.Rival + id + '/ability', ability)).data;
     }
 
     static async createMinion(name: string): Promise<Minion> {

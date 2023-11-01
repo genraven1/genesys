@@ -9,6 +9,7 @@ import { ActorSkill } from "../../client/src/models/actor/Actor.ts";
 import {ActorWeapon} from '../../client/src/models/equipment/Weapon.ts';
 import {ActorArmor} from '../../client/src/models/equipment/Armor.ts';
 import NonPlayerActor from '../../client/src/models/actor/npc/NonPlayerActor.ts';
+import {createDefaultCharacteristics, createDefaultRatings, createDefaultStats} from "./ActorHelper.ts";
 
 export const createRivalActor = async (name: string): Promise<Rival> => {
     const countQuery = "SELECT COUNT(*) FROM rival;";
@@ -18,6 +19,9 @@ export const createRivalActor = async (name: string): Promise<Rival> => {
     const values = [name, rival_id, 'Rival'];
     const results = await pool.query(insertQuery, values);
     const rival = results.rows[0] as Rival;
+    createDefaultCharacteristics(rival);
+    createDefaultStats(rival);
+    createDefaultRatings(rival);
     rival.settings = await createRivalSettings(rival_id);
     rival.skills = await createRivalSkills(rival_id);
     rival.abilities = [];

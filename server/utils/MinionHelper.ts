@@ -9,6 +9,7 @@ import NonPlayerActor from '../../client/src/models/actor/npc/NonPlayerActor.ts'
 import Skill from '../../client/src/models/actor/Skill.ts';
 import { ActorWeapon } from '../../client/src/models/equipment/Weapon.ts';
 import { ActorArmor } from '../../client/src/models/equipment/Armor.ts';
+import {createDefaultCharacteristics, createDefaultRatings, createDefaultStats} from "./ActorHelper.ts";
 
 export const createMinionActor = async (name: string): Promise<Minion> => {
     const countQuery = "SELECT COUNT(*) FROM minion;";
@@ -18,6 +19,9 @@ export const createMinionActor = async (name: string): Promise<Minion> => {
     const values = [name, minion_id, 'Minion'];
     const results = await pool.query(insertQuery, values);
     const minion = results.rows[0] as Minion;
+    createDefaultCharacteristics(minion);
+    createDefaultStats(minion);
+    createDefaultRatings(minion);
     minion.settings = await createMinionSettings(minion_id);
     minion.skills = await createMinionSkills(minion_id);
     minion.abilities = [];

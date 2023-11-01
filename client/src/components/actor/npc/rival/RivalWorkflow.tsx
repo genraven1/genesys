@@ -6,23 +6,23 @@ import RivalEdit from "./RivalEdit";
 import RivalView from "./RivalView";
 import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 
-function useFetchRival(name: string): Rival {
+function useFetchRival(id: number): Rival {
     const [rival, setRival] = useState<Rival>()
     useEffect(() => {
-        if(!name) {return}
+        if(!id) {return}
         (async (): Promise<void> => {
             try {
-                const rivalData = await ActorService.getRival(name)
+                const rivalData = await ActorService.getRival(id)
                 if (rivalData) {setRival(rivalData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, setRival])
+    },[id, setRival])
     return rival as Rival
 }
 
 export default function RivalWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const rival = useFetchRival(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const rival = useFetchRival(Number(id!!))
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
