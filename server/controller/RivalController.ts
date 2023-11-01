@@ -83,9 +83,6 @@ export const updateRivalSkill = async (req, res) => {
     const {id} = req.params;
     const {ranks, id: skill_id} = req.body as ActorSkill;
     const query = "UPDATE rival_skills SET ranks = $1 WHERE rival_id = $2 AND skill_id = $3 RETURNING *;";
-    console.log(ranks);
-    console.log(id);
-    console.log(skill_id);
     const values = [ranks, Number(id), Number(skill_id)];
     const skills = await pool.query(query, values);
     res.send(skills.rows[0]);
