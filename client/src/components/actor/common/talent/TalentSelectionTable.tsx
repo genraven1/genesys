@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent, {ActorTalent} from "../../../../models/Talent";
+import Talent, { ActorTalent } from "../../../../models/Talent";
 import ActorService from "../../../../services/ActorService";
 import Actor, {ActorType} from "../../../../models/actor/Actor";
 import {renderHeaders} from "../../../common/table/TableRenders";
@@ -29,7 +29,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
                 await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
                 break
             case ActorType.Rival:
-                await ActorService.addRivalTalent(actor.name, {...talent!!} as ActorTalent)
+                await ActorService.addRivalTalent(actor.id, {...talent!!} as ActorTalent)
                 break
             case ActorType.Player:
                 await ActorService.addPlayerTalent(actor.name, {...talent} as ActorTalent)

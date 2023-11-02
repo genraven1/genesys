@@ -24,7 +24,7 @@ export default function CreateAbilityDialog(props: Props) {
                 await ActorService.createMinionAbility(actor.id, ability!!)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalAbility(actor.name, ability!!)
+                await ActorService.createRivalAbility(actor.id, ability!!)
                 break
             case ActorType.Nemesis:
                 await ActorService.createNemesisAbility(actor.name, ability!!)

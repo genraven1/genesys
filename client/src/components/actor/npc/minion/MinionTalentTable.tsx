@@ -6,7 +6,6 @@ import TableRow from "@mui/material/TableRow";
 import {renderHeaders} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import Talent from "../../../../models/Talent";
-import * as React from "react";
 import Minion from "../../../../models/actor/npc/Minion";
 import {
     GenesysDescriptionTypographyCenterTableCell,

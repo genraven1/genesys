@@ -7,7 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
+import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
 import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import {SkillType} from "../../../../models/actor/Skill";
 import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";

@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
@@ -7,7 +7,7 @@ import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
-import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter";
+import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import SoakCard from "../../SoakCard";
 import {EditStatsCard} from "../../StatsCard";
 import {EditDefenseCard} from "../../DefenseCard";
@@ -15,15 +15,14 @@ import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
-import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable";
 import {ActorKey} from "../../../../models/actor/Actor";
-import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable";
 import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 
 interface Props {
     riv: Rival
@@ -34,8 +33,6 @@ export default function RivalEdit(props: Props) {
     const {riv, settings} = props
     const { id } = useParams<{ id: string }>()
     const [rival, setRival] = useState<Rival>(riv)
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
-
     let navigate = useNavigate()
 
     useEffect(() => {setRival(riv)}, [riv])
@@ -109,7 +106,7 @@ export default function RivalEdit(props: Props) {
     const updateRival = async (copyRival: Rival) => {
         copyRival.soak = copyRival.brawn
         setRival(copyRival)
-        await ActorService.updateRival(copyRival.name, copyRival)
+        await ActorService.updateRival(copyRival.id, copyRival)
     }
 
     const onView = () => {
@@ -146,15 +143,13 @@ export default function RivalEdit(props: Props) {
                         <RatingCard  rating={rival?.general!!} type={RatingType.General} onChange={(value: number): void => { onChange(NonPlayerCharacterKey.General, value) }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillTable npc={rival}/>
+                    <NonPlayerCharacterSkillCard npc={rival}/>
                     <Divider/>
                     <NonPlayerCharacterEquipmentCard npc={rival}/>
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={rival}/>
                     <Divider/>
-                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <TalentSelectionDialog actor={rival} open={openSelectTalentDialog} onClose={(): void => setOpenSelectTalentDialog(false)}/>}
-                    <NonPlayerCharacterTalentTable npc={rival}/>
+                    <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
                 <EditSettingsCard settings={rival?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>

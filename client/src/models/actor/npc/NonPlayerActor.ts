@@ -1,6 +1,6 @@
 import Actor, {ActorSkill} from "../Actor";
 import Ability from "../../Ability";
-import {ActorTalent} from "../../Talent";
+import { ActorTalent } from "../../Talent";
 
 export enum RatingType {
     Combat = 'Combat',
@@ -8,16 +8,16 @@ export enum RatingType {
     General = 'General'
 }
 
-export default interface NonPlayerCharacter extends Actor {
+export default interface NonPlayerActor extends Actor {
     combat: number,
     social: number,
     general: number,
     abilities: Ability[]
 }
 
-export interface SingleNonPlayerCharacter extends NonPlayerCharacter {
-    talents: ActorTalent[],
+export interface SingleNonPlayerCharacter extends NonPlayerActor {
     skills: ActorSkill[]
+    talents: ActorTalent[]
 }
 
 export enum NonPlayerCharacterKey {
@@ -26,7 +26,7 @@ export enum NonPlayerCharacterKey {
     Social = 'social'
 }
 
-export const getRatings = (npc: NonPlayerCharacter): string => {
+export const getRatings = (npc: NonPlayerActor): string => {
     return '[combat] ' + String(npc?.combat!!) + ' [social] ' + String(npc?.social!!) + ' [general] ' + String(npc?.general!!)
 }
 

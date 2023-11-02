@@ -1,4 +1,4 @@
-import {EquipmentQuality} from "../models/equipment/Quality.ts";
+import { EquipmentQuality } from "../../client/src/models/Quality.ts";
 import {pool} from "../config/Database.ts";
 
 export const getQuality = async (id: number, ranks: number): Promise<EquipmentQuality> => {

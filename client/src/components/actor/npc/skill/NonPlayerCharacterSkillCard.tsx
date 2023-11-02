@@ -1,6 +1,6 @@
 import {Card, CardContent} from "@mui/material";
 import ViewNonPlayerCharacterSkillTable from "./ViewNonPlayerCharacterSkillTable";
-import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor, {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
 import {useLocation} from "react-router-dom";
 import {Fragment} from "react";
 import NonPlayerCharacterSkillTable from "./NonPlayerCharacterSkillTable";
@@ -11,7 +11,7 @@ import EditMinionSkillTable from "../minion/EditMinionSkillTable";
 import Minion from "../../../../models/actor/npc/Minion";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 
 export default function NonPlayerCharacterSkillCard(props: Props): JSX.Element {

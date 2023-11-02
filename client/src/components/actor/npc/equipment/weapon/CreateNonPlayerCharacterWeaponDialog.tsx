@@ -11,11 +11,11 @@ import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 import NonPlayerCharacterWeaponQualityCard from "./NonPlayerCharacterWeaponQualityCard";
-import NonPlayerCharacter from "../../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../../../models/actor/npc/NonPlayerActor";
 import {ActorType} from "../../../../../models/actor/Actor";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
     open: boolean
     onClose: () => void
 }
@@ -30,7 +30,7 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
                 await ActorService.createMinionWeapon(npc.id, weapon!!)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalWeapon(npc.name, weapon!!)
+                await ActorService.createRivalWeapon(npc.id, weapon!!)
                 break
             case ActorType.Nemesis:
                 await ActorService.createNemesisWeapon(npc.name, weapon!!)

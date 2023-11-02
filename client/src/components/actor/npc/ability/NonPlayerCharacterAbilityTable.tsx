@@ -6,7 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import Ability from "../../../../models/Ability";
@@ -33,7 +33,7 @@ function Row(props: Props): JSX.Element {
 }
 
 interface TableProps {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 
 export default function NonPlayerCharacterAbilityTable(props: TableProps) {

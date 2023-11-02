@@ -1,14 +1,15 @@
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {pool} from "../config/Database.ts";
 import {getCurrentSettingId, getSetting} from "./SettingHelper.ts";
-import {Skill} from "../models/Skill.ts";
-import Minion, {GroupSkill} from "../models/Minion.ts";
-import NonPlayerActor from "../models/NonPlayerActor.ts";
 import {getCurrentSettingSkills} from "./SkillHelper.ts";
-import {ActorWeapon} from "../models/equipment/Weapon.ts";
 import {retrieveWeapon} from "./WeaponHelper.ts";
-import {ActorArmor} from "../models/equipment/Armor.ts";
 import {retrieveArmor} from "./ArmorHelper.ts";
+import Minion, { GroupSkill } from '../../client/src/models/actor/npc/Minion.ts';
+import NonPlayerActor from '../../client/src/models/actor/npc/NonPlayerActor.ts';
+import Skill from '../../client/src/models/actor/Skill.ts';
+import { ActorWeapon } from '../../client/src/models/equipment/Weapon.ts';
+import { ActorArmor } from '../../client/src/models/equipment/Armor.ts';
+import {createDefaultCharacteristics, createDefaultRatings, createDefaultStats} from "./ActorHelper.ts";
 
 export const createMinionActor = async (name: string): Promise<Minion> => {
     const countQuery = "SELECT COUNT(*) FROM minion;";
@@ -18,6 +19,9 @@ export const createMinionActor = async (name: string): Promise<Minion> => {
     const values = [name, minion_id, 'Minion'];
     const results = await pool.query(insertQuery, values);
     const minion = results.rows[0] as Minion;
+    createDefaultCharacteristics(minion);
+    createDefaultStats(minion);
+    createDefaultRatings(minion);
     minion.settings = await createMinionSettings(minion_id);
     minion.skills = await createMinionSkills(minion_id);
     minion.abilities = [];

@@ -1,19 +1,19 @@
-import NonPlayerCharacter, {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerCharacter";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
-import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
+import NonPlayerActor, { SingleNonPlayerCharacter } from "../../../../models/actor/npc/NonPlayerActor";
 import {Button, Card, CardContent} from "@mui/material";
+import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
-import * as React from "react";
-import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
-import {Fragment, useState} from "react";
-import {ActorType} from "../../../../models/actor/Actor";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import { Fragment, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Minion from "../../../../models/actor/npc/Minion";
+import { ActorType } from "../../../../models/actor/Actor";
 import MinionTalentTable from "../minion/MinionTalentTable";
-import {useLocation} from "react-router-dom";
+import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
+
 export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element {
     const {npc} = props
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)

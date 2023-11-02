@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
-import NonPlayerCharacter, {combat, general, social} from "../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor, {combat, general, social} from "../../../models/actor/npc/NonPlayerActor";
 import {ActorType} from "../../../models/actor/Actor";
 import {ActorPath} from "../../../services/Path";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
@@ -20,7 +20,7 @@ import {
 import Collapse from "@mui/material/Collapse";
 
 interface RowProps {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
     columns: number
 }
 
@@ -68,7 +68,7 @@ function Row(props: RowProps): JSX.Element {
 }
 
 export default function ViewAllNonPlayerCharacters() {
-    const [nonPlayerCharacters, setNonPlayerCharacters] = useState<NonPlayerCharacter[]>([])
+    const [nonPlayerCharacters, setNonPlayerCharacters] = useState<NonPlayerActor[]>([])
     const headers = ['Name', 'Type', 'View']
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export default function ViewAllNonPlayerCharacters() {
                     {renderHeaders(headers)}
                 </TableHead>
                 <TableBody>
-                    {nonPlayerCharacters.map((npc: NonPlayerCharacter) => (
+                    {nonPlayerCharacters.map((npc: NonPlayerActor) => (
                         <Row key={npc.name} npc={npc} columns={headers.length}/>
                     ))}
                 </TableBody>

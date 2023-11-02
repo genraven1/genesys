@@ -1,4 +1,4 @@
-import Setting from "../models/Setting.ts";
+import Setting from '../../client/src/models/Setting.ts';
 import {pool} from "../config/Database.ts";
 import {getSetting} from "./SettingHelper.ts";
 

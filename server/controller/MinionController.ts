@@ -1,10 +1,9 @@
 import {pool} from '../config/Database.ts';
 import {createMinionActor, getMinionSettings, getMinionSkills, retrieveMinion} from "../utils/MinionHelper.ts";
-import Minion from "../models/Minion.ts";
-import {Weapon} from "../models/equipment/Weapon.ts";
+import Minion from '../../client/src/models/actor/npc/Minion.ts';
 import {createCustomWeapon} from "../utils/WeaponHelper.ts";
-import {Armor} from "../models/equipment/Armor.ts";
-import {Talent} from "../models/Talent.ts";
+import {Weapon} from '../../client/src/models/equipment/Weapon.ts';
+import {Armor} from '../../client/src/models/equipment/Armor.ts';
 
 export const getAllMinions = async (req, res) => {
     const query = "SELECT * from minion;";
@@ -112,12 +111,3 @@ export const addMinionArmor = async (req, res) => {
     await pool.query(query, values);
     return await retrieveMinion(id);
 };
-
-export const addMinionTalent = async (req, res) => {
-    const {id} = req.params;
-    const talent = req.body as Talent;
-    const query = "INSERT INTO minion_talents (minion_id, talent_id) VALUES ($1, $2);";
-    const values = [id, talent.id];
-    await pool.query(query, values);
-    return await retrieveMinion(id);
-}

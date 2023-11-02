@@ -1,4 +1,4 @@
-import NonPlayerCharacter from "../../../../models/actor/npc/NonPlayerCharacter";
+import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
@@ -7,7 +7,7 @@ import {useState} from "react";
 import CreateAbilityDialog from "./CreateAbilityDialog";
 
 interface Props {
-    npc: NonPlayerCharacter
+    npc: NonPlayerActor
 }
 export default function NonPlayerCharacterAbilityCard(props: Props): JSX.Element {
     const {npc} = props

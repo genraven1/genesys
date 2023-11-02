@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material"
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material"
 import * as React from "react"
 import {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom"
@@ -9,12 +9,9 @@ import {DefenseType} from "../../../../models/actor/Defense"
 import {StatsType} from "../../../../models/actor/Stats"
 import {EditCharacteristicCard} from "../../CharacteristicCard"
 import RatingCard from "../RatingCard"
-import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerCharacter"
+import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor"
 import SoakCard from "../../SoakCard"
 import {EditStatsCard} from "../../StatsCard"
-import NonPlayerCharacterSkillTable from "../skill/NonPlayerCharacterSkillTable"
-import NonPlayerCharacterTalentTable from "../talent/NonPlayerCharacterTalentTable"
-import TalentSelectionDialog from "../../common/talent/TalentSelectionDialog"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
@@ -24,6 +21,8 @@ import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
+import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 
 interface Props {
     nem: Nemesis
@@ -34,7 +33,6 @@ export default function NemesisEdit(props: Props) {
     const {nem, settings} = props
     const {id} = useParams<{ id: string }>()
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -191,16 +189,13 @@ export default function NemesisEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillTable npc={nemesis}/>
+                    <NonPlayerCharacterSkillCard npc={nemesis}/>
                     <Divider/>
                     <NonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={nemesis}/>
                     <Divider/>
-                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <TalentSelectionDialog actor={nemesis} open={openSelectTalentDialog}
-                                                                      onClose={(): void => setOpenSelectTalentDialog(false)}/>}
-                    <NonPlayerCharacterTalentTable npc={nemesis}/>
+                    <NonPlayerCharacterTalentCard npc={nemesis}/>
                 </Grid>
                 <EditSettingsCard settings={nemesis?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>

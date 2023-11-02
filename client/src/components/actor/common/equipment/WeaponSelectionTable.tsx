@@ -29,7 +29,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
                 await ActorService.createNemesisWeapon(actor.name, {...weapon} as ActorWeapon)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalWeapon(actor.name, {...weapon} as ActorWeapon)
+                await ActorService.createRivalWeapon(actor.id, {...weapon} as ActorWeapon)
                 break
             case ActorType.Minion:
                 await ActorService.createMinionWeapon(actor.id, {...weapon} as ActorWeapon)
