@@ -12,8 +12,8 @@ import {
     DialogTitle,
     Divider
 } from "@mui/material";
-import RollService from "../../services/RollService";
 import {GenesysResultsConversion, GenesysRollConversion} from "./GenesysRollConversion";
+import RollHelper from '../../util/RollHelper';
 
 interface Props {
     open: boolean
@@ -32,8 +32,7 @@ export default function CustomRollDialog(props: Props) {
     }
 
     const onClick = async () => {
-        let rollResults = await RollService.roll(roll!)
-        setResults(rollResults)
+        setResults(RollHelper(roll))
     }
 
     const viewRoll = <GenesysRollConversion roll={roll!}/>
