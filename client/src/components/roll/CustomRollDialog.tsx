@@ -23,12 +23,12 @@ interface Props {
 export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
-    const [diceResults, serDiceResults] = useState(false)
+    const [diceResults, setDiceResults] = useState(false)
     const [results, setResults] = useState<Results>(DefaultResults.create)
 
     const onChange = (diceRoll: Roll) => {
         setRoll(diceRoll)
-        serDiceResults(true)
+        setDiceResults(true)
     }
 
     const onClick = async () => {
