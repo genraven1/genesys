@@ -36,6 +36,17 @@ export class DefaultResults {
             triumph: 0
         }
     }
+
+    static createWithRoll(roll: Roll): Results {
+        return {
+            advantage: roll.advantage,
+            despair: roll.despair,
+            failure: roll.failure,
+            success: roll.success,
+            threat: roll.threat,
+            triumph: roll.triumph
+        }
+    }
 }
 
 export class DefaultRoll {
