@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ViewRollTable from "./ViewRollTable";
 import Roll, {DefaultResults, DefaultRoll, Results} from "../../models/Roll";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {
     Button,
     Card,
@@ -25,18 +25,14 @@ export default function CustomRollDialog(props: Props) {
     const [diceResults, setDiceResults] = useState(false)
     const [results, setResults] = useState<Results>()
 
-
-
     const rollDie = (sides: number): number => {
         return Math.floor(Math.random() * sides) + 1
     }
 
     const rollDiePool = (roll: Roll): Results => {
         const results = DefaultResults.createWithRoll(roll);
-        console.log("DICE POOL: " + roll.boost)
 
         while (roll.boost > 0) {
-            console.log("ROLLING BOOST: " + roll.boost)
             switch (rollDie(6)) {
                 case 1:
                 case 2:
@@ -67,23 +63,21 @@ export default function CustomRollDialog(props: Props) {
                     break;
                 case 2:
                 case 3:
-                    results.success++
+                    results.success = results.success + 1
                     break
                 case 4:
-                    results.success++
-                    results.success++
+                    results.success = results.success + 2
                     break
                 case 5:
                 case 6:
-                    results.advantage++
+                    results.advantage = results.advantage + 1
                     break
                 case 7:
-                    results.success++
-                    results.advantage++
+                    results.success = results.success + 1
+                    results.advantage = results.advantage + 1
                     break
                 case 8:
-                    results.advantage++
-                    results.advantage++
+                    results.advantage = results.advantage + 2
                     break
                 default:
                     break;
@@ -97,30 +91,28 @@ export default function CustomRollDialog(props: Props) {
                     break
                 case 2:
                 case 3:
-                    results.success++
+                    results.success = results.success + 1
                     break
                 case 4:
                 case 5:
-                    results.success++
-                    results.success++
+                    results.success = results.success + 2
                     break
                 case 6:
-                    results.advantage++
+                    results.advantage = results.advantage + 1
                     break
                 case 7:
                 case 8:
                 case 9:
-                    results.success++
-                    results.advantage++
+                    results.success = results.success + 1
+                    results.advantage = results.advantage + 1
                     break
                 case 10:
                 case 11:
-                    results.advantage++
-                    results.advantage++
+                    results.advantage = results.advantage + 2
                     break
                 case 12:
-                    results.success++
-                    results.triumph++
+                    results.success = results.success + 1
+                    results.triumph = results.triumph + 1
                     break
                 default:
                     break;
@@ -135,11 +127,11 @@ export default function CustomRollDialog(props: Props) {
                     break;
                 case 3:
                 case 4:
-                    results.failure++
+                    results.failure = results.failure + 1
                     break
                 case 5:
                 case 6:
-                    results.threat++
+                    results.threat = results.threat + 1
                     break
                 default:
                     break;
@@ -152,24 +144,22 @@ export default function CustomRollDialog(props: Props) {
                 case 1:
                     break
                 case 2:
-                    results.failure++
+                    results.failure = results.failure + 1
                     break;
                 case 3:
-                    results.failure++
-                    results.failure++
+                    results.failure = results.failure + 2
                     break
                 case 4:
                 case 5:
                 case 6:
-                    results.threat++
+                    results.threat = results.threat + 1
                     break
                 case 7:
-                    results.threat++
-                    results.threat++
+                    results.threat = results.threat + 2
                     break
                 case 8:
-                    results.failure++
-                    results.threat++
+                    results.failure = results.failure + 1
+                    results.threat = results.threat + 1
                     break
                 default:
                     break;
@@ -183,38 +173,34 @@ export default function CustomRollDialog(props: Props) {
                     break
                 case 2:
                 case 3:
-                    results.failure++
+                    results.failure = results.failure + 1
                     break
                 case 4:
                 case 5:
-                    results.failure++
-                    results.failure++
+                    results.failure = results.failure + 2
                     break
                 case 6:
                 case 7:
-                    results.threat++
+                    results.threat = results.threat + 1
                     break
                 case 8:
                 case 9:
-                    results.failure++
-                    results.threat++
+                    results.failure = results.failure + 1
+                    results.threat = results.threat + 1
                     break
                 case 10:
                 case 11:
-                    results.threat++
-                    results.threat++
+                    results.threat = results.threat + 2
                     break
                 case 12:
-                    results.failure++
-                    results.despair++
+                    results.failure = results.failure + 1
+                    results.despair = results.despair + 1
                     break
                 default:
                     break;
             }
             roll.despair--
         }
-
-        console.log(results)
 
         if (results.success > results.failure) {
             results.success = results.success - results.failure
@@ -238,8 +224,6 @@ export default function CustomRollDialog(props: Props) {
             results.threat = 0
         }
 
-        console.log(results)
-
         return results
     }
 
@@ -247,12 +231,11 @@ export default function CustomRollDialog(props: Props) {
         setRoll(diceRoll)
     }
 
-    const useOnClick = async () => {
-        console.log("HERE")
+    const onClick = async (event: React.SyntheticEvent) => {
         const dieResults = rollDiePool(roll)
         console.log(dieResults)
         setResults(dieResults)
-        console.log(results)
+        console.log(results!!)
         setDiceResults(true)
     }
 
@@ -273,7 +256,7 @@ export default function CustomRollDialog(props: Props) {
                 </Card>
             </DialogContent>
             <DialogActions>
-                <Button color='primary' variant='contained' onClick={useOnClick}>ROLL</Button>
+                <Button color='primary' variant='contained' onClick={onClick}>ROLL</Button>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
             </DialogActions>
         </Dialog>

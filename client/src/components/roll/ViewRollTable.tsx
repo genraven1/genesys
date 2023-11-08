@@ -51,7 +51,6 @@ export default function ViewRollTable(props: TableProps): JSX.Element {
 
     const onRemoveDiceChange = (type: DieType) => {
         let copyDiceRoll = diceRoll
-        console.log(diceRoll)
         switch (type) {
             case DieType.Boost:
                 copyDiceRoll.boost = copyDiceRoll.boost - 1
