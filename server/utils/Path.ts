@@ -11,3 +11,4 @@ export const NEMESIS_PATH = '/actors/nemeses/';
 export const RIVAL_PATH = '/actors/rivals/';
 export const MINION_PATH = '/actors/minions/';
 export const NPC_PATH = '/actors/npcs';
+export const ROLL_PATH = '/roll';

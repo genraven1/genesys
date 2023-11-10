@@ -11,6 +11,7 @@ import {qualityRouter} from "./routes/QualityRoutes.ts";
 import {weaponRouter} from "./routes/WeaponRoutes.ts";
 import {armorRouter} from "./routes/ArmorRoutes.ts";
 import {rivalRouter} from "./routes/RivalRoutes.ts";
+import { rollRouter } from "./routes/RollRoutes.ts";
 
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('', currentSettingRouter);
+app.use('', rollRouter);
 app.use('', settingRouter);
 app.use('', skillRouter);
 app.use('', talentRouter);

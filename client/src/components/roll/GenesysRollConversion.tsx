@@ -79,6 +79,9 @@ export function GenesysResultsConversion(props: ResultsProps): JSX.Element {
 
     const generateResultText = ():string => {
         let text = ''
+        if (!results) {
+            return text;
+        }
         while (results.success > 0) {
             text = text.concat('[success] ')
             results.success--
