@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ViewRollTable from "./ViewRollTable";
-import Roll, {DefaultRoll, Results} from "../../models/Roll";
+import Roll, {DefaultResults, DefaultRoll, Results} from "../../models/Roll";
 import {useState} from "react";
 import {
     Button,
@@ -21,15 +21,17 @@ export default function CustomRollDialog(props: Props) {
     const {open, onClose} = props
     const [roll, setRoll] = useState<Roll>(DefaultRoll.create)
     const [diceResults, setDiceResults] = useState(false)
-    const [results, setResults] = useState<Results>()
+    const [results, setResults] = useState<Results>(DefaultResults.create)
 
     const onChange = (diceRoll: Roll) => {
         setRoll(diceRoll)
     }
 
     const onClick = async (event: React.SyntheticEvent) => {
-        const diceResults = await RollService.rollDice(roll) as Results
-        setResults(diceResults)
+        const res = await RollService.rollDice(roll)
+        console.log(res)
+        setResults(res)
+        console.log(results)
         setDiceResults(true)
     }
 
@@ -37,12 +39,17 @@ export default function CustomRollDialog(props: Props) {
 
     const viewResults = <GenesysResultsConversion results={results!}/>
 
+    const viewResulting = async () => {
+
+        return <GenesysResultsConversion results={results}/>
+    }
+
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle style={{textAlign:'center'}}>Assemble Dice Roll</DialogTitle>
             <DialogContent>
                 <ViewRollTable roll={roll!} onChange={onChange}/>
-                {diceResults ? viewResults:viewRoll}
+                {diceResults ? viewResulting:viewRoll}
             </DialogContent>
             <DialogActions>
                 <Button color='primary' variant='contained' onClick={onClick}>ROLL</Button>
