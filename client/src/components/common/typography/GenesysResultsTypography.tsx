@@ -10,7 +10,7 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
     const {results} = props
 
     const displayResults = (): string => {
-        let text = ''
+        let text = ' '
         if (!results) {
             return 'None';
         }
@@ -67,10 +67,10 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
                     array[index + 1].includes('symbol')) ||
                 array.length === index + 1
             ) {
-                console.log(word)
+                // console.log(word)
                 final += word;
             } else {
-                console.log('ELSE: ' + word)
+                // console.log('ELSE: ' + word)
                 final += `${word} `;
             }
         });
@@ -81,7 +81,7 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
     return (
         <Fragment>
             <Typography style={{wordWrap: 'break-word', textAlign: 'center'}}
-                        dangerouslySetInnerHTML={{__html: displayResults()}}/>
+                        dangerouslySetInnerHTML={{__html: 'Results: ' + displayResults()}}/>
         </Fragment>
     )
 }
