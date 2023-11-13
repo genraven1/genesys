@@ -54,7 +54,7 @@ export class DefaultRoll {
         return {
             ability: 0,
             advantage: 0,
-            boost: 0,
+            boost: 12,
             challenge: 0,
             despair: 0,
             difficulty: 0,

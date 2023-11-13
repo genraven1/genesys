@@ -1,6 +1,6 @@
 import Roll, {Results} from "../../models/Roll";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 
 interface RollProps {
     roll: Roll
@@ -10,7 +10,7 @@ export function GenesysRollConversion(props: RollProps): JSX.Element {
     const {roll} = props
     const [text, setText] = useState('')
 
-    const generateRollText = ():string => {
+    const generateRollText = (): string => {
         if (!roll) {
             return text
         }
@@ -77,10 +77,10 @@ interface ResultsProps {
 export function GenesysResultsConversion(props: ResultsProps): JSX.Element {
     const {results} = props
 
-    const generateResultText = ():string => {
+    const generateResultText = (): string => {
         let text = ''
         if (!results) {
-            return text;
+            return 'None';
         }
         while (results.success > 0) {
             text = text.concat('[success] ')
@@ -110,6 +110,8 @@ export function GenesysResultsConversion(props: ResultsProps): JSX.Element {
     }
 
     return (
-        <GenesysDescriptionTypography text={generateResultText()}/>
+        <Fragment>
+            <GenesysDescriptionTypography text={generateResultText()}/>
+        </Fragment>
     )
 }
