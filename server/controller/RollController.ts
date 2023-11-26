@@ -200,7 +200,6 @@ export const resolveRoll = (req, res) => {
         results.advantage = 0
         results.threat = 0
     }
-    console.log(results)
     res.send(results);
 };
 

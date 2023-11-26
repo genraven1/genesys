@@ -13,8 +13,10 @@ export default function GenesysDescriptionTypography(props: Props): JSX.Element 
             return '';
         }
         const string = text.split(' ');
+        console.log(string)
         const array = string.map((word: string) => {
             const target = word.toLowerCase();
+            console.log(target)
             switch (true) {
                 case target.includes('[boost]'):
                     return '<i class="symbol d6 symbol-border boost-color"></i>';
@@ -71,6 +73,7 @@ export default function GenesysDescriptionTypography(props: Props): JSX.Element 
                 final += `${word} `;
             }
         });
+        console.log(final)
         return final;
     };
 

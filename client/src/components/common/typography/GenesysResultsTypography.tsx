@@ -40,8 +40,10 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
             results.despair--
         }
         const string = text.split(' ');
+        console.log(string)
         const array = string.map((word: string) => {
             const target = word.toLowerCase();
+            console.log(target)
             switch (true) {
                 case target.includes('[advantage]'):
                     return '<i class="symbol advantage"></i>';
@@ -59,21 +61,25 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
                     return `${word}`;
             }
         });
+        console.log(array)
+        const filterArray = array.filter(str => str)
+        console.log(filterArray)
         let final = '';
-        array.forEach((word, index) => {
+        filterArray.forEach((word, index) => {
             if (
                 (word.includes('symbol') &&
                     array[index + 1] &&
                     array[index + 1].includes('symbol')) ||
                 array.length === index + 1
             ) {
-                // console.log(word)
                 final += word;
             } else {
-                // console.log('ELSE: ' + word)
                 final += `${word} `;
             }
         });
+        if (final === '') {
+            return 'EMPTY'
+        }
         console.log(final)
         return final;
     }
@@ -81,7 +87,7 @@ export default function GenesysResultsTypography(props: Props): JSX.Element {
     return (
         <Fragment>
             <Typography style={{wordWrap: 'break-word', textAlign: 'center'}}
-                        dangerouslySetInnerHTML={{__html: 'Results: ' + displayResults()}}/>
+                        dangerouslySetInnerHTML={{__html: displayResults()}}/>
         </Fragment>
     )
 }
