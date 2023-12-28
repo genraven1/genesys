@@ -7,6 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document
 public class Setting {
+
+    public Setting(final String name) {
+        this.name = name;
+    }
+
     @Id
     private Long id;
     private String name;

@@ -18,7 +18,7 @@ public class TalentHandler {
     @Autowired
     private TalentService talentService;
 
-    public Mono<ServerResponse> getCartById(final ServerRequest serverRequest) {
+    public Mono<ServerResponse> getTalentById(final ServerRequest serverRequest) {
         return talentService.getTalentById(Long.valueOf(serverRequest.pathVariable(ID)))
                 .flatMap(talentResponse -> ServerResponse.status(HttpStatus.OK)
                         .body(Mono.just(talentResponse), Talent.class));

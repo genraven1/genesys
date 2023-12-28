@@ -11,6 +11,11 @@ public class TalentRouter {
 
     @Bean
     public RouterFunction<ServerResponse> routeGetTalentById(final TalentHandler talentHandler) {
-        return RouterFunctions.route(RequestPredicates.GET(TalentConstants.GET_TALENT_BY_ID), talentHandler::getCartById);
+        return RouterFunctions.route(RequestPredicates.GET(TalentConstants.GET_TALENT_BY_ID), talentHandler::getTalentById);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> routeCreateTalent(final TalentHandler talentHandler) {
+        return RouterFunctions.route(RequestPredicates.POST(TalentConstants.CREATE_TALENT), talentHandler::createTalent);
     }
 }
