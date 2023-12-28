@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "",
   "type": "module",
   "proxy": "http://localhost:5050",
   "scripts": {
