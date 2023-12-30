@@ -17,6 +17,12 @@ public class SettingHandler {
     @Autowired
     private SettingService settingService;
 
+    public Mono<ServerResponse> getCurrentSetting(final ServerRequest serverRequest) {
+        return settingService.getCurrentSetting(Long.valueOf(serverRequest.pathVariable(ID)))
+                .flatMap(settingResponse -> ServerResponse.status(HttpStatus.OK)
+                        .body(Mono.just(settingResponse), Setting.class));
+    }
+
     public Mono<ServerResponse> getSettingById(final ServerRequest serverRequest) {
         return settingService.getSettingById(Long.valueOf(serverRequest.pathVariable(ID)))
                 .flatMap(settingResponse -> ServerResponse.status(HttpStatus.OK)

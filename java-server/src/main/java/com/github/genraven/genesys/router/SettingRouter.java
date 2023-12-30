@@ -11,6 +11,11 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
 public class SettingRouter {
+
+    @Bean
+    public RouterFunction<ServerResponse> routeGetCurrentSetting(final SettingHandler settingHandler) {
+        return RouterFunctions.route(RequestPredicates.GET(SettingConstants.CURRENT_SETTING), settingHandler::getSettingById);
+    }
     @Bean
     public RouterFunction<ServerResponse> routeGetSettingById(final SettingHandler settingHandler) {
         return RouterFunctions.route(RequestPredicates.GET(SettingConstants.GET_SETTING_BY_ID), settingHandler::getSettingById);
