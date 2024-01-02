@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import static com.github.genraven.genesys.constants.CommonConstants.ID;
 import static com.github.genraven.genesys.constants.CommonConstants.NAME;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Component
 public class SettingHandler {
@@ -18,9 +19,13 @@ public class SettingHandler {
     private SettingService settingService;
 
     public Mono<ServerResponse> getCurrentSetting(final ServerRequest serverRequest) {
-        return settingService.getCurrentSetting(Long.valueOf(serverRequest.pathVariable(ID)))
+        return settingService.getCurrentSetting()
                 .flatMap(settingResponse -> ServerResponse.status(HttpStatus.OK)
                         .body(Mono.just(settingResponse), Setting.class));
+    }
+
+    public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
+        return ok().body(settingService.getAllSettings(), Setting.class);
     }
 
     public Mono<ServerResponse> getSettingById(final ServerRequest serverRequest) {
