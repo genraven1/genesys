@@ -34,7 +34,7 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={Path.Home} element={<Dashboard/>}/>
+                    <Route path={Path.Home} element={<MainDashboard/>}/>
 
                     <Route path={Path.Setting} element={<SettingWorkflow/>}/>
                     <Route path={Path.Setting + ':id/view'} element={<SettingWorkflow/>}/>
