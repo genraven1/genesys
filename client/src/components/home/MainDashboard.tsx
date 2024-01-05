@@ -1,3 +1,5 @@
+import Dashboard from "./Dashboard"
+
 export default function MainDashboard(): JSX.Element {
     const [value, setValue] = useState('1')
     let naviage = useNavigate()
@@ -11,7 +13,11 @@ export default function MainDashboard(): JSX.Element {
     }
 
     const renderLoreDashboard = (): JSX.Element {
+        return <Dashboard/>
+    }
 
+    const renderSceneDashboard = (): JSX.Element {
+        return <Dashboard/>
     }
 
     return {
@@ -27,9 +33,9 @@ export default function MainDashboard(): JSX.Element {
                                 <Tab label="Scene" value="3" />
                             </TabList>
                         </Grid>
-                        <TabPanel value="1">{renderWeaponsTab()}</TabPanel>
-                        <TabPanel value="2">{renderArmorTab()}</TabPanel>
-                        <TabPanel value="3">{renderGearTab()}</TabPanel>
+                        <TabPanel value="1">{renderDefaultDashboard()}</TabPanel>
+                        <TabPanel value="2">{renderLoreDashboard()}</TabPanel>
+                        <TabPanel value="3">{renderSceneDashboard()}</TabPanel>
                     </TabContext>
                 </Grid>
             </CardContent>
