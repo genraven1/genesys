@@ -1,5 +1,20 @@
+version: "3"
 services:
-  web:
+  client:
+    build: .
+    ports:
+      - "3000:3000"
+    tty: true
+    image: client
+  java:
     build: .
     ports:
       - "8080:8080"
+    tty: true
+    image: java
+  mongo:
+    ports:
+      - "27017:27017"
+    tty: true
+    image: mongo
+    command: -v ./data:/data/db

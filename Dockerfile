@@ -3,11 +3,23 @@ WORKDIR /client
 
 COPY package.json .
 COPY package-lock.json .
+
 RUN npm install
+
 COPY . .
+
 RUN npm run build
 
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+#RUN npm run build --production
+#
+#RUN npm install -g serve
+#
+#EXPOSE 3000
+#
+#CMD [ "npm", "start" ]
+#CMD serve -s build
+
+FROM maven:3.9.6-eclipse-temurin-17
 WORKDIR ./java-server
 
 COPY ./java-server/pom.xml .
@@ -16,9 +28,9 @@ COPY ./java-server/src src
 RUN mvn clean install
 
 FROM eclipse-temurin:17-jre-alpine
-
 WORKDIR /genesys
-COPY --from=build /app/target/*.jar app.jar
+
+COPY --from=build /java-server/target/*.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","/app/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
