@@ -6,7 +6,6 @@ import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
-import Dashboard from "./Dashboard";
 import LoreMenu from "../lore/common/LoreMenu";
 import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
@@ -24,7 +23,7 @@ import SettingWorkflow from "../setting/SettingWorkflow";
 import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
-
+import MainDashboard from "./MainDashboard";
 
 export default function App() {
 
@@ -34,7 +33,11 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={Path.Home} element={<Dashboard/>}/>
+                    <Route path={Path.Home} element={<MainDashboard/>}/>
+
+                    <Route path={Path.Scene} element={<SettingWorkflow/>}/>
+                    <Route path={Path.Scene + ':id/view'} element={<SettingWorkflow/>}/>
+                    <Route path={Path.Scene + ':id/edit'} element={<SettingWorkflow/>}/>
 
                     <Route path={Path.Setting} element={<SettingWorkflow/>}/>
                     <Route path={Path.Setting + ':id/view'} element={<SettingWorkflow/>}/>

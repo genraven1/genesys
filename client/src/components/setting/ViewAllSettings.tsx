@@ -13,6 +13,7 @@ import {Path} from "../../services/Path";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import SettingDialog from "./SettingDialog";
+import {renderHeaders} from "../common/table/TableRenders";
 
 interface Props {
     setting: Setting
@@ -42,6 +43,7 @@ function Row(props: Props): JSX.Element {
 export default function ViewAllSettings() {
     const [settings, setSettings] = useState<Setting[]>([])
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
+    const headers = ['Name', 'Magic', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -63,11 +65,7 @@ export default function ViewAllSettings() {
                 <TableContainer component={Paper}>
                     <Table aria-label="collapsible table">
                         <TableHead>
-                            <TableRow>
-                                <TypographyCenterTableCell value={'Name'}/>
-                                <TypographyCenterTableCell value={'Magic'}/>
-                                <TypographyCenterTableCell value={'View'}/>
-                            </TableRow>
+                            {renderHeaders(headers)}
                         </TableHead>
                         <TableBody>
                             {settings.map((setting: Setting) => (

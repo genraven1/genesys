@@ -1,8 +1,6 @@
-import {ActorPath, EquipmentPath, LorePath, Path} from "../../services/Path";
-import {useNavigate} from "react-router-dom";
+import {ActorPath, EquipmentPath, Path} from "../../services/Path";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import {LoreType} from "../../models/lore/Lore";
 import {useEffect, useState} from "react";
 import SettingDialog from "../setting/SettingDialog";
 import TalentDialog from "../talents/TalentDialog";
@@ -13,13 +11,12 @@ import CreateNonPlayerCharacterDialog from "../actor/npc/CreateNonPlayerCharacte
 import ExpansionList from "../navigation/ExpansionList";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
-import {NavigateFunction} from "react-router";
 import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CreatePlayerDialog from "../actor/player/CreatePlayerDialog";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
 
 export default function Dashboard(): JSX.Element {
-    let navigate = useNavigate()
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
@@ -48,7 +45,7 @@ export default function Dashboard(): JSX.Element {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'Dashboard'} subheader={getSubHeader()}/>
+            <CenteredCardHeader title={getSubHeader()}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
@@ -112,15 +109,6 @@ export default function Dashboard(): JSX.Element {
                                                                            onClose={(): void => setOpenSettingSelectionDialog(false)}
                                                                            current={setting!!}/>}
                 </Grid>
-                <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained' onClick={() => navigate(Path.Lore)}>Lore</Button>
-                </Grid>
-                <Grid container justifyContent={'center'}>
-                    <Grid item xs>
-                        <DashboardButton path={LorePath.Organization} title={LoreType.ORGANIZATION}
-                                         navigate={navigate}/>
-                    </Grid>
-                </Grid>
             </CardContent>
             {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
                                                                onClose={(): void => setOpenSettingCreationDialog(false)}/>}
@@ -144,18 +132,5 @@ export default function Dashboard(): JSX.Element {
             {openPlayerCreationDialog && <CreatePlayerDialog open={openPlayerCreationDialog}
                                                              onClose={(): void => setOpenPlayerCreationDialog(false)}/>}
         </Card>
-    )
-}
-
-interface DashboardProps {
-    path: LorePath
-    title: string
-    navigate: NavigateFunction
-}
-
-function DashboardButton(props: DashboardProps): JSX.Element {
-    const {path, title, navigate} = props
-    return (
-        <Button color='primary' variant='contained' onClick={() => navigate(path)}>{title}</Button>
     )
 }
