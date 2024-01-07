@@ -2,9 +2,8 @@ import {useLocation, useParams} from "react-router-dom";
 import Scene from "../../models/Scene";
 import {Fragment, useEffect, useState} from "react";
 import SceneService from "../../services/SceneService";
-import SettingView from "../setting/SettingView";
-import SettingEdit from "../setting/SettingEdit";
-import ViewAllSettings from "../setting/ViewAllSettings";
+import ViewAllScenes from "./ViewAllScenes";
+import SceneView from "./SceneView";
 
 
 function useFetchScene(id: number): Scene {
@@ -32,20 +31,22 @@ export default function SceneWorkflow(): JSX.Element {
     const {id} = useParams<{ id?: string }>()
     const scene = useFetchScene(Number(id))
 
-    // const useWorkflowRender = (): JSX.Element => {
-    //     const pathname = useLocation().pathname
-    //     if (pathname.endsWith('/view')) {
-    //         return <SettingView setting={setting}/>
-    //     } else if (pathname.endsWith('/edit')) {
-    //         return <SettingEdit set={setting}/>
-    //     } else {
-    //         return <ViewAllSettings/>
-    //     }
-    // }
+    const useWorkflowRender = (): JSX.Element => {
+        const pathname = useLocation().pathname
+        if (pathname.endsWith('/view')) {
+            return <SceneView scene={scene}/>
+        }
+        // else if (pathname.endsWith('/edit')) {
+        //     return <SettingEdit set={setting}/>
+        // }
+        else {
+            return <ViewAllScenes/>
+        }
+    }
 
     return (
         <Fragment>
-            {/*{useWorkflowRender()}*/}
+            {useWorkflowRender()}
         </Fragment>
     )
 }

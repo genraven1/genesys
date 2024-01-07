@@ -4,7 +4,7 @@ import {Path} from "./Path";
 
 export default class SceneService {
     static async createScene(name: string): Promise<Scene> {
-        return await (await axios.post('/scene/' + name)).data;
+        return await (await axios.post(Path.Scene + name)).data;
     }
 
     static async getScenes(): Promise<Scene[]> {
