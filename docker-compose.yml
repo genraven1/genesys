@@ -1,17 +1,10 @@
 version: "3"
 services:
-  client:
-    build: .
-    ports:
-      - "3000:3000"
+  genesys:
     tty: true
-    image: client
-  java:
-    build: .
+    image: genesys
     ports:
       - "8080:8080"
-    tty: true
-    image: java
   mongo:
     ports:
       - "27017:27017"
