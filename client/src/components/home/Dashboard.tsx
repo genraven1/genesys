@@ -1,5 +1,4 @@
 import {ActorPath, EquipmentPath, Path} from "../../services/Path";
-import {useNavigate} from "react-router-dom";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -15,9 +14,9 @@ import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CreatePlayerDialog from "../actor/player/CreatePlayerDialog";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
 
 export default function Dashboard(): JSX.Element {
-    let navigate = useNavigate()
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
@@ -46,7 +45,7 @@ export default function Dashboard(): JSX.Element {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'Dashboard'} subheader={getSubHeader()}/>
+            <CenteredCardHeader title={getSubHeader()}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>

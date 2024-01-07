@@ -10,11 +10,12 @@ export default function LoreDashboard(): JSX.Element {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'Lore Dashboard'}/>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'Lore Dashboard'}
+                action={<Button color='primary' variant='contained' onClick={() => navigate(Path.Lore)}>Lore</Button>}>
+            </CardHeader>
             <CardContent>
-                <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained' onClick={() => navigate(Path.Lore)}>Lore</Button>
-                </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item xs>
                         <DashboardButton path={LorePath.Organization} title={LoreType.ORGANIZATION}
