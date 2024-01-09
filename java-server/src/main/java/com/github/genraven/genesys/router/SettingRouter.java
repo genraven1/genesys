@@ -18,9 +18,15 @@ public class SettingRouter {
     RouterFunction<ServerResponse> settingRoutes(final SettingHandler settingHandler) {
         return RouterFunctions.route().path(SettingConstants.SETTING_PATH, builder -> builder
                 .GET(ID_WITH_BRACKETS, settingHandler::getSettingById))
-                .GET(CURRENT, settingHandler::getCurrentSetting)
                 .GET(settingHandler::getAllSettings)
                 .POST(settingHandler::createSetting)
+                .build();
+    }
+
+    @Bean
+    RouterFunction<ServerResponse> currentSettingRoutes(final SettingHandler settingHandler) {
+        return RouterFunctions.route().path(CURRENT, builder -> builder
+                .GET(settingHandler::getCurrentSetting))
                 .build();
     }
 }
