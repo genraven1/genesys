@@ -1,19 +1,38 @@
-version: "3"
+version: "3.8"
 services:
   client:
-    tty: true
-    image: client
+    build:
+      context: client
+    restart: always
+    stdin_open: true
+    networks:
+      - react-java
+    depends_on:
+        - java
     ports:
       - "3000:3000"
   java:
-    tty: true
-    image: java
-    ports:
-      - "8080:8080"
+    build:
+      context: java-server
+    restart: always
+    volumes:
+      - ./:/app
+    depends_on:
+        - mongo
+    networks:
+      - java-mongo
+      - react-java
+    expose:
+      - 3000
   mongo:
-    ports:
-      - "27017:27017"
-    tty: true
+    restart: always
+    networks:
+      - java-mongo
+    expose:
+      - 27017
     image: mongo
     volumes:
       - ./data:/data/db
+networks:
+  react-java:
+  java-mongo:

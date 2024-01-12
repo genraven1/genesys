@@ -2,11 +2,14 @@ FROM maven:3.9.6-eclipse-temurin-17
 
 WORKDIR /app
 
-COPY .mvn/ .
-COPY mvnw pom.xml ./
+COPY .mvn/ .mvn
+COPY pom.xml .
 
-RUN ./mvnw dependency:resolve
+RUN mvn clean
+RUN mvn dependency:resolve
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run"]
+RUN mvn install
+
+CMD ["mvn", "spring-boot:run"]
