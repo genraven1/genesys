@@ -1,12 +1,12 @@
 FROM maven:3.9.6-eclipse-temurin-17
 
-COPY pom.xml .
-COPY ./src src
+WORKDIR /app
 
-RUN mvn clean install
+COPY .mvn/ .
+COPY mvnw pom.xml ./
 
-COPY /target/*.jar app.jar
+RUN ./mvnw dependency:resolve
 
-EXPOSE 8080
+COPY src ./src
 
-ENTRYPOINT ["java","-jar","app.jar"]
+CMD ["./mvnw", "spring-boot:run"]
