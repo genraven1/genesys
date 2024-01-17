@@ -12,4 +12,6 @@ COPY src ./src
 
 RUN mvn install
 
-CMD ["mvn", "spring-boot:run"]
+EXPOSE 8080
+
+ENTRYPOINT ["mvn","spring-boot:run"]

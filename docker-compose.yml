@@ -6,33 +6,33 @@ services:
     restart: always
     stdin_open: true
     networks:
-      - react-java
+      - react-maven-java
     depends_on:
-        - java
+        - maven-java
     ports:
       - "3000:3000"
-  java:
+  maven-java:
     build:
-      context: java-server
+      context: maven-java-server
     restart: always
     volumes:
       - ./:/app
     depends_on:
         - mongo
     networks:
-      - java-mongo
-      - react-java
-    expose:
-      - 3000
+      - maven-java-mongo
+      - react-maven-java
+    ports:
+      - "8080:8080"
   mongo:
     restart: always
     networks:
-      - java-mongo
+      - maven-java-mongo
     expose:
       - 27017
     image: mongo
     volumes:
       - ./data:/data/db
 networks:
-  react-java:
-  java-mongo:
+  react-maven-java:
+  maven-java-mongo:

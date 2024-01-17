@@ -7,5 +7,5 @@ client/.git
 client/*.md
 client/.gitignore
 
-java-server/.gitignore
-java-server/target
+maven-java-server/.gitignore
+maven-java-server/target
