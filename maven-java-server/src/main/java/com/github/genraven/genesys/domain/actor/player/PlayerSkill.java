@@ -1,23 +1,22 @@
-package com.github.genraven.genesys.domain.actor;
+package com.github.genraven.genesys.domain.actor.player;
 
-import com.github.genraven.genesys.domain.skill.Skill;
+import com.github.genraven.genesys.domain.actor.ActorSkill;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
-public class ActorSkill extends Skill {
+public class PlayerSkill extends ActorSkill {
 
-    public ActorSkill(final Skill skill) {
+    public PlayerSkill(final ActorSkill skill) {
         this.setName(skill.getName());
         this.setId(skill.getId());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
         this.setSettings(skill.getSettings());
-        this.ranks = 0;
+        this.setRanks(skill.getRanks());
+        this.career = false;
     }
 
-    private int ranks;
+    private boolean career;
 }
