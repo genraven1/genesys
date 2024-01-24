@@ -29,7 +29,9 @@ public class PlayerHandler {
             if(players.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(fromValue(players));
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(players));
         });
     }
 
