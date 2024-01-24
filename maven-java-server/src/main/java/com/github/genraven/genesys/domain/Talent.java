@@ -13,6 +13,7 @@ public class Talent {
     public Talent(final String name) {
         this.name = name;
     }
+    private Talent() {}
 
     @Id
     private Long id;

@@ -12,8 +12,12 @@ public class PlayerRouter {
 
     @Bean
     public RouterFunction<ServerResponse> playerRouter(final PlayerHandler playerHandler) {
-        return RouterFunctions.route().path("/actors/players/", builder -> builder
-                .GET(playerHandler::getAllPlayers))
+        return RouterFunctions.route()
+                .path("/actors/players/", builder -> builder
+                        .GET(playerHandler::getAllPlayers)
+                        .POST("{name}", playerHandler::createPlayer)
+                        .GET("{id}", playerHandler::getPlayer)
+                        .PUT("{id}", playerHandler::updatePlayer))
                 .build();
     }
 }

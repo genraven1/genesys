@@ -2,18 +2,17 @@ package com.github.genraven.genesys.domain.actor;
 
 import com.github.genraven.genesys.domain.Setting;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 public class Actor {
 
     public Actor (final String name) {
         this.name = name;
     }
+    private Actor() {}
 
     private String name;
     private ActorType type;
