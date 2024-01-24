@@ -3,7 +3,6 @@ package com.github.genraven.genesys.handler;
 import com.github.genraven.genesys.domain.Setting;
 import com.github.genraven.genesys.service.SettingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;

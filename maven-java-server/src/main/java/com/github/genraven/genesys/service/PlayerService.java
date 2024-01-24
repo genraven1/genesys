@@ -45,6 +45,6 @@ public class PlayerService {
             play.setRanged(player.getRanged());
             play.setSkills(player.getSkills());
             return play;
-        });
+        }).flatMap(playerRepository::save);
     }
 }
