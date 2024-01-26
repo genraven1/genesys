@@ -14,7 +14,7 @@ import static com.github.genraven.gradlejavaserver.constants.SettingConstants.SE
 public class SettingRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> settingRouter(final SettingHandler settingHandler) {
+    public RouterFunction<ServerResponse> router(final SettingHandler settingHandler) {
         return RouterFunctions.route()
                 .path(SETTING_PATH, builder -> builder
                         .GET(settingHandler::getAllSettings)

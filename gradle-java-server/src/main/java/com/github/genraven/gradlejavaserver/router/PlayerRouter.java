@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 public class PlayerRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> playerRouter(final PlayerHandler playerHandler) {
+    public RouterFunction<ServerResponse> router(final PlayerHandler playerHandler) {
         return RouterFunctions.route()
                 .path("/actors/players/", builder -> builder
                         .GET(playerHandler::getAllPlayers)
