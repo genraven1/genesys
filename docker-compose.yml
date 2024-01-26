@@ -15,8 +15,6 @@ services:
     build:
       context: gradle-java-server
     restart: always
-    environment:
-      MONGODB_URI: mongodb://mongo:27017/genesys
     depends_on:
       - mongo
     networks:

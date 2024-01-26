@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.server.*;
 public class TalentRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> router(final TalentHandler talentHandler) {
+    public RouterFunction<ServerResponse> talentRouterMethod(final TalentHandler talentHandler) {
         return RouterFunctions.route()
                 .path("/talents/", builder -> builder
                         .GET(talentHandler::getAllTalents)
