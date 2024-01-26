@@ -11,9 +11,12 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 @EnableReactiveMongoRepositories(basePackages = "com.github.genraven.gradlejavaserver.repository")
 public class Config extends AbstractReactiveMongoConfiguration {
 
+    @Value("${spring.data.mongodb.uri}")
+    private String connectionString;
+
     @Override
     public MongoClient reactiveMongoClient() {
-        return MongoClients.create("mongodb://localhost:27017/");
+        return MongoClients.create(connectionString);
     }
     @Override
     protected String getDatabaseName() {

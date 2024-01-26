@@ -15,10 +15,10 @@ services:
     build:
       context: gradle-java-server
     restart: always
-    depends_on:
-      - mongo
+#    depends_on:
+#      - mongo
     networks:
-      - maven-java-mongo
+#      - maven-java-mongo
       - react-maven-java
     ports:
       - "8080:8080"
@@ -35,17 +35,17 @@ services:
 #      - react-maven-java
 #    ports:
 #      - "8080:8080"
-  mongo:
-    restart: always
-    networks:
-      - maven-java-mongo
-    expose:
-      - 27017
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data:/data/db
+#  mongo:
+#    restart: always
+#    networks:
+#      - maven-java-mongo
+#    expose:
+#      - 27017
+#    image: mongo
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - ./data:/data/db
 networks:
   react-maven-java:
-  maven-java-mongo:
+#  maven-java-mongo:
