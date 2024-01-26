@@ -1,6 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.actor;
 
-import com.github.genraven.genesys.domain.skill.Skill;
+import com.github.genraven.gradlejavaserver.domain.skill.Skill;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
