@@ -33,6 +33,7 @@ public class SettingHandler {
     }
 
     public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
+        System.out.println("HERE");
         return settingService.getAllSettings().collectList().flatMap(settings -> {
             if (settings.isEmpty()) {
                 return ServerResponse.noContent().build();
