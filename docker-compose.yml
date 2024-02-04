@@ -6,7 +6,7 @@ services:
     restart: always
     stdin_open: true
     networks:
-      - react-maven-java
+      - react-gradle-java
     depends_on:
         - gradle-java
     ports:
@@ -15,39 +15,9 @@ services:
     build:
       context: gradle-java-server
     restart: always
-#    environment:
-#      WAIT_HOSTS: mongodb:27017
-#    depends_on:
-#      - mongo
     networks:
-#      - maven-java-mongo
-      - react-maven-java
+      - react-gradle-java
     ports:
       - "8080:8080"
-#  maven-java:
-#    build:
-#      context: maven-java-server
-#    restart: always
-#    volumes:
-#      - ./:/app
-#    depends_on:
-#        - mongo
-#    networks:
-#      - maven-java-mongo
-#      - react-maven-java
-#    ports:
-#      - "8080:8080"
-#  mongo:
-#    restart: always
-#    networks:
-#      - maven-java-mongo
-#    expose:
-#      - 27017
-#    image: mongo
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - ./data:/data/db
 networks:
-  react-maven-java:
-#  maven-java-mongo:
+  react-gradle-java:
