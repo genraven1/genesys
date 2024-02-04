@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useEffect, useState} from 'react';
 import Talent, {Activation, getActivationOptions, getTierOptions, Tier} from '../../models/Talent';
 import TalentService from '../../services/TalentService';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
@@ -20,6 +20,7 @@ interface Props {
 
 export default function TalentEdit(props: Props) {
     const {tal, settings} = props
+    const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     let navigate = useNavigate()
 
@@ -71,11 +72,11 @@ export default function TalentEdit(props: Props) {
 
     const updateTalent = async (copyTalent: Talent) => {
         setTalent(copyTalent)
-        await TalentService.updateTalent(copyTalent.name, copyTalent)
+        await TalentService.updateTalent(name as string, copyTalent)
     }
 
     const onView = () => {
-        navigate(Path.Talent + talent.name + '/view');
+        navigate(Path.Talent + name + '/view');
     }
 
     return (

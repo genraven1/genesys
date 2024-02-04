@@ -8,7 +8,7 @@ import ViewAllTalents from "./ViewAllTalents";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
-function useFetchTalent(name: string): Talent {
+export function useFetchTalent(name: string): Talent {
     const [talent, setTalent] = useState<Talent>()
     useEffect(() => {
         if (!name) {

@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
 import * as React from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
@@ -16,14 +16,16 @@ interface Props {
 
 export default function TalentView(props: Props) {
     const {talent, allSettings} = props
+    const {name} = useParams<{ name: string }>()
     const path = Path.Talent
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + talent.name + '/edit')
+        navigate(path + name + '/edit')
     }
 
     const renderRanked = (): JSX.Element => {
+        console.log(talent)
         if (talent?.ranked!! === undefined) {
             return <Fragment/>
         }
@@ -40,7 +42,7 @@ export default function TalentView(props: Props) {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={talent?.name!!}
+                title={talent?.name!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>

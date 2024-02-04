@@ -31,7 +31,6 @@ public class TalentService {
 
     public Mono<Talent> updateTalent(final String name, final Talent talent) {
         return getTalent(name).map(tal -> {
-            tal.setName(talent.getName());
             tal.setActivation(talent.getActivation());
             tal.setRanked(talent.isRanked());
             tal.setTier(talent.getTier());

@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,10 +23,10 @@ public class Talent {
     private String name;
     private Activation activation;
     private Tier tier;
-    private boolean ranked;
+    private boolean ranked = false;
     private String summary;
     private String description;
-    private List<Setting> settings;
+    private List<Setting> settings = new ArrayList<>();
 
     @AllArgsConstructor
     @Getter
