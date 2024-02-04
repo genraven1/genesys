@@ -6,26 +6,42 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
-import {Fragment} from "react";
+import {Fragment, useEffect, useState} from "react";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
+import TalentService from "../../services/TalentService";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
-    talent: Talent
     allSettings: Setting[]
 }
 
-export default function TalentView(props: Props) {
-    const {talent, allSettings} = props
-    const {name} = useParams<{ name: string }>()
+export default function TalentView() {
+    // const {allSettings} = props
+    const allSettings = useFetchAllSettings();
+    const [talent, setTalent] = useState<Talent>()
+    const { name } = useParams();
     const path = Path.Talent
     let navigate = useNavigate()
+
+    const getTalent = (name: string) => {
+        TalentService.getTalent(name).then(tal => {
+            setTalent(tal)
+        })
+    }
+
+    useEffect(() => {
+        if (name) {
+            console.log(name)
+            getTalent(name)
+            console.log(talent)
+        }
+    }, [name])
 
     const onEdit = () => {
         navigate(path + name + '/edit')
     }
 
     const renderRanked = (): JSX.Element => {
-        console.log(talent)
         if (talent?.ranked!! === undefined) {
             return <Fragment/>
         }

@@ -24,6 +24,7 @@ import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
 import MainDashboard from "./MainDashboard";
+import TalentView from "../talents/TalentView";
 
 export default function App() {
 
@@ -44,7 +45,7 @@ export default function App() {
                     <Route path={Path.Setting + ':name/edit'} element={<SettingWorkflow/>}/>
 
                     <Route path={Path.Talent} element={<TalentWorkflow/>}/>
-                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow/>}/>
+                    <Route path={Path.Talent + ':name/view'} element={<TalentView/>}/>
                     <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow/>}/>
 
                     <Route path={Path.Qualities} element={<QualityWorkflow/>}/>
