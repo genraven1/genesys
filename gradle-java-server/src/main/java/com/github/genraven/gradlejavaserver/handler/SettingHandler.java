@@ -2,6 +2,7 @@ package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.Setting;
 import com.github.genraven.gradlejavaserver.service.SettingService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class SettingHandler {
     }
 
     public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
-        System.out.println("HERE");
+        System.out.println("GET ALL SETTINGS");
         return settingService.getAllSettings().collectList().flatMap(settings -> {
             if (settings.isEmpty()) {
                 return ServerResponse.noContent().build();
@@ -44,9 +45,10 @@ public class SettingHandler {
         });
     }
 
-    public Mono<ServerResponse> getSettingById(final ServerRequest serverRequest) {
-        final Long id = Long.valueOf(serverRequest.pathVariable("id"));
-        return settingService.getSettingById(id)
+    public Mono<ServerResponse> getSetting(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable("name");
+        System.out.println("GET SINGLE SETTING");
+        return settingService.getSetting(name)
                 .flatMap(setting -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(setting))
@@ -59,6 +61,6 @@ public class SettingHandler {
     }
 
     private URI getURI(final Setting setting) {
-        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(setting.getId()).toUri();
+        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(setting.getName()).toUri();
     }
 }

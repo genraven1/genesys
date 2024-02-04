@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface SettingRepository extends ReactiveMongoRepository<Setting, Long> {
+public interface SettingRepository extends ReactiveMongoRepository<Setting, String> {
     Mono<Setting> findByCurrent(boolean current);
 }

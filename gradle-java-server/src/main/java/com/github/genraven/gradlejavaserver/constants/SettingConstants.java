@@ -4,7 +4,7 @@ import static com.github.genraven.gradlejavaserver.constants.CommonConstants.ID_
 import static com.github.genraven.gradlejavaserver.constants.CommonConstants.NAME_WITH_BRACKETS;
 
 public class SettingConstants {
-    public static final String SETTING_PATH = "/settings/";
+    public static final String SETTING_PATH = "/settings";
     public static final String CURRENT = "/current/";
 
     public static final String GET_SETTING_BY_ID = SETTING_PATH + ID_WITH_BRACKETS;

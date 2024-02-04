@@ -20,8 +20,8 @@ public class SettingService {
         return settingRepository.findAll();
     }
 
-    public Mono<Setting> getSettingById(final Long id) {
-        return settingRepository.findById(id);
+    public Mono<Setting> getSetting(final String name) {
+        return settingRepository.findById(name);
     }
 
     public Mono<Setting> createSetting(final String name) {

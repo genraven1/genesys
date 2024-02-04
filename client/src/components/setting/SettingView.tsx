@@ -17,11 +17,19 @@ export default function SettingView(props: {setting: Setting}) {
         navigate(path + id + '/edit')
     }
 
+    const getName = (): string => {
+        if (!setting) {
+            return 'Setting'
+        }
+        console.log(setting)
+        return setting.name
+    }
+
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={setting?.name!!}
+                title={getName()}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>

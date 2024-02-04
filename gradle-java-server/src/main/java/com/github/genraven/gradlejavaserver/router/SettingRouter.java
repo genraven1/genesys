@@ -17,9 +17,9 @@ public class SettingRouter {
     public RouterFunction<ServerResponse> settingRouterMethod(final SettingHandler settingHandler) {
         return RouterFunctions.route()
                 .path(SETTING_PATH, builder -> builder
-                        .GET(settingHandler::getAllSettings)
-                        .POST("{name}", settingHandler::createSetting)
-                        .GET("{id}", settingHandler::getSettingById))
+                        .GET("/", settingHandler::getAllSettings)
+                        .POST("/{name}", settingHandler::createSetting)
+                        .GET("/{name}", settingHandler::getSetting))
                 .path(CURRENT, builder -> builder
                         .GET(settingHandler::getCurrentSetting))
                 .build();
