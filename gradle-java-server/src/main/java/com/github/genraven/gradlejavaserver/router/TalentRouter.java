@@ -14,8 +14,8 @@ public class TalentRouter {
                 .path("/talents/", builder -> builder
                         .GET(talentHandler::getAllTalents)
                         .POST("{name}", talentHandler::createTalent)
-                        .GET("{id}", talentHandler::getTalentById)
-                        .PUT("{id}", talentHandler::updateTalent))
+                        .GET("{name}", talentHandler::getTalentById)
+                        .PUT("{name}", talentHandler::updateTalent))
                 .build();
     }
 }

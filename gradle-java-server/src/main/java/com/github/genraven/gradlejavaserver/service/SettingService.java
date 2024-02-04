@@ -27,4 +27,12 @@ public class SettingService {
     public Mono<Setting> createSetting(final String name) {
         return settingRepository.save(new Setting(name));
     }
+
+    public Mono<Setting> updateSetting(final String name, final Setting setting) {
+        return getSetting(name).map(set -> {
+            set.setName(setting.getName());
+            set.setMagic(setting.isMagic());
+            return set;
+        }).flatMap(settingRepository::save);
+    }
 }

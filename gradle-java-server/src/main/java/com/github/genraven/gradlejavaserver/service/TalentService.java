@@ -21,16 +21,16 @@ public class TalentService {
         return talentRepository.findAll();
     }
 
-    public Mono<Talent> getTalentById(final Long id) {
-        return talentRepository.findById(id);
+    public Mono<Talent> getTalent(final String name) {
+        return talentRepository.findById(name);
     }
 
     public Mono<Talent> createTalent(final String name) {
         return talentRepository.save(new Talent(name));
     }
 
-    public Mono<Talent> updateTalent(final Long id, final Talent talent) {
-        return talentRepository.findById(id).map(tal -> {
+    public Mono<Talent> updateTalent(final String name, final Talent talent) {
+        return getTalent(name).map(tal -> {
             tal.setName(talent.getName());
             tal.setActivation(talent.getActivation());
             tal.setRanked(talent.isRanked());

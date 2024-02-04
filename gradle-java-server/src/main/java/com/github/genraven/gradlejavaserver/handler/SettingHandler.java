@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.Setting;
+import com.github.genraven.gradlejavaserver.domain.Talent;
 import com.github.genraven.gradlejavaserver.service.SettingService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,6 @@ public class SettingHandler {
     }
 
     public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
-        System.out.println("GET ALL SETTINGS");
         return settingService.getAllSettings().collectList().flatMap(settings -> {
             if (settings.isEmpty()) {
                 return ServerResponse.noContent().build();
@@ -47,7 +47,6 @@ public class SettingHandler {
 
     public Mono<ServerResponse> getSetting(final ServerRequest serverRequest) {
         final String name = serverRequest.pathVariable("name");
-        System.out.println("GET SINGLE SETTING");
         return settingService.getSetting(name)
                 .flatMap(setting -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,6 +57,17 @@ public class SettingHandler {
     public Mono<ServerResponse> createSetting(final ServerRequest serverRequest) {
         return settingService.createSetting(serverRequest.pathVariable(NAME))
                 .flatMap(setting -> ServerResponse.created(getURI(setting)).bodyValue(setting));
+    }
+
+    public Mono<ServerResponse> updateSetting(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable("name");
+        final Mono<Setting> settingMono = serverRequest.bodyToMono(Setting.class);
+        return settingMono
+                .flatMap(setting -> settingService.updateSetting(name, setting))
+                .flatMap(setting -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(setting)))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     private URI getURI(final Setting setting) {

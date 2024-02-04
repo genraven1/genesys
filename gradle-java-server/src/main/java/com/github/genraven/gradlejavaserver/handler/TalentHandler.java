@@ -36,8 +36,8 @@ public class TalentHandler {
     }
 
     public Mono<ServerResponse> getTalentById(final ServerRequest serverRequest) {
-        final Long id = Long.valueOf(serverRequest.pathVariable("id"));
-        return talentService.getTalentById(id)
+        final String name = serverRequest.pathVariable("name");
+        return talentService.getTalent(name)
                 .flatMap(talent -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(talent)))
@@ -50,10 +50,10 @@ public class TalentHandler {
     }
 
     public Mono<ServerResponse> updateTalent(final ServerRequest serverRequest) {
-        final Long id = Long.valueOf(serverRequest.pathVariable("id"));
+        final String name = serverRequest.pathVariable("name");
         final Mono<Talent> talentMono = serverRequest.bodyToMono(Talent.class);
         return talentMono
-                .flatMap(talent -> talentService.updateTalent(id, talent))
+                .flatMap(talent -> talentService.updateTalent(name, talent))
                 .flatMap(talent -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(talent)))
@@ -61,6 +61,6 @@ public class TalentHandler {
     }
 
     private URI getURI(final Talent talent) {
-        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(talent.getId()).toUri();
+        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(talent.getName()).toUri();
     }
 }

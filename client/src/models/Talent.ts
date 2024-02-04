@@ -2,7 +2,6 @@ import {Option} from "../components/common/InputSelectField";
 import Setting from "./Setting";
 
 export default interface Talent {
-    id: number
     name: string
     ranked: boolean
     activation: Activation

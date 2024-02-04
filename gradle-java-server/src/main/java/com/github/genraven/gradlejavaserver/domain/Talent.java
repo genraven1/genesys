@@ -19,7 +19,6 @@ public class Talent {
     private Talent() {}
 
     @Id
-    private Long id;
     private String name;
     private Activation activation;
     private Tier tier;
