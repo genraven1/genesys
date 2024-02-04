@@ -16,11 +16,11 @@ import java.util.List;
 public class Player extends Actor {
 
     public Player(final String name) {
-        super(name);
+        this.name = name;
     }
 
     @Id
-    private Long id;
+    private String name;
     private int strain;
     private List<PlayerSkill> skills = new ArrayList<>();
 }

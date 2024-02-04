@@ -18,7 +18,6 @@ public class Skill {
     protected Skill() {}
 
     @Id
-    private Long id;
     private String name;
     private CharacteristicType characteristic;
     private SkillType type;

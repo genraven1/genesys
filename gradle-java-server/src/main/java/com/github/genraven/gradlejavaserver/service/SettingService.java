@@ -9,8 +9,13 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class SettingService {
+
+    private final SettingRepository settingRepository;
+
     @Autowired
-    private SettingRepository settingRepository;
+    public SettingService(final SettingRepository settingRepository) {
+        this.settingRepository = settingRepository;
+    }
 
     public Mono<Setting> getCurrentSetting(){
         return settingRepository.findByCurrent(true);

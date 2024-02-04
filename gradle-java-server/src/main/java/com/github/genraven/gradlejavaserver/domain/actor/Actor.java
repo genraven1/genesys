@@ -10,12 +10,8 @@ import java.util.List;
 @Data
 public class Actor {
 
-    public Actor (final String name) {
-        this.name = name;
-    }
     protected Actor() {}
 
-    private String name;
     private ActorType type;
     private int brawn = 1;
     private int agility = 1;

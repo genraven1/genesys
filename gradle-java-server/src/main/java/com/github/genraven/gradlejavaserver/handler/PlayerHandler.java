@@ -61,6 +61,6 @@ public class PlayerHandler {
     }
 
     private URI getURI(final Player player) {
-        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(player.getId()).toUri();
+        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(player.getName()).toUri();
     }
 }
