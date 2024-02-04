@@ -26,17 +26,17 @@ export default function ArmorEdit(props: Props) {
 
     useEffect(() => {setArmor(ar)}, [ar])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyArmor = {...armor} as Armor
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyArmor.settings = copyArmor.settings.concat(setting)
         await updateArmor(copyArmor)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyArmor = {...armor} as Armor
         copyArmor.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyArmor.settings.splice(index, 1)
             }
         })

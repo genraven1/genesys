@@ -26,15 +26,15 @@ export function useFetchAllSettings(): Setting[] {
     return settings
 }
 
-function useFetchSetting(id: number): Setting {
+function useFetchSetting(name: string): Setting {
     const [setting, setSetting] = useState<Setting>()
     useEffect(() => {
-        if (!id) {
+        if (!name) {
             return
         }
         (async (): Promise<void> => {
             try {
-                const settingData = await SettingService.getSetting(id)
+                const settingData = await SettingService.getSetting(name)
                 if (settingData) {
                     setSetting(settingData)
                 }
@@ -42,7 +42,7 @@ function useFetchSetting(id: number): Setting {
                 console.log(err)
             }
         })()
-    }, [id, setSetting])
+    }, [name, setSetting])
     return setting as Setting
 }
 
@@ -64,8 +64,8 @@ export function useFetchCurrentSetting(): Setting {
 }
 
 export default function SettingWorkflow(): JSX.Element {
-    const {id} = useParams<{ id?: string }>()
-    const setting = useFetchSetting(Number(id!!))
+    const {name} = useParams<{ name?: string }>()
+    const setting = useFetchSetting(name as string)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname

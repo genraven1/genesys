@@ -9,12 +9,12 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function SettingView(props: {setting: Setting}) {
     const {setting} = props
-    const { id } = useParams<{ id: string }>()
+    const { name } = useParams<{ name: string }>()
     const path = Path.Setting
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + name + '/edit')
     }
 
     const getName = (): string => {

@@ -28,17 +28,17 @@ export default function TalentEdit(props: Props) {
         setTalent(tal)
     }, [tal])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyTalent = {...talent} as Talent
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyTalent.settings = copyTalent.settings.concat(setting)
         await updateTalent(copyTalent)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyTalent = {...talent} as Talent
         copyTalent.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === id) {
                 copyTalent.settings.splice(index, 1)
             }
         })

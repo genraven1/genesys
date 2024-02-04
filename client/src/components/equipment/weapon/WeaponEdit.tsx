@@ -36,17 +36,17 @@ export default function WeaponEdit(props: Props) {
         setWeapon(wea)
     }, [wea])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyWeapon = {...weapon} as Weapon
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyWeapon.settings = copyWeapon.settings.concat(setting)
         await updateWeapon(copyWeapon)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyWeapon.settings.splice(index, 1)
             }
         })
