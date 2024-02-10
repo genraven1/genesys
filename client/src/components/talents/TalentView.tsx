@@ -12,30 +12,20 @@ import TalentService from "../../services/TalentService";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
+    tal: Talent
     allSettings: Setting[]
 }
 
-export default function TalentView() {
-    // const {allSettings} = props
-    const allSettings = useFetchAllSettings();
-    const [talent, setTalent] = useState<Talent>()
-    const { name } = useParams();
+export default function TalentView(props: Props) {
+    const {tal, allSettings} = props
+    const [talent, setTalent] = useState<Talent>(tal)
+    const { name } = useParams<string>();
     const path = Path.Talent
     let navigate = useNavigate()
 
-    const getTalent = (name: string) => {
-        TalentService.getTalent(name).then(tal => {
-            setTalent(tal)
-        })
-    }
-
     useEffect(() => {
-        if (name) {
-            console.log(name)
-            getTalent(name)
-            console.log(talent)
-        }
-    }, [name])
+        console.log(talent)
+    }, [talent]);
 
     const onEdit = () => {
         navigate(path + name + '/edit')
@@ -76,7 +66,7 @@ export default function TalentView() {
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!}/>
                     </Grid>
                 </Grid>
-                <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
+                <ViewSettingsCard settings={talent?.settings!!} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

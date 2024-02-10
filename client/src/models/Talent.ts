@@ -38,3 +38,17 @@ export const getTierOptions = (): Option[] => {
 export interface ActorTalent extends Talent {
     ranks: number
 }
+
+export class DefaultTalent {
+    static create(): Talent {
+        return {
+            settings: [],
+            summary: '',
+            name: '',
+            ranked: false,
+            activation: Activation.Passive,
+            tier: Tier.First,
+            description: ''
+        };
+    }
+}
