@@ -20,7 +20,7 @@ interface Props {
 
 export default function TalentEdit(props: Props) {
     const {tal, settings} = props
-    const {id} = useParams<{ id: string }>()
+    const {name} = useParams<{ name: string }>()
     const [talent, setTalent] = useState<Talent>(tal)
     let navigate = useNavigate()
 
@@ -28,17 +28,17 @@ export default function TalentEdit(props: Props) {
         setTalent(tal)
     }, [tal])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyTalent = {...talent} as Talent
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyTalent.settings = copyTalent.settings.concat(setting)
         await updateTalent(copyTalent)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyTalent = {...talent} as Talent
         copyTalent.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyTalent.settings.splice(index, 1)
             }
         })
@@ -72,11 +72,11 @@ export default function TalentEdit(props: Props) {
 
     const updateTalent = async (copyTalent: Talent) => {
         setTalent(copyTalent)
-        await TalentService.updateTalent(copyTalent.id, copyTalent)
+        await TalentService.updateTalent(name as string, copyTalent)
     }
 
     const onView = () => {
-        navigate(Path.Talent + id!! + '/view');
+        navigate(Path.Talent + name + '/view');
     }
 
     return (

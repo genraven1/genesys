@@ -37,17 +37,17 @@ export default function SkillEdit(props: Props) {
         setSkill(sk)
     }, [sk])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copySkill = {...skill} as Skill
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copySkill.settings = copySkill.settings.concat(setting)
         await updateSkill(copySkill)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copySkill = {...skill} as Skill
         copySkill.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copySkill.settings.splice(index, 1)
             }
         })

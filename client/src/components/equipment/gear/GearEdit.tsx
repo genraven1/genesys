@@ -31,17 +31,17 @@ export default function GearEdit(props: Props) {
 
     useEffect(() => {setGear(gea)}, [gea])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyGear = {...gear} as Gear
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyGear.settings = copyGear.settings.concat(setting)
         await updateGear(copyGear)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyGear = {...gear} as Gear
         copyGear.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyGear.settings.splice(index, 1)
             }
         })

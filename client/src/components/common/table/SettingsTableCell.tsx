@@ -11,7 +11,7 @@ export default function SettingTableCell(props: Props): JSX.Element {
     const {settings, setting} = props
     let value = "No"
     for (const set of settings) {
-        if (setting.id === set.id) {
+        if (setting.name === set.name) {
             value = "Yes"
         }
     }

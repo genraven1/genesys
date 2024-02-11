@@ -38,17 +38,17 @@ export default function PlayerView(props: Props) {
         setPlayer(play)
     }, [play])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyPlayer = {...player} as Player
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyPlayer.settings = copyPlayer.settings.concat(setting)
         await updatePlayer(copyPlayer)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyPlayer = {...player} as Player
         copyPlayer.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyPlayer.settings.splice(index, 1)
             }
         })

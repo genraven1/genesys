@@ -2,7 +2,6 @@ import {Option} from "../components/common/InputSelectField";
 import Setting from "./Setting";
 
 export default interface Talent {
-    id: number
     name: string
     ranked: boolean
     activation: Activation
@@ -38,4 +37,18 @@ export const getTierOptions = (): Option[] => {
 
 export interface ActorTalent extends Talent {
     ranks: number
+}
+
+export class DefaultTalent {
+    static create(): Talent {
+        return {
+            settings: [],
+            summary: '',
+            name: '',
+            ranked: false,
+            activation: Activation.Passive,
+            tier: Tier.First,
+            description: ''
+        };
+    }
 }

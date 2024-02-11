@@ -1,0 +1,43 @@
+package com.github.genraven.gradlejavaserver.service;
+
+import com.github.genraven.gradlejavaserver.domain.Setting;
+import com.github.genraven.gradlejavaserver.repository.SettingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+public class SettingService {
+
+    private final SettingRepository settingRepository;
+
+    @Autowired
+    public SettingService(final SettingRepository settingRepository) {
+        this.settingRepository = settingRepository;
+    }
+
+    public Mono<Setting> getCurrentSetting(){
+        return settingRepository.findByCurrent(true);
+    }
+
+    public Flux<Setting> getAllSettings() {
+        return settingRepository.findAll();
+    }
+
+    public Mono<Setting> getSetting(final String name) {
+        return settingRepository.findById(name);
+    }
+
+    public Mono<Setting> createSetting(final String name) {
+        return settingRepository.save(new Setting(name));
+    }
+
+    public Mono<Setting> updateSetting(final String name, final Setting setting) {
+        return getSetting(name).map(set -> {
+            set.setName(setting.getName());
+            set.setMagic(setting.isMagic());
+            return set;
+        }).flatMap(settingRepository::save);
+    }
+}

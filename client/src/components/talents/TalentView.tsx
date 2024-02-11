@@ -6,22 +6,29 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
-import {Fragment} from "react";
+import {Fragment, useEffect, useState} from "react";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
+import TalentService from "../../services/TalentService";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
-    talent: Talent
+    tal: Talent
     allSettings: Setting[]
 }
 
 export default function TalentView(props: Props) {
-    const {talent, allSettings} = props
-    const {id} = useParams<{ id: string }>()
+    const {tal, allSettings} = props
+    const [talent, setTalent] = useState<Talent>(tal)
+    const { name } = useParams<string>();
     const path = Path.Talent
     let navigate = useNavigate()
 
+    useEffect(() => {
+        console.log(talent)
+    }, [talent]);
+
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + name + '/edit')
     }
 
     const renderRanked = (): JSX.Element => {
@@ -41,7 +48,7 @@ export default function TalentView(props: Props) {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={talent?.name!!}
+                title={talent?.name!}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
@@ -59,7 +66,7 @@ export default function TalentView(props: Props) {
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!}/>
                     </Grid>
                 </Grid>
-                <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
+                <ViewSettingsCard settings={talent?.settings!!} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

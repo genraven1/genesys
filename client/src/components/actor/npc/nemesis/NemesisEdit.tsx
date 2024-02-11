@@ -39,17 +39,17 @@ export default function NemesisEdit(props: Props) {
         setNemesis(nem)
     }, [nem])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyNemesis = {...nemesis} as Nemesis
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyNemesis.settings = copyNemesis.settings.concat(setting)
         await updateNemesis(copyNemesis)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyNemesis = {...nemesis} as Nemesis
         copyNemesis.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyNemesis.settings.splice(index, 1)
             }
         })

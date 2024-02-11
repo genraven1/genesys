@@ -16,15 +16,15 @@ export default class SettingService {
         return await (await axios.get(Path.Setting)).data;
     }
 
-    static async getSetting(id: number): Promise<Setting> {
-        return await (await axios.get(Path.Setting + id)).data;
+    static async getSetting(name: string): Promise<Setting> {
+        return await (await axios.get(Path.Setting + name)).data;
     }
 
     static async createSetting(name: string): Promise<Setting> {
         return await (await axios.post(Path.Setting + name)).data;
     }
 
-    static async updateSetting(id: number, setting: Setting): Promise<Setting> {
-        return await (await axios.put(Path.Setting + id, setting)).data;
+    static async updateSetting(name: string, setting: Setting): Promise<Setting> {
+        return await (await axios.put(Path.Setting + name, setting)).data;
     }
 }

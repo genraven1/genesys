@@ -38,17 +38,17 @@ export default function MinionEdit(props: Props) {
         setMinion(min)
     }, [min])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyMinion = {...minion} as Minion
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyMinion.settings = copyMinion.settings.concat(setting)
         await updateMinion(copyMinion)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyMinion = {...minion} as Minion
         copyMinion.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyMinion.settings.splice(index, 1)
             }
         })

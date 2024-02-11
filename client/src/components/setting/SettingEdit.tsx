@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Checkbox, Divider, Grid, IconButton} from
 import {useEffect, useState} from 'react';
 import Setting from '../../models/Setting';
 import SettingService from '../../services/SettingService';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
@@ -13,7 +13,6 @@ interface Props {
 
 export default function SettingEdit(props: Props) {
     const {set} = props
-    const {id} = useParams<{ id: string }>()
     const [setting, setSetting] = useState<Setting>(set)
 
     let navigate = useNavigate()
@@ -32,11 +31,11 @@ export default function SettingEdit(props: Props) {
         }
         setSetting(copySetting)
 
-        await SettingService.updateSetting(copySetting.id, copySetting)
+        await SettingService.updateSetting(copySetting.name, copySetting)
     }
 
     const onView = () => {
-        navigate(Path.Setting + id + '/view')
+        navigate(Path.Setting + setting.name + '/view')
     }
 
     return (

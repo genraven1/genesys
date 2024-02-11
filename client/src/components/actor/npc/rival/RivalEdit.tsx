@@ -37,17 +37,17 @@ export default function RivalEdit(props: Props) {
 
     useEffect(() => {setRival(riv)}, [riv])
 
-    const onSettingAddition = async (id: number) => {
+    const onSettingAddition = async (name: string) => {
         const copyRival = {...rival} as Rival
-        let setting = await SettingService.getSetting(id)
+        let setting = await SettingService.getSetting(name)
         copyRival.settings = copyRival.settings.concat(setting)
         await updateRival(copyRival)
     }
 
-    const onSettingRemoval = async (id: number) => {
+    const onSettingRemoval = async (name: string) => {
         const copyRival = {...rival} as Rival
         copyRival.settings.forEach((set, index) => {
-            if (set.id === id) {
+            if (set.name === name) {
                 copyRival.settings.splice(index, 1)
             }
         })
