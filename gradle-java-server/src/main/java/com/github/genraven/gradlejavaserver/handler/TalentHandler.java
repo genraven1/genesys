@@ -35,13 +35,13 @@ public class TalentHandler {
         });
     }
 
-    public Mono<ServerResponse> getTalentById(final ServerRequest serverRequest) {
+    public Mono<ServerResponse> getTalent(final ServerRequest serverRequest) {
         final String name = serverRequest.pathVariable("name");
         return talentService.getTalent(name)
                 .flatMap(talent -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(talent)))
-                .switchIfEmpty(ServerResponse.notFound().build());
+                        .body(fromValue(talent))
+                    .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     public Mono<ServerResponse> createTalent(final ServerRequest serverRequest) {

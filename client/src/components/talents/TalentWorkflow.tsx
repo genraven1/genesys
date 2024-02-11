@@ -8,47 +8,25 @@ import ViewAllTalents from "./ViewAllTalents";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
-// function useFetchTalent(name: string): Talent {
-//     const [talent, setTalent] = useState<Talent>()
-//
-//     useEffect(() => {
-//         if (!name) {
-//             return
-//         }
-//         (async (): Promise<void> => {
-//             try {
-//                 const talentData = await TalentService.getTalent(name)
-//                 console.log(talentData)
-//                 if (!talentData) {
-//                     return
-//                 }
-//                 setTalent(talentData)
-//                 console.log(talentData)
-//                 console.log(talent!)
-//             } catch (err) {
-//                 console.log(err)
-//             }
-//         })()
-//         }, [name, setTalent])
-//     return talent as Talent
-// }
-
 function useFetchTalent(name: string): Talent {
     const [talent, setTalent] = useState<Talent>()
 
     useEffect(() => {
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
-            const talentData = await TalentService.getTalent(name)
-            console.log(talentData)
-            setTalent(talentData)
+            try {
+                const talentData = await TalentService.getTalent(name)
+                if (talentData) {
+                    setTalent(talentData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    }, [name])
-
-    useEffect(() => {
-        console.log(talent)
-    }, [talent]);
-
-    return talent!!
+        }, [name, setTalent])
+    return talent as Talent
 }
 
 export default function TalentWorkflow(): JSX.Element {
@@ -61,7 +39,7 @@ export default function TalentWorkflow(): JSX.Element {
         if (pathname.endsWith('/view')) {
             return talent && <TalentView tal={talent!} allSettings={settings}/>
         } else if (pathname.endsWith('/edit')) {
-            return <TalentEdit tal={talent!} settings={settings}/>
+            return talent && <TalentEdit tal={talent!} settings={settings}/>
         } else {
             return <ViewAllTalents/>
         }

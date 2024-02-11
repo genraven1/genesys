@@ -11,11 +11,11 @@ public class TalentRouter {
     @Bean
     public RouterFunction<ServerResponse> talentRouterMethod(final TalentHandler talentHandler) {
         return RouterFunctions.route()
-                .path("/talents/", builder -> builder
-                        .GET(talentHandler::getAllTalents)
-                        .POST("{name}", talentHandler::createTalent)
-                        .GET("{name}", talentHandler::getTalentById)
-                        .PUT("{name}", talentHandler::updateTalent))
+                .path("/talents", builder -> builder
+                        .GET("/", talentHandler::getAllTalents)
+                        .POST("/{name}", talentHandler::createTalent)
+                        .GET("/{name}", talentHandler::getTalent)
+                        .PUT("/{name}", talentHandler::updateTalent))
                 .build();
     }
 }

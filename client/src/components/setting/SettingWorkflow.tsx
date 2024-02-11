@@ -70,9 +70,9 @@ export default function SettingWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <SettingView setting={setting}/>
+            return setting && <SettingView setting={setting}/>
         } else if (pathname.endsWith('/edit')) {
-            return <SettingEdit set={setting}/>
+            return setting && <SettingEdit set={setting}/>
         } else {
             return <ViewAllSettings/>
         }
