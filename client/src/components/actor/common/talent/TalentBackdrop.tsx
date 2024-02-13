@@ -15,7 +15,7 @@ export default function TalentBackdrop(props: Props) {
 
     return (
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
-                <TalentView tal={talent} allSettings={useFetchAllSettings()}/>
+                <TalentView talent={talent} allSettings={useFetchAllSettings()}/>
             </Backdrop>
     )
 }

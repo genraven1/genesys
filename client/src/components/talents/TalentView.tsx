@@ -6,26 +6,19 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Setting from "../../models/Setting";
-import {Fragment, useEffect, useState} from "react";
+import {Fragment} from "react";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
-import TalentService from "../../services/TalentService";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
-    tal: Talent
+    talent: Talent
     allSettings: Setting[]
 }
 
 export default function TalentView(props: Props) {
-    const {tal, allSettings} = props
-    const [talent, setTalent] = useState<Talent>(tal)
+    const {talent, allSettings} = props
     const { name } = useParams<string>();
     const path = Path.Talent
     let navigate = useNavigate()
-
-    useEffect(() => {
-        console.log(talent)
-    }, [talent]);
 
     const onEdit = () => {
         navigate(path + name + '/edit')
@@ -66,7 +59,7 @@ export default function TalentView(props: Props) {
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!}/>
                     </Grid>
                 </Grid>
-                <ViewSettingsCard settings={talent?.settings!!} allSettings={useFetchAllSettings()}/>
+                <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
             </CardContent>
         </Card>
     )

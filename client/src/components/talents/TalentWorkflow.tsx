@@ -1,5 +1,5 @@
 import {Fragment, useEffect, useState} from "react";
-import Talent, {DefaultTalent} from "../../models/Talent";
+import Talent from "../../models/Talent";
 import TalentService from "../../services/TalentService";
 import {useLocation, useParams} from "react-router-dom";
 import TalentView from "./TalentView";
@@ -37,7 +37,7 @@ export default function TalentWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return talent && <TalentView tal={talent!} allSettings={settings}/>
+            return talent && <TalentView talent={talent!} allSettings={settings}/>
         } else if (pathname.endsWith('/edit')) {
             return talent && <TalentEdit tal={talent!} settings={settings}/>
         } else {
