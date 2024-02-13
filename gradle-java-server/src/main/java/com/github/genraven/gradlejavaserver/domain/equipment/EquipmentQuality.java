@@ -1,5 +1,10 @@
 package com.github.genraven.gradlejavaserver.domain.equipment;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class EquipmentQuality extends Quality {
 
     public EquipmentQuality(final Quality quality) {

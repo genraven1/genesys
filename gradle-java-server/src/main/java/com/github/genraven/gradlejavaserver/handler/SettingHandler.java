@@ -66,8 +66,8 @@ public class SettingHandler {
                 .flatMap(setting -> settingService.updateSetting(name, setting))
                 .flatMap(setting -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(setting)))
-                .switchIfEmpty(ServerResponse.notFound().build());
+                        .body(fromValue(setting))
+                .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     private URI getURI(final Setting setting) {
