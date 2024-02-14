@@ -56,8 +56,8 @@ public class TalentHandler {
                 .flatMap(talent -> talentService.updateTalent(name, talent))
                 .flatMap(talent -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(talent)))
-                .switchIfEmpty(ServerResponse.notFound().build());
+                        .body(fromValue(talent))
+                .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     private URI getURI(final Talent talent) {

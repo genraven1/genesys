@@ -12,6 +12,8 @@ public class Setting {
         this.name = name;
     }
 
+    protected Setting() {}
+
     @Id
     private String name;
     private boolean magic;

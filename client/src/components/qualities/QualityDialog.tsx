@@ -16,7 +16,7 @@ export default function QualityDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let quality = await QualityService.createQuality(name)
-        navigate(Path.Qualities + quality?.id!! + '/view')
+        navigate(Path.Qualities + quality.name + '/view')
         onClose()
     }
 

@@ -24,7 +24,6 @@ import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
 import MainDashboard from "./MainDashboard";
-import TalentView from "../talents/TalentView";
 
 export default function App() {
 

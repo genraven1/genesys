@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
@@ -16,7 +16,6 @@ interface Props {
 
 export default function QualityEdit(props: Props) {
     const {qual} = props
-    const {id} = useParams<{ id: string }>()
     const [quality, setQuality] = useState<Quality>(qual)
 
     let navigate = useNavigate()
@@ -49,16 +48,16 @@ export default function QualityEdit(props: Props) {
         }
         setQuality(copyQuality)
 
-        await QualityService.updateQuality(copyQuality.id, copyQuality)
+        await QualityService.updateQuality(copyQuality.name, copyQuality)
     }
 
     const onView = () => {
-        navigate(Path.Qualities + id!! + '/view');
+        navigate(Path.Qualities + quality.name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={quality?.name!!} style={{textAlign: 'center'}}
+            <CardHeader title={quality.name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}>

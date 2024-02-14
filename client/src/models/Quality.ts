@@ -1,5 +1,4 @@
 export default interface Quality {
-    id: number
     name: string
     description: string
     passive: boolean
