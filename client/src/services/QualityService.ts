@@ -16,7 +16,7 @@ export default class QualityService {
         return await (await axios.post(Path.Qualities + name)).data
     }
 
-    static async updateQuality(id: number, quality: Quality): Promise<Quality> {
-        return (await axios.put(Path.Qualities + id, quality)).data;
+    static async updateQuality(name: string, quality: Quality): Promise<Quality> {
+        return (await axios.put(Path.Qualities + name, quality)).data;
     }
 }

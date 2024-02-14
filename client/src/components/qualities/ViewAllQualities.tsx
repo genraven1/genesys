@@ -30,13 +30,13 @@ function Row(props: RowProps): JSX.Element {
     const [open, setOpen] = useState(false)
 
     const renderActivation = (): JSX.Element => {
-        if (quality?.passive!! === undefined) {
+        if (quality.passive === undefined) {
             return <Fragment/>
         }
-        if (quality?.passive!!) {
+        if (quality.passive) {
             return <GenesysDescriptionTypography text={'Passive'}/>
         } else {
-            return <GenesysQualityTypography ranks={quality?.cost}/>
+            return <GenesysQualityTypography ranks={quality.cost}/>
         }
     }
 
@@ -46,7 +46,7 @@ function Row(props: RowProps): JSX.Element {
                 <TypographyCenterTableCell value={quality.name}/>
                 <TableCell style={{textAlign: 'center'}}>{renderActivation()}</TableCell>
                 <TypographyCenterTableCell value={renderUsable(quality)}/>
-                <ActionsTableCell id={String(quality.id)} path={Path.Qualities}/>
+                <ActionsTableCell id={quality.name} path={Path.Qualities}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>

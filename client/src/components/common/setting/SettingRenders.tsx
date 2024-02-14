@@ -4,7 +4,7 @@ import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypogr
 import * as React from "react";
 
 export const renderSettings = (settings: Setting[], allSettings: Setting[]):JSX.Element => {
-    if (settings === undefined) {
+    if (settings === undefined || settings.length === 0) {
         return <GenesysDescriptionTypography text={'None'}/>
     }
     let settingList = []
