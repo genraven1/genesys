@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.service;
 
 import com.github.genraven.gradlejavaserver.domain.lore.Lore;
+import com.github.genraven.gradlejavaserver.domain.lore.Organization;
 import com.github.genraven.gradlejavaserver.repository.LoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class LoreService {
         return loreRepository.findAll();
     }
 
-    public Mono<Lore> getLore(final String name) {
-        return loreRepository.findById(name);
+    public Flux<Organization> getAllOrganizations() {
+        return loreRepository.findAllOrganizations();
     }
 }
