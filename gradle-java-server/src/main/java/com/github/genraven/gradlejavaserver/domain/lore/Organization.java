@@ -2,9 +2,11 @@ package com.github.genraven.gradlejavaserver.domain.lore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Document(collection = "lore")
 public class Organization extends Lore {
 
     public Organization(final Lore lore) {

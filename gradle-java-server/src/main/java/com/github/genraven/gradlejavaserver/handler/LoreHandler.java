@@ -2,7 +2,8 @@ package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.lore.Lore;
 import com.github.genraven.gradlejavaserver.domain.lore.Organization;
-import com.github.genraven.gradlejavaserver.service.LoreService;
+import com.github.genraven.gradlejavaserver.service.lore.LoreService;
+import com.github.genraven.gradlejavaserver.service.lore.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,10 +21,12 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 public class LoreHandler {
 
     private final LoreService loreService;
+    private final OrganizationService organizationService;
 
     @Autowired
-    public LoreHandler(final LoreService loreService) {
+    public LoreHandler(final LoreService loreService, final OrganizationService organizationService) {
         this.loreService = loreService;
+        this.organizationService = organizationService;
     }
 
     public Mono<ServerResponse> getAllLore(final ServerRequest serverRequest) {
@@ -38,7 +41,7 @@ public class LoreHandler {
     }
 
     public Mono<ServerResponse> getAllOrganizations(final ServerRequest serverRequest) {
-        return loreService.getAllOrganizations().collectList().flatMap(organizations -> {
+        return organizationService.getAllOrganizations().collectList().flatMap(organizations -> {
             if (organizations.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
@@ -49,12 +52,12 @@ public class LoreHandler {
     }
 
     public Mono<ServerResponse> createOrganization(final ServerRequest serverRequest) {
-        return loreService.createOrganization(serverRequest.pathVariable(NAME))
+        return organizationService.createOrganization(serverRequest.pathVariable(NAME))
                 .flatMap(organization -> ServerResponse.created(getURI(organization)).bodyValue(organization));
     }
 
     public Mono<ServerResponse> getOrganization(final ServerRequest serverRequest) {
-        return loreService.getOrganization(serverRequest.pathVariable(NAME))
+        return organizationService.getOrganization(serverRequest.pathVariable(NAME))
                 .flatMap(organization -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(organization))
@@ -63,7 +66,7 @@ public class LoreHandler {
 
     public Mono<ServerResponse> updateOrganization(final ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Organization.class)
-                .flatMap(organization -> loreService.updateOrganization(serverRequest.pathVariable(NAME), organization))
+                .flatMap(organization -> organizationService.updateOrganization(serverRequest.pathVariable(NAME), organization))
                 .flatMap(organization -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(organization))
