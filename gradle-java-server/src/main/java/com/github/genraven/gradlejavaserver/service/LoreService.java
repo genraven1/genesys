@@ -25,4 +25,8 @@ public class LoreService {
     public Flux<Organization> getAllOrganizations() {
         return loreRepository.findAllOrganizations();
     }
+
+    public Mono<Organization> createOrganization(final String name) {
+        return loreRepository.saveOrganization(new Organization(new Lore(name)));
+    }
 }

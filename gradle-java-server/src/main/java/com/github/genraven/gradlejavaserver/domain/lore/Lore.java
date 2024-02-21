@@ -17,6 +17,10 @@ public class Lore {
 
     protected Lore() {}
 
+    public Lore(final String name) {
+        this.name = name;
+    }
+
     @Id
     private String name;
     private Type type;

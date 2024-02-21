@@ -16,7 +16,8 @@ public class LoreRouter {
                 .path("/lore", builder -> builder
                         .GET("/", loreHandler::getAllLore))
                 .path("/lore/organizations", builder -> builder
-                        .GET("/", loreHandler::getAllOrganizations))
+                        .GET("/", loreHandler::getAllOrganizations)
+                        .POST("/{name}", loreHandler::createOrganization))
                 .build();
     }
 }
