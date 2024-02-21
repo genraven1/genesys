@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.lore.Lore;
+import com.github.genraven.gradlejavaserver.domain.lore.Organization;
 import com.github.genraven.gradlejavaserver.service.LoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -50,6 +51,23 @@ public class LoreHandler {
     public Mono<ServerResponse> createOrganization(final ServerRequest serverRequest) {
         return loreService.createOrganization(serverRequest.pathVariable(NAME))
                 .flatMap(organization -> ServerResponse.created(getURI(organization)).bodyValue(organization));
+    }
+
+    public Mono<ServerResponse> getOrganization(final ServerRequest serverRequest) {
+        return loreService.getOrganization(serverRequest.pathVariable(NAME))
+                .flatMap(organization -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(organization))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> updateOrganization(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Organization.class)
+                .flatMap(organization -> loreService.updateOrganization(serverRequest.pathVariable(NAME), organization))
+                .flatMap(organization -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(organization))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     private URI getURI(final Lore lore) {

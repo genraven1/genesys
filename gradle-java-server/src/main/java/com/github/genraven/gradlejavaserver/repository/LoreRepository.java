@@ -12,4 +12,5 @@ public interface LoreRepository extends ReactiveMongoRepository<Lore, String> {
     Flux<Organization> findAllOrganizations();
 
     Mono<Organization> saveOrganization(final Organization organization);
+    Mono<Organization> getOrganization(final String name);
 }
