@@ -6,8 +6,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Document(collection = "lore")
+@Document(collection = "organizations")
 public class Organization extends Lore {
+
+    protected Organization() {}
 
     public Organization(final Lore lore) {
         this.setName(lore.getName());

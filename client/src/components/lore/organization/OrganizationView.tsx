@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Organization} from "../../../models/lore/Organization";
 import {LorePath} from "../../../services/Path";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
@@ -12,19 +12,18 @@ interface Props {
 
 export default function OrganizationView(props: Props) {
     const {organization} = props
-    const { id } = useParams<{ id: string }>()
     const path = LorePath.Organization
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + organization.name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={id}
+                title={organization.name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
