@@ -1,7 +1,10 @@
 package com.github.genraven.gradlejavaserver.domain.lore;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,8 +20,22 @@ public class Organization extends Lore {
         this.setSettings(lore.getSettings());
     }
 
+    private OrgType orgType;
     private int founded;
     private int disbanded;
     private String nickname;
     private String membersName;
+
+    @Getter
+    @AllArgsConstructor
+    public enum OrgType {
+        POLITICAL("Political"),
+        SOCIAL("Social"),
+        RELIGIOUS("Religious"),
+        MILITARY("Military"),
+        ACADEMIC("Academic");
+
+        @JsonValue
+        private final String label;
+    }
 }
