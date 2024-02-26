@@ -11,7 +11,7 @@ import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {LorePath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface RowProps {
@@ -65,6 +65,5 @@ export function ViewAllLore(): JSX.Element {
                 </TableContainer>
             </CardContent>
         </Card>
-
     )
 }

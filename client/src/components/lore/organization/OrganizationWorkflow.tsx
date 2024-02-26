@@ -22,9 +22,9 @@ function useFetchOrganization(name: string, path: LorePath): Organization {
 }
 
 export default function OrganizationWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
+    const { name } = useParams<{ name: string }>()
     const path = LorePath.Organization
-    const organization = useFetchOrganization(name!!, path)
+    const organization = useFetchOrganization(name as string, path)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname

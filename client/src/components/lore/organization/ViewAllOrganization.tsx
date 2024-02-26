@@ -69,6 +69,5 @@ export function ViewAllOrganizations(): JSX.Element {
                 </TableContainer>
             </CardContent>
         </Card>
-
     )
 }

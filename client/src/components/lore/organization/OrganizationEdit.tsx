@@ -86,23 +86,23 @@ export default function OrganizationEdit(props: Props) {
                         }} options={getOrgTypes()} title={'Type of Organization'}/>
                     </Grid>
                     <Grid container spacing={10}>
-                        <EditNumberCard title={'Founding Year'} value={organization?.founded}
+                        <EditNumberCard title={'Founding Year'} value={organization.founded}
                                         onChange={(value: number): void => {
                                             onChange(OrgKey.founded, String(value))
                                         }}/>
-                        <EditNumberCard title={'Year Disbanded'} value={organization?.disbanded!!}
+                        <EditNumberCard title={'Year Disbanded'} value={organization.disbanded!!}
                                         onChange={(value: number): void => {
                                             onChange(OrgKey.disbanded, String(value))
                                         }}/>
                     </Grid>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={organization?.nickname}
+                        <InputTextFieldCard defaultValue={organization.nickname}
                                             onCommit={(value: string): void => {
                                                 onChange(OrgKey.nickname, value)
                                             }} title={'Alternative Name'}
                                             helperText={'Other Names the Organization goes by'}
                                             placeholder={'Pirates Republic'}/>
-                        <InputTextFieldCard defaultValue={organization?.membersName}
+                        <InputTextFieldCard defaultValue={organization.membersName}
                                             onCommit={(value: string): void => {
                                                 onChange(OrgKey.membersName, value)
                                             }} title={'Name of Members'} helperText={'How members are referred to'}
