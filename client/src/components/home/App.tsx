@@ -6,8 +6,6 @@ import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
-import LoreMenu from "../lore/common/LoreMenu";
-import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
@@ -91,8 +89,7 @@ export default function App() {
                     {/*Lore Routes*/}
                     <Route path={Path.Lore} element={<ViewAllLore/>}/>
 
-                    <Route path={LorePath.Organization}
-                           element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>}/>
+                    <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
                 </Routes>

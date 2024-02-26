@@ -33,6 +33,10 @@ public class OrganizationService {
     public Mono<Organization> updateOrganization(final String name, final Organization organization) {
         return getOrganization(name).map(org -> {
             org.setSettings(organization.getSettings());
+            org.setDisbanded(organization.getDisbanded());
+            org.setFounded(organization.getFounded());
+            org.setNickname(organization.getNickname());
+            org.setMembersName(organization.getMembersName());
             return org;
         }).flatMap(organizationRepository::save);
     }

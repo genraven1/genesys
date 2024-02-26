@@ -1,14 +1,16 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {LorePath} from "../../../services/Path";
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import {Organization, OrgKey, OrgType} from "../../../models/lore/Organization";
 import LoreService from "../../../services/LoreService";
-import InputSelectField, {Option} from "../../common/InputSelectField";
+import {Option} from "../../common/InputSelectField";
 import EditNumberCard from "../../common/EditNumberCard";
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
+import {LoreType} from "../../../models/lore/Lore";
+import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 
 const getOrgTypes = (): Option[] => {
     return Object.values(OrgType).map((value) => ({value}))
@@ -20,33 +22,14 @@ interface Props {
 
 export default function OrganizationEdit(props: Props) {
     const {org} = props
-    const {id} = useParams<{ id: string }>()
     const path = LorePath.Organization
     const [organization, setOrganization] = useState<Organization>(org)
 
     let navigate = useNavigate()
 
-    useEffect(() => {setOrganization(org)}, [org])
-
-    const onNumberChange = async (key: keyof Organization, value: number) => {
-        const copyOrg = {...organization} as Organization
-        switch (key) {
-            case "founded":
-                copyOrg.founded = value
-                break
-            case "disbanded":
-                copyOrg.disbanded = value
-                break
-            case "type":
-            case "orgType":
-            case "name":
-            case "membersName":
-            case "nickname":
-                break
-        }
-
-        await updateOrganization(copyOrg)
-    }
+    useEffect(() => {
+        setOrganization(org)
+    }, [org])
 
     const onChange = async (key: keyof Organization, value: string) => {
         if (value === null || (organization !== null && organization!![key] === value)) {
@@ -64,8 +47,14 @@ export default function OrganizationEdit(props: Props) {
                 copyOrg.nickname = value
                 break
             case "disbanded":
+                copyOrg.disbanded = Number(value)
+                break
             case "founded":
+                copyOrg.founded = Number(value)
+                break
             case "type":
+                copyOrg.type = value as LoreType
+                break
             case 'name':
                 break
         }
@@ -73,49 +62,51 @@ export default function OrganizationEdit(props: Props) {
         await updateOrganization(copyOrg)
     }
 
-    const updateOrganization = async (copyOrg: Organization): Promise<Organization> => {
+    const updateOrganization = async (copyOrg: Organization) => {
         setOrganization(copyOrg)
-        await LoreService.updateOrganization(id as string, copyOrg)
-        return organization!!
+        await LoreService.updateOrganization(organization.name, copyOrg)
     }
 
     const onView = () => {
-        navigate(path + id + '/view')
+        navigate(path + organization.name + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={organization?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
-                <CheckIcon color='primary' fontSize='small' />
-            </IconButton>}>
+            <CardHeader title={organization?.name!!} style={{textAlign: 'center'}}
+                        action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+                            <CheckIcon color='primary' fontSize='small'/>
+                        </IconButton>}>
             </CardHeader>
-            <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <Grid item xs>
-                            <Card>
-                                <CardHeader title={'Type of Organization'} style={{ textAlign: 'center' }} />
-                                <Divider />
-                                <InputSelectField defaultValue={organization?.orgType!!} options={getOrgTypes()} onCommit={(value: string): void => { onChange(OrgKey.orgType, value) }} />
-                            </Card>
-                        </Grid>
+                        <InputSelectFieldCard defaultValue={organization.type} onCommit={(value: string): void => {
+                            onChange(OrgKey.orgType, value)
+                        }} options={getOrgTypes()} title={'Type of Organization'}/>
                     </Grid>
                     <Grid container spacing={10}>
-                        <Grid item xs>
-                            <EditNumberCard title={'Founding Year'} value={organization?.founded} onChange={(value: number): void => { onNumberChange(OrgKey.founded, value)}} />
-                        </Grid>
-                        <Grid item xs>
-                            <EditNumberCard title={'Year Disbanded'} value={organization?.disbanded!!} onChange={(value: number): void => { onNumberChange(OrgKey.disbanded, value)}} />
-                        </Grid>
+                        <EditNumberCard title={'Founding Year'} value={organization?.founded}
+                                        onChange={(value: number): void => {
+                                            onChange(OrgKey.founded, String(value))
+                                        }}/>
+                        <EditNumberCard title={'Year Disbanded'} value={organization?.disbanded!!}
+                                        onChange={(value: number): void => {
+                                            onChange(OrgKey.disbanded, String(value))
+                                        }}/>
                     </Grid>
                     <Grid container spacing={10}>
-                        <Grid item xs>
-                            <InputTextFieldCard defaultValue={organization?.nickname} onCommit={(value: string): void => { onChange(OrgKey.nickname, value) }} title={'Alternative Name'}  helperText={'Other Names the Organization goes by'} placeholder={'Pirates Republic'}/>
-                        </Grid>
-                        <Grid item xs>
-                            <InputTextFieldCard defaultValue={organization?.membersName} onCommit={(value: string): void => { onChange(OrgKey.membersName, value) }} title={'Name of Members'} helperText={'How members are referred to'} placeholder={'Pirates'} />
-                        </Grid>
+                        <InputTextFieldCard defaultValue={organization?.nickname}
+                                            onCommit={(value: string): void => {
+                                                onChange(OrgKey.nickname, value)
+                                            }} title={'Alternative Name'}
+                                            helperText={'Other Names the Organization goes by'}
+                                            placeholder={'Pirates Republic'}/>
+                        <InputTextFieldCard defaultValue={organization?.membersName}
+                                            onCommit={(value: string): void => {
+                                                onChange(OrgKey.membersName, value)
+                                            }} title={'Name of Members'} helperText={'How members are referred to'}
+                                            placeholder={'Pirates'}/>
                     </Grid>
                 </Grid>
             </CardContent>
