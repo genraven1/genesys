@@ -1,8 +1,9 @@
+import Setting from "../Setting";
+
 export default interface Lore {
-    id: number
     name: string
     type: LoreType
-    settings: number[]
+    settings: Setting[]
 }
 
 export enum LoreType {

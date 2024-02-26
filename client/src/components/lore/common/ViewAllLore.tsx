@@ -1,8 +1,6 @@
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
@@ -11,6 +9,10 @@ import LoreService from "../../../services/LoreService";
 import Lore, {LoreType} from "../../../models/lore/Lore";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {LorePath} from "../../../services/Path";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
+import {Card, CardContent} from "@mui/material";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface RowProps {
     lore: Lore
@@ -28,15 +30,16 @@ function LoreRow(props: RowProps): JSX.Element {
 
     return (
         <TableRow>
-            <TableCell component="th" scope="row">{lore.name}</TableCell>
-            <TableCell>{lore.type}</TableCell>
-            <ActionsTableCell id={String(lore.id)} path={getLorePath()}/>
+            <TypographyCenterTableCell value={lore.name}/>
+            <TypographyCenterTableCell value={lore.type}/>
+            <ActionsTableCell id={lore.name} path={getLorePath()}/>
         </TableRow>
     )
 }
 
 export function ViewAllLore(): JSX.Element {
     const [lore, setLore] = useState<Lore[]>([])
+    const headers = ['Name', 'Type', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -47,26 +50,20 @@ export function ViewAllLore(): JSX.Element {
     }, [])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell colSpan={3} style={{textAlign: "center"}}>Lore</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Type</TableCell>
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {lore.map((lore: Lore) => (
-                        <LoreRow lore={lore}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CenteredCardHeader title={'View All Lore'}/>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        <TableBody>
+                            {lore.map((lore: Lore) => (
+                                <LoreRow lore={lore}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+        </Card>
     )
 }
