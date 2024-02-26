@@ -37,6 +37,7 @@ public class OrganizationService {
             org.setFounded(organization.getFounded());
             org.setNickname(organization.getNickname());
             org.setMembersName(organization.getMembersName());
+            org.setOrgType(organization.getOrgType());
             return org;
         }).flatMap(organizationRepository::save);
     }
