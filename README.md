@@ -12,12 +12,15 @@ Usee npm i to install all of the client dependencies
 Use npm run start to run the program locally.
 
 GRADLE JAVA SERVER
+
 Repository is using Java 17, and Springboot 3.x.
 
 Backend Server is run with ./gradlew clean build bootRun
 
 Adding a connection string:
-Create an .env file in the gradle-java-server root directory with the 
+Create an .env file in the gradle-java-server root directory.
+
+File only needs to define the connection string as MONGODB_URI.
 
 MongoDB
 Currently using Atlas provided by MongoDB, which will hold 256MB of data. The application can also be used by a local or docker version using a different connection string.
