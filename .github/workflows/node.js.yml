@@ -13,9 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-          working-directory: ./client
 
     strategy:
       matrix:
@@ -29,6 +26,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install Node Dependencies
+      working-directory: ./client
+      run: npm ci
+    - name: Build Node Dependencies
+      working-directory: ./client
+      run: npm run build --if-present
+    - name: Test Node Dependencies
+      working-directory: ./client
+      run: npm test
