@@ -39,7 +39,7 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     }
 
     return (
-        <TableRow key={skill.id}>
+        <TableRow key={skill.name}>
             <TypographyCenterTableCell value={skill.name}/>
             <CheckboxTableCell value={groupSkill.group_skill}
                                onAddition={() => onSkillAddition(groupSkill)}

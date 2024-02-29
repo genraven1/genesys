@@ -32,7 +32,7 @@ function Row(props: Props): JSX.Element {
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
             <SettingTableCell settings={skill.settings} setting={setting}/>
-            <ActionsTableCell id={String(skill.id)} path={Path.Skills}/>
+            <ActionsTableCell id={skill.name} path={Path.Skills}/>
         </TableRow>
     )
 }
