@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
@@ -28,7 +28,6 @@ interface Props {
 
 export default function WeaponEdit(props: Props) {
     const {wea, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [weapon, setWeapon] = useState<Weapon>(wea)
     let navigate = useNavigate()
 
@@ -101,16 +100,16 @@ export default function WeaponEdit(props: Props) {
 
     const updateWeapon = async (copyWeapon: Weapon) => {
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.id, copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Weapon + id + '/view');
+        navigate(EquipmentPath.Weapon + weapon.name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={weapon?.name!!} style={{textAlign: 'center'}}
+            <CardHeader title={weapon.name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>
@@ -118,44 +117,44 @@ export default function WeaponEdit(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={weapon?.description!!} onCommit={(value: string): void => {
+                        <InputTextFieldCard defaultValue={weapon.description} onCommit={(value: string): void => {
                             onChange('description', value)
                         }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
+                        <SkillSelectCard defaultValue={weapon.skill} onCommit={(value: Skill): void => {
                             onSkillChange(value)
                         }} type={SkillType.Combat}/>
-                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
+                        <NumberRangeSelectCard title={'Damage'} defaultValue={weapon.damage}
                                                onChange={(value: number): void => {
                                                    onChange('damage', String(value))
                                                }} min={0} max={20}/>
-                        <CheckButtonCard title={'Brawn Powered'} value={weapon?.brawn!!}
+                        <CheckButtonCard title={'Brawn Powered'} value={weapon.brawn}
                                          onChange={(value: boolean): void => {
                                              onChange('brawn', String(value))
                                          }}/>
-                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon?.critical!!}
+                        <NumberRangeSelectCard title={'Critical'} defaultValue={weapon.critical}
                                                onChange={(value: number): void => {
                                                    onChange('critical', String(value))
                                                }} min={1} max={7}/>
-                        <InputSelectFieldCard defaultValue={weapon?.range!!} onCommit={(value: string): void => {
+                        <InputSelectFieldCard defaultValue={weapon.range} onCommit={(value: string): void => {
                             onChange('range', value)
                         }} title={'Range'} options={getRangeOptions()}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <EditNumberFieldCard value={weapon?.encumbrance!!} title={'Encumbrance'}
+                        <EditNumberFieldCard value={weapon.encumbrance} title={'Encumbrance'}
                                              onChange={(value: number): void => {
                                                  onChange('encumbrance', String(value))
                                              }} min={0} max={10}/>
-                        <EditPriceCheckBoxCard check={weapon?.restricted!!} value={weapon?.price!!}
+                        <EditPriceCheckBoxCard check={weapon.restricted} value={weapon.price}
                                                checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => {
                             onChange('restricted', String(value))
                         }} onNumberChange={(value: number): void => {
                             onChange('price', String(value))
                         }}/>
-                        <EditNumberFieldCard value={weapon?.rarity!!} title={'Rarity'}
+                        <EditNumberFieldCard value={weapon.rarity} title={'Rarity'}
                                              onChange={(value: number): void => {
                                                  onChange('rarity', String(value))
                                              }} min={0} max={11}/>
@@ -164,7 +163,7 @@ export default function WeaponEdit(props: Props) {
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
-                    <EditSettingsCard settings={weapon?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard settings={weapon.settings} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>

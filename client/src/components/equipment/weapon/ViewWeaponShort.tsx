@@ -54,12 +54,12 @@ export default function WeaponViewShort(props: Props) {
 
     return (
         <Card>
-            <CenteredCardHeader title={weapon?.name!!}/>
+            <CenteredCardHeader title={weapon.name}/>
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={weapon?.description!!}/>
+                        <ViewFieldCard name={'Description'} value={weapon.description}/>
                     </Grid>
                     <Divider/>
                     <TableContainer component={Paper}>
@@ -69,7 +69,7 @@ export default function WeaponViewShort(props: Props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                    <TypographyCenterTableCell value={weapon?.name!!}/>
+                                    <TypographyCenterTableCell value={weapon.name}/>
                                     <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
                                     <TypographyCenterTableCell value={renderDamage()}/>
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>

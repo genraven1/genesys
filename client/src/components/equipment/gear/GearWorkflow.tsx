@@ -24,16 +24,16 @@ function useFetchGear(name: string): Gear {
 
 export default function GearWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
-    const Gear = useFetchGear(name!!)
+    const gear = useFetchGear(name as string)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <GearView  gear={Gear} settings={settings}/>
+            return gear && <GearView  gear={gear} settings={settings}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <GearEdit gea={Gear} settings={settings}/>
+            return gear && <GearEdit gea={gear} settings={settings}/>
         }
         else {return <ViewAllGear/>}
     }

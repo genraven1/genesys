@@ -4,7 +4,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
@@ -12,9 +11,13 @@ import * as React from 'react';
 import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import Typography from "@mui/material/Typography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import CreateEquipmentDialog from "../CreateEquipmentDialog";
+import {EquipmentType} from "../../../models/equipment/Equipment";
+import {renderPrice} from "../../../models/equipment/EquipmentHelper";
 
 interface Props {
     gear: Gear
@@ -24,34 +27,20 @@ function Row(props: Props): JSX.Element {
     const {gear} = props
     const [open, setOpen] = useState(false)
 
-    const renderPrice = (): JSX.Element => {
-        let price = ''
-        if (gear.restricted) {
-            price = gear.price + '(R)'
-        } else {
-            price = String(gear.price)
-        }
-        return (
-            <Fragment>
-                <Typography>{price}</Typography>
-            </Fragment>
-        )
-    }
-
     return (
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TableCell component="th" scope="row">{gear.name}</TableCell>
                 <TableCell>{gear.encumbrance}</TableCell>
-                <TableCell>{renderPrice()}</TableCell>
+                <TableCell>{renderPrice(gear)}</TableCell>
                 <TableCell>{gear.rarity}</TableCell>
-                <ActionsTableCell id={String(gear.id)} path={EquipmentPath.Gear}/>
+                <ActionsTableCell id={gear.name} path={EquipmentPath.Gear}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
-                            <Table size="small" aria-label="purchases">
+                            <Table size="small">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={gear.description}/>
                                 </TableBody>
@@ -66,6 +55,8 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllGear(): JSX.Element {
     const [gears, setGears] = useState<Gear[]>([])
+    const [openEquipmentCreationDialog, setOpenEquipmentCreationDialog] = useState(false)
+    const headers = ['Name', 'Encumbrance', 'Price', 'Rarity', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -78,23 +69,28 @@ export default function ViewAllGear(): JSX.Element {
     }, [])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Encumbrance</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell>Rarity</TableCell>
-                        <TableCell>View</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {gears.map((gear: Gear) => (
-                        <Row key={gear.name} gear={gear}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Gear'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Gear</Button>}>
+            </CardHeader>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        <TableBody>
+                            {gears.map((gear: Gear) => (
+                                <Row key={gear.name} gear={gear}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+            {openEquipmentCreationDialog && <CreateEquipmentDialog open={openEquipmentCreationDialog}
+                                                                   onClose={(): void => setOpenEquipmentCreationDialog(false)}
+                                                                   type={EquipmentType.Gear}/>}
+        </Card>
     )
 }

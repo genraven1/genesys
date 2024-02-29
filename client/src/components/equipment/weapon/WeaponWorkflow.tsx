@@ -7,34 +7,40 @@ import WeaponEdit from "./WeaponEdit";
 import ViewAllWeapon from "./ViewAllWeapon";
 import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
-function useFetchWeapon(id: number): Weapon {
+function useFetchWeapon(name: string): Weapon {
     const [weapon, setWeapon] = useState<Weapon>()
     useEffect(() => {
-        if(!id) {return}
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
             try {
-                const weaponData = await EquipmentService.getWeapon(id)
-                if (weaponData) {setWeapon(weaponData)}
-            } catch (err) {console.log(err)}
+                const weaponData = await EquipmentService.getWeapon(name)
+                if (weaponData) {
+                    setWeapon(weaponData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[id, setWeapon])
+    }, [name, setWeapon])
     return weapon as Weapon
 }
 
 export default function WeaponWorkflow(): JSX.Element {
-    const { id } = useParams<{ id?: string }>()
-    const weapon = useFetchWeapon(Number(id!!))
+    const {name} = useParams<{ name: string }>()
+    const weapon = useFetchWeapon(name as string)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <WeaponView  weapon={weapon} settings={settings}/>
+            return weapon && <WeaponView weapon={weapon} settings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
+            return weapon && <WeaponEdit wea={weapon} settings={settings}/>
+        } else {
+            return <ViewAllWeapon/>
         }
-        else if (pathname.endsWith('/edit')) {
-            return <WeaponEdit wea={weapon} settings={settings}/>
-        }
-        else {return <ViewAllWeapon/>}
     }
 
     return (

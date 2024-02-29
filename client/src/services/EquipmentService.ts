@@ -15,16 +15,16 @@ export default class EquipmentService {
         return await (await axios.get(EquipmentPath.Armor)).data
     }
 
-    static async getArmor(id: number): Promise<Armor> {
-        return await (await axios.get(EquipmentPath.Armor + id)).data
+    static async getArmor(name: string): Promise<Armor> {
+        return await (await axios.get(EquipmentPath.Armor + name)).data
     }
 
-    static async updateArmor(id: number, armor: Armor): Promise<Armor> {
-        return await (await axios.put(EquipmentPath.Armor + id, armor)).data
+    static async updateArmor(name: string, armor: Armor): Promise<Armor> {
+        return await (await axios.put(EquipmentPath.Armor + name, armor)).data
     }
 
-    static async addArmorQuality(id: number, quality: Quality): Promise<Armor> {
-        return await (await axios.put(EquipmentPath.Armor + id + '/quality', quality)).data;
+    static async addArmorQuality(name: string, quality: Quality): Promise<Armor> {
+        return await (await axios.put(EquipmentPath.Armor + name + '/quality', quality)).data;
     }
 
     static async createWeapon(name: string): Promise<Weapon> {
@@ -35,16 +35,16 @@ export default class EquipmentService {
         return await (await axios.get(EquipmentPath.Weapon)).data
     }
 
-    static async getWeapon(id: number): Promise<Weapon> {
-        return await (await axios.get(EquipmentPath.Weapon + id)).data
+    static async getWeapon(name: string): Promise<Weapon> {
+        return await (await axios.get(EquipmentPath.Weapon + name)).data
     }
 
-    static async updateWeapon(id: number, weapon: Weapon): Promise<Weapon> {
-        return await (await axios.put(EquipmentPath.Weapon + id, weapon)).data
+    static async updateWeapon(name: string, weapon: Weapon): Promise<Weapon> {
+        return await (await axios.put(EquipmentPath.Weapon + name, weapon)).data
     }
 
-    static async addWeaponQuality(id: number, quality: Quality): Promise<Weapon> {
-        return await (await axios.put(EquipmentPath.Weapon + id + '/quality', quality)).data;
+    static async addWeaponQuality(name: string, quality: Quality): Promise<Weapon> {
+        return await (await axios.put(EquipmentPath.Weapon + name + '/quality', quality)).data;
     }
 
     static async createGear(name: string): Promise<Gear> {
