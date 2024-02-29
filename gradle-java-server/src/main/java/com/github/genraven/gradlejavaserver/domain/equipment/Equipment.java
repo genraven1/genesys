@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public abstract class Equipment {
+public class Equipment {
 
     protected Equipment() {}
+
+    public Equipment(final String name) {
+        this.name = name;
+    }
 
     @Id
     private String name;
