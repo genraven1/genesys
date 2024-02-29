@@ -14,5 +14,11 @@ public abstract class Equipment {
 
     @Id
     private String name;
+    private String description;
+    private int price;
+    private boolean restricted;
+    private int encumbrance;
+    private int rarity;
+    private List<EquipmentQuality> qualities = new ArrayList<>();
     private List<Setting> settings = new ArrayList<>();
 }
