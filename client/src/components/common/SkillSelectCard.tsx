@@ -119,7 +119,7 @@ function SkillSelectField(props: FieldProps): JSX.Element {
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
 
-        let selectedSkill = skills.find((sk) => sk.id === Number(event.target.value))!!
+        let selectedSkill = skills.find((sk) => sk.name === event.target.value) as Skill
         setSkill(selectedSkill)
 
         if (onChange) {
@@ -135,7 +135,7 @@ function SkillSelectField(props: FieldProps): JSX.Element {
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography style={{wordWrap: 'break-word'}}>{skill?.name!!}</Typography>
+    const viewElement = <Typography style={{wordWrap: 'break-word'}}>{skill.name}</Typography>
 
     const onCancel = (): void => {
         setEdit(!edit)

@@ -8,15 +8,15 @@ export default class SkillService {
         return await (await axios.post(Path.Skills + name)).data;
     }
 
-    static async getSkill(id: number): Promise<Skill> {
-        return await (await axios.get(Path.Skills + id)).data;
+    static async getSkill(name: string): Promise<Skill> {
+        return await (await axios.get(Path.Skills + name)).data;
     }
 
     static async getSkills(): Promise<Skill[]> {
         return await (await axios.get(Path.Skills)).data;
     }
 
-    static async updateSkill(id: number, skill: Skill): Promise<Skill> {
-        return await (await axios.put(Path.Skills + id, skill)).data;
+    static async updateSkill(name: string, skill: Skill): Promise<Skill> {
+        return await (await axios.put(Path.Skills + name, skill)).data;
     }
 }
