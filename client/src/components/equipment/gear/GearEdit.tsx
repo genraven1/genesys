@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
@@ -24,7 +24,6 @@ interface Props {
 
 export default function GearEdit(props: Props) {
     const {gea, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [gear, setGear] = useState<Gear>(gea)
 
     let navigate = useNavigate()
@@ -91,12 +90,12 @@ export default function GearEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Gear + id + '/view');
+        navigate(EquipmentPath.Gear + gear.name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={gear?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={gear.name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}/>
             <Divider />

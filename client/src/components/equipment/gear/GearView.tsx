@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Gear} from "../../../models/equipment/Gear";
 import {EquipmentPath} from "../../../services/Path";
@@ -16,24 +16,22 @@ interface Props {
 
 export default function GearView(props: Props) {
     const {gear, settings} = props
-    const {id} = useParams<{ id: string }>()
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(path + gear.name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={gear?.name!!}
+                title={gear.name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>

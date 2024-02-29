@@ -17,7 +17,7 @@ import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderHeaders} from '../../common/table/TableRenders';
 import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
 import {EquipmentType} from "../../../models/equipment/Equipment";
 
@@ -39,13 +39,13 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={String(armor.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice(armor)}/>
                 <TypographyCenterTableCell value={String(armor.rarity)}/>
-                <ActionsTableCell id={String(armor.id)} path={EquipmentPath.Armor}/>
+                <ActionsTableCell id={armor.name} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
-                            <Table size="small" aria-label="purchases">
+                            <Table size="small">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={armor?.description!!}/>
                                 </TableBody>
@@ -81,7 +81,6 @@ export default function ViewAllArmor() {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Armor</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

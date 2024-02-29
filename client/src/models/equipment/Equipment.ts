@@ -2,7 +2,6 @@ import {EquipmentQuality} from "../Quality";
 import Setting from "../Setting";
 
 export default interface Equipment {
-    id: number
     name: string
     description: string
     price: number

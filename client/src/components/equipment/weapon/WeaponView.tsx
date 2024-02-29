@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
@@ -24,12 +24,11 @@ interface Props {
 
 export default function WeaponView(props: Props) {
     const {weapon, settings} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Weapon + id + '/edit')
+        navigate(EquipmentPath.Weapon + weapon.name + '/edit')
     }
 
     return (
