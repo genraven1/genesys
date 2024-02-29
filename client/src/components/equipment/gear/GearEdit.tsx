@@ -81,7 +81,7 @@ export default function GearEdit(props: Props) {
             default:
                 break
         }
-
+        updateGear(copyGear)
     }
 
     const updateGear = async (copyGear: Gear) => {
@@ -106,14 +106,14 @@ export default function GearEdit(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <AllSkillsSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} />
+                        {/*<AllSkillsSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} />*/}
                         <InputSelectFieldCard defaultValue={gear?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
                         <EditNumberFieldCard value={gear?.encumbrance!!} title={'Encumbrance'} onChange={(value: number): void => { onChange('encumbrance', String(value))}} min={0} max={10} />
-                        <EditPriceCheckBoxCard check={gear?.restricted!!} value={gear?.price!!} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
-                        <EditNumberFieldCard value={gear?.rarity!!} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
+                        <EditPriceCheckBoxCard check={gear.restricted} value={gear.price} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
+                        <EditNumberFieldCard value={gear.rarity} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
                     <EditSettingsCard settings={gear?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={settings}/>
