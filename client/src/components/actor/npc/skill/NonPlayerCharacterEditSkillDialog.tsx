@@ -22,7 +22,7 @@ export default function NonPlayerCharacterEditSkillDialog(props: Props) {
         setSkill(copySkill)
         switch (type) {
             case ActorType.Rival:
-                await ActorService.updateRivalSkill(actor.id, copySkill)
+                await ActorService.updateRivalSkill(actor.name, copySkill)
                 break
             case ActorType.Nemesis:
                 await ActorService.updateNemesisSkill(actor.name, copySkill)

@@ -2,6 +2,7 @@ package com.github.genraven.gradlejavaserver.domain.actor.player;
 
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 
+import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
@@ -15,12 +16,21 @@ import java.util.List;
 @Document(collection = "players")
 public class Player extends Actor {
 
-    public Player(final String name) {
-        this.name = name;
+    protected Player() {}
+
+    public Player(final Actor actor) {
+        this.setName(actor.getName());
+        this.setType(ActorType.PLAYER);
+        this.setBrawn(actor.getBrawn());
+        this.setAgility(actor.getAgility());
+        this.setIntellect(actor.getIntellect());
+        this.setCunning(actor.getCunning());
+        this.setWillpower(actor.getWillpower());
+        this.setPresence(actor.getPresence());
+        this.setWounds(actor.getWounds());
+        this.setSettings(actor.getSettings());
     }
 
-    @Id
-    private String name;
     private int strain;
     private List<PlayerSkill> skills = new ArrayList<>();
 }

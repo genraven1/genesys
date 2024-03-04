@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
@@ -26,24 +26,22 @@ interface Props {
 
 export default function RivalView(props: Props) {
     const {rival, settings} = props
-    const { id } = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Rival + id + '/edit')
+        navigate(ActorPath.Rival + rival.name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={rival?.name!!}
+                title={rival.name}
                 subheader={<GenesysDescriptionTypography text={getRatings(rival)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />
                 </IconButton>}>
             </CardHeader>
-            <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <ViewCharacteristicRow actor={rival}/>
@@ -63,7 +61,7 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterTalentCard npc={rival}/>
                 </Grid>
-                <ViewSettingsCard settings={rival?.settings!!} allSettings={settings}/>
+                <ViewSettingsCard settings={rival.settings} allSettings={settings}/>
             </CardContent>
         </Card>
     )

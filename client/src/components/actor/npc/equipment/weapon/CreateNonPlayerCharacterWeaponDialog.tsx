@@ -27,10 +27,10 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
     const onCreate = async (): Promise<void> => {
         switch (npc.type) {
             case ActorType.Minion:
-                await ActorService.createMinionWeapon(npc.id, weapon!!)
+                await ActorService.createMinionWeapon(npc.name, weapon!!)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalWeapon(npc.id, weapon!!)
+                await ActorService.createRivalWeapon(npc.name, weapon!!)
                 break
             case ActorType.Nemesis:
                 await ActorService.createNemesisWeapon(npc.name, weapon!!)

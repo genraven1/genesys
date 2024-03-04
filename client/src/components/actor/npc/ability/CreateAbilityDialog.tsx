@@ -21,10 +21,10 @@ export default function CreateAbilityDialog(props: Props) {
     const onCreate = async (): Promise<void> => {
         switch (actor.type) {
             case ActorType.Minion:
-                await ActorService.createMinionAbility(actor.id, ability!!)
+                await ActorService.createMinionAbility(actor.name, ability!!)
                 break
             case ActorType.Rival:
-                await ActorService.createRivalAbility(actor.id, ability!!)
+                await ActorService.createRivalAbility(actor.name, ability!!)
                 break
             case ActorType.Nemesis:
                 await ActorService.createNemesisAbility(actor.name, ability!!)

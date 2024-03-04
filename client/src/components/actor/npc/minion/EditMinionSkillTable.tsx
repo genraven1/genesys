@@ -29,13 +29,13 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     const onSkillAddition = async (skill: GroupSkill) => {
         skill.group_skill = true
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.id, groupSkill))
+        setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
     }
 
     const onSkillRemoval = async (skill: GroupSkill) => {
         skill.group_skill = false
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.id, groupSkill))
+        setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
     }
 
     return (

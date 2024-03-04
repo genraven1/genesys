@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
@@ -30,7 +30,6 @@ interface Props {
 
 export default function MinionEdit(props: Props) {
     const {min, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [minion, setMinion] = useState<Minion>(min)
     let navigate = useNavigate()
 
@@ -107,11 +106,11 @@ export default function MinionEdit(props: Props) {
     const updateMinion = async (copyMinion: Minion) => {
         copyMinion.soak = copyMinion.brawn
         setMinion(copyMinion)
-        await ActorService.updateMinion(copyMinion.id, copyMinion)
+        await ActorService.updateMinion(copyMinion.name, copyMinion)
     }
 
     const onView = () => {
-        navigate(ActorPath.Minion + id + '/view')
+        navigate(ActorPath.Minion + minion.name + '/view')
     }
 
     return (

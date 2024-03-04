@@ -3,6 +3,7 @@ package com.github.genraven.gradlejavaserver.domain.actor;
 
 import com.github.genraven.gradlejavaserver.domain.Setting;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,12 @@ public class Actor {
 
     protected Actor() {}
 
+    public Actor(final String name) {
+        this.name = name;
+    }
+
+    @Id
+    private String name;
     private ActorType type;
     private int brawn = 1;
     private int agility = 1;
