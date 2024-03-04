@@ -1,8 +1,10 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
+import com.github.genraven.gradlejavaserver.domain.actor.npc.Rival;
 import com.github.genraven.gradlejavaserver.domain.actor.player.Player;
 import com.github.genraven.gradlejavaserver.service.actor.PlayerService;
+import com.github.genraven.gradlejavaserver.service.actor.RivalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,10 +22,12 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 public class ActorHandler {
 
     private final PlayerService playerService;
+    private final RivalService rivalService;
 
     @Autowired
-    public ActorHandler(final PlayerService playerService) {
+    public ActorHandler(final PlayerService playerService, final RivalService rivalService) {
         this.playerService = playerService;
+        this.rivalService = rivalService;
     }
 
     public Mono<ServerResponse> getAllPlayers(final ServerRequest serverRequest) {
@@ -59,6 +63,42 @@ public class ActorHandler {
                 .flatMap(player -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getAllRivals(final ServerRequest serverRequest) {
+        return rivalService.getAllRivals().collectList().flatMap(rivals -> {
+            if(rivals.isEmpty()) {
+                return ServerResponse.noContent().build();
+            }
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(rivals));
+        });
+    }
+
+    public Mono<ServerResponse> getRival(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        return rivalService.getRival(name)
+                .flatMap(rival -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(rival)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> createRival(final ServerRequest serverRequest) {
+        return rivalService.createRival(serverRequest.pathVariable("name"))
+                .flatMap(player -> ServerResponse.created(getURI(player)).bodyValue(player));
+    }
+
+    public Mono<ServerResponse> updateRival(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        final Mono<Rival> rivalMono = serverRequest.bodyToMono(Rival.class);
+        return rivalMono
+                .flatMap(rival -> rivalService.updateRival(name, rival))
+                .flatMap(rival -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(rival)))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 

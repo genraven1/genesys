@@ -18,6 +18,11 @@ public class ActorRouter {
                         .POST("/{name}", playerHandler::createPlayer)
                         .GET("/{name}", playerHandler::getPlayer)
                         .PUT("/{name}", playerHandler::updatePlayer))
+                .path("/actors/rivals", builder -> builder
+                        .GET("/", playerHandler::getAllRivals)
+                        .POST("/{name}", playerHandler::createRival)
+                        .GET("/{name}", playerHandler::getRival)
+                        .PUT("/{name}", playerHandler::updateRival))
                 .build();
     }
 }
