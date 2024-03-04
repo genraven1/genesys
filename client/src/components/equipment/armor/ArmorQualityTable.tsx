@@ -11,6 +11,7 @@ import {
     TypographyCenterTableCell
 } from "../../common/table/TypographyTableCell";
 import {renderDoubleRowTableHeader} from "../../common/table/TableRenders";
+import {Armor} from "../../../models/equipment/Armor";
 
 interface Props {
     quality: EquipmentQuality
@@ -28,19 +29,19 @@ function Row(props: Props): JSX.Element {
 }
 
 interface TableProps {
-    weapon: Weapon
+    armor: Armor
 }
 
-export default function WeaponQualityTable(props: TableProps) {
-    const {weapon} = props
+export default function ArmorQualityTable(props: TableProps) {
+    const {armor} = props
     const headers = ['Name', 'Ranks']
 
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Weapon Special Qualities', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Armor Special Qualities', headers.length)}
                 <TableBody>
-                    {(weapon.qualities || []).map((quality: EquipmentQuality) => (
+                    {(armor.qualities || []).map((quality: EquipmentQuality) => (
                         <Row key={quality.name} quality={quality}/>
                     ))}
                 </TableBody>

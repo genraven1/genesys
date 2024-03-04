@@ -1,10 +1,11 @@
-import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {Button, Card, CardContent} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
 import {Weapon} from "../../../models/equipment/Weapon";
 import WeaponQualityTable from "./WeaponQualityTable";
 import WeaponQualitySelectionDialog from "./WeaponQualitySelectionDialog";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface Props {
     weapon: Weapon
@@ -23,7 +24,7 @@ export default function WeaponQualityCard(props: Props): JSX.Element {
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Weapon Special Qualities'} style={{textAlign: 'center'}}/>
+            <CenteredCardHeader title={'Weapon Special Qualities'}/>
             <CardContent>
                 {renderTable()}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponQualityDialog(true)}>Add
