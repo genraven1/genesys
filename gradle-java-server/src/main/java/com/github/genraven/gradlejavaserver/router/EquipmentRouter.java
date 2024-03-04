@@ -13,6 +13,11 @@ public class EquipmentRouter {
     @Bean
     public RouterFunction<ServerResponse> equipmentRouterMethod(final EquipmentHandler equipmentHandler) {
         return RouterFunctions.route()
+                .path("/equipment/armors", builder -> builder
+                        .GET("/", equipmentHandler::getAllArmors)
+                        .POST("/{name}", equipmentHandler::createArmor)
+                        .PUT("/{name}", equipmentHandler::updateArmor)
+                        .GET("/{name}", equipmentHandler::getArmor))
                 .path("/equipment/gears", builder -> builder
                         .GET("/", equipmentHandler::getAllGears)
                         .POST("/{name}", equipmentHandler::createGear)

@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
@@ -24,19 +24,18 @@ interface Props {
 
 export default function ArmorView(props: Props) {
     const {armor, settings} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + id + '/edit');
+        navigate(EquipmentPath.Armor + armor.name + '/edit');
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={armor?.name!!}
+                title={armor.name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
