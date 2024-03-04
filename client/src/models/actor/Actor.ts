@@ -6,7 +6,6 @@ import {ActorGear} from "../equipment/Gear";
 import Setting from "../Setting";
 
 export default interface Actor {
-    id: number
     name: string,
     type: ActorType,
     brawn: number,

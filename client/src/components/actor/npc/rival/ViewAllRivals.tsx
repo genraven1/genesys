@@ -14,21 +14,25 @@ import Rival from "../../../../models/actor/npc/Rival";
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import {ActorPath} from "../../../../services/Path";
 
-function Row(props: { row: Rival }): JSX.Element {
-    const { row } = props
+interface Props {
+    rival: Rival
+}
+
+function Row(props: Props): JSX.Element {
+    const { rival } = props
     const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <ActionsTableCell id={String(row.id)} path={ActorPath.Rival}/>
+                <TableCell>{rival.name}</TableCell>
+                <ActionsTableCell id={rival.name} path={ActorPath.Rival}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
-                            <Table size="small" aria-label="purchases">
+                            <Table>
                                 <TableBody>
                                 </TableBody>
                             </Table>
@@ -40,7 +44,7 @@ function Row(props: { row: Rival }): JSX.Element {
     )
 }
 
-export default function AllRivalsView() {
+export default function ViewAllRivals() {
     const [rivals, setRivals] = useState<Rival[]>([])
 
     useEffect(() => {
@@ -53,7 +57,7 @@ export default function AllRivalsView() {
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>Rival Name</TableCell>
@@ -62,7 +66,7 @@ export default function AllRivalsView() {
                 </TableHead>
                 <TableBody>
                     {rivals.map((row: Rival) => (
-                        <Row key={row.name} row={row} />
+                        <Row key={row.name} rival={row} />
                     ))}
                 </TableBody>
             </Table>

@@ -29,7 +29,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
                 await ActorService.addNemesisTalent(actor.name, {...talent!!} as ActorTalent)
                 break
             case ActorType.Rival:
-                await ActorService.addRivalTalent(actor.id, {...talent!!} as ActorTalent)
+                await ActorService.addRivalTalent(actor.name, {...talent!!} as ActorTalent)
                 break
             case ActorType.Player:
                 await ActorService.addPlayerTalent(actor.name, {...talent} as ActorTalent)

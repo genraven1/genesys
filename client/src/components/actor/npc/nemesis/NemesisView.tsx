@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
@@ -26,18 +26,17 @@ interface Props {
 
 export default function NemesisView(props: Props) {
     const {nemesis, settings} = props
-    const { id } = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Nemesis + id + '/edit')
+        navigate(ActorPath.Nemesis + nemesis.name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={nemesis?.name!!}
+                title={nemesis.name}
                 subheader={<GenesysDescriptionTypography text={getRatings(nemesis)} />}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small' />

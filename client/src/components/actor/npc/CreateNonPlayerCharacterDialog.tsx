@@ -31,20 +31,20 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
             case ActorType.Minion:
                 copyActor = {...await ActorService.createMinion(name)}
                 copyActor.type = type
-                await ActorService.updateMinion(copyActor.id, copyActor as Minion)
-                navigate(ActorPath.Minion + copyActor.id + '/edit')
+                await ActorService.updateMinion(copyActor.name, copyActor as Minion)
+                navigate(ActorPath.Minion + copyActor.name + '/edit')
                 break
             case ActorType.Rival:
                 copyActor = {...await ActorService.createRival(name)}
                 copyActor.type = type
-                await ActorService.updateRival(copyActor.id, copyActor as Rival)
-                navigate(ActorPath.Rival + copyActor.id + '/edit')
+                await ActorService.updateRival(copyActor.name, copyActor as Rival)
+                navigate(ActorPath.Rival + copyActor.name + '/edit')
                 break
             case ActorType.Nemesis:
                 copyActor = {...await ActorService.createNemesis(name)}
                 copyActor.type = type
                 await ActorService.updateNemesis(name, copyActor as Nemesis)
-                navigate(ActorPath.Nemesis + copyActor.id + '/edit')
+                navigate(ActorPath.Nemesis + copyActor.name + '/edit')
                 break
             case ActorType.Player:
                 break

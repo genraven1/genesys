@@ -1,7 +1,8 @@
-package com.github.genraven.gradlejavaserver.service;
+package com.github.genraven.gradlejavaserver.service.actor;
 
+import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 import com.github.genraven.gradlejavaserver.domain.actor.player.Player;
-import com.github.genraven.gradlejavaserver.repository.PlayerRepository;
+import com.github.genraven.gradlejavaserver.repository.actor.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -21,17 +22,16 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
-    public Mono<Player> getPlayer(final Long id) {
-        return playerRepository.findById(id);
+    public Mono<Player> getPlayer(final String name) {
+        return playerRepository.findById(name);
     }
 
     public Mono<Player> createPlayer(final String name) {
-        return playerRepository.save(new Player(name));
+        return playerRepository.save(new Player(new Actor(name)));
     }
 
-    public Mono<Player> updatePlayer(final Long id, final Player player) {
-        return playerRepository.findById(id).map(play -> {
-            play.setName(player.getName());
+    public Mono<Player> updatePlayer(final String name, final Player player) {
+        return playerRepository.findById(name).map(play -> {
             play.setBrawn(player.getBrawn());
             play.setAgility(player.getAgility());
             play.setIntellect(player.getIntellect());
@@ -40,8 +40,6 @@ public class PlayerService {
             play.setPresence(player.getPresence());
             play.setWounds(player.getWounds());
             play.setStrain(player.getStrain());
-            play.setMelee(player.getMelee());
-            play.setRanged(player.getRanged());
             play.setSkills(player.getSkills());
             return play;
         }).flatMap(playerRepository::save);

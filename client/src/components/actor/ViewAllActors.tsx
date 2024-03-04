@@ -2,15 +2,16 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import * as React from 'react';
 import Actor, {ActorType} from "../../models/actor/Actor";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import ActorService from "../../services/ActorService";
 import {ActorPath} from "../../services/Path";
+import {Card, CardContent, CardHeader} from "@mui/material";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 
 interface Props {
     actor: Actor
@@ -36,38 +37,41 @@ function Row(props: Props): JSX.Element {
         <TableRow>
             <TableCell>{actor.name}</TableCell>
             <TableCell>{actor.type}</TableCell>
-            <ActionsTableCell id={String(actor.id)} path={getPathFromType()}/>
+            <ActionsTableCell id={actor.name} path={getPathFromType()}/>
         </TableRow>
     )
 }
 
 export default function ViewAllActors() {
     const [actors, setActors] = useState<Actor[]>([])
+    const headers = ['Name', 'Type', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
             const actorList = await ActorService.getActors()
-            if (!actorList) { return }
+            if (!actorList) {
+                return
+            }
             setActors(actorList)
         })()
     }, [setActors])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Type</TableCell>
-                        <TableCell>Edit</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {actors.map((actor: Actor) => (
-                        <Row key={actor.name} actor={actor} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader style={{textAlign: 'center'}} title={'View All Actors'}>
+            </CardHeader>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        <TableBody>
+                            {actors.map((actor: Actor) => (
+                                <Row key={actor.name} actor={actor}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+        </Card>
     )
 }

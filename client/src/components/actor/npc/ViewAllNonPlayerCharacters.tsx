@@ -18,6 +18,8 @@ import {
     TypographyCenterTableCell
 } from "../../common/table/TypographyTableCell";
 import Collapse from "@mui/material/Collapse";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import CreateNonPlayerCharacterDialog from "./CreateNonPlayerCharacterDialog";
 
 interface RowProps {
     npc: NonPlayerActor
@@ -46,12 +48,12 @@ function Row(props: RowProps): JSX.Element {
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={npc.name}/>
                 <TypographyCenterTableCell value={npc.type}/>
-                <ActionsTableCell id={String(npc.id)} path={getPathFromType()}/>
+                <ActionsTableCell id={npc.name} path={getPathFromType()}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table size="small">
+                        <Table>
                             <TableBody>
                                 <TableRow>
                                     <GenesysDescriptionTypographyCenterTableCell value={combat + ' ' + String(npc.combat)}/>
@@ -69,6 +71,7 @@ function Row(props: RowProps): JSX.Element {
 
 export default function ViewAllNonPlayerCharacters() {
     const [nonPlayerCharacters, setNonPlayerCharacters] = useState<NonPlayerActor[]>([])
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
     const headers = ['Name', 'Type', 'View']
 
     useEffect(() => {
@@ -82,17 +85,29 @@ export default function ViewAllNonPlayerCharacters() {
     }, [setNonPlayerCharacters])
 
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
-                <TableBody>
-                    {nonPlayerCharacters.map((npc: NonPlayerActor) => (
-                        <Row key={npc.name} npc={npc} columns={headers.length}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All NPC'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenActorCreationDialog(true)}>Create NPC</Button>}>
+            </CardHeader>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {renderHeaders(headers)}
+                        </TableHead>
+                        <TableBody>
+                            {nonPlayerCharacters.map((npc: NonPlayerActor) => (
+                                <Row key={npc.name} npc={npc} columns={headers.length}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+            {openActorCreationDialog && <CreateNonPlayerCharacterDialog open={openActorCreationDialog}
+                                                       onClose={(): void => setOpenActorCreationDialog(false)}/>}
+        </Card>
     )
 }
