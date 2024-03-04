@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 @Data
 public class EquipmentQuality extends Quality {
 
+    protected EquipmentQuality() {}
+
     public EquipmentQuality(final Quality quality) {
         this.setName(quality.getName());
         this.setDescription(quality.getDescription());

@@ -24,7 +24,18 @@ function QualityRow(props: RowProps): JSX.Element {
     const [openQualityBackDrop, setOpenQualityBackDrop] = useState(false)
 
     const addQuality = async () => {
-        await EquipmentService.addWeaponQuality(weapon.name, quality)
+        if (weapon.qualities.find(equipmentQuality  => equipmentQuality.name === quality.name)) {
+            weapon.qualities.forEach((equipmentQuality, index) => {
+                if (equipmentQuality.name === quality.name) {
+                    equipmentQuality.ranks = equipmentQuality.ranks + 1
+                    weapon.qualities[index] = equipmentQuality
+                }
+            })
+        }
+        else {
+            weapon.qualities = weapon.qualities.concat({...quality, ranks: 1})
+        }
+        await EquipmentService.updateWeapon(weapon.name, weapon)
     }
 
     return (
@@ -71,7 +82,7 @@ export default function WeaponQualitySelectionTable(props: TableProps) {
                 </TableHead>
                 <TableBody>
                     {qualities.map((quality: Quality) => (
-                        <QualityRow quality={quality!!} weapon={weapon}/>
+                        <QualityRow quality={quality} weapon={weapon}/>
                     ))}
                 </TableBody>
             </Table>
