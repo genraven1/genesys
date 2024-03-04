@@ -1,7 +1,9 @@
 package com.github.genraven.gradlejavaserver.handler;
 
+import com.github.genraven.gradlejavaserver.domain.equipment.Armor;
 import com.github.genraven.gradlejavaserver.domain.equipment.Equipment;
 import com.github.genraven.gradlejavaserver.domain.equipment.Gear;
+import com.github.genraven.gradlejavaserver.service.equipment.ArmorService;
 import com.github.genraven.gradlejavaserver.service.equipment.GearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,10 +22,46 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 public class EquipmentHandler {
 
     private final GearService gearService;
+    private final ArmorService armorService;
 
     @Autowired
-    public EquipmentHandler(final GearService gearService) {
+    public EquipmentHandler(final ArmorService armorService, final GearService gearService) {
+        this.armorService = armorService;
         this.gearService = gearService;
+    }
+
+    public Mono<ServerResponse> getAllArmors(final ServerRequest serverRequest) {
+        return armorService.getAllArmors().collectList().flatMap(armors -> {
+            if (armors.isEmpty()) {
+                return ServerResponse.noContent().build();
+            }
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(armors));
+        });
+    }
+
+    public Mono<ServerResponse> createArmor(final ServerRequest serverRequest) {
+        return armorService.createArmor(serverRequest.pathVariable(NAME))
+                .flatMap(armor -> ServerResponse.created(getURI(armor))
+                        .bodyValue(armor));
+    }
+
+    public Mono<ServerResponse> getArmor(final ServerRequest serverRequest) {
+        return armorService.getArmor(serverRequest.pathVariable(NAME))
+                .flatMap(armor -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(armor))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> updateArmor(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Armor.class)
+                .flatMap(gear -> armorService.updateArmor(serverRequest.pathVariable(NAME), gear))
+                .flatMap(gear -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(gear))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     public Mono<ServerResponse> getAllGears(final ServerRequest serverRequest) {
@@ -39,15 +77,15 @@ public class EquipmentHandler {
 
     public Mono<ServerResponse> createGear(final ServerRequest serverRequest) {
         return gearService.createGear(serverRequest.pathVariable(NAME))
-                .flatMap(organization -> ServerResponse.created(getURI(organization))
-                        .bodyValue(organization));
+                .flatMap(gear -> ServerResponse.created(getURI(gear))
+                        .bodyValue(gear));
     }
 
     public Mono<ServerResponse> getGear(final ServerRequest serverRequest) {
         return gearService.getGear(serverRequest.pathVariable(NAME))
-                .flatMap(organization -> ServerResponse.ok()
+                .flatMap(gear -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(organization))
+                        .body(fromValue(gear))
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
