@@ -1,8 +1,10 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
+import com.github.genraven.gradlejavaserver.domain.actor.npc.Nemesis;
 import com.github.genraven.gradlejavaserver.domain.actor.npc.Rival;
 import com.github.genraven.gradlejavaserver.domain.actor.player.Player;
+import com.github.genraven.gradlejavaserver.service.actor.NemesisService;
 import com.github.genraven.gradlejavaserver.service.actor.PlayerService;
 import com.github.genraven.gradlejavaserver.service.actor.RivalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,12 @@ public class ActorHandler {
 
     private final PlayerService playerService;
     private final RivalService rivalService;
+    private final NemesisService nemesisService;
 
     @Autowired
-    public ActorHandler(final PlayerService playerService, final RivalService rivalService) {
+    public ActorHandler(final PlayerService playerService, final NemesisService nemesisService, final RivalService rivalService) {
         this.playerService = playerService;
+        this.nemesisService = nemesisService;
         this.rivalService = rivalService;
     }
 
@@ -66,6 +70,42 @@ public class ActorHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    public Mono<ServerResponse> getAllNemeses(final ServerRequest serverRequest) {
+        return nemesisService.getAllNemeses().collectList().flatMap(nemeses -> {
+            if(nemeses.isEmpty()) {
+                return ServerResponse.noContent().build();
+            }
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(nemeses));
+        });
+    }
+
+    public Mono<ServerResponse> getNemesis(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        return nemesisService.getNemesis(name)
+                .flatMap(nemesis -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(nemesis)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> createNemesis(final ServerRequest serverRequest) {
+        return nemesisService.createNemesis(serverRequest.pathVariable("name"))
+                .flatMap(nemesis -> ServerResponse.created(getURI(nemesis)).bodyValue(nemesis));
+    }
+
+    public Mono<ServerResponse> updateNemesis(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        final Mono<Nemesis> nemesisMono = serverRequest.bodyToMono(Nemesis.class);
+        return nemesisMono
+                .flatMap(nemesis -> nemesisService.updateNemesis(name, nemesis))
+                .flatMap(nemesis -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(nemesis)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
     public Mono<ServerResponse> getAllRivals(final ServerRequest serverRequest) {
         return rivalService.getAllRivals().collectList().flatMap(rivals -> {
             if(rivals.isEmpty()) {
@@ -88,7 +128,7 @@ public class ActorHandler {
 
     public Mono<ServerResponse> createRival(final ServerRequest serverRequest) {
         return rivalService.createRival(serverRequest.pathVariable("name"))
-                .flatMap(player -> ServerResponse.created(getURI(player)).bodyValue(player));
+                .flatMap(rival -> ServerResponse.created(getURI(rival)).bodyValue(rival));
     }
 
     public Mono<ServerResponse> updateRival(final ServerRequest serverRequest) {
