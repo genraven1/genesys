@@ -8,14 +8,15 @@ import lombok.EqualsAndHashCode;
 @Data
 public class PlayerSkill extends ActorSkill {
 
+    protected PlayerSkill() {}
+
     public PlayerSkill(final ActorSkill skill) {
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
         this.setSettings(skill.getSettings());
         this.setRanks(skill.getRanks());
-        this.career = false;
     }
 
-    private boolean career;
+    private boolean career = false;
 }

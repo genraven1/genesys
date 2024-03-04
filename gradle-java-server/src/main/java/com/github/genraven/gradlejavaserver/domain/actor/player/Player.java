@@ -31,6 +31,6 @@ public class Player extends Actor {
         this.setSettings(actor.getSettings());
     }
 
-    private int strain;
+    private int strain = 0;
     private List<PlayerSkill> skills = new ArrayList<>();
 }
