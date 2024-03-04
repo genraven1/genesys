@@ -3,8 +3,10 @@ package com.github.genraven.gradlejavaserver.handler;
 import com.github.genraven.gradlejavaserver.domain.equipment.Armor;
 import com.github.genraven.gradlejavaserver.domain.equipment.Equipment;
 import com.github.genraven.gradlejavaserver.domain.equipment.Gear;
+import com.github.genraven.gradlejavaserver.domain.equipment.Weapon;
 import com.github.genraven.gradlejavaserver.service.equipment.ArmorService;
 import com.github.genraven.gradlejavaserver.service.equipment.GearService;
+import com.github.genraven.gradlejavaserver.service.equipment.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -23,10 +25,12 @@ public class EquipmentHandler {
 
     private final GearService gearService;
     private final ArmorService armorService;
+    private final WeaponService weaponService;
 
     @Autowired
-    public EquipmentHandler(final ArmorService armorService, final GearService gearService) {
+    public EquipmentHandler(final ArmorService armorService, final WeaponService weaponService, final GearService gearService) {
         this.armorService = armorService;
+        this.weaponService = weaponService;
         this.gearService = gearService;
     }
 
@@ -61,6 +65,40 @@ public class EquipmentHandler {
                 .flatMap(gear -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(gear))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> getAllWeapons(final ServerRequest serverRequest) {
+        return weaponService.getAllWeapons().collectList().flatMap(weapons -> {
+            if (weapons.isEmpty()) {
+                return ServerResponse.noContent().build();
+            }
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(weapons));
+        });
+    }
+
+    public Mono<ServerResponse> createWeapon(final ServerRequest serverRequest) {
+        return weaponService.createWeapon(serverRequest.pathVariable(NAME))
+                .flatMap(weapon -> ServerResponse.created(getURI(weapon))
+                        .bodyValue(weapon));
+    }
+
+    public Mono<ServerResponse> getWeapon(final ServerRequest serverRequest) {
+        return weaponService.getWeapon(serverRequest.pathVariable(NAME))
+                .flatMap(weapon -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(weapon))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> updateWeapon(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Weapon.class)
+                .flatMap(weapon -> weaponService.updateWeapon(serverRequest.pathVariable(NAME), weapon))
+                .flatMap(weapon -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(weapon))
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 

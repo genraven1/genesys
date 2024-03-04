@@ -42,7 +42,7 @@ export function SkillSelectCard(props: TypeProps): JSX.Element {
             if (!skillList) {
                 return
             }
-            setSkills(skillList.filter((skill) => skill.type === type).filter((skill) => skill.settings.includes(setting!!)))
+            setSkills(skillList.filter((skill) => skill.type === type))
         })()
     }, [setting, type])
 
@@ -135,7 +135,7 @@ function SkillSelectField(props: FieldProps): JSX.Element {
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography style={{wordWrap: 'break-word'}}>{skill.name}</Typography>
+    const viewElement = skill && <Typography style={{wordWrap: 'break-word'}}>{skill.name}</Typography>
 
     const onCancel = (): void => {
         setEdit(!edit)

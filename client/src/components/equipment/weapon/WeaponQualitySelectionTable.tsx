@@ -24,7 +24,7 @@ function QualityRow(props: RowProps): JSX.Element {
     const [openQualityBackDrop, setOpenQualityBackDrop] = useState(false)
 
     const addQuality = async () => {
-        await EquipmentService.addWeaponQuality(weapon.name, {...quality})
+        await EquipmentService.addWeaponQuality(weapon.name, quality)
     }
 
     return (
