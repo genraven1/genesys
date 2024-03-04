@@ -3,14 +3,13 @@ import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import {SkillType} from "../../../../models/actor/Skill";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {renderHeaders} from "../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import Minion, {GroupSkill} from "../../../../models/actor/npc/Minion";
 import CheckboxTableCell from "../../../common/table/CheckboxTableCell";
@@ -27,13 +26,13 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     const [min, setMin] = useState(minion)
 
     const onSkillAddition = async (skill: GroupSkill) => {
-        skill.group_skill = true
+        skill.group = true
         setGroupSkill(skill)
         setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
     }
 
     const onSkillRemoval = async (skill: GroupSkill) => {
-        skill.group_skill = false
+        skill.group = false
         setGroupSkill(skill)
         setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
     }
@@ -41,7 +40,7 @@ function GroupSkillRow(props: GroupSkillRowProps) {
     return (
         <TableRow key={skill.name}>
             <TypographyCenterTableCell value={skill.name}/>
-            <CheckboxTableCell value={groupSkill.group_skill}
+            <CheckboxTableCell value={groupSkill.group}
                                onAddition={() => onSkillAddition(groupSkill)}
                                onRemoval={() => onSkillRemoval(groupSkill)}/>
         </TableRow>
@@ -68,9 +67,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Table>
-                                <TableHead>
-                                    {renderHeaders(headers)}
-                                </TableHead>
+                                {renderSingleRowTableHeader(headers)}
                                 <TableBody>
                                     {(minion?.skills!! || [])
                                         .sort((a, b) => a.name.localeCompare(b.name))
@@ -99,9 +96,7 @@ export default function EditMinionSkillTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     <SkillTypeGroup minion={minion!!} type={SkillType.General}/>
                     <SkillTypeGroup minion={minion!!} type={SkillType.Magic}/>

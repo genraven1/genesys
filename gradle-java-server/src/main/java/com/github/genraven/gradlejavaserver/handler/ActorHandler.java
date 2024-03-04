@@ -1,9 +1,11 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
+import com.github.genraven.gradlejavaserver.domain.actor.npc.Minion;
 import com.github.genraven.gradlejavaserver.domain.actor.npc.Nemesis;
 import com.github.genraven.gradlejavaserver.domain.actor.npc.Rival;
 import com.github.genraven.gradlejavaserver.domain.actor.player.Player;
+import com.github.genraven.gradlejavaserver.service.actor.MinionService;
 import com.github.genraven.gradlejavaserver.service.actor.NemesisService;
 import com.github.genraven.gradlejavaserver.service.actor.PlayerService;
 import com.github.genraven.gradlejavaserver.service.actor.RivalService;
@@ -26,17 +28,20 @@ public class ActorHandler {
     private final PlayerService playerService;
     private final RivalService rivalService;
     private final NemesisService nemesisService;
+    private final MinionService minionService;
 
     @Autowired
-    public ActorHandler(final PlayerService playerService, final NemesisService nemesisService, final RivalService rivalService) {
+    public ActorHandler(final PlayerService playerService, final NemesisService nemesisService,
+                        final RivalService rivalService, final MinionService minionService) {
         this.playerService = playerService;
         this.nemesisService = nemesisService;
         this.rivalService = rivalService;
+        this.minionService = minionService;
     }
 
     public Mono<ServerResponse> getAllPlayers(final ServerRequest serverRequest) {
         return playerService.getAllPlayers().collectList().flatMap(players -> {
-            if(players.isEmpty()) {
+            if (players.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
             return ServerResponse.ok()
@@ -72,7 +77,7 @@ public class ActorHandler {
 
     public Mono<ServerResponse> getAllNemeses(final ServerRequest serverRequest) {
         return nemesisService.getAllNemeses().collectList().flatMap(nemeses -> {
-            if(nemeses.isEmpty()) {
+            if (nemeses.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
             return ServerResponse.ok()
@@ -108,7 +113,7 @@ public class ActorHandler {
 
     public Mono<ServerResponse> getAllRivals(final ServerRequest serverRequest) {
         return rivalService.getAllRivals().collectList().flatMap(rivals -> {
-            if(rivals.isEmpty()) {
+            if (rivals.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
             return ServerResponse.ok()
@@ -139,6 +144,42 @@ public class ActorHandler {
                 .flatMap(rival -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(rival)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getAllMinions(final ServerRequest serverRequest) {
+        return minionService.getAllMinions().collectList().flatMap(minions -> {
+            if (minions.isEmpty()) {
+                return ServerResponse.noContent().build();
+            }
+            return ServerResponse.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(fromValue(minions));
+        });
+    }
+
+    public Mono<ServerResponse> getMinion(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        return minionService.getMinion(name)
+                .flatMap(minion -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(minion)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> createMinion(final ServerRequest serverRequest) {
+        return minionService.createMinion(serverRequest.pathVariable("name"))
+                .flatMap(minion -> ServerResponse.created(getURI(minion)).bodyValue(minion));
+    }
+
+    public Mono<ServerResponse> updateMinion(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
+        final Mono<Minion> minionMono = serverRequest.bodyToMono(Minion.class);
+        return minionMono
+                .flatMap(minion -> minionService.updateMinion(name, minion))
+                .flatMap(minion -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(minion)))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
