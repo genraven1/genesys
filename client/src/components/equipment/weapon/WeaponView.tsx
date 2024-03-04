@@ -16,6 +16,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderDamage, renderPrice, renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../common/table/TableRenders";
+import SkillTableCell from "../../common/table/SkillTableCell";
 
 interface Props {
     weapon: Weapon
@@ -55,7 +56,7 @@ export default function WeaponView(props: Props) {
                             <TableBody>
                                 <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
                                     <TypographyLeftTableCell value={weapon?.name!!}/>
-                                    <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
+                                    <SkillTableCell skill={weapon.skill}/>
                                     <TypographyCenterTableCell value={renderDamage(weapon)}/>
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
                                     <TypographyCenterTableCell value={weapon?.range!!}/>

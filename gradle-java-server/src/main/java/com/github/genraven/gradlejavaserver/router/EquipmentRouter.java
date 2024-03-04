@@ -18,6 +18,11 @@ public class EquipmentRouter {
                         .POST("/{name}", equipmentHandler::createArmor)
                         .PUT("/{name}", equipmentHandler::updateArmor)
                         .GET("/{name}", equipmentHandler::getArmor))
+                .path("/equipment/weapons", builder -> builder
+                        .GET("/", equipmentHandler::getAllWeapons)
+                        .POST("/{name}", equipmentHandler::createWeapon)
+                        .PUT("/{name}", equipmentHandler::updateWeapon)
+                        .GET("/{name}", equipmentHandler::getWeapon))
                 .path("/equipment/gears", builder -> builder
                         .GET("/", equipmentHandler::getAllGears)
                         .POST("/{name}", equipmentHandler::createGear)

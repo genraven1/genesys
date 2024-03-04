@@ -8,12 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Document(collection = "gears")
-public class Gear extends Equipment {
+@Document(collection = "weapons")
+public class Weapon extends Equipment {
 
-    protected Gear() {}
+    protected Weapon() {}
 
-    public Gear(final Equipment equipment) {
+    public Weapon(final Equipment equipment) {
         this.setName(equipment.getName());
         this.setDescription(equipment.getDescription());
         this.setPrice(equipment.getPrice());
@@ -24,8 +24,9 @@ public class Gear extends Equipment {
         this.setSettings(equipment.getSettings());
     }
 
+    private int damage = 0;
     private Skill skill;
-    private boolean modifier = false;
-    private int amount;
+    private int critical = 3;
     private RangeBand range = RangeBand.ENGAGED;
+    private boolean brawn = false;
 }

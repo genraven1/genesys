@@ -22,6 +22,6 @@ public class Armor extends Equipment {
         this.setSettings(equipment.getSettings());
     }
 
-    private int soak;
-    private int defense;
+    private int soak = 0;
+    private int defense = 0;
 }
