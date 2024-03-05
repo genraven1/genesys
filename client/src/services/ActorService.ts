@@ -1,5 +1,5 @@
 import axios from "axios";
-import Player, {PlayerSkill} from "../models/actor/player/Player";
+import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
