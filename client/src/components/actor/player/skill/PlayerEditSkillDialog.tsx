@@ -17,6 +17,7 @@ export default function PlayerEditSkillDialog(props: Props) {
         player.skills.forEach((skill, index) => {
             if (skill.name === playerSkill.name) {
                 skill.ranks = ranks
+                player.skills[index] = skill
             }
         })
         await ActorService.updatePlayer(player.name, player)

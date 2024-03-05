@@ -3,7 +3,6 @@ import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
@@ -13,7 +12,7 @@ import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 import {SkillType} from "../../../../models/actor/Skill";
 import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
 import {GenesysDicePoolCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
-import {renderSkillName} from "../../../common/table/TableRenders";
+import {renderSingleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 
 interface RowProps {
     skill: PlayerSkill
@@ -49,28 +48,22 @@ interface GroupProps {
 export function SkillTypeGroup(props: GroupProps) {
     const {player, type} = props
     const [open, setOpen] = useState(false)
+    const headers = ['Name', 'Ranks', 'Dice Pool', 'View']
 
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TableCell component="th" scope="row" style={{textAlign: 'center'}}>{type}</TableCell>
+                <TableCell style={{textAlign: 'center'}}>{type}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Skill</TableCell>
-                                        <TableCell>Ranks</TableCell>
-                                        <TableCell>Dice Pool</TableCell>
-                                        <TableCell>Edit</TableCell>
-                                    </TableRow>
-                                </TableHead>
+                                {renderSingleRowTableHeader(headers)}
                                 <TableBody>
-                                    {(player?.skills!! || []).filter((skill) => skill.type === type).map((row: PlayerSkill) => (
-                                        <SkillRow key={row.name} skill={row} player={player}/>
+                                    {(player?.skills!! || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
+                                        <SkillRow key={skill.name} skill={skill} player={player}/>
                                     ))}
                                 </TableBody>
                             </Table>
@@ -88,14 +81,12 @@ interface TableProps {
 
 export default function PlayerEditSkillTable(props: TableProps) {
     const {player} = props
+    const headers = ['Skills']
+
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell style={{textAlign: "center"}}>Skills</TableCell>
-                    </TableRow>
-                </TableHead>
+            <Table>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     <SkillTypeGroup player={player!!} type={SkillType.General}/>
                     <SkillTypeGroup player={player!!} type={SkillType.Magic}/>
