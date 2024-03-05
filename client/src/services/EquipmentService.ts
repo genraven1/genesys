@@ -3,7 +3,6 @@ import {EquipmentPath} from "./Path";
 import {Armor} from "../models/equipment/Armor";
 import {Gear} from "../models/equipment/Gear";
 import {Weapon} from "../models/equipment/Weapon";
-import Quality from "../models/Quality";
 
 export default class EquipmentService {
 

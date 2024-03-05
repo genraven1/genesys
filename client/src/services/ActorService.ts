@@ -1,5 +1,5 @@
 import axios from "axios";
-import Player, {PlayerSkill} from "../models/actor/player/Player";
+import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
@@ -35,10 +35,6 @@ export default class ActorService {
 
     static async updatePlayer(name: string, player: Player): Promise<Player> {
         return await (await axios.put(ActorPath.Player + name, player)).data;
-    }
-
-    static async updatePlayerSkill(name: string, skill: PlayerSkill): Promise<Player> {
-        return await (await axios.put(ActorPath.Player + name + '/skill', skill)).data;
     }
 
     static async addPlayerTalent(name: string, talent: ActorTalent): Promise<Player> {

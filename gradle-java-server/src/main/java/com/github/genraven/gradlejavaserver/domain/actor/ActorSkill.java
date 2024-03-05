@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
 public class ActorSkill extends Skill {
+
+    protected ActorSkill() {}
 
     public ActorSkill(final Skill skill) {
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
         this.setSettings(skill.getSettings());
-        this.ranks = 0;
     }
 
-    private int ranks;
+    private int ranks = 0;
 }
