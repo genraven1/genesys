@@ -37,10 +37,6 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Player + name, player)).data;
     }
 
-    static async updatePlayerSkill(name: string, skill: PlayerSkill): Promise<Player> {
-        return await (await axios.put(ActorPath.Player + name + '/skill', skill)).data;
-    }
-
     static async addPlayerTalent(name: string, talent: ActorTalent): Promise<Player> {
         return await (await axios.put(ActorPath.Player + name + '/talent', talent)).data;
     }
