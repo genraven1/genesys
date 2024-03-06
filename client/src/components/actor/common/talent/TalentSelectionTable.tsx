@@ -8,9 +8,8 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import TalentBackdrop from "./TalentBackdrop";
-import Talent, { ActorTalent } from "../../../../models/Talent";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
+import Talent from "../../../../models/Talent";
+import Actor from "../../../../models/actor/Actor";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 
 interface RowProps {
@@ -22,13 +21,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
     const {talent, actor} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
-    const addTalent = async () => {
-        switch (actor.type) {
-            case ActorType.Rival:
-                await ActorService.addRivalTalent(actor.name, {...talent!!} as ActorTalent)
-                break
-        }
-    }
+    const addTalent = async () => {}
 
     return (
         <TableRow>

@@ -21,8 +21,8 @@ import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityC
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import RivalSkillCard from "./skill/RivalSkillCard";
+import RivalTalentCard from "./talent/RivalTalentCard";
 
 interface Props {
     riv: Rival
@@ -187,9 +187,9 @@ export default function RivalEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={rival}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={rival}/>
+                    <RivalTalentCard rival={rival}/>
                 </Grid>
-                <EditSettingsCard settings={rival?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard settings={rival.settings} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>

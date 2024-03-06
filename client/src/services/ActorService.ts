@@ -9,7 +9,7 @@ import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
-import Talent, {ActorTalent} from "../models/Talent";
+import Talent from "../models/Talent";
 
 export default class ActorService {
 
@@ -87,10 +87,6 @@ export default class ActorService {
 
     static async updateRival(name: string, rival: Rival): Promise<Rival> {
         return await (await axios.put(ActorPath.Rival + name, rival)).data;
-    }
-
-    static async addRivalTalent(name: string, talent: ActorTalent): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name + '/talents', talent)).data;
     }
 
     static async createRivalWeapon(name: string, weapon: ActorWeapon): Promise<Rival> {
