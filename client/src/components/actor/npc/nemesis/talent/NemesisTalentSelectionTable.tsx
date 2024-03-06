@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import TalentService from "../../../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,36 +6,41 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import TalentBackdrop from "./TalentBackdrop";
-import Talent, { ActorTalent } from "../../../../models/Talent";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
+import Talent from "../../../../../models/Talent";
+import TalentBackdrop from "../../../common/talent/TalentBackdrop";
+import TalentService from "../../../../../services/TalentService";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 
 interface RowProps {
     talent: Talent
-    actor: Actor
+    nemesis: Nemesis
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {talent, actor} = props;
+    const {talent, nemesis} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     const addTalent = async () => {
-        switch (actor.type) {
-            case ActorType.Rival:
-                await ActorService.addRivalTalent(actor.name, {...talent!!} as ActorTalent)
-                break
+        if (nemesis.talents.some(actorTalent => actorTalent.name === talent.name)) {
+            nemesis.talents.forEach((actorTalent, index) => {
+                if (talent.name === actorTalent.name) {
+                    actorTalent.ranks = actorTalent.ranks + 1
+                    nemesis.talents[index] = actorTalent
+                }
+            })
+        } else {
+            nemesis.talents.push({...talent, ranks: 1})
         }
     }
 
     return (
         <TableRow>
             <TableCell>
-                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{talent?.name!!}</Button>
+                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{talent.name}</Button>
                 {openTalentBackDrop &&
                     <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)}
-                                    talent={talent!!}/>}
+                                    talent={talent}/>}
             </TableCell>
             <TableCell>
                 <Button onClick={addTalent}>Add</Button>
@@ -46,11 +50,11 @@ function TalentNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    nemesis: Nemesis
 }
 
-export default function TalentSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function NemesisTalentSelectionTable(props: TableProps) {
+    const {nemesis} = props
     const [talents, setTalents] = useState<Talent[]>([])
     const headers = ['Name', 'Add']
 
@@ -70,7 +74,7 @@ export default function TalentSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {talents.map((talent: Talent) => (
-                        <TalentNameRow talent={talent} actor={actor}/>
+                        <TalentNameRow talent={talent} nemesis={nemesis}/>
                     ))}
                 </TableBody>
             </Table>
