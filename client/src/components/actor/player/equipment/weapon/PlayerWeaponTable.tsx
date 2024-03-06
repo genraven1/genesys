@@ -4,7 +4,6 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {useState} from "react";
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {
@@ -55,7 +54,6 @@ interface RowProps {
 
 function Row(props: RowProps): JSX.Element {
     const {weapon, player} = props
-    const [open, setOpen] = useState(false)
 
     // const renderEquipped = (): string => {
     //     let equip = ''
@@ -78,7 +76,7 @@ function Row(props: RowProps): JSX.Element {
     }
 
     return (
-        <TableRow onClick={() => setOpen(!open)}>
+        <TableRow>
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
             <TypographyCenterTableCell value={weapon.skill.name}/>

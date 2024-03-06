@@ -34,9 +34,6 @@ function ArmorNameRow(props: RowProps): JSX.Element {
             case ActorType.Minion:
                 await ActorService.createMinionArmor(actor.name, {...armor} as ActorArmor)
                 break
-            case ActorType.Player:
-                await ActorService.createPlayerArmor(actor.name, {...armor} as ActorArmor)
-                break
         }
     }
 

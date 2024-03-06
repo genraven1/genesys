@@ -48,6 +48,7 @@ public class MinionService {
             min.setTalents(minion.getTalents());
             min.setSettings(minion.getSettings());
             min.setWeapons(minion.getWeapons());
+            min.setArmors(minion.getArmors());
             return min;
         }).flatMap(minionRepository::save);
     }
