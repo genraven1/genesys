@@ -31,5 +31,5 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setTalents(singleNonPlayerActor.getTalents());
     }
 
-    private int strain;
+    private int strain = 0;
 }

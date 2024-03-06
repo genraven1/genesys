@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -30,6 +31,6 @@ public class Minion extends NonPlayerActor {
         this.setAbilities(nonPlayerActor.getAbilities());
     }
 
-    private List<Talent> talents;
-    private List<GroupSkill> skills;
+    private List<Talent> talents = new ArrayList<>();
+    private List<GroupSkill> skills = new ArrayList<>();
 }

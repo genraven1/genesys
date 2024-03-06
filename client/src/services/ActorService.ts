@@ -3,8 +3,8 @@ import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
-import Actor, {ActorSkill} from "../models/actor/Actor";
-import Minion, {GroupSkill} from "../models/actor/npc/Minion";
+import Actor from "../models/actor/Actor";
+import Minion from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
@@ -127,10 +127,6 @@ export default class ActorService {
 
     static async updateMinion(name: string, minion: Minion): Promise<Minion> {
         return await (await axios.put(ActorPath.Minion + name, minion)).data;
-    }
-
-    static async updateMinionSkill(name: string, skill: GroupSkill): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name + '/skills', skill)).data;
     }
 
     static async addMinionTalent(name: string, talent: Talent): Promise<Minion> {
