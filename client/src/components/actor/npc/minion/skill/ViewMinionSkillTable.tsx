@@ -1,7 +1,6 @@
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -10,7 +9,7 @@ import {SkillType} from "../../../../../models/actor/Skill";
 import {setSkillName} from "../../../../../models/actor/Actor";
 import Minion, {GroupSkill} from "../../../../../models/actor/npc/Minion";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
-import {renderHeaders} from "../../../../common/table/TableRenders";
+import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
 
 interface GroupProps {
     minion: Minion,
@@ -19,10 +18,7 @@ interface GroupProps {
 
 export function SkillTypeGroup(props: GroupProps) {
     const {minion, type} = props
-
-    const renderSkillTableHeaders = ():JSX.Element => {
-        return renderHeaders(['Name', 'Group Skill'])
-    }
+    const headers = ['Name', 'Group Skill']
 
     const renderSkillRow = (skill: GroupSkill):JSX.Element => {
         let text = 'No'
@@ -34,12 +30,7 @@ export function SkillTypeGroup(props: GroupProps) {
 
     return (
         <Table>
-            <TableHead>
-                <TableRow>
-                    <TypographyCenterTableCell value={type} span={2}/>
-                </TableRow>
-                {renderSkillTableHeaders}
-            </TableHead>
+            {renderDoubleRowTableHeader(headers, type, headers.length)}
             <TableBody>
                 {(minion?.skills!! || [])
                     .sort((a, b) => a.name.localeCompare(b.name))

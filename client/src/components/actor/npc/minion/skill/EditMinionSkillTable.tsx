@@ -23,18 +23,29 @@ interface GroupSkillRowProps {
 function GroupSkillRow(props: GroupSkillRowProps) {
     const {skill, minion} = props
     const [groupSkill, setGroupSkill] = useState(skill)
-    const [min, setMin] = useState(minion)
 
     const onSkillAddition = async (skill: GroupSkill) => {
+        minion.skills.forEach((groupSkill, index) => {
+            if (groupSkill.name === skill.name) {
+                groupSkill.group = true
+                minion.skills[index] = groupSkill
+            }
+        })
         skill.group = true
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
+        await ActorService.updateMinion(minion.name, minion)
     }
 
     const onSkillRemoval = async (skill: GroupSkill) => {
+        minion.skills.forEach((groupSkill, index) => {
+            if (groupSkill.name === skill.name) {
+                groupSkill.group = false
+                minion.skills[index] = groupSkill
+            }
+        })
         skill.group = false
         setGroupSkill(skill)
-        setMin(await ActorService.updateMinionSkill(minion.name, groupSkill))
+        await ActorService.updateMinion(minion.name, minion)
     }
 
     return (
@@ -69,7 +80,7 @@ export function SkillTypeGroup(props: GroupProps) {
                             <Table>
                                 {renderSingleRowTableHeader(headers)}
                                 <TableBody>
-                                    {(minion?.skills!! || [])
+                                    {(minion.skills || [])
                                         .sort((a, b) => a.name.localeCompare(b.name))
                                         .filter((skill) => skill.type === type)
                                         .map((skill: GroupSkill) => (
