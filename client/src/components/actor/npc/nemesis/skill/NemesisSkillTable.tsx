@@ -3,27 +3,26 @@ import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import {SkillType} from "../../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
-import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
-import {renderHeaders} from "../../../common/table/TableRenders";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
+import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import GenesysSkillDiceTypography from "../../../../common/typography/GenesysSkillDiceTypography";
+import NemesisEditSkillDialog from "./NemesisEditSkillDialog";
+import {SkillType} from "../../../../../models/actor/Skill";
 
 interface RowProps {
     skill: ActorSkill
-    npc: SingleNonPlayerCharacter
+    nemesis: Nemesis
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const {skill, npc} = props
+    const {skill, nemesis} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
     return (
@@ -31,27 +30,26 @@ function SkillRow(props: RowProps): JSX.Element {
             <TypographyCenterTableCell value={setSkillName(skill)}/>
             <TypographyCenterTableCell value={String(skill?.ranks!!)}/>
             <TableCell>
-                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, skill)}
+                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(nemesis, skill)}
                                             skillRanks={skill?.ranks!!}/>
             </TableCell>
             <TableCell>
                 <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
-                {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog}
-                                                                           onClose={(): void => setOpenEditSkillDialog(false)}
-                                                                           actorSkill={skill!!} npc={npc}
-                                                                           type={npc.type}/>}
+                {openEditSkillDialog && <NemesisEditSkillDialog open={openEditSkillDialog}
+                                                                onClose={(): void => setOpenEditSkillDialog(false)}
+                                                                actorSkill={skill} nemesis={nemesis}/>}
             </TableCell>
         </TableRow>
     )
 }
 
 interface GroupProps {
-    npc: SingleNonPlayerCharacter
+    nemesis: Nemesis
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {npc, type} = props
+    const {nemesis, type} = props
     const [open, setOpen] = useState(false)
     const headers = ['Name', 'Ranks', 'Dice Pool', 'Edit']
 
@@ -65,15 +63,13 @@ export function SkillTypeGroup(props: GroupProps) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Table>
-                                <TableHead>
-                                    {renderHeaders(headers)}
-                                </TableHead>
+                                {renderSingleRowTableHeader(headers)}
                                 <TableBody>
-                                    {(npc?.skills!! || [])
+                                    {(nemesis.skills || [])
                                         .sort((a, b) => a.name.localeCompare(b.name))
                                         .filter((skill) => skill.type === type)
                                         .map((skill: ActorSkill) => (
-                                            <SkillRow skill={skill} npc={npc}/>
+                                            <SkillRow skill={skill} nemesis={nemesis}/>
                                         ))}
                                 </TableBody>
                             </Table>
@@ -86,25 +82,23 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    npc: SingleNonPlayerCharacter
+    nemesis: Nemesis
 }
 
-export default function NonPlayerCharacterSkillTable(props: TableProps) {
-    const {npc} = props
+export default function NemesisSkillTable(props: TableProps) {
+    const {nemesis} = props
     const headers = ['Skills']
 
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.General}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Magic}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Combat}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Social}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Knowledge}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.General}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Magic}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Combat}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Social}/>
+                    <SkillTypeGroup nemesis={nemesis} type={SkillType.Knowledge}/>
                 </TableBody>
             </Table>
         </TableContainer>
