@@ -1,27 +1,36 @@
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
-import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
-import {SkillType} from "../../../../models/actor/Skill";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import {renderHeaders} from "../../../common/table/TableRenders";
+import {SkillType} from "../../../../../models/actor/Skill";
+import {setSkillName} from "../../../../../models/actor/Actor";
+import Minion, {GroupSkill} from "../../../../../models/actor/npc/Minion";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import {renderHeaders} from "../../../../common/table/TableRenders";
 
 interface GroupProps {
-    npc: SingleNonPlayerCharacter,
+    minion: Minion,
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {npc, type} = props
-    const headers = ['Name', 'Dice Pool']
+    const {minion, type} = props
+
+    const renderSkillTableHeaders = ():JSX.Element => {
+        return renderHeaders(['Name', 'Group Skill'])
+    }
+
+    const renderSkillRow = (skill: GroupSkill):JSX.Element => {
+        let text = 'No'
+        if (skill.group) {
+            text = 'Yes'
+        }
+        return <TypographyCenterTableCell value={text}/>
+    }
 
     return (
         <Table>
@@ -29,19 +38,16 @@ export function SkillTypeGroup(props: GroupProps) {
                 <TableRow>
                     <TypographyCenterTableCell value={type} span={2}/>
                 </TableRow>
-                {renderHeaders(headers)}
+                {renderSkillTableHeaders}
             </TableHead>
             <TableBody>
-                {(npc?.skills!! || [])
+                {(minion?.skills!! || [])
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .filter((skill) => skill.type === type)
-                    .map((actorSkill: ActorSkill) => (
+                    .map((actorSkill: GroupSkill) => (
                         <TableRow>
                             <TypographyCenterTableCell value={setSkillName(actorSkill)}/>
-                            <TableCell style={{textAlign: 'center'}}>
-                                {<GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, actorSkill)}
-                                                             skillRanks={actorSkill.ranks}/>}
-                            </TableCell>
+                            {renderSkillRow(actorSkill)}
                         </TableRow>
                     ))}
             </TableBody>
@@ -50,11 +56,11 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    npc: SingleNonPlayerCharacter
+    minion: Minion
 }
 
-export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
-    const {npc} = props
+export default function ViewMinionSkillTable(props: TableProps) {
+    const {minion} = props
 
     return (
         <Grid container>
@@ -62,8 +68,8 @@ export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
                 <TableContainer component={Paper}>
                     <Table>
                         <TableBody>
-                            <SkillTypeGroup npc={npc} type={SkillType.General}/>
-                            <SkillTypeGroup npc={npc} type={SkillType.Magic}/>
+                            <SkillTypeGroup minion={minion} type={SkillType.General}/>
+                            <SkillTypeGroup minion={minion} type={SkillType.Magic}/>
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -72,9 +78,9 @@ export default function ViewNonPlayerCharacterSkillTable(props: TableProps) {
                 <TableContainer component={Paper}>
                     <Table>
                         <TableBody>
-                            <SkillTypeGroup npc={npc} type={SkillType.Combat}/>
-                            <SkillTypeGroup npc={npc} type={SkillType.Social}/>
-                            <SkillTypeGroup npc={npc} type={SkillType.Knowledge}/>
+                            <SkillTypeGroup minion={minion} type={SkillType.Combat}/>
+                            <SkillTypeGroup minion={minion} type={SkillType.Social}/>
+                            <SkillTypeGroup minion={minion} type={SkillType.Knowledge}/>
                         </TableBody>
                     </Table>
                 </TableContainer>

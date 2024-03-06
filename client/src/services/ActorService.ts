@@ -97,10 +97,6 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Rival + name, rival)).data;
     }
 
-    static async updateRivalSkill(name: string, skill: ActorSkill): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name + '/skills', skill)).data;
-    }
-
     static async addRivalTalent(name: string, talent: ActorTalent): Promise<Rival> {
         return await (await axios.put(ActorPath.Rival + name + '/talents', talent)).data;
     }

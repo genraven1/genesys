@@ -18,10 +18,11 @@ import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEqui
 import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import MinionSkillCard from "./skill/MinionSkillCard";
+import * as React from "react";
 
 interface Props {
     min: Minion
@@ -179,7 +180,7 @@ export default function MinionEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={minion}/>
+                    <MinionSkillCard minion={minion}/>
                     <Divider/>
                     <NonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider/>

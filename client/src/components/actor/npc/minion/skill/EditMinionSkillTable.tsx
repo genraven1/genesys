@@ -6,14 +6,14 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import {Box} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import {SkillType} from "../../../../models/actor/Skill";
+import {SkillType} from "../../../../../models/actor/Skill";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import Minion, {GroupSkill} from "../../../../models/actor/npc/Minion";
-import CheckboxTableCell from "../../../common/table/CheckboxTableCell";
-import ActorService from "../../../../services/ActorService";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import Minion, {GroupSkill} from "../../../../../models/actor/npc/Minion";
+import CheckboxTableCell from "../../../../common/table/CheckboxTableCell";
+import ActorService from "../../../../../services/ActorService";
 
 interface GroupSkillRowProps {
     skill: GroupSkill
