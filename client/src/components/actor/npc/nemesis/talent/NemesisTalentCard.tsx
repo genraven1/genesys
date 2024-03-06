@@ -1,5 +1,5 @@
 import {Button, Card, CardContent} from "@mui/material";
-import NonPlayerCharacterTalentTable from "./NonPlayerCharacterTalentTable";
+import NemesisTalentTable from "./NemesisTalentTable";
 import { Fragment, useState } from "react";
 import { useLocation } from "react-router-dom";
 import NemesisTalentSelectionDialog from "./NemesisTalentSelectionDialog";
@@ -11,7 +11,7 @@ interface Props {
     nemesis: Nemesis
 }
 
-export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element {
+export default function NemesisTalentCard(props: Props): JSX.Element {
     const {nemesis} = props
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     const pathname = useLocation().pathname
@@ -20,7 +20,7 @@ export default function NonPlayerCharacterTalentCard(props: Props): JSX.Element 
         if (nemesis?.talents!!.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <NonPlayerCharacterTalentTable nemesis={nemesis} />
+        return <NemesisTalentTable nemesis={nemesis} />
     }
 
     const renderButton = (): JSX.Element => {

@@ -9,7 +9,6 @@ import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
 import Ability from "../models/Ability";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
-import Talent from "../models/Talent";
 
 export default class ActorService {
 
@@ -115,10 +114,6 @@ export default class ActorService {
 
     static async updateMinion(name: string, minion: Minion): Promise<Minion> {
         return await (await axios.put(ActorPath.Minion + name, minion)).data;
-    }
-
-    static async addMinionTalent(name: string, talent: Talent): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name + '/talents', talent)).data;
     }
 
     static async createMinionWeapon(name: string, weapon: ActorWeapon): Promise<Minion> {
