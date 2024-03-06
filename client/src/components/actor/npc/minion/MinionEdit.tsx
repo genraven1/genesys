@@ -20,7 +20,7 @@ import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import * as React from "react";
 
@@ -186,7 +186,7 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={minion}/>
+                    <MinionTalentCard minion={minion}/>
                 </Grid>
                 <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import TalentService from "../../../../services/TalentService";
+import TalentService from "../../../../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,21 +7,25 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import TalentBackdrop from "./TalentBackdrop";
-import Talent from "../../../../models/Talent";
-import Actor from "../../../../models/actor/Actor";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import TalentBackdrop from "../../../common/talent/TalentBackdrop";
+import Talent from "../../../../../models/Talent";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import Minion from "../../../../../models/actor/npc/Minion";
+import ActorService from "../../../../../services/ActorService";
 
 interface RowProps {
     talent: Talent
-    actor: Actor
+    minion: Minion
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {talent, actor} = props;
+    const {talent, minion} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
-    const addTalent = async () => {}
+    const addTalent = async () => {
+        minion.talents.push({...talent, group: true})
+        await ActorService.updateMinion(minion.name, minion)
+    }
 
     return (
         <TableRow>
@@ -39,11 +43,11 @@ function TalentNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    minion: Minion
 }
 
-export default function TalentSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function MinionTalentSelectionTable(props: TableProps) {
+    const {minion} = props
     const [talents, setTalents] = useState<Talent[]>([])
     const headers = ['Name', 'Add']
 
@@ -63,7 +67,7 @@ export default function TalentSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {talents.map((talent: Talent) => (
-                        <TalentNameRow talent={talent} actor={actor}/>
+                        <TalentNameRow talent={talent} minion={minion}/>
                     ))}
                 </TableBody>
             </Table>

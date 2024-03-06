@@ -21,8 +21,8 @@ import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
 import NemesisSkillCard from "./skill/NemesisSkillCard";
+import NemesisTalentCard from "./talent/NemesisTalentCard";
 
 interface Props {
     nem: Nemesis
@@ -194,9 +194,9 @@ export default function NemesisEdit(props: Props) {
                     <Divider/>
                     <NonPlayerCharacterAbilityCard npc={nemesis}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={nemesis}/>
+                    <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
-                <EditSettingsCard settings={nemesis?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard settings={nemesis.settings} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>

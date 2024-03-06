@@ -1,21 +1,21 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import Actor from "../../../../models/actor/Actor";
-import TalentSelectionTable from "./TalentSelectionTable";
+import MinionTalentSelectionTable from "./MinionTalentSelectionTable";
+import Minion from "../../../../../models/actor/npc/Minion";
 
 interface Props {
-    actor: Actor
+    minion: Minion
     open: boolean
     onClose: () => void
 }
 
-export default function TalentSelectionDialog(props: Props) {
-    const {actor, open, onClose} = props
+export default function MinionTalentSelectionDialog(props: Props) {
+    const {minion, open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={'Add Talent'}/>
             <DialogContent>
-                <TalentSelectionTable actor={actor}/>
+                <MinionTalentSelectionTable minion={minion}/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

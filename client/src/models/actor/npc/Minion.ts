@@ -3,10 +3,14 @@ import Skill from "../Skill";
 import Talent from "../../Talent";
 
 export default interface Minion extends NonPlayerActor {
-    talents: Talent[]
+    talents: GroupTalent[]
     skills: GroupSkill[]
 }
 
 export interface GroupSkill extends Skill {
+    group: boolean
+}
+
+export interface GroupTalent extends Talent {
     group: boolean
 }

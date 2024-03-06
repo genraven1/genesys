@@ -5,7 +5,6 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import TableHead from "@mui/material/TableHead";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import Nemesis from "../../../../../models/actor/npc/Nemesis";
 import {ActorTalent} from "../../../../../models/Talent";
@@ -34,7 +33,7 @@ interface TableProps {
     nemesis: Nemesis
 }
 
-export default function NonPlayerCharacterTalentTable(props: TableProps) {
+export default function NemesisTalentTable(props: TableProps) {
     const {nemesis} = props
     const headers = ['Name', 'Summary']
 

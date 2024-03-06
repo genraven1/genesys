@@ -5,14 +5,14 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import GenesysTalentTypography from "../../../common/typography/GenesysTalentTypography";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
-import {renderDoubleRowTableHeader} from "../../../common/table/TableRenders";
-import {ActorTalent} from "../../../../models/Talent";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import GenesysTalentTypography from "../../../../common/typography/GenesysTalentTypography";
+import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import Minion, {GroupTalent} from "../../../../../models/actor/npc/Minion";
+import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
 
 interface Props {
-    talent: ActorTalent
+    talent: GroupTalent
     skillRanks?: number
 }
 
@@ -23,18 +23,18 @@ function Row(props: Props): JSX.Element {
         <TableRow>
             <TypographyCenterTableCell value={talent.name}/>
             <TableCell>
-                <GenesysTalentTypography text={talent.summary} ranks={talent.ranks} secondRanks={skillRanks}/>
+                <GenesysDescriptionTypography text={talent.summary}/>
             </TableCell>
         </TableRow>
     );
 }
 
 interface TableProps {
-    npc: SingleNonPlayerCharacter
+    minion: Minion
 }
 
-export default function NonPlayerCharacterTalentTable(props: TableProps) {
-    const {npc} = props
+export default function MinionTalentTable(props: TableProps) {
+    const {minion} = props
     const headers = ['Name', 'Summary']
 
     return (
@@ -42,7 +42,7 @@ export default function NonPlayerCharacterTalentTable(props: TableProps) {
             <Table>
                 {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
                 <TableBody>
-                    {(npc.talents || []).map((talent: ActorTalent) => (
+                    {(minion.talents || []).map((talent: GroupTalent) => (
                         <Row key={talent.name} talent={talent}/>
                     ))}
                 </TableBody>
