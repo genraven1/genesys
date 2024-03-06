@@ -22,7 +22,8 @@ public class SettingRouter {
                         .GET("/{name}", settingHandler::getSetting)
                         .PUT("/{name}", settingHandler::updateSetting))
                 .path(CURRENT, builder -> builder
-                        .GET(settingHandler::getCurrentSetting))
+                        .GET("/", settingHandler::getCurrentSetting)
+                        .POST("/", settingHandler::setCurrentSetting))
                 .build();
     }
 }

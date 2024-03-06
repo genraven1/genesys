@@ -34,6 +34,15 @@ public class SettingHandler {
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
+    public Mono<ServerResponse> setCurrentSetting(final ServerRequest serverRequest) {
+        settingService.getCurrentSetting().flatMap(setting -> {
+            setting.setCurrent(false);
+            return settingService.updateSetting(setting.getName(), setting);
+        });
+        final Mono<Setting> settingMono = settingService.getSetting(serverRequest.pathVariable(NAME));
+        return null;
+    }
+
     public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
         return settingService.getAllSettings().collectList().flatMap(settings -> {
             if (settings.isEmpty()) {
@@ -46,7 +55,7 @@ public class SettingHandler {
     }
 
     public Mono<ServerResponse> getSetting(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         return settingService.getSetting(name)
                 .flatMap(setting -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
