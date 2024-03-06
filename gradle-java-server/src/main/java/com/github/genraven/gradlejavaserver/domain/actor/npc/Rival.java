@@ -29,5 +29,6 @@ public class Rival extends SingleNonPlayerActor {
         this.setAbilities(singleNonPlayerActor.getAbilities());
         this.setSkills(singleNonPlayerActor.getSkills());
         this.setTalents(singleNonPlayerActor.getTalents());
+        this.setWeapons(singleNonPlayerActor.getWeapons());
     }
 }

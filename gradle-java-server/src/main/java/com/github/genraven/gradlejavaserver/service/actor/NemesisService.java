@@ -49,6 +49,7 @@ public class NemesisService {
             nem.setTalents(nemesis.getTalents());
             nem.setSettings(nemesis.getSettings());
             nem.setStrain(nemesis.getStrain());
+            nem.setWeapons(nemesis.getWeapons());
             return nem;
         }).flatMap(nemesisRepository::save);
     }

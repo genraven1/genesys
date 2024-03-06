@@ -42,6 +42,7 @@ public class PlayerService {
             play.setStrain(player.getStrain());
             play.setSkills(player.getSkills());
             play.setSettings(player.getSettings());
+            play.setWeapons(player.getWeapons());
             return play;
         }).flatMap(playerRepository::save);
     }

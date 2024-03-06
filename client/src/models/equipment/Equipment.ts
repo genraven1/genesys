@@ -21,7 +21,8 @@ export enum EquipmentSlot {
     Main='Main Hand',
     Off='Off Hand',
     Both='Both Hands',
-    Body='Body'
+    Body='Body',
+    None='None'
 }
 
 export enum EquipmentType {

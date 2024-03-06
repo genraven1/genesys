@@ -29,6 +29,7 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setAbilities(singleNonPlayerActor.getAbilities());
         this.setSkills(singleNonPlayerActor.getSkills());
         this.setTalents(singleNonPlayerActor.getTalents());
+        this.setWeapons(singleNonPlayerActor.getWeapons());
     }
 
     private int strain = 0;
