@@ -6,34 +6,34 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import Nemesis from "../../../../../models/actor/npc/Nemesis";
 import Talent from "../../../../../models/Talent";
+import Rival from "../../../../../models/actor/npc/Rival";
 import TalentBackdrop from "../../../common/talent/TalentBackdrop";
-import TalentService from "../../../../../services/TalentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import TalentService from "../../../../../services/TalentService";
 import ActorService from "../../../../../services/ActorService";
 
 interface RowProps {
     talent: Talent
-    nemesis: Nemesis
+    rival: Rival
 }
 
 function TalentNameRow(props: RowProps): JSX.Element {
-    const {talent, nemesis} = props;
+    const {talent, rival} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
     const addTalent = async () => {
-        if (nemesis.talents.some(actorTalent => actorTalent.name === talent.name)) {
-            nemesis.talents.forEach((actorTalent, index) => {
+        if (rival.talents.some(actorTalent => actorTalent.name === talent.name)) {
+            rival.talents.forEach((actorTalent, index) => {
                 if (talent.name === actorTalent.name) {
                     actorTalent.ranks = actorTalent.ranks + 1
-                    nemesis.talents[index] = actorTalent
+                    rival.talents[index] = actorTalent
                 }
             })
         } else {
-            nemesis.talents.push({...talent, ranks: 1})
+            rival.talents.push({...talent, ranks: 1})
         }
-        await ActorService.updateNemesis(nemesis.name, nemesis)
+        await ActorService.updateRival(rival.name, rival)
     }
 
     return (
@@ -52,11 +52,11 @@ function TalentNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    nemesis: Nemesis
+    rival: Rival
 }
 
-export default function NemesisTalentSelectionTable(props: TableProps) {
-    const {nemesis} = props
+export default function RivalTalentSelectionTable(props: TableProps) {
+    const {rival} = props
     const [talents, setTalents] = useState<Talent[]>([])
     const headers = ['Name', 'Add']
 
@@ -76,7 +76,7 @@ export default function NemesisTalentSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {talents.map((talent: Talent) => (
-                        <TalentNameRow talent={talent} nemesis={nemesis}/>
+                        <TalentNameRow talent={talent} rival={rival}/>
                     ))}
                 </TableBody>
             </Table>
