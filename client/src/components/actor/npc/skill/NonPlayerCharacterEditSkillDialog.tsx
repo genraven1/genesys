@@ -25,15 +25,6 @@ export default function NonPlayerCharacterEditSkillDialog(props: Props) {
             case ActorType.Rival:
                 await ActorService.updateRivalSkill(npc.name, copySkill)
                 break
-            case ActorType.Nemesis:
-                npc.skills.forEach((actorSkill, index) => {
-                    if (actorSkill.name === skill.name) {
-                        actorSkill.ranks = ranks
-                        npc.skills[index] = actorSkill
-                    }
-                })
-                await ActorService.updateNemesisSkill(npc.name, copySkill)
-                break
         }
         onClose()
     }

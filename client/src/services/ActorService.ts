@@ -64,10 +64,6 @@ export default class ActorService {
     static async updateNemesis(name: string, nemesis: Nemesis): Promise<Nemesis> {
         return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
-
-    static async updateNemesisSkill(name: string, skill: ActorSkill): Promise<Nemesis> {
-        return await (await axios.put(ActorPath.Nemesis + name + '/skills', skill)).data;
-    }
     
     static async addNemesisTalent(name: string, talent: ActorTalent): Promise<Nemesis> {
         return await (await axios.put(ActorPath.Nemesis + name + '/talents', talent)).data;

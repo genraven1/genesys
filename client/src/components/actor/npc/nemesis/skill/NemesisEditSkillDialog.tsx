@@ -26,7 +26,7 @@ export default function NemesisEditSkillDialog(props: Props) {
                 nemesis.skills[index] = actorSkill
             }
         })
-        await ActorService.updateNemesisSkill(nemesis.name, copySkill)
+        await ActorService.updateNemesis(nemesis.name, nemesis)
         onClose()
     }
 
