@@ -49,6 +49,7 @@ public class RivalService {
             riv.setTalents(rival.getTalents());
             riv.setSettings(rival.getSettings());
             riv.setWeapons(rival.getWeapons());
+            riv.setArmors(rival.getArmors());
             return riv;
         }).flatMap(rivalRepository::save);
     }

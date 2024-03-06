@@ -5,16 +5,16 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
-import {ActorArmor} from "../../../../models/equipment/Armor";
-import {renderHeaders} from "../../../common/table/TableRenders";
-import {renderQualities, renderSoak} from "../../../../models/equipment/EquipmentHelper";
+import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {ActorArmor} from "../../../../../models/equipment/Armor";
+import {renderHeaders} from "../../../../common/table/TableRenders";
+import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
 
 interface Props {
     armor: ActorArmor[]
 }
 
-export default function ViewPlayerArmorTable(props: Props): JSX.Element {
+export default function PlayerArmorTable(props: Props): JSX.Element {
     const {armor} = props
     const headers = ['Name', 'Defense', 'Soak', 'Special Qualities']
 
@@ -60,7 +60,7 @@ function Row(props: RowProps): JSX.Element {
     // }
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
+        <TableRow>
             <TypographyLeftTableCell value={armor.name}/>
             <TypographyCenterTableCell value={String(armor.defense)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
