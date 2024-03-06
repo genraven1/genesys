@@ -10,7 +10,8 @@ public enum EquipmentSlot {
     MAIN_HAND("Main Hand"),
     OFF_HAND("Off Hand"),
     BOTH_HANDS("Both Hands"),
-    BODY("Body");
+    BODY("Body"),
+    NONE("None");
 
     @JsonValue
     private final String value;

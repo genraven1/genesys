@@ -34,9 +34,9 @@ export default function PlayerWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <PlayerView player={player} settings={settings}/>
+            return player && <PlayerView player={player} settings={settings}/>
         } else if (pathname.endsWith('/edit')) {
-            return <PlayerEdit play={player} settings={settings}/>
+            return player && <PlayerEdit play={player} settings={settings}/>
         } else {
             return <Fragment/>
         }
