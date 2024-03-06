@@ -5,11 +5,12 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import GenesysTalentTypography from "../../../common/typography/GenesysTalentTypography";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
-import {renderDoubleRowTableHeader} from "../../../common/table/TableRenders";
-import {ActorTalent} from "../../../../models/Talent";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import TableHead from "@mui/material/TableHead";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
+import {ActorTalent} from "../../../../../models/Talent";
+import GenesysTalentTypography from "../../../../common/typography/GenesysTalentTypography";
+import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
 
 interface Props {
     talent: ActorTalent
@@ -30,11 +31,11 @@ function Row(props: Props): JSX.Element {
 }
 
 interface TableProps {
-    npc: SingleNonPlayerCharacter
+    nemesis: Nemesis
 }
 
 export default function NonPlayerCharacterTalentTable(props: TableProps) {
-    const {npc} = props
+    const {nemesis} = props
     const headers = ['Name', 'Summary']
 
     return (
@@ -42,7 +43,7 @@ export default function NonPlayerCharacterTalentTable(props: TableProps) {
             <Table>
                 {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
                 <TableBody>
-                    {(npc.talents || []).map((talent: ActorTalent) => (
+                    {(nemesis.talents || []).map((talent: ActorTalent) => (
                         <Row key={talent.name} talent={talent}/>
                     ))}
                 </TableBody>
