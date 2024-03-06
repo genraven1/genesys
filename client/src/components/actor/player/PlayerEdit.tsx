@@ -1,5 +1,5 @@
-import {Button, Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {CharacteristicType} from '../../../models/actor/Characteristics';
@@ -8,11 +8,9 @@ import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
-import PlayerTalentTable from "./PlayerTalentTable";
 import {EditCharacteristicCard} from '../CharacteristicCard';
 import {EditStatsCard} from "../StatsCard";
 import SoakCard from "../SoakCard";
-import TalentSelectionDialog from "../common/talent/TalentSelectionDialog";
 import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
@@ -21,6 +19,7 @@ import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import * as React from "react";
 import SettingService from "../../../services/SettingService";
 import {EditDefenseCard} from "../DefenseCard";
+import PlayerTalentCard from "./talent/PlayerTalentCard";
 
 interface Props {
     play: Player
@@ -29,9 +28,7 @@ interface Props {
 
 export default function PlayerView(props: Props) {
     const {play, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [player, setPlayer] = useState<Player>(play)
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -105,12 +102,12 @@ export default function PlayerView(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Player + id + '/view')
+        navigate(ActorPath.Player + player.name + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={player?.name!!} style={{textAlign: 'center'}}
+            <CardHeader title={player.name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>
@@ -166,12 +163,9 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <PlayerEquipmentCard player={player}/>
                     <Divider/>
-                    <Button onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <TalentSelectionDialog actor={player} open={openSelectTalentDialog}
-                                                                      onClose={(): void => setOpenSelectTalentDialog(false)}/>}
-                    <PlayerTalentTable player={player}/>
+                    <PlayerTalentCard player={player}/>
                 </Grid>
-                <EditSettingsCard settings={player?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard settings={player.settings} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
