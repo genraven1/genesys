@@ -7,13 +7,12 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
-import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
 import ViewPlayerArmorTable from "./ViewPlayerArmorTable";
 import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
 import PlayerWeaponTable from "./weapon/PlayerWeaponTable";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {useLocation} from "react-router-dom";
-import NemesisTalentSelectionDialog from "../../npc/nemesis/talent/NemesisTalentSelectionDialog";
+import PlayerWeaponSelectionDialog from "./weapon/PlayerWeaponSelectionDialog";
 
 interface Props {
     player: Player
@@ -52,7 +51,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
                 <Fragment>
                     <Button color='primary' variant='contained' onClick={(): void => setOpenSelectWeaponDialog(true)}>Add
                         Weapon</Button>
-                    {openSelectWeaponDialog && <WeaponSelectionDialog actor={player} open={openSelectWeaponDialog}
+                    {openSelectWeaponDialog && <PlayerWeaponSelectionDialog player={player} open={openSelectWeaponDialog}
                                                                       onClose={(): void => setOpenSelectWeaponDialog(false)}/>}
                 </Fragment>
             )
