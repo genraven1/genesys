@@ -17,7 +17,7 @@ export default function PlayerTalentCard(props: Props): JSX.Element {
     const pathname = useLocation().pathname
 
     const renderTable = (): JSX.Element => {
-        if (player.talents.length === 0) {
+        if (player.talents == undefined || player.talents.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
         return <PlayerTalentTable player={player} />

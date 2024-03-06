@@ -25,6 +25,8 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
+    console.log(player)
+
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
     }
@@ -39,7 +41,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderWeaponsTable = (): JSX.Element => {
-        if (player.weapons.length === 0) {
+        if (player.weapons == undefined || player.weapons.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <PlayerWeaponTable weapons={player.weapons} player={player}/>
@@ -70,7 +72,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (player?.armor!!.length === 0) {
+        if (player.armor == undefined || player.armor.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <PlayerArmorTable armor={player.armor}/>
@@ -105,7 +107,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderGearTable = (): JSX.Element => {
-        if (player?.gear!!.length === 0) {
+        if (player.gear == undefined || player.gear.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <Fragment/>
