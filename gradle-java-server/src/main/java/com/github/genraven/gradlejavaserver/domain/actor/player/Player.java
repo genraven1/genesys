@@ -3,6 +3,7 @@ package com.github.genraven.gradlejavaserver.domain.actor.player;
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 
 import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
+import com.github.genraven.gradlejavaserver.domain.actor.ActorWeapon;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
@@ -28,6 +29,7 @@ public class Player extends Actor {
         this.setWillpower(actor.getWillpower());
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
+        this.setWeapons(actor.getWeapons());
         this.setSettings(actor.getSettings());
     }
 

@@ -29,6 +29,7 @@ public class Minion extends NonPlayerActor {
         this.setSocial(nonPlayerActor.getSocial());
         this.setGeneral(nonPlayerActor.getGeneral());
         this.setAbilities(nonPlayerActor.getAbilities());
+        this.setWeapons(nonPlayerActor.getWeapons());
     }
 
     private List<Talent> talents = new ArrayList<>();

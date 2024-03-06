@@ -1,21 +1,20 @@
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useState} from "react";
-import {ActorWeapon} from "../../../../models/equipment/Weapon";
-import {renderHeaders} from "../../../common/table/TableRenders";
+import {ActorWeapon} from "../../../../../models/equipment/Weapon";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {
     GenesysDicePoolCenterTableCell,
     TypographyCenterTableCell,
     TypographyLeftTableCell
-} from "../../../common/table/TypographyTableCell";
-import {renderActorDamage, renderQualities} from "../../../../models/equipment/EquipmentHelper";
-import Player from "../../../../models/actor/player/Player";
-import {ActorSkill} from "../../../../models/actor/Actor";
+} from "../../../../common/table/TypographyTableCell";
+import {renderActorDamage, renderQualities} from "../../../../../models/equipment/EquipmentHelper";
+import Player from "../../../../../models/actor/player/Player";
+import {ActorSkill} from "../../../../../models/actor/Actor";
 
 
 interface Props {
@@ -23,7 +22,7 @@ interface Props {
     player: Player
 }
 
-export default function ViewPlayerWeaponTable(props: Props): JSX.Element {
+export default function PlayerWeaponTable(props: Props): JSX.Element {
     const {weapons, player} = props
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool']
 
@@ -40,9 +39,7 @@ export default function ViewPlayerWeaponTable(props: Props): JSX.Element {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {renderTableBody()}
                 </TableBody>
@@ -81,7 +78,7 @@ function Row(props: RowProps): JSX.Element {
     }
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
+        <TableRow onClick={() => setOpen(!open)}>
             <TypographyLeftTableCell value={weapon.name}/>
             {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
             <TypographyCenterTableCell value={weapon.skill.name}/>

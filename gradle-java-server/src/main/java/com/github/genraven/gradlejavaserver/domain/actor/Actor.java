@@ -30,5 +30,6 @@ public class Actor {
     private int melee;
     private int ranged;
     private int wounds = 1;
+    private List<ActorWeapon> weapons = new ArrayList<>();
     private List<Setting> settings = new ArrayList<>();
 }

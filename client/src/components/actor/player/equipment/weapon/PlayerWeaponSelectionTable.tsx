@@ -6,40 +6,32 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import WeaponBackdrop from "./WeaponBackdrop";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import EquipmentService from "../../../../services/EquipmentService";
-import {ActorWeapon, Weapon} from "../../../../models/equipment/Weapon";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {Weapon} from "../../../../../models/equipment/Weapon";
+import WeaponBackdrop from "../../../common/equipment/WeaponBackdrop";
+import EquipmentService from "../../../../../services/EquipmentService";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import Player from "../../../../../models/actor/player/Player";
+import ActorService from "../../../../../services/ActorService";
+import {EquipmentSlot} from "../../../../../models/equipment/Equipment";
 
 interface RowProps {
     weapon: Weapon
-    actor: Actor
+    player: Player
 }
 
 function WeaponNameRow(props: RowProps): JSX.Element {
-    const {weapon, actor} = props;
+    const {weapon, player} = props;
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        switch (actor.type) {
-            case ActorType.Nemesis:
-                await ActorService.createNemesisWeapon(actor.name, {...weapon} as ActorWeapon)
-                break
-            case ActorType.Rival:
-                await ActorService.createRivalWeapon(actor.name, {...weapon} as ActorWeapon)
-                break
-            case ActorType.Minion:
-                await ActorService.createMinionWeapon(actor.name, {...weapon} as ActorWeapon)
-                break
-        }
+        player.weapons.push({slot: EquipmentSlot.None, ...weapon, equipped: false})
+        await ActorService.updatePlayer(player.name, player)
     }
 
     return (
         <TableRow>
             <TableCell>
-                <Button onClick={(): void => setOpenWeaponBackDrop(true)}>{weapon?.name!!}</Button>
+                <Button onClick={(): void => setOpenWeaponBackDrop(true)}>{weapon.name}</Button>
                 {openWeaponBackDrop && <WeaponBackdrop open={openWeaponBackDrop} onClose={(): void => setOpenWeaponBackDrop(false)} weapon={weapon!!}/>}
             </TableCell>
             <TableCell>
@@ -50,11 +42,11 @@ function WeaponNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    player: Player
 }
 
-export default function WeaponSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function PlayerWeaponSelectionTable(props: TableProps) {
+    const {player} = props
     const [weapons, setWeapons] = useState<Weapon[]>([])
     const headers = ['Name', 'Add']
 
@@ -72,7 +64,7 @@ export default function WeaponSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {weapons.map((weapon: Weapon) => (
-                        <WeaponNameRow weapon={weapon} actor={actor}/>
+                        <WeaponNameRow weapon={weapon} player={player}/>
                     ))}
                 </TableBody>
             </Table>
