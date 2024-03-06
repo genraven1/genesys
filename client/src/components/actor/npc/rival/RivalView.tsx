@@ -9,7 +9,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
@@ -18,6 +17,7 @@ import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
+import RivalSkillCard from "./skill/RivalSkillCard";
 
 interface Props {
     rival: Rival
@@ -53,7 +53,7 @@ export default function RivalView(props: Props) {
                         <ViewDefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={rival}/>
+                    <RivalSkillCard rival={rival}/>
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={rival}/>
                     <Divider/>

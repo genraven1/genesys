@@ -1,31 +1,32 @@
 import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
-import InputNumberRangeSelectField from "../../../common/InputNumberRangeSelect";
-import ActorService from "../../../../services/ActorService";
-import {ActorSkill, ActorType} from "../../../../models/actor/Actor";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
+import InputNumberRangeSelectField from "../../../../common/InputNumberRangeSelect";
+import ActorService from "../../../../../services/ActorService";
+import {ActorSkill} from "../../../../../models/actor/Actor";
+import Rival from "../../../../../models/actor/npc/Rival";
 
 interface Props {
     open: boolean
-    npc: SingleNonPlayerCharacter
-    type: ActorType
+    rival: Rival
     actorSkill: ActorSkill
     onClose: () => void
 }
 
-export default function NonPlayerCharacterEditSkillDialog(props: Props) {
-    const { open, actorSkill, npc, type, onClose } = props
+export default function RivalEditSkillDialog(props: Props) {
+    const { open, actorSkill, rival, onClose } = props
     const [skill, setSkill] = useState<ActorSkill>(actorSkill)
 
     const handleEdit = async (ranks: number): Promise<void> => {
         const copySkill = {...skill} as ActorSkill
         copySkill.ranks = ranks
         setSkill(copySkill)
-        switch (type) {
-            case ActorType.Rival:
-                await ActorService.updateRivalSkill(npc.name, copySkill)
-                break
-        }
+        rival.skills.forEach((actorSkill, index) => {
+            if (actorSkill.name === skill.name) {
+                actorSkill.ranks = ranks
+                rival.skills[index] = actorSkill
+            }
+        })
+        await ActorService.updateRival(rival.name, rival)
         onClose()
     }
 

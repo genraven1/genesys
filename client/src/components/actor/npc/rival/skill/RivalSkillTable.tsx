@@ -7,51 +7,50 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
-import {SkillType} from "../../../../models/actor/Skill";
-import GenesysSkillDiceTypography from "../../../common/typography/GenesysSkillDiceTypography";
+import {SkillType} from "../../../../../models/actor/Skill";
+import GenesysSkillDiceTypography from "../../../../common/typography/GenesysSkillDiceTypography";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
-import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
-import NonPlayerCharacterEditSkillDialog from "./NonPlayerCharacterEditSkillDialog";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../models/actor/Actor";
-import {renderHeaders} from "../../../common/table/TableRenders";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import NonPlayerCharacterEditSkillDialog from "./RivalEditSkillDialog";
+import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
+import {renderHeaders, renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import Rival from "../../../../../models/actor/npc/Rival";
 
 interface RowProps {
     skill: ActorSkill
-    npc: SingleNonPlayerCharacter
+    rival: Rival
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const {skill, npc} = props
+    const {skill, rival} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
     return (
         <TableRow>
             <TypographyCenterTableCell value={setSkillName(skill)}/>
-            <TypographyCenterTableCell value={String(skill?.ranks!!)}/>
+            <TypographyCenterTableCell value={String(skill.ranks)}/>
             <TableCell>
-                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(npc, skill)}
-                                            skillRanks={skill?.ranks!!}/>
+                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(rival, skill)}
+                                            skillRanks={skill.ranks}/>
             </TableCell>
             <TableCell>
                 <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
                 {openEditSkillDialog && <NonPlayerCharacterEditSkillDialog open={openEditSkillDialog}
                                                                            onClose={(): void => setOpenEditSkillDialog(false)}
-                                                                           actorSkill={skill!!} npc={npc}
-                                                                           type={npc.type}/>}
+                                                                           actorSkill={skill} rival={rival}/>}
             </TableCell>
         </TableRow>
     )
 }
 
 interface GroupProps {
-    npc: SingleNonPlayerCharacter
+    rival: Rival
     type: SkillType
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {npc, type} = props
+    const {rival, type} = props
     const [open, setOpen] = useState(false)
     const headers = ['Name', 'Ranks', 'Dice Pool', 'Edit']
 
@@ -69,11 +68,11 @@ export function SkillTypeGroup(props: GroupProps) {
                                     {renderHeaders(headers)}
                                 </TableHead>
                                 <TableBody>
-                                    {(npc?.skills!! || [])
+                                    {(rival.skills || [])
                                         .sort((a, b) => a.name.localeCompare(b.name))
                                         .filter((skill) => skill.type === type)
                                         .map((skill: ActorSkill) => (
-                                            <SkillRow skill={skill} npc={npc}/>
+                                            <SkillRow skill={skill} rival={rival}/>
                                         ))}
                                 </TableBody>
                             </Table>
@@ -86,25 +85,23 @@ export function SkillTypeGroup(props: GroupProps) {
 }
 
 interface TableProps {
-    npc: SingleNonPlayerCharacter
+    rival: Rival
 }
 
-export default function NonPlayerCharacterSkillTable(props: TableProps) {
-    const {npc} = props
+export default function RivalSkillTable(props: TableProps) {
+    const {rival} = props
     const headers = ['Skills']
 
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.General}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Magic}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Combat}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Social}/>
-                    <SkillTypeGroup npc={npc!!} type={SkillType.Knowledge}/>
+                    <SkillTypeGroup rival={rival} type={SkillType.General}/>
+                    <SkillTypeGroup rival={rival} type={SkillType.Magic}/>
+                    <SkillTypeGroup rival={rival} type={SkillType.Combat}/>
+                    <SkillTypeGroup rival={rival} type={SkillType.Social}/>
+                    <SkillTypeGroup rival={rival} type={SkillType.Knowledge}/>
                 </TableBody>
             </Table>
         </TableContainer>

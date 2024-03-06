@@ -22,7 +22,7 @@ import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NemesisSkillCard from "./skill/NemesisSkillCard";
 
 interface Props {
     nem: Nemesis
@@ -188,7 +188,7 @@ export default function NemesisEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={nemesis}/>
+                    <NemesisSkillCard nemesis={nemesis}/>
                     <Divider/>
                     <NonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider/>

@@ -14,10 +14,10 @@ import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
 import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import MinionSkillCard from "./skill/MinionSkillCard";
 
 interface Props {
     minion: Minion
@@ -54,7 +54,7 @@ export default function MinionView(props: Props) {
                         <ViewDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={minion}/>
+                    <MinionSkillCard minion={minion}/>
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider/>
