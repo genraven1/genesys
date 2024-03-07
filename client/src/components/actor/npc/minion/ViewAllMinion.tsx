@@ -12,8 +12,11 @@ import ActorService from '../../../../services/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
 import {ActorPath} from "../../../../services/Path";
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import CreateActorDialog from "../CreateActorDialog";
+import {ActorType} from "../../../../models/actor/Actor";
 
 interface Props {
     minion: Minion
@@ -26,7 +29,7 @@ function Row(props: Props): JSX.Element {
     return (
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
-                <TableCell>{minion.name}</TableCell>
+                <TypographyCenterTableCell value={minion.name}/>
                 <ActionsTableCell id={minion.name} path={ActorPath.Minion}/>
             </TableRow>
             <TableRow>
@@ -47,6 +50,7 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllMinions() {
     const [minions, setMinions] = useState<Minion[]>([])
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
     const headers = ['Name', 'View']
 
     useEffect(() => {
@@ -59,7 +63,11 @@ export default function ViewAllMinions() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'View All Minion'}>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Minions'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Minion</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
@@ -73,6 +81,9 @@ export default function ViewAllMinions() {
                     </Table>
                 </TableContainer>
             </CardContent>
+            {openActorCreationDialog && <CreateActorDialog open={openActorCreationDialog}
+                                                           onClose={(): void => setOpenActorCreationDialog(false)}
+                                                           actorType={ActorType.Minion}/>}
         </Card>
     )
 }
