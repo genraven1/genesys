@@ -1,14 +1,13 @@
-import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../services/ActorService";
 import {ActorPath} from "../../../services/Path";
 import {ActorType} from "../../../models/actor/Actor";
 import InputSelectField, {Option} from "../../common/InputSelectField";
-import Nemesis from "../../../models/actor/npc/Nemesis";
-import Minion from "../../../models/actor/npc/Minion";
-import Rival from "../../../models/actor/npc/Rival";
-import NonPlayerActor from "../../../models/actor/npc/NonPlayerActor";
+import SettingService from "../../../services/SettingService";
+import SkillService from "../../../services/SkillService";
+import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean
@@ -26,25 +25,48 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let copyActor = {} as NonPlayerActor
+        let currentSetting = await SettingService.getCurrentSetting()
+        let skills = await SkillService.getSkills()
+        skills = skills.sort((a, b) => a.name.localeCompare(b.name))
         switch (type) {
             case ActorType.Minion:
-                copyActor = {...await ActorService.createMinion(name)}
-                copyActor.type = type
-                await ActorService.updateMinion(copyActor.name, copyActor as Minion)
-                navigate(ActorPath.Minion + copyActor.name + '/edit')
+                let minion = {...await ActorService.createMinion(name)}
+                minion.settings.push(currentSetting)
+                skills.forEach((skill) => {
+                    skill.settings.forEach((setting) => {
+                        if (setting.name === currentSetting.name) {
+                            minion.skills.push({group: false, ...skill})
+                        }
+                    })
+                })
+                await ActorService.updateMinion(minion.name, minion)
+                navigate(ActorPath.Minion + minion.name + '/edit')
                 break
             case ActorType.Rival:
-                copyActor = {...await ActorService.createRival(name)}
-                copyActor.type = type
-                await ActorService.updateRival(copyActor.name, copyActor as Rival)
-                navigate(ActorPath.Rival + copyActor.name + '/edit')
+                let rival = {...await ActorService.createRival(name)}
+                rival.settings.push(currentSetting)
+                skills.forEach((skill) => {
+                    skill.settings.forEach((setting) => {
+                        if (setting.name === currentSetting.name) {
+                            rival.skills.push({ranks: 0, ...skill})
+                        }
+                    })
+                })
+                await ActorService.updateRival(rival.name, rival)
+                navigate(ActorPath.Rival + rival.name + '/edit')
                 break
             case ActorType.Nemesis:
-                copyActor = {...await ActorService.createNemesis(name)}
-                copyActor.type = type
-                await ActorService.updateNemesis(name, copyActor as Nemesis)
-                navigate(ActorPath.Nemesis + copyActor.name + '/edit')
+                let nemesis = {...await ActorService.createNemesis(name)}
+                nemesis.settings.push(currentSetting)
+                skills.forEach((skill) => {
+                    skill.settings.forEach((setting) => {
+                        if (setting.name === currentSetting.name) {
+                            nemesis.skills.push({ranks: 0, ...skill})
+                        }
+                    })
+                })
+                await ActorService.updateNemesis(nemesis.name, nemesis)
+                navigate(ActorPath.Nemesis + nemesis.name + '/edit')
                 break
             case ActorType.Player:
                 break
@@ -76,10 +98,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
                                       onTypeChange(value as ActorType)
                                   }}/>
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
     )
 }
