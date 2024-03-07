@@ -20,15 +20,17 @@ export default function CreatePlayerDialog(props: Props) {
     const useHandleCreate = async (): Promise<void> => {
         let player = {} as Player
         player = {...await ActorService.createPlayer(name)}
-        let setting = await SettingService.getCurrentSetting()
+        let currentSetting = await SettingService.getCurrentSetting()
+        player.settings.push(currentSetting)
         let skills = await SkillService.getSkills()
-        skills = skills.filter((skill) => skill.settings.includes(setting))
+        skills = skills.sort((a, b) => a.name.localeCompare(b.name))
         skills.forEach((skill, index) => {
-            if (skill.settings.includes(setting)) {
-                player.skills.push({career: false, ranks: 0, ...skill})
-            }
+            skill.settings.forEach((setting, index) => {
+                if (setting.name === currentSetting.name) {
+                    player.skills.push({career: false, ranks: 0, ...skill})
+                }
+            })
         })
-        player.settings.push(setting)
         await ActorService.updatePlayer(name, player)
         navigate(ActorPath.Player + name + '/edit')
         onClose()
