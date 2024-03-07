@@ -9,7 +9,6 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
-import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
@@ -18,6 +17,7 @@ import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
 import NemesisSkillCard from "./skill/NemesisSkillCard";
 import NemesisTalentCard from "./talent/NemesisTalentCard";
+import NemesisAbilityCard from "./ability/NemesisAbilityCard";
 
 interface Props {
     nemesis: Nemesis
@@ -59,7 +59,7 @@ export default function NemesisView(props: Props) {
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={nemesis}/>
                     <Divider />
-                    <ViewNonPlayerCharacterAbilityCard npc={nemesis}/>
+                    <NemesisAbilityCard nemesis={nemesis}/>
                     <Divider/>
                     <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
