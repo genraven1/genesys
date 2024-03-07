@@ -1,4 +1,3 @@
-import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
 import {Button, Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import Tab from '@mui/material/Tab';
@@ -6,22 +5,23 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useState} from "react";
-import ViewNonPlayerCharacterWeaponTable from "./weapon/ViewNonPlayerCharacterWeaponTable";
-import CreateNonPlayerCharacterWeaponDialog from "./weapon/CreateNonPlayerCharacterWeaponDialog";
-import WeaponSelectionDialog from "../../common/equipment/WeaponSelectionDialog";
-import ViewNonPlayerCharacterArmorTable from "./armor/ViewNonPlayerCharacterArmorTable";
-import ArmorSelectionDialog from "../../common/equipment/ArmorSelectionDialog";
-import CreateArmorDialog from "./armor/CreateArmorDialog";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import {useLocation} from "react-router-dom";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
+import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
+import ViewNonPlayerCharacterWeaponTable from "../../equipment/weapon/ViewNonPlayerCharacterWeaponTable";
+import CreateNemesisWeaponDialog from "./weapon/CreateNemesisWeaponDialog";
+import NemesisWeaponSelectionDialog from "./weapon/NemesisWeaponSelectionDialog";
+import CreateArmorDialog from "../../equipment/armor/CreateArmorDialog";
+import ArmorSelectionDialog from "../../../common/equipment/ArmorSelectionDialog";
+import ViewNonPlayerCharacterArmorTable from "../../equipment/armor/ViewNonPlayerCharacterArmorTable";
+import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 
 interface Props {
-    npc: NonPlayerActor
+    nemesis: Nemesis
 }
 
-export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Element {
-    const {npc} = props
+export default function NemesisEquipmentCard(props: Props): JSX.Element {
+    const {nemesis} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
     const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
@@ -43,10 +43,10 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderWeaponsTable = (): JSX.Element => {
-        if (npc?.weapons!!.length === 0) {
+        if (nemesis?.weapons!!.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterWeaponTable weapons={npc?.weapons!!} npc={npc!!}/>
+        return <ViewNonPlayerCharacterWeaponTable weapons={nemesis?.weapons!!} npc={nemesis!!}/>
     }
 
     const renderWeaponTableButtons = (): JSX.Element => {
@@ -56,12 +56,12 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
                     <Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Create
                         Weapon</Button>
                     {openCreateWeaponDialog &&
-                        <CreateNonPlayerCharacterWeaponDialog npc={npc} open={openCreateWeaponDialog}
+                        <CreateNemesisWeaponDialog nemesis={nemesis} open={openCreateWeaponDialog}
                                                               onClose={(): void => setOpenCreateWeaponDialog(false)}/>}
                     <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponDialog(true)}>Add
                         Weapon</Button>
-                    {openAddWeaponDialog && <WeaponSelectionDialog actor={npc} open={openAddWeaponDialog}
-                                                                   onClose={(): void => setOpenAddWeaponDialog(false)}/>}
+                    {openAddWeaponDialog && <NemesisWeaponSelectionDialog nemesis={nemesis} open={openAddWeaponDialog}
+                                                                          onClose={(): void => setOpenAddWeaponDialog(false)}/>}
                 </Fragment>
             )
         } else {
@@ -75,21 +75,21 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
                 {renderArmorTable()}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create
                     Armor</Button>
-                {openCreateArmorDialog && <CreateArmorDialog actor={npc} open={openCreateArmorDialog}
+                {openCreateArmorDialog && <CreateArmorDialog actor={nemesis} open={openCreateArmorDialog}
                                                              onClose={(): void => setOpenCreateArmorDialog(false)}/>}
                 <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add
                     Armor</Button>
-                {openSelectArmorDialog && <ArmorSelectionDialog actor={npc} open={openSelectArmorDialog}
+                {openSelectArmorDialog && <ArmorSelectionDialog actor={nemesis} open={openSelectArmorDialog}
                                                                 onClose={(): void => setOpenSelectArmorDialog(false)}/>}
             </Fragment>
         )
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (npc?.armor!!.length === 0) {
+        if (nemesis?.armor!!.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterArmorTable armor={npc?.armor!!}/>
+        return <ViewNonPlayerCharacterArmorTable armor={nemesis?.armor!!}/>
     }
 
     const addGear = () => {
@@ -106,7 +106,7 @@ export default function NonPlayerCharacterEquipmentCard(props: Props): JSX.Eleme
     }
 
     const renderGearTable = (): JSX.Element => {
-        if (npc?.gear!!.length === 0) {
+        if (nemesis?.gear!!.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
         return <Fragment/>
