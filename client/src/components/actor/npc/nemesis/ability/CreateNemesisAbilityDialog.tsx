@@ -1,32 +1,30 @@
 import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import ActorService from "../../../../services/ActorService";
-import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
-import Ability from "../../../../models/Ability";
-import {Activation, getActivationOptions} from "../../../../models/Talent";
-import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
-import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
+import ActorService from "../../../../../services/ActorService";
+import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
+import Ability from "../../../../../models/Ability";
+import {Activation, getActivationOptions} from "../../../../../models/Talent";
+import InputSelectFieldCard from "../../../../common/InlineSelectFieldCard";
+import {GenesysDialogActions} from "../../../../common/dialog/GenesysDialogActions";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
 
 interface Props {
-    actor: Actor
+    nemesis: Nemesis
     open: boolean
     onClose: () => void
 }
 
-export default function CreateAbilityDialog(props: Props) {
-    const {actor, open, onClose} = props
+export default function CreateNemesisAbilityDialog(props: Props) {
+    const {nemesis, open, onClose} = props
     const [ability, setAbility] = useState<Ability>()
 
     const onCreate = async (): Promise<void> => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionAbility(actor.name, ability!!)
-                break
-            case ActorType.Rival:
-                await ActorService.createRivalAbility(actor.name, ability!!)
-                break
+        if (ability) {
+            if (!nemesis.abilities.some(npcAbility => npcAbility.name === ability.name)) {
+                nemesis.abilities.push(ability)
+                await ActorService.updateNemesis(nemesis.name, nemesis)
+            }
         }
         onClose()
     }
