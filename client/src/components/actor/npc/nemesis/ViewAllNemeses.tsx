@@ -13,7 +13,10 @@ import ActorService from '../../../../services/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import {ActorPath} from "../../../../services/Path";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import CreateActorDialog from "../CreateActorDialog";
+import {ActorType} from "../../../../models/actor/Actor";
 
 interface Props {
     nemesis: Nemesis
@@ -26,7 +29,7 @@ function Row(props: Props): JSX.Element {
     return (
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
-                <TableCell>{nemesis.name}</TableCell>
+                <TypographyCenterTableCell value={nemesis.name}/>
                 <ActionsTableCell id={nemesis.name} path={ActorPath.Nemesis}/>
             </TableRow>
             <TableRow>
@@ -47,6 +50,7 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllNemeses() {
     const [nemeses, setNemeses] = useState<Nemesis[]>([])
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
     const headers = ['Name', 'View']
 
     useEffect(() => {
@@ -61,7 +65,11 @@ export default function ViewAllNemeses() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'View All Nemeses'}>
+            <CardHeader
+                style={{textAlign: 'center'}}
+                title={'View All Nemeses'}
+                action={<Button color='primary' variant='contained'
+                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Nemesis</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
@@ -75,6 +83,9 @@ export default function ViewAllNemeses() {
                     </Table>
                 </TableContainer>
             </CardContent>
+            {openActorCreationDialog && <CreateActorDialog open={openActorCreationDialog}
+                                                           onClose={(): void => setOpenActorCreationDialog(false)}
+                                                           actorType={ActorType.Nemesis}/>}
         </Card>
     )
 }

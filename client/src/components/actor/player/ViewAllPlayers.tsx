@@ -50,9 +50,9 @@ export default function ViewAllPlayers() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Actors'}
+                title={'View All Players'}
                 action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Actor</Button>}>
+                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Player</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
