@@ -2,36 +2,30 @@ import {useEffect, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import EquipmentService from "../../../../services/EquipmentService";
-import {ActorArmor, Armor} from "../../../../models/equipment/Armor";
-import ArmorBackdrop from "./ArmorBackdrop";
-import {renderHeaders} from "../../../common/table/TableRenders";
+import Nemesis from "../../../../../../models/actor/npc/Nemesis";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {Armor} from "../../../../../../models/equipment/Armor";
+import ArmorBackdrop from "../../../../common/equipment/ArmorBackdrop";
+import EquipmentService from "../../../../../../services/EquipmentService";
+import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
+import ActorService from "../../../../../../services/ActorService";
 
 interface RowProps {
     armor: Armor
-    actor: Actor
+    nemesis: Nemesis
 }
 
 function ArmorNameRow(props: RowProps): JSX.Element {
-    const {armor, actor} = props;
+    const {armor, nemesis} = props;
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        switch (actor.type) {
-            case ActorType.Rival:
-                await ActorService.createRivalArmor(actor.name, {...armor} as ActorArmor)
-                break
-            case ActorType.Minion:
-                await ActorService.createMinionArmor(actor.name, {...armor} as ActorArmor)
-                break
-        }
+        nemesis.armor.push({slot: EquipmentSlot.None, ...armor, equipped: false})
+        await ActorService.updateNemesis(nemesis.name, nemesis)
     }
 
     return (
@@ -48,11 +42,11 @@ function ArmorNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    nemesis: Nemesis
 }
 
-export default function ArmorSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function NemesisArmorSelectionTable(props: TableProps) {
+    const {nemesis} = props
     const [armors, setArmors] = useState<Armor[]>([])
     const headers = ['Name', 'Add']
 
@@ -67,12 +61,10 @@ export default function ArmorSelectionTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {armors.map((armor: Armor) => (
-                        <ArmorNameRow armor={armor} actor={actor}/>
+                        <ArmorNameRow armor={armor} nemesis={nemesis}/>
                     ))}
                 </TableBody>
             </Table>

@@ -32,9 +32,6 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
             case ActorType.Rival:
                 await ActorService.createRivalWeapon(npc.name, weapon!!)
                 break
-            case ActorType.Nemesis:
-                await ActorService.createNemesisWeapon(npc.name, weapon!!)
-                break
         }
         onClose()
     }
