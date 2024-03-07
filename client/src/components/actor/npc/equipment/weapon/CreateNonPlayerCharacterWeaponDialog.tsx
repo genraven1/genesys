@@ -29,9 +29,6 @@ export default function CreateNonPlayerCharacterWeaponDialog(props: Props) {
             case ActorType.Minion:
                 await ActorService.createMinionWeapon(npc.name, weapon!!)
                 break
-            case ActorType.Rival:
-                await ActorService.createRivalWeapon(npc.name, weapon!!)
-                break
         }
         onClose()
     }

@@ -68,10 +68,6 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Rival + name, rival)).data;
     }
 
-    static async createRivalWeapon(name: string, weapon: ActorWeapon): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/weapons', weapon)).data;
-    }
-
     static async createRivalArmor(name: string, armor: ActorArmor): Promise<Rival> {
         return await (await axios.post(ActorPath.Rival + name + '/armor', armor)).data;
     }

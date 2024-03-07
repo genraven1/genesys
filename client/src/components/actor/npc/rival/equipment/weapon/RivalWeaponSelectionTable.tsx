@@ -6,28 +6,26 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import WeaponBackdrop from "./WeaponBackdrop";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import EquipmentService from "../../../../services/EquipmentService";
-import {ActorWeapon, Weapon} from "../../../../models/equipment/Weapon";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {Weapon} from "../../../../../../models/equipment/Weapon";
+import WeaponBackdrop from "../../../../common/equipment/WeaponBackdrop";
+import EquipmentService from "../../../../../../services/EquipmentService";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
+import ActorService from "../../../../../../services/ActorService";
+import Rival from "../../../../../../models/actor/npc/Rival";
 
 interface RowProps {
     weapon: Weapon
-    actor: Actor
+    rival: Rival
 }
 
 function WeaponNameRow(props: RowProps): JSX.Element {
-    const {weapon, actor} = props;
+    const {weapon, rival} = props;
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionWeapon(actor.name, {...weapon} as ActorWeapon)
-                break
-        }
+        rival.weapons.push({slot: EquipmentSlot.None, ...weapon, equipped: false})
+        await ActorService.updateRival(rival.name, rival)
     }
 
     return (
@@ -44,11 +42,11 @@ function WeaponNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    rival: Rival
 }
 
-export default function WeaponSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function RivalWeaponSelectionTable(props: TableProps) {
+    const {rival} = props
     const [weapons, setWeapons] = useState<Weapon[]>([])
     const headers = ['Name', 'Add']
 
@@ -66,7 +64,7 @@ export default function WeaponSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {weapons.map((weapon: Weapon) => (
-                        <WeaponNameRow weapon={weapon} actor={actor}/>
+                        <WeaponNameRow weapon={weapon} rival={rival}/>
                     ))}
                 </TableBody>
             </Table>
