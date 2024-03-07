@@ -21,6 +21,20 @@ public class SettingService {
         return settingRepository.findByCurrent(true);
     }
 
+    public Mono<Setting> removeCurrentSetting() {
+        return getCurrentSetting().map(setting -> {
+            setting.setCurrent(false);
+            return setting;
+        }).flatMap(settingRepository::save);
+    }
+
+    public Mono<Setting> setCurrentSetting(final String name) {
+        return getSetting(name).map(setting -> {
+            setting.setCurrent(true);
+            return setting;
+        }).flatMap(settingRepository::save);
+    }
+
     public Flux<Setting> getAllSettings() {
         return settingRepository.findAll();
     }

@@ -34,13 +34,20 @@ public class SettingHandler {
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
+    public Mono<ServerResponse> removeCurrentSetting(final ServerRequest serverRequest) {
+        return settingService.removeCurrentSetting()
+                .flatMap(setting -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(setting))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
     public Mono<ServerResponse> setCurrentSetting(final ServerRequest serverRequest) {
-        settingService.getCurrentSetting().flatMap(setting -> {
-            setting.setCurrent(false);
-            return settingService.updateSetting(setting.getName(), setting);
-        });
-        final Mono<Setting> settingMono = settingService.getSetting(serverRequest.pathVariable(NAME));
-        return null;
+        return settingService.setCurrentSetting(serverRequest.pathVariable(NAME))
+                .flatMap(setting -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(setting))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     public Mono<ServerResponse> getAllSettings(final ServerRequest serverRequest) {
@@ -76,7 +83,7 @@ public class SettingHandler {
                 .flatMap(setting -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(setting))
-                .switchIfEmpty(ServerResponse.notFound().build()));
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     private URI getURI(final Setting setting) {

@@ -12,6 +12,10 @@ export default class SettingService {
         return await (await axios.post('/current/' + name)).data;
     }
 
+    static async removeCurrentSetting(): Promise<Setting> {
+        return await (await axios.delete('/current/')).data;
+    }
+
     static async getSettings(): Promise<Setting[]> {
         return await (await axios.get(Path.Setting)).data;
     }
