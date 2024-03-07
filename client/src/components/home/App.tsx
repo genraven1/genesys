@@ -18,9 +18,7 @@ import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
-import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
-import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
 import MainDashboard from "./MainDashboard";
 
 export default function App() {
@@ -54,9 +52,6 @@ export default function App() {
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
 
                     {/*Actor Routes*/}
-                    <Route path={ActorPath.Actor} element={<ViewAllActors/>}/>
-                    <Route path={ActorPath.Npc} element={<ViewAllNonPlayerCharacters/>}/>
-
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
                     <Route path={ActorPath.Player + ':name/edit'} element={<PlayerWorkflow/>}/>
                     <Route path={ActorPath.Player + ':name/view'} element={<PlayerWorkflow/>}/>

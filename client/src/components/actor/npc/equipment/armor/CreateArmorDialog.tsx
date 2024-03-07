@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
+import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import {ActorArmor} from "../../../../../models/equipment/Armor";
@@ -6,6 +6,7 @@ import Actor, {ActorType} from "../../../../../models/actor/Actor";
 import ActorService from "../../../../../services/ActorService";
 import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
 import NumberRangeSelectCard from "../../../../common/NumberRangeSelectCard";
+import {GenesysDialogActions} from "../../../../common/dialog/GenesysDialogActions";
 
 interface Props {
     actor: Actor
@@ -24,9 +25,6 @@ export default function CreateArmorDialog(props: Props) {
                 break
             case ActorType.Rival:
                 await ActorService.createRivalArmor(actor.name, armor!!)
-                break
-            case ActorType.Nemesis:
-                await ActorService.createNemesisArmor(actor.name, armor!!)
                 break
         }
         onClose()
@@ -55,9 +53,7 @@ export default function CreateArmorDialog(props: Props) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>
-                Add Custom Armor
-            </DialogTitle>
+            <DialogTitle>Add Custom Armor</DialogTitle>
             <DialogContent>
                 <Grid container spacing={10}>
                     <InputTextFieldCard defaultValue={armor?.name!!} onCommit={(value: string): void => { onChange('name', value) }} title={'Name'} helperText={'Name'} placeholder={'Name'} />
@@ -68,10 +64,7 @@ export default function CreateArmorDialog(props: Props) {
                     <NumberRangeSelectCard title={'Defense'} defaultValue={armor?.defense!!} onChange={(value: number): void => {onChange('defense', String(value))}} min={0} max={4} />
                 </Grid>
             </DialogContent>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={onCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={onCreate} onClose={onClose}/>
         </Dialog>
     )
 }

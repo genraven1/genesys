@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 
 export const renderHeaders = (headers: string[]): JSX.Element => {
     return (
-        <TableRow>
+        <TableRow key={'Header'}>
             {headers.map((header: string) => (
                 <TypographyCenterTableCell value={header}/>
             ))}

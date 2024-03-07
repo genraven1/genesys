@@ -8,9 +8,11 @@ import InputSelectField, {Option} from "../../common/InputSelectField";
 import SettingService from "../../../services/SettingService";
 import SkillService from "../../../services/SkillService";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
+import Player from "../../../models/actor/player/Player";
 
 interface Props {
     open: boolean
+    actorType: ActorType
     onClose: () => void
 }
 
@@ -18,10 +20,10 @@ const getActorTypes = (): Option[] => {
     return Object.values(ActorType).map((value) => ({value}))
 }
 
-export default function CreateNonPlayerCharacterDialog(props: Props) {
-    const {open, onClose} = props
+export default function CreateActorDialog(props: Props) {
+    const {open, actorType, onClose} = props
     const [name, setName] = useState('')
-    const [type, setType] = useState<ActorType>(ActorType.Minion)
+    const [type, setType] = useState<ActorType>(actorType)
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
@@ -69,6 +71,18 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
                 navigate(ActorPath.Nemesis + nemesis.name + '/edit')
                 break
             case ActorType.Player:
+                let player = {} as Player
+                player = {...await ActorService.createPlayer(name)}
+                player.settings.push(currentSetting)
+                skills.forEach((skill, index) => {
+                    skill.settings.forEach((setting) => {
+                        if (setting.name === currentSetting.name) {
+                            player.skills.push({career: false, ranks: 0, ...skill})
+                        }
+                    })
+                })
+                await ActorService.updatePlayer(player.name, player)
+                navigate(ActorPath.Player + player.name + '/edit')
                 break
         }
         onClose()
@@ -93,7 +107,7 @@ export default function CreateNonPlayerCharacterDialog(props: Props) {
             <DialogContentText>
                 <TextField onChange={onNameChange} value={name} required/>
                 <Divider/>
-                <InputSelectField defaultValue={ActorType.Minion} options={getActorTypes()}
+                <InputSelectField defaultValue={type} options={getActorTypes()}
                                   onCommit={(value: string) => {
                                       onTypeChange(value as ActorType)
                                   }}/>
