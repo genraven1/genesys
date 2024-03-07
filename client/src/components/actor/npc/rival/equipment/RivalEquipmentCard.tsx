@@ -13,6 +13,8 @@ import RivalWeaponSelectionDialog from "./weapon/RivalWeaponSelectionDialog";
 import ViewNonPlayerCharacterArmorTable from "../../equipment/armor/ViewNonPlayerCharacterArmorTable";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Rival from "../../../../../models/actor/npc/Rival";
+import CreateRivalArmorDialog from "./armor/CreateRivalArmorDialog";
+import RivalArmorSelectionDialog from "./armor/RivalArmorSelectionDialog";
 
 interface Props {
     rival: Rival
@@ -87,14 +89,14 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
-                    {/*<Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create*/}
-                    {/*    Armor</Button>*/}
-                    {/*{openCreateArmorDialog && <CreateNemesisArmorDialog nemesis={rival} open={openCreateArmorDialog}*/}
-                    {/*                                                    onClose={(): void => setOpenCreateArmorDialog(false)}/>}*/}
-                    {/*<Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add*/}
-                    {/*    Armor</Button>*/}
-                    {/*{openSelectArmorDialog && <NemesisArmorSelectionDialog nemesis={rival} open={openSelectArmorDialog}*/}
-                    {/*                                                       onClose={(): void => setOpenSelectArmorDialog(false)}/>}*/}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create
+                        Armor</Button>
+                    {openCreateArmorDialog && <CreateRivalArmorDialog rival={rival} open={openCreateArmorDialog}
+                                                                        onClose={(): void => setOpenCreateArmorDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add
+                        Armor</Button>
+                    {openSelectArmorDialog && <RivalArmorSelectionDialog rival={rival} open={openSelectArmorDialog}
+                                                                           onClose={(): void => setOpenSelectArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {

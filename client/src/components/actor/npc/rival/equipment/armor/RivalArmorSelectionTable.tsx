@@ -2,33 +2,30 @@ import {useEffect, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import EquipmentService from "../../../../services/EquipmentService";
-import {ActorArmor, Armor} from "../../../../models/equipment/Armor";
-import ArmorBackdrop from "./ArmorBackdrop";
-import {renderHeaders} from "../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {Armor} from "../../../../../../models/equipment/Armor";
+import ArmorBackdrop from "../../../../common/equipment/ArmorBackdrop";
+import EquipmentService from "../../../../../../services/EquipmentService";
+import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
+import ActorService from "../../../../../../services/ActorService";
+import Rival from "../../../../../../models/actor/npc/Rival";
 
 interface RowProps {
     armor: Armor
-    actor: Actor
+    rival: Rival
 }
 
 function ArmorNameRow(props: RowProps): JSX.Element {
-    const {armor, actor} = props;
+    const {armor, rival} = props;
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionArmor(actor.name, {...armor} as ActorArmor)
-                break
-        }
+        rival.armor.push({slot: EquipmentSlot.None, ...armor, equipped: false})
+        await ActorService.updateRival(rival.name, rival)
     }
 
     return (
@@ -45,11 +42,11 @@ function ArmorNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    rival: Rival
 }
 
-export default function ArmorSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function RivalArmorSelectionTable(props: TableProps) {
+    const {rival} = props
     const [armors, setArmors] = useState<Armor[]>([])
     const headers = ['Name', 'Add']
 
@@ -64,12 +61,10 @@ export default function ArmorSelectionTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {armors.map((armor: Armor) => (
-                        <ArmorNameRow armor={armor} actor={actor}/>
+                        <ArmorNameRow armor={armor} rival={rival}/>
                     ))}
                 </TableBody>
             </Table>
