@@ -1,27 +1,27 @@
-import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
 import {Button, Card, CardContent} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import NonPlayerCharacterAbilityTable from "./NonPlayerCharacterAbilityTable";
 import {Fragment, useState} from "react";
-import CreateAbilityDialog from "./CreateAbilityDialog";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {useLocation} from "react-router-dom";
+import Nemesis from "../../../../../models/actor/npc/Nemesis";
+import NonPlayerCharacterAbilityTable from "../../ability/NonPlayerCharacterAbilityTable";
+import CreateNemesisAbilityDialog from "./CreateNemesisAbilityDialog";
+import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 
 interface Props {
-    npc: NonPlayerActor
+    nemesis: Nemesis
 }
 
-export default function NonPlayerCharacterAbilityCard(props: Props): JSX.Element {
-    const {npc} = props
+export default function NemesisAbilityCard(props: Props): JSX.Element {
+    const {nemesis} = props
     const [openCreateAbilityDialog, setOpenCreateAbilityDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const renderTable = (): JSX.Element => {
-        if (npc?.abilities!!.length === 0) {
+        if (nemesis?.abilities!!.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
-        return <NonPlayerCharacterAbilityTable npc={npc}/>
+        return <NonPlayerCharacterAbilityTable npc={nemesis}/>
     }
 
     const renderCreateAbilityButton = (): JSX.Element => {
@@ -30,7 +30,7 @@ export default function NonPlayerCharacterAbilityCard(props: Props): JSX.Element
                 <Fragment>
                     <Button color='primary' variant='contained' onClick={(): void => setOpenCreateAbilityDialog(true)}>Create
                         Ability</Button>
-                    {openCreateAbilityDialog && <CreateAbilityDialog actor={npc} open={openCreateAbilityDialog}
+                    {openCreateAbilityDialog && <CreateNemesisAbilityDialog nemesis={nemesis} open={openCreateAbilityDialog}
                                                                      onClose={(): void => setOpenCreateAbilityDialog(false)}/>}
                 </Fragment>
             )

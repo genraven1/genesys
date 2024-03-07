@@ -1,8 +1,9 @@
 import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
-import {Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import NonPlayerCharacterAbilityTable from "./NonPlayerCharacterAbilityTable";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     npc: NonPlayerActor
@@ -20,7 +21,7 @@ export default function ViewNonPlayerCharacterAbilityCard(props: Props): JSX.Ele
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader title={'Abilities'} style={{textAlign: 'center'}}/>
+            <CenteredCardHeader title={'Abilities'}/>
             <CardContent>
                 {renderTable()}
             </CardContent>

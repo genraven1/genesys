@@ -25,8 +25,6 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
-    console.log(player)
-
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
     }
