@@ -6,6 +6,37 @@ import SkillEdit from "./SkillEdit";
 import SkillView from "./SkillView";
 import ViewAllSkills from "./ViewAllSkills";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
+import Setting from "../../models/Setting";
+import SettingService from "../../services/SettingService";
+
+export function useFetchCurrentSettingSkills(): Skill[] {
+    const [skills, setSkills] = useState<Skill[]>([])
+    const [setting, setSetting] = useState<Setting>()
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const currentSetting = await SettingService.getCurrentSetting()
+            if (!currentSetting) {
+                return
+            }
+            setSetting(currentSetting)
+        })()
+    }, [setSetting])
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            if (!setting) {
+                return
+            }
+            const skillList = await SkillService.getSkills()
+            if (!skillList) {
+                return
+            }
+            setSkills(skillList)
+        })()
+    }, [setting, setSkills])
+    return skills;
+}
 
 function useFetchSkill(name: string): Skill {
     const [skill, setSkill] = useState<Skill>()

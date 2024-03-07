@@ -60,7 +60,7 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> createPlayer(final ServerRequest serverRequest) {
-        return playerService.createPlayer(serverRequest.pathVariable("name"))
+        return playerService.createPlayer(serverRequest.pathVariable(NAME))
                 .flatMap(player -> ServerResponse.created(getURI(player)).bodyValue(player));
     }
 
