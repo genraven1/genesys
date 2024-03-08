@@ -106,7 +106,7 @@ export default function GearEdit(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        {/*<AllSkillsSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} />*/}
+                        <AllSkillsSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} />
                         <InputSelectFieldCard defaultValue={gear?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
                     </Grid>
                     <Divider />
