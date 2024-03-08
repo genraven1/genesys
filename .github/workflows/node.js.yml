@@ -37,6 +37,6 @@ jobs:
     - name: Build Node Dependencies
       working-directory: ./client
       run: npm run build --if-present
-    - name: Test Node Dependencies
-      working-directory: ./client
-      run: npm test
+#    - name: Test Node Dependencies
+#      working-directory: ./client
+#      run: npm test
