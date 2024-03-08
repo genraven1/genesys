@@ -1,8 +1,7 @@
 import {Organization} from "../../../models/lore/Organization";
-import {useEffect, useState} from "react";
 import * as React from "react";
+import {useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import {LorePath} from "../../../services/Path";
 import LoreService from "../../../services/LoreService";
 import TableContainer from "@mui/material/TableContainer";
@@ -11,6 +10,11 @@ import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {GenesysDescriptionTypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import {renderHeaders} from "../../common/table/TableRenders";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import LoreCreationDialog from "../common/LoreCreationDialog";
+import {LoreType} from "../../../models/lore/Lore";
 
 interface RowProps {
     organization: Organization
@@ -21,45 +25,49 @@ function OrganizationRow(props: RowProps): JSX.Element {
 
     return (
         <TableRow>
-            <TableCell component="th" scope="row">{organization.name}</TableCell>
-            <ActionsTableCell id={String(organization.id)} path={LorePath.Organization}/>
+            <GenesysDescriptionTypographyCenterTableCell value={organization.name}/>
+            <ActionsTableCell id={organization.name} path={LorePath.Organization}/>
         </TableRow>
     )
 }
 
-interface Props {
-    path: LorePath
-}
-
-export function ViewAllOrganizations(props: Props): JSX.Element {
-    const {path} = props
+export function ViewAllOrganizations(): JSX.Element {
     const [organizations, setOrganizations] = useState<Organization[]>([])
+    const [openLoreCreationDialog, setOpenLoreCreationDialog] = useState(false)
+    const headers = ['Name', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const loreList = await LoreService.getAllLoreOfType(path)
+            const loreList = await LoreService.getAllLoreOfType(LorePath.Organization)
             if (!loreList) {
                 return
             }
             setOrganizations(loreList)
         })()
-    }, [path])
+    }, [])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {organizations.map((organization: Organization) => (
-                        <OrganizationRow key={organization.name} organization={organization}/>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Card>
+            <CardHeader style={{textAlign: 'center'}} title={'View All Organizations'}
+                        action={<Button color='primary' variant='contained'
+                                        onClick={(): void => setOpenLoreCreationDialog(true)}>CREATE</Button>}/>
+            {openLoreCreationDialog &&
+                <LoreCreationDialog open={openLoreCreationDialog} onClose={(): void => setOpenLoreCreationDialog(false)}
+                                    lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>}
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {renderHeaders(headers)}
+                        </TableHead>
+                        <TableBody>
+                            {organizations.map((organization: Organization) => (
+                                <OrganizationRow key={organization.name} organization={organization}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </CardContent>
+        </Card>
     )
 }

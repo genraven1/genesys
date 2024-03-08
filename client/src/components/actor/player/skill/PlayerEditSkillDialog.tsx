@@ -1,34 +1,35 @@
-import {useState} from "react";
 import {Dialog, DialogActions, DialogContentText, DialogTitle} from "@mui/material";
 import InputNumberRangeSelectField from "../../../common/InputNumberRangeSelect";
 import ActorService from "../../../../services/ActorService";
-import {PlayerSkill} from "../../../../models/actor/player/Player";
+import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 
 interface Props {
     open: boolean
-    name: string
-    actorSkill: PlayerSkill
+    player: Player
+    playerSkill: PlayerSkill
     onClose: () => void
 }
 
 export default function PlayerEditSkillDialog(props: Props) {
-    const { open, actorSkill, name, onClose } = props
-    const [skill, setSkill] = useState<PlayerSkill>(actorSkill)
+    const { open, playerSkill, player, onClose } = props
 
     const handleEdit = async (ranks: number): Promise<void> => {
-        const copySkill = {...skill} as PlayerSkill
-        copySkill.ranks = ranks
-        setSkill(copySkill)
-        await ActorService.updatePlayerSkill(name, copySkill)
+        player.skills.forEach((skill, index) => {
+            if (skill.name === playerSkill.name) {
+                skill.ranks = ranks
+                player.skills[index] = skill
+            }
+        })
+        await ActorService.updatePlayer(player.name, player)
         onClose()
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>{skill.name}</DialogTitle>
-            <DialogContentText style={{ textAlign: 'center' }}>{skill.ranks}</DialogContentText>
+            <DialogTitle>{playerSkill.name}</DialogTitle>
+            <DialogContentText style={{ textAlign: 'center' }}>{playerSkill.ranks}</DialogContentText>
             <DialogActions>
-                <InputNumberRangeSelectField defaultValue={skill.ranks} min={0} max={6} onCommit={handleEdit} />
+                <InputNumberRangeSelectField defaultValue={playerSkill.ranks} min={0} max={6} onCommit={handleEdit} />
             </DialogActions>
         </Dialog>
     )

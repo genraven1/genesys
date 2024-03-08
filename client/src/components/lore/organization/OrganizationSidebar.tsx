@@ -20,11 +20,11 @@ export default function OrganizationSidebar(props: Props): JSX.Element {
 
     return (
         <Fragment>
-            {organization?.orgType && renderFragment('Organization Type', organization?.orgType)}
-            {organization?.founded && renderFragment('Founding Date', organization?.founded)}
-            {organization?.disbanded && renderFragment('Disbanded', organization?.disbanded)}
-            {organization?.nickname && renderFragment('Alternative Name', organization?.nickname)}
-            <Typography>{'Members are referred to as ' + organization?.membersName}</Typography>
+            {organization.orgType && renderFragment('Organization Type', organization.orgType)}
+            {organization.founded && renderFragment('Founding Date', organization.founded)}
+            {organization.disbanded && renderFragment('Disbanded', organization.disbanded)}
+            {organization.nickname && renderFragment('Alternative Name', organization.nickname)}
+            <Typography>{'Members are referred to as ' + organization.membersName}</Typography>
         </Fragment>
     )
 }

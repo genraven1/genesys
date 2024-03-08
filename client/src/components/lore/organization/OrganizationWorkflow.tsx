@@ -5,6 +5,7 @@ import {Fragment, useEffect, useState} from "react";
 import LoreService from "../../../services/LoreService";
 import OrganizationView from "./OrganizationView";
 import OrganizationEdit from "./OrganizationEdit";
+import {ViewAllOrganizations} from "./ViewAllOrganization";
 
 function useFetchOrganization(name: string, path: LorePath): Organization {
     const [organization, setOrganization] = useState<Organization>()
@@ -16,24 +17,24 @@ function useFetchOrganization(name: string, path: LorePath): Organization {
                 if (orgData) {setOrganization(orgData)}
             } catch (err) {console.log(err)}
         })()
-    },[name, organization, path])
+    },[name, setOrganization, path])
     return organization as Organization
 }
 
 export default function OrganizationWorkflow(): JSX.Element {
-    const { name } = useParams<{ name?: string }>()
+    const { name } = useParams<{ name: string }>()
     const path = LorePath.Organization
-    const organization = useFetchOrganization(name!!, path)
+    const organization = useFetchOrganization(name as string, path)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <OrganizationView  organization={organization}/>
+            return organization && <OrganizationView  organization={organization}/>
         }
         else if (pathname.endsWith('/edit')) {
-            return <OrganizationEdit org={organization}/>
+            return organization && <OrganizationEdit org={organization}/>
         }
-        else {return <Fragment/>}
+        else {return <ViewAllOrganizations/>}
     }
 
     return (

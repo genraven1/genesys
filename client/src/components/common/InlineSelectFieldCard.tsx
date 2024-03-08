@@ -1,5 +1,6 @@
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import InputSelectField, {Option} from "./InputSelectField";
+import CenteredCardHeader from "./card/CenteredCardHeader";
 
 interface TextProps {
     defaultValue: string
@@ -13,7 +14,7 @@ export default function InputSelectFieldCard(props: TextProps): JSX.Element {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{textAlign: 'center'}}/>
+                <CenteredCardHeader title={title}/>
                 <CardContent>
                     <InputSelectField defaultValue={defaultValue} options={options} onCommit={onCommit}/>
                 </CardContent>

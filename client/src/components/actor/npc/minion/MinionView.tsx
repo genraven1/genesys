@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
@@ -8,16 +8,16 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Minion from "../../../../models/actor/npc/Minion";
-import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
-import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import MinionTalentCard from "./talent/MinionTalentCard";
+import MinionSkillCard from "./skill/MinionSkillCard";
+import MinionAbilityCard from "./ability/MinionAbilityCard";
+import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
 
 interface Props {
     minion: Minion
@@ -26,18 +26,17 @@ interface Props {
 
 export default function MinionView(props: Props) {
     const {minion, settings} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Minion + id + '/edit')
+        navigate(ActorPath.Minion + minion.name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={minion?.name!!}
+                title={minion.name}
                 subheader={<GenesysDescriptionTypography text={getRatings(minion)}/>}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
@@ -55,13 +54,13 @@ export default function MinionView(props: Props) {
                         <ViewDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={minion}/>
+                    <MinionSkillCard minion={minion}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
+                    <MinionEquipmentCard minion={minion}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterAbilityCard npc={minion}/>
+                    <MinionAbilityCard minion={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={minion}/>
+                    <MinionTalentCard minion={minion}/>
                 </Grid>
                 <ViewSettingsCard settings={minion?.settings!!} allSettings={settings}/>
             </CardContent>

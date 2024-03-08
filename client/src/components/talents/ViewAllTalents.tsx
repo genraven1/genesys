@@ -16,7 +16,7 @@ import {Path} from "../../services/Path";
 import Setting from "../../models/Setting";
 import SettingService from "../../services/SettingService";
 import {renderHeaders} from "../common/table/TableRenders";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TalentDialog from "./TalentDialog";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import SettingTableCell from "../common/table/SettingsTableCell";
@@ -98,7 +98,6 @@ export default function ViewAllTalents() {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenTalentCreationDialog(true)}>Create Talent</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

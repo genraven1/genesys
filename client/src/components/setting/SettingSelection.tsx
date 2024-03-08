@@ -15,9 +15,13 @@ export default function SettingSelection(props: Props): JSX.Element {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            if (settings.length > 0) {return}
+            if (settings.length > 0) {
+                return
+            }
             const settingList = await SettingService.getSettings()
-            if (!settingList) {return}
+            if (!settingList) {
+                return
+            }
             setSettings(settingList)
         })()
     }, [settings.length, setSettings])
@@ -25,7 +29,9 @@ export default function SettingSelection(props: Props): JSX.Element {
     useEffect(() => {
         (async (): Promise<void> => {
             const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) { return }
+            if (!currentSetting) {
+                return
+            }
             setSetting(currentSetting)
         })()
     }, [setSetting])

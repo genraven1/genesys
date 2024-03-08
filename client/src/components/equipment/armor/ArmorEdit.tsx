@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
@@ -19,7 +19,6 @@ interface Props {
 
 export default function ArmorEdit(props: Props) {
     const {ar, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [armor, setArmor] = useState<Armor>(ar)
 
     let navigate = useNavigate()
@@ -79,19 +78,18 @@ export default function ArmorEdit(props: Props) {
 
     const updateArmor = async (copyArmor: Armor) => {
         setArmor(copyArmor)
-        await EquipmentService.updateArmor(copyArmor.id, copyArmor)
+        await EquipmentService.updateArmor(copyArmor.name, copyArmor)
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Armor + id + '/view');
+        navigate(EquipmentPath.Armor + armor.name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={armor?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={armor.name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}/>
-            <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>

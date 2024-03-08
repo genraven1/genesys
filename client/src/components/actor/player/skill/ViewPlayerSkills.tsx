@@ -48,8 +48,8 @@ export function SkillTypeGroup(props: GroupProps) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {(player?.skills!! || []).filter((skill) => skill.type === type).map((row: PlayerSkill) => (
-                                <SkillRow key={row.name} skill={row} player={player}/>
+                        {(player.skills || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
+                                <SkillRow key={skill.name} skill={skill} player={player}/>
                                 ))}
                     </TableBody>
                 </Table>

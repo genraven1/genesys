@@ -6,8 +6,6 @@ import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
-import LoreMenu from "../lore/common/LoreMenu";
-import {LoreType} from "../../models/lore/Lore";
 import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
@@ -20,10 +18,8 @@ import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
-import ViewAllActors from "../actor/ViewAllActors";
 import QualityWorkflow from "../qualities/QualityWorkflow";
-import ViewAllNonPlayerCharacters from "../actor/npc/ViewAllNonPlayerCharacters";
-import MainDashboard from "./MainDashboard";
+import HomeDashboard from "./HomeDashboard";
 
 export default function App() {
 
@@ -33,7 +29,7 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={Path.Home} element={<MainDashboard/>}/>
+                    <Route path={Path.Home} element={<HomeDashboard/>}/>
 
                     <Route path={Path.Scene} element={<SettingWorkflow/>}/>
                     <Route path={Path.Scene + ':name/view'} element={<SettingWorkflow/>}/>
@@ -56,9 +52,6 @@ export default function App() {
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
 
                     {/*Actor Routes*/}
-                    <Route path={ActorPath.Actor} element={<ViewAllActors/>}/>
-                    <Route path={ActorPath.Npc} element={<ViewAllNonPlayerCharacters/>}/>
-
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
                     <Route path={ActorPath.Player + ':name/edit'} element={<PlayerWorkflow/>}/>
                     <Route path={ActorPath.Player + ':name/view'} element={<PlayerWorkflow/>}/>
@@ -91,8 +84,7 @@ export default function App() {
                     {/*Lore Routes*/}
                     <Route path={Path.Lore} element={<ViewAllLore/>}/>
 
-                    <Route path={LorePath.Organization}
-                           element={<LoreMenu lore={LoreType.ORGANIZATION} path={LorePath.Organization}/>}/>
+                    <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
                 </Routes>

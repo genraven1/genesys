@@ -7,15 +7,15 @@ import MinionEdit from "./MinionEdit";
 import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 import ViewAllMinions from "./ViewAllMinion";
 
-function useFetchMinion(id: number): Minion {
+function useFetchMinion(name: string): Minion {
     const [minion, setMinion] = useState<Minion>()
     useEffect(() => {
-        if (!id) {
+        if (!name) {
             return
         }
         (async (): Promise<void> => {
             try {
-                const minionData = await ActorService.getMinion(id)
+                const minionData = await ActorService.getMinion(name)
                 if (minionData) {
                     setMinion(minionData)
                 }
@@ -23,21 +23,21 @@ function useFetchMinion(id: number): Minion {
                 console.log(err)
             }
         })()
-    }, [id, setMinion])
+    }, [name, setMinion])
     return minion as Minion
 }
 
 export default function MinionWorkflow(): JSX.Element {
-    const {id} = useParams<{ id?: string }>()
-    const minion = useFetchMinion(Number(id!!))
+    const {name} = useParams<{ name: string }>()
+    const minion = useFetchMinion(name as string)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <MinionView minion={minion} settings={settings}/>
+            return minion && <MinionView minion={minion} settings={settings}/>
         } else if (pathname.endsWith('/edit')) {
-            return <MinionEdit min={minion} settings={settings}/>
+            return minion && <MinionEdit min={minion} settings={settings}/>
         } else {
             return <ViewAllMinions/>
         }

@@ -1,33 +1,28 @@
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import TableHead from "@mui/material/TableHead";
 import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyLeftTableCell
+} from "../../../common/table/TypographyTableCell";
 import Ability from "../../../../models/Ability";
+import {renderDoubleRowTableHeader} from "../../../common/table/TableRenders";
 
 interface Props {
-    row: Ability
+    ability: Ability
 }
 
 function Row(props: Props): JSX.Element {
-    const {row} = props
-
-    const renderTypography = (): JSX.Element => {
-        return <GenesysDescriptionTypography text={row.description}/>
-    }
+    const {ability} = props
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
-            <TableCell>
-                {renderTypography()}
-            </TableCell>
+        <TableRow>
+            <TypographyLeftTableCell value={ability.name}/>
+            <GenesysDescriptionTypographyCenterTableCell value={ability.description}/>
         </TableRow>
     )
 }
@@ -38,22 +33,15 @@ interface TableProps {
 
 export default function NonPlayerCharacterAbilityTable(props: TableProps) {
     const {npc} = props
+    const headers = ['Name', 'Summary']
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell colSpan={2} style={{textAlign: "center"}}>Abilities</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TypographyCenterTableCell value={"Name"}/>
-                        <TypographyCenterTableCell value={"Summary"}/>
-                    </TableRow>
-                </TableHead>
+            <Table>
+                {renderDoubleRowTableHeader(headers, 'Abilities', headers.length)}
                 <TableBody>
-                    {(npc?.abilities!! || []).map((row: Ability) => (
-                        <Row key={row.name} row={row}/>
+                    {(npc?.abilities!! || []).map((ability: Ability) => (
+                        <Row key={ability.name} ability={ability}/>
                     ))}
                 </TableBody>
             </Table>

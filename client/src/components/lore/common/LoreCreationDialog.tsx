@@ -2,8 +2,9 @@ import {LoreType} from "../../../models/lore/Lore";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LorePath} from "../../../services/Path";
-import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import LoreService from "../../../services/LoreService";
+import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 
 
 interface Props {
@@ -39,10 +40,7 @@ export default function LoreCreationDialog(props: Props): JSX.Element {
             <DialogContentText>
                 <TextField onChange={onNameChange} value={name} required/>
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions onClose={onClose} handleCreate={handleCreate}/>
         </Dialog>
     )
 }

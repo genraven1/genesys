@@ -5,17 +5,34 @@ import Typography from '@mui/material/Typography';
 import {Button, IconButton} from "@mui/material";
 import * as React from "react";
 import CustomRollDialog from "../roll/CustomRollDialog";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import {Path} from "../../services/Path";
 import {useNavigate} from "react-router-dom";
+import Setting from "../../models/Setting";
+import SettingService from "../../services/SettingService";
 
 export default function NavBar() {
     let navigate = useNavigate()
     const [openCustomRollBackDrop, setOpenCustomRollBackDrop] = useState(false)
+    const [setting, setSetting] = useState<Setting>()
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const current = await SettingService.getCurrentSetting()
+            if (!current) {
+                return
+            }
+            setSetting(current)
+        })()
+    }, [setSetting])
 
     const onClick = () => {
         navigate(Path.Home)
+    }
+
+    const getSetting = (): string => {
+        return 'Current Setting: ' + setting?.name!!
     }
 
     return (
@@ -26,6 +43,7 @@ export default function NavBar() {
                     <HomeIcon color='secondary' fontSize='small' />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>GENESYS</Typography>
+                <Typography sx={{ flexGrow: 1, align: "center" }}>{getSetting()}</Typography>
                 <Button color='secondary' variant='contained' onClick={(): void => setOpenCustomRollBackDrop(true)}>Roll</Button>
                 {openCustomRollBackDrop && <CustomRollDialog open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
             </Toolbar>

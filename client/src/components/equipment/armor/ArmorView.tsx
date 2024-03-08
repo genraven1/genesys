@@ -1,5 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
@@ -14,7 +14,7 @@ import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell"
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderHeaders} from "../../common/table/TableRenders";
-import {renderPrice, renderSoak} from "../../../models/equipment/EquipmentHelper";
+import {renderPrice, renderQualities, renderSoak} from "../../../models/equipment/EquipmentHelper";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
@@ -24,19 +24,18 @@ interface Props {
 
 export default function ArmorView(props: Props) {
     const {armor, settings} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
-    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity']
+    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'Qualities']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Armor + id + '/edit');
+        navigate(EquipmentPath.Armor + armor.name + '/edit');
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={armor?.name!!}
+                title={armor.name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
@@ -61,6 +60,7 @@ export default function ArmorView(props: Props) {
                                     <TypographyCenterTableCell value={String(armor?.encumbrance!!)}/>
                                     <TypographyCenterTableCell value={renderPrice(armor)}/>
                                     <TypographyCenterTableCell value={String(armor?.rarity!!)}/>
+                                    <TypographyCenterTableCell value={renderQualities(armor)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>
