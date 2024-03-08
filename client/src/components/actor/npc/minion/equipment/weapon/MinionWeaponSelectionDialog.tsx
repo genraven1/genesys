@@ -1,21 +1,21 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import Actor from "../../../../models/actor/Actor";
-import ArmorSelectionTable from "./ArmorSelectionTable";
+import MinionWeaponSelectionTable from "./MinionWeaponSelectionTable";
+import Minion from "../../../../../../models/actor/npc/Minion";
 
 interface Props {
-    actor: Actor
+    minion: Minion
     open: boolean
     onClose: () => void
 }
 
-export default function ArmorSelectionDialog(props: Props) {
-    const {actor, open, onClose} = props
+export default function MinionWeaponSelectionDialog(props: Props) {
+    const {minion, open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle title={'Add Armor'}/>
+            <DialogTitle title={'Add Weapon'}/>
             <DialogContent>
-                <ArmorSelectionTable actor={actor}/>
+                <MinionWeaponSelectionTable minion={minion}/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

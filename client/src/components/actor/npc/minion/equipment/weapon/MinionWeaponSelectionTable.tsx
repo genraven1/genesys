@@ -6,28 +6,26 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import WeaponBackdrop from "./WeaponBackdrop";
-import ActorService from "../../../../services/ActorService";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import EquipmentService from "../../../../services/EquipmentService";
-import {ActorWeapon, Weapon} from "../../../../models/equipment/Weapon";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {Weapon} from "../../../../../../models/equipment/Weapon";
+import WeaponBackdrop from "../../../../common/equipment/WeaponBackdrop";
+import EquipmentService from "../../../../../../services/EquipmentService";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
+import ActorService from "../../../../../../services/ActorService";
+import Minion from "../../../../../../models/actor/npc/Minion";
 
 interface RowProps {
     weapon: Weapon
-    actor: Actor
+    minion: Minion
 }
 
 function WeaponNameRow(props: RowProps): JSX.Element {
-    const {weapon, actor} = props;
+    const {weapon, minion} = props;
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionWeapon(actor.name, {...weapon} as ActorWeapon)
-                break
-        }
+        minion.weapons.push({slot: EquipmentSlot.None, ...weapon, equipped: false})
+        await ActorService.updateMinion(minion.name, minion)
     }
 
     return (
@@ -44,11 +42,11 @@ function WeaponNameRow(props: RowProps): JSX.Element {
 }
 
 interface TableProps {
-    actor: Actor
+    minion: Minion
 }
 
-export default function WeaponSelectionTable(props: TableProps) {
-    const {actor} = props
+export default function MinionWeaponSelectionTable(props: TableProps) {
+    const {minion} = props
     const [weapons, setWeapons] = useState<Weapon[]>([])
     const headers = ['Name', 'Add']
 
@@ -66,7 +64,7 @@ export default function WeaponSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {weapons.map((weapon: Weapon) => (
-                        <WeaponNameRow weapon={weapon} actor={actor}/>
+                        <WeaponNameRow weapon={weapon} minion={minion}/>
                     ))}
                 </TableBody>
             </Table>
