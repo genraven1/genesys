@@ -1,4 +1,4 @@
-import {ActorPath, EquipmentPath, Path} from "../../services/Path";
+import {EquipmentPath, Path} from "../../services/Path";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {useEffect, useState} from "react";
@@ -7,14 +7,12 @@ import TalentDialog from "../talents/TalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
 import {EquipmentType} from "../../models/equipment/Equipment";
-import CreateActorDialog from "../actor/npc/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
-import {ActorType} from "../../models/actor/Actor";
 
 export default function Dashboard(): JSX.Element {
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
@@ -24,10 +22,6 @@ export default function Dashboard(): JSX.Element {
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
-    const [openMinionCreationDialog, setOpenMinionCreationDialog] = useState(false)
-    const [openRivalCreationDialog, setOpenRivalCreationDialog] = useState(false)
-    const [openNemesisCreationDialog, setOpenNemesisCreationDialog] = useState(false)
-    const [openPlayerCreationDialog, setOpenPlayerCreationDialog] = useState(false)
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
@@ -90,27 +84,6 @@ export default function Dashboard(): JSX.Element {
                     </Card>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'Actors'}/>
-                        <CardContent>
-                            <Grid container justifyContent={'center'}>
-                                <ExpansionList header={'View Minions'} viewTitle={'View Minions'} to={ActorPath.Minion}
-                                               dialogTitle={'Create Minions'}
-                                               onClick={(): void => setOpenMinionCreationDialog(true)}/>
-                                <ExpansionList header={'View Rivals'} viewTitle={'View Rivals'} to={ActorPath.Rival}
-                                               dialogTitle={'Create Rival'}
-                                               onClick={(): void => setOpenMinionCreationDialog(true)}/>
-                                <ExpansionList header={'View Nemeses'} viewTitle={'View Nemeses'} to={ActorPath.Nemesis}
-                                               dialogTitle={'Create Nemesis'}
-                                               onClick={(): void => setOpenMinionCreationDialog(true)}/>
-                                <ExpansionList header={'View Players'} viewTitle={'View Players'} to={ActorPath.Player}
-                                               dialogTitle={'Create Player'}
-                                               onClick={(): void => setOpenPlayerCreationDialog(true)}/>
-                            </Grid>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid container justifyContent={'center'}>
                     <Button color='primary' variant='contained'
                             onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
                     {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog}
@@ -135,18 +108,6 @@ export default function Dashboard(): JSX.Element {
             {openGearCreationDialog && <CreateEquipmentDialog open={openGearCreationDialog}
                                                               onClose={(): void => setOpenGearCreationDialog(false)}
                                                               type={EquipmentType.Gear}/>}
-            {openMinionCreationDialog && <CreateActorDialog open={openMinionCreationDialog}
-                                                            onClose={(): void => setOpenMinionCreationDialog(false)}
-                                                            actorType={ActorType.Minion}/>}
-            {openRivalCreationDialog && <CreateActorDialog open={openRivalCreationDialog}
-                                                           onClose={(): void => setOpenRivalCreationDialog(false)}
-                                                           actorType={ActorType.Rival}/>}
-            {openNemesisCreationDialog && <CreateActorDialog open={openNemesisCreationDialog}
-                                                             onClose={(): void => setOpenNemesisCreationDialog(false)}
-                                                             actorType={ActorType.Nemesis}/>}
-            {openPlayerCreationDialog && <CreateActorDialog open={openPlayerCreationDialog}
-                                                            onClose={(): void => setOpenPlayerCreationDialog(false)}
-                                                            actorType={ActorType.Player}/>}
         </Card>
     )
 }
