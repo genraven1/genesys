@@ -9,7 +9,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Minion from "../../../../models/actor/npc/Minion";
 import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
-import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
@@ -18,6 +17,7 @@ import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
+import MinionAbilityCard from "./ability/MinionAbilityCard";
 
 interface Props {
     minion: Minion
@@ -58,7 +58,7 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterAbilityCard npc={minion}/>
+                    <MinionAbilityCard minion={minion}/>
                     <Divider/>
                     <MinionTalentCard minion={minion}/>
                 </Grid>

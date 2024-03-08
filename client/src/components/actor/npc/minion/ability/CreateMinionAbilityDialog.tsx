@@ -1,32 +1,30 @@
 import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import Actor, {ActorType} from "../../../../models/actor/Actor";
-import ActorService from "../../../../services/ActorService";
-import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
-import Ability from "../../../../models/Ability";
-import {Activation, getActivationOptions} from "../../../../models/Talent";
-import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
-import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
+import ActorService from "../../../../../services/ActorService";
+import {InputTextFieldCard} from "../../../../common/InputTextFieldCard";
+import Ability from "../../../../../models/Ability";
+import {Activation, getActivationOptions} from "../../../../../models/Talent";
+import InputSelectFieldCard from "../../../../common/InlineSelectFieldCard";
+import {GenesysDialogActions} from "../../../../common/dialog/GenesysDialogActions";
+import Minion from "../../../../../models/actor/npc/Minion";
 
 interface Props {
-    actor: Actor
+    minion: Minion
     open: boolean
     onClose: () => void
 }
 
-export default function CreateAbilityDialog(props: Props) {
-    const {actor, open, onClose} = props
+export default function CreateMinionAbilityDialog(props: Props) {
+    const {minion, open, onClose} = props
     const [ability, setAbility] = useState<Ability>()
 
     const onCreate = async (): Promise<void> => {
-        switch (actor.type) {
-            case ActorType.Minion:
-                await ActorService.createMinionAbility(actor.name, ability!!)
-                break
-            case ActorType.Rival:
-                await ActorService.createRivalAbility(actor.name, ability!!)
-                break
+        if (ability) {
+            if (!minion.abilities.some(npcAbility => npcAbility.name === ability.name)) {
+                minion.abilities.push(ability)
+                await ActorService.updateMinion(minion.name, minion)
+            }
         }
         onClose()
     }
