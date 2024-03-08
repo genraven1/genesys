@@ -8,7 +8,6 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Minion from "../../../../models/actor/npc/Minion";
-import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
@@ -18,6 +17,7 @@ import {ViewDefenseCard} from "../../DefenseCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import MinionAbilityCard from "./ability/MinionAbilityCard";
+import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
 
 interface Props {
     minion: Minion
@@ -56,7 +56,7 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <MinionSkillCard minion={minion}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterEquipmentCard npc={minion}/>
+                    <MinionEquipmentCard minion={minion}/>
                     <Divider/>
                     <MinionAbilityCard minion={minion}/>
                     <Divider/>

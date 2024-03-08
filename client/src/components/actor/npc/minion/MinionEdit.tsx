@@ -14,7 +14,6 @@ import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
-import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
@@ -23,6 +22,7 @@ import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import * as React from "react";
 import MinionAbilityCard from "./ability/MinionAbilityCard";
+import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
 
 interface Props {
     min: Minion
@@ -182,7 +182,7 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <MinionSkillCard minion={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterEquipmentCard npc={minion}/>
+                    <MinionEquipmentCard minion={minion}/>
                     <Divider/>
                     <MinionAbilityCard minion={minion}/>
                     <Divider/>

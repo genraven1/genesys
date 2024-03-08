@@ -13,12 +13,14 @@ import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Minion from "../../../../../models/actor/npc/Minion";
 import CreateMinionArmorDialog from "./armor/CreateMinionArmorDialog";
 import MinionArmorSelectionDialog from "./armor/MinionArmorSelectionDialog";
+import CreateMinionWeaponDialog from "./weapon/CreateMinionWeaponDialog";
+import MinionWeaponSelectionDialog from "./weapon/MinionWeaponSelectionDialog";
 
 interface Props {
     minion: Minion
 }
 
-export default function NemesisEquipmentCard(props: Props): JSX.Element {
+export default function MinionEquipmentCard(props: Props): JSX.Element {
     const {minion} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
@@ -51,15 +53,15 @@ export default function NemesisEquipmentCard(props: Props): JSX.Element {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
-                    {/*<Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Create*/}
-                    {/*    Weapon</Button>*/}
-                    {/*{openCreateWeaponDialog &&*/}
-                    {/*    <CreateNemesisWeaponDialog nemesis={minion} open={openCreateWeaponDialog}*/}
-                    {/*                               onClose={(): void => setOpenCreateWeaponDialog(false)}/>}*/}
-                    {/*<Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponDialog(true)}>Add*/}
-                    {/*    Weapon</Button>*/}
-                    {/*{openAddWeaponDialog && <NemesisWeaponSelectionDialog nemesis={minion} open={openAddWeaponDialog}*/}
-                    {/*                                                      onClose={(): void => setOpenAddWeaponDialog(false)}/>}*/}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenCreateWeaponDialog(true)}>Create
+                        Weapon</Button>
+                    {openCreateWeaponDialog &&
+                        <CreateMinionWeaponDialog minion={minion} open={openCreateWeaponDialog}
+                                                  onClose={(): void => setOpenCreateWeaponDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponDialog(true)}>Add
+                        Weapon</Button>
+                    {openAddWeaponDialog && <MinionWeaponSelectionDialog minion={minion} open={openAddWeaponDialog}
+                                                                         onClose={(): void => setOpenAddWeaponDialog(false)}/>}
                 </Fragment>
             )
         } else {
@@ -90,11 +92,11 @@ export default function NemesisEquipmentCard(props: Props): JSX.Element {
                     <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create
                         Armor</Button>
                     {openCreateArmorDialog && <CreateMinionArmorDialog minion={minion} open={openCreateArmorDialog}
-                                                                        onClose={(): void => setOpenCreateArmorDialog(false)}/>}
+                                                                       onClose={(): void => setOpenCreateArmorDialog(false)}/>}
                     <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add
                         Armor</Button>
                     {openSelectArmorDialog && <MinionArmorSelectionDialog minion={minion} open={openSelectArmorDialog}
-                                                                           onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                                                                          onClose={(): void => setOpenSelectArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {
