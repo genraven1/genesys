@@ -8,8 +8,6 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
-import ViewNonPlayerCharacterEquipmentCard from "../equipment/ViewNonPlayerCharacterEquipmentCard";
-import ViewNonPlayerCharacterAbilityCard from "../ability/ViewNonPlayerCharacterAbilityCard";
 import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
@@ -18,6 +16,8 @@ import {ViewStatsCard} from "../../StatsCard";
 import {ViewDefenseCard} from "../../DefenseCard";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
+import RivalAbilityCard from "./ability/RivalAbilityCard";
+import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
 
 interface Props {
     rival: Rival
@@ -55,9 +55,9 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <RivalSkillCard rival={rival}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterEquipmentCard npc={rival}/>
+                    <RivalEquipmentCard rival={rival}/>
                     <Divider/>
-                    <ViewNonPlayerCharacterAbilityCard npc={rival}/>
+                    <RivalAbilityCard rival={rival}/>
                     <Divider/>
                     <RivalTalentCard rival={rival}/>
                 </Grid>

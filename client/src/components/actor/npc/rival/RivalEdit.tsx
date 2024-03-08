@@ -16,13 +16,13 @@ import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
-import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
-import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
+import RivalAbilityCard from "./ability/RivalAbilityCard";
+import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
 
 interface Props {
     riv: Rival
@@ -183,9 +183,9 @@ export default function RivalEdit(props: Props) {
                     <Divider/>
                     <RivalSkillCard rival={rival}/>
                     <Divider/>
-                    <NonPlayerCharacterEquipmentCard npc={rival}/>
+                    <RivalEquipmentCard rival={rival}/>
                     <Divider/>
-                    <NonPlayerCharacterAbilityCard npc={rival}/>
+                    <RivalAbilityCard rival={rival}/>
                     <Divider/>
                     <RivalTalentCard rival={rival}/>
                 </Grid>

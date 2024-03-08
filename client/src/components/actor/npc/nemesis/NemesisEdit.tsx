@@ -15,7 +15,6 @@ import {EditStatsCard} from "../../StatsCard"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
-import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
@@ -192,7 +191,7 @@ export default function NemesisEdit(props: Props) {
                     <Divider/>
                     <NemesisEquipmentCard nemesis={nemesis}/>
                     <Divider/>
-                    <NonPlayerCharacterAbilityCard npc={nemesis}/>
+                    <NemesisEquipmentCard nemesis={nemesis}/>
                     <Divider/>
                     <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
