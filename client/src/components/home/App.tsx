@@ -19,7 +19,7 @@ import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
-import MainDashboard from "./MainDashboard";
+import HomeDashboard from "./HomeDashboard";
 
 export default function App() {
 
@@ -29,7 +29,7 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={Path.Home} element={<MainDashboard/>}/>
+                    <Route path={Path.Home} element={<HomeDashboard/>}/>
 
                     <Route path={Path.Scene} element={<SettingWorkflow/>}/>
                     <Route path={Path.Scene + ':name/view'} element={<SettingWorkflow/>}/>

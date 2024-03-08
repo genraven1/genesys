@@ -10,7 +10,7 @@ export default function SceneDashboard(): JSX.Element {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'Scene Dashboard'}
+                title={'Scene MainDashboard'}
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenSceneCreationDialog(true)}>Create Scene</Button>}>
             </CardHeader>

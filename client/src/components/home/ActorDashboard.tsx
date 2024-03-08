@@ -1,5 +1,5 @@
 import {ActorPath} from "../../services/Path";
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import CreateActorDialog from "../actor/npc/CreateActorDialog";
@@ -15,28 +15,21 @@ export default function ActorDashboard(): JSX.Element {
 
     return (
         <Card>
-            <CenteredCardHeader title={'Actor Dashboard'}/>
+            <CenteredCardHeader title={'Actor MainDashboard'}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'Actors'}/>
-                        <CardContent>
-                            <Grid container justifyContent={'center'}>
-                                <ExpansionList header={'View Minions'} viewTitle={'View Minions'} to={ActorPath.Minion}
-                                               dialogTitle={'Create Minions'}
-                                               onClick={(): void => setOpenMinionCreationDialog(true)}/>
-                                <ExpansionList header={'View Rivals'} viewTitle={'View Rivals'} to={ActorPath.Rival}
-                                               dialogTitle={'Create Rival'}
-                                               onClick={(): void => setOpenRivalCreationDialog(true)}/>
-                                <ExpansionList header={'View Nemeses'} viewTitle={'View Nemeses'} to={ActorPath.Nemesis}
-                                               dialogTitle={'Create Nemesis'}
-                                               onClick={(): void => setOpenNemesisCreationDialog(true)}/>
-                                <ExpansionList header={'View Players'} viewTitle={'View Players'} to={ActorPath.Player}
-                                               dialogTitle={'Create Player'}
-                                               onClick={(): void => setOpenPlayerCreationDialog(true)}/>
-                            </Grid>
-                        </CardContent>
-                    </Card>
+                    <ExpansionList header={'View Minions'} viewTitle={'View Minions'} to={ActorPath.Minion}
+                                   dialogTitle={'Create Minions'}
+                                   onClick={(): void => setOpenMinionCreationDialog(true)}/>
+                    <ExpansionList header={'View Rivals'} viewTitle={'View Rivals'} to={ActorPath.Rival}
+                                   dialogTitle={'Create Rival'}
+                                   onClick={(): void => setOpenRivalCreationDialog(true)}/>
+                    <ExpansionList header={'View Nemeses'} viewTitle={'View Nemeses'} to={ActorPath.Nemesis}
+                                   dialogTitle={'Create Nemesis'}
+                                   onClick={(): void => setOpenNemesisCreationDialog(true)}/>
+                    <ExpansionList header={'View Players'} viewTitle={'View Players'} to={ActorPath.Player}
+                                   dialogTitle={'Create Player'}
+                                   onClick={(): void => setOpenPlayerCreationDialog(true)}/>
                 </Grid>
             </CardContent>
             {openMinionCreationDialog && <CreateActorDialog open={openMinionCreationDialog}
