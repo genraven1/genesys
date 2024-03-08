@@ -12,7 +12,7 @@ export default function LoreDashboard(): JSX.Element {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'Lore Dashboard'}
+                title={'Lore MainDashboard'}
                 action={<Button color='primary' variant='contained' onClick={() => navigate(Path.Lore)}>Lore</Button>}>
             </CardHeader>
             <CardContent>
