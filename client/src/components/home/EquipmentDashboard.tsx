@@ -1,5 +1,5 @@
 import {EquipmentPath} from "../../services/Path";
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import CreateEquipmentDialog from "../equipment/CreateEquipmentDialog";
