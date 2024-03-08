@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/actor/Characteristics";
 import {DefenseType} from "../../../../models/actor/Defense";
@@ -14,14 +14,15 @@ import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
-import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
-import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
+import MinionTalentCard from "./talent/MinionTalentCard";
+import MinionSkillCard from "./skill/MinionSkillCard";
+import * as React from "react";
+import MinionAbilityCard from "./ability/MinionAbilityCard";
+import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
 
 interface Props {
     min: Minion
@@ -30,7 +31,6 @@ interface Props {
 
 export default function MinionEdit(props: Props) {
     const {min, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [minion, setMinion] = useState<Minion>(min)
     let navigate = useNavigate()
 
@@ -107,11 +107,11 @@ export default function MinionEdit(props: Props) {
     const updateMinion = async (copyMinion: Minion) => {
         copyMinion.soak = copyMinion.brawn
         setMinion(copyMinion)
-        await ActorService.updateMinion(copyMinion.id, copyMinion)
+        await ActorService.updateMinion(copyMinion.name, copyMinion)
     }
 
     const onView = () => {
-        navigate(ActorPath.Minion + id + '/view')
+        navigate(ActorPath.Minion + minion.name + '/view')
     }
 
     return (
@@ -180,13 +180,13 @@ export default function MinionEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={minion}/>
+                    <MinionSkillCard minion={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterEquipmentCard npc={minion}/>
+                    <MinionEquipmentCard minion={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterAbilityCard npc={minion}/>
+                    <MinionAbilityCard minion={minion}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={minion}/>
+                    <MinionTalentCard minion={minion}/>
                 </Grid>
                 <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>

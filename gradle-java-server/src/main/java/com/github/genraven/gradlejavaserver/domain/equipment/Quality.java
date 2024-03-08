@@ -16,8 +16,8 @@ public class Quality {
     @Id
     private String name;
     private String description;
-    private boolean passive;
-    private int cost;
-    private boolean armor;
-    protected boolean weapon;
+    private boolean passive = false;
+    private int cost = 2;
+    private boolean armor = false;
+    protected boolean weapon = false;
 }

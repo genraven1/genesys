@@ -2,8 +2,9 @@ import {EquipmentType} from "../../models/equipment/Equipment";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {EquipmentPath} from "../../services/Path";
-import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, Divider, TextField,} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, Divider, TextField,} from "@mui/material";
 import EquipmentService from "../../services/EquipmentService";
+import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean;
@@ -17,20 +18,22 @@ export default function CreateEquipmentDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
+        let path = ''
         switch (type) {
             case EquipmentType.Armor:
-                let armor = await EquipmentService.createArmor(name)
-                navigate(EquipmentPath.Armor + armor?.id!! + '/view')
+                await EquipmentService.createArmor(name)
+                path = EquipmentPath.Armor
                 break
             case EquipmentType.Weapon:
-                let weapon = await EquipmentService.createWeapon(name)
-                navigate(EquipmentPath.Weapon + weapon?.id!! + '/view')
+                await EquipmentService.createWeapon(name)
+                path = EquipmentPath.Weapon
                 break
             case EquipmentType.Gear:
-                let gear = await EquipmentService.createGear(name)
-                navigate(EquipmentPath.Gear + gear?.id!! + '/view')
+                await EquipmentService.createGear(name)
+                path = EquipmentPath.Gear
                 break
         }
+        navigate(path + name + '/view')
         onClose()
     }
 
@@ -50,10 +53,7 @@ export default function CreateEquipmentDialog(props: Props) {
                 <TextField onChange={onNameChange} value={name} required/>
                 <Divider />
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
     )
 }

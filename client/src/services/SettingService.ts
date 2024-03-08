@@ -8,8 +8,12 @@ export default class SettingService {
         return await (await axios.get('/current/')).data;
     }
 
-    static async setCurrentSetting(id: number): Promise<Setting> {
-        return await (await axios.post('/current/' + id)).data;
+    static async setCurrentSetting(name: string): Promise<Setting> {
+        return await (await axios.post('/current/' + name)).data;
+    }
+
+    static async removeCurrentSetting(): Promise<Setting> {
+        return await (await axios.delete('/current/')).data;
     }
 
     static async getSettings(): Promise<Setting[]> {

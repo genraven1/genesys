@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
@@ -16,6 +16,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderDamage, renderPrice, renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderHeaders} from "../../common/table/TableRenders";
+import SkillTableCell from "../../common/table/SkillTableCell";
 
 interface Props {
     weapon: Weapon
@@ -24,12 +25,11 @@ interface Props {
 
 export default function WeaponView(props: Props) {
     const {weapon, settings} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Weapon + id + '/edit')
+        navigate(EquipmentPath.Weapon + weapon.name + '/edit')
     }
 
     return (
@@ -56,7 +56,7 @@ export default function WeaponView(props: Props) {
                             <TableBody>
                                 <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
                                     <TypographyLeftTableCell value={weapon?.name!!}/>
-                                    <TypographyCenterTableCell value={weapon?.skill?.name!!}/>
+                                    <SkillTableCell skill={weapon.skill}/>
                                     <TypographyCenterTableCell value={renderDamage(weapon)}/>
                                     <TypographyCenterTableCell value={String(weapon?.critical!!)}/>
                                     <TypographyCenterTableCell value={weapon?.range!!}/>

@@ -8,34 +8,40 @@ import ViewAllArmor from "./ViewAllArmor";
 import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 
-function useFetchArmor(id: number): Armor {
+function useFetchArmor(name: string): Armor {
     const [armor, setArmor] = useState<Armor>()
     useEffect(() => {
-        if(!id) {return}
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
             try {
-                const armorData = await EquipmentService.getArmor(id)
-                if (armorData) {setArmor(armorData)}
-            } catch (err) {console.log(err)}
+                const armorData = await EquipmentService.getArmor(name)
+                if (armorData) {
+                    setArmor(armorData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[id, setArmor])
+    }, [name, setArmor])
     return armor as Armor
 }
 
 export default function ArmorWorkflow(): JSX.Element {
-    const { id } = useParams<{ id?: string }>()
-    const armor = useFetchArmor(Number(id!!))
+    const {name} = useParams<{ name: string }>()
+    const armor = useFetchArmor(name as string)
     const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <ArmorView  armor={armor} settings={settings}/>
+            return armor && <ArmorView armor={armor} settings={settings}/>
+        } else if (pathname.endsWith('/edit')) {
+            return armor && <ArmorEdit ar={armor} settings={settings}/>
+        } else {
+            return <ViewAllArmor/>
         }
-        else if (pathname.endsWith('/edit')) {
-            return <ArmorEdit ar={armor} settings={settings}/>
-        }
-        else {return <ViewAllArmor/>}
     }
 
     return (

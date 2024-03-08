@@ -1,29 +1,28 @@
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import TableHead from "@mui/material/TableHead";
 import {EquipmentQuality} from "../../../models/Quality";
 import {Weapon} from "../../../models/equipment/Weapon";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../common/table/TypographyTableCell";
+import {renderDoubleRowTableHeader} from "../../common/table/TableRenders";
 
 interface Props {
-    row: EquipmentQuality
+    quality: EquipmentQuality
 }
 
 function Row(props: Props): JSX.Element {
-    const {row} = props
+    const {quality} = props
 
     return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
-            <TableCell>
-                <GenesysDescriptionTypography text={String(row.ranks)}/>
-            </TableCell>
+        <TableRow>
+            <TypographyCenterTableCell value={quality.name}/>
+            <GenesysDescriptionTypographyCenterTableCell value={String(quality.ranks)}/>
         </TableRow>
     )
 }
@@ -34,22 +33,15 @@ interface TableProps {
 
 export default function WeaponQualityTable(props: TableProps) {
     const {weapon} = props
+    const headers = ['Name', 'Ranks']
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell colSpan={2} style={{textAlign: "center"}}>Weapon Special Qualities</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TypographyCenterTableCell value={"Name"}/>
-                        <TypographyCenterTableCell value={"Ranks"}/>
-                    </TableRow>
-                </TableHead>
+            <Table>
+                {renderDoubleRowTableHeader(headers, 'Weapon Special Qualities', headers.length)}
                 <TableBody>
-                    {(weapon?.qualities!! || []).map((row: EquipmentQuality) => (
-                        <Row key={row.name} row={row}/>
+                    {(weapon.qualities || []).map((quality: EquipmentQuality) => (
+                        <Row key={quality.name} quality={quality}/>
                     ))}
                 </TableBody>
             </Table>

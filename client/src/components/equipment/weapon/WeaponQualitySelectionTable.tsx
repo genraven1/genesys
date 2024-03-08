@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
@@ -12,7 +11,7 @@ import Quality from "../../../models/Quality";
 import QualityBackdrop from "../QualityBackdrop";
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 
 interface RowProps {
     quality: Quality
@@ -24,7 +23,18 @@ function QualityRow(props: RowProps): JSX.Element {
     const [openQualityBackDrop, setOpenQualityBackDrop] = useState(false)
 
     const addQuality = async () => {
-        await EquipmentService.addWeaponQuality(weapon.id, {...quality})
+        if (weapon.qualities.find(equipmentQuality  => equipmentQuality.name === quality.name)) {
+            weapon.qualities.forEach((equipmentQuality, index) => {
+                if (equipmentQuality.name === quality.name) {
+                    equipmentQuality.ranks = equipmentQuality.ranks + 1
+                    weapon.qualities[index] = equipmentQuality
+                }
+            })
+        }
+        else {
+            weapon.qualities = weapon.qualities.concat({...quality, ranks: 1})
+        }
+        await EquipmentService.updateWeapon(weapon.name, weapon)
     }
 
     return (
@@ -64,14 +74,10 @@ export default function WeaponQualitySelectionTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    <TableRow>
-                        {renderHeaders(headers)}
-                    </TableRow>
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {qualities.map((quality: Quality) => (
-                        <QualityRow quality={quality!!} weapon={weapon}/>
+                        <QualityRow quality={quality} weapon={weapon}/>
                     ))}
                 </TableBody>
             </Table>

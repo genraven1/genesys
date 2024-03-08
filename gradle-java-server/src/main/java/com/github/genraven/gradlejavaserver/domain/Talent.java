@@ -17,7 +17,7 @@ public class Talent {
     public Talent(final String name) {
         this.name = name;
     }
-    private Talent() {}
+    protected Talent() {}
 
     @Id
     private String name;

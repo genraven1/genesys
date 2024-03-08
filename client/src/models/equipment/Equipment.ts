@@ -2,7 +2,6 @@ import {EquipmentQuality} from "../Quality";
 import Setting from "../Setting";
 
 export default interface Equipment {
-    id: number
     name: string
     description: string
     price: number
@@ -22,7 +21,8 @@ export enum EquipmentSlot {
     Main='Main Hand',
     Off='Off Hand',
     Both='Both Hands',
-    Body='Body'
+    Body='Body',
+    None='None'
 }
 
 export enum EquipmentType {

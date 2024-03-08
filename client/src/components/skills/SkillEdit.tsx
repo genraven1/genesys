@@ -1,7 +1,7 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {SkillType} from '../../models/actor/Skill';
 import {Option} from '../common/InputSelectField';
@@ -28,7 +28,6 @@ interface Props {
 
 export default function SkillEdit(props: Props) {
     const {sk, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [skill, setSkill] = useState<Skill>(sk)
 
     let navigate = useNavigate()
@@ -67,7 +66,6 @@ export default function SkillEdit(props: Props) {
                 copySkill.type = value
                 break
             case 'name':
-                copySkill.name = value
                 break
         }
 
@@ -76,30 +74,29 @@ export default function SkillEdit(props: Props) {
 
     const updateSkill = async (copySkill: Skill) => {
         setSkill(copySkill)
-        await SkillService.updateSkill(copySkill.id, copySkill)
+        await SkillService.updateSkill(copySkill.name, copySkill)
     }
 
     const onView = () => {
-        navigate(Path.Skills + id + '/view');
+        navigate(Path.Skills + skill.name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={skill?.name!!} style={{textAlign: 'center'}}
+            <CardHeader title={skill.name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <InputSelectFieldCard defaultValue={skill?.type!!} onCommit={(value: string): void => {
+                    <InputSelectFieldCard defaultValue={skill.type} onCommit={(value: string): void => {
                         onChange('type', value)
                     }} title={'Skill Type'} options={getSkillTypes()}/>
-                    <InputSelectFieldCard defaultValue={skill?.characteristic!!} onCommit={(value: string): void => {
+                    <InputSelectFieldCard defaultValue={skill.characteristic} onCommit={(value: string): void => {
                         onChange('characteristic', value)
                     }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
-                    <EditSettingsCard settings={skill?.settings!!} onSettingAddition={onSettingAddition}
+                    <EditSettingsCard settings={skill.settings} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>

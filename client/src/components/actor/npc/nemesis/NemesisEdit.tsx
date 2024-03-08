@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material"
 import * as React from "react"
 import {useEffect, useState} from "react"
-import {useNavigate, useParams} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import ActorService from "../../../../services/ActorService"
 import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/actor/Characteristics"
@@ -15,14 +15,13 @@ import {EditStatsCard} from "../../StatsCard"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
-import NonPlayerCharacterEquipmentCard from "../equipment/NonPlayerCharacterEquipmentCard";
-import NonPlayerCharacterAbilityCard from "../ability/NonPlayerCharacterAbilityCard";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
 import {EditDefenseCard} from "../../DefenseCard";
-import NonPlayerCharacterTalentCard from "../talent/NonPlayerCharacterTalentCard";
-import NonPlayerCharacterSkillCard from "../skill/NonPlayerCharacterSkillCard";
+import NemesisSkillCard from "./skill/NemesisSkillCard";
+import NemesisTalentCard from "./talent/NemesisTalentCard";
+import NemesisEquipmentCard from "./equipment/NemesisEquipmentCard";
 
 interface Props {
     nem: Nemesis
@@ -31,7 +30,6 @@ interface Props {
 
 export default function NemesisEdit(props: Props) {
     const {nem, settings} = props
-    const {id} = useParams<{ id: string }>()
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
     let navigate = useNavigate()
 
@@ -115,12 +113,12 @@ export default function NemesisEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Nemesis + id + '/view')
+        navigate(ActorPath.Nemesis + nemesis.name + '/view')
     }
 
     return (
         <Card>
-            <CardHeader title={nemesis?.name!!} style={{textAlign: 'center'}}
+            <CardHeader title={nemesis.name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}/>
@@ -189,15 +187,15 @@ export default function NemesisEdit(props: Props) {
                                     }}/>
                     </Grid>
                     <Divider/>
-                    <NonPlayerCharacterSkillCard npc={nemesis}/>
+                    <NemesisSkillCard nemesis={nemesis}/>
                     <Divider/>
-                    <NonPlayerCharacterEquipmentCard npc={nemesis}/>
+                    <NemesisEquipmentCard nemesis={nemesis}/>
                     <Divider/>
-                    <NonPlayerCharacterAbilityCard npc={nemesis}/>
+                    <NemesisEquipmentCard nemesis={nemesis}/>
                     <Divider/>
-                    <NonPlayerCharacterTalentCard npc={nemesis}/>
+                    <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
-                <EditSettingsCard settings={nemesis?.settings!!} onSettingAddition={onSettingAddition}
+                <EditSettingsCard settings={nemesis.settings} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
