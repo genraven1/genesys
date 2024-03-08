@@ -7,7 +7,6 @@ import Actor from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";
 import {ActorWeapon} from "../models/equipment/Weapon";
 import {ActorArmor} from "../models/equipment/Armor";
-import Ability from "../models/Ability";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
 
 export default class ActorService {
@@ -68,14 +67,6 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Rival + name, rival)).data;
     }
 
-    static async createRivalArmor(name: string, armor: ActorArmor): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/armor', armor)).data;
-    }
-
-    static async createRivalAbility(name: string, ability: Ability): Promise<Rival> {
-        return await (await axios.post(ActorPath.Rival + name + '/ability', ability)).data;
-    }
-
     static async createMinion(name: string): Promise<Minion> {
         return await (await axios.post( ActorPath.Minion + name)).data;
     }
@@ -98,9 +89,5 @@ export default class ActorService {
 
     static async createMinionArmor(name: string, armor: ActorArmor): Promise<Minion> {
         return await (await axios.put(ActorPath.Minion + name + '/armors', armor)).data;
-    }
-
-    static async createMinionAbility(name: string, ability: Ability): Promise<Minion> {
-        return await (await axios.put(ActorPath.Minion + name + '/ability', ability)).data;
     }
 }
