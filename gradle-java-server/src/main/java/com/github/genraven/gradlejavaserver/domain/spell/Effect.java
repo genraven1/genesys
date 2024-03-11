@@ -6,5 +6,5 @@ import lombok.Data;
 public class Effect {
     private String name;
     private String description;
-    private int increase;
+    private int increase = 0;
 }

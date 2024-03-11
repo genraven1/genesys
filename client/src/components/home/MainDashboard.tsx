@@ -11,6 +11,8 @@ import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
+import CreateSpellDialog from "../spell/CreateSpellDialog";
 
 export default function MainDashboard(): JSX.Element {
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
@@ -18,6 +20,7 @@ export default function MainDashboard(): JSX.Element {
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
+    const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
@@ -68,6 +71,9 @@ export default function MainDashboard(): JSX.Element {
                                 <ExpansionList header={'Critical Injuries'} viewTitle={'View All Critical Injuries'} to={Path.Injury}
                                                dialogTitle={'Create Critical Injury'}
                                                onClick={(): void => setOpenInjuryCreationDialog(true)}/>
+                                <ExpansionList header={'Spells'} viewTitle={'View All Spells'} to={Path.Spell}
+                                               dialogTitle={'Create Spell'}
+                                               onClick={(): void => setOpenSpellCreationDialog(true)}/>
                             </Grid>
                         </CardContent>
                     </Card>
@@ -88,8 +94,10 @@ export default function MainDashboard(): JSX.Element {
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
                                                             onClose={(): void => setOpenSkillCreationDialog(false)}/>}
-            {openInjuryCreationDialog && <CreateSkillDialog open={openInjuryCreationDialog}
+            {openInjuryCreationDialog && <CreateInjuryDialog open={openInjuryCreationDialog}
                                                             onClose={(): void => setOpenInjuryCreationDialog(false)}/>}
+            {openSpellCreationDialog && <CreateSpellDialog open={openSpellCreationDialog}
+                                                            onClose={(): void => setOpenSpellCreationDialog(false)}/>}
         </Card>
     )
 }
