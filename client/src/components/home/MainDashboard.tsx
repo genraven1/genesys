@@ -17,6 +17,7 @@ export default function MainDashboard(): JSX.Element {
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
+    const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
@@ -60,6 +61,18 @@ export default function MainDashboard(): JSX.Element {
                     </Card>
                 </Grid>
                 <Grid container justifyContent={'center'}>
+                    <Card>
+                        <CardHeader style={{textAlign: 'center'}} title={'System Information'}/>
+                        <CardContent>
+                            <Grid container justifyContent={'center'}>
+                                <ExpansionList header={'Critical Injuries'} viewTitle={'View All Critical Injuries'} to={Path.Injury}
+                                               dialogTitle={'Create Critical Injury'}
+                                               onClick={(): void => setOpenInjuryCreationDialog(true)}/>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid container justifyContent={'center'}>
                     <Button color='primary' variant='contained'
                             onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
                     {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog}
@@ -74,7 +87,9 @@ export default function MainDashboard(): JSX.Element {
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
-                                                           onClose={(): void => setOpenSkillCreationDialog(false)}/>}
+                                                            onClose={(): void => setOpenSkillCreationDialog(false)}/>}
+            {openInjuryCreationDialog && <CreateSkillDialog open={openInjuryCreationDialog}
+                                                            onClose={(): void => setOpenInjuryCreationDialog(false)}/>}
         </Card>
     )
 }

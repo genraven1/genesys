@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.actor.player;
 
+import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 
 import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
@@ -32,7 +33,7 @@ public class Player extends Actor {
         this.setWeapons(actor.getWeapons());
         this.setSettings(actor.getSettings());
     }
-
     private int strain = 0;
     private List<PlayerSkill> skills = new ArrayList<>();
+    private List<CriticalInjury> injuries = new ArrayList<>();
 }
