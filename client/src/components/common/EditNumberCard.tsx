@@ -1,21 +1,23 @@
-import {Card, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import InlineNumberField from "./NumberField";
+import CenteredCardHeader from "./card/CenteredCardHeader";
 
-interface EditPriceProps {
+interface Props {
     title: string
     value: number
     onChange: (value: number) => void
 }
 
-export default function EditNumberCard(props: EditPriceProps): JSX.Element {
+export default function EditNumberCard(props: Props): JSX.Element {
     const {onChange, value, title} = props
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }}/>
-                <Divider />
-                <InlineNumberField defaultValue={value} onCommit={onChange} />
+                <CenteredCardHeader title={title}/>
+                <CardContent>
+                    <InlineNumberField defaultValue={value} onCommit={onChange} />
+                </CardContent>
             </Card>
         </Grid>
     )
