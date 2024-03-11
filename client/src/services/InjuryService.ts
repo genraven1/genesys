@@ -14,4 +14,8 @@ export default class InjuryService {
     static async updateInjury(name: string, injury: Injury): Promise<Injury> {
         return await (await axios.put(Path.Injury + name, injury)).data;
     }
+
+    static async getInjuries(): Promise<Injury[]> {
+        return await (await axios.get(Path.Injury)).data;
+    }
 }
