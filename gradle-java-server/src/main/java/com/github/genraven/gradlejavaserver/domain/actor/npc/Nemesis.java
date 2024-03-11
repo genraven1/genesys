@@ -1,9 +1,13 @@
 package com.github.genraven.gradlejavaserver.domain.actor.npc;
 
+import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -31,6 +35,6 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setTalents(singleNonPlayerActor.getTalents());
         this.setWeapons(singleNonPlayerActor.getWeapons());
     }
-
     private int strain = 0;
+    private List<CriticalInjury> injuries = new ArrayList<>();
 }
