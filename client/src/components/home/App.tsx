@@ -20,6 +20,8 @@ import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import HomeDashboard from "./HomeDashboard";
+import InjuryWorkflow from "../injuries/InjuryWorkflow";
+import SceneWorkflow from "../scene/SceneWorkflow";
 
 export default function App() {
 
@@ -31,9 +33,13 @@ export default function App() {
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
                     <Route path={Path.Home} element={<HomeDashboard/>}/>
 
-                    <Route path={Path.Scene} element={<SettingWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/view'} element={<SettingWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/edit'} element={<SettingWorkflow/>}/>
+                    <Route path={Path.Injury} element={<InjuryWorkflow/>}/>
+                    <Route path={Path.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
+                    <Route path={Path.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
+
+                    <Route path={Path.Scene} element={<SceneWorkflow/>}/>
+                    <Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>
+                    <Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
 
                     <Route path={Path.Setting} element={<SettingWorkflow/>}/>
                     <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow/>}/>

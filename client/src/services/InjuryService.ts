@@ -6,4 +6,12 @@ export default class InjuryService {
     static async createInjury(name: string): Promise<Injury> {
         return await (await axios.post(Path.Injury + name)).data;
     }
+
+    static async getInjury(name: string): Promise<Injury> {
+        return await (await axios.get(Path.Injury + name)).data;
+    }
+
+    static async updateInjury(name: string, injury: Injury): Promise<Injury> {
+        return await (await axios.put(Path.Injury + name, injury)).data;
+    }
 }
