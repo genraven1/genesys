@@ -16,7 +16,7 @@ export default class SpellService {
         return await (await axios.post(Path.Spell + name)).data;
     }
 
-    static async updateSpell(name: string, talent: Spell): Promise<Spell> {
-        return await (await axios.put(Path.Spell + name, talent)).data;
+    static async updateSpell(name: string, spell: Spell): Promise<Spell> {
+        return await (await axios.put(Path.Spell + name, spell)).data;
     }
 }
