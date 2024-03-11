@@ -1,9 +1,9 @@
-
 import Injury from "../../models/Injury";
 import InjuryService from "../../services/InjuryService";
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import InjuryEdit from "./InjuryEdit";
+import InjuryView from "./InjuryView";
 
 function useFetchInjury(name: string): Injury {
     const [injury, setInjury] = useState<Injury>()
@@ -32,8 +32,7 @@ export default function InjuryWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            // return injury && <PlayerView player={injury} settings={settings}/>
-            return <Fragment/>
+            return injury && <InjuryView injury={injury}/>
         } else if (pathname.endsWith('/edit')) {
             return injury && <InjuryEdit crit={injury}/>
         } else {
