@@ -3,6 +3,8 @@ import {TableCell, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 import Actor, {ActorSkill, getCharacteristicRanks} from "../../../models/actor/Actor";
 import GenesysSkillDiceTypography from "../typography/GenesysSkillDiceTypography";
+import {Difficulty} from "../../../models/common/Difficulty";
+import GenesysDifficultyDiceTypography from "../typography/GenesysDifficultyDiceTypography";
 
 interface LeftProps {
     value: string
@@ -56,6 +58,19 @@ export function GenesysDicePoolCenterTableCell(props: SkillCenterProps): JSX.Ele
         <TableCell style={{textAlign: 'center'}}>
             <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(actor, skill)}
                                         skillRanks={skill.ranks}/>
+        </TableCell>
+    )
+}
+
+interface DifficultyProps {
+    difficulty: Difficulty
+}
+
+export function GenesysDifficultyCenterTableCell(props: DifficultyProps): JSX.Element {
+    const {difficulty} = props
+    return (
+        <TableCell style={{textAlign: 'center'}}>
+            <GenesysDifficultyDiceTypography difficulty={difficulty}/>
         </TableCell>
     )
 }

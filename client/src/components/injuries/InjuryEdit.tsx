@@ -11,7 +11,6 @@ import InjuryService from "../../services/InjuryService";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
 import EditNumberCard from "../common/EditNumberCard";
 
-
 interface Props {
     crit: Injury
 }
@@ -34,14 +33,14 @@ export default function InjuryEdit(props: Props): JSX.Element {
             case 'description':
                 copyInjury.description = value
                 break
-            case "difficulty":
-                copyInjury.difficulty = value as Difficulty
+            case "severity":
+                copyInjury.severity = value as Difficulty
                 break;
             case "min":
                 copyInjury.min = Number(value)
                 break;
             case "max":
-                copyInjury.min = Number(value)
+                copyInjury.max = Number(value)
                 break;
         }
         await updateInjury(copyInjury)
@@ -72,8 +71,8 @@ export default function InjuryEdit(props: Props): JSX.Element {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <InputSelectFieldCard defaultValue={injury.difficulty} onCommit={(value: string): void => {
-                            onChange('difficulty', value)
+                        <InputSelectFieldCard defaultValue={injury.severity} onCommit={(value: string): void => {
+                            onChange('severity', value)
                         }} title={'Severity'} options={getDifficultyOptions()}/>
                         <EditNumberCard title={'Min'} value={injury.min} onChange={(value: number): void => {
                             onChange('min', String(value))

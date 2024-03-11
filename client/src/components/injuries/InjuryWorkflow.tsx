@@ -4,6 +4,7 @@ import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import InjuryEdit from "./InjuryEdit";
 import InjuryView from "./InjuryView";
+import ViewAllInjuries from "./ViewAllInjuries";
 
 function useFetchInjury(name: string): Injury {
     const [injury, setInjury] = useState<Injury>()
@@ -36,7 +37,7 @@ export default function InjuryWorkflow(): JSX.Element {
         } else if (pathname.endsWith('/edit')) {
             return injury && <InjuryEdit crit={injury}/>
         } else {
-            return <Fragment/>
+            return <ViewAllInjuries/>
         }
     }
 
