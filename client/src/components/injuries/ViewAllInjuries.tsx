@@ -9,7 +9,7 @@ import * as React from "react";
 import Injury from "../../models/Injury";
 import InjuryService from "../../services/InjuryService";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
 import TableCell from "@mui/material/TableCell";
@@ -35,7 +35,7 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
-                <TypographyCenterTableCell value={injury.difficulty}/>
+                <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
                 <ActionsTableCell id={injury.name} path={Path.Injury}/>
             </TableRow>
             <TableRow>
