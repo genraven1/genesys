@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import TalentDialog from "../talents/TalentDialog";
 import * as React from "react";
 import Injury from "../../models/Injury";
 import InjuryService from "../../services/InjuryService";
@@ -16,6 +15,7 @@ import {Path} from "../../services/Path";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import CreateInjuryDialog from "./CreateInjuryDialog";
 
 interface Props {
     injury: Injury
@@ -88,7 +88,7 @@ export default function ViewAllInjuries():JSX.Element {
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openInjuryCreationDialog && <TalentDialog open={openInjuryCreationDialog}
+            {openInjuryCreationDialog && <CreateInjuryDialog open={openInjuryCreationDialog}
                                                        onClose={(): void => setOpenInjuryCreationDialog(false)}/>}
         </Card>
     );
