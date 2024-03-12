@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,9 +21,9 @@ public class Spell {
 
     @Id
     private String name;
-    private boolean concentration;
-    private Difficulty difficulty;
+    private boolean concentration = false;
+    private Difficulty difficulty = Difficulty.EASY;
     private String description;
-    private List<Skill> skills;
-    private List<Effect> effects;
+    private List<Skill> skills = new ArrayList<>();
+    private List<Effect> effects = new ArrayList<>();
 }

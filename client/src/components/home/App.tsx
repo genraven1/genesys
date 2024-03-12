@@ -22,6 +22,7 @@ import QualityWorkflow from "../qualities/QualityWorkflow";
 import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SceneWorkflow from "../scene/SceneWorkflow";
+import SpellWorkflow from "../spell/SpellWorkflow";
 
 export default function App() {
 
@@ -36,6 +37,10 @@ export default function App() {
                     <Route path={Path.Injury} element={<InjuryWorkflow/>}/>
                     <Route path={Path.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
                     <Route path={Path.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
+
+                    <Route path={Path.Spell} element={<SpellWorkflow/>}/>
+                    <Route path={Path.Spell + ':name/view'} element={<SpellWorkflow/>}/>
+                    <Route path={Path.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
 
                     <Route path={Path.Scene} element={<SceneWorkflow/>}/>
                     <Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>
