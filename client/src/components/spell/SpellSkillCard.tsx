@@ -71,3 +71,36 @@ export default function SpellSkillCard(props: Props): JSX.Element {
         </Card>
     )
 }
+
+interface ViewProps {
+    spell: Spell
+}
+
+export function ViewSpellSkillCard(props: ViewProps): JSX.Element {
+    const {spell} = props
+
+    const renderTableBody = (): JSX.Element => {
+        return (
+            <TableBody>
+                {spell.skills.map((skill: Skill) => (
+                    <TableRow key={skill.name}>
+                        <TypographyCenterTableCell value={skill.name}/>
+                    </TableRow>
+                ))}
+            </TableBody>
+        )
+    }
+
+    return (
+        <Card sx={{"width": 1}}>
+            <CenteredCardHeader title={'Skills'}/>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderTableBody()}
+                    </Table>
+                </TableContainer>
+            </CardContent>
+        </Card>
+    )
+}
