@@ -10,9 +10,9 @@ import * as React from "react";
 import Spell from "../../models/spell/Spell";
 import SpellService from "../../services/SpellService";
 import CheckButtonCard from "../common/CheckButtonCard";
-import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import SpellEffectCard from "./SpellEffectCard";
+import SpellSkillCard from "./SpellSkillCard";
 
 interface Props {
     sp: Spell
@@ -101,7 +101,7 @@ export default function SpellEdit(props: Props): JSX.Element {
                                          }}/>
                     </Grid>
                     <Grid container spacing={2}>
-
+                        <SpellSkillCard spell={spell} onSkillAddition={onSkillAddition} onSkillRemoval={onSkillRemoval}/>
                     </Grid>
                     <Grid container spacing={2}>
                         {/*Use*/}
