@@ -4,6 +4,7 @@ import SpellService from "../../services/SpellService";
 import Spell from "../../models/spell/Spell";
 import SpellEdit from "./SpellEdit";
 import SpellView from "./SpellView";
+import ViewAllSpells from "./ViewAllSpells";
 
 function useFetchSpell(name: string): Spell {
     const [spell, setSpell] = useState<Spell>()
@@ -37,8 +38,7 @@ export default function SpellWorkflow(): JSX.Element {
         } else if (pathname.endsWith('/edit')) {
             return spell && <SpellEdit sp={spell}/>
         } else {
-            //     return <ViewAllTalents/>
-            return <Fragment/>
+            return <ViewAllSpells/>
         }
     }
 

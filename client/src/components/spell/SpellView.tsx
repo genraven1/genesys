@@ -1,4 +1,3 @@
-import Injury from "../../models/Injury";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
@@ -6,7 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import * as React from "react";
 import Spell from "../../models/spell/Spell";
-import SpellSkillCard, {ViewSpellSkillCard} from "./SpellSkillCard";
+import {ViewSpellSkillCard} from "./SpellSkillCard";
 import SpellEffectCard from "./SpellEffectCard";
 
 interface Props {
