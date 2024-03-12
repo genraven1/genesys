@@ -3,6 +3,7 @@ import {useLocation, useParams} from "react-router-dom";
 import SpellService from "../../services/SpellService";
 import Spell from "../../models/spell/Spell";
 import SpellEdit from "./SpellEdit";
+import SpellView from "./SpellView";
 
 function useFetchSpell(name: string): Spell {
     const [spell, setSpell] = useState<Spell>()
@@ -31,17 +32,14 @@ export default function SpellWorkflow(): JSX.Element {
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
-        if (pathname.endsWith('/edit')) {
+        if (pathname.endsWith('/view')) {
+            return spell && <SpellView spell={spell}/>
+        } else if (pathname.endsWith('/edit')) {
             return spell && <SpellEdit sp={spell}/>
+        } else {
+            //     return <ViewAllTalents/>
+            return <Fragment/>
         }
-        return <Fragment/>
-        // if (pathname.endsWith('/view')) {
-        //     return talent && <TalentView talent={talent!} allSettings={settings}/>
-        // } else if (pathname.endsWith('/edit')) {
-        //     return talent && <TalentEdit tal={talent!} settings={settings}/>
-        // } else {
-        //     return <ViewAllTalents/>
-        // }
     }
 
     return (
