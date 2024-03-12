@@ -104,7 +104,6 @@ export default function SpellEdit(props: Props): JSX.Element {
                         <SpellSkillCard spell={spell} onSkillAddition={onSkillAddition} onSkillRemoval={onSkillRemoval}/>
                     </Grid>
                     <Grid container spacing={2}>
-                        {/*Use*/}
                         <SpellEffectCard spell={spell}/>
                     </Grid>
                 </Grid>
