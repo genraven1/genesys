@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
 import Skill, {SkillType} from '../../models/actor/Skill';
 import {Option} from '../common/InputSelectField';
-import {CharacteristicType} from '../../models/actor/Characteristics';
+import {CharacteristicType} from '../../models/character/Characteristic';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";

@@ -1,4 +1,4 @@
-import {CharacteristicType} from './Characteristics';
+import {CharacteristicType} from '../character/Characteristic';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";

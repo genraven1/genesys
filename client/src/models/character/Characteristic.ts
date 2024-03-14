@@ -9,5 +9,5 @@ export enum CharacteristicType {
 
 export interface Characteristic {
     current: number,
-    temp: number,
+    type: CharacteristicType
 }
