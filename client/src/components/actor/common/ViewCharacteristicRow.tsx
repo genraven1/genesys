@@ -1,6 +1,6 @@
 import Actor from "../../../models/actor/Actor";
 import {Grid} from "@mui/material";
-import {CharacteristicType} from "../../../models/actor/Characteristics";
+import {CharacteristicType} from "../../../models/character/Characteristic";
 import * as React from "react";
 import { ViewCharacteristicCard } from "../CharacteristicCard";
 

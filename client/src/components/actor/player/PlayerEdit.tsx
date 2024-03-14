@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
-import {CharacteristicType} from '../../../models/actor/Characteristics';
+import {CharacteristicType} from '../../../models/character/Characteristic';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';

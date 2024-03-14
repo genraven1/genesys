@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/mat
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
-import {CharacteristicType} from "../../../../models/actor/Characteristics";
+import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
