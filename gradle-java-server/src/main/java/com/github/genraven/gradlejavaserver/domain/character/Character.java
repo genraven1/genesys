@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.domain.character;
 
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
+import com.github.genraven.gradlejavaserver.domain.actor.ActorArmor;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorWeapon;
 import com.github.genraven.gradlejavaserver.domain.actor.CharacteristicType;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Character {
         this.setWillpower(new Characteristic(CharacteristicType.WILLPOWER, actor.getWillpower()));
         this.setPresence(new Characteristic(CharacteristicType.PRESENCE, actor.getPresence()));
         this.setWeapons(actor.getWeapons());
+        this.setArmors(actor.getArmors());
         this.setWounds(new Wounds(0, actor.getWounds()));
     }
 
@@ -35,4 +37,5 @@ public class Character {
     private StatusEffect immobilized = new StatusEffect(StatusEffect.Type.IMMOBILIZED);
     private StatusEffect staggered = new StatusEffect(StatusEffect.Type.STAGGERED);
     private List<ActorWeapon> weapons;
+    private List<ActorArmor> armors;
 }
