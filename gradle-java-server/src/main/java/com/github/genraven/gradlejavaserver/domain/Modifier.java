@@ -14,7 +14,11 @@ public class Modifier {
     @Getter
     public enum Type {
         INCREASE_WOUND_THRESHOLD("Increase Wound Threshold"),
-        SUFFER_WOUNDS("Suffer Wounds");
+        SUFFER_WOUNDS("Suffer Wounds"),
+        SUFFER_WOUNDS_BY_TALENT("Suffer Wounds By Talent"),
+        INCREASE_CRITICAL_INJURY("Increase Critical Injury"),
+        DECREASE_CRITICAL_INJURY("Decrease Critical Injury"),
+        RESET_CRITICAL_INJURY("Reset Critical Injury");
 
         @JsonValue
         private final String label;
