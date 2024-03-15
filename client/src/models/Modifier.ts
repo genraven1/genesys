@@ -1,4 +1,4 @@
-import {Option} from "../components/common/InputSelectField";
+import {Option} from '../components/common/InputSelectField';
 
 export default interface Modifier {
     modifier: Type
@@ -7,7 +7,11 @@ export default interface Modifier {
 
 export enum Type {
     IncreaseWoundThreshold = 'Increase Wound Threshold',
-    SufferWounds = 'Suffer Wounds'
+    SufferWounds = 'Suffer Wounds',
+    SufferWoundsByTalent = 'Suffer Wounds By Talent',
+    IncreaseCriticalInjury = 'Increase Critical Injury',
+    DecreaseCriticalInjury = 'Decrease Critical Injury',
+    ResetCriticalInjury = 'Reset Critical Injury',
 }
 
 export const getModifierOptions = (): Option[] => {
