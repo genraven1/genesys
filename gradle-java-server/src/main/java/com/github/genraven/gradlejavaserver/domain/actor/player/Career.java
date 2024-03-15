@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.actor.player;
 
+import com.github.genraven.gradlejavaserver.domain.Setting;
 import com.github.genraven.gradlejavaserver.domain.skill.Skill;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -21,4 +22,5 @@ public class Career {
     @Id
     private String name;
     private List<Skill> skills = new ArrayList<>();
+    private List<Setting> settings = new ArrayList<>();
 }
