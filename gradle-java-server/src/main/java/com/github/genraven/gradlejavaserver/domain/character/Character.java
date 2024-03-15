@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.character;
 
+import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorArmor;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorWeapon;
@@ -33,6 +34,7 @@ public class Character {
     private Characteristic willpower;
     private Characteristic presence;
     private Wounds wounds;
+    private List<CriticalInjury> injuries = new ArrayList<>();
     private StatusEffect disoriented = new StatusEffect(StatusEffect.Type.DISORIENTED);
     private StatusEffect immobilized = new StatusEffect(StatusEffect.Type.IMMOBILIZED);
     private StatusEffect staggered = new StatusEffect(StatusEffect.Type.STAGGERED);
