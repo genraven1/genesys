@@ -3,6 +3,7 @@ import Wounds from "./Wounds";
 import {Characteristic} from "./Characteristic";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
+import Injury from "../Injury";
 
 export default interface Character {
     brawn: Characteristic,
@@ -14,6 +15,7 @@ export default interface Character {
     wounds: Wounds
     weapons: ActorWeapon[]
     armors: ActorArmor[]
+    injuries: Injury[]
     disoriented: StatusEffect
     immobilized: StatusEffect
     staggered: StatusEffect
