@@ -27,6 +27,7 @@ public class Talent {
     private String summary;
     private String description;
     private List<Setting> settings = new ArrayList<>();
+    private List<Modifier> modifiers = new ArrayList<>();
 
     @AllArgsConstructor
     @Getter

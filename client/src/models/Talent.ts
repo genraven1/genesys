@@ -1,5 +1,6 @@
 import {Option} from "../components/common/InputSelectField";
 import Setting from "./Setting";
+import Modifier from "./Modifier";
 
 export default interface Talent {
     name: string
@@ -8,6 +9,7 @@ export default interface Talent {
     tier: Tier
     summary: string
     description: string
+    modifiers: Modifier[]
     settings: Setting[]
 }
 
