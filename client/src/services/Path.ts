@@ -8,7 +8,8 @@ export enum Path {
     Qualities = '/qualities/',
     Scene = '/scenes/',
     Injury = '/injuries/',
-    Spell = '/spells/'
+    Spell = '/spells/',
+    Career = '/careers/'
 }
 
 export enum LorePath {

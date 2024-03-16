@@ -2,7 +2,7 @@ import {Card, CardContent} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../card/CenteredCardHeader";
 import Skill from "../../../models/actor/Skill";
-import {renderSkills} from "./SkillRenders";
+import {renderViewSkills} from "./SkillRenders";
 import {useFetchCurrentSettingSkills} from "../../skills/SkillWorkflow";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function ViewSkillsCard(props: Props): JSX.Element {
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Career Skills'}/>
             <CardContent>
-                {renderSkills(skills, useFetchCurrentSettingSkills())}
+                {renderViewSkills(skills, useFetchCurrentSettingSkills())}
             </CardContent>
         </Card>
     )

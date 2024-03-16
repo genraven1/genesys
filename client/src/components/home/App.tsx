@@ -23,6 +23,7 @@ import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SceneWorkflow from "../scene/SceneWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
+import CareerWorkflow from "../career/CareerWorkflow";
 
 export default function App() {
 
@@ -61,6 +62,10 @@ export default function App() {
                     <Route path={Path.Skills} element={<SkillWorkflow/>}/>
                     <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
                     <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
+
+                    <Route path={Path.Career} element={<CareerWorkflow/>}/>
+                    <Route path={Path.Career + ':name/edit'} element={<CareerWorkflow/>}/>
+                    <Route path={Path.Career + ':name/view'} element={<CareerWorkflow/>}/>
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>

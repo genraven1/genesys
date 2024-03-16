@@ -10,7 +10,7 @@ export const renderSkillName = (skill: Skill): string => {
     return skill.name
 }
 
-export const renderSkills = (skills: Skill[], settingSkills: Skill[]):JSX.Element => {
+export const renderViewSkills = (skills: Skill[], settingSkills: Skill[]):JSX.Element => {
     if (skills === undefined || skills.length === 0) {
         return <GenesysDescriptionTypography text={'None'}/>
     }
