@@ -4,6 +4,7 @@ import {Path} from "../../services/Path";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import CareerService from "../../services/CareerService";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
+import {useFetchCurrentSetting} from "../setting/SettingWorkflow";
 
 interface Props {
     open: boolean
@@ -13,10 +14,13 @@ interface Props {
 export default function CareerDialog(props: Props) {
     const {open,onClose} = props
     const [name,setName] = useState('')
+    let current = useFetchCurrentSetting()
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         let career = await CareerService.createCareer(name)
+        career.settings = career.settings.concat(current)
+        await CareerService.updateCareer(career.name, career)
         navigate(Path.Career + career?.name!! + '/edit')
         onClose()
     }

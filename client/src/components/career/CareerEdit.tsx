@@ -59,7 +59,7 @@ export default function CareerEdit(props: Props) {
             </CardHeader>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <EditSkillsCard car={career}/>
+                    <EditSkillsCard career={career}/>
                     <EditSettingsCard settings={career?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>

@@ -1,64 +1,80 @@
 import {
     Card,
     CardContent,
-    Checkbox,
-    FormControl,
-    InputLabel,
-    ListItemText,
-    MenuItem,
-    OutlinedInput,
-    Select
 } from "@mui/material";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import Career from "../../models/actor/player/Career";
 import Skill from "../../models/actor/Skill";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import CareerService from "../../services/CareerService";
 import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import * as React from "react";
+import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import CheckboxTableCell from "../common/table/CheckboxTableCell";
 
 interface Props {
-    car: Career
+    career: Career
 }
 
 export default function EditSkillsCard(props: Props): JSX.Element {
-    const {car} = props
-    const [career, setCareer] = useState<Career>(car)
+    const {career} = props
+    const [skills, setSkills] = useState<Skill[]>(career.skills)
 
-    useEffect(() => {
-        setCareer(car)
-    }, [car])
-
-    const onSkillUpdate = () => {
-
+    const onSkillAddition = async (skill: Skill) => {
+        if (skills.length <= 8) {
+            setSkills(skills.concat(skill))
+            await updateCareer()
+        }
     }
 
-    const updateCareer = async (copyCareer: Career) => {
-        setCareer(copyCareer)
-        await CareerService.updateCareer(career.name, copyCareer)
+    const onSkillRemoval = async (skill: Skill) => {
+        skills.forEach((sk, index) => {
+            if (sk.name === skill.name) {
+                setSkills(skills.splice(index, 1))
+            }
+        })
+        await updateCareer()
+    }
+
+    const updateCareer = async () => {
+        career.skills = skills
+        await CareerService.updateCareer(career.name, career)
+    }
+
+    const renderTableBody = (settingSKills: Skill[]): JSX.Element => {
+        if (!skills) {
+            return <GenesysDescriptionTypography text={'None'}/>
+        } else {
+            return (
+                <TableBody>
+                    {settingSKills.map((skill: Skill) => (
+                        <TableRow key={skill.name}>
+                            <TypographyCenterTableCell value={skill.name}/>
+                            <CheckboxTableCell value={skills.some(sk => sk.name === skill.name)}
+                                               onAddition={() => onSkillAddition(skill)}
+                                               onRemoval={() => onSkillRemoval(skill)}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            )
+        }
     }
 
     return (
-        <Card>
-            <CenteredCardHeader title={'Skills'}/>
+        <Card sx={{"width": 1}}>
+            <CenteredCardHeader title={'Career Skills'}/>
             <CardContent>
-                <FormControl sx={{width: 500}}>
-                    <InputLabel id="demo-multiple-checkbox-label">Skill</InputLabel>
-                    <Select
-                        labelId='Skill'
-                        multiple
-                        value={career.skills}
-                        onChange={onSkillUpdate}
-                        input={<OutlinedInput label="Tag" />}
-                        renderValue={(selected) => selected.join(', ')}
-                    >
-                        {useFetchCurrentSettingSkills().map((skill: Skill) => (
-                            <MenuItem key={skill.name} value={skill.name}>
-                                <Checkbox checked={career.skills.some(sk => sk.name === skill.name)} />
-                                <ListItemText primary={skill.name} />
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderTableBody(useFetchCurrentSettingSkills())}
+                    </Table>
+                </TableContainer>
             </CardContent>
         </Card>
     )

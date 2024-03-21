@@ -32,7 +32,13 @@ export function useFetchCurrentSettingSkills(): Skill[] {
             if (!skillList) {
                 return
             }
-            setSkills(skillList)
+            let temp = [] as Skill[]
+            skillList.forEach((sk, index) => {
+                if (sk.settings.some(set => set.name === setting.name)) {
+                    temp.push(sk)
+                }
+            })
+            setSkills(temp.sort((a, b) => a.name.localeCompare(b.name)))
         })()
     }, [setting, setSkills])
     return skills;
