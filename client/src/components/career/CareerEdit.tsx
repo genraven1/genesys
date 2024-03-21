@@ -9,6 +9,7 @@ import SettingService from "../../services/SettingService";
 import Career from "../../models/actor/player/Career";
 import CareerService from '../../services/CareerService';
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
+import EditSkillsCard from "./EditSkillsCard";
 
 interface Props {
     car: Career
@@ -40,17 +41,6 @@ export default function CareerEdit(props: Props) {
         await updateCareer(copyCareer)
     }
 
-    const onChange = async (key: keyof Career, value: string) => {
-        if (value.trim().length === 0 || (career !== null && career!![key] === value)) {
-            return
-        }
-        const copyCareer = {...career} as Career;
-        switch (key) {
-
-        }
-        await updateCareer(copyCareer)
-    }
-
     const updateCareer = async (copyCareer: Career) => {
         setCareer(copyCareer)
         await CareerService.updateCareer(career.name, copyCareer)
@@ -69,6 +59,7 @@ export default function CareerEdit(props: Props) {
             </CardHeader>
             <CardContent>
                 <Grid container justifyContent={'center'}>
+                    <EditSkillsCard car={career}/>
                     <EditSettingsCard settings={career?.settings!!} onSettingAddition={onSettingAddition}
                                       onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
