@@ -1,4 +1,4 @@
-import {Card, CardContent, Divider} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import * as React from "react";
 import Setting from "../../../models/Setting";
 import {renderSettings} from "./SettingRenders";
@@ -15,7 +15,6 @@ export default function ViewSettingsCard(props: Props): JSX.Element {
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Settings'}/>
-            <Divider/>
             <CardContent>
                 {renderSettings(settings, allSettings)}
             </CardContent>

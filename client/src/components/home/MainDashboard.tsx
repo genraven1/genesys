@@ -13,6 +13,7 @@ import QualityDialog from "../qualities/QualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
+import CareerDialog from "../career/CareerDialog";
 
 export default function MainDashboard(): JSX.Element {
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
@@ -21,6 +22,7 @@ export default function MainDashboard(): JSX.Element {
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
+    const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
@@ -53,9 +55,9 @@ export default function MainDashboard(): JSX.Element {
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent}
                                                dialogTitle={'Create Talent'}
                                                onClick={(): void => setOpenTalentCreationDialog(true)}/>
-                                <ExpansionList header={'Qualities'} viewTitle={'View All Qualities'} to={Path.Qualities}
-                                               dialogTitle={'Create Quality'}
-                                               onClick={(): void => setOpenQualityCreationDialog(true)}/>
+                                <ExpansionList header={'Careers'} viewTitle={'View All Careers'} to={Path.Career}
+                                               dialogTitle={'Create Career'}
+                                               onClick={(): void => setOpenCareerCreationDialog(true)}/>
                                 <ExpansionList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills}
                                                dialogTitle={'Create Skill'}
                                                onClick={(): void => setOpenSkillCreationDialog(true)}/>
@@ -74,6 +76,9 @@ export default function MainDashboard(): JSX.Element {
                                 <ExpansionList header={'Spells'} viewTitle={'View All Spells'} to={Path.Spell}
                                                dialogTitle={'Create Spell'}
                                                onClick={(): void => setOpenSpellCreationDialog(true)}/>
+                                <ExpansionList header={'Qualities'} viewTitle={'View All Qualities'} to={Path.Qualities}
+                                               dialogTitle={'Create Quality'}
+                                               onClick={(): void => setOpenQualityCreationDialog(true)}/>
                             </Grid>
                         </CardContent>
                     </Card>
@@ -92,6 +97,8 @@ export default function MainDashboard(): JSX.Element {
                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
+            {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}
+                                                         onClose={(): void => setOpenCareerCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
                                                             onClose={(): void => setOpenSkillCreationDialog(false)}/>}
             {openInjuryCreationDialog && <CreateInjuryDialog open={openInjuryCreationDialog}
