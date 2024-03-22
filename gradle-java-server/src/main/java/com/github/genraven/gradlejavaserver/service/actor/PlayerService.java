@@ -40,6 +40,7 @@ public class PlayerService {
             play.setPresence(player.getPresence());
             play.setWounds(player.getWounds());
             play.setStrain(player.getStrain());
+            play.setCareer(player.getCareer());
             play.setSkills(player.getSkills());
             play.setSettings(player.getSettings());
             play.setWeapons(player.getWeapons());

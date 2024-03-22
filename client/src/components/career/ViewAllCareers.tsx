@@ -14,10 +14,10 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
-import TalentDialog from "../talents/TalentDialog";
 import * as React from "react";
 import Career from "../../models/actor/player/Career";
 import CareerService from "../../services/CareerService";
+import CareerDialog from "./CareerDialog";
 
 interface Props {
     career: Career
@@ -53,7 +53,7 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllCareers() {
     const [careers, setCareers] = useState<Career[]>([])
-    const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
+    const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
     const headers = ['Name', 'Active', 'View']
 
@@ -83,7 +83,7 @@ export default function ViewAllCareers() {
                 style={{textAlign: 'center'}}
                 title={'View All Careers'}
                 action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenTalentCreationDialog(true)}>Create Career</Button>}>
+                                onClick={(): void => setOpenCareerCreationDialog(true)}>Create Career</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
@@ -97,8 +97,8 @@ export default function ViewAllCareers() {
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
-                                                       onClose={(): void => setOpenTalentCreationDialog(false)}/>}
+            {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}
+                                                       onClose={(): void => setOpenCareerCreationDialog(false)}/>}
         </Card>
     );
 }

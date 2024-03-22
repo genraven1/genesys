@@ -20,6 +20,8 @@ import * as React from "react";
 import SettingService from "../../../services/SettingService";
 import {EditDefenseCard} from "../DefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
+import CareerSelectCard from "./CareerSelectCard";
+import Career from "../../../models/actor/player/Career";
 
 interface Props {
     play: Player
@@ -49,6 +51,12 @@ export default function PlayerView(props: Props) {
                 copyPlayer.settings.splice(index, 1)
             }
         })
+        await updatePlayer(copyPlayer)
+    }
+
+    const onCareerChange = async (value: Career) => {
+        const copyPlayer = {...player} as Player
+        copyPlayer.career = value
         await updatePlayer(copyPlayer)
     }
 
@@ -115,6 +123,14 @@ export default function PlayerView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
+                        <Grid item xs>
+                            <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
+                                onCareerChange(value)
+                            }}/>
+                        </Grid>
+                    </Grid>
+                    <Divider/>
+                    <Grid container spacing={2}>
                         <EditCharacteristicCard characteristic={player?.brawn!!} type={CharacteristicType.Brawn}
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Brawn, value)
@@ -143,20 +159,22 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <Grid container spacing={2}>
                         <SoakCard soak={player?.soak!!}/>
-                        <EditStatsCard stats={player?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
-                            onChange(ActorKey.Wounds, value)
-                        }}/>
-                        <EditStatsCard stats={player?.strain!!} type={StatsType.Strain} onChange={(value: number): void => {
-                            onChange(ActorKey.Strain, value)
-                        }}/>
+                        <EditStatsCard stats={player?.wounds!!} type={StatsType.Wounds}
+                                       onChange={(value: number): void => {
+                                           onChange(ActorKey.Wounds, value)
+                                       }}/>
+                        <EditStatsCard stats={player?.strain!!} type={StatsType.Strain}
+                                       onChange={(value: number): void => {
+                                           onChange(ActorKey.Strain, value)
+                                       }}/>
                         <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Melee, value)
-                                     }}/>
+                                         onChange={(value: number): void => {
+                                             onChange(ActorKey.Melee, value)
+                                         }}/>
                         <EditDefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Ranged, value)
-                                     }}/>
+                                         onChange={(value: number): void => {
+                                             onChange(ActorKey.Ranged, value)
+                                         }}/>
                     </Grid>
                     <Divider/>
                     <PlayerEditSkillTable player={player}/>

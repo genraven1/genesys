@@ -34,6 +34,7 @@ public class Player extends Actor {
         this.setSettings(actor.getSettings());
     }
     private int strain = 0;
+    private Career career;
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();
 }
