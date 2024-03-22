@@ -14,6 +14,7 @@ import {ViewStatsCard} from "../StatsCard";
 import {ViewDefenseCard} from "../DefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 interface Props {
     player: Player
@@ -39,14 +40,18 @@ export default function PlayerView(props: Props) {
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
+                    <Grid container spacing={2}>
+                        <ViewFieldCard name={'Career'} value={player.career.name}/>
+                    </Grid>
+                    <Divider/>
                     <ViewCharacteristicRow actor={player}/>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={player?.soak!!}/>
-                        <ViewStatsCard stats={player?.wounds!!} type={StatsType.Wounds}/>
-                        <ViewStatsCard stats={player?.strain!!} type={StatsType.Strain}/>
-                        <ViewDefenseCard defense={player?.melee!!} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}/>
+                        <SoakCard soak={player.soak}/>
+                        <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
+                        <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
+                        <ViewDefenseCard defense={player.melee} type={DefenseType.Melee}/>
+                        <ViewDefenseCard defense={player.ranged} type={DefenseType.Ranged}/>
                     </Grid>
                     <Divider/>
                     <ViewPlayerSkillTable player={player}/>
