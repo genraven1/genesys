@@ -24,6 +24,8 @@ import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
 import Skill from "../../../models/actor/Skill";
+import ArchetypeSelectCard from "./ArchetypeSelectCard";
+import Archetype from "../../../models/actor/player/Archetype";
 
 interface Props {
     play: Player
@@ -64,6 +66,19 @@ export default function PlayerView(props: Props) {
                 playerSkill.ranks = skill.ranks
             }
         })
+        await updatePlayer(player)
+    }
+
+    const onArchetypeChange = async (archetype: Archetype) => {
+        player.archetype = archetype
+        player.brawn = archetype.brawn
+        player.agility = archetype.agility
+        player.intellect = archetype.intellect
+        player.cunning = archetype.cunning
+        player.willpower = archetype.willpower
+        player.presence = archetype.presence
+        player.wounds = archetype.wounds + archetype.brawn
+        player.strain = archetype.strain + archetype.willpower
         await updatePlayer(player)
     }
 
@@ -145,6 +160,9 @@ export default function PlayerView(props: Props) {
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
                         <Grid item xs>
+                            <ArchetypeSelectCard defaultValue={player.archetype} onCommit={(value: Archetype): void => {
+                                onArchetypeChange(value)
+                            }}/>
                             <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
                                 onCareerChange(value)
                             }}/>

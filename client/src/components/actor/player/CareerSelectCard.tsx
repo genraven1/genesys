@@ -1,11 +1,10 @@
 import {ChangeEvent, useEffect, useState} from "react";
 import {Card, CardContent, ClickAwayListener, Grid, MenuItem, TextField, Typography} from "@mui/material";
 import EditField from "../../common/EditField";
-import Setting from "../../../models/Setting";
-import SettingService from "../../../services/SettingService";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
+import {useFetchCurrentSetting} from "../../setting/SettingWorkflow";
 
 interface AllProps {
     defaultValue: Career
@@ -15,17 +14,7 @@ interface AllProps {
 export default function CareerSelectCard(props: AllProps): JSX.Element {
     const {defaultValue, onCommit} = props
     const [careers, setCareers] = useState<Career[]>([])
-    const [setting, setSetting] = useState<Setting>()
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
-        })()
-    }, [setSetting])
+    const current = useFetchCurrentSetting()
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -35,13 +24,13 @@ export default function CareerSelectCard(props: AllProps): JSX.Element {
             }
             let temp = [] as Career[]
             careerList.forEach((career, index) => {
-                if (career.settings.some(set => set.name === setting?.name!!)) {
+                if (career.settings.some(set => set.name === current.name)) {
                     temp.push(career)
                 }
             })
             setCareers(temp)
         })()
-    }, [setting])
+    }, [current])
 
     return (
         <Grid item xs>

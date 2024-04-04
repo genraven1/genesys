@@ -41,7 +41,8 @@ export default function PlayerView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <ViewFieldCard name={'Career'} value={player.career.name}/>
+                        <ViewFieldCard name={'Archetype'} value={player?.archetype?.name!}/>
+                        <ViewFieldCard name={'Career'} value={player?.career?.name!}/>
                     </Grid>
                     <Divider/>
                     <ViewCharacteristicRow actor={player}/>
