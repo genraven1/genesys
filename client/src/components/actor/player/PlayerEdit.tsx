@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import Player from '../../../models/actor/player/Player';
+import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {CharacteristicType} from '../../../models/character/Characteristic';
 import {StatsType} from '../../../models/actor/Stats';
@@ -22,6 +22,8 @@ import {EditDefenseCard} from "../DefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
+import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
+import Skill from "../../../models/actor/Skill";
 
 interface Props {
     play: Player
@@ -31,6 +33,8 @@ interface Props {
 export default function PlayerView(props: Props) {
     const {play, settings} = props
     const [player, setPlayer] = useState<Player>(play)
+    const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false)
+
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -54,10 +58,27 @@ export default function PlayerView(props: Props) {
         await updatePlayer(copyPlayer)
     }
 
+    const onSkillChange = async (skill: PlayerSkill) => {
+        player.skills.forEach((playerSkill) => {
+            if (skill.name === playerSkill.name) {
+                playerSkill.ranks = skill.ranks
+            }
+        })
+        await updatePlayer(player)
+    }
+
     const onCareerChange = async (value: Career) => {
-        const copyPlayer = {...player} as Player
-        copyPlayer.career = value
-        await updatePlayer(copyPlayer)
+        player.career = value
+        player.skills.forEach((playerSkill, index) => {
+            player.career.skills.forEach((skill: Skill) => {
+                if (skill.name === playerSkill.name) {
+                    playerSkill.career = true
+                    player.skills[index] = playerSkill
+                }
+            })
+        })
+        setOpenCareerSkillDialog(true)
+        await updatePlayer(player)
     }
 
     const onChange = async (key: keyof Player, value: number) => {
@@ -127,6 +148,9 @@ export default function PlayerView(props: Props) {
                             <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
                                 onCareerChange(value)
                             }}/>
+                            {openCareerSkillDialog && <CareerSkillSelectDialog open={openCareerSkillDialog}
+                                                                               onClose={(): void => setOpenCareerSkillDialog(false)}
+                                                                               player={player}/>}
                         </Grid>
                     </Grid>
                     <Divider/>
@@ -177,7 +201,7 @@ export default function PlayerView(props: Props) {
                                          }}/>
                     </Grid>
                     <Divider/>
-                    <PlayerEditSkillTable player={player}/>
+                    <PlayerEditSkillTable player={player} onSkillChange={onSkillChange}/>
                     <Divider/>
                     <PlayerEquipmentCard player={player}/>
                     <Divider/>

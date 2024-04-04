@@ -12,7 +12,6 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import * as React from "react";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
@@ -47,32 +46,22 @@ export default function EditSkillsCard(props: Props): JSX.Element {
         await CareerService.updateCareer(career.name, career)
     }
 
-    const renderTableBody = (settingSKills: Skill[]): JSX.Element => {
-        if (!skills) {
-            return <GenesysDescriptionTypography text={'None'}/>
-        } else {
-            return (
-                <TableBody>
-                    {settingSKills.map((skill: Skill) => (
-                        <TableRow key={skill.name}>
-                            <TypographyCenterTableCell value={skill.name}/>
-                            <CheckboxTableCell value={skills.some(sk => sk.name === skill.name)}
-                                               onAddition={() => onSkillAddition(skill)}
-                                               onRemoval={() => onSkillRemoval(skill)}/>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            )
-        }
-    }
-
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Career Skills'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        {renderTableBody(useFetchCurrentSettingSkills())}
+                        <TableBody>
+                            {useFetchCurrentSettingSkills().map((skill: Skill) => (
+                                <TableRow key={skill.name}>
+                                    <TypographyCenterTableCell value={skill.name}/>
+                                    <CheckboxTableCell value={skills.some(sk => sk.name === skill.name)}
+                                                       onAddition={() => onSkillAddition(skill)}
+                                                       onRemoval={() => onSkillRemoval(skill)}/>
+                                </TableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </TableContainer>
             </CardContent>

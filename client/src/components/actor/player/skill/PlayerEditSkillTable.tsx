@@ -4,51 +4,46 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import {Box, Button} from "@mui/material";
+import {Box} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 import {SkillType} from "../../../../models/actor/Skill";
-import PlayerEditSkillDialog from "./PlayerEditSkillDialog";
 import {GenesysDicePoolCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
-import {renderSingleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
+import {renderBooleanTableCell, renderSingleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
+import PlayerSkillRankTableCell from "../../../common/table/PlayerSkillRankTableCell";
 
 interface RowProps {
     skill: PlayerSkill
     player: Player
+    onSkillChange: (skill: PlayerSkill) => void
 }
 
 function SkillRow(props: RowProps): JSX.Element {
-    const {skill, player} = props
-    const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
+    const {skill, player, onSkillChange} = props
 
     return (
-        <Fragment>
-            <TableRow>
-                {renderSkillName(skill)}
-                <TypographyLeftTableCell value={String(skill?.ranks!!)}/>
-                <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
-                <TableCell>
-                    <Button onClick={(): void => setOpenEditSkillDialog(true)}>Edit</Button>
-                </TableCell>
-            </TableRow>
-            {openEditSkillDialog &&
-                <PlayerEditSkillDialog open={openEditSkillDialog} onClose={(): void => setOpenEditSkillDialog(false)}
-                                       playerSkill={skill} player={player}/>}
-        </Fragment>
+        <TableRow key={skill.name}>
+            {renderSkillName(skill)}
+            {renderBooleanTableCell(skill.career)}
+            <TypographyLeftTableCell value={String(skill.ranks)}/>
+            <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
+            <PlayerSkillRankTableCell skill={skill} onSkillChange={onSkillChange}/>
+        </TableRow>
     )
 }
 
 interface GroupProps {
     player: Player
     type: SkillType
+    onSkillChange: (skill: PlayerSkill) => void
 }
 
 export function SkillTypeGroup(props: GroupProps) {
-    const {player, type} = props
+    const {player, type, onSkillChange} = props
     const [open, setOpen] = useState(false)
-    const headers = ['Name', 'Ranks', 'Dice Pool', 'View']
+    const headers = ['Name', 'Career', 'Ranks', 'Dice Pool', 'View']
 
     return (
         <Fragment>
@@ -62,8 +57,9 @@ export function SkillTypeGroup(props: GroupProps) {
                             <Table>
                                 {renderSingleRowTableHeader(headers)}
                                 <TableBody>
-                                    {(player?.skills!! || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
-                                        <SkillRow key={skill.name} skill={skill} player={player}/>
+                                    {(player.skills).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
+                                        <SkillRow key={skill.name} skill={skill} player={player}
+                                                  onSkillChange={onSkillChange}/>
                                     ))}
                                 </TableBody>
                             </Table>
@@ -77,10 +73,11 @@ export function SkillTypeGroup(props: GroupProps) {
 
 interface TableProps {
     player: Player
+    onSkillChange: (skill: PlayerSkill) => void
 }
 
 export default function PlayerEditSkillTable(props: TableProps) {
-    const {player} = props
+    const {player, onSkillChange} = props
     const headers = ['Skills']
 
     return (
@@ -88,11 +85,11 @@ export default function PlayerEditSkillTable(props: TableProps) {
             <Table>
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    <SkillTypeGroup player={player!!} type={SkillType.General}/>
-                    <SkillTypeGroup player={player!!} type={SkillType.Magic}/>
-                    <SkillTypeGroup player={player!!} type={SkillType.Combat}/>
-                    <SkillTypeGroup player={player!!} type={SkillType.Social}/>
-                    <SkillTypeGroup player={player!!} type={SkillType.Knowledge}/>
+                    <SkillTypeGroup player={player} type={SkillType.General} onSkillChange={onSkillChange}/>
+                    <SkillTypeGroup player={player} type={SkillType.Magic} onSkillChange={onSkillChange}/>
+                    <SkillTypeGroup player={player} type={SkillType.Combat} onSkillChange={onSkillChange}/>
+                    <SkillTypeGroup player={player} type={SkillType.Social} onSkillChange={onSkillChange}/>
+                    <SkillTypeGroup player={player} type={SkillType.Knowledge} onSkillChange={onSkillChange}/>
                 </TableBody>
             </Table>
         </TableContainer>

@@ -3,6 +3,10 @@ import {TypographyCenterTableCell, TypographyLeftTableCell} from "./TypographyTa
 import * as React from "react";
 import Skill from "../../../models/actor/Skill";
 import TableHead from "@mui/material/TableHead";
+import TableCell from "@mui/material/TableCell";
+import Typography from "@mui/material/Typography";
+import CheckIcon from "@mui/icons-material/Check";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export const renderHeaders = (headers: string[]): JSX.Element => {
     return (
@@ -35,4 +39,13 @@ export const renderDoubleRowTableHeader = (headers: string[], value: string, col
 
 export const renderSkillName = (skill: Skill): JSX.Element => {
     return <TypographyLeftTableCell value={skill.name + '(' + skill.characteristic + ')'}/>
+}
+
+export const renderBooleanTableCell = (value: boolean): JSX.Element => {
+    return (
+        <TableCell>
+            <Typography style={{textAlign: 'center'}}>{value ? <CheckIcon color='primary' fontSize='small'/> :
+                <CancelIcon color='primary' fontSize='small'/>}</Typography>
+        </TableCell>
+    )
 }
