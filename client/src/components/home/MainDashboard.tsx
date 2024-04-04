@@ -14,6 +14,7 @@ import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
 import CareerDialog from "../career/CareerDialog";
+import ArchetypeDialog from "../archetype/ArchetypeDialog";
 
 export default function MainDashboard(): JSX.Element {
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
@@ -23,6 +24,7 @@ export default function MainDashboard(): JSX.Element {
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
+    const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
@@ -58,6 +60,9 @@ export default function MainDashboard(): JSX.Element {
                                 <ExpansionList header={'Careers'} viewTitle={'View All Careers'} to={Path.Career}
                                                dialogTitle={'Create Career'}
                                                onClick={(): void => setOpenCareerCreationDialog(true)}/>
+                                <ExpansionList header={'Archetypes'} viewTitle={'View All Archetypes'} to={Path.Archetype}
+                                               dialogTitle={'Create Archetype'}
+                                               onClick={(): void => setOpenArchetypeCreationDialog(true)}/>
                                 <ExpansionList header={'Skills'} viewTitle={'View All Skills'} to={Path.Skills}
                                                dialogTitle={'Create Skill'}
                                                onClick={(): void => setOpenSkillCreationDialog(true)}/>
@@ -99,6 +104,8 @@ export default function MainDashboard(): JSX.Element {
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}
                                                          onClose={(): void => setOpenCareerCreationDialog(false)}/>}
+            {openArchetypeCreationDialog && <ArchetypeDialog open={openArchetypeCreationDialog}
+                                                       onClose={(): void => setOpenArchetypeCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}
                                                             onClose={(): void => setOpenSkillCreationDialog(false)}/>}
             {openInjuryCreationDialog && <CreateInjuryDialog open={openInjuryCreationDialog}
