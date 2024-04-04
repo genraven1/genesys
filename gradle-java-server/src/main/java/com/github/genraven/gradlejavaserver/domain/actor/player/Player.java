@@ -4,10 +4,8 @@ import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 
 import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
-import com.github.genraven.gradlejavaserver.domain.actor.ActorWeapon;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -35,6 +33,7 @@ public class Player extends Actor {
     }
     private int strain = 0;
     private Career career;
+    private Archetype archetype;
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();
 }

@@ -41,6 +41,7 @@ public class PlayerService {
             play.setWounds(player.getWounds());
             play.setStrain(player.getStrain());
             play.setCareer(player.getCareer());
+            play.setArchetype(player.getArchetype());
             play.setSkills(player.getSkills());
             play.setSettings(player.getSettings());
             play.setWeapons(player.getWeapons());
