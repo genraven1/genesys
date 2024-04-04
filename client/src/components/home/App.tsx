@@ -24,6 +24,7 @@ import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SceneWorkflow from "../scene/SceneWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
+import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 
 export default function App() {
 
@@ -66,6 +67,10 @@ export default function App() {
                     <Route path={Path.Career} element={<CareerWorkflow/>}/>
                     <Route path={Path.Career + ':name/edit'} element={<CareerWorkflow/>}/>
                     <Route path={Path.Career + ':name/view'} element={<CareerWorkflow/>}/>
+
+                    <Route path={Path.Archetype} element={<ArchetypeWorkflow/>}/>
+                    <Route path={Path.Archetype + ':name/edit'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={Path.Archetype + ':name/view'} element={<ArchetypeWorkflow/>}/>
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
