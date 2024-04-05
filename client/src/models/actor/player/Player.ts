@@ -6,6 +6,7 @@ import Archetype from "./Archetype";
 
 export default interface Player extends Actor {
     strain: number
+    encumbrance: number
     career: Career
     archetype: Archetype
     talents: ActorTalent[]

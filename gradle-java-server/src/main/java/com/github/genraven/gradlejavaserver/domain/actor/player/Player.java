@@ -31,7 +31,8 @@ public class Player extends Actor {
         this.setWeapons(actor.getWeapons());
         this.setSettings(actor.getSettings());
     }
-    private int strain = 0;
+    private int strain = 1;
+    private int encumbrance = 5 + getBrawn();
     private Career career;
     private Archetype archetype;
     private List<PlayerSkill> skills = new ArrayList<>();
