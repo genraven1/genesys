@@ -6,12 +6,14 @@ export default interface Modifier {
 }
 
 export enum Type {
+    IncreaseEncumbranceCapacity = 'IncreaseEncumbranceCapacity',
+    IncreaseBaseEncumbranceCapacity = 'IncreaseBaseEncumbranceCapacity',
     IncreaseWoundThreshold = 'Increase Wound Threshold',
     SufferWounds = 'Suffer Wounds',
     SufferWoundsByTalent = 'Suffer Wounds By Talent',
     IncreaseCriticalInjury = 'Increase Critical Injury',
     DecreaseCriticalInjury = 'Decrease Critical Injury',
-    ResetCriticalInjury = 'Reset Critical Injury',
+    ResetCriticalInjury = 'Reset Critical Injury'
 }
 
 export const getModifierOptions = (): Option[] => {

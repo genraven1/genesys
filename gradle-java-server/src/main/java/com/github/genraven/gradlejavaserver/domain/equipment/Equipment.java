@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.equipment;
 
+import com.github.genraven.gradlejavaserver.domain.Modifier;
 import com.github.genraven.gradlejavaserver.domain.Setting;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -23,6 +24,7 @@ public class Equipment {
     private boolean restricted = false;
     private int encumbrance = 0;
     private int rarity = 0;
+    private List<Modifier> modifiers = new ArrayList<>();
     private List<EquipmentQuality> qualities = new ArrayList<>();
     private List<Setting> settings = new ArrayList<>();
 }

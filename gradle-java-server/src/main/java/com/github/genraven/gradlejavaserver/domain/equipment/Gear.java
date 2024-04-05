@@ -20,12 +20,12 @@ public class Gear extends Equipment {
         this.setRestricted(equipment.isRestricted());
         this.setEncumbrance(equipment.getEncumbrance());
         this.setRarity(equipment.getRarity());
+        this.setModifiers(equipment.getModifiers());
         this.setQualities(equipment.getQualities());
         this.setSettings(equipment.getSettings());
     }
 
     private Skill skill;
-    private boolean modifier = false;
     private int amount;
     private RangeBand range = RangeBand.ENGAGED;
 }

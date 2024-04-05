@@ -36,6 +36,7 @@ public class TalentService {
             tal.setTier(talent.getTier());
             tal.setDescription(talent.getDescription());
             tal.setSummary(talent.getSummary());
+            tal.setModifiers(talent.getModifiers());
             tal.setSettings(talent.getSettings());
             return tal;
         }).flatMap(talentRepository::save);
