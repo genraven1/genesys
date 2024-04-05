@@ -40,6 +40,7 @@ public class PlayerService {
             play.setPresence(player.getPresence());
             play.setWounds(player.getWounds());
             play.setStrain(player.getStrain());
+            play.setEncumbrance(player.getEncumbrance());
             play.setCareer(player.getCareer());
             play.setArchetype(player.getArchetype());
             play.setSkills(player.getSkills());

@@ -2,14 +2,12 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
-import {CharacteristicType} from '../../../models/character/Characteristic';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
-import {EditCharacteristicCard} from '../CharacteristicCard';
-import {EditStatsCard} from "../StatsCard";
+import {ViewStatsCard} from "../StatsCard";
 import SoakCard from "../SoakCard";
 import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
@@ -26,6 +24,8 @@ import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
 import Skill from "../../../models/actor/Skill";
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
+import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 interface Props {
     play: Player
@@ -36,7 +36,6 @@ export default function PlayerView(props: Props) {
     const {play, settings} = props
     const [player, setPlayer] = useState<Player>(play)
     const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false)
-
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -102,36 +101,12 @@ export default function PlayerView(props: Props) {
         }
         const copyPlayer = {...player} as Player
         switch (key) {
-            case 'brawn':
-                copyPlayer.brawn = value
-                break;
-            case 'agility':
-                copyPlayer.agility = value
-                break;
-            case 'intellect':
-                copyPlayer.intellect = value
-                break;
-            case 'cunning':
-                copyPlayer.cunning = value
-                break;
-            case 'willpower':
-                copyPlayer.willpower = value
-                break;
-            case 'presence':
-                copyPlayer.presence = value
-                break;
             case 'melee':
                 copyPlayer.melee = value
                 break;
             case 'ranged':
                 copyPlayer.ranged = value
                 break;
-            case 'wounds':
-                copyPlayer.wounds = value
-                break
-            case 'strain':
-                copyPlayer.strain = value
-                break
             default:
                 break
         }
@@ -141,6 +116,7 @@ export default function PlayerView(props: Props) {
 
     const updatePlayer = async (copyPlayer: Player) => {
         copyPlayer.soak = copyPlayer.brawn
+        copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
         await ActorService.updatePlayer(copyPlayer.name, copyPlayer)
     }
@@ -159,56 +135,26 @@ export default function PlayerView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <ArchetypeSelectCard defaultValue={player.archetype} onCommit={(value: Archetype): void => {
-                                onArchetypeChange(value)
-                            }}/>
-                            <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
-                                onCareerChange(value)
-                            }}/>
-                            {openCareerSkillDialog && <CareerSkillSelectDialog open={openCareerSkillDialog}
-                                                                               onClose={(): void => setOpenCareerSkillDialog(false)}
-                                                                               player={player}/>}
-                        </Grid>
+                        <ArchetypeSelectCard defaultValue={player.archetype} onCommit={(value: Archetype): void => {
+                            onArchetypeChange(value)
+                        }}/>
+                        <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
+                            onCareerChange(value)
+                        }}/>
+                        <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
+                        {openCareerSkillDialog && <CareerSkillSelectDialog open={openCareerSkillDialog}
+                                                                           onClose={(): void => setOpenCareerSkillDialog(false)}
+                                                                           player={player}/>}
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <EditCharacteristicCard characteristic={player?.brawn!!} type={CharacteristicType.Brawn}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Brawn, value)
-                                                }}/>
-                        <EditCharacteristicCard characteristic={player?.agility!!} type={CharacteristicType.Agility}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Agility, value)
-                                                }}/>
-                        <EditCharacteristicCard characteristic={player?.intellect!!} type={CharacteristicType.Intellect}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Intellect, value)
-                                                }}/>
-                        <EditCharacteristicCard characteristic={player?.cunning!!} type={CharacteristicType.Cunning}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Cunning, value)
-                                                }}/>
-                        <EditCharacteristicCard characteristic={player?.willpower!!} type={CharacteristicType.Willpower}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Willpower, value)
-                                                }}/>
-                        <EditCharacteristicCard characteristic={player?.presence!!} type={CharacteristicType.Presence}
-                                                onChange={(value: number): void => {
-                                                    onChange(ActorKey.Presence, value)
-                                                }}/>
+                        <ViewCharacteristicRow actor={player}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={player?.soak!!}/>
-                        <EditStatsCard stats={player?.wounds!!} type={StatsType.Wounds}
-                                       onChange={(value: number): void => {
-                                           onChange(ActorKey.Wounds, value)
-                                       }}/>
-                        <EditStatsCard stats={player?.strain!!} type={StatsType.Strain}
-                                       onChange={(value: number): void => {
-                                           onChange(ActorKey.Strain, value)
-                                       }}/>
+                        <SoakCard soak={player.soak}/>
+                        <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
+                        <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
                         <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}
                                          onChange={(value: number): void => {
                                              onChange(ActorKey.Melee, value)

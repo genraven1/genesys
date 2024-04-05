@@ -43,6 +43,7 @@ export default function PlayerView(props: Props) {
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Archetype'} value={player?.archetype?.name!}/>
                         <ViewFieldCard name={'Career'} value={player?.career?.name!}/>
+                        <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>
                     <ViewCharacteristicRow actor={player}/>
