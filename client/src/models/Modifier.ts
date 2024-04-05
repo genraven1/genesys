@@ -1,13 +1,13 @@
 import {Option} from '../components/common/InputSelectField';
 
 export default interface Modifier {
-    modifier: Type
+    type: Type
     ranks: number
 }
 
 export enum Type {
-    IncreaseEncumbranceCapacity = 'IncreaseEncumbranceCapacity',
-    IncreaseBaseEncumbranceCapacity = 'IncreaseBaseEncumbranceCapacity',
+    IncreaseEncumbranceCapacity = 'Increase Encumbrance Capacity',
+    IncreaseBaseEncumbranceCapacity = 'Increase Base Encumbrance Capacity',
     IncreaseWoundThreshold = 'Increase Wound Threshold',
     SufferWounds = 'Suffer Wounds',
     SufferWoundsByTalent = 'Suffer Wounds By Talent',

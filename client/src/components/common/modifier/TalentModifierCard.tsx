@@ -12,7 +12,7 @@ import {TypographyCenterTableCell} from "../table/TypographyTableCell";
 import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useState} from "react";
 import * as React from "react";
-import AddModifierDialog from "./AddModifierDialog";
+import AddTalentModifierDialog from "./AddTalentModifierDialog";
 import Talent from "../../../models/Talent";
 
 interface Props {
@@ -32,8 +32,8 @@ export default function TalentModifierCard(props: Props) {
                     <TableRow>
                         <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
                             Modifier</Button>
-                        {openDialog && <AddModifierDialog open={openDialog}
-                                                          onClose={(): void => setOpenDialog(false)} talent={talent}/>}
+                        {openDialog && <AddTalentModifierDialog open={openDialog}
+                                                                onClose={(): void => setOpenDialog(false)} talent={talent}/>}
                     </TableRow>
                 </TableFooter>
             )
@@ -74,8 +74,8 @@ function ModifierRow(props: RowProps) {
     const {modifier} = props
 
     return (
-        <TableRow key={modifier.modifier}>
-            <TypographyCenterTableCell value={modifier.modifier}/>
+        <TableRow key={modifier.type}>
+            <TypographyCenterTableCell value={modifier.type}/>
             <TypographyCenterTableCell value={String(modifier.ranks)}/>
         </TableRow>
     )

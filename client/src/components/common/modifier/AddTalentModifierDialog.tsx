@@ -12,13 +12,13 @@ interface Props {
     onClose: () => void
 }
 
-export default function AddModifierDialog(props: Props) {
+export default function AddTalentModifierDialog(props: Props) {
     const {talent, open, onClose} = props
     const [modifier, setModifier] = useState<Modifier>()
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
-            if (!talent.modifiers.some(mod => mod.modifier === modifier.modifier)) {
+            if (!talent.modifiers.some(mod => mod.type === modifier.type)) {
                 talent.modifiers.push(modifier)
                 await TalentService.updateTalent(talent.name, talent)
             }
@@ -32,8 +32,8 @@ export default function AddModifierDialog(props: Props) {
         }
         const copyModifier = {...modifier} as Modifier
         switch (key) {
-            case "modifier":
-                copyModifier.modifier = value as Type
+            case "type":
+                copyModifier.type = value as Type
                 break;
             case "ranks":
                 copyModifier.ranks = Number(value)
@@ -48,8 +48,8 @@ export default function AddModifierDialog(props: Props) {
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={'Add Modifier'}/>
             <DialogContent>
-                <InputSelectFieldCard defaultValue={modifier?.modifier!} onCommit={(value: string): void => {
-                    onChange('modifier', value)
+                <InputSelectFieldCard defaultValue={modifier?.type!} onCommit={(value: string): void => {
+                    onChange('type', value)
                 }} title={'Modifier Type'} options={getModifierOptions()}/>
                 <NumberRangeSelectCard defaultValue={modifier?.ranks!} title={'Modifier Ranks'} onChange={(value: number): void => {
                     onChange('ranks', String(value))
