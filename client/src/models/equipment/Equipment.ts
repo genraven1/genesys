@@ -1,5 +1,6 @@
 import {EquipmentQuality} from "../Quality";
 import Setting from "../Setting";
+import Modifier from "../Modifier";
 
 export default interface Equipment {
     name: string
@@ -8,6 +9,7 @@ export default interface Equipment {
     restricted: boolean
     encumbrance: number
     rarity: number
+    modifiers: Modifier[]
     qualities: EquipmentQuality[]
     settings: Setting[]
 }
@@ -29,15 +31,4 @@ export enum EquipmentType {
     Armor='Armor',
     Weapon='Weapon',
     Gear='Gear'
-}
-
-export enum ModifierType {
-    Success = 'Success',
-    Advantage = 'Advantage',
-    Triumph = 'Triumph',
-    Failure = 'Failure',
-    Threat = 'Threat',
-    Despair = 'Despair',
-    Boost = 'Boost',
-    Setback = 'Setback'
 }
