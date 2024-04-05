@@ -1,8 +1,8 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
-import * as React from "react";
 import Archetype from "../../models/actor/player/Archetype";
 import SettingService from "../../services/SettingService";
 import ArchetypeService from "../../services/ArchetypeService";
@@ -12,6 +12,8 @@ import {CharacteristicType} from "../../models/character/Characteristic";
 import {ActorKey} from "../../models/actor/Actor";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
+import {EditStatsCard} from "../actor/StatsCard";
+import {StatsType} from "../../models/actor/Stats";
 
 interface Props {
     arch: Archetype
@@ -108,7 +110,8 @@ export default function ArchetypeEdit(props: Props) {
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Agility, value)
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.intellect!!} type={CharacteristicType.Intellect}
+                        <EditCharacteristicCard characteristic={archetype?.intellect!!}
+                                                type={CharacteristicType.Intellect}
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Intellect, value)
                                                 }}/>
@@ -116,14 +119,26 @@ export default function ArchetypeEdit(props: Props) {
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Cunning, value)
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.willpower!!} type={CharacteristicType.Willpower}
+                        <EditCharacteristicCard characteristic={archetype?.willpower!!}
+                                                type={CharacteristicType.Willpower}
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Willpower, value)
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.presence!!} type={CharacteristicType.Presence}
+                        <EditCharacteristicCard characteristic={archetype?.presence!!}
+                                                type={CharacteristicType.Presence}
                                                 onChange={(value: number): void => {
                                                     onChange(ActorKey.Presence, value)
                                                 }}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <EditStatsCard stats={archetype.wounds} type={StatsType.Wounds}
+                                       onChange={(value: number): void => {
+                                           onChange(ActorKey.Wounds, value)
+                                       }}/>
+                        <EditStatsCard stats={archetype.strain} type={StatsType.Strain}
+                                       onChange={(value: number): void => {
+                                           onChange(ActorKey.Strain, value)
+                                       }}/>
                     </Grid>
                 </Grid>
                 <EditSettingsCard settings={archetype.settings} onSettingAddition={onSettingAddition}
