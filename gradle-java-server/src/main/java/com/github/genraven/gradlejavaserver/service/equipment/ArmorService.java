@@ -41,6 +41,7 @@ public class ArmorService {
             arm.setSoak(armor.getSoak());
             arm.setDefense(armor.getDefense());
             arm.setSettings(armor.getSettings());
+            arm.setModifiers(armor.getModifiers());
             return arm;
         }).flatMap(armorRepository::save);
     }

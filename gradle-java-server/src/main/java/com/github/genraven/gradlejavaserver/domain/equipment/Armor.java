@@ -18,6 +18,7 @@ public class Armor extends Equipment {
         this.setRestricted(equipment.isRestricted());
         this.setEncumbrance(equipment.getEncumbrance());
         this.setRarity(equipment.getRarity());
+        this.setModifiers(equipment.getModifiers());
         this.setQualities(equipment.getQualities());
         this.setSettings(equipment.getSettings());
     }

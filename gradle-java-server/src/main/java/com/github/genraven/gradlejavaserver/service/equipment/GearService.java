@@ -39,9 +39,9 @@ public class GearService {
             ge.setRestricted(gear.isRestricted());
             ge.setRange(gear.getRange());
             ge.setAmount(gear.getAmount());
-            ge.setModifier(gear.isModifier());
             ge.setDescription(gear.getDescription());
             ge.setSettings(gear.getSettings());
+            ge.setModifiers(gear.getModifiers());
             return ge;
         }).flatMap(gearRepository::save);
     }

@@ -13,6 +13,8 @@ public class Modifier {
     @AllArgsConstructor
     @Getter
     public enum Type {
+        INCREASE_ENCUMBRANCE_CAPACITY("Increase Encumbrance Capacity"),
+        INCREASE_BASE_ENCUMBRANCE_CAPACITY("Increase Base Encumbrance Capacity"),
         INCREASE_WOUND_THRESHOLD("Increase Wound Threshold"),
         SUFFER_WOUNDS("Suffer Wounds"),
         SUFFER_WOUNDS_BY_TALENT("Suffer Wounds By Talent"),
