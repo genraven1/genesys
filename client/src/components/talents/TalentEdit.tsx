@@ -8,18 +8,18 @@ import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {Path} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
-import Setting from "../../models/Setting";
 import CheckButtonCard from "../common/CheckButtonCard";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
 import SettingService from "../../services/SettingService";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
+import TalentModifierCard from "../common/modifier/TalentModifierCard";
 
 interface Props {
     tal: Talent
-    settings: Setting[]
 }
 
 export default function TalentEdit(props: Props) {
-    const {tal, settings} = props
+    const {tal} = props
     const [talent, setTalent] = useState<Talent>(tal)
     let navigate = useNavigate()
 
@@ -111,8 +111,9 @@ export default function TalentEdit(props: Props) {
                             onChange('tier', value)
                         }} title={'Tier'} options={getTierOptions()}/>
                     </Grid>
-                    <EditSettingsCard settings={talent?.settings!!} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
+                    <TalentModifierCard talent={talent}/>
+                    <EditSettingsCard settings={talent.settings} onSettingAddition={onSettingAddition}
+                                      onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>

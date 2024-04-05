@@ -5,17 +5,17 @@ import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
-import Setting from "../../models/Setting";
 import {Fragment} from "react";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
+import TalentModifierCard from "../common/modifier/TalentModifierCard";
+import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 interface Props {
     talent: Talent
-    allSettings: Setting[]
 }
 
 export default function TalentView(props: Props) {
-    const {talent, allSettings} = props
+    const {talent} = props
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -56,7 +56,8 @@ export default function TalentView(props: Props) {
                         <ViewFieldCard name={'Tier'} value={talent?.tier!!}/>
                     </Grid>
                 </Grid>
-                <ViewSettingsCard settings={talent?.settings!!} allSettings={allSettings}/>
+                <TalentModifierCard talent={talent}/>
+                <ViewSettingsCard settings={talent.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )
