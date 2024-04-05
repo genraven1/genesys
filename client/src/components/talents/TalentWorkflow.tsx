@@ -5,7 +5,6 @@ import {useLocation, useParams} from "react-router-dom";
 import TalentView from "./TalentView";
 import TalentEdit from "./TalentEdit";
 import ViewAllTalents from "./ViewAllTalents";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 
 
 function useFetchTalent(name: string): Talent {
@@ -32,14 +31,13 @@ function useFetchTalent(name: string): Talent {
 export default function TalentWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const talent = useFetchTalent(name!!)
-    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return talent && <TalentView talent={talent!} allSettings={settings}/>
+            return talent && <TalentView talent={talent}/>
         } else if (pathname.endsWith('/edit')) {
-            return talent && <TalentEdit tal={talent!} settings={settings}/>
+            return talent && <TalentEdit tal={talent}/>
         } else {
             return <ViewAllTalents/>
         }
