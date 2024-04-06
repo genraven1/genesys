@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../table/TableRenders";
 import {useLocation} from "react-router-dom";
-import Modifier from "../../../models/Modifier";
+import Modifier from "../../../models/common/Modifier";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../table/TypographyTableCell";

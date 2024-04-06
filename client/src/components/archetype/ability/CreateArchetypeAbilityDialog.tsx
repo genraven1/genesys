@@ -8,6 +8,9 @@ import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 import ArchetypeService from "../../../services/ArchetypeService";
+import Cost, {CostType, DefaultCost, getCostOptions} from "../../../models/common/Cost";
+import Limit, {DefaultLimit, getLimitOptions, LimitType} from "../../../models/common/Limit";
+import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 
 interface Props {
     archetype: Archetype
@@ -22,11 +25,53 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
     const onCreate = async (): Promise<void> => {
         if (ability) {
             if (!archetype.abilities.some(archetypeAbility => archetypeAbility.name === ability.name)) {
+                if (!ability.cost) {
+                    ability.cost = DefaultCost.create()
+                }
+                if (!ability.limit) {
+                    ability.limit = DefaultLimit.create()
+                }
                 archetype.abilities.push(ability)
                 await ArchetypeService.updateArchetype(archetype.name, archetype)
             }
         }
         onClose()
+    }
+
+    const onCostChange = async (key: keyof Cost, value: string) => {
+        if (value === null) {
+            return
+        }
+        const copyAbility = {...ability} as Ability
+        switch (key) {
+            case "type":
+                copyAbility.cost.type = value as CostType
+                break;
+            case "amount":
+                copyAbility.cost.amount = Number(value)
+                break;
+            default:
+                break
+        }
+        setAbility(copyAbility)
+    }
+
+    const onLimitChange = async (key: keyof Limit, value: string) => {
+        if (value === null) {
+            return
+        }
+        const copyAbility = {...ability} as Ability
+        switch (key) {
+            case "type":
+                copyAbility.limit.type = value as LimitType
+                break;
+            case "limit":
+                copyAbility.limit.limit = Number(value)
+                break;
+            default:
+                break
+        }
+        setAbility(copyAbility)
     }
 
     const onChange = async (key: keyof Ability, value: string) => {
@@ -69,6 +114,22 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
                     <InputSelectFieldCard defaultValue={ability?.activation!!} onCommit={(value: string): void => {
                         onChange('activation', value)
                     }} title={'Activation'} options={getActivationOptions()}/>
+                </Grid>
+                <Grid container spacing={10}>
+                    <InputSelectFieldCard defaultValue={ability?.cost?.type!} onCommit={(value: string): void => {
+                        onCostChange('type', value)
+                    }} title={'Cost Type'} options={getCostOptions()}/>
+                    <NumberRangeSelectCard defaultValue={ability?.cost?.amount!} title={'Amount'} onChange={(value: number): void => {
+                        onCostChange('amount', String(value))
+                    }} min={1} max={6}/>
+                </Grid>
+                <Grid container spacing={10}>
+                    <InputSelectFieldCard defaultValue={ability?.limit?.type!} onCommit={(value: string): void => {
+                        onLimitChange('type', value)
+                    }} title={'Limit Type'} options={getLimitOptions()}/>
+                    <NumberRangeSelectCard defaultValue={ability?.limit?.limit!} title={'Limit'} onChange={(value: number): void => {
+                        onLimitChange('limit', String(value))
+                    }} min={1} max={6}/>
                 </Grid>
             </DialogContent>
             <GenesysDialogActions handleCreate={onCreate} onClose={onClose}/>

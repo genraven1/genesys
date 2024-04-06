@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.github.genraven.gradlejavaserver.domain.modifier.Modifier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
