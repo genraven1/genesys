@@ -6,7 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import {AllSkillsSelectCard} from "../../common/SkillSelectCard";
+import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import Skill from "../../../models/actor/Skill";
 import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
@@ -16,6 +16,7 @@ import {Gear} from "../../../models/equipment/Gear";
 import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import SettingService from "../../../services/SettingService";
+import {useFetchCurrentSettingSkills} from "../../skills/SkillWorkflow";
 
 interface Props {
     gea: Gear
@@ -106,7 +107,7 @@ export default function GearEdit(props: Props) {
                     </Grid>
                     <Divider />
                     <Grid container spacing={10}>
-                        <AllSkillsSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} />
+                        <SkillSelectCard defaultValue={gear?.skill!!} onCommit={(value: Skill): void => {onSkillChange(value)}} skills={useFetchCurrentSettingSkills()} title={'Required Skill'} />
                         <InputSelectFieldCard defaultValue={gear?.range!!} onCommit={(value: string): void => { onChange('range', value) }} title={'Range'} options={getRangeOptions()} />
                     </Grid>
                     <Divider />

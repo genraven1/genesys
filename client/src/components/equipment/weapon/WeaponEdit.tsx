@@ -7,11 +7,11 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import {SkillSelectCard} from "../../common/SkillSelectCard";
+import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import Skill, {SkillType} from "../../../models/actor/Skill";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 import CheckButtonCard from "../../common/CheckButtonCard";
-import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
+import {getRangeOptions, RangeBand} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
@@ -19,6 +19,7 @@ import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import SettingService from "../../../services/SettingService";
+import {useFetchCurrentSettingSkillsByType} from "../../skills/SkillWorkflow";
 
 
 interface Props {
@@ -125,7 +126,7 @@ export default function WeaponEdit(props: Props) {
                     <Grid container spacing={10}>
                         <SkillSelectCard defaultValue={weapon.skill} onCommit={(value: Skill): void => {
                             onSkillChange(value)
-                        }} type={SkillType.Combat}/>
+                        }} skills={useFetchCurrentSettingSkillsByType(SkillType.Combat)} title={'Required Skill'}/>
                         <NumberRangeSelectCard title={'Damage'} defaultValue={weapon.damage}
                                                onChange={(value: number): void => {
                                                    onChange('damage', String(value))

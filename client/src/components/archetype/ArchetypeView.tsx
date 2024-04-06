@@ -10,6 +10,7 @@ import {ViewCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {ViewStatsCard} from "../actor/StatsCard";
 import {StatsType} from "../../models/actor/Stats";
+import {ViewFieldCard} from "../common/ViewFieldCard";
 
 interface Props {
     archetype: Archetype
@@ -34,6 +35,9 @@ export default function ArchetypeView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
+                        <ViewFieldCard name={'Description'} value={archetype.description}/>
+                    </Grid>
+                    <Grid container spacing={2}>
                         <ViewCharacteristicCard characteristic={archetype.brawn} type={CharacteristicType.Brawn} />
                         <ViewCharacteristicCard characteristic={archetype.agility} type={CharacteristicType.Agility}/>
                         <ViewCharacteristicCard characteristic={archetype.intellect} type={CharacteristicType.Intellect}/>
@@ -44,6 +48,12 @@ export default function ArchetypeView(props: Props) {
                     <Grid container spacing={2}>
                         <ViewStatsCard stats={archetype.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={archetype.strain} type={StatsType.Strain}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <ViewFieldCard name={'Starting Skill'} value={String(archetype?.skill?.name!)}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+
                     </Grid>
                 </Grid>
                 <ViewSettingsCard settings={archetype.settings} allSettings={useFetchAllSettings()}/>

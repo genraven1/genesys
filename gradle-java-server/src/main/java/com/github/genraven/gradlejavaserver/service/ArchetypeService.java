@@ -39,6 +39,7 @@ public class ArchetypeService {
             arch.setPresence(archetype.getPresence());
             arch.setWounds(archetype.getWounds());
             arch.setStrain(archetype.getStrain());
+            arch.setSkill(archetype.getSkill());
             arch.setSettings(archetype.getSettings());
             return arch;
         }).flatMap(archetypeRepository::save);

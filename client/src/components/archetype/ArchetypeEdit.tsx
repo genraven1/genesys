@@ -14,6 +14,10 @@ import EditSettingsCard from "../common/setting/EditSettingsCard";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import {EditStatsCard} from "../actor/StatsCard";
 import {StatsType} from "../../models/actor/Stats";
+import Skill from "../../models/actor/Skill";
+import SkillSelectCard from "../common/skill/SkillSelectCard";
+import {InputTextFieldCard} from "../common/InputTextFieldCard";
+import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
 
 interface Props {
     arch: Archetype
@@ -46,35 +50,41 @@ export default function ArchetypeEdit(props: Props) {
         await updateArchetype(copyArchetype)
     }
 
-    const onChange = async (key: keyof Archetype, value: number) => {
+    const onSkillChange = async (value: Skill) => {
+        archetype.skill = value
+        setArchetype(archetype)
+        await ArchetypeService.updateArchetype(archetype.name, archetype)
+    }
+
+    const onChange = async (key: keyof Archetype, value: string) => {
         if (value === null || (archetype !== null && archetype[key] === value)) {
             return;
         }
         const copyArchetype = {...archetype} as Archetype
         switch (key) {
             case 'brawn':
-                copyArchetype.brawn = value
+                copyArchetype.brawn = Number(value)
                 break;
             case 'agility':
-                copyArchetype.agility = value
+                copyArchetype.agility = Number(value)
                 break;
             case 'intellect':
-                copyArchetype.intellect = value
+                copyArchetype.intellect = Number(value)
                 break;
             case 'cunning':
-                copyArchetype.cunning = value
+                copyArchetype.cunning = Number(value)
                 break;
             case 'willpower':
-                copyArchetype.willpower = value
+                copyArchetype.willpower = Number(value)
                 break;
             case 'presence':
-                copyArchetype.presence = value
+                copyArchetype.presence = Number(value)
                 break;
             case 'wounds':
-                copyArchetype.wounds = value
+                copyArchetype.wounds = Number(value)
                 break
             case 'strain':
-                copyArchetype.strain = value
+                copyArchetype.strain = Number(value)
                 break
             default:
                 break
@@ -102,43 +112,56 @@ export default function ArchetypeEdit(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <EditCharacteristicCard characteristic={archetype?.brawn!!} type={CharacteristicType.Brawn}
+                        <InputTextFieldCard defaultValue={archetype.description} onCommit={(value: string): void => {
+                            onChange('description', value)
+                        }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <EditCharacteristicCard characteristic={archetype.brawn} type={CharacteristicType.Brawn}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Brawn, value)
+                                                    onChange(ActorKey.Brawn, String(value))
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.agility!!} type={CharacteristicType.Agility}
+                        <EditCharacteristicCard characteristic={archetype.agility} type={CharacteristicType.Agility}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Agility, value)
+                                                    onChange(ActorKey.Agility, String(value))
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.intellect!!}
+                        <EditCharacteristicCard characteristic={archetype.intellect}
                                                 type={CharacteristicType.Intellect}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Intellect, value)
+                                                    onChange(ActorKey.Intellect, String(value))
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.cunning!!} type={CharacteristicType.Cunning}
+                        <EditCharacteristicCard characteristic={archetype.cunning} type={CharacteristicType.Cunning}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Cunning, value)
+                                                    onChange(ActorKey.Cunning, String(value))
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.willpower!!}
+                        <EditCharacteristicCard characteristic={archetype.willpower}
                                                 type={CharacteristicType.Willpower}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Willpower, value)
+                                                    onChange(ActorKey.Willpower, String(value))
                                                 }}/>
-                        <EditCharacteristicCard characteristic={archetype?.presence!!}
+                        <EditCharacteristicCard characteristic={archetype.presence}
                                                 type={CharacteristicType.Presence}
                                                 onChange={(value: number): void => {
-                                                    onChange(ActorKey.Presence, value)
+                                                    onChange(ActorKey.Presence, String(value))
                                                 }}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <EditStatsCard stats={archetype.wounds} type={StatsType.Wounds}
                                        onChange={(value: number): void => {
-                                           onChange(ActorKey.Wounds, value)
+                                           onChange(ActorKey.Wounds, String(value))
                                        }}/>
                         <EditStatsCard stats={archetype.strain} type={StatsType.Strain}
                                        onChange={(value: number): void => {
-                                           onChange(ActorKey.Strain, value)
+                                           onChange(ActorKey.Strain, String(value))
                                        }}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <SkillSelectCard defaultValue={archetype?.skill!} onCommit={(value: Skill): void => {
+                            onSkillChange(value)
+                        }} skills={useFetchCurrentSettingSkills()} title={'Starting Skill'}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+
                     </Grid>
                 </Grid>
                 <EditSettingsCard settings={archetype.settings} onSettingAddition={onSettingAddition}
