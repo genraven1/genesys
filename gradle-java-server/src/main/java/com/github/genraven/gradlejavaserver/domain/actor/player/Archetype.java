@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.domain.actor.player;
 
 import com.github.genraven.gradlejavaserver.domain.Setting;
+import com.github.genraven.gradlejavaserver.domain.skill.Skill;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,5 +31,6 @@ public class Archetype {
     private int presence = 1;
     private int wounds = 1;
     private int strain = 1;
+    private Skill skill;
     private List<Setting> settings = new ArrayList<>();
 }

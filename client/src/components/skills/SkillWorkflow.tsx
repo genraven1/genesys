@@ -1,31 +1,19 @@
 import {Fragment, useEffect, useState} from "react";
-import Skill from "../../models/actor/Skill";
+import Skill, {SkillType} from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import {useLocation, useParams} from "react-router-dom";
 import SkillEdit from "./SkillEdit";
 import SkillView from "./SkillView";
 import ViewAllSkills from "./ViewAllSkills";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
-import Setting from "../../models/Setting";
-import SettingService from "../../services/SettingService";
+import {useFetchAllSettings, useFetchCurrentSetting} from "../setting/SettingWorkflow";
 
 export function useFetchCurrentSettingSkills(): Skill[] {
     const [skills, setSkills] = useState<Skill[]>([])
-    const [setting, setSetting] = useState<Setting>()
+    const current = useFetchCurrentSetting()
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
-        })()
-    }, [setSetting])
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            if (!setting) {
+            if (!current) {
                 return
             }
             const skillList = await SkillService.getSkills()
@@ -34,13 +22,38 @@ export function useFetchCurrentSettingSkills(): Skill[] {
             }
             let temp = [] as Skill[]
             skillList.forEach((sk, index) => {
-                if (sk.settings.some(set => set.name === setting.name)) {
+                if (sk.settings.some(set => set.name === current.name)) {
                     temp.push(sk)
                 }
             })
             setSkills(temp.sort((a, b) => a.name.localeCompare(b.name)))
         })()
-    }, [setting, setSkills])
+    }, [current, setSkills])
+    return skills;
+}
+
+export function useFetchCurrentSettingSkillsByType(type: SkillType): Skill[] {
+    const [skills, setSkills] = useState<Skill[]>([])
+    const current = useFetchCurrentSetting()
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            if (!current) {
+                return
+            }
+            const skillList = await SkillService.getSkills()
+            if (!skillList) {
+                return
+            }
+            let temp = [] as Skill[]
+            skillList.forEach((sk) => {
+                if (sk.type === type && sk.settings.some(set => set.name === current.name)) {
+                    temp.push(sk)
+                }
+            })
+            setSkills(temp.sort((a, b) => a.name.localeCompare(b.name)))
+        })()
+    }, [current, setSkills, type])
     return skills;
 }
 

@@ -5,7 +5,7 @@ import {ActorWeapon} from "../../../../../../models/equipment/Weapon";
 import Skill, {SkillType} from "../../../../../../models/actor/Skill";
 import {getRangeOptions, RangeBand} from "../../../../../../models/common/RangeBand";
 import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
-import {SkillSelectCard} from "../../../../../common/SkillSelectCard";
+import SkillSelectCard from "../../../../../common/skill/SkillSelectCard";
 import NumberRangeSelectCard from "../../../../../common/NumberRangeSelectCard";
 import CheckButtonCard from "../../../../../common/CheckButtonCard";
 import InputSelectFieldCard from "../../../../../common/InlineSelectFieldCard";
@@ -13,6 +13,7 @@ import NonPlayerCharacterWeaponQualityCard from "../../../equipment/weapon/NonPl
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
 import ActorService from "../../../../../../services/ActorService";
 import Minion from "../../../../../../models/actor/npc/Minion";
+import {useFetchCurrentSettingSkillsByType} from "../../../../../skills/SkillWorkflow";
 
 interface Props {
     minion: Minion
@@ -78,7 +79,7 @@ export default function CreateMinionWeaponDialog(props: Props) {
                 <Grid container spacing={10}>
                     <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
                         onSkillChange(value)
-                    }} type={SkillType.Combat}/>
+                    }} skills={useFetchCurrentSettingSkillsByType(SkillType.Combat)} title={'Required Skill'}/>
                     <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
                                            onChange={(value: number): void => {
                                                onChange('damage', String(value))
