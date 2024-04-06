@@ -14,4 +14,6 @@ public class Ability {
 
     @Id
     private String name;
+    private String description;
+    private Activation activation;
 }

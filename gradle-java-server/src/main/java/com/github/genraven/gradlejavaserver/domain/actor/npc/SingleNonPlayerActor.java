@@ -1,9 +1,11 @@
 package com.github.genraven.gradlejavaserver.domain.actor.npc;
 
+import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorSkill;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorTalent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,4 +34,5 @@ public class SingleNonPlayerActor extends NonPlayerActor {
 
     private List<ActorTalent> talents = new ArrayList<>();
     private List<ActorSkill> skills = new ArrayList<>();
+    private List<CriticalInjury> injuries = new ArrayList<>();
 }

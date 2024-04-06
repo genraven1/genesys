@@ -3,6 +3,7 @@ package com.github.genraven.gradlejavaserver.domain.actor.player;
 import com.github.genraven.gradlejavaserver.domain.CriticalInjury;
 import com.github.genraven.gradlejavaserver.domain.actor.Actor;
 
+import com.github.genraven.gradlejavaserver.domain.actor.ActorTalent;
 import com.github.genraven.gradlejavaserver.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,6 +36,7 @@ public class Player extends Actor {
     private int encumbrance = 5 + getBrawn();
     private Career career;
     private Archetype archetype;
+    private List<ActorTalent> talents = new ArrayList<>();
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();
 }

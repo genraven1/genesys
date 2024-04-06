@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.actor.player;
 
+import com.github.genraven.gradlejavaserver.domain.Ability;
 import com.github.genraven.gradlejavaserver.domain.Setting;
 import com.github.genraven.gradlejavaserver.domain.skill.Skill;
 import lombok.Data;
@@ -32,5 +33,6 @@ public class Archetype {
     private int wounds = 1;
     private int strain = 1;
     private Skill skill;
+    private List<Ability> abilities = new ArrayList<>();
     private List<Setting> settings = new ArrayList<>();
 }

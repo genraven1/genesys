@@ -35,5 +35,4 @@ public class Rival extends SingleNonPlayerActor {
         this.setTalents(singleNonPlayerActor.getTalents());
         this.setWeapons(singleNonPlayerActor.getWeapons());
     }
-    private List<CriticalInjury> injuries = new ArrayList<>();
 }
