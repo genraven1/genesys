@@ -36,5 +36,4 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setWeapons(singleNonPlayerActor.getWeapons());
     }
     private int strain = 0;
-    private List<CriticalInjury> injuries = new ArrayList<>();
 }

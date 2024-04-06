@@ -78,6 +78,11 @@ export default function PlayerView(props: Props) {
         player.presence = archetype.presence
         player.wounds = archetype.wounds + archetype.brawn
         player.strain = archetype.strain + archetype.willpower
+        player.skills.forEach((playerSkill) => {
+            if (archetype.skill.name === playerSkill.name) {
+                playerSkill.ranks = 1
+            }
+        })
         await updatePlayer(player)
     }
 

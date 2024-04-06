@@ -1,5 +1,6 @@
 import Setting from "../../Setting";
 import Skill from "../Skill";
+import Ability from "../../Ability";
 
 export default interface Archetype {
     name: string
@@ -13,5 +14,6 @@ export default interface Archetype {
     wounds: number
     strain: number
     skill: Skill
+    abilities: Ability[]
     settings: Setting[]
 }

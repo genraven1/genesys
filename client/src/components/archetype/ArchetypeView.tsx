@@ -11,6 +11,7 @@ import {CharacteristicType} from "../../models/character/Characteristic";
 import {ViewStatsCard} from "../actor/StatsCard";
 import {StatsType} from "../../models/actor/Stats";
 import {ViewFieldCard} from "../common/ViewFieldCard";
+import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 
 interface Props {
     archetype: Archetype
@@ -52,10 +53,8 @@ export default function ArchetypeView(props: Props) {
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Starting Skill'} value={String(archetype?.skill?.name!)}/>
                     </Grid>
-                    <Grid container spacing={2}>
-
-                    </Grid>
                 </Grid>
+                <ArchetypeAbilityCard archetype={archetype}/>
                 <ViewSettingsCard settings={archetype.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>

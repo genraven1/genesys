@@ -18,6 +18,7 @@ import Skill from "../../models/actor/Skill";
 import SkillSelectCard from "../common/skill/SkillSelectCard";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
 import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
+import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 
 interface Props {
     arch: Archetype
@@ -160,10 +161,8 @@ export default function ArchetypeEdit(props: Props) {
                             onSkillChange(value)
                         }} skills={useFetchCurrentSettingSkills()} title={'Starting Skill'}/>
                     </Grid>
-                    <Grid container spacing={2}>
-
-                    </Grid>
                 </Grid>
+                <ArchetypeAbilityCard archetype={archetype}/>
                 <EditSettingsCard settings={archetype.settings} onSettingAddition={onSettingAddition}
                                   onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
             </CardContent>

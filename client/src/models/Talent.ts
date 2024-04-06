@@ -1,6 +1,6 @@
 import {Option} from "../components/common/InputSelectField";
 import Setting from "./Setting";
-import Modifier from "./Modifier";
+import Modifier from "./common/Modifier";
 
 export default interface Talent {
     name: string

@@ -10,8 +10,8 @@ interface Props {
 export default function SettingTableCell(props: Props): JSX.Element {
     const {settings, setting} = props
     let value = "No"
-    for (const set of settings) {
-        if (setting.name === set.name) {
+    if (setting) {
+        if (settings.some((set) => set.name === setting.name)) {
             value = "Yes"
         }
     }

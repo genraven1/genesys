@@ -1,6 +1,6 @@
 import {EquipmentQuality} from "../Quality";
 import Setting from "../Setting";
-import Modifier from "../Modifier";
+import Modifier from "../common/Modifier";
 
 export default interface Equipment {
     name: string

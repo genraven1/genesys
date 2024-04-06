@@ -1,5 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import Modifier, {getModifierOptions, Type} from "../../../models/Modifier";
+import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifier";
 import {useState} from "react";
 import Talent from "../../../models/Talent";
 import TalentService from "../../../services/TalentService";
