@@ -11,7 +11,6 @@ import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
 import {renderHeaders} from "../common/table/TableRenders";
-import Setting from "../../models/Setting";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import CreateSkillDialog from "./CreateSkillDialog";
@@ -20,18 +19,17 @@ import SettingTableCell from "../common/table/SettingsTableCell";
 
 interface Props {
     skill: Skill
-    setting: Setting
 }
 
 function Row(props: Props): JSX.Element {
-    const {skill, setting} = props
+    const {skill} = props
 
     return (
-        <TableRow>
+        <TableRow key={skill.name}>
             <TypographyCenterTableCell value={skill.name}/>
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
-            <SettingTableCell settings={skill.settings} setting={setting}/>
+            <SettingTableCell settings={skill.settings} setting={useFetchCurrentSetting()}/>
             <ActionsTableCell id={skill.name} path={Path.Skills}/>
         </TableRow>
     )
@@ -39,7 +37,6 @@ function Row(props: Props): JSX.Element {
 
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
-    const setting = useFetchCurrentSetting()
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const headers = ['Name', 'Type', 'Linked Characteristic', 'Active', 'View']
 
@@ -70,7 +67,7 @@ export default function ViewAllSkills() {
                         </TableHead>
                         <TableBody>
                             {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                                <Row key={skill.name} skill={skill} setting={setting!!}/>
+                                <Row skill={skill}/>
                             ))}
                         </TableBody>
                     </Table>
