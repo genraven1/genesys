@@ -39,6 +39,7 @@ public class ArchetypeService {
             arch.setPresence(archetype.getPresence());
             arch.setWounds(archetype.getWounds());
             arch.setStrain(archetype.getStrain());
+            arch.setExperience(archetype.getExperience());
             arch.setSkill(archetype.getSkill());
             arch.setAbilities(archetype.getAbilities());
             arch.setSettings(archetype.getSettings());
