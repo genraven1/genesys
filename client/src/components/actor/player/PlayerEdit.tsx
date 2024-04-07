@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import Player, {PlayerSkill} from '../../../models/actor/player/Player';
+import Player, {Experience, PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {StatsType} from '../../../models/actor/Stats';
 import {DefenseType} from '../../../models/actor/Defense';
@@ -78,6 +78,7 @@ export default function PlayerView(props: Props) {
         player.presence = archetype.presence
         player.wounds = archetype.wounds + archetype.brawn
         player.strain = archetype.strain + archetype.willpower
+        player.experience = {total: archetype.experience, available: archetype.experience} as Experience
         player.skills.forEach((playerSkill) => {
             if (archetype.skill.name === playerSkill.name) {
                 playerSkill.ranks = 1
@@ -157,7 +158,7 @@ export default function PlayerView(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={player.soak}/>
+                        <SoakCard actor={player}/>
                         <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
                         <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}

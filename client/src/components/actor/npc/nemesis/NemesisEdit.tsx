@@ -153,7 +153,7 @@ export default function NemesisEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <SoakCard soak={nemesis?.soak!!}/>
+                        <SoakCard actor={nemesis}/>
                         <EditStatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}
                                        onChange={(value: number): void => {
                                        onChange(ActorKey.Wounds, value)

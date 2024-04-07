@@ -32,6 +32,7 @@ public class Archetype {
     private int presence = 1;
     private int wounds = 1;
     private int strain = 1;
+    private int experience = 0;
     private Skill skill;
     private List<Ability> abilities = new ArrayList<>();
     private List<Setting> settings = new ArrayList<>();
