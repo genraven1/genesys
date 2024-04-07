@@ -48,7 +48,7 @@ export default function MinionView(props: Props) {
                     <ViewCharacteristicRow actor={minion}/>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={minion?.soak!!}/>
+                        <SoakCard actor={minion}/>
                         <ViewStatsCard stats={minion?.wounds!!} type={StatsType.Wounds}/>
                         <ViewDefenseCard defense={minion?.melee!!} type={DefenseType.Melee}/>
                         <ViewDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}/>

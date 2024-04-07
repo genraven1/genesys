@@ -157,7 +157,7 @@ export default function PlayerView(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={player.soak}/>
+                        <SoakCard actor={player}/>
                         <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
                         <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}

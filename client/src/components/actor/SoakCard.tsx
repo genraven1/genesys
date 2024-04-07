@@ -1,19 +1,25 @@
 import { Grid, Card, CardContent } from "@mui/material";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import Actor from "../../models/actor/Actor";
 
 interface Props {
-    soak: number,
+    actor: Actor,
 }
 
 export default function SoakCard(props: Props): JSX.Element {
-    const { soak } = props;
+    const { actor } = props;
+
+    const renderSoak = () => {
+        return String(actor.brawn)
+    }
+
     return (
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Soak'}/>
                 <CardContent>
-                    <GenesysDescriptionTypography text={String(soak)}/>
+                    <GenesysDescriptionTypography text={renderSoak()}/>
                 </CardContent>
             </Card>
         </Grid>

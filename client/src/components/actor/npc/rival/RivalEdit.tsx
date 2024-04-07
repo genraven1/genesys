@@ -151,7 +151,7 @@ export default function RivalEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard soak={rival?.soak!!}/>
+                        <SoakCard actor={rival}/>
                         <EditStatsCard stats={rival?.wounds!!} type={StatsType.Wounds}
                                        onChange={(value: number): void => {
                                            onChange(ActorKey.Wounds, value)

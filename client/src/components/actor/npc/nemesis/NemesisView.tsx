@@ -48,7 +48,7 @@ export default function NemesisView(props: Props) {
                     <ViewCharacteristicRow actor={nemesis}/>
                     <Divider />
                     <Grid container spacing={10}>
-                        <SoakCard soak={nemesis?.soak!!} />
+                        <SoakCard actor={nemesis} />
                         <ViewStatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={nemesis?.strain!!} type={StatsType.Strain}/>
                         <ViewDefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee}/>

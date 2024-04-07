@@ -151,7 +151,7 @@ export default function MinionEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <SoakCard soak={minion?.soak!!}/>
+                        <SoakCard actor={minion}/>
                         <EditStatsCard stats={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
