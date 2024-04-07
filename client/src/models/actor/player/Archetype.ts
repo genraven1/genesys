@@ -13,6 +13,7 @@ export default interface Archetype {
     presence: number
     wounds: number
     strain: number
+    experience: number
     skill: Skill
     abilities: Ability[]
     settings: Setting[]

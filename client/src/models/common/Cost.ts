@@ -8,7 +8,7 @@ export default interface Cost {
 export enum CostType {
     None = 'None',
     Strain = 'Strain',
-    StoryPoint = 'StoryPoint'
+    StoryPoint = 'Story Point'
 }
 
 export const getCostOptions = (): Option[] => {

@@ -53,6 +53,9 @@ export default function ArchetypeView(props: Props) {
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Starting Skill'} value={String(archetype?.skill?.name!)}/>
                     </Grid>
+                    <Grid container spacing={2}>
+                        <ViewFieldCard name={'Base Experience'} value={String(archetype.experience)}/>
+                    </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
                 <ViewSettingsCard settings={archetype.settings} allSettings={useFetchAllSettings()}/>

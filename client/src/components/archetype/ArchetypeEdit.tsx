@@ -19,6 +19,7 @@ import SkillSelectCard from "../common/skill/SkillSelectCard";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
 import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
 import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
+import EditNumberCard from "../common/EditNumberCard";
 
 interface Props {
     arch: Archetype
@@ -86,6 +87,9 @@ export default function ArchetypeEdit(props: Props) {
                 break
             case 'strain':
                 copyArchetype.strain = Number(value)
+                break
+            case "experience":
+                copyArchetype.experience = Number(value)
                 break
             default:
                 break
@@ -160,6 +164,12 @@ export default function ArchetypeEdit(props: Props) {
                         <SkillSelectCard defaultValue={archetype?.skill!} onCommit={(value: Skill): void => {
                             onSkillChange(value)
                         }} skills={useFetchCurrentSettingSkills()} title={'Starting Skill'}/>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <EditNumberCard title={'Base Experience'} value={archetype.experience}
+                                        onChange={(value: number): void => {
+                                            onChange('experience', String(value))
+                                        }}/>
                     </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
