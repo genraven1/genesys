@@ -15,6 +15,7 @@ import ViewNonPlayerCharacterArmorTable from "../../equipment/armor/ViewNonPlaye
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import CreateNemesisArmorDialog from "./armor/CreateNemesisArmorDialog";
 import NemesisArmorSelectionDialog from "./armor/NemesisArmorSelectionDialog";
+import NemesisArmorEquipDialog from "./armor/NemesisArmorEquipDialog";
 
 interface Props {
     nemesis: Nemesis
@@ -24,9 +25,10 @@ export default function NemesisEquipmentCard(props: Props): JSX.Element {
     const {nemesis} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
-    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
+    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
+    const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -97,6 +99,10 @@ export default function NemesisEquipmentCard(props: Props): JSX.Element {
                         Armor</Button>
                     {openSelectArmorDialog && <NemesisArmorSelectionDialog nemesis={nemesis} open={openSelectArmorDialog}
                                                                     onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipArmorDialog(true)}>Equip
+                        Armor</Button>
+                    {openEquipArmorDialog && <NemesisArmorEquipDialog nemesis={nemesis} open={openEquipArmorDialog}
+                                                                           onClose={(): void => setOpenEquipArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {
