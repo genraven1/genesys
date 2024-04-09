@@ -19,15 +19,15 @@ export interface ActorEquipment {
 }
 
 export enum EquipmentSlot {
-    Main='Main Hand',
-    Off='Off Hand',
-    Both='Both Hands',
-    Body='Body',
-    None='None'
+    Main = 'Main Hand',
+    Off = 'Off Hand',
+    Both = 'Both Hands',
+    Body = 'Body',
+    None = 'None'
 }
 
 export enum EquipmentType {
-    Armor='Armor',
-    Weapon='Weapon',
-    Gear='Gear'
+    Armor = 'Armor',
+    Weapon = 'Weapon',
+    Gear = 'Gear'
 }

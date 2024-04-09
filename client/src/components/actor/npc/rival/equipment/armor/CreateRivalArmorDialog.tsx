@@ -2,12 +2,11 @@ import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
-import {ActorArmor} from "../../../../../../models/equipment/Armor";
+import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
 import NumberRangeSelectCard from "../../../../../common/NumberRangeSelectCard";
 import ActorService from "../../../../../../services/ActorService";
 import Rival from "../../../../../../models/actor/npc/Rival";
-import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
 
 interface Props {
     rival: Rival
@@ -21,7 +20,7 @@ export default function CreateRivalArmorDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (armor) {
-            rival.armor.push({...armor, slot: EquipmentSlot.None})
+            rival.armors.push({...armor, slot: ArmorSlot.None})
             await ActorService.updateRival(rival.name, rival)
         }
         onClose()

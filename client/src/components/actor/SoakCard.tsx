@@ -2,7 +2,7 @@ import {Card, CardContent, Grid} from "@mui/material";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import Actor from "../../models/actor/Actor";
-import {EquipmentSlot} from "../../models/equipment/Equipment";
+import {ArmorSlot} from "../../models/equipment/Armor";
 
 interface Props {
     actor: Actor,
@@ -12,10 +12,10 @@ export default function SoakCard(props: Props): JSX.Element {
     const {actor} = props;
 
     const calculateArmorSoak = () => {
-        if (actor.armor.length === 0) {
+        if (actor.armors === undefined || actor.armors.length === 0) {
             return 0;
         } else {
-            let armor = actor.armor.filter((armor) => armor.slot === EquipmentSlot.Body).pop()
+            let armor = actor.armors.filter((armor) => armor.slot === ArmorSlot.Body).pop()
             if (armor) {
                 return armor.soak
             } else {

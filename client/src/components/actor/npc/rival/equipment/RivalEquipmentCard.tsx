@@ -79,10 +79,10 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (rival.armor === undefined || rival.armor.length === 0) {
+        if (rival.armors === undefined || rival.armors.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterArmorTable armor={rival?.armor!!}/>
+        return <ViewNonPlayerCharacterArmorTable armor={rival?.armors!!}/>
     }
 
     const renderArmorTableButtons = (): JSX.Element => {

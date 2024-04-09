@@ -79,10 +79,10 @@ export default function MinionEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (minion.armor === undefined || minion.armor.length === 0) {
+        if (minion.armors === undefined || minion.armors.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterArmorTable armor={minion?.armor!!}/>
+        return <ViewNonPlayerCharacterArmorTable armor={minion?.armors!!}/>
     }
 
     const renderArmorTableButtons = (): JSX.Element => {

@@ -6,12 +6,11 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import {Armor} from "../../../../../models/equipment/Armor";
+import {Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
 import Player from "../../../../../models/actor/player/Player";
 import ArmorBackdrop from "../../../common/equipment/ArmorBackdrop";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import {EquipmentSlot} from "../../../../../models/equipment/Equipment";
 import ActorService from "../../../../../services/ActorService";
 
 interface RowProps {
@@ -24,12 +23,12 @@ function ArmorNameRow(props: RowProps): JSX.Element {
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        player.armor.push({slot: EquipmentSlot.None, ...armor})
+        player.armors.push({slot: ArmorSlot.None, ...armor})
         await ActorService.updatePlayer(player.name, player)
     }
 
     return (
-        <TableRow>
+        <TableRow key={armor.name}>
             <TableCell>
                 <Button onClick={(): void => setOpenArmorBackDrop(true)}>{armor.name}</Button>
                 {openArmorBackDrop && <ArmorBackdrop open={openArmorBackDrop} onClose={(): void => setOpenArmorBackDrop(false)} armor={armor}/>}

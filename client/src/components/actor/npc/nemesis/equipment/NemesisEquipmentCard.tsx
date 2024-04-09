@@ -79,10 +79,10 @@ export default function NemesisEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (nemesis.armor === undefined || nemesis.armor.length === 0) {
+        if (nemesis.armors === undefined || nemesis.armors.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterArmorTable armor={nemesis?.armor!!}/>
+        return <ViewNonPlayerCharacterArmorTable armor={nemesis?.armors!!}/>
     }
 
     const renderArmorTableButtons = (): JSX.Element => {

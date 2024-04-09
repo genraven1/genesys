@@ -7,10 +7,9 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
-import {Armor} from "../../../../../../models/equipment/Armor";
+import {Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import ArmorBackdrop from "../../../../common/equipment/ArmorBackdrop";
 import EquipmentService from "../../../../../../services/EquipmentService";
-import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
 import ActorService from "../../../../../../services/ActorService";
 import Minion from "../../../../../../models/actor/npc/Minion";
 
@@ -24,7 +23,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        minion.armor.push({slot: EquipmentSlot.None, ...armor})
+        minion.armors.push({slot: ArmorSlot.None, ...armor})
         await ActorService.updateMinion(minion.name, minion)
     }
 
