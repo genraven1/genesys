@@ -1,8 +1,20 @@
-import Equipment, {ActorEquipment} from "./Equipment";
+import Equipment from "./Equipment";
+import {Option} from "../../components/common/InputSelectField";
 
 export interface Armor extends Equipment {
     soak: number
     defense: number
 }
 
-export interface ActorArmor extends ActorEquipment, Armor {}
+export interface ActorArmor extends Armor {
+    slot: ArmorSlot
+}
+
+export enum ArmorSlot {
+    Body = 'Body',
+    None = 'None'
+}
+
+export const getArmorSlotOptions = (): Option[] => {
+    return Object.values(ArmorSlot).map((value) => ({value}))
+}

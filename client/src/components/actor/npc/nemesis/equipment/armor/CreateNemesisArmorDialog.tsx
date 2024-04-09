@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import Nemesis from "../../../../../../models/actor/npc/Nemesis";
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
-import {ActorArmor} from "../../../../../../models/equipment/Armor";
+import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
 import NumberRangeSelectCard from "../../../../../common/NumberRangeSelectCard";
 import ActorService from "../../../../../../services/ActorService";
@@ -20,7 +20,7 @@ export default function CreateNemesisArmorDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (armor) {
-            nemesis.armor.push({...armor, equipped: false})
+            nemesis.armors.push({...armor, slot: ArmorSlot.None})
             await ActorService.updateNemesis(nemesis.name, nemesis)
         }
         onClose()

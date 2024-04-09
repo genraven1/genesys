@@ -6,7 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
-import {ActorArmor} from "../../../../../models/equipment/Armor";
+import {ActorArmor, ArmorSlot} from "../../../../../models/equipment/Armor";
 import {renderHeaders} from "../../../../common/table/TableRenders";
 import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
 
@@ -16,14 +16,14 @@ interface Props {
 
 export default function PlayerArmorTable(props: Props): JSX.Element {
     const {armor} = props
-    const headers = ['Name', 'Defense', 'Soak', 'Special Qualities']
+    const headers = ['Name', 'Equipped', 'Defense', 'Soak', 'Special Qualities']
 
     const renderTableBody = () => {
         if (!armor) {
             return
         } else {
-            return armor.map((weapon: ActorArmor) => (
-                <Row key={weapon.name} armor={weapon}/>
+            return armor.map((actorArmor: ActorArmor) => (
+                <Row armor={actorArmor}/>
             ))
         }
     }
@@ -49,19 +49,14 @@ interface RowProps {
 function Row(props: RowProps): JSX.Element {
     const {armor} = props
 
-    // const renderEquipped = (): string => {
-    //     let equip = ''
-    //     if (weapon.equipped) {
-    //         equip = 'True'
-    //     } else {
-    //         equip = 'False'
-    //     }
-    //     return equip
-    // }
+    const renderEquipped = (): string => {
+        return armor.slot === ArmorSlot.Body ? 'True' : 'False';
+    }
 
     return (
-        <TableRow>
+        <TableRow key={armor.name}>
             <TypographyLeftTableCell value={armor.name}/>
+            <TypographyCenterTableCell value={renderEquipped()}/>
             <TypographyCenterTableCell value={String(armor.defense)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
             <TypographyCenterTableCell value={renderQualities(armor!!)}/>

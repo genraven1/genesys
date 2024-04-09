@@ -27,7 +27,7 @@ export default function CreateMinionWeaponDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (weapon) {
-            minion.weapons.push({...weapon, equipped: false})
+            minion.weapons.push({...weapon})
             await ActorService.updateMinion(minion.name, minion)
         }
         onClose()

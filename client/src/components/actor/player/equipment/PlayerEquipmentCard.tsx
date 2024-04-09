@@ -13,6 +13,7 @@ import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {useLocation} from "react-router-dom";
 import PlayerWeaponSelectionDialog from "./weapon/PlayerWeaponSelectionDialog";
 import PlayerArmorSelectionDialog from "./armor/PlayerArmorSelectionDialog";
+import PlayerArmorEquipDialog from "./armor/PlayerArmorEquipDialog";
 
 interface Props {
     player: Player
@@ -23,6 +24,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const [value, setValue] = useState('1')
     const [openSelectWeaponDialog, setOpenSelectWeaponDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
+    const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -51,8 +53,9 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
                 <Fragment>
                     <Button color='primary' variant='contained' onClick={(): void => setOpenSelectWeaponDialog(true)}>Add
                         Weapon</Button>
-                    {openSelectWeaponDialog && <PlayerWeaponSelectionDialog player={player} open={openSelectWeaponDialog}
-                                                                      onClose={(): void => setOpenSelectWeaponDialog(false)}/>}
+                    {openSelectWeaponDialog &&
+                        <PlayerWeaponSelectionDialog player={player} open={openSelectWeaponDialog}
+                                                     onClose={(): void => setOpenSelectWeaponDialog(false)}/>}
                 </Fragment>
             )
         } else {
@@ -64,26 +67,30 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         return (
             <Fragment>
                 {renderArmorTable()}
-                {renderArmorTableButton()}
+                {renderArmorTableButtons()}
             </Fragment>
         )
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (player.armor === undefined || player.armor.length === 0) {
+        if (player.armors === undefined || player.armors.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
-        return <PlayerArmorTable armor={player.armor}/>
+        return <PlayerArmorTable armor={player.armors}/>
     }
 
-    const renderArmorTableButton = (): JSX.Element => {
+    const renderArmorTableButtons = (): JSX.Element => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
                     <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add
-                        Weapon</Button>
+                        Armor</Button>
                     {openSelectArmorDialog && <PlayerArmorSelectionDialog player={player} open={openSelectArmorDialog}
-                                                                            onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                                                                          onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipArmorDialog(true)}>Equip
+                        Armor</Button>
+                    {openEquipArmorDialog && <PlayerArmorEquipDialog player={player} open={openEquipArmorDialog}
+                                                                     onClose={(): void => setOpenEquipArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {

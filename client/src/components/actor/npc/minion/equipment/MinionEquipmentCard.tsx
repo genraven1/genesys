@@ -15,6 +15,7 @@ import CreateMinionArmorDialog from "./armor/CreateMinionArmorDialog";
 import MinionArmorSelectionDialog from "./armor/MinionArmorSelectionDialog";
 import CreateMinionWeaponDialog from "./weapon/CreateMinionWeaponDialog";
 import MinionWeaponSelectionDialog from "./weapon/MinionWeaponSelectionDialog";
+import MinionArmorEquipDialog from "./armor/MinionArmorEquipDialog";
 
 interface Props {
     minion: Minion
@@ -24,9 +25,10 @@ export default function MinionEquipmentCard(props: Props): JSX.Element {
     const {minion} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
-    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
+    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
+    const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -79,10 +81,10 @@ export default function MinionEquipmentCard(props: Props): JSX.Element {
     }
 
     const renderArmorTable = (): JSX.Element => {
-        if (minion.armor === undefined || minion.armor.length === 0) {
+        if (minion.armors === undefined || minion.armors.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
-        return <ViewNonPlayerCharacterArmorTable armor={minion?.armor!!}/>
+        return <ViewNonPlayerCharacterArmorTable armor={minion?.armors!!}/>
     }
 
     const renderArmorTableButtons = (): JSX.Element => {
@@ -97,6 +99,10 @@ export default function MinionEquipmentCard(props: Props): JSX.Element {
                         Armor</Button>
                     {openSelectArmorDialog && <MinionArmorSelectionDialog minion={minion} open={openSelectArmorDialog}
                                                                           onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipArmorDialog(true)}>Equip
+                        Armor</Button>
+                    {openEquipArmorDialog && <MinionArmorEquipDialog minion={minion} open={openEquipArmorDialog}
+                                                                      onClose={(): void => setOpenEquipArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {

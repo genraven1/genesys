@@ -8,10 +8,9 @@ import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import Nemesis from "../../../../../../models/actor/npc/Nemesis";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
-import {Armor} from "../../../../../../models/equipment/Armor";
+import {Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import ArmorBackdrop from "../../../../common/equipment/ArmorBackdrop";
 import EquipmentService from "../../../../../../services/EquipmentService";
-import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
 import ActorService from "../../../../../../services/ActorService";
 
 interface RowProps {
@@ -24,7 +23,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        nemesis.armor.push({slot: EquipmentSlot.None, ...armor, equipped: false})
+        nemesis.armors.push({slot: ArmorSlot.None, ...armor})
         await ActorService.updateNemesis(nemesis.name, nemesis)
     }
 

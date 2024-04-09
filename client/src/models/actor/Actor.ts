@@ -19,7 +19,7 @@ export default interface Actor {
     ranged: number,
     wounds: number,
     weapons: ActorWeapon[],
-    armor: ActorArmor[],
+    armors: ActorArmor[],
     gear: ActorGear[],
     settings: Setting[]
 }

@@ -24,7 +24,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        rival.weapons.push({slot: EquipmentSlot.None, ...weapon, equipped: false})
+        rival.weapons.push({slot: EquipmentSlot.None, ...weapon})
         await ActorService.updateRival(rival.name, rival)
     }
 

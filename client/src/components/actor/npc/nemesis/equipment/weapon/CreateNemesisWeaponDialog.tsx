@@ -27,7 +27,7 @@ export default function CreateNemesisWeaponDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (weapon) {
-            nemesis.weapons.push({...weapon, equipped: false})
+            nemesis.weapons.push({...weapon})
             await ActorService.updateNemesis(nemesis.name, nemesis)
         }
         onClose()
