@@ -8,6 +8,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ActorArmor extends Armor {
-    private boolean equipped;
-    private EquipmentSlot slot;
+    private EquipmentSlot slot = EquipmentSlot.NONE;
 }
