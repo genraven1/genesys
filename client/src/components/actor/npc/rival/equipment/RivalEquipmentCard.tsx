@@ -15,6 +15,7 @@ import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Rival from "../../../../../models/actor/npc/Rival";
 import CreateRivalArmorDialog from "./armor/CreateRivalArmorDialog";
 import RivalArmorSelectionDialog from "./armor/RivalArmorSelectionDialog";
+import RivalArmorEquipDialog from "./armor/RivalArmorEquipDialog";
 
 interface Props {
     rival: Rival
@@ -24,9 +25,10 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
     const {rival} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
-    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
+    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
+    const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -97,6 +99,10 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
                         Armor</Button>
                     {openSelectArmorDialog && <RivalArmorSelectionDialog rival={rival} open={openSelectArmorDialog}
                                                                            onClose={(): void => setOpenSelectArmorDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipArmorDialog(true)}>Equip
+                        Armor</Button>
+                    {openEquipArmorDialog && <RivalArmorEquipDialog rival={rival} open={openEquipArmorDialog}
+                                                                      onClose={(): void => setOpenEquipArmorDialog(false)}/>}
                 </Fragment>
             )
         } else {
