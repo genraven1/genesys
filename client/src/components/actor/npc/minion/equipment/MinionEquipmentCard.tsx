@@ -15,7 +15,6 @@ import CreateMinionArmorDialog from "./armor/CreateMinionArmorDialog";
 import MinionArmorSelectionDialog from "./armor/MinionArmorSelectionDialog";
 import CreateMinionWeaponDialog from "./weapon/CreateMinionWeaponDialog";
 import MinionWeaponSelectionDialog from "./weapon/MinionWeaponSelectionDialog";
-import NemesisArmorEquipDialog from "../../nemesis/equipment/armor/NemesisArmorEquipDialog";
 import MinionArmorEquipDialog from "./armor/MinionArmorEquipDialog";
 
 interface Props {
