@@ -7,6 +7,7 @@ import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
 import NumberRangeSelectCard from "../../../../../common/NumberRangeSelectCard";
 import ActorService from "../../../../../../services/ActorService";
 import Rival from "../../../../../../models/actor/npc/Rival";
+import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
 
 interface Props {
     rival: Rival
@@ -20,7 +21,7 @@ export default function CreateRivalArmorDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (armor) {
-            rival.armor.push({...armor, equipped: false})
+            rival.armor.push({...armor, slot: EquipmentSlot.None})
             await ActorService.updateRival(rival.name, rival)
         }
         onClose()

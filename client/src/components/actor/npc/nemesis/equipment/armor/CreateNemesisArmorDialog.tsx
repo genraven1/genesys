@@ -20,7 +20,7 @@ export default function CreateNemesisArmorDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (armor) {
-            nemesis.armor.push({...armor, equipped: false})
+            nemesis.armor.push({...armor})
             await ActorService.updateNemesis(nemesis.name, nemesis)
         }
         onClose()

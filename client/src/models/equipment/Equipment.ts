@@ -15,7 +15,6 @@ export default interface Equipment {
 }
 
 export interface ActorEquipment {
-    equipped: boolean
     slot: EquipmentSlot
 }
 

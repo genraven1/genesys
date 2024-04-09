@@ -27,7 +27,7 @@ export default function CreateRivalWeaponDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (weapon) {
-            rival.weapons.push({...weapon, equipped: false})
+            rival.weapons.push({...weapon})
             await ActorService.updateRival(rival.name, rival)
         }
         onClose()

@@ -24,7 +24,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
     const addArmor = async () => {
-        minion.armor.push({slot: EquipmentSlot.None, ...armor, equipped: false})
+        minion.armor.push({slot: EquipmentSlot.None, ...armor})
         await ActorService.updateMinion(minion.name, minion)
     }
 

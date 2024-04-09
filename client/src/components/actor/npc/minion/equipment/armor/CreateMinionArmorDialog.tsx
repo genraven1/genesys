@@ -20,7 +20,7 @@ export default function CreateMinionArmorDialog(props: Props) {
 
     const onCreate = async (): Promise<void> => {
         if (armor) {
-            minion.armor.push({...armor, equipped: false})
+            minion.armor.push({...armor})
             await ActorService.updateMinion(minion.name, minion)
         }
         onClose()

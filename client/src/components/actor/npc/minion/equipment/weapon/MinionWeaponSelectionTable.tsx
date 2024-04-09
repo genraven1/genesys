@@ -24,7 +24,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        minion.weapons.push({slot: EquipmentSlot.None, ...weapon, equipped: false})
+        minion.weapons.push({slot: EquipmentSlot.None, ...weapon})
         await ActorService.updateMinion(minion.name, minion)
     }
 
