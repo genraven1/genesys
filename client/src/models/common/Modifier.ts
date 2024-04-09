@@ -8,6 +8,7 @@ export default interface Modifier {
 export enum Type {
     IncreaseEncumbranceCapacity = 'Increase Encumbrance Capacity',
     IncreaseBaseEncumbranceCapacity = 'Increase Base Encumbrance Capacity',
+    IncreaseSoak = 'Increase Soak',
     IncreaseWoundThreshold = 'Increase Wound Threshold',
     SufferWounds = 'Suffer Wounds',
     SufferWoundsByTalent = 'Suffer Wounds By Talent',
