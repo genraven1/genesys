@@ -5,6 +5,7 @@ import {ViewFieldCard} from "../common/ViewFieldCard";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
+import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 
 interface Props {
     injury: Injury
@@ -38,6 +39,7 @@ export default function InjuryView(props: Props):JSX.Element {
                         <ViewFieldCard name={'Min'} value={String(injury.min)}/>
                         <ViewFieldCard name={'Max'} value={String(injury.max)}/>
                     </Grid>
+                    <CriticalInjuryModifierCard injury={injury}/>
                 </Grid>
             </CardContent>
         </Card>
