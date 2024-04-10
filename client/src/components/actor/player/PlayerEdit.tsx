@@ -8,7 +8,6 @@ import {ActorPath} from '../../../services/Path';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import {ViewStatsCard} from "../StatsCard";
-import SoakCard from "../SoakCard";
 import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
@@ -26,6 +25,7 @@ import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
 import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
+import PlayerSoakCard from "./PlayerSoakCard";
 
 interface Props {
     play: Player
@@ -121,7 +121,6 @@ export default function PlayerView(props: Props) {
     }
 
     const updatePlayer = async (copyPlayer: Player) => {
-        copyPlayer.soak = copyPlayer.brawn
         copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
         await ActorService.updatePlayer(copyPlayer.name, copyPlayer)
@@ -158,7 +157,7 @@ export default function PlayerView(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard actor={player}/>
+                        <PlayerSoakCard player={player}/>
                         <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
                         <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}
