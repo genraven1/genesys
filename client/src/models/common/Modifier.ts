@@ -17,7 +17,10 @@ export enum Type {
     IncreaseCriticalInjury = 'Increase Critical Injury',
     DecreaseCriticalInjury = 'Decrease Critical Injury',
     ResetCriticalInjury = 'Reset Critical Injury',
-    AddSetbackOnTargetedSocial = 'Add Setback on Targeted Social'
+    AddSetbackOnTargetedSocial = 'Add Setback on Targeted Social',
+    AddBoostToCombat = 'Add Boost To Combat',
+    IncreaseMeleeDefense = 'Increase Melee Defense',
+    IncreaseRangedDefense = 'Increase Ranged Defense',
 }
 
 export const getModifierOptions = (): Option[] => {

@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {Fragment} from "react";
 import Quality from "../../models/Quality";
 import {renderUsable} from "../../models/equipment/EquipmentHelper";
+import QualityModifierCard from "./modifiers/QualityModifierCard";
 
 interface Props {
     quality: Quality
@@ -47,6 +48,7 @@ export default function QualityView(props: Props) {
                         {renderQualityUsable()}
                         <ViewQualityActivationCard quality={quality}/>
                     </Grid>
+                    <QualityModifierCard quality={quality}/>
                 </Grid>
             </CardContent>
         </Card>

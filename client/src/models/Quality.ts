@@ -1,3 +1,5 @@
+import Modifier from "./common/Modifier";
+
 export default interface Quality {
     name: string
     description: string
@@ -5,6 +7,7 @@ export default interface Quality {
     cost: number
     armor: boolean
     weapon: boolean
+    modifiers: Modifier[]
 }
 
 export interface EquipmentQuality extends Quality {

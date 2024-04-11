@@ -1,27 +1,26 @@
-import Injury from "../../../models/Injury";
 import {useState} from "react";
 import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifier";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
-import InjuryService from "../../../services/InjuryService";
+import Quality from "../../../models/Quality";
+import QualityService from "../../../services/QualityService";
 
 interface Props {
-    injury: Injury
+    quality: Quality
     open: boolean
     onClose: () => void
 }
 
-export default function AddCriticalInjuryModifierDialog(props: Props) {
-    const {injury, open, onClose} = props
-
+export default function AddQualityModifierDialog(props: Props) {
+    const {quality, open, onClose} = props
     const [modifier, setModifier] = useState<Modifier>()
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
-            if (!injury.modifiers.some(mod => mod.type === modifier.type)) {
-                injury.modifiers.push(modifier)
-                await InjuryService.updateInjury(injury.name, injury)
+            if (!quality.modifiers.some(mod => mod.type === modifier.type)) {
+                quality.modifiers.push(modifier)
+                await QualityService.updateQuality(quality.name, quality)
             }
         }
         onClose()

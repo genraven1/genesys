@@ -9,18 +9,18 @@ import TableRow from "@mui/material/TableRow";
 import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useState} from "react";
 import * as React from "react";
-import Injury from "../../../models/Injury";
-import AddCriticalInjuryModifierDialog from "./AddCriticalInjuryModifierDialog";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import Quality from "../../../models/Quality";
+import AddQualityModifierDialog from "./AddQualityModifierDialog";
 
 interface Props {
-    injury: Injury
+    quality: Quality
 }
 
-export default function CriticalInjuryModifierCard(props: Props) {
-    const {injury} = props
+export default function QualityModifierCard(props: Props) {
+    const {quality} = props
     const [openDialog, setOpenDialog] = useState(false)
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
@@ -32,9 +32,9 @@ export default function CriticalInjuryModifierCard(props: Props) {
                     <TableRow>
                         <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
                             Modifier</Button>
-                        {openDialog && <AddCriticalInjuryModifierDialog open={openDialog}
-                                                                        onClose={(): void => setOpenDialog(false)}
-                                                                        injury={injury}/>}
+                        {openDialog && <AddQualityModifierDialog open={openDialog}
+                                                                 onClose={(): void => setOpenDialog(false)}
+                                                                 quality={quality}/>}
                     </TableRow>
                 </TableFooter>
             )
@@ -55,7 +55,7 @@ export default function CriticalInjuryModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {(injury.modifiers).map((modifier) => (
+                            {(quality.modifiers).map((modifier) => (
                                 <ModifierRow modifier={modifier}/>
                             ))}
                         </TableBody>
