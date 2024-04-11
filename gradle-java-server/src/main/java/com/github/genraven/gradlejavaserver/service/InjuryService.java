@@ -35,6 +35,7 @@ public class InjuryService {
             injury.setDescription(criticalInjury.getDescription());
             injury.setMin(criticalInjury.getMin());
             injury.setMax(criticalInjury.getMax());
+            injury.setModifiers(criticalInjury.getModifiers());
             return injury;
         }).flatMap(injuryRepository::save);
     }

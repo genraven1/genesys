@@ -10,6 +10,7 @@ import * as React from "react";
 import InjuryService from "../../services/InjuryService";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
 import EditNumberCard from "../common/EditNumberCard";
+import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 
 interface Props {
     crit: Injury
@@ -81,6 +82,7 @@ export default function InjuryEdit(props: Props): JSX.Element {
                             onChange('max', String(value))
                         }}/>
                     </Grid>
+                    <CriticalInjuryModifierCard injury={injury}/>
                 </Grid>
             </CardContent>
         </Card>

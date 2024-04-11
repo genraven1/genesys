@@ -8,10 +8,12 @@ export default interface Modifier {
 export enum Type {
     IncreaseEncumbranceCapacity = 'Increase Encumbrance Capacity',
     IncreaseBaseEncumbranceCapacity = 'Increase Base Encumbrance Capacity',
+    MoveStoryPoint = 'Move Story Point',
     IncreaseSoak = 'Increase Soak',
     IncreaseWoundThreshold = 'Increase Wound Threshold',
     SufferWounds = 'Suffer Wounds',
     SufferWoundsByTalent = 'Suffer Wounds By Talent',
+    SufferStrain = 'Suffer Strain',
     IncreaseCriticalInjury = 'Increase Critical Injury',
     DecreaseCriticalInjury = 'Decrease Critical Injury',
     ResetCriticalInjury = 'Reset Critical Injury',
