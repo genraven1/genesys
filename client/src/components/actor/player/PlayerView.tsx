@@ -2,7 +2,6 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import {StatsType} from '../../../models/actor/Stats';
-import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
@@ -10,7 +9,7 @@ import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
 import Setting from "../../../models/Setting";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../StatsCard";
-import {ViewDefenseCard} from "../DefenseCard";
+import PlayerDefenseCard from "./PlayerDefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
@@ -52,8 +51,7 @@ export default function PlayerView(props: Props) {
                         <PlayerSoakCard player={player}/>
                         <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
-                        <ViewDefenseCard defense={player.melee} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={player.ranged} type={DefenseType.Ranged}/>
+                        <PlayerDefenseCard player={player}/>
                     </Grid>
                     <Divider/>
                     <ViewPlayerSkillTable player={player}/>

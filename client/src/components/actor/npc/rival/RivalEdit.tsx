@@ -3,14 +3,12 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
-import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import SoakCard from "../../SoakCard";
 import {EditStatsCard} from "../../StatsCard";
-import {EditDefenseCard} from "../../DefenseCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
@@ -23,6 +21,7 @@ import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
 import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
+import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     riv: Rival
@@ -78,12 +77,6 @@ export default function RivalEdit(props: Props) {
                 break
             case "presence":
                 copyRival.presence = value
-                break
-            case "melee":
-                copyRival.melee = value
-                break
-            case "ranged":
-                copyRival.ranged = value
                 break
             case "wounds":
                 copyRival.wounds = value
@@ -156,14 +149,7 @@ export default function RivalEdit(props: Props) {
                                        onChange={(value: number): void => {
                                            onChange(ActorKey.Wounds, value)
                                        }}/>
-                        <EditDefenseCard defense={rival?.melee!!} type={DefenseType.Melee}
-                                         onChange={(value: number): void => {
-                                             onChange(ActorKey.Melee, value)
-                                         }}/>
-                        <EditDefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged}
-                                         onChange={(value: number): void => {
-                                             onChange(ActorKey.Ranged, value)
-                                         }}/>
+                        <NonPlayerActorDefenseCard npc={rival}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>

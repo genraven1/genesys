@@ -1,6 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
@@ -13,11 +12,11 @@ import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
-import {ViewDefenseCard} from "../../DefenseCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import MinionAbilityCard from "./ability/MinionAbilityCard";
 import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
+import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     minion: Minion
@@ -50,8 +49,7 @@ export default function MinionView(props: Props) {
                     <Grid container spacing={2}>
                         <SoakCard actor={minion}/>
                         <ViewStatsCard stats={minion?.wounds!!} type={StatsType.Wounds}/>
-                        <ViewDefenseCard defense={minion?.melee!!} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}/>
+                        <NonPlayerActorDefenseCard npc={minion}/>
                     </Grid>
                     <Divider/>
                     <MinionSkillCard minion={minion}/>

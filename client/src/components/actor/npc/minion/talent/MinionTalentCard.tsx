@@ -4,7 +4,7 @@ import GenesysDescriptionTypography from "../../../../common/typography/GenesysD
 import { Fragment, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Minion from "../../../../../models/actor/npc/Minion";
-import MinionTalentTable from "../MinionTalentTable";
+import MinionTalentTable from "./MinionTalentTable";
 import MinionTalentSelectionDialog from "./MinionTalentSelectionDialog";
 
 interface Props {
