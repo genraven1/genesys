@@ -1,6 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.equipment;
 
-import com.github.genraven.gradlejavaserver.domain.modifier.Modifier;
+import com.github.genraven.gradlejavaserver.domain.Modifier;
 import com.github.genraven.gradlejavaserver.domain.Setting;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

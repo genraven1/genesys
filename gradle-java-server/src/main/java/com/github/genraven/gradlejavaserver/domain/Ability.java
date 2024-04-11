@@ -1,6 +1,5 @@
 package com.github.genraven.gradlejavaserver.domain;
 
-import com.github.genraven.gradlejavaserver.domain.modifier.Modifier;
 import lombok.Data;
 
 import java.util.ArrayList;
