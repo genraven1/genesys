@@ -16,6 +16,7 @@ public class EquipmentQuality extends Quality {
         this.setCost(quality.getCost());
         this.setArmor(quality.isArmor());
         this.setWeapon(quality.isWeapon());
+        this.setModifiers(quality.getModifiers());
     }
     private int ranks = 0;
 }

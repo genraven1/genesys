@@ -36,6 +36,7 @@ public class QualityService {
             qual.setPassive(quality.isPassive());
             qual.setWeapon(quality.isWeapon());
             qual.setArmor(quality.isArmor());
+            qual.setModifiers(quality.getModifiers());
             return qual;
         }).flatMap(qualityRepository::save);
     }

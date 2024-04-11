@@ -9,6 +9,7 @@ import CheckButtonCard from "../common/CheckButtonCard";
 import Quality from "../../models/Quality";
 import QualityService from "../../services/QualityService";
 import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
+import QualityModifierCard from "./modifiers/QualityModifierCard";
 
 interface Props {
     qual: Quality
@@ -92,6 +93,7 @@ export default function QualityEdit(props: Props) {
                                                          onChange('cost', String(value))
                                                      }}/>
                     </Grid>
+                    <QualityModifierCard quality={quality}/>
                 </Grid>
             </CardContent>
         </Card>
