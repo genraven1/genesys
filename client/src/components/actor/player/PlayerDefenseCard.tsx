@@ -27,11 +27,11 @@ export default function PlayerDefenseCard(props: Props) {
     }
 
     const calculateMeleeDefense = () => {
-        return String(player.melee + calculateArmorDefense())
+        return String(calculateArmorDefense())
     }
 
     const calculateRangedDefense = () => {
-        return String(player.ranged + calculateArmorDefense())
+        return String(calculateArmorDefense())
     }
 
     return (

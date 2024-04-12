@@ -100,7 +100,6 @@ export default function NemesisEdit(props: Props) {
     }
 
     const updateNemesis = async (copyNemesis: Nemesis) => {
-        copyNemesis.soak = copyNemesis.brawn
         setNemesis(copyNemesis)
         await ActorService.updateNemesis(copyNemesis.name, copyNemesis)
     }

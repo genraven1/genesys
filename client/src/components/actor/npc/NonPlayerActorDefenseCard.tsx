@@ -27,11 +27,11 @@ export default function NonPlayerActorDefenseCard(props: Props) {
     }
 
     const calculateMeleeDefense = () => {
-        return String(npc.melee + calculateArmorDefense())
+        return String(calculateArmorDefense())
     }
 
     const calculateRangedDefense = () => {
-        return String(npc.ranged + calculateArmorDefense())
+        return String(calculateArmorDefense())
     }
 
     return (

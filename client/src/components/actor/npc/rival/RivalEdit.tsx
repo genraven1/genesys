@@ -98,7 +98,6 @@ export default function RivalEdit(props: Props) {
     }
 
     const updateRival = async (copyRival: Rival) => {
-        copyRival.soak = copyRival.brawn
         setRival(copyRival)
         await ActorService.updateRival(copyRival.name, copyRival)
     }
