@@ -14,6 +14,36 @@ interface Props {
 export default function PlayerDefenseCard(props: Props) {
     const {player} = props;
 
+    const calculateWeaponMeleeDefense = () => {
+        if (player.weapons === undefined || player.weapons.length === 0) {
+            return 0;
+        } else {
+            player.archetype.abilities.forEach((ability) => {
+                ability.modifiers.forEach(modifier => {
+                    if (modifier.type === Type.IncreaseMeleeDefense) {
+                        return modifier.ranks;
+                    }
+                })
+            })
+        }
+        return 0;
+    }
+
+    const calculateWeaponRangedDefense = () => {
+        if (player.archetype === undefined || player.archetype.abilities === undefined || player.archetype.abilities.length === 0) {
+            return 0;
+        } else {
+            player.archetype.abilities.forEach((ability) => {
+                ability.modifiers.forEach(modifier => {
+                    if (modifier.type === Type.IncreaseRangedDefense) {
+                        return modifier.ranks;
+                    }
+                })
+            })
+        }
+        return 0;
+    }
+
     const calculateArchetypeMeleeDefense = () => {
         if (player.archetype === undefined || player.archetype.abilities === undefined || player.archetype.abilities.length === 0) {
             return 0;
