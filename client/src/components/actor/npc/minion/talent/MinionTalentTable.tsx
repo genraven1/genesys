@@ -1,9 +1,8 @@
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {renderHeaders} from "../../../../common/table/TableRenders";
+import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import Talent from "../../../../../models/Talent";
 import Minion from "../../../../../models/actor/npc/Minion";
@@ -23,14 +22,7 @@ export default function MinionTalentTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    <TableRow>
-                        <GenesysDescriptionTypographyCenterTableCell value={'Talents'} span={headers.length}/>
-                    </TableRow>
-                    <TableRow>
-                        {renderHeaders(headers)}
-                    </TableRow>
-                </TableHead>
+                {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
                 <TableBody>
                     {(minion?.talents!! || []).map((row: Talent) => (
                         <TalentRow key={row.name} talent={row}/>
@@ -50,7 +42,7 @@ function TalentRow(props: Props): JSX.Element {
     const {talent} = props
 
     return (
-        <TableRow>
+        <TableRow key={talent.name}>
             <TypographyCenterTableCell value={talent.name}/>
             <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
         </TableRow>
