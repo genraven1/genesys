@@ -1,14 +1,14 @@
 import {Card, CardContent, Grid} from "@mui/material";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
-import Actor from "../../models/actor/Actor";
-import {ArmorSlot} from "../../models/equipment/Armor";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
+import Actor from "../../../models/actor/Actor";
+import {ArmorSlot} from "../../../models/equipment/Armor";
 
 interface Props {
     actor: Actor,
 }
 
-export default function SoakCard(props: Props): JSX.Element {
+export default function NonPlayerActorSoakCard(props: Props): JSX.Element {
     const {actor} = props;
 
     const calculateArmorSoak = () => {

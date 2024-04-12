@@ -9,7 +9,7 @@ import {StatsType} from "../../../../models/actor/Stats"
 import {EditCharacteristicCard} from "../../CharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor"
-import SoakCard from "../../SoakCard"
+import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard"
 import {EditStatsCard} from "../../StatsCard"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
@@ -146,7 +146,7 @@ export default function NemesisEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <SoakCard actor={nemesis}/>
+                        <NonPlayerActorSoakCard actor={nemesis}/>
                         <EditStatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}
                                        onChange={(value: number): void => {
                                        onChange(ActorKey.Wounds, value)

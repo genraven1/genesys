@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {StatsType} from "../../../../models/actor/Stats";
-import SoakCard from "../../SoakCard";
+import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
@@ -46,7 +46,7 @@ export default function RivalView(props: Props) {
                     <ViewCharacteristicRow actor={rival}/>
                     <Divider />
                     <Grid container spacing={10}>
-                        <SoakCard actor={rival} />
+                        <NonPlayerActorSoakCard actor={rival} />
                         <ViewStatsCard stats={rival.wounds} type={StatsType.Wounds}/>
                         <NonPlayerActorDefenseCard npc={rival}/>
                     </Grid>
