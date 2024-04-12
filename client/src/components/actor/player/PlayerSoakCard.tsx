@@ -45,7 +45,7 @@ export default function PlayerSoakCard(props: Props): JSX.Element {
         }
     }
 
-    const renderSoak = () => {
+    const calculateTotalSoak = () => {
         return String(player.brawn + calculateArmorSoak() + calculateTalentSoak())
     }
 
@@ -54,7 +54,7 @@ export default function PlayerSoakCard(props: Props): JSX.Element {
             <Card>
                 <CenteredCardHeader title={'Soak'}/>
                 <CardContent>
-                    <GenesysDescriptionTypography text={renderSoak()}/>
+                    <GenesysDescriptionTypography text={calculateTotalSoak()}/>
                 </CardContent>
             </Card>
         </Grid>

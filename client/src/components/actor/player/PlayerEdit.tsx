@@ -3,19 +3,17 @@ import {useNavigate} from 'react-router-dom';
 import Player, {Experience, PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {StatsType} from '../../../models/actor/Stats';
-import {DefenseType} from '../../../models/actor/Defense';
 import {ActorPath} from '../../../services/Path';
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import {ViewStatsCard} from "../StatsCard";
-import {ActorKey} from '../../../models/actor/Actor';
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import * as React from "react";
 import SettingService from "../../../services/SettingService";
-import {EditDefenseCard} from "../DefenseCard";
+import PlayerDefenseCard from "./PlayerDefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
@@ -101,25 +99,6 @@ export default function PlayerView(props: Props) {
         await updatePlayer(player)
     }
 
-    const onChange = async (key: keyof Player, value: number) => {
-        if (value === null || (player !== null && player[key] === value)) {
-            return;
-        }
-        const copyPlayer = {...player} as Player
-        switch (key) {
-            case 'melee':
-                copyPlayer.melee = value
-                break;
-            case 'ranged':
-                copyPlayer.ranged = value
-                break;
-            default:
-                break
-        }
-
-        await updatePlayer(copyPlayer)
-    }
-
     const updatePlayer = async (copyPlayer: Player) => {
         copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
@@ -160,14 +139,7 @@ export default function PlayerView(props: Props) {
                         <PlayerSoakCard player={player}/>
                         <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
-                        <EditDefenseCard defense={player?.melee!!} type={DefenseType.Melee}
-                                         onChange={(value: number): void => {
-                                             onChange(ActorKey.Melee, value)
-                                         }}/>
-                        <EditDefenseCard defense={player?.ranged!!} type={DefenseType.Ranged}
-                                         onChange={(value: number): void => {
-                                             onChange(ActorKey.Ranged, value)
-                                         }}/>
+                        <PlayerDefenseCard player={player}/>
                     </Grid>
                     <Divider/>
                     <PlayerEditSkillTable player={player} onSkillChange={onSkillChange}/>

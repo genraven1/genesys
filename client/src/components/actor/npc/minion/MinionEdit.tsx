@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
-import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
@@ -17,12 +16,12 @@ import Minion from "../../../../models/actor/npc/Minion";
 import Setting from "../../../../models/Setting";
 import EditSettingsCard from "../../../common/setting/EditSettingsCard";
 import SettingService from "../../../../services/SettingService";
-import {EditDefenseCard} from "../../DefenseCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import * as React from "react";
 import MinionAbilityCard from "./ability/MinionAbilityCard";
 import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
+import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     min: Minion
@@ -78,12 +77,6 @@ export default function MinionEdit(props: Props) {
                 break
             case "presence":
                 copyMinion.presence = value
-                break
-            case "melee":
-                copyMinion.melee = value
-                break
-            case "ranged":
-                copyMinion.ranged = value
                 break
             case "wounds":
                 copyMinion.wounds = value
@@ -155,14 +148,7 @@ export default function MinionEdit(props: Props) {
                         <EditStatsCard stats={minion?.wounds!!} type={StatsType.Wounds} onChange={(value: number): void => {
                             onChange(ActorKey.Wounds, value)
                         }}/>
-                        <EditDefenseCard defense={minion?.melee!!} type={DefenseType.Melee}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Melee, value)
-                                     }}/>
-                        <EditDefenseCard defense={minion?.ranged!!} type={DefenseType.Ranged}
-                                     onChange={(value: number): void => {
-                                         onChange(ActorKey.Ranged, value)
-                                     }}/>
+                        <NonPlayerActorDefenseCard npc={minion}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>

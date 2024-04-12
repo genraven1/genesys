@@ -1,6 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
@@ -13,11 +12,11 @@ import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
-import {ViewDefenseCard} from "../../DefenseCard";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
 import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
+import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     rival: Rival
@@ -48,9 +47,8 @@ export default function RivalView(props: Props) {
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard actor={rival} />
-                        <ViewStatsCard stats={rival?.wounds!!} type={StatsType.Wounds}/>
-                        <ViewDefenseCard defense={rival?.melee!!} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={rival?.ranged!!} type={DefenseType.Ranged}/>
+                        <ViewStatsCard stats={rival.wounds} type={StatsType.Wounds}/>
+                        <NonPlayerActorDefenseCard npc={rival}/>
                     </Grid>
                     <Divider/>
                     <RivalSkillCard rival={rival}/>

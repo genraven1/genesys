@@ -1,7 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
-import {DefenseType} from "../../../../models/actor/Defense";
 import {StatsType} from "../../../../models/actor/Stats";
 import SoakCard from "../../SoakCard";
 import * as React from "react";
@@ -13,11 +12,11 @@ import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
-import {ViewDefenseCard} from "../../DefenseCard";
 import NemesisSkillCard from "./skill/NemesisSkillCard";
 import NemesisTalentCard from "./talent/NemesisTalentCard";
 import NemesisEquipmentCard from "./equipment/NemesisEquipmentCard";
 import NemesisAbilityCard from "./ability/NemesisAbilityCard";
+import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     nemesis: Nemesis
@@ -49,10 +48,9 @@ export default function NemesisView(props: Props) {
                     <Divider />
                     <Grid container spacing={10}>
                         <SoakCard actor={nemesis} />
-                        <ViewStatsCard stats={nemesis?.wounds!!} type={StatsType.Wounds}/>
-                        <ViewStatsCard stats={nemesis?.strain!!} type={StatsType.Strain}/>
-                        <ViewDefenseCard defense={nemesis?.melee!!} type={DefenseType.Melee}/>
-                        <ViewDefenseCard defense={nemesis?.ranged!!} type={DefenseType.Ranged}/>
+                        <ViewStatsCard stats={nemesis.wounds} type={StatsType.Wounds}/>
+                        <ViewStatsCard stats={nemesis.strain} type={StatsType.Strain}/>
+                        <NonPlayerActorDefenseCard npc={nemesis}/>
                     </Grid>
                     <Divider />
                     <NemesisSkillCard nemesis={nemesis}/>

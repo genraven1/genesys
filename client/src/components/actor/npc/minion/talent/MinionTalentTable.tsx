@@ -1,33 +1,15 @@
-import * as React from "react";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import GenesysTalentTypography from "../../../../common/typography/GenesysTalentTypography";
+import Table from "@mui/material/Table";
+import TableRow from "@mui/material/TableRow";
 import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
-import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
-import Minion, {GroupTalent} from "../../../../../models/actor/npc/Minion";
-import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
-
-interface Props {
-    talent: GroupTalent
-    skillRanks?: number
-}
-
-function Row(props: Props): JSX.Element {
-    const {talent, skillRanks} = props
-
-    return (
-        <TableRow>
-            <TypographyCenterTableCell value={talent.name}/>
-            <TableCell>
-                <GenesysDescriptionTypography text={talent.summary}/>
-            </TableCell>
-        </TableRow>
-    );
-}
+import TableBody from "@mui/material/TableBody";
+import Talent from "../../../../../models/Talent";
+import Minion from "../../../../../models/actor/npc/Minion";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../../common/table/TypographyTableCell";
 
 interface TableProps {
     minion: Minion
@@ -42,11 +24,27 @@ export default function MinionTalentTable(props: TableProps) {
             <Table>
                 {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
                 <TableBody>
-                    {(minion.talents || []).map((talent: GroupTalent) => (
-                        <Row key={talent.name} talent={talent}/>
+                    {(minion?.talents!! || []).map((row: Talent) => (
+                        <TalentRow key={row.name} talent={row}/>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
+    )
+}
+
+interface Props {
+    talent: Talent
+    skillRanks?: number
+}
+
+function TalentRow(props: Props): JSX.Element {
+    const {talent} = props
+
+    return (
+        <TableRow key={talent.name}>
+            <TypographyCenterTableCell value={talent.name}/>
+            <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
+        </TableRow>
     )
 }
