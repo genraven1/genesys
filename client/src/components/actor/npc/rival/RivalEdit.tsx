@@ -7,7 +7,7 @@ import {StatsType} from "../../../../models/actor/Stats";
 import {EditCharacteristicCard} from "../../CharacteristicCard";
 import RatingCard from "../RatingCard";
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
-import SoakCard from "../../SoakCard";
+import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import {EditStatsCard} from "../../StatsCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
@@ -144,7 +144,7 @@ export default function RivalEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard actor={rival}/>
+                        <NonPlayerActorSoakCard actor={rival}/>
                         <EditStatsCard stats={rival?.wounds!!} type={StatsType.Wounds}
                                        onChange={(value: number): void => {
                                            onChange(ActorKey.Wounds, value)

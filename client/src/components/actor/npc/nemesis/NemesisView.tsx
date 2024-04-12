@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/mat
 import {useNavigate} from "react-router-dom";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import {StatsType} from "../../../../models/actor/Stats";
-import SoakCard from "../../SoakCard";
+import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
@@ -47,7 +47,7 @@ export default function NemesisView(props: Props) {
                     <ViewCharacteristicRow actor={nemesis}/>
                     <Divider />
                     <Grid container spacing={10}>
-                        <SoakCard actor={nemesis} />
+                        <NonPlayerActorSoakCard actor={nemesis} />
                         <ViewStatsCard stats={nemesis.wounds} type={StatsType.Wounds}/>
                         <ViewStatsCard stats={nemesis.strain} type={StatsType.Strain}/>
                         <NonPlayerActorDefenseCard npc={nemesis}/>

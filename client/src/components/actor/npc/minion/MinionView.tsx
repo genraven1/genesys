@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {StatsType} from "../../../../models/actor/Stats";
-import SoakCard from "../../SoakCard";
+import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
@@ -47,7 +47,7 @@ export default function MinionView(props: Props) {
                     <ViewCharacteristicRow actor={minion}/>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <SoakCard actor={minion}/>
+                        <NonPlayerActorSoakCard actor={minion}/>
                         <ViewStatsCard stats={minion?.wounds!!} type={StatsType.Wounds}/>
                         <NonPlayerActorDefenseCard npc={minion}/>
                     </Grid>
