@@ -4,6 +4,7 @@ import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import {DefenseType} from "../../../models/actor/Defense";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import NonPlayerActor from "../../../models/actor/npc/NonPlayerActor";
+import {ArmorSlot} from "../../../models/equipment/Armor";
 
 interface Props {
     npc: NonPlayerActor;
@@ -12,12 +13,25 @@ interface Props {
 export default function NonPlayerActorDefenseCard(props: Props) {
     const {npc} = props;
 
+    const calculateArmorDefense = () => {
+        if (npc.armors === undefined || npc.armors.length === 0) {
+            return 0;
+        } else {
+            let armor = npc.armors.filter((armor) => armor.slot === ArmorSlot.Body).pop()
+            if (armor) {
+                return armor.defense
+            } else {
+                return 0;
+            }
+        }
+    }
+
     const calculateMeleeDefense = () => {
-        return String(npc.melee)
+        return String(npc.melee + calculateArmorDefense())
     }
 
     const calculateRangedDefense = () => {
-        return String(npc.ranged)
+        return String(npc.ranged + calculateArmorDefense())
     }
 
     return (
