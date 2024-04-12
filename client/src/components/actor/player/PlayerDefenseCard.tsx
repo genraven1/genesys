@@ -5,6 +5,7 @@ import GenesysDescriptionTypography from "../../common/typography/GenesysDescrip
 import Player from "../../../models/actor/player/Player";
 import {Fragment} from "react";
 import {ArmorSlot} from "../../../models/equipment/Armor";
+import {Type} from "../../../models/common/Modifier";
 
 interface Props {
     player: Player;
@@ -12,6 +13,46 @@ interface Props {
 
 export default function PlayerDefenseCard(props: Props) {
     const {player} = props;
+
+    const calculateTalentMeleeDefense = () => {
+        if (player.talents === undefined || player.talents.length === 0) {
+            return 0;
+        }
+        else {
+            player.talents.forEach((talent) => {
+                talent.modifiers.forEach(modifier => {
+                    if (modifier.type === Type.IncreaseMeleeDefense) {
+                        if (talent.ranked) {
+                            return modifier.ranks * talent.ranks;
+                        } else {
+                            return modifier.ranks;
+                        }
+                    }
+                })
+            })
+        }
+        return 0;
+    }
+
+    const calculateTalentRangedDefense = () => {
+        if (player.talents === undefined || player.talents.length === 0) {
+            return 0;
+        }
+        else {
+            player.talents.forEach((talent) => {
+                talent.modifiers.forEach(modifier => {
+                    if (modifier.type === Type.IncreaseRangedDefense) {
+                        if (talent.ranked) {
+                            return modifier.ranks * talent.ranks;
+                        } else {
+                            return modifier.ranks;
+                        }
+                    }
+                })
+            })
+        }
+        return 0;
+    }
 
     const calculateArmorDefense = () => {
         if (player.armors === undefined || player.armors.length === 0) {
@@ -27,11 +68,11 @@ export default function PlayerDefenseCard(props: Props) {
     }
 
     const calculateMeleeDefense = () => {
-        return String(calculateArmorDefense())
+        return String(calculateArmorDefense() + calculateTalentMeleeDefense())
     }
 
     const calculateRangedDefense = () => {
-        return String(calculateArmorDefense())
+        return String(calculateArmorDefense() + calculateTalentRangedDefense())
     }
 
     return (
