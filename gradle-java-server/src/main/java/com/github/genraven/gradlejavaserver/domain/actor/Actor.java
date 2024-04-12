@@ -26,9 +26,6 @@ public class Actor {
     private int cunning = 1;
     private int willpower = 1;
     private int presence = 1;
-    private int soak;
-    private int melee;
-    private int ranged;
     private int wounds = 1;
     private List<ActorWeapon> weapons = new ArrayList<>();
     private List<ActorArmor> armors = new ArrayList<>();
