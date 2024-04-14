@@ -30,4 +30,5 @@ public class Weapon extends Equipment {
     private int critical = 3;
     private RangeBand range = RangeBand.ENGAGED;
     private boolean brawn = false;
+    private int hands = 1;
 }

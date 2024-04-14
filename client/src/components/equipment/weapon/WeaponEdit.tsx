@@ -91,6 +91,9 @@ export default function WeaponEdit(props: Props) {
             case "critical":
                 copyWeapon.critical = Number(value)
                 break
+            case "hands":
+                copyWeapon.hands = Number(value)
+                break
             default:
                 break
         }
@@ -158,6 +161,10 @@ export default function WeaponEdit(props: Props) {
                                              onChange={(value: number): void => {
                                                  onChange('rarity', String(value))
                                              }} min={0} max={11}/>
+                        <EditNumberFieldCard value={weapon.hands} title={'Hands'}
+                                             onChange={(value: number): void => {
+                                                 onChange('hands', String(value))
+                                             }} min={1} max={2}/>
                     </Grid>
                     <Divider/>
                     <Grid container>
