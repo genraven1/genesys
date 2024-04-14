@@ -164,7 +164,7 @@ export default function WeaponEdit(props: Props) {
                         <EditNumberFieldCard value={weapon.hands} title={'Hands'}
                                              onChange={(value: number): void => {
                                                  onChange('hands', String(value))
-                                             }} min={1} max={2}/>
+                                             }} min={1} max={3}/>
                     </Grid>
                     <Divider/>
                     <Grid container>

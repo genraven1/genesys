@@ -4,12 +4,11 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {ActorWeapon} from "../../../../../models/equipment/Weapon";
+import {ActorWeapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {
     GenesysDicePoolCenterTableCell,
-    TypographyCenterTableCell,
-    TypographyLeftTableCell
+    TypographyCenterTableCell
 } from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities} from "../../../../../models/equipment/EquipmentHelper";
 import Player from "../../../../../models/actor/player/Player";
@@ -23,7 +22,7 @@ interface Props {
 
 export default function PlayerWeaponTable(props: Props): JSX.Element {
     const {weapons, player} = props
-    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool']
+    const headers = ['Name', 'Equipped', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool']
 
     const renderTableBody = () => {
         if (!weapons) {
@@ -55,15 +54,9 @@ interface RowProps {
 function Row(props: RowProps): JSX.Element {
     const {weapon, player} = props
 
-    // const renderEquipped = (): string => {
-    //     let equip = ''
-    //     if (weapon.equipped) {
-    //         equip = 'True'
-    //     } else {
-    //         equip = 'False'
-    //     }
-    //     return equip
-    // }
+    const renderEquipped = (): string => {
+        return weapon.slot !== WeaponSlot.None ? 'True' : 'False';
+    }
 
     const getActorSkill = (): ActorSkill => {
         let actorSkill = {} as ActorSkill
@@ -77,8 +70,8 @@ function Row(props: RowProps): JSX.Element {
 
     return (
         <TableRow>
-            <TypographyLeftTableCell value={weapon.name}/>
-            {/*<TypographyCenterTableCell value={renderEquipped()}/>*/}
+            <TypographyCenterTableCell value={weapon.name}/>
+            <TypographyCenterTableCell value={renderEquipped()}/>
             <TypographyCenterTableCell value={weapon.skill.name}/>
             <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>

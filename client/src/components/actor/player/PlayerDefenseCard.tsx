@@ -21,10 +21,13 @@ export default function PlayerDefenseCard(props: Props) {
         } else {
             player.weapons.forEach((weapon) => {
                 if (weapon.slot !== WeaponSlot.None) {
-                    weapon.modifiers.forEach(modifier => {
-                        if (modifier.type === Type.IncreaseMeleeDefense) {
-                            return modifier.ranks;
-                        }
+                    weapon.qualities.forEach((quality) => {
+                        quality.modifiers.forEach(modifier => {
+                            if (modifier.type === Type.IncreaseMeleeDefense) {
+                                console.log(quality.ranks * modifier.ranks)
+                                return quality.ranks * modifier.ranks;
+                            }
+                        })
                     })
                 }
             })
@@ -38,10 +41,12 @@ export default function PlayerDefenseCard(props: Props) {
         } else {
             player.weapons.forEach((weapon) => {
                 if (weapon.slot !== WeaponSlot.None) {
-                    weapon.modifiers.forEach(modifier => {
-                        if (modifier.type === Type.IncreaseRangedDefense) {
-                            return modifier.ranks;
-                        }
+                    weapon.qualities.forEach((quality) => {
+                        quality.modifiers.forEach(modifier => {
+                            if (modifier.type === Type.IncreaseRangedDefense) {
+                                return modifier.ranks;
+                            }
+                        })
                     })
                 }
             })
@@ -131,6 +136,14 @@ export default function PlayerDefenseCard(props: Props) {
     }
 
     const calculateMeleeDefense = () => {
+        let armor = calculateArmorDefense()
+        console.log(armor)
+        let talent = calculateTalentMeleeDefense()
+        console.log(talent)
+        let archetype = calculateArchetypeMeleeDefense()
+        console.log(archetype)
+        let weapon = calculateWeaponMeleeDefense()
+        console.log(weapon)
         return String(calculateArmorDefense() + calculateTalentMeleeDefense() + calculateArchetypeMeleeDefense() + calculateWeaponMeleeDefense())
     }
 

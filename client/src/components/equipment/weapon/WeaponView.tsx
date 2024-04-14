@@ -24,7 +24,7 @@ interface Props {
 export default function WeaponView(props: Props) {
     const {weapon} = props
     let navigate = useNavigate()
-    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
+    const headers = ['Name', 'Skill', 'Hands', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
         navigate(EquipmentPath.Weapon + weapon.name + '/edit')
