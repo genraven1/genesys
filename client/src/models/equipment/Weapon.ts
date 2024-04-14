@@ -1,6 +1,6 @@
 import Skill from "../actor/Skill";
 import {RangeBand} from "../common/RangeBand";
-import Equipment, {ActorEquipment} from "./Equipment";
+import Equipment from "./Equipment";
 
 export interface Weapon extends Equipment {
     damage: number
@@ -8,6 +8,16 @@ export interface Weapon extends Equipment {
     critical: number
     range: RangeBand
     brawn: boolean
+    hands: number
 }
 
-export interface ActorWeapon extends ActorEquipment, Weapon {}
+export interface ActorWeapon extends Weapon {
+    slot: WeaponSlot
+}
+
+export enum WeaponSlot {
+    Main = 'Main Hand',
+    Off = 'Off Hand',
+    Both = 'Both Hands',
+    None = 'None'
+}

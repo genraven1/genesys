@@ -6,13 +6,12 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import {Weapon} from "../../../../../models/equipment/Weapon";
+import {Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
 import WeaponBackdrop from "../../../common/equipment/WeaponBackdrop";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import Player from "../../../../../models/actor/player/Player";
 import ActorService from "../../../../../services/ActorService";
-import {EquipmentSlot} from "../../../../../models/equipment/Equipment";
 
 interface RowProps {
     weapon: Weapon
@@ -24,7 +23,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        player.weapons.push({slot: EquipmentSlot.None, ...weapon})
+        player.weapons.push({slot: WeaponSlot.None, ...weapon})
         await ActorService.updatePlayer(player.name, player)
     }
 

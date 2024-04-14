@@ -15,20 +15,19 @@ import {getRangeOptions, RangeBand} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
-import Setting from "../../../models/Setting";
 import WeaponQualityCard from "./WeaponQualityCard";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import SettingService from "../../../services/SettingService";
 import {useFetchCurrentSettingSkillsByType} from "../../skills/SkillWorkflow";
+import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 
 interface Props {
     wea: Weapon
-    settings: Setting[]
 }
 
 export default function WeaponEdit(props: Props) {
-    const {wea, settings} = props
+    const {wea} = props
     const [weapon, setWeapon] = useState<Weapon>(wea)
     let navigate = useNavigate()
 
@@ -165,7 +164,7 @@ export default function WeaponEdit(props: Props) {
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
                     <EditSettingsCard settings={weapon.settings} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
+                                      onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>
