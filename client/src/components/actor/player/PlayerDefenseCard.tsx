@@ -15,111 +15,116 @@ interface Props {
 export default function PlayerDefenseCard(props: Props) {
     const {player} = props;
 
-    const calculateWeaponMeleeDefense = () => {
+    const calculateWeaponMeleeDefense = (): number => {
+        let defense = 0
         if (player.weapons === undefined || player.weapons.length === 0) {
-            return 0;
+            return defense
         } else {
             player.weapons.forEach((weapon) => {
                 if (weapon.slot !== WeaponSlot.None) {
                     weapon.qualities.forEach((quality) => {
                         quality.modifiers.forEach(modifier => {
                             if (modifier.type === Type.IncreaseMeleeDefense) {
-                                console.log(quality.ranks * modifier.ranks)
-                                return quality.ranks * modifier.ranks;
+                                defense = quality.ranks * modifier.ranks;
                             }
                         })
                     })
                 }
             })
         }
-        return 0;
+        return defense
     }
 
     const calculateWeaponRangedDefense = () => {
+        let defense = 0
         if (player.weapons === undefined || player.weapons.length === 0) {
-            return 0;
+            return defense
         } else {
             player.weapons.forEach((weapon) => {
                 if (weapon.slot !== WeaponSlot.None) {
                     weapon.qualities.forEach((quality) => {
                         quality.modifiers.forEach(modifier => {
                             if (modifier.type === Type.IncreaseRangedDefense) {
-                                return modifier.ranks;
+                                defense = modifier.ranks;
                             }
                         })
                     })
                 }
             })
         }
-        return 0;
+        return defense
     }
 
     const calculateArchetypeMeleeDefense = () => {
+        let defense = 0
         if (player.archetype === undefined || player.archetype.abilities === undefined || player.archetype.abilities.length === 0) {
-            return 0;
+            return defense;
         } else {
             player.archetype.abilities.forEach((ability) => {
                 ability.modifiers.forEach(modifier => {
                     if (modifier.type === Type.IncreaseMeleeDefense) {
-                        return modifier.ranks;
+                        defense = modifier.ranks;
                     }
                 })
             })
         }
-        return 0;
+        return defense;
     }
 
     const calculateArchetypeRangedDefense = () => {
+        let defense = 0
         if (player.archetype === undefined || player.archetype.abilities === undefined || player.archetype.abilities.length === 0) {
-            return 0;
+            return defense;
         } else {
             player.archetype.abilities.forEach((ability) => {
                 ability.modifiers.forEach(modifier => {
                     if (modifier.type === Type.IncreaseRangedDefense) {
-                        return modifier.ranks;
+                        defense = modifier.ranks;
                     }
                 })
             })
         }
-        return 0;
+        return defense;
     }
 
     const calculateTalentMeleeDefense = () => {
+        let defense = 0
         if (player.talents === undefined || player.talents.length === 0) {
-            return 0;
+            return defense;
         } else {
             player.talents.forEach((talent) => {
                 talent.modifiers.forEach(modifier => {
                     if (modifier.type === Type.IncreaseMeleeDefense) {
                         if (talent.ranked) {
-                            return modifier.ranks * talent.ranks;
+                            defense = modifier.ranks * talent.ranks;
                         } else {
-                            return modifier.ranks;
+                            defense = modifier.ranks;
                         }
                     }
                 })
             })
         }
-        return 0;
+        return defense;
     }
 
     const calculateTalentRangedDefense = () => {
+        let defense = 0
         if (player.talents === undefined || player.talents.length === 0) {
-            return 0;
+            return defense;
         } else {
             player.talents.forEach((talent) => {
                 talent.modifiers.forEach(modifier => {
                     if (modifier.type === Type.IncreaseRangedDefense) {
                         if (talent.ranked) {
-                            return modifier.ranks * talent.ranks;
+                            defense = modifier.ranks * talent.ranks;
                         } else {
-                            return modifier.ranks;
+                            defense = modifier.ranks;
                         }
                     }
                 })
             })
         }
-        return 0;
+        return defense;
     }
 
     const calculateArmorDefense = () => {
@@ -136,14 +141,6 @@ export default function PlayerDefenseCard(props: Props) {
     }
 
     const calculateMeleeDefense = () => {
-        let armor = calculateArmorDefense()
-        console.log(armor)
-        let talent = calculateTalentMeleeDefense()
-        console.log(talent)
-        let archetype = calculateArchetypeMeleeDefense()
-        console.log(archetype)
-        let weapon = calculateWeaponMeleeDefense()
-        console.log(weapon)
         return String(calculateArmorDefense() + calculateTalentMeleeDefense() + calculateArchetypeMeleeDefense() + calculateWeaponMeleeDefense())
     }
 
