@@ -14,6 +14,7 @@ import {useLocation} from "react-router-dom";
 import PlayerWeaponSelectionDialog from "./weapon/PlayerWeaponSelectionDialog";
 import PlayerArmorSelectionDialog from "./armor/PlayerArmorSelectionDialog";
 import PlayerArmorEquipDialog from "./armor/PlayerArmorEquipDialog";
+import PlayerWeaponEquipDialog from "./weapon/PlayerWeaponEquipDialog";
 
 interface Props {
     player: Player
@@ -25,6 +26,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
     const [openSelectWeaponDialog, setOpenSelectWeaponDialog] = useState(false)
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
     const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
+    const [openEquipWeaponDialog, setOpenEquipWeaponDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -35,7 +37,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         return (
             <Fragment>
                 {renderWeaponsTable()}
-                {renderWeaponTableButton()}
+                {renderWeaponTableButtons()}
             </Fragment>
         )
     }
@@ -47,7 +49,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         return <PlayerWeaponTable weapons={player.weapons} player={player}/>
     }
 
-    const renderWeaponTableButton = (): JSX.Element => {
+    const renderWeaponTableButtons = (): JSX.Element => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -56,6 +58,10 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
                     {openSelectWeaponDialog &&
                         <PlayerWeaponSelectionDialog player={player} open={openSelectWeaponDialog}
                                                      onClose={(): void => setOpenSelectWeaponDialog(false)}/>}
+                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipWeaponDialog(true)}>Equip
+                        Weapon</Button>
+                    {openEquipWeaponDialog && <PlayerWeaponEquipDialog player={player} open={openEquipWeaponDialog}
+                                                                     onClose={(): void => setOpenEquipWeaponDialog(false)}/>}
                 </Fragment>
             )
         } else {

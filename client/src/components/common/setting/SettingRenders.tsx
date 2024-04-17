@@ -16,7 +16,7 @@ export const renderSettings = (settings: Setting[], allSettings: Setting[]):JSX.
     return (
         <Fragment>
             {(settingList || []).map((setting: Setting):JSX.Element => {
-                return <GenesysDescriptionTypography text={setting?.name!!}/>
+                return <GenesysDescriptionTypography key={setting.name} text={setting?.name!!}/>
             })}
         </Fragment>
     )

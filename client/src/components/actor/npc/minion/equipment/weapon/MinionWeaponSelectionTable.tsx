@@ -6,11 +6,10 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import {Weapon} from "../../../../../../models/equipment/Weapon";
+import {Weapon, WeaponSlot} from "../../../../../../models/equipment/Weapon";
 import WeaponBackdrop from "../../../../common/equipment/WeaponBackdrop";
 import EquipmentService from "../../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
-import {EquipmentSlot} from "../../../../../../models/equipment/Equipment";
 import ActorService from "../../../../../../services/ActorService";
 import Minion from "../../../../../../models/actor/npc/Minion";
 
@@ -24,7 +23,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
     const addWeapon = async () => {
-        minion.weapons.push({slot: EquipmentSlot.None, ...weapon})
+        minion.weapons.push({slot: WeaponSlot.None, ...weapon})
         await ActorService.updateMinion(minion.name, minion)
     }
 
