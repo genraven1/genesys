@@ -1,9 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {Path} from "../../../services/Path";
 import {Card, CardContent, CardHeader, Grid, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";
-import Scene from "../../models/Scene";
+import Scene from "../../../models/campaign/Scene";
 
 interface Props {
     scene: Scene

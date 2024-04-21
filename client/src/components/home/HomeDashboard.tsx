@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import LoreDashboard from "./LoreDashboard";
-import SceneDashboard from "./SceneDashboard";
+import CampaignDashboard from "./CampaignDashboard";
 import ActorDashboard from "./ActorDashboard";
 import EquipmentDashboard from "./EquipmentDashboard";
 
@@ -34,7 +34,7 @@ export default function HomeDashboard(): JSX.Element {
     }
 
     const renderSceneDashboard = (): JSX.Element => {
-        return <SceneDashboard/>
+        return <CampaignDashboard/>
     }
 
     return (

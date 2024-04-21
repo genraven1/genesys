@@ -1,8 +1,8 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {Path} from "../../../services/Path";
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import SceneService from "../../services/SceneService";
+import SceneService from "../../../services/SceneService";
 
 interface Props {
     open: boolean

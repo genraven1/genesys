@@ -1,7 +1,7 @@
 import {useLocation, useParams} from "react-router-dom";
-import Scene from "../../models/Scene";
+import Scene from "../../../models/campaign/Scene";
 import {Fragment, useEffect, useState} from "react";
-import SceneService from "../../services/SceneService";
+import SceneService from "../../../services/SceneService";
 import ViewAllScenes from "./ViewAllScenes";
 import SceneView from "./SceneView";
 

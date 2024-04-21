@@ -21,7 +21,7 @@ import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
-import SceneWorkflow from "../scene/SceneWorkflow";
+import SceneWorkflow from "../campaign/scene/SceneWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";

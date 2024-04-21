@@ -1,4 +1,4 @@
-import Scene from "../models/Scene";
+import Scene from "../models/campaign/Scene";
 import axios from "axios";
 import {Path} from "./Path";
 

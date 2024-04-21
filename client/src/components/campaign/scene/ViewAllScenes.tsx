@@ -1,19 +1,19 @@
 import {useEffect, useState} from "react";
-import Scene from "../../models/Scene";
+import Scene from "../../../models/campaign/Scene";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
-import SettingDialog from "../setting/SettingDialog";
+import SettingDialog from "../../setting/SettingDialog";
 import * as React from "react";
-import SceneService from "../../services/SceneService";
-import {renderHeaders} from "../common/table/TableRenders";
-import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import SceneService from "../../../services/SceneService";
+import {renderHeaders} from "../../common/table/TableRenders";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {Path} from "../../../services/Path";
 
 interface Props {
     scene: Scene
