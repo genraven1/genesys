@@ -1,8 +1,5 @@
-import Actor from "../actor/Actor";
+import Party from "./Party";
 
 export default interface Scene {
-    id: number
-    name: string
-    actors: Actor[]
-    party: Actor[]
+    party: Party
 }
