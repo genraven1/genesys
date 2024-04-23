@@ -21,7 +21,6 @@ import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
-import SceneWorkflow from "../campaign/scene/SceneWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
@@ -43,10 +42,6 @@ export default function App() {
                     <Route path={Path.Spell} element={<SpellWorkflow/>}/>
                     <Route path={Path.Spell + ':name/view'} element={<SpellWorkflow/>}/>
                     <Route path={Path.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
-
-                    <Route path={Path.Scene} element={<SceneWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
 
                     <Route path={Path.Setting} element={<SettingWorkflow/>}/>
                     <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow/>}/>
@@ -108,6 +103,23 @@ export default function App() {
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
+
+                    {/*Campaign Routes*/}
+                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+
+                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+
+                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+
+                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
                 </Routes>
             </HashRouter>
         </ThemeProvider>
