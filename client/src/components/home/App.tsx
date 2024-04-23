@@ -1,7 +1,7 @@
 import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
+import {ActorPath, CampaignPath, EquipmentPath, LorePath, Path} from '../../services/Path';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
@@ -24,6 +24,7 @@ import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
+import CampaignWorkflow from "../campaign/CampaignWorkflow";
 
 export default function App() {
 
@@ -105,9 +106,9 @@ export default function App() {
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
 
                     {/*Campaign Routes*/}
-                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+                    <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':name/view'} element={<CampaignWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':name/edit'} element={<CampaignWorkflow/>}/>
 
                     {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
                     {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}

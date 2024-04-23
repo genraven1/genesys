@@ -37,7 +37,7 @@
 //             return <SceneView scene={scene}/>
 //         }
 //         // else if (pathname.endsWith('/edit')) {
-//         //     return <SettingEdit set={setting}/>
+//         //     return <CampaignEdit set={setting}/>
 //         // }
 //         else {
 //             return <ViewAllScenes/>

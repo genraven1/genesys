@@ -15,7 +15,7 @@ export default class CampaignService {
         return await (await axios.get(CampaignPath.Campaign + name)).data;
     }
 
-    static async updateCampaign(id: number, setting: Campaign): Promise<Campaign> {
-        return await (await axios.put(CampaignPath.Campaign + id, setting)).data;
+    static async updateCampaign(name: string, campaign: Campaign): Promise<Campaign> {
+        return await (await axios.put(CampaignPath.Campaign + name, campaign)).data;
     }
 }
