@@ -2,6 +2,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
+import ViewAllCampaigns from "./ViewAllCampaigns";
 
 
 function useFetchCampaign(name: string): Campaign {
@@ -27,10 +28,10 @@ function useFetchCampaign(name: string): Campaign {
 
 export default function CampaignWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
-    const scene = useFetchCampaign(name!)
+    const campaign = useFetchCampaign(name!)
 
-    // const useWorkflowRender = (): JSX.Element => {
-    //     const pathname = useLocation().pathname
+    const useWorkflowRender = (): JSX.Element => {
+        const pathname = useLocation().pathname
     //     if (pathname.endsWith('/view')) {
     //         return <CampaignView scene={scene}/>
     //     }
@@ -38,13 +39,13 @@ export default function CampaignWorkflow(): JSX.Element {
     //     //     return <SettingEdit set={setting}/>
     //     // }
     //     else {
-    //         return <ViewAllCampaigns/>
+            return <ViewAllCampaigns/>
     //     }
-    // }
+    }
 
     return (
         <Fragment>
-            {/*{useWorkflowRender()}*/}
+            {useWorkflowRender()}
         </Fragment>
     )
 }
