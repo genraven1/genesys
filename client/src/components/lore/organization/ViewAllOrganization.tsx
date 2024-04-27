@@ -26,7 +26,7 @@ function OrganizationRow(props: RowProps): JSX.Element {
     return (
         <TableRow>
             <GenesysDescriptionTypographyCenterTableCell value={organization.name}/>
-            <ActionsTableCell id={organization.name} path={LorePath.Organization}/>
+            <ActionsTableCell name={organization.name} path={LorePath.Organization}/>
         </TableRow>
     )
 }

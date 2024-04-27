@@ -5,16 +5,16 @@ import {forwardRef, useMemo} from "react";
 import * as React from "react";
 
 interface Props {
-    id: string
+    name: string
     path: string
 }
 
 export default function ActionsTableCell(props: Props): JSX.Element {
-    const {id, path} = props
+    const {name, path} = props
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${path}${id}/view`} ref={ref} {...itemProps} />
-    )), [path, id])
+        <Link to={`${path}${name}/view`} ref={ref} {...itemProps} />
+    )), [path, name])
 
     return (
         <TableCell style={{textAlign: 'center'}}>

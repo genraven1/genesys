@@ -34,7 +34,7 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={career.name}/>
                 <SettingTableCell settings={career.settings} setting={setting}/>
-                <ActionsTableCell id={career.name} path={Path.Career}/>
+                <ActionsTableCell name={career.name} path={Path.Career}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

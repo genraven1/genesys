@@ -7,7 +7,7 @@ import CampaignView from "./CampaignView";
 import CampaignEdit from "./CampaignEdit";
 
 
-function useFetchCampaign(name: string): Campaign {
+export function useFetchCampaign(name: string): Campaign {
     const [campaign, setCampaign] = useState<Campaign>()
 
     useEffect(() => {

@@ -35,7 +35,7 @@ function Row(props: Props): JSX.Element {
         <TableRow>
             <TypographyCenterTableCell value={setting.name}/>
             {renderSettingMagicTableCell()}
-            <ActionsTableCell id={String(setting.name)} path={Path.Setting}/>
+            <ActionsTableCell name={String(setting.name)} path={Path.Setting}/>
         </TableRow>
     )
 }

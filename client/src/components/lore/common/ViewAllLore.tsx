@@ -32,7 +32,7 @@ function LoreRow(props: RowProps): JSX.Element {
         <TableRow>
             <TypographyCenterTableCell value={lore.name}/>
             <TypographyCenterTableCell value={lore.type}/>
-            <ActionsTableCell id={lore.name} path={getLorePath()}/>
+            <ActionsTableCell name={lore.name} path={getLorePath()}/>
         </TableRow>
     )
 }

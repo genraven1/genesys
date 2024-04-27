@@ -37,7 +37,7 @@ function Row(props: Props): JSX.Element {
         <TableRow>
             <TableCell>{actor.name}</TableCell>
             <TableCell>{actor.type}</TableCell>
-            <ActionsTableCell id={actor.name} path={getPathFromType()}/>
+            <ActionsTableCell name={actor.name} path={getPathFromType()}/>
         </TableRow>
     )
 }

@@ -30,7 +30,7 @@ function Row(props: Props): JSX.Element {
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
             <SettingTableCell settings={skill.settings} setting={useFetchCurrentSetting()}/>
-            <ActionsTableCell id={skill.name} path={Path.Skills}/>
+            <ActionsTableCell name={skill.name} path={Path.Skills}/>
         </TableRow>
     )
 }
