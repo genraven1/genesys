@@ -6,6 +6,7 @@ import {CampaignPath} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import Campaign from "../../models/campaign/Campaign";
+import ViewAllSessions from "./session/ViewAllSessions";
 
 interface Props {
     camp: Campaign
@@ -14,7 +15,6 @@ interface Props {
 export default function CampaignEdit(props: Props) {
     const {camp} = props
     const [campaign, setCampaign] = useState<Campaign>(camp)
-
     let navigate = useNavigate()
 
     useEffect(() => {setCampaign(camp)}, [camp])
@@ -46,7 +46,9 @@ export default function CampaignEdit(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-
+                        <Grid item xs>
+                            <ViewAllSessions sessions={campaign.sessions} campaignName={campaign.name}/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>

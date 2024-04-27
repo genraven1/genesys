@@ -5,6 +5,7 @@ import com.github.genraven.gradlejavaserver.domain.campaign.Session;
 import com.github.genraven.gradlejavaserver.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -49,5 +50,12 @@ public class CampaignService {
             campaign.setSessions(sessions);
             return campaign;
         }).flatMap(campaignRepository::save);
+    }
+
+    public Mono<Session> getSession(final String campaignName, final String sessionName) {
+        return getCampaign(campaignName)
+                .map(campaign -> campaign.getSessions().stream()
+                        .filter(session -> session.getName().equals(sessionName))
+                        .findFirst().orElseThrow(ArrayIndexOutOfBoundsException::new));
     }
 }

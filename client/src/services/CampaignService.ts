@@ -23,4 +23,8 @@ export default class CampaignService {
     static async createSession(campaignName: string, sessionName: string): Promise<CampaignSession> {
         return await (await axios.put(CampaignPath.Campaign + campaignName + CampaignPath.Session + sessionName)).data;
     }
+
+    static async getSession(campaignName: string, sessionName: string): Promise<CampaignSession> {
+        return await (await axios.get(CampaignPath.Campaign + campaignName + CampaignPath.Session + sessionName)).data;
+    }
 }

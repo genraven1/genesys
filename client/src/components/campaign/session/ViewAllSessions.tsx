@@ -1,5 +1,5 @@
 import CampaignSession from "../../../models/campaign/CampaignSession";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/Path";
+import {useLocation} from "react-router-dom";
 
 
 interface RowProps {
@@ -39,14 +40,30 @@ export default function ViewAllSessions(props: Props) {
     const {sessions, campaignName} = props;
     const [openSessionCreationDialog, setOpenSessionCreationDialog] = useState(false)
     const headers = ['Name', 'View']
+    const pathname = useLocation().pathname
+
+    const renderButton = (): JSX.Element => {
+        if (pathname.endsWith('/edit')) {
+            return (
+                <Fragment>
+                    <Button color='primary' variant='contained'
+                            onClick={(): void => setOpenSessionCreationDialog(true)}>Create Session</Button>
+                    {openSessionCreationDialog && <SessionDialog open={openSessionCreationDialog}
+                                                                 onClose={(): void => setOpenSessionCreationDialog(false)}
+                                                                 campaignName={campaignName}/>}
+                </Fragment>
+            )
+        } else {
+            return <Fragment/>
+        }
+    }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={'View All Sessions'}
-                action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenSessionCreationDialog(true)}>Create Session</Button>}>
+                action={renderButton()}>
             </CardHeader>
             <Divider/>
             <CardContent>
@@ -61,9 +78,6 @@ export default function ViewAllSessions(props: Props) {
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openSessionCreationDialog && <SessionDialog open={openSessionCreationDialog}
-                                                         onClose={(): void => setOpenSessionCreationDialog(false)}
-                                                         campaignName={campaignName}/>}
         </Card>
     )
 

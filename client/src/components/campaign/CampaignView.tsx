@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {CampaignPath, Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Campaign from "../../models/campaign/Campaign";
+import ViewAllSessions from "./session/ViewAllSessions";
 
 interface Props {
     campaign: Campaign
@@ -30,7 +31,9 @@ export default function CampaignView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-
+                        <Grid item xs>
+                            <ViewAllSessions sessions={campaign.sessions} campaignName={campaign.name}/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>

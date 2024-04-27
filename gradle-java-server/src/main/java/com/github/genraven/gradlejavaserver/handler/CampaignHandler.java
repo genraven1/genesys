@@ -71,6 +71,16 @@ public class CampaignHandler {
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
+    public Mono<ServerResponse> getSession(final ServerRequest serverRequest) {
+        final String campaignName = serverRequest.pathVariable("campaignName");
+        final String sessionName = serverRequest.pathVariable("sessionName");
+        return campaignService.getSession(campaignName, sessionName)
+                .flatMap(session -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(session))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
     private URI getURI(final Campaign campaign) {
         return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(campaign.getName()).toUri();
     }
