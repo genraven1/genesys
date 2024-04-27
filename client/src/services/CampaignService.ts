@@ -1,6 +1,7 @@
 import Campaign from "../models/campaign/Campaign";
 import axios from "axios";
 import {CampaignPath} from "./Path";
+import CampaignSession from "../models/campaign/CampaignSession";
 
 export default class CampaignService {
     static async createCampaign(name: string): Promise<Campaign> {
@@ -17,5 +18,9 @@ export default class CampaignService {
 
     static async updateCampaign(name: string, campaign: Campaign): Promise<Campaign> {
         return await (await axios.put(CampaignPath.Campaign + name, campaign)).data;
+    }
+
+    static async createSession(campaignName: string, sessionName: string): Promise<CampaignSession> {
+        return await (await axios.put(CampaignPath.Campaign + campaignName + CampaignPath.Session + sessionName)).data;
     }
 }

@@ -17,7 +17,8 @@ public class CampaignRouter {
                         .GET("/", campaignHandler::getAllCampaigns)
                         .POST("/{name}", campaignHandler::createCampaign)
                         .GET("/{name}", campaignHandler::getCampaign)
-                        .PUT("/{name}", campaignHandler::updateCampaign))
+                        .PUT("/{name}", campaignHandler::updateCampaign)
+                        .PUT("/{campaignName}/sessions/{sessionName}", campaignHandler::createSession))
                 .build();
     }
 }
