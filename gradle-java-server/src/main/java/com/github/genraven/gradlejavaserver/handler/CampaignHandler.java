@@ -1,6 +1,7 @@
 package com.github.genraven.gradlejavaserver.handler;
 
 import com.github.genraven.gradlejavaserver.domain.campaign.Campaign;
+import com.github.genraven.gradlejavaserver.domain.campaign.Session;
 import com.github.genraven.gradlejavaserver.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -75,6 +76,40 @@ public class CampaignHandler {
         final String campaignName = serverRequest.pathVariable("campaignName");
         final String sessionName = serverRequest.pathVariable("sessionName");
         return campaignService.getSession(campaignName, sessionName)
+                .flatMap(session -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(session))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> updateSession(final ServerRequest serverRequest) {
+        final String campaignName = serverRequest.pathVariable("campaignName");
+        final String sessionName = serverRequest.pathVariable("sessionName");
+        final Mono<Session> sessionMono = serverRequest.bodyToMono(Session.class);
+        return sessionMono
+                .flatMap(session -> campaignService.updateSession(campaignName, sessionName, session))
+                .flatMap(session -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(session))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> createScene(final ServerRequest serverRequest) {
+        final String campaignName = serverRequest.pathVariable("campaignName");
+        final String sessionName = serverRequest.pathVariable("sessionName");
+        final String sceneName = serverRequest.pathVariable("sceneName");
+        return campaignService.createScene(campaignName, sessionName, sceneName)
+                .flatMap(campaign -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(campaign))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> getScene(final ServerRequest serverRequest) {
+        final String campaignName = serverRequest.pathVariable("campaignName");
+        final String sessionName = serverRequest.pathVariable("sessionName");
+        final String sceneName = serverRequest.pathVariable("sceneName");
+        return campaignService.getScene(campaignName, sessionName, sceneName)
                 .flatMap(session -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(session))

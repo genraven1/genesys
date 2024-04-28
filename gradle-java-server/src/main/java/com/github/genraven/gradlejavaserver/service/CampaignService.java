@@ -1,11 +1,11 @@
 package com.github.genraven.gradlejavaserver.service;
 
 import com.github.genraven.gradlejavaserver.domain.campaign.Campaign;
+import com.github.genraven.gradlejavaserver.domain.campaign.Scene;
 import com.github.genraven.gradlejavaserver.domain.campaign.Session;
 import com.github.genraven.gradlejavaserver.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -56,6 +56,38 @@ public class CampaignService {
         return getCampaign(campaignName)
                 .map(campaign -> campaign.getSessions().stream()
                         .filter(session -> session.getName().equals(sessionName))
+                        .findFirst().orElseThrow(ArrayIndexOutOfBoundsException::new));
+    }
+
+    public Mono<Campaign> updateSession(final String campaignName, final String sessionName, final Session session) {
+        return getCampaign(campaignName).map(campaign -> {
+            campaign.getSessions().stream().filter(ses -> ses.getName().equals(sessionName)).forEach(ses -> {
+                ses.setScenes(session.getScenes());
+                ses.setParty(session.getParty());
+            });
+            return campaign;
+        }).flatMap(campaignRepository::save);
+    }
+
+    public Mono<Campaign> createScene(final String campaignName, final String sessionName, final String sceneName) {
+        return getCampaign(campaignName).map(campaign -> {
+            campaign.getSessions().stream().filter(session -> session.getName().equals(sessionName)).forEach(session -> {
+                final Scene scene = new Scene(sceneName);
+                final List<Scene> scenes = session.getScenes();
+                scenes.add(scene);
+                session.setScenes(scenes);
+            });
+            return campaign;
+        }).flatMap(campaignRepository::save);
+    }
+
+    public Mono<Scene> getScene(final String campaignName, final String sessionName, final String sceneName) {
+        return getCampaign(campaignName)
+                .map(campaign -> campaign.getSessions().stream()
+                        .filter(session -> session.getName().equals(sessionName))
+                        .map(session -> session.getScenes().stream()
+                                .filter(scene -> scene.getName().equals(sceneName))
+                                .findFirst().orElseThrow(ArrayIndexOutOfBoundsException::new))
                         .findFirst().orElseThrow(ArrayIndexOutOfBoundsException::new));
     }
 }
