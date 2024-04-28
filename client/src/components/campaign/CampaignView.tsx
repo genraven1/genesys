@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {CampaignPath, Path} from "../../services/Path";
+import {CampaignPath} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
 import Campaign from "../../models/campaign/Campaign";
 import ViewAllSessions from "./session/ViewAllSessions";

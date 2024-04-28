@@ -38,7 +38,7 @@ export default function CampaignEdit(props: Props) {
 
     return (
         <Card>
-            <CardHeader title={campaign?.name!!} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
+            <CardHeader title={campaign.name} style={{ textAlign: 'center' }} action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                 <CheckIcon color='primary' fontSize='small' />
             </IconButton>}>
             </CardHeader>

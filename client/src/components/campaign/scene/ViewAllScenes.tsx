@@ -1,64 +1,82 @@
-import {useEffect, useState} from "react";
+import {Fragment, useState} from "react";
 import Scene from "../../../models/campaign/Scene";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
-import SettingDialog from "../../setting/SettingDialog";
 import * as React from "react";
-import CampaignService from "../../../services/CampaignService";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {Path} from "../../../services/Path";
+import {useLocation} from "react-router-dom";
+import SceneDialog from "./SceneDialog";
 
-interface Props {
+interface RowProps {
     scene: Scene
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: RowProps): JSX.Element {
     const {scene} = props
 
     return (
         <TableRow>
-            <TypographyCenterTableCell value={''}/>
-            <TypographyCenterTableCell value={''}/>
+            <TypographyCenterTableCell value={scene.name}/>
             <ActionsTableCell name={''} path={Path.Setting}/>
         </TableRow>
     )
 }
 
-export default function ViewAllScenes(): JSX.Element {
-    const [scenes, setScenes] = useState<Scene[]>([])
+interface Props {
+    scenes: Scene[]
+    campaignName: string
+    sessionName: string
+}
+
+export default function ViewAllScenes(props: Props): JSX.Element {
+    const {scenes, campaignName, sessionName} = props
     const [openSceneCreationDialog, setOpenSceneCreationDialog] = useState(false)
-    const headers = ['Name', 'Number of Actors', 'View']
+    const headers = ['Name', 'View']
+    const pathname = useLocation().pathname
+
+    const renderButton = (): JSX.Element => {
+        if (pathname.endsWith('/edit')) {
+            return (
+                <Fragment>
+                    <Button color='primary' variant='contained'
+                            onClick={(): void => setOpenSceneCreationDialog(true)}>Create Session</Button>
+                    {openSceneCreationDialog && <SceneDialog open={openSceneCreationDialog}
+                                                             onClose={(): void => setOpenSceneCreationDialog(false)}
+                                                             campaignName={campaignName} sessionName={sessionName}/>}
+                </Fragment>
+            )
+        } else {
+            return <Fragment/>
+        }
+    }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={'View All Scenes'}
-                action={<Button color='primary' variant='contained' onClick={(): void => setOpenSceneCreationDialog(true)}>Create Scene</Button>}>
+                action={renderButton()}>
             </CardHeader>
-            <Divider />
+            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
-                    <Table aria-label="collapsible table">
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {scenes.map((scene: Scene) => (
-                                <Row key={''} scene={scene} />
+                                <Row key={scene.name} scene={scene}/>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openSceneCreationDialog && <SettingDialog open={openSceneCreationDialog} onClose={(): void => setOpenSceneCreationDialog(false)}/>}
         </Card>
     )
 }

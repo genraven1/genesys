@@ -4,43 +4,51 @@ import {Fragment, useEffect, useState} from "react";
 import CampaignService from "../../../services/CampaignService";
 import SceneView from "./SceneView";
 import ViewAllScenes from "./ViewAllScenes";
+import {useFetchCampaign} from "../CampaignWorkflow";
+import {useFetchSession} from "../session/SessionWorkflow";
 
 
-function useFetchScene(id: number): Scene {
+export function useFetchScene(campaignName: string, sessionName: string, sceneName: string) {
     const [scene, setScene] = useState<Scene>()
 
-    // useEffect(() => {
-    //     if (!id) {
-    //         return
-    //     }
-    //     (async (): Promise<void> => {
-    //         try {
-    //             const sceneData = await CampaignService.getScene(id)
-    //             if (sceneData) {
-    //                 setScene(sceneData)
-    //             }
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //     })()
-    // }, [id, setScene])
+    useEffect(() => {
+        if (!campaignName || !sessionName) {
+            return
+        }
+        (async (): Promise<void> => {
+            try {
+                const sceneData = await CampaignService.getScene(campaignName, sessionName, sceneName)
+                if (sceneData) {
+                    setScene(sceneData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        })()
+    }, [campaignName, sessionName, setScene])
     return scene as Scene
 }
 
 export default function SceneWorkflow(): JSX.Element {
-    const {id} = useParams<{ id?: string }>()
-    const scene = useFetchScene(Number(id))
+    const {campaignName, sessionName, sceneName} = useParams<{
+        campaignName: string,
+        sessionName: string,
+        sceneName: string
+    }>()
+    const campaign = useFetchCampaign(campaignName!)
+    const session = useFetchSession(campaignName!, sessionName!)
+    const scene = useFetchScene(campaignName!, sessionName!, sceneName!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return <SceneView scene={scene}/>
         }
-        // else if (pathname.endsWith('/edit')) {
-        //     return <CampaignEdit set={setting}/>
+            // else if (pathname.endsWith('/edit')) {
+            //     return <CampaignEdit set={setting}/>
         // }
         else {
-            return <ViewAllScenes/>
+            return <ViewAllScenes campaignName={campaign.name} sessionName={session.name} scenes={session.scenes}/>
         }
     }
 
