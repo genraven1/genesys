@@ -10,21 +10,23 @@ import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {Path} from "../../../services/Path";
+import {CampaignPath} from "../../../services/Path";
 import {useLocation} from "react-router-dom";
 import SceneDialog from "./SceneDialog";
 
 interface RowProps {
     scene: Scene
+    campaignName: string
+    sessionName: string
 }
 
 function Row(props: RowProps): JSX.Element {
-    const {scene} = props
+    const {scene, campaignName, sessionName} = props
 
     return (
         <TableRow>
             <TypographyCenterTableCell value={scene.name}/>
-            <ActionsTableCell name={''} path={Path.Setting}/>
+            <ActionsTableCell name={scene.name} path={CampaignPath.Campaign + campaignName + CampaignPath.Session + sessionName + CampaignPath.Scene}/>
         </TableRow>
     )
 }
@@ -71,7 +73,7 @@ export default function ViewAllScenes(props: Props): JSX.Element {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {scenes.map((scene: Scene) => (
-                                <Row key={scene.name} scene={scene}/>
+                                <Row key={scene.name} scene={scene} campaignName={campaignName} sessionName={sessionName}/>
                             ))}
                         </TableBody>
                     </Table>

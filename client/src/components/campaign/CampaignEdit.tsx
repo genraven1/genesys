@@ -1,6 +1,5 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useEffect, useState} from 'react';
-import CampaignService from '../../services/CampaignService';
 import {useNavigate} from 'react-router-dom';
 import {CampaignPath} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
@@ -19,18 +18,18 @@ export default function CampaignEdit(props: Props) {
 
     useEffect(() => {setCampaign(camp)}, [camp])
 
-    const onChange = async (key: keyof Campaign, value: any) => {
-        if (value === null || (campaign !== null && campaign[key] === value)) {
-            return
-        }
-        const copyCampaign = { ...campaign } as Campaign
-        switch (key) {
-
-        }
-        setCampaign(copyCampaign)
-
-        await CampaignService.updateCampaign(copyCampaign.name, copyCampaign)
-    }
+    // const onChange = async (key: keyof Campaign, value: any) => {
+    //     if (value === null || (campaign !== null && campaign[key] === value)) {
+    //         return
+    //     }
+    //     const copyCampaign = { ...campaign } as Campaign
+    //     switch (key) {
+    //
+    //     }
+    //     setCampaign(copyCampaign)
+    //
+    //     await CampaignService.updateCampaign(copyCampaign.name, copyCampaign)
+    // }
 
     const onView = () => {
         navigate(CampaignPath.Campaign + campaign.name + '/view')
