@@ -26,6 +26,7 @@ import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import SessionWorkflow from "../campaign/session/SessionWorkflow";
+import SceneWorkflow from "../campaign/scene/SceneWorkflow";
 
 export default function App() {
 
@@ -115,9 +116,9 @@ export default function App() {
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/view'} element={<SessionWorkflow/>}/>
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/edit'} element={<SessionWorkflow/>}/>
 
-                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene} element={<SceneWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/view'} element={<SceneWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
 
                     {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
                     {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}

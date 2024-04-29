@@ -16,6 +16,7 @@ export default function CampaignEdit(props: Props) {
     const [campaign, setCampaign] = useState<Campaign>(camp)
     let navigate = useNavigate()
 
+
     useEffect(() => {setCampaign(camp)}, [camp])
 
     // const onChange = async (key: keyof Campaign, value: any) => {

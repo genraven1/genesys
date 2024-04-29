@@ -25,7 +25,7 @@ export function useFetchScene(campaignName: string, sessionName: string, sceneNa
                 console.log(err)
             }
         })()
-    }, [campaignName, sessionName, setScene])
+    }, [campaignName, sessionName, sceneName, setScene])
     return scene as Scene
 }
 
@@ -42,7 +42,7 @@ export default function SceneWorkflow(): JSX.Element {
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return <SceneView scene={scene}/>
+            return scene && <SceneView scene={scene} campaignName={campaign.name} sessionName={session.name}/>
         }
             // else if (pathname.endsWith('/edit')) {
             //     return <CampaignEdit set={setting}/>
