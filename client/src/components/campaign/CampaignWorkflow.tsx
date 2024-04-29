@@ -28,6 +28,21 @@ export function useFetchCampaign(name: string): Campaign {
     return campaign as Campaign
 }
 
+export function useFetchAllCampaigns(): Campaign[] {
+    const [campaigns, setCampaigns] = useState<Campaign[]>([])
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const campaignList = await CampaignService.getCampaigns()
+            if (!campaignList) {
+                return
+            }
+            setCampaigns(campaignList)
+        })()
+    }, [])
+    return campaigns
+}
+
 export default function CampaignWorkflow(): JSX.Element {
     const {name} = useParams<{ name?: string }>()
     const campaign = useFetchCampaign(name!)

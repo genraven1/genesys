@@ -38,6 +38,7 @@ public class CampaignService {
             camp.setName(campaign.getName());
             camp.setParty(campaign.getParty());
             camp.setSessions(campaign.getSessions());
+            camp.setTalents(campaign.getTalents());
             return camp;
         }).flatMap(campaignRepository::save);
     }

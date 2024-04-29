@@ -1,5 +1,6 @@
 package com.github.genraven.gradlejavaserver.domain.campaign;
 
+import com.github.genraven.gradlejavaserver.domain.Talent;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,4 +21,5 @@ public class Campaign {
     private String name;
     private Party party;
     private List<Session> sessions = new ArrayList<>();
+    private List<Talent> talents = new ArrayList<>();
 }
