@@ -46,7 +46,7 @@ function Row(props: RowProps): JSX.Element {
                 <TypographyCenterTableCell value={quality.name}/>
                 <TableCell style={{textAlign: 'center'}}>{renderActivation()}</TableCell>
                 <TypographyCenterTableCell value={renderUsable(quality)}/>
-                <ActionsTableCell id={quality.name} path={Path.Qualities}/>
+                <ActionsTableCell name={quality.name} path={Path.Qualities}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>

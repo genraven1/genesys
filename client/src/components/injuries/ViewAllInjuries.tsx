@@ -36,7 +36,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ActionsTableCell id={injury.name} path={Path.Injury}/>
+                <ActionsTableCell name={injury.name} path={Path.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

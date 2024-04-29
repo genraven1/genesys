@@ -30,7 +30,7 @@ function Row(props: Props): JSX.Element {
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={nemesis.name}/>
-                <ActionsTableCell id={nemesis.name} path={ActorPath.Nemesis}/>
+                <ActionsTableCell name={nemesis.name} path={ActorPath.Nemesis}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>

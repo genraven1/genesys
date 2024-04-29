@@ -6,7 +6,6 @@ export enum Path {
     Roll = '/roll',
     Setting = '/settings/',
     Qualities = '/qualities/',
-    Scene = '/scenes/',
     Injury = '/injuries/',
     Spell = '/spells/',
     Career = '/careers/',
@@ -30,4 +29,11 @@ export enum ActorPath {
     Rival = '/actors/rivals/',
     Minion = '/actors/minions/',
     Npc = '/actors/npcs'
+}
+
+export enum CampaignPath {
+    Campaign = '/campaigns/',
+    Party = '/party/',
+    Session = '/sessions/',
+    Scene = '/scenes/',
 }

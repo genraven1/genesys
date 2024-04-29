@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import LoreDashboard from "./LoreDashboard";
-import SceneDashboard from "./SceneDashboard";
+import CampaignDashboard from "./CampaignDashboard";
 import ActorDashboard from "./ActorDashboard";
 import EquipmentDashboard from "./EquipmentDashboard";
 
@@ -33,8 +33,8 @@ export default function HomeDashboard(): JSX.Element {
         return <LoreDashboard/>
     }
 
-    const renderSceneDashboard = (): JSX.Element => {
-        return <SceneDashboard/>
+    const renderCampaignDashboard = (): JSX.Element => {
+        return <CampaignDashboard/>
     }
 
     return (
@@ -47,14 +47,14 @@ export default function HomeDashboard(): JSX.Element {
                             <Tab label="Actor" value="2"/>
                             <Tab label="Equipment" value="3"/>
                             <Tab label="Lore" value="4"/>
-                            <Tab label="Scene" value="5"/>
+                            <Tab label="Campaign" value="5"/>
                         </TabList>
                     </Grid>
                     <TabPanel value="1">{renderDefaultDashboard()}</TabPanel>
                     <TabPanel value="2">{renderActorDashboard()}</TabPanel>
                     <TabPanel value="3">{renderEquipmentDashboard()}</TabPanel>
                     <TabPanel value="4">{renderLoreDashboard()}</TabPanel>
-                    <TabPanel value="5">{renderSceneDashboard()}</TabPanel>
+                    <TabPanel value="5">{renderCampaignDashboard()}</TabPanel>
                 </TabContext>
             </Grid>
         </Card>

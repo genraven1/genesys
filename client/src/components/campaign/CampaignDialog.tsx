@@ -1,21 +1,22 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
-import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import SceneService from "../../services/SceneService";
+import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
+import {CampaignPath} from "../../services/Path";
+import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
+import CampaignService from "../../services/CampaignService";
 
 interface Props {
     open: boolean
     onClose: () => void
 }
-export default function SceneDialog(props: Props): JSX.Element {
+export default function CampaignDialog(props: Props): JSX.Element {
     const {open,onClose} = props
     const [name,setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let scene = await SceneService.createScene(name)
-        navigate(Path.Scene + scene?.id!!  + '/edit')
+        let scene = await CampaignService.createCampaign(name)
+        navigate(CampaignPath.Campaign + scene.name  + '/edit')
         onClose()
     }
 
@@ -26,14 +27,11 @@ export default function SceneDialog(props: Props): JSX.Element {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Name New Scene</DialogTitle>
+            <DialogTitle>Name New Campaign</DialogTitle>
             <DialogContentText>
                 <TextField onChange={onChange} value={name} required/>
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
     )
 }

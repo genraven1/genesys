@@ -34,7 +34,7 @@ function Row(props: Props): JSX.Element {
                 <TableCell>{gear.encumbrance}</TableCell>
                 <TableCell>{renderPrice(gear)}</TableCell>
                 <TableCell>{gear.rarity}</TableCell>
-                <ActionsTableCell id={gear.name} path={EquipmentPath.Gear}/>
+                <ActionsTableCell name={gear.name} path={EquipmentPath.Gear}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>

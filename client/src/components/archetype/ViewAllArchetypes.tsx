@@ -25,7 +25,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow key={archetype.name}>
             <TypographyCenterTableCell value={archetype.name}/>
-            <ActionsTableCell id={archetype.name} path={Path.Archetype}/>
+            <ActionsTableCell name={archetype.name} path={Path.Archetype}/>
         </TableRow>
     )
 }

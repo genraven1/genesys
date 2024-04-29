@@ -31,7 +31,7 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={spell.name}/>
                 <GenesysDifficultyCenterTableCell difficulty={spell.difficulty}/>
-                <ActionsTableCell id={spell.name} path={Path.Spell}/>
+                <ActionsTableCell name={spell.name} path={Path.Spell}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

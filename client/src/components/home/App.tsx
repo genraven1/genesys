@@ -1,7 +1,7 @@
 import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {ActorPath, EquipmentPath, LorePath, Path} from '../../services/Path';
+import {ActorPath, CampaignPath, EquipmentPath, LorePath, Path} from '../../services/Path';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
@@ -21,10 +21,12 @@ import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
-import SceneWorkflow from "../scene/SceneWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
+import CampaignWorkflow from "../campaign/CampaignWorkflow";
+import SessionWorkflow from "../campaign/session/SessionWorkflow";
+import SceneWorkflow from "../campaign/scene/SceneWorkflow";
 
 export default function App() {
 
@@ -43,10 +45,6 @@ export default function App() {
                     <Route path={Path.Spell} element={<SpellWorkflow/>}/>
                     <Route path={Path.Spell + ':name/view'} element={<SpellWorkflow/>}/>
                     <Route path={Path.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
-
-                    <Route path={Path.Scene} element={<SceneWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>
-                    <Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
 
                     <Route path={Path.Setting} element={<SettingWorkflow/>}/>
                     <Route path={Path.Setting + ':name/view'} element={<SettingWorkflow/>}/>
@@ -108,6 +106,23 @@ export default function App() {
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
+
+                    {/*Campaign Routes*/}
+                    <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':name/view'} element={<CampaignWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':name/edit'} element={<CampaignWorkflow/>}/>
+
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session} element={<SessionWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/view'} element={<SessionWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/edit'} element={<SessionWorkflow/>}/>
+
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene} element={<SceneWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/view'} element={<SceneWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
+
+                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
                 </Routes>
             </HashRouter>
         </ThemeProvider>

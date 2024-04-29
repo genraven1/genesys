@@ -39,7 +39,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={String(armor.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice(armor)}/>
                 <TypographyCenterTableCell value={String(armor.rarity)}/>
-                <ActionsTableCell id={armor.name} path={EquipmentPath.Armor}/>
+                <ActionsTableCell name={armor.name} path={EquipmentPath.Armor}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>

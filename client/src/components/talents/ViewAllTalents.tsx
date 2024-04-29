@@ -47,7 +47,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
                 <SettingTableCell settings={talent.settings} setting={setting}/>
-                <ActionsTableCell id={talent.name} path={Path.Talent}/>
+                <ActionsTableCell name={talent.name} path={Path.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
