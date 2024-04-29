@@ -42,14 +42,15 @@ public class CampaignService {
         }).flatMap(campaignRepository::save);
     }
 
-    public Mono<Campaign> createSession(final String campaignName, final String sessionName) {
-        return getCampaign(campaignName).map(campaign -> {
+    public Mono<Session> createSession(final String campaignName, final String sessionName) {
+        getCampaign(campaignName).map(campaign -> {
             final Session session = new Session(sessionName);
             final List<Session> sessions = campaign.getSessions();
             sessions.add(session);
             campaign.setSessions(sessions);
             return campaign;
         }).flatMap(campaignRepository::save);
+        return getSession(campaignName, sessionName);
     }
 
     public Mono<Session> getSession(final String campaignName, final String sessionName) {
@@ -59,18 +60,20 @@ public class CampaignService {
                         .findFirst().orElseThrow(ArrayIndexOutOfBoundsException::new));
     }
 
-    public Mono<Campaign> updateSession(final String campaignName, final String sessionName, final Session session) {
-        return getCampaign(campaignName).map(campaign -> {
-            campaign.getSessions().stream().filter(ses -> ses.getName().equals(sessionName)).forEach(ses -> {
+    public Mono<Session> updateSession(final String campaignName, final String sessionName, final Session session) {
+        getCampaign(campaignName).map(campaign -> {
+            campaign.getSessions().stream()
+                    .filter(ses -> ses.getName().equals(sessionName)).forEach(ses -> {
                 ses.setScenes(session.getScenes());
                 ses.setParty(session.getParty());
             });
             return campaign;
         }).flatMap(campaignRepository::save);
+        return getSession(campaignName, sessionName);
     }
 
-    public Mono<Campaign> createScene(final String campaignName, final String sessionName, final String sceneName) {
-        return getCampaign(campaignName).map(campaign -> {
+    public Mono<Scene> createScene(final String campaignName, final String sessionName, final String sceneName) {
+        getCampaign(campaignName).map(campaign -> {
             campaign.getSessions().stream().filter(session -> session.getName().equals(sessionName)).forEach(session -> {
                 final Scene scene = new Scene(sceneName);
                 final List<Scene> scenes = session.getScenes();
@@ -79,6 +82,7 @@ public class CampaignService {
             });
             return campaign;
         }).flatMap(campaignRepository::save);
+        return getScene(campaignName, sessionName, sceneName);
     }
 
     public Mono<Scene> getScene(final String campaignName, final String sessionName, final String sceneName) {
