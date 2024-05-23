@@ -21,9 +21,10 @@ import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
 import Skill from "../../../models/actor/Skill";
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
-import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
+import CharacteristicRow from "../common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import PlayerSoakCard from "./PlayerSoakCard";
+import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 interface Props {
     play: Player
@@ -131,16 +132,9 @@ export default function PlayerView(props: Props) {
                                                                            player={player}/>}
                     </Grid>
                     <Divider/>
-                    <Grid container spacing={2}>
-                        <ViewCharacteristicRow actor={player}/>
-                    </Grid>
+                    <CharacteristicRow actor={player}/>
                     <Divider/>
-                    <Grid container spacing={2}>
-                        <PlayerSoakCard player={player}/>
-                        <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
-                        <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
-                        <PlayerDefenseCard player={player}/>
-                    </Grid>
+                    <DerivedPlayerStatsRow player={player}/>
                     <Divider/>
                     <PlayerEditSkillTable player={player} onSkillChange={onSkillChange}/>
                     <Divider/>

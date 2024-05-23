@@ -6,6 +6,7 @@ import {ActorArmor} from "../equipment/Armor";
 import Injury from "../Injury";
 
 export default interface Character {
+    name: string
     brawn: Characteristic,
     agility: Characteristic,
     intellect: Characteristic,

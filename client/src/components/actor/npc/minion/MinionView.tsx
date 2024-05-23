@@ -7,7 +7,7 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Minion from "../../../../models/actor/npc/Minion";
-import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import CharacteristicRow from "../../common/CharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
@@ -44,7 +44,7 @@ export default function MinionView(props: Props) {
             <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ViewCharacteristicRow actor={minion}/>
+                    <CharacteristicRow actor={minion}/>
                     <Divider/>
                     <Grid container spacing={2}>
                         <NonPlayerActorSoakCard actor={minion}/>

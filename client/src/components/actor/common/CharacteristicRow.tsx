@@ -8,7 +8,7 @@ interface Props {
     actor: Actor
 }
 
-export default function ViewCharacteristicRow(props: Props): JSX.Element {
+export default function CharacteristicRow(props: Props): JSX.Element {
     const {actor} = props
 
     return (

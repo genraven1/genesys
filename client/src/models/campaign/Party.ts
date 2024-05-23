@@ -1,3 +1,5 @@
-export default interface Party {
+import Character from "../character/Character";
 
+export default interface Party {
+    characters: Character[]
 }
