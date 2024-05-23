@@ -2,18 +2,15 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player, {Experience, PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
-import {StatsType} from '../../../models/actor/Stats';
 import {ActorPath} from '../../../services/Path';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
-import {ViewStatsCard} from "../StatsCard";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import SettingService from "../../../services/SettingService";
-import PlayerDefenseCard from "./PlayerDefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
@@ -23,7 +20,6 @@ import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
 import CharacteristicRow from "../common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import PlayerSoakCard from "./PlayerSoakCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 interface Props {
