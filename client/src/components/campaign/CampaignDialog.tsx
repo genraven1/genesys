@@ -15,8 +15,8 @@ export default function CampaignDialog(props: Props): JSX.Element {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let scene = await CampaignService.createCampaign(name)
-        navigate(CampaignPath.Campaign + scene.name  + '/edit')
+        let campaign = await CampaignService.createCampaign(name)
+        navigate(CampaignPath.Campaign + campaign.name)
         onClose()
     }
 

@@ -34,7 +34,7 @@ export default function PartyCard(props: Props) {
     }
 
     return (
-        <Card>
+        <Card sx={{"width": 1}}>
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={'Party'}
