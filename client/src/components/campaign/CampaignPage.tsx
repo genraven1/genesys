@@ -1,31 +1,20 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
-import * as React from "react";
-import {useNavigate} from "react-router-dom";
-import {CampaignPath} from "../../services/Path";
-import EditIcon from "@mui/icons-material/Edit";
 import Campaign from "../../models/campaign/Campaign";
+import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
 import ViewAllSessions from "./session/ViewAllSessions";
+import * as React from "react";
 
 interface Props {
     campaign: Campaign
 }
 
-export default function CampaignView(props: Props) {
-    const {campaign} = props
-    let navigate = useNavigate()
-
-    const onEdit = () => {
-        navigate(CampaignPath.Campaign + campaign.name + '/edit')
-    }
+export default function CampaignPage(props: Props) {
+    const { campaign } = props;
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={campaign.name}
-                action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
-                    <EditIcon color='primary' fontSize='small' />
-                </IconButton>}>
+                title={campaign.name}>
             </CardHeader>
             <Divider />
             <CardContent>

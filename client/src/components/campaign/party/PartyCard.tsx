@@ -17,8 +17,21 @@ interface Props {
 }
 
 export default function PartyCard(props: Props) {
-    const { party } = props;
+    const {party} = props;
     const headers = ['Name', 'View']
+
+    const renderTableBody = () => {
+        return (
+            <TableBody>
+                {party.characters.map((player: Character) => (
+                    <TableRow key={player.name}>
+                        <TypographyCenterTableCell value={player.name}/>
+                        <ActionsTableCell name={player.name} path={ActorPath.Player}/>
+                    </TableRow>
+                ))}
+            </TableBody>
+        )
+    }
 
     return (
         <Card>
@@ -31,14 +44,7 @@ export default function PartyCard(props: Props) {
                 <TableContainer component={Paper}>
                     <Table>
                         {renderSingleRowTableHeader(headers)}
-                        <TableBody>
-                            {party.characters.map((player: Character) => (
-                                <TableRow key={player.name}>
-                                    <TypographyCenterTableCell value={player.name}/>
-                                    <ActionsTableCell name={player.name} path={ActorPath.Player}/>
-                                </TableRow>
-                            ))}
-                        </TableBody>
+                        {renderTableBody()}
                     </Table>
                 </TableContainer>
             </CardContent>
