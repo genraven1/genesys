@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import ActionsTableCell from "../common/table/ActionsTableCell";
+import {SingleActionTableCell} from "../common/table/ActionsTableCell";
 import {CampaignPath} from "../../services/Path";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
@@ -24,7 +24,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow>
             <TypographyCenterTableCell value={campaign.name}/>
-            <ActionsTableCell name={campaign.name} path={CampaignPath.Campaign}/>
+            <SingleActionTableCell name={campaign.name} path={CampaignPath.Campaign}/>
         </TableRow>
     )
 }

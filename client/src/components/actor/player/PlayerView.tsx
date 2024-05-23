@@ -1,19 +1,16 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
-import {StatsType} from '../../../models/actor/Stats';
 import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
-import ViewCharacteristicRow from "../common/ViewCharacteristicRow";
+import CharacteristicRow from "../common/CharacteristicRow";
 import Setting from "../../../models/Setting";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
-import {ViewStatsCard} from "../StatsCard";
-import PlayerDefenseCard from "./PlayerDefenseCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import PlayerSoakCard from "./PlayerSoakCard";
+import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 interface Props {
     player: Player
@@ -45,14 +42,9 @@ export default function PlayerView(props: Props) {
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>
-                    <ViewCharacteristicRow actor={player}/>
+                    <CharacteristicRow actor={player}/>
                     <Divider/>
-                    <Grid container spacing={2}>
-                        <PlayerSoakCard player={player}/>
-                        <ViewStatsCard stats={player.wounds} type={StatsType.Wounds}/>
-                        <ViewStatsCard stats={player.strain} type={StatsType.Strain}/>
-                        <PlayerDefenseCard player={player}/>
-                    </Grid>
+                    <DerivedPlayerStatsRow player={player}/>
                     <Divider/>
                     <ViewPlayerSkillTable player={player}/>
                     <Divider/>

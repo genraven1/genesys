@@ -7,7 +7,7 @@ import GenesysDescriptionTypography from "../../../common/typography/GenesysDesc
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
-import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import CharacteristicRow from "../../common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
@@ -43,7 +43,7 @@ export default function RivalView(props: Props) {
             </CardHeader>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ViewCharacteristicRow actor={rival}/>
+                    <CharacteristicRow actor={rival}/>
                     <Divider />
                     <Grid container spacing={10}>
                         <NonPlayerActorSoakCard actor={rival} />

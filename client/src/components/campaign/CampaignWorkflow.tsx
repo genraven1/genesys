@@ -3,8 +3,8 @@ import {Fragment, useEffect, useState} from "react";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
 import ViewAllCampaigns from "./ViewAllCampaigns";
-import CampaignView from "./CampaignView";
-import CampaignEdit from "./CampaignEdit";
+import {CampaignPath} from "../../services/Path";
+import CampaignPage from "./CampaignPage";
 
 
 export function useFetchCampaign(name: string): Campaign {
@@ -34,14 +34,11 @@ export default function CampaignWorkflow(): JSX.Element {
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
-        if (pathname.endsWith('/view')) {
-            return campaign && <CampaignView campaign={campaign}/>
-        }
-        else if (pathname.endsWith('/edit')) {
-            return campaign && <CampaignEdit camp={campaign}/>
+        if (pathname.endsWith(CampaignPath.Campaign)) {
+            return <ViewAllCampaigns/>
         }
         else {
-            return <ViewAllCampaigns/>
+            return campaign && <CampaignPage campaign={campaign}/>
         }
     }
 

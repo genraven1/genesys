@@ -7,7 +7,7 @@ import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
-import ViewCharacteristicRow from "../../common/ViewCharacteristicRow";
+import CharacteristicRow from "../../common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";
 import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
@@ -44,7 +44,7 @@ export default function NemesisView(props: Props) {
             <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ViewCharacteristicRow actor={nemesis}/>
+                    <CharacteristicRow actor={nemesis}/>
                     <Divider />
                     <Grid container spacing={10}>
                         <NonPlayerActorSoakCard actor={nemesis} />
