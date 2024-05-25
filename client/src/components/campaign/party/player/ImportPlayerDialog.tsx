@@ -1,5 +1,5 @@
 import {Dialog, DialogContent, DialogTitle} from "@mui/material";
-import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
+import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean

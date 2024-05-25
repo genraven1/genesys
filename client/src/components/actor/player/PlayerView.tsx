@@ -5,20 +5,19 @@ import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";
-import Setting from "../../../models/Setting";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
+import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 interface Props {
     player: Player
-    settings: Setting[]
 }
 
 export default function PlayerView(props: Props) {
-    const {player, settings} = props
+    const {player} = props
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -52,7 +51,7 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <PlayerTalentCard player={player}/>
                 </Grid>
-                <ViewSettingsCard settings={player.settings} allSettings={settings}/>
+                <ViewSettingsCard settings={player.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

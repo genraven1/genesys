@@ -21,14 +21,14 @@ import Archetype from "../../../models/actor/player/Archetype";
 import CharacteristicRow from "../common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
+import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 interface Props {
     play: Player
-    settings: Setting[]
 }
 
-export default function PlayerView(props: Props) {
-    const {play, settings} = props
+export default function PlayerEdit(props: Props) {
+    const {play} = props
     const [player, setPlayer] = useState<Player>(play)
     const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false)
     let navigate = useNavigate()
@@ -139,7 +139,7 @@ export default function PlayerView(props: Props) {
                     <PlayerTalentCard player={player}/>
                 </Grid>
                 <EditSettingsCard settings={player.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
+                                  onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )
