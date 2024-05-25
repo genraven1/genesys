@@ -1,4 +1,4 @@
-package com.github.genraven.gradlejavaserver.repository;
+package com.github.genraven.gradlejavaserver.repository.campaign;
 
 import com.github.genraven.gradlejavaserver.domain.campaign.Campaign;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;

@@ -1,9 +1,11 @@
-package com.github.genraven.gradlejavaserver.service;
+package com.github.genraven.gradlejavaserver.service.campaign;
 
 import com.github.genraven.gradlejavaserver.domain.campaign.Campaign;
+import com.github.genraven.gradlejavaserver.domain.campaign.Party;
 import com.github.genraven.gradlejavaserver.domain.campaign.Scene;
 import com.github.genraven.gradlejavaserver.domain.campaign.Session;
-import com.github.genraven.gradlejavaserver.repository.CampaignRepository;
+import com.github.genraven.gradlejavaserver.repository.campaign.CampaignRepository;
+import com.github.genraven.gradlejavaserver.repository.campaign.PartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -15,10 +17,12 @@ import java.util.List;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final PartyRepository partyRepository;
 
     @Autowired
-    public CampaignService(final CampaignRepository campaignRepository) {
+    public CampaignService(final CampaignRepository campaignRepository, PartyRepository partyRepository) {
         this.campaignRepository = campaignRepository;
+        this.partyRepository = partyRepository;
     }
 
     public Flux<Campaign> getAllCampaigns() {
@@ -30,6 +34,9 @@ public class CampaignService {
     }
 
     public Mono<Campaign> createCampaign(final String name) {
+        final Campaign campaign = new Campaign(name);
+        final Party party = partyRepository.save(new Party(name));
+        campaign.setParty();
         return campaignRepository.save(new Campaign(name));
     }
 
