@@ -12,6 +12,7 @@ import TableCell from "@mui/material/TableCell";
 import {Button} from "@mui/material";
 import TalentBackdrop from "../../../actor/common/talent/TalentBackdrop";
 import Campaign from "../../../../models/campaign/Campaign";
+import PlayerBackdrop from "./PlayerBackdrop";
 
 interface RowProps {
     campaign: Campaign
@@ -20,32 +21,22 @@ interface RowProps {
 
 function AddPlayerToCampaign(props: RowProps): JSX.Element {
     const {campaign, player} = props;
-    const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
+    const [openPlayerBackDrop, setOpenPlayerBackDrop] = useState(false)
 
-    const addTalent = async () => {
-        if (player.talents.some(actorTalent => actorTalent.name === talent.name)) {
-            player.talents.forEach((actorTalent, index) => {
-                if (talent.name === actorTalent.name) {
-                    actorTalent.ranks = actorTalent.ranks + 1
-                    player.talents[index] = actorTalent
-                }
-            })
-        } else {
-            player.talents.push({...talent, ranks: 1})
-        }
-        await ActorService.updatePlayer(player.name, player)
+    const importPlayer = async () => {
+        // await ActorService.updatePlayer(player.name, player)
     }
 
     return (
         <TableRow>
             <TableCell>
-                <Button onClick={(): void => setOpenTalentBackDrop(true)}>{talent.name}</Button>
-                {openTalentBackDrop &&
-                    <TalentBackdrop open={openTalentBackDrop} onClose={(): void => setOpenTalentBackDrop(false)}
-                                    talent={talent}/>}
+                <Button onClick={(): void => setOpenPlayerBackDrop(true)}>{player.name}</Button>
+                {openPlayerBackDrop &&
+                    <PlayerBackdrop open={openPlayerBackDrop} onClose={(): void => setOpenPlayerBackDrop(false)}
+                                    player={player}/>}
             </TableCell>
             <TableCell>
-                <Button onClick={addTalent}>Add</Button>
+                <Button onClick={importPlayer}>Add</Button>
             </TableCell>
         </TableRow>
     )

@@ -8,7 +8,6 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
-import Setting from "../../../models/Setting";
 import EditSettingsCard from "../../common/setting/EditSettingsCard";
 import SettingService from "../../../services/SettingService";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
