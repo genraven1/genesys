@@ -1,5 +1,5 @@
 import Party from "../../../models/campaign/Party";
-import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent, TableFooter} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,6 +11,8 @@ import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {ActorPath} from "../../../services/Path";
 import TableRow from "@mui/material/TableRow";
 import Character from "../../../models/character/Character";
+import ImportActorToPartySelection from "./ImportActorToPartySelection";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface Props {
     party: Party
@@ -19,6 +21,16 @@ interface Props {
 export default function PartyCard(props: Props) {
     const {party} = props;
     const headers = ['Name', 'View']
+
+    const renderTableFooter = () => {
+        return (
+            <TableFooter>
+                <TableRow key={'footer'}>
+                    <ImportActorToPartySelection/>
+                </TableRow>
+            </TableFooter>
+        )
+    }
 
     const renderTableBody = () => {
         return (
@@ -35,16 +47,13 @@ export default function PartyCard(props: Props) {
 
     return (
         <Card sx={{"width": 1}}>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={'Party'}
-                action={<Button color='primary' variant='contained'>Import Player</Button>}>
-            </CardHeader>
+            <CenteredCardHeader title={'Party'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         {renderTableBody()}
+                        {renderTableFooter()}
                     </Table>
                 </TableContainer>
             </CardContent>

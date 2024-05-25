@@ -14,21 +14,6 @@ import CampaignService from "../../services/CampaignService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import CampaignDialog from "./CampaignDialog";
 
-interface Props {
-    campaign: Campaign
-}
-
-function Row(props: Props): JSX.Element {
-    const {campaign} = props
-
-    return (
-        <TableRow>
-            <TypographyCenterTableCell value={campaign.name}/>
-            <SingleActionTableCell name={campaign.name} path={CampaignPath.Campaign}/>
-        </TableRow>
-    )
-}
-
 export default function ViewAllCampaigns(): JSX.Element {
     const [campaigns, setCampaigns] = useState<Campaign[]>([])
     const [openCampaignCreationDialog, setOpenCampaignCreationDialog] = useState(false)
@@ -59,7 +44,10 @@ export default function ViewAllCampaigns(): JSX.Element {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {campaigns.map((campaign: Campaign) => (
-                                <Row key={campaign.name} campaign={campaign}/>
+                                <TableRow key={campaign.name}>
+                                    <TypographyCenterTableCell value={campaign.name}/>
+                                    <SingleActionTableCell name={campaign.name} path={CampaignPath.Campaign}/>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>

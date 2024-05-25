@@ -1,8 +1,9 @@
 import Campaign from "../../models/campaign/Campaign";
-import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import ViewAllSessions from "./session/ViewAllSessions";
 import * as React from "react";
 import PartyCard from "./party/PartyCard";
+import CenteredCardHeader from "../common/card/CenteredCardHeader";
 
 interface Props {
     campaign: Campaign
@@ -13,11 +14,7 @@ export default function CampaignPage(props: Props) {
 
     return (
         <Card>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={campaign.name}>
-            </CardHeader>
-            <Divider />
+            <CenteredCardHeader title={campaign.name}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container>
