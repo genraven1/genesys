@@ -18,7 +18,7 @@ export default class SettingService {
     }
 
     static async getSettings(): Promise<Setting[]> {
-        const {data, error} = await supabase
+        const {data} = await supabase
             .from('settings')
             .select().returns<Setting[]>();
         return data!;
