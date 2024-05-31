@@ -68,7 +68,7 @@ export default function ViewAllSettings() {
                             {renderHeaders(headers)}
                         </TableHead>
                         <TableBody>
-                            {settings.map((setting: Setting) => (
+                            {(settings || []).map((setting: Setting) => (
                                 <Row key={setting.name} setting={setting} />
                             ))}
                         </TableBody>
