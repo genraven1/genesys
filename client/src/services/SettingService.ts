@@ -1,7 +1,6 @@
 import axios from "axios";
 import {Path} from "./Path";
 import Setting from "../models/Setting";
-import {supabase} from "./BaseService";
 
 export default class SettingService {
 
@@ -18,10 +17,7 @@ export default class SettingService {
     }
 
     static async getSettings(): Promise<Setting[]> {
-        const {data} = await supabase
-            .from('settings')
-            .select().returns<Setting[]>();
-        return data!;
+        return []
     }
 
     static async getSetting(name: string): Promise<Setting> {
