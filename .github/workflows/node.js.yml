@@ -9,13 +9,8 @@ on:
   pull_request:
     branches: [ "master" ]
 
-defaults:
-  run:
-    working-directory: ./client
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,13 +25,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: ./client/package-lock.json
+        cache-dependency-path: ./package-lock.json
     - name: Install Node Dependencies
-      working-directory: ./client
       run: npm ci
     - name: Build Node Dependencies
-      working-directory: ./client
       run: npm run build --if-present
 #    - name: Test Node Dependencies
-#      working-directory: ./client
 #      run: npm test
