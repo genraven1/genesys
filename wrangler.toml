@@ -1,3 +1,10 @@
+name = "genesys"
+pages_build_output_dir = "build"
+compatibility_date = "2024-05-29"
+
+[env.production]
+compatibility_date = "2024-05-29"
+
 [[d1_databases]]
 binding = "GENESYS" # available in your Worker on env.DB
 database_name = "genesys"
