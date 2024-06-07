@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Session
 (
     session_name TEXT PRIMARY KEY
 );
-CREATE TABLE IF NOT EXISTS Campaign
+CREATE TABLE IF NOT EXISTS CampaignSession
 (
     campaign_name TEXT PRIMARY KEY,
     session_name  TEXT PRIMARY KEY,
