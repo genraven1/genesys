@@ -58,7 +58,7 @@ export default function ViewAllCampaigns(): JSX.Element {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {campaigns.map((campaign: Campaign) => (
+                            {(campaigns || []).map((campaign: Campaign) => (
                                 <Row key={campaign.name} campaign={campaign}/>
                             ))}
                         </TableBody>

@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS Campaign;
 DROP TABLE IF EXISTS Party;
 DROP TABLE IF EXISTS Session;
+DROP TABLE IF EXISTS CampaignSession;
 
 CREATE TABLE IF NOT EXISTS Campaign
 (
@@ -15,4 +16,11 @@ CREATE TABLE IF NOT EXISTS Party
 CREATE TABLE IF NOT EXISTS Session
 (
     session_name TEXT PRIMARY KEY
+);
+CREATE TABLE IF NOT EXISTS Campaign
+(
+    campaign_name TEXT PRIMARY KEY,
+    session_name  TEXT PRIMARY KEY,
+    FOREIGN KEY (campaign_name) REFERENCES Campaign (campaign_name),
+    FOREIGN KEY (session_name) REFERENCES Session (session_name)
 );
