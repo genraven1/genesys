@@ -1,8 +1,15 @@
+DROP TABLE IF EXISTS Injury;
 DROP TABLE IF EXISTS Campaign;
 DROP TABLE IF EXISTS Party;
 DROP TABLE IF EXISTS Session;
 DROP TABLE IF EXISTS CampaignSession;
 
+CREATE TABLE IF NOT EXISTS Injury
+(
+    injury_name TEXT PRIMARY KEY,
+    description TEXT,
+    severity    TEXT
+);
 CREATE TABLE IF NOT EXISTS Campaign
 (
     campaign_name TEXT PRIMARY KEY,

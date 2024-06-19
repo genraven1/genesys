@@ -7,7 +7,6 @@ import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import Injury from "../../models/Injury";
-import InjuryService from "../../services/InjuryService";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
@@ -39,9 +38,9 @@ function Row(props: Props): JSX.Element {
                 <ActionsTableCell name={injury.name} path={Path.Injury}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
+                        <Table sx={{margin: 1}}>
                             <TableBody>
                                 <GenesysDescriptionTypography text={injury.description}/>
                             </TableBody>
@@ -53,20 +52,18 @@ function Row(props: Props): JSX.Element {
     );
 }
 
-export default function ViewAllInjuries():JSX.Element {
+export default function ViewAllInjuries(): JSX.Element {
     const [injuries, setInjuries] = useState<Injury[]>([])
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const headers = ['Name', 'Min-Max', 'Severity', 'View']
 
     useEffect(() => {
-        (async (): Promise<void> => {
-            const injuriesList = await InjuryService.getInjuries()
-            if (!injuriesList) {
-                return
-            }
-            setInjuries(injuriesList)
-        })()
-    }, [])
+        async function fetchInjuries() {
+            const data = await fetch("/api/injuries")
+                .then((res) => res.json())
+                .then((data) => setInjuries(data as Injury[]))
+        }
+    })
 
     return (
         <Card>
@@ -74,7 +71,8 @@ export default function ViewAllInjuries():JSX.Element {
                 style={{textAlign: 'center'}}
                 title={'View All Critical Injuries'}
                 action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenInjuryCreationDialog(true)}>Create Critical Injury</Button>}>
+                                onClick={(): void => setOpenInjuryCreationDialog(true)}>Create Critical
+                    Injury</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
@@ -89,7 +87,7 @@ export default function ViewAllInjuries():JSX.Element {
                 </TableContainer>
             </CardContent>
             {openInjuryCreationDialog && <CreateInjuryDialog open={openInjuryCreationDialog}
-                                                       onClose={(): void => setOpenInjuryCreationDialog(false)}/>}
+                                                             onClose={(): void => setOpenInjuryCreationDialog(false)}/>}
         </Card>
     );
 }
