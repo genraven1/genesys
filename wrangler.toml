@@ -1,6 +1,7 @@
 name = "genesys"
 pages_build_output_dir = "build"
 compatibility_date = "2024-05-29"
+compatibility_flags = [ "nodejs_compat" ]
 
 [env.production]
 compatibility_date = "2024-05-29"
