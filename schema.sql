@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS Injury
 (
     injury_name TEXT PRIMARY KEY,
     description TEXT,
-    severity    TEXT
+    severity    TEXT,
+    min         INTEGER,
+    max         INTEGER
 );
 CREATE TABLE IF NOT EXISTS Campaign
 (
@@ -26,8 +28,8 @@ CREATE TABLE IF NOT EXISTS Session
 );
 CREATE TABLE IF NOT EXISTS CampaignSession
 (
-    campaign_name TEXT PRIMARY KEY,
-    session_name  TEXT PRIMARY KEY,
+    campaign_name TEXT,
+    session_name  TEXT,
     FOREIGN KEY (campaign_name) REFERENCES Campaign (campaign_name),
     FOREIGN KEY (session_name) REFERENCES Session (session_name)
 );

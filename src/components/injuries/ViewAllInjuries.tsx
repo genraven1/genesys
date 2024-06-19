@@ -59,10 +59,11 @@ export default function ViewAllInjuries(): JSX.Element {
 
     useEffect(() => {
         async function fetchInjuries() {
-            const data = await fetch("/api/injuries")
+            await fetch("/api/injuries")
                 .then((res) => res.json())
                 .then((data) => setInjuries(data as Injury[]))
         }
+        fetchInjuries()
     })
 
     return (
