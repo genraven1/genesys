@@ -48,18 +48,18 @@ export default function InjuryEdit(props: Props): JSX.Element {
 
     const updateInjury = async (copyInjury: Injury) => {
         setInjury(copyInjury)
-        await fetch("/injuries/:id")
+        await fetch("/injuries/:name")
             .then((res) => res.json())
             .then((data) => setInjury(data as Injury))
     }
 
     const onView = () => {
-        navigate(Path.Injury + injury.name + '/view');
+        navigate(Path.Injury + injury.injury_name + '/view');
     }
 
     return (
         <Card>
-            <CardHeader title={injury.name} style={{textAlign: 'center'}}
+            <CardHeader title={injury.injury_name} style={{textAlign: 'center'}}
                         action={<IconButton title='View' size='small' onClick={(): void => onView()}>
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}>

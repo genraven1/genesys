@@ -16,14 +16,14 @@ export default function InjuryView(props: Props):JSX.Element {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Injury + injury.name + '/edit')
+        navigate(Path.Injury + injury.injury_name + '/edit')
     }
 
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={injury.name}
+                title={injury.injury_name}
                 action={<IconButton title='Edit' size='small' onClick={(): void => onEdit()}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>

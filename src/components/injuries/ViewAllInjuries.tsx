@@ -32,10 +32,10 @@ function Row(props: Props): JSX.Element {
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TypographyCenterTableCell value={injury.name}/>
+                <TypographyCenterTableCell value={injury.injury_name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ActionsTableCell name={injury.name} path={Path.Injury}/>
+                <ActionsTableCell name={injury.injury_name} path={Path.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
@@ -84,7 +84,7 @@ export default function ViewAllInjuries(): JSX.Element {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {injuries.map((injury: Injury) => (
-                                <Row key={injury.name} injury={injury} columns={headers.length}/>
+                                <Row key={injury.injury_name} injury={injury} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>
