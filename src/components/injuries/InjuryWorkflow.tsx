@@ -7,6 +7,7 @@ import ViewAllInjuries from "./ViewAllInjuries";
 
 function useFetchInjury(name: string): Injury {
     const [injury, setInjury] = useState<Injury>()
+
     useEffect(() => {
         if (!name) {
             return

@@ -58,13 +58,16 @@ export default function ViewAllInjuries(): JSX.Element {
     const headers = ['Name', 'Min-Max', 'Severity', 'View']
 
     useEffect(() => {
-        async function fetchInjuries() {
-            await fetch("/injuries")
-                .then((res) => res.json())
-                .then((data) => setInjuries(data as Injury[]))
-        }
-        fetchInjuries()
-    })
+        (async (): Promise<void> => {
+            try {
+                await fetch("/injuries")
+                    .then((res) => res.json())
+                    .then((data) => setInjuries(data as Injury[]))
+            } catch (err) {
+                console.log(err)
+            }
+        })()
+    }, [])
 
     return (
         <Card>
