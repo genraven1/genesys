@@ -12,7 +12,6 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
-    "@types/node": "^16.18.99",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "axios": "^0.28.0",
@@ -53,6 +52,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240614.0",
+    "@types/node": "^20.14.5",
     "react-app-rewired": "^2.2.1",
     "react-scripts": "^5.0.1",
     "typescript": "^5.4.5",
