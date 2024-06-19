@@ -16,7 +16,10 @@ function useFetchInjury(name: string): Injury {
             try {
                 await fetch(`/injuries/${name}`)
                     .then((res) => res.json())
-                    .then((data) => setInjury(data as Injury))
+                    .then((data) => {
+                        console.log(data)
+                        setInjury(data as Injury)
+                    })
             } catch (err) {
                 console.log(err)
             }
