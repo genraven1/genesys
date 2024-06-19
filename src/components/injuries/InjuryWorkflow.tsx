@@ -1,5 +1,4 @@
 import Injury from "../../models/Injury";
-import InjuryService from "../../services/InjuryService";
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import InjuryEdit from "./InjuryEdit";
@@ -14,10 +13,9 @@ function useFetchInjury(name: string): Injury {
         }
         (async (): Promise<void> => {
             try {
-                const injuryData = await InjuryService.getInjury(name)
-                if (injuryData) {
-                    setInjury(injuryData)
-                }
+                await fetch("/api/injuries")
+                    .then((res) => res.json())
+                    .then((data) => setInjury(data as Injury))
             } catch (err) {
                 console.log(err)
             }

@@ -3,8 +3,6 @@ import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
-import InjuryService from "../../services/InjuryService";
-
 
 interface Props {
     open: boolean
@@ -17,8 +15,9 @@ export default function CreateInjuryDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let injury = await InjuryService.createInjury(name)
-        navigate(Path.Injury + injury.name + '/edit')
+        await fetch("/api/injuries/:name")
+            .then((res) => res.json())
+        navigate(Path.Injury + name + '/edit')
         onClose()
     }
 
