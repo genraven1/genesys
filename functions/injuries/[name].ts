@@ -5,7 +5,7 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const result = await context.env.GENESYS.prepare('SELECT * FROM Injury WHERE injury_name = ?').bind(context.params.name).first<Injury>();
+    const result = await context.env.GENESYS.prepare('SELECT * FROM Injury WHERE injury_name = ?').bind(context.params.injury_name).first<Injury>();
     return Response.json(result);
 }
 

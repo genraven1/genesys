@@ -48,7 +48,7 @@ export default function InjuryEdit(props: Props): JSX.Element {
 
     const updateInjury = async (copyInjury: Injury) => {
         setInjury(copyInjury)
-        await fetch("/injuries/:name")
+        await fetch(`/injuries/${injury.injury_name}`)
             .then((res) => res.json())
             .then((data) => setInjury(data as Injury))
     }
