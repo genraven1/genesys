@@ -13,7 +13,7 @@ function useFetchInjury(name: string): Injury {
         }
         (async (): Promise<void> => {
             try {
-                await fetch("/api/injuries")
+                await fetch("injuries")
                     .then((res) => res.json())
                     .then((data) => setInjury(data as Injury))
             } catch (err) {
