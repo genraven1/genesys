@@ -67,7 +67,7 @@ export default function ViewAllInjuries(): JSX.Element {
                 console.log(err)
             }
         })()
-    }, [])
+    }, [setInjuries])
 
     return (
         <Card>
