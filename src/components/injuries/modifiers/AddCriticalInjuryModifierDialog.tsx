@@ -4,7 +4,6 @@ import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifie
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
-import InjuryService from "../../../services/InjuryService";
 
 interface Props {
     injury: Injury
