@@ -14,6 +14,8 @@ function useFetchInjury(name: string): Injury {
         }
         (async (): Promise<void> => {
             try {
+                console.log(name)
+                console.log(`/injuries/${name}`)
                 await fetch(`/injuries/${name}`)
                     .then((res) => res.json())
                     .then((data) => {
