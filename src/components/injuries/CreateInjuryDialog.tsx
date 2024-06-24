@@ -17,7 +17,7 @@ export default function CreateInjuryDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await fetch(`/injuries/${name}`, {"method": "POST"})
+        await fetch(`/injuries/${name}`, {method: "POST"})
             .then((res) => res.json())
             .then((data) => setInjury(data as Injury))
         navigate(Path.Injury + injury.id + '/edit')
