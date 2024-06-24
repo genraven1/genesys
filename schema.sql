@@ -1,4 +1,5 @@
--- DROP TABLE IF EXISTS Injury;
+DROP TABLE IF EXISTS Injury;
+DROP TABLE IF EXISTS InjuryModification;
 DROP TABLE IF EXISTS Campaign;
 DROP TABLE IF EXISTS Party;
 DROP TABLE IF EXISTS Session;
@@ -6,11 +7,19 @@ DROP TABLE IF EXISTS CampaignSession;
 
 CREATE TABLE IF NOT EXISTS Injury
 (
-    injury_name TEXT PRIMARY KEY,
+    injury_id   INTEGER PRIMARY KEY,
+    name        TEXT,
     description TEXT,
     severity    TEXT,
     min         INTEGER,
     max         INTEGER
+);
+CREATE TABLE IF NOT EXISTS InjuryModification
+(
+    injury_id   INTEGER,
+    type        TEXT,
+    ranks       INTEGER,
+    FOREIGN KEY (injury_id) REFERENCES Injury (injury_id)
 );
 CREATE TABLE IF NOT EXISTS Campaign
 (

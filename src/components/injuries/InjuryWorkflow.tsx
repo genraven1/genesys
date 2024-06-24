@@ -14,8 +14,6 @@ function useFetchInjury(name: string): Injury {
         }
         (async (): Promise<void> => {
             try {
-                console.log(name)
-                console.log(`/injuries/${name}`)
                 await fetch(`/injuries/${name}`)
                     .then((res) => res.json())
                     .then((data) => {
@@ -30,7 +28,7 @@ function useFetchInjury(name: string): Injury {
     return injury as Injury
 }
 
-export default function InjuryWorkflow(): JSX.Element {
+export default function InjuryWorkflow() {
     const {name} = useParams<{ name?: string }>()
     const injury = useFetchInjury(name!!)
 

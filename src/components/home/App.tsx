@@ -39,8 +39,8 @@ export default function App() {
                     <Route path={Path.Home} element={<HomeDashboard/>}/>
 
                     <Route path={Path.Injury} element={<InjuryWorkflow/>}/>
-                    <Route path={Path.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
-                    <Route path={Path.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
+                    <Route path={Path.Injury + ':id/view'} element={<InjuryWorkflow/>}/>
+                    <Route path={Path.Injury + ':id/edit'} element={<InjuryWorkflow/>}/>
 
                     <Route path={Path.Spell} element={<SpellWorkflow/>}/>
                     <Route path={Path.Spell + ':name/view'} element={<SpellWorkflow/>}/>

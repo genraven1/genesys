@@ -9,7 +9,7 @@ import * as React from "react";
 import Injury from "../../models/Injury";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import ActionsTableCell from "../common/table/ActionsTableCell";
+import {ViewActionTableCell} from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
@@ -32,10 +32,10 @@ function Row(props: Props): JSX.Element {
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
-                <TypographyCenterTableCell value={injury.injury_name}/>
+                <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ActionsTableCell name={injury.injury_name} path={Path.Injury}/>
+                <ViewActionTableCell id={injury.id} path={Path.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
@@ -84,7 +84,7 @@ export default function ViewAllInjuries(): JSX.Element {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {injuries.map((injury: Injury) => (
-                                <Row key={injury.injury_name} injury={injury} columns={headers.length}/>
+                                <Row key={injury.name} injury={injury} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>

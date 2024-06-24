@@ -21,7 +21,7 @@ export default function AddCriticalInjuryModifierDialog(props: Props) {
         if (modifier) {
             if (!injury.modifiers.some(mod => mod.type === modifier.type)) {
                 injury.modifiers.push(modifier)
-                await InjuryService.updateInjury(injury.injury_name, injury)
+                // await InjuryService.updateInjury(injury.injury_name, injury)
             }
         }
         onClose()
