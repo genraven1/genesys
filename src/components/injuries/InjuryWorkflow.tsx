@@ -17,7 +17,6 @@ function useFetchInjury(id: string): Injury {
                 await fetch(`/injuries/${id}`)
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data)
                         setInjury(data as Injury)
                     })
             } catch (err) {
