@@ -55,7 +55,7 @@ export default function CriticalInjuryModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {(injury.modifiers).map((modifier) => (
+                            {(injury.modifiers || []).map((modifier) => (
                                 <ModifierRow modifier={modifier}/>
                             ))}
                         </TableBody>
