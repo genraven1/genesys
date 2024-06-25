@@ -21,9 +21,11 @@ export default function CreateInjuryDialog(props: Props) {
                 if (!res.ok) {
                     throw new Error(res.statusText)
                 }
+                console.log(res.json())
                 return res.json() as Promise<{ data: Injury }>
             })
             .then(data => {
+                console.log(data)
                 return data.data
             })
         console.log(injury)
