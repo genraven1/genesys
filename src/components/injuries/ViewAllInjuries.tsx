@@ -21,7 +21,7 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {injury, columns} = props
     const [open, setOpen] = useState(false)
 
@@ -35,7 +35,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ViewActionTableCell id={injury.id} path={Path.Injury}/>
+                <ViewActionTableCell id={injury.injury_id} path={Path.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
@@ -52,7 +52,7 @@ function Row(props: Props): JSX.Element {
     );
 }
 
-export default function ViewAllInjuries(): JSX.Element {
+export default function ViewAllInjuries() {
     const [injuries, setInjuries] = useState<Injury[]>([])
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const headers = ['Name', 'Min-Max', 'Severity', 'View']

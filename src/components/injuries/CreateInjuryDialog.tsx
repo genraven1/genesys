@@ -26,7 +26,7 @@ export default function CreateInjuryDialog(props: Props) {
             .then(data => {
                 return data.data
             })
-        navigate(Path.Injury + injury.id + '/edit')
+        navigate(Path.Injury + injury.injury_id + '/edit')
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
