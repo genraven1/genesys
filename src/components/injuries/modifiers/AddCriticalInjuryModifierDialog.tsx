@@ -13,16 +13,11 @@ interface Props {
 
 export default function AddCriticalInjuryModifierDialog(props: Props) {
     const {injury, open, onClose} = props
-
     const [modifier, setModifier] = useState<Modifier>()
 
     const handleAdd = async (): Promise<void> => {
-        if (modifier) {
-            if (!injury.modifiers.some(mod => mod.type === modifier.type)) {
-                injury.modifiers.push(modifier)
-                // await InjuryService.updateInjury(injury.injury_name, injury)
-            }
-        }
+        await fetch(`/modifications/injuries/${injury.injury_id}`, {method: 'POST', body: JSON.stringify(modifier)})
+            .then((res) => res.json())
         onClose()
     }
 
