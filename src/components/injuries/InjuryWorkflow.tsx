@@ -5,17 +5,17 @@ import InjuryEdit from "./InjuryEdit";
 import InjuryView from "./InjuryView";
 import ViewAllInjuries from "./ViewAllInjuries";
 
-function useFetchInjury(name: string): Injury {
+function useFetchInjury(id: string): Injury {
     const [injury, setInjury] = useState<Injury>()
 
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
             try {
-                console.log(name)
-                await fetch(`/injuries/${name}`)
+                console.log(id)
+                await fetch(`/injuries/${id}`)
                     .then((res) => res.json())
                     .then((data) => {
                         console.log(data)
@@ -25,12 +25,13 @@ function useFetchInjury(name: string): Injury {
                 console.log(err)
             }
         })()
-    }, [name, setInjury])
+    }, [id, setInjury])
     return injury as Injury
 }
 
 export default function InjuryWorkflow() {
     const {id} = useParams<{ id?: string }>()
+    console.log(id)
     const injury = useFetchInjury(id!!)
 
     const useWorkflowRender = () => {
