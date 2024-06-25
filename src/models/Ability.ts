@@ -8,6 +8,6 @@ export default interface Ability {
     description: string
     activation: Activation
     cost: Cost
-    limit: Limit
+    limiter: Limit
     modifiers: Modifier[]
 }

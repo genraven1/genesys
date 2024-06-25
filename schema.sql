@@ -63,3 +63,17 @@ CREATE TABLE IF NOT EXISTS TalentModification
     ranks       INTEGER,
     FOREIGN KEY (talent_id) REFERENCES Talent (talent_id)
 );
+CREATE TABLE IF NOT EXISTS Ability
+(
+    ability_id  INTEGER PRIMARY KEY,
+    name        TEXT,
+    description TEXT,
+    activation  TEXT
+);
+CREATE TABLE IF NOT EXISTS AbilityModification
+(
+    ability_id   INTEGER,
+    type        TEXT,
+    ranks       INTEGER,
+    FOREIGN KEY (ability_id) REFERENCES Ability (ability_id)
+);
