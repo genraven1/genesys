@@ -30,9 +30,8 @@ function useFetchInjury(id: string): Injury {
 }
 
 export default function InjuryWorkflow() {
-    const {id} = useParams<{ id?: string }>()
-    console.log(id)
-    const injury = useFetchInjury(id!!)
+    const {injury_id} = useParams<{ injury_id?: string }>()
+    const injury = useFetchInjury(injury_id!!)
 
     const useWorkflowRender = () => {
         const pathname = useLocation().pathname
