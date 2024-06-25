@@ -11,6 +11,6 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
     const createResult = await context.request.json() as Injury
-    const result = await context.env.GENESYS.prepare('INSERT INTO Injury (injury_id, name) VALUES (null, ?)').bind(createResult.name).first<Injury>();
+    const result = await context.env.GENESYS.prepare('INSERT INTO Injury (injury_id, name) VALUES (null, ?) RETURNING *').bind(createResult.name).first<Injury>();
     return Response.json(result)
 }
