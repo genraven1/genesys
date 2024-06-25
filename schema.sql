@@ -46,3 +46,20 @@ CREATE TABLE IF NOT EXISTS CampaignSession
     FOREIGN KEY (campaign_name) REFERENCES Campaign (campaign_name),
     FOREIGN KEY (session_name) REFERENCES Session (session_name)
 );
+CREATE TABLE IF NOT EXISTS Talent
+(
+    talent_id   INTEGER PRIMARY KEY,
+    name        TEXT,
+    description TEXT,
+    summary     TEXT,
+    activation  TEXT,
+    tier        TEXT,
+    ranked      INTEGER
+);
+CREATE TABLE IF NOT EXISTS TalentModification
+(
+    talent_id   INTEGER,
+    type        TEXT,
+    ranks       INTEGER,
+    FOREIGN KEY (talent_id) REFERENCES Talent (talent_id)
+);
