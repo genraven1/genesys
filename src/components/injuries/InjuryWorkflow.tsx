@@ -29,8 +29,8 @@ function useFetchInjury(name: string): Injury {
 }
 
 export default function InjuryWorkflow() {
-    const {name} = useParams<{ name?: string }>()
-    const injury = useFetchInjury(name!!)
+    const {id} = useParams<{ id?: string }>()
+    const injury = useFetchInjury(id!!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
