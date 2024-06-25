@@ -34,7 +34,7 @@ export function ViewActionTableCell(props: ViewProps) {
     const {id, path} = props
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${path}${id}`} ref={ref} {...itemProps} />
+        <Link to={`${path}${id}/view`} ref={ref} {...itemProps} />
     )), [path, id])
 
     return (
