@@ -14,6 +14,7 @@ function useFetchInjury(name: string): Injury {
         }
         (async (): Promise<void> => {
             try {
+                console.log(name)
                 await fetch(`/injuries/${name}`)
                     .then((res) => res.json())
                     .then((data) => {
@@ -32,7 +33,7 @@ export default function InjuryWorkflow() {
     const {id} = useParams<{ id?: string }>()
     const injury = useFetchInjury(id!!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return injury && <InjuryView injury={injury}/>
