@@ -1,36 +1,37 @@
 import Injury from "../../models/Injury";
-import InjuryService from "../../services/InjuryService";
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import InjuryEdit from "./InjuryEdit";
 import InjuryView from "./InjuryView";
 import ViewAllInjuries from "./ViewAllInjuries";
 
-function useFetchInjury(name: string): Injury {
+function useFetchInjury(id: string): Injury {
     const [injury, setInjury] = useState<Injury>()
+
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
             try {
-                const injuryData = await InjuryService.getInjury(name)
-                if (injuryData) {
-                    setInjury(injuryData)
-                }
+                await fetch(`/injuries/${id}`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setInjury(data as Injury)
+                    })
             } catch (err) {
                 console.log(err)
             }
         })()
-    }, [name, setInjury])
+    }, [id, setInjury])
     return injury as Injury
 }
 
-export default function InjuryWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const injury = useFetchInjury(name!!)
+export default function InjuryWorkflow() {
+    const {injury_id} = useParams<{ injury_id?: string }>()
+    const injury = useFetchInjury(injury_id!!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return injury && <InjuryView injury={injury}/>

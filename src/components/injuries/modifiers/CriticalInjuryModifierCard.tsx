@@ -25,7 +25,7 @@ export default function CriticalInjuryModifierCard(props: Props) {
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
 
-    const renderTableFooter = (): JSX.Element => {
+    const renderTableFooter = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <TableFooter>
@@ -55,7 +55,7 @@ export default function CriticalInjuryModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {(injury.modifiers).map((modifier) => (
+                            {(injury.modifiers || []).map((modifier) => (
                                 <ModifierRow modifier={modifier}/>
                             ))}
                         </TableBody>

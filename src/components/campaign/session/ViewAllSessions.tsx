@@ -71,7 +71,7 @@ export default function ViewAllSessions(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {sessions.map((session: CampaignSession) => (
+                            {(sessions || []).map((session: CampaignSession) => (
                                 <Row key={session.name} session={session} campaignName={campaignName}/>
                             ))}
                         </TableBody>

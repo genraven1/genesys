@@ -22,7 +22,7 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {spell, columns} = props
     const [open, setOpen] = useState(false)
 
@@ -48,7 +48,7 @@ function Row(props: Props): JSX.Element {
     );
 }
 
-export default function ViewAllSpells():JSX.Element {
+export default function ViewAllSpells() {
     const [spells, setSpells] = useState<Spell[]>([])
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const headers = ['Name', 'Base Difficulty', 'View']
@@ -76,7 +76,7 @@ export default function ViewAllSpells():JSX.Element {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {spells.map((spell: Spell) => (
+                            {(spells || []).map((spell: Spell) => (
                                 <Row key={spell.name} spell={spell} columns={headers.length}/>
                             ))}
                         </TableBody>

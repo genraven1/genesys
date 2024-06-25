@@ -7,7 +7,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import * as React from "react";
-import InjuryService from "../../services/InjuryService";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
 import EditNumberCard from "../common/EditNumberCard";
 import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
@@ -49,11 +48,13 @@ export default function InjuryEdit(props: Props): JSX.Element {
 
     const updateInjury = async (copyInjury: Injury) => {
         setInjury(copyInjury)
-        await InjuryService.updateInjury(injury.name, copyInjury)
+        await fetch(`/injuries/${injury.injury_id}`, {method: 'PUT', body: JSON.stringify(copyInjury)})
+            .then((res) => res.json())
+            .then((data) => setInjury(data as Injury))
     }
 
     const onView = () => {
-        navigate(Path.Injury + injury.name + '/view');
+        navigate(Path.Injury + injury.injury_id + '/view');
     }
 
     return (

@@ -1,0 +1,12 @@
+name = "genesys"
+pages_build_output_dir = "build"
+compatibility_date = "2024-05-29"
+compatibility_flags = [ "nodejs_compat" ]
+
+[env.production]
+compatibility_date = "2024-05-29"
+
+[[d1_databases]]
+binding = "GENESYS" # available in your Worker on env.DB
+database_name = "genesys"
+database_id = "a0eafd91-8532-481e-abbe-16f98c5ef657"

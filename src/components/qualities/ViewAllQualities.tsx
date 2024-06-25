@@ -25,7 +25,7 @@ interface RowProps {
     quality: Quality
 }
 
-function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps) {
     const {quality} = props
     const [open, setOpen] = useState(false)
 
@@ -96,7 +96,7 @@ export default function ViewAllQualities() {
                             {renderHeaders(headers)}
                         </TableHead>
                         <TableBody>
-                            {qualities.map((quality: Quality) => (
+                            {(qualities || []).map((quality: Quality) => (
                                 <Row key={quality.name} quality={quality}/>
                             ))}
                         </TableBody>

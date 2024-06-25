@@ -9,7 +9,7 @@ interface Props {
     path: string
 }
 
-export default function ActionsTableCell(props: Props): JSX.Element {
+export default function ActionsTableCell(props: Props) {
     const {name, path} = props
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
@@ -25,12 +25,17 @@ export default function ActionsTableCell(props: Props): JSX.Element {
     )
 }
 
-export function SingleActionTableCell(props: Props) {
-    const {name, path} = props
+interface ViewProps {
+    id: number
+    path: string
+}
+
+export function ViewActionTableCell(props: ViewProps) {
+    const {id, path} = props
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (
-        <Link to={`${path}${name}`} ref={ref} {...itemProps} />
-    )), [path, name])
+        <Link to={`${path}${String(id)}/view`} ref={ref} {...itemProps} />
+    )), [path, id])
 
     return (
         <TableCell style={{textAlign: 'center'}}>

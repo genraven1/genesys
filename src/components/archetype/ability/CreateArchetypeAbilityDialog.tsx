@@ -28,8 +28,8 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
                 if (!ability.cost) {
                     ability.cost = DefaultCost.create()
                 }
-                if (!ability.limit) {
-                    ability.limit = DefaultLimit.create()
+                if (!ability.limiter) {
+                    ability.limiter = DefaultLimit.create()
                 }
                 archetype.abilities.push(ability)
                 await ArchetypeService.updateArchetype(archetype.name, archetype)
@@ -63,10 +63,10 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
         const copyAbility = {...ability} as Ability
         switch (key) {
             case "type":
-                copyAbility.limit.type = value as LimitType
+                copyAbility.limiter.type = value as LimitType
                 break;
             case "limit":
-                copyAbility.limit.limit = Number(value)
+                copyAbility.limiter.limit = Number(value)
                 break;
             default:
                 break
@@ -124,10 +124,10 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
                     }} min={1} max={6}/>
                 </Grid>
                 <Grid container spacing={10}>
-                    <InputSelectFieldCard defaultValue={ability?.limit?.type!} onCommit={(value: string): void => {
+                    <InputSelectFieldCard defaultValue={ability?.limiter?.type!} onCommit={(value: string): void => {
                         onLimitChange('type', value)
                     }} title={'Limit Type'} options={getLimitOptions()}/>
-                    <NumberRangeSelectCard defaultValue={ability?.limit?.limit!} title={'Limit'} onChange={(value: number): void => {
+                    <NumberRangeSelectCard defaultValue={ability?.limiter?.limit!} title={'Limit'} onChange={(value: number): void => {
                         onLimitChange('limit', String(value))
                     }} min={1} max={6}/>
                 </Grid>

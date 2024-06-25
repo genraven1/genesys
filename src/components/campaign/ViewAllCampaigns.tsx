@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import {SingleActionTableCell} from "../common/table/ActionsTableCell";
+import ActionsTableCell from "../common/table/ActionsTableCell";
 import {CampaignPath} from "../../services/Path";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
@@ -24,7 +24,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow>
             <TypographyCenterTableCell value={campaign.name}/>
-            <SingleActionTableCell name={campaign.name} path={CampaignPath.Campaign}/>
+            <ActionsTableCell name={campaign.name} path={CampaignPath.Campaign}/>
         </TableRow>
     )
 }
@@ -58,7 +58,7 @@ export default function ViewAllCampaigns(): JSX.Element {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {campaigns.map((campaign: Campaign) => (
+                            {(campaigns || []).map((campaign: Campaign) => (
                                 <Row key={campaign.name} campaign={campaign}/>
                             ))}
                         </TableBody>
