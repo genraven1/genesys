@@ -13,15 +13,20 @@ interface Props {
 export default function CreateInjuryDialog(props: Props) {
     const {open, onClose} = props
     const [name, setName] = useState('')
-    const [injury, setInjury] = useState<Injury>({} as Injury)
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await fetch(`/injuries`, {method: "POST", body: JSON.stringify({...injury, name: name})})
-            .then((res) => res.json())
-            .then((data) => setInjury(data as Injury))
+        const injury = await fetch(`/injuries`, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json() as Promise<{ data: Injury }>
+            })
+            .then(data => {
+                return data.data
+            })
         navigate(Path.Injury + injury.id + '/edit')
-        onClose()
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
