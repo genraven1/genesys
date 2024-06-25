@@ -21,6 +21,7 @@ export default function CreateInjuryDialog(props: Props) {
             ...injury,
             name: name,
         })
+        console.log(JSON.stringify(injury))
         await fetch(`/injuries`, {method: "POST", body: JSON.stringify(injury)})
             .then((res) => res.json())
             .then((data) => setInjury(data as Injury))
