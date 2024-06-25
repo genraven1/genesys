@@ -1,13 +1,7 @@
--- DROP TABLE IF EXISTS Injury;
+-- SYSTEM TABLES
+DROP TABLE IF EXISTS Injury;
 DROP TABLE IF EXISTS InjuryModification;
-DROP TABLE IF EXISTS Campaign;
-DROP TABLE IF EXISTS Party;
-DROP TABLE IF EXISTS Session;
-DROP TABLE IF EXISTS CampaignSession;
-DROP TABLE IF EXISTS Talent;
-DROP TABLE IF EXISTS TalentModification;
-DROP TABLE IF EXISTS Ability;
-DROP TABLE IF EXISTS AbilityModification;
+DROP TABLE IF EXISTS Spell;
 
 CREATE TABLE IF NOT EXISTS Injury
 (
@@ -25,6 +19,13 @@ CREATE TABLE IF NOT EXISTS InjuryModification
     ranks       INTEGER,
     FOREIGN KEY (injury_id) REFERENCES Injury (injury_id)
 );
+
+-- CAMPAIGN META TABLES
+DROP TABLE IF EXISTS Campaign;
+DROP TABLE IF EXISTS Party;
+DROP TABLE IF EXISTS Session;
+DROP TABLE IF EXISTS CampaignSession;
+
 CREATE TABLE IF NOT EXISTS Campaign
 (
     campaign_name TEXT PRIMARY KEY,
@@ -46,6 +47,13 @@ CREATE TABLE IF NOT EXISTS CampaignSession
     FOREIGN KEY (campaign_name) REFERENCES Campaign (campaign_name),
     FOREIGN KEY (session_name) REFERENCES Session (session_name)
 );
+
+-- CAMPAIGN ITEM TABLES
+DROP TABLE IF EXISTS Talent;
+DROP TABLE IF EXISTS TalentModification;
+DROP TABLE IF EXISTS Ability;
+DROP TABLE IF EXISTS AbilityModification;
+
 CREATE TABLE IF NOT EXISTS Talent
 (
     talent_id   INTEGER PRIMARY KEY,
