@@ -24,6 +24,8 @@ export default function CreateInjuryDialog(props: Props) {
                 return res.json() as Promise<{ data: Injury }>
             })
             .then(data => {
+                console.log(data)
+                console.log(data.data)
                 navigate(Path.Injury + data.data.injury_id + '/edit')
             })
     }
