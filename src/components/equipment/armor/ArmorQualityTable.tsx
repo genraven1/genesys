@@ -39,7 +39,7 @@ export default function ArmorQualityTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Armor Special Qualities', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Armor Special Qualities')}
                 <TableBody>
                     {(armor.qualities || []).map((quality: EquipmentQuality) => (
                         <Row key={quality.name} quality={quality}/>

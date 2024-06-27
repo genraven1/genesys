@@ -26,11 +26,11 @@ export const renderSingleRowTableHeader = (headers: string[]): JSX.Element => {
     )
 }
 
-export const renderDoubleRowTableHeader = (headers: string[], value: string, colSpan: number): JSX.Element => {
+export const renderDoubleRowTableHeader = (headers: string[], value: string) => {
     return (
         <TableHead>
             <TableRow key={'Main Header'}>
-                <TypographyCenterTableCell value={value} span={colSpan}/>
+                <TypographyCenterTableCell value={value} span={headers.length}/>
             </TableRow>
             {renderHeaders(headers)}
         </TableHead>

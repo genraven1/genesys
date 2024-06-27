@@ -22,7 +22,7 @@ export default function MinionTalentTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Talents')}
                 <TableBody>
                     {(minion?.talents!! || []).map((row: Talent) => (
                         <TalentRow key={row.name} talent={row}/>
