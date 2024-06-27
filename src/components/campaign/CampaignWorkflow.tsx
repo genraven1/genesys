@@ -6,38 +6,33 @@ import ViewAllCampaigns from "./ViewAllCampaigns";
 import {CampaignPath} from "../../services/RootPath";
 import CampaignPage from "./CampaignPage";
 
-
-export function useFetchCampaign(name: string): Campaign {
+export function useFetchCampaign(id: string): Campaign {
     const [campaign, setCampaign] = useState<Campaign>()
 
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
             try {
-                const campaignData = await CampaignService.getCampaign(name)
-                if (campaignData) {
-                    setCampaign(campaignData)
-                }
+                setCampaign(await CampaignService.getCampaign(id))
             } catch (err) {
                 console.log(err)
             }
         })()
-    }, [name, setCampaign])
+    }, [id, setCampaign])
     return campaign as Campaign
 }
 
-export default function CampaignWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const campaign = useFetchCampaign(name!)
+export default function CampaignWorkflow() {
+    const {campaign_id} = useParams<{ campaign_id?: string }>()
+    const campaign = useFetchCampaign(campaign_id!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith(CampaignPath.Campaign)) {
             return <ViewAllCampaigns/>
-        }
-        else {
+        } else {
             return campaign && <CampaignPage campaign={campaign}/>
         }
     }
