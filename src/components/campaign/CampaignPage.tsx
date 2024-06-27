@@ -1,5 +1,5 @@
 import Campaign from "../../models/campaign/Campaign";
-import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import ViewAllSessions from "./session/ViewAllSessions";
 import * as React from "react";
 import PartyCard from "./party/PartyCard";
@@ -17,7 +17,6 @@ export default function CampaignPage(props: Props) {
                 style={{textAlign: 'center'}}
                 title={campaign.name}>
             </CardHeader>
-            <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container>

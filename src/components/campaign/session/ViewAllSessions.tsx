@@ -1,6 +1,6 @@
 import CampaignSession from "../../../models/campaign/CampaignSession";
 import {Fragment, useState} from "react";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -20,7 +20,7 @@ interface RowProps {
     campaignName: string
 }
 
-function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps) {
     const {session, campaignName} = props
 
     return (
@@ -42,7 +42,7 @@ export default function ViewAllSessions(props: Props) {
     const headers = ['Name', 'View']
     const pathname = useLocation().pathname
 
-    const renderButton = (): JSX.Element => {
+    const renderButton = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -65,7 +65,6 @@ export default function ViewAllSessions(props: Props) {
                 title={'View All Sessions'}
                 action={renderButton()}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
