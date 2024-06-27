@@ -40,7 +40,7 @@ export default function RivalTalentTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Talents')}
                 <TableBody>
                     {(rival.talents || []).map((talent: ActorTalent) => (
                         <Row key={talent.name} talent={talent}/>

@@ -40,7 +40,7 @@ export default function NemesisTalentTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Talents', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Talents')}
                 <TableBody>
                     {(nemesis.talents || []).map((talent: ActorTalent) => (
                         <Row key={talent.name} talent={talent}/>

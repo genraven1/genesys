@@ -16,22 +16,22 @@ CREATE TABLE IF NOT EXISTS Injury
 );
 CREATE TABLE IF NOT EXISTS InjuryModification
 (
-    injury_id   INTEGER,
-    type        TEXT,
-    ranks       INTEGER,
+    injury_id INTEGER,
+    type      TEXT,
+    ranks     INTEGER,
     FOREIGN KEY (injury_id) REFERENCES Injury (injury_id)
 );
 CREATE TABLE IF NOT EXISTS Spell
 (
-    spell_id        INTEGER PRIMARY KEY,
-    name            TEXT,
-    description     TEXT,
-    difficulty      TEXT,
-    concentration   INTEGER
+    spell_id      INTEGER PRIMARY KEY,
+    name          TEXT,
+    description   TEXT,
+    difficulty    TEXT,
+    concentration INTEGER
 );
 CREATE TABLE IF NOT EXISTS Quality
 (
-    quality_id   INTEGER PRIMARY KEY,
+    quality_id  INTEGER PRIMARY KEY,
     name        TEXT,
     description TEXT,
     passive     INTEGER,
@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS Quality
 );
 CREATE TABLE IF NOT EXISTS QualityModification
 (
-    quality_id   INTEGER,
-    type        TEXT,
-    ranks       INTEGER,
+    quality_id INTEGER,
+    type       TEXT,
+    ranks      INTEGER,
     FOREIGN KEY (quality_id) REFERENCES Quality (quality_id)
 );
 
@@ -55,23 +55,23 @@ DROP TABLE IF EXISTS CampaignSession;
 
 CREATE TABLE IF NOT EXISTS Campaign
 (
-    campaign_id   INTEGER PRIMARY KEY,
-    name          TEXT,
-    party_id      INTEGER,
+    campaign_id INTEGER PRIMARY KEY,
+    name        TEXT,
+    party_id    INTEGER,
     FOREIGN KEY (party_id) REFERENCES Party (party_id)
 );
 CREATE TABLE IF NOT EXISTS Party
 (
-    party_id        INTEGER PRIMARY KEY
+    party_id INTEGER PRIMARY KEY
 );
 CREATE TABLE IF NOT EXISTS Session
 (
-    session_id      INTEGER PRIMARY KEY
+    session_id INTEGER PRIMARY KEY
 );
 CREATE TABLE IF NOT EXISTS CampaignSession
 (
-    campaign_id     INTEGER,
-    session_id    INTEGER,
+    campaign_id INTEGER,
+    session_id  INTEGER,
     FOREIGN KEY (campaign_id) REFERENCES Campaign (campaign_id),
     FOREIGN KEY (session_id) REFERENCES Session (session_id)
 );
@@ -94,9 +94,9 @@ CREATE TABLE IF NOT EXISTS Talent
 );
 CREATE TABLE IF NOT EXISTS TalentModification
 (
-    talent_id   INTEGER,
-    type        TEXT,
-    ranks       INTEGER,
+    talent_id INTEGER,
+    type      TEXT,
+    ranks     INTEGER,
     FOREIGN KEY (talent_id) REFERENCES Talent (talent_id)
 );
 CREATE TABLE IF NOT EXISTS Ability
@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS Ability
 );
 CREATE TABLE IF NOT EXISTS AbilityModification
 (
-    ability_id   INTEGER,
-    type        TEXT,
-    ranks       INTEGER,
+    ability_id INTEGER,
+    type       TEXT,
+    ranks      INTEGER,
     FOREIGN KEY (ability_id) REFERENCES Ability (ability_id)
 );
