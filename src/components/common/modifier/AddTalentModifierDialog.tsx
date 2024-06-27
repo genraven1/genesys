@@ -18,10 +18,7 @@ export default function AddTalentModifierDialog(props: Props) {
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
-            if (!talent.modifiers.some(mod => mod.type === modifier.type)) {
-                talent.modifiers.push(modifier)
-                await TalentService.updateTalent(talent.name, talent)
-            }
+            await TalentService.addTalentModification(String(talent.talent_id), modifier)
         }
         onClose()
     }

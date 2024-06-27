@@ -18,7 +18,7 @@ export default function AddCriticalInjuryModifierDialog(props: Props) {
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
-            await InjuryService.AddInjuryModification(String(injury.injury_id), modifier)
+            await InjuryService.addInjuryModification(String(injury.injury_id), modifier)
         }
         onClose()
     }

@@ -1,8 +1,8 @@
 import {Option} from "../components/common/InputSelectField";
-import Setting from "./Setting";
 import Modifier from "./common/Modifier";
 
 export default interface Talent {
+    talent_id: number;
     name: string
     ranked: boolean
     activation: Activation
@@ -10,7 +10,6 @@ export default interface Talent {
     summary: string
     description: string
     modifiers: Modifier[]
-    settings: Setting[]
 }
 
 export enum Activation {

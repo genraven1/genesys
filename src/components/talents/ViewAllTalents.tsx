@@ -3,7 +3,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Talent from '../../models/Talent';
@@ -11,32 +10,24 @@ import TalentService from '../../services/TalentService';
 import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
-import ActionsTableCell from "../common/table/ActionsTableCell";
+import {ViewActionTableCell} from "../common/table/ActionsTableCell";
 import {RootPath} from "../../services/RootPath";
-import Setting from "../../models/Setting";
-import SettingService from "../../services/SettingService";
-import {renderHeaders} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
-import TalentDialog from "./TalentDialog";
+import CreateTalentDialog from "./CreateTalentDialog";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import SettingTableCell from "../common/table/SettingsTableCell";
 
 interface Props {
     talent: Talent
-    setting: Setting
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
-    const {talent, setting, columns} = props
+function Row(props: Props) {
+    const {talent, columns} = props
     const [open, setOpen] = useState(false)
 
     const renderRanked = (): string => {
-        let ranked = 'No'
-        if (talent?.ranked!!) {
-            ranked = 'Yes'
-        }
-        return ranked
+        return talent.ranked ? 'Yes' : 'No'
     }
 
     return (
@@ -46,13 +37,12 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={renderRanked()}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
-                <SettingTableCell settings={talent.settings} setting={setting}/>
-                <ActionsTableCell name={talent.name} path={RootPath.Talent}/>
+                <ViewActionTableCell id={talent.talent_id} path={RootPath.Talent}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
+                        <Table sx={{margin: 1}}>
                             <TableBody>
                                 <GenesysDescriptionTypography text={talent.description}/>
                             </TableBody>
@@ -67,28 +57,13 @@ function Row(props: Props): JSX.Element {
 export default function ViewAllTalents() {
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
-    const [setting, setSetting] = useState<Setting>()
     const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'Active', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
+            setTalents(await TalentService.getTalents())
         })()
-    }, [setSetting])
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents()
-            if (!talentList) {
-                return
-            }
-            setTalents(talentList)
-        })()
-    }, [])
+    }, [setTalents])
 
     return (
         <Card>
@@ -101,19 +76,17 @@ export default function ViewAllTalents() {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {talents.map((talent: Talent) => (
-                                <Row key={talent.name} talent={talent} setting={setting!!} columns={headers.length}/>
+                                <Row key={talent.name} talent={talent} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
-                                                       onClose={(): void => setOpenTalentCreationDialog(false)}/>}
+            {openTalentCreationDialog && <CreateTalentDialog open={openTalentCreationDialog}
+                                                             onClose={(): void => setOpenTalentCreationDialog(false)}/>}
         </Card>
     );
 }

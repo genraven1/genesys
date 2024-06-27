@@ -9,9 +9,6 @@ import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import CheckButtonCard from "../common/CheckButtonCard";
-import EditSettingsCard from "../common/setting/EditSettingsCard";
-import SettingService from "../../services/SettingService";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import TalentModifierCard from "../common/modifier/TalentModifierCard";
 
 interface Props {
@@ -26,23 +23,6 @@ export default function TalentEdit(props: Props) {
     useEffect(() => {
         setTalent(tal)
     }, [tal])
-
-    const onSettingAddition = async (name: string) => {
-        const copyTalent = {...talent} as Talent
-        let setting = await SettingService.getSetting(name)
-        copyTalent.settings = copyTalent.settings.concat(setting)
-        await updateTalent(copyTalent)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyTalent = {...talent} as Talent
-        copyTalent.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyTalent.settings.splice(index, 1)
-            }
-        })
-        await updateTalent(copyTalent)
-    }
 
     const onChange = async (key: keyof Talent, value: string) => {
         if (value.trim().length === 0 || (talent !== null && talent!![key] === value)) {
@@ -70,12 +50,11 @@ export default function TalentEdit(props: Props) {
     }
 
     const updateTalent = async (copyTalent: Talent) => {
-        setTalent(copyTalent)
-        await TalentService.updateTalent(talent.name, copyTalent)
+        setTalent(await TalentService.updateTalent(copyTalent))
     }
 
     const onView = () => {
-        navigate(RootPath.Talent + talent.name + '/view');
+        navigate(RootPath.Talent + talent.talent_id + '/view');
     }
 
     return (
@@ -112,8 +91,6 @@ export default function TalentEdit(props: Props) {
                         }} title={'Tier'} options={getTierOptions()}/>
                     </Grid>
                     <TalentModifierCard talent={talent}/>
-                    <EditSettingsCard settings={talent.settings} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>
