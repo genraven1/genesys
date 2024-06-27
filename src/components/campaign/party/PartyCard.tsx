@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {ActorPath} from "../../../services/Path";
+import {ActorPath} from "../../../services/RootPath";
 import TableRow from "@mui/material/TableRow";
 import Character from "../../../models/character/Character";
 

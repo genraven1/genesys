@@ -12,7 +12,7 @@ import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import Setting from "../../models/Setting";
 import SettingService from "../../services/SettingService";
 import {renderHeaders} from "../common/table/TableRenders";
@@ -47,7 +47,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
                 <SettingTableCell settings={talent.settings} setting={setting}/>
-                <ActionsTableCell name={talent.name} path={Path.Talent}/>
+                <ActionsTableCell name={talent.name} path={RootPath.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

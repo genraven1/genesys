@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import CampaignService from "../../../services/CampaignService";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";

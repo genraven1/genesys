@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
-import {ActorPath} from '../../../services/Path';
+import {ActorPath} from '../../../services/RootPath';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";

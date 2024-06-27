@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
-import {EquipmentPath} from '../../../services/Path';
+import {EquipmentPath} from '../../../services/RootPath';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import Skill from "../../../models/actor/Skill";

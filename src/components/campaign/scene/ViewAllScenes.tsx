@@ -10,7 +10,7 @@ import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 import {useLocation} from "react-router-dom";
 import SceneDialog from "./SceneDialog";
 

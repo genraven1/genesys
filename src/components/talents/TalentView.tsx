@@ -3,7 +3,7 @@ import {ViewFieldCard} from "../common/ViewFieldCard";
 import Talent from "../../models/Talent";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import EditIcon from "@mui/icons-material/Edit";
 import {Fragment} from "react";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
@@ -19,7 +19,7 @@ export default function TalentView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Talent + talent.name + '/edit')
+        navigate(RootPath.Talent + talent.name + '/edit')
     }
 
     const renderRanked = (): JSX.Element => {

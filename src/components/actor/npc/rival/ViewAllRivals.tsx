@@ -11,7 +11,7 @@ import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
 import Rival from "../../../../models/actor/npc/Rival";
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
-import {ActorPath} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/RootPath";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";

@@ -1,4 +1,4 @@
-import {EquipmentPath} from "../../services/Path";
+import {EquipmentPath} from "../../services/RootPath";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";

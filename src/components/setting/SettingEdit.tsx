@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import Setting from '../../models/Setting';
 import SettingService from '../../services/SettingService';
 import {useNavigate} from 'react-router-dom';
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 
@@ -35,7 +35,7 @@ export default function SettingEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Setting + setting.name + '/view')
+        navigate(RootPath.Setting + setting.name + '/view')
     }
 
     return (

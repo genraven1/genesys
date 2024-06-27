@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import LoreService from "../../../services/LoreService";
 import Lore, {LoreType} from "../../../models/lore/Lore";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {LorePath} from "../../../services/Path";
+import {LorePath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Card, CardContent} from "@mui/material";

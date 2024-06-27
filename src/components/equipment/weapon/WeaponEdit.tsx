@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
-import {EquipmentPath} from '../../../services/Path';
+import {EquipmentPath} from '../../../services/RootPath';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import Skill, {SkillType} from "../../../models/actor/Skill";

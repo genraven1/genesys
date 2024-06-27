@@ -1,6 +1,6 @@
 import Campaign from "../models/campaign/Campaign";
 import axios from "axios";
-import {CampaignPath} from "./Path";
+import {CampaignPath} from "./RootPath";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
 

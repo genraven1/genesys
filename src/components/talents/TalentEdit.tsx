@@ -5,7 +5,7 @@ import TalentService from '../../services/TalentService';
 import {useNavigate} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import CheckButtonCard from "../common/CheckButtonCard";
@@ -75,7 +75,7 @@ export default function TalentEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Talent + talent.name + '/view');
+        navigate(RootPath.Talent + talent.name + '/view');
     }
 
     return (

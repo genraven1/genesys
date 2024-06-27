@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import CampaignService from "../../../services/CampaignService";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 
 interface Props {
     open: boolean

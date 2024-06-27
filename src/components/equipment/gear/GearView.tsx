@@ -3,7 +3,7 @@ import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Gear} from "../../../models/equipment/Gear";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
 import Setting from "../../../models/Setting";

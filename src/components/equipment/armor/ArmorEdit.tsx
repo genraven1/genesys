@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
-import {EquipmentPath} from '../../../services/Path';
+import {EquipmentPath} from '../../../services/RootPath';
 import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";

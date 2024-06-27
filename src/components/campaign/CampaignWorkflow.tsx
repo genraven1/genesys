@@ -3,7 +3,7 @@ import {Fragment, useEffect, useState} from "react";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
 import ViewAllCampaigns from "./ViewAllCampaigns";
-import {CampaignPath} from "../../services/Path";
+import {CampaignPath} from "../../services/RootPath";
 import CampaignPage from "./CampaignPage";
 
 

@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import CheckButtonCard from "../common/CheckButtonCard";
@@ -53,7 +53,7 @@ export default function QualityEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Qualities + quality.name + '/view');
+        navigate(RootPath.Qualities + quality.name + '/view');
     }
 
     return (

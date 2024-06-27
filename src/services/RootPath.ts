@@ -1,4 +1,4 @@
-export enum Path {
+export enum RootPath {
     Home = 'home',
     Talent = '/talents/',
     Skills = '/skills/',
@@ -10,6 +10,10 @@ export enum Path {
     Spell = '/spells/',
     Career = '/careers/',
     Archetype = '/archetypes/',
+}
+
+export enum ModificationPath {
+    ModificationInjury = '/modifications/injuries/'
 }
 
 export enum LorePath {

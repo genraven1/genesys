@@ -11,7 +11,7 @@ import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor"
 import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard"
 import {EditStatsCard} from "../../StatsCard"
-import {ActorPath} from "../../../../services/Path"
+import {ActorPath} from "../../../../services/RootPath"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
 import Setting from "../../../../models/Setting";

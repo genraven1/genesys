@@ -2,7 +2,7 @@ import CampaignSession from "../../../models/campaign/CampaignSession";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import ViewAllScenes from "../scene/ViewAllScenes";

@@ -1,4 +1,4 @@
-import {ActorPath} from "../../services/Path";
+import {ActorPath} from "../../services/RootPath";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";

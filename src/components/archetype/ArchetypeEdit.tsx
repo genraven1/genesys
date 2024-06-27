@@ -6,7 +6,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import Archetype from "../../models/actor/player/Archetype";
 import SettingService from "../../services/SettingService";
 import ArchetypeService from "../../services/ArchetypeService";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {EditCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {ActorKey} from "../../models/actor/Actor";
@@ -104,7 +104,7 @@ export default function ArchetypeEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Archetype + archetype.name + '/view')
+        navigate(RootPath.Archetype + archetype.name + '/view')
     }
 
     return (

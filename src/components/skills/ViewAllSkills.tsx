@@ -9,7 +9,7 @@ import * as React from 'react';
 import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {renderHeaders} from "../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
@@ -30,7 +30,7 @@ function Row(props: Props): JSX.Element {
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
             <SettingTableCell settings={skill.settings} setting={useFetchCurrentSetting()}/>
-            <ActionsTableCell name={skill.name} path={Path.Skills}/>
+            <ActionsTableCell name={skill.name} path={RootPath.Skills}/>
         </TableRow>
     )
 }

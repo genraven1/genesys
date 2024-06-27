@@ -11,7 +11,7 @@ import SessionDialog from "./SessionDialog";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 import {useLocation} from "react-router-dom";
 
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Injury from "../../models/Injury";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
@@ -10,6 +10,7 @@ import * as React from "react";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
 import EditNumberCard from "../common/EditNumberCard";
 import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
+import InjuryService from "../../services/InjuryService";
 
 interface Props {
     crit: Injury
@@ -47,14 +48,11 @@ export default function InjuryEdit(props: Props): JSX.Element {
     }
 
     const updateInjury = async (copyInjury: Injury) => {
-        setInjury(copyInjury)
-        await fetch(`/injuries/${injury.injury_id}`, {method: 'PUT', body: JSON.stringify(copyInjury)})
-            .then((res) => res.json())
-            .then((data) => setInjury(data as Injury))
+        setInjury(await InjuryService.updateInjury(copyInjury))
     }
 
     const onView = () => {
-        navigate(Path.Injury + injury.injury_id + '/view');
+        navigate(RootPath.Injury + injury.injury_id + '/view');
     }
 
     return (

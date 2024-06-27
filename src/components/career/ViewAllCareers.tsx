@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import SettingTableCell from "../common/table/SettingsTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -34,7 +34,7 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={career.name}/>
                 <SettingTableCell settings={career.settings} setting={setting}/>
-                <ActionsTableCell name={career.name} path={Path.Career}/>
+                <ActionsTableCell name={career.name} path={RootPath.Career}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

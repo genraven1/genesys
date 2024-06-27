@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import {ViewFieldCard} from "../common/ViewFieldCard";
@@ -17,7 +17,7 @@ export default function SpellView(props: Props):JSX.Element {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Spell + spell.name + '/edit')
+        navigate(RootPath.Spell + spell.name + '/edit')
     }
 
     return (
