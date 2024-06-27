@@ -9,7 +9,7 @@ interface Props {
     open: boolean
     onClose: () => void
 }
-export default function CampaignDialog(props: Props): JSX.Element {
+export default function CampaignDialog(props: Props) {
     const {open,onClose} = props
     const [name,setName] = useState('')
     let navigate = useNavigate()
