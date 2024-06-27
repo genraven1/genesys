@@ -15,6 +15,7 @@ import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import CreateInjuryDialog from "./CreateInjuryDialog";
+import InjuryService from "../../services/InjuryService";
 
 interface Props {
     injury: Injury
@@ -60,9 +61,7 @@ export default function ViewAllInjuries() {
     useEffect(() => {
         (async (): Promise<void> => {
             try {
-                await fetch("/injuries")
-                    .then((res) => res.json())
-                    .then((data) => setInjuries(data as Injury[]))
+                setInjuries(await InjuryService.getAllInjuries())
             } catch (err) {
                 console.log(err)
             }
