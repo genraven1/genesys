@@ -3,7 +3,8 @@ import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
-import Injury from "../../models/Injury";
+// import Injury from "../../models/Injury";
+import InjuryService from "../../services/InjuryService";
 
 interface Props {
     open: boolean
@@ -16,17 +17,19 @@ export default function CreateInjuryDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await fetch(`/injuries`, {method: "POST", body: JSON.stringify({name: name})})
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json() as Promise<{ data: Injury }>
-            })
-            .then(data => {
-                const injury = data as unknown as Injury
-                navigate(Path.Injury + injury.injury_id + '/edit')
-            })
+        const injury = await InjuryService.createInjury(name)
+        navigate(Path.Injury + injury.injury_id + '/edit')
+        // await fetch(`/injuries`, {method: "POST", body: JSON.stringify({name: name})})
+        //     .then((res) => {
+        //         if (!res.ok) {
+        //             throw new Error(res.statusText)
+        //         }
+        //         return res.json() as Promise<{ data: Injury }>
+        //     })
+        //     .then(data => {
+        //         const injury = data as unknown as Injury
+        //         navigate(Path.Injury + injury.injury_id + '/edit')
+        //     })
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {

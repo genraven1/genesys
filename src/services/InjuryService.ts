@@ -4,7 +4,13 @@ import Injury from "../models/Injury";
 
 export default class InjuryService {
     static async createInjury(name: string): Promise<Injury> {
-        return await (await axios.post(Path.Injury + name)).data;
+        return await fetch(`/injuries`, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async getInjury(name: string): Promise<Injury> {
