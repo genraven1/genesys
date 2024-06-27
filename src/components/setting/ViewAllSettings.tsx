@@ -9,7 +9,7 @@ import * as React from 'react';
 import SettingService from "../../services/SettingService";
 import Setting from "../../models/Setting";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import SettingDialog from "./SettingDialog";
@@ -35,7 +35,7 @@ function Row(props: Props): JSX.Element {
         <TableRow>
             <TypographyCenterTableCell value={setting.name}/>
             {renderSettingMagicTableCell()}
-            <ActionsTableCell name={String(setting.name)} path={Path.Setting}/>
+            <ActionsTableCell name={String(setting.name)} path={RootPath.Setting}/>
         </TableRow>
     )
 }

@@ -55,24 +55,25 @@ DROP TABLE IF EXISTS CampaignSession;
 
 CREATE TABLE IF NOT EXISTS Campaign
 (
-    campaign_name TEXT PRIMARY KEY,
-    party_name    TEXT,
-    FOREIGN KEY (party_name) REFERENCES Party (party_name)
+    campaign_id   INTEGER PRIMARY KEY,
+    name          TEXT,
+    party_id      INTEGER,
+    FOREIGN KEY (party_id) REFERENCES Party (party_id)
 );
 CREATE TABLE IF NOT EXISTS Party
 (
-    party_name TEXT PRIMARY KEY
+    party_id        INTEGER PRIMARY KEY
 );
 CREATE TABLE IF NOT EXISTS Session
 (
-    session_name TEXT PRIMARY KEY
+    session_id      INTEGER PRIMARY KEY
 );
 CREATE TABLE IF NOT EXISTS CampaignSession
 (
-    campaign_name TEXT,
-    session_name  TEXT,
-    FOREIGN KEY (campaign_name) REFERENCES Campaign (campaign_name),
-    FOREIGN KEY (session_name) REFERENCES Session (session_name)
+    campaign_id     INTEGER,
+    session_id    INTEGER,
+    FOREIGN KEY (campaign_id) REFERENCES Campaign (campaign_id),
+    FOREIGN KEY (session_id) REFERENCES Session (session_id)
 );
 
 -- CAMPAIGN ITEM TABLES

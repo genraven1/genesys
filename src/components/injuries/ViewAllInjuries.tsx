@@ -10,11 +10,12 @@ import Injury from "../../models/Injury";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {ViewActionTableCell} from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import CreateInjuryDialog from "./CreateInjuryDialog";
+import InjuryService from "../../services/InjuryService";
 
 interface Props {
     injury: Injury
@@ -35,7 +36,7 @@ function Row(props: Props) {
                 <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ViewActionTableCell id={injury.injury_id} path={Path.Injury}/>
+                <ViewActionTableCell id={injury.injury_id} path={RootPath.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
@@ -60,9 +61,7 @@ export default function ViewAllInjuries() {
     useEffect(() => {
         (async (): Promise<void> => {
             try {
-                await fetch("/injuries")
-                    .then((res) => res.json())
-                    .then((data) => setInjuries(data as Injury[]))
+                setInjuries(await InjuryService.getAllInjuries())
             } catch (err) {
                 console.log(err)
             }

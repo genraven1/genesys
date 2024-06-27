@@ -1,6 +1,6 @@
 import CampaignSession from "../../../models/campaign/CampaignSession";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {CampaignPath} from "../../../services/Path";
+import {CampaignPath} from "../../../services/RootPath";
 import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";

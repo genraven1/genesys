@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import {CampaignPath} from "../../services/Path";
+import {CampaignPath} from "../../services/RootPath";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import CampaignService from "../../services/CampaignService";
 
@@ -9,14 +9,14 @@ interface Props {
     open: boolean
     onClose: () => void
 }
-export default function CampaignDialog(props: Props): JSX.Element {
+export default function CampaignDialog(props: Props) {
     const {open,onClose} = props
     const [name,setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         let campaign = await CampaignService.createCampaign(name)
-        navigate(CampaignPath.Campaign + campaign.name)
+        navigate(CampaignPath.Campaign + campaign.campaign_id)
         onClose()
     }
 

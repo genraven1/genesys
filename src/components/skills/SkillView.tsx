@@ -1,7 +1,7 @@
 import Skill from "../../models/actor/Skill";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import {ViewFieldCard} from "../common/ViewFieldCard";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import {useNavigate, useParams} from "react-router-dom";
@@ -16,7 +16,7 @@ interface Props {
 export default function SkillView(props: Props): JSX.Element {
     const {skill, settings} = props
     const {id} = useParams<{ id: string }>()
-    let path = Path.Skills
+    let path = RootPath.Skills
     let navigate = useNavigate()
 
     const onEdit = () => {

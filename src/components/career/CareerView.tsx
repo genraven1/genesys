@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import EditIcon from "@mui/icons-material/Edit";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
@@ -17,7 +17,7 @@ export default function CareerView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Career + career.name + '/edit')
+        navigate(RootPath.Career + career.name + '/edit')
     }
 
     return (

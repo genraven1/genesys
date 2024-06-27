@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,8 +7,8 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import ActionsTableCell from "../common/table/ActionsTableCell";
-import {CampaignPath} from "../../services/Path";
+import {ViewActionTableCell} from "../common/table/ActionsTableCell";
+import {CampaignPath} from "../../services/RootPath";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
@@ -18,31 +18,27 @@ interface Props {
     campaign: Campaign
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {campaign} = props
 
     return (
         <TableRow>
             <TypographyCenterTableCell value={campaign.name}/>
-            <ActionsTableCell name={campaign.name} path={CampaignPath.Campaign}/>
+            <ViewActionTableCell id={campaign.campaign_id} path={CampaignPath.Campaign}/>
         </TableRow>
     )
 }
 
-export default function ViewAllCampaigns(): JSX.Element {
+export default function ViewAllCampaigns() {
     const [campaigns, setCampaigns] = useState<Campaign[]>([])
     const [openCampaignCreationDialog, setOpenCampaignCreationDialog] = useState(false)
     const headers = ['Name', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const campaignList = await CampaignService.getCampaigns()
-            if (!campaignList) {
-                return
-            }
-            setCampaigns(campaignList)
+            setCampaigns(await CampaignService.getAllCampaigns())
         })()
-    }, [])
+    }, [setCampaigns])
 
     return (
         <Card>
@@ -52,7 +48,6 @@ export default function ViewAllCampaigns(): JSX.Element {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenCampaignCreationDialog(true)}>Create Campaign</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

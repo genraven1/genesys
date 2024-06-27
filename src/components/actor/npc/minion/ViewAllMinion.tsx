@@ -11,7 +11,7 @@ import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
-import {ActorPath} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/RootPath";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";

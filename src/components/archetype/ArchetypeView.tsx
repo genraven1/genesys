@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import * as React from "react";
 import Archetype from "../../models/actor/player/Archetype";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 import {ViewCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
@@ -22,7 +22,7 @@ export default function ArchetypeView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Archetype + archetype.name + '/edit')
+        navigate(RootPath.Archetype + archetype.name + '/edit')
     }
 
     return (

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
@@ -73,7 +73,7 @@ export default function SpellEdit(props: Props): JSX.Element {
     }
 
     const onView = () => {
-        navigate(Path.Spell + spell.name + '/view');
+        navigate(RootPath.Spell + spell.name + '/view');
     }
 
     return (

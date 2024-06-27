@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {ViewFieldCard, ViewQualityActivationCard} from "../common/ViewFieldCard";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import EditIcon from "@mui/icons-material/Edit";
 import {Fragment} from "react";
 import Quality from "../../models/Quality";
@@ -18,7 +18,7 @@ export default function QualityView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Qualities + quality.name + '/edit')
+        navigate(RootPath.Qualities + quality.name + '/edit')
     }
 
     const renderQualityUsable = (): JSX.Element => {

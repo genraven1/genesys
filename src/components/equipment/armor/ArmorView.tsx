@@ -4,7 +4,7 @@ import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import Setting from "../../../models/Setting";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";

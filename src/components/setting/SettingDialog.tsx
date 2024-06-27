@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextFiel
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import SettingService from "../../services/SettingService";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 
 interface Props {
     open: boolean
@@ -16,7 +16,7 @@ export default function SettingDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let setting = await SettingService.createSetting(name)
-        navigate(Path.Setting + setting?.name!!  + '/edit')
+        navigate(RootPath.Setting + setting?.name!!  + '/edit')
         onClose()
     }
 

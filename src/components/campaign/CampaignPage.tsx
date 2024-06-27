@@ -1,8 +1,9 @@
 import Campaign from "../../models/campaign/Campaign";
-import {Card, CardContent, CardHeader, Divider, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import ViewAllSessions from "./session/ViewAllSessions";
 import * as React from "react";
 import PartyCard from "./party/PartyCard";
+import {Fragment} from "react";
 
 interface Props {
     campaign: Campaign
@@ -11,17 +12,23 @@ interface Props {
 export default function CampaignPage(props: Props) {
     const { campaign } = props;
 
+    const renderPartyCard = () => {
+        if (!campaign.party) {
+            return <Fragment/>
+        }
+        return <PartyCard party={campaign.party}/>
+    }
+
     return (
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={campaign.name}>
             </CardHeader>
-            <Divider />
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container>
-                        <PartyCard party={campaign.party}/>
+                        {renderPartyCard()}
                     </Grid>
                     <Grid container spacing={10}>
                         <Grid item xs>

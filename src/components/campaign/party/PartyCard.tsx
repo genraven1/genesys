@@ -8,9 +8,10 @@ import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {ActorPath} from "../../../services/Path";
+import {ActorPath} from "../../../services/RootPath";
 import TableRow from "@mui/material/TableRow";
 import Character from "../../../models/character/Character";
+import {Fragment} from "react";
 
 interface Props {
     party: Party
@@ -21,6 +22,9 @@ export default function PartyCard(props: Props) {
     const headers = ['Name', 'View']
 
     const renderTableBody = () => {
+        if (party.characters === undefined || party.characters.length === 0) {
+            return <Fragment/>
+        }
         return (
             <TableBody>
                 {party.characters.map((player: Character) => (

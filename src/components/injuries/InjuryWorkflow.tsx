@@ -4,6 +4,7 @@ import {useLocation, useParams} from "react-router-dom";
 import InjuryEdit from "./InjuryEdit";
 import InjuryView from "./InjuryView";
 import ViewAllInjuries from "./ViewAllInjuries";
+import InjuryService from "../../services/InjuryService";
 
 function useFetchInjury(id: string): Injury {
     const [injury, setInjury] = useState<Injury>()
@@ -14,11 +15,7 @@ function useFetchInjury(id: string): Injury {
         }
         (async (): Promise<void> => {
             try {
-                await fetch(`/injuries/${id}`)
-                    .then((res) => res.json())
-                    .then((data) => {
-                        setInjury(data as Injury)
-                    })
+                setInjury(await InjuryService.getInjury(id))
             } catch (err) {
                 console.log(err)
             }
@@ -29,7 +26,7 @@ function useFetchInjury(id: string): Injury {
 
 export default function InjuryWorkflow() {
     const {injury_id} = useParams<{ injury_id?: string }>()
-    const injury = useFetchInjury(injury_id!!)
+    const injury = useFetchInjury(injury_id!)
 
     const useWorkflowRender = () => {
         const pathname = useLocation().pathname

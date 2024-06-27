@@ -3,7 +3,7 @@ import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import Paper from "@mui/material/Paper";

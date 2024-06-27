@@ -7,7 +7,7 @@ import Skill, {SkillType} from '../../models/actor/Skill';
 import {Option} from '../common/InputSelectField';
 import {CharacteristicType} from '../../models/character/Characteristic';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import EditSettingsCard from "../common/setting/EditSettingsCard";
 import Setting from "../../models/Setting";
@@ -78,7 +78,7 @@ export default function SkillEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(Path.Skills + skill.name + '/view');
+        navigate(RootPath.Skills + skill.name + '/view');
     }
 
     return (

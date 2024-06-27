@@ -6,7 +6,7 @@ import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
-import {ActorPath} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/RootPath";
 import CharacteristicRow from "../../common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
 import Setting from "../../../../models/Setting";

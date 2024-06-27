@@ -4,6 +4,7 @@ import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifie
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
+import InjuryService from "../../../services/InjuryService";
 
 interface Props {
     injury: Injury
@@ -16,8 +17,9 @@ export default function AddCriticalInjuryModifierDialog(props: Props) {
     const [modifier, setModifier] = useState<Modifier>()
 
     const handleAdd = async (): Promise<void> => {
-        await fetch(`/modifications/injuries/${injury.injury_id}`, {method: 'POST', body: JSON.stringify(modifier)})
-            .then((res) => res.json())
+        if (modifier) {
+            await InjuryService.AddInjuryModification(String(injury.injury_id), modifier)
+        }
         onClose()
     }
 

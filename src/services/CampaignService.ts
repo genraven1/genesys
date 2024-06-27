@@ -1,20 +1,38 @@
 import Campaign from "../models/campaign/Campaign";
 import axios from "axios";
-import {CampaignPath} from "./Path";
+import {CampaignPath} from "./RootPath";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
 
 export default class CampaignService {
     static async createCampaign(name: string): Promise<Campaign> {
-        return await (await axios.post(CampaignPath.Campaign + name)).data;
+        return await fetch(CampaignPath.Campaign, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getCampaigns(): Promise<Campaign[]> {
-        return await (await axios.get(CampaignPath.Campaign)).data;
+    static async getAllCampaigns(): Promise<Campaign[]> {
+        return await fetch(CampaignPath.Campaign)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getCampaign(name: string): Promise<Campaign> {
-        return await (await axios.get(CampaignPath.Campaign + name)).data;
+    static async getCampaign(id: string): Promise<Campaign> {
+        return await fetch(CampaignPath.Campaign + `${id}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async updateCampaign(name: string, campaign: Campaign): Promise<Campaign> {

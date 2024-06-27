@@ -2,14 +2,14 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton, Typography} fr
 import Setting from "../../models/Setting";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function SettingView(props: {setting: Setting}) {
     const {setting} = props
-    const path = Path.Setting
+    const path = RootPath.Setting
     let navigate = useNavigate()
 
     const onEdit = () => {
