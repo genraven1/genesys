@@ -28,7 +28,7 @@ export default function CampaignWorkflow() {
     const {campaign_id} = useParams<{ campaign_id?: string }>()
     const campaign = useFetchCampaign(campaign_id!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith(CampaignPath.Campaign)) {
             return <ViewAllCampaigns/>
