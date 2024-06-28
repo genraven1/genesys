@@ -47,13 +47,11 @@ export default function QualityEdit(props: Props) {
                 copyQuality.weapon = !Boolean(copyQuality.weapon)
                 break
         }
-        setQuality(copyQuality)
-
-        await QualityService.updateQuality(copyQuality.name, copyQuality)
+        setQuality(await QualityService.updateQuality(copyQuality))
     }
 
     const onView = () => {
-        navigate(RootPath.Qualities + quality.name + '/view');
+        navigate(RootPath.Qualities + quality.quality_id + '/view');
     }
 
     return (
@@ -63,7 +61,6 @@ export default function QualityEdit(props: Props) {
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>

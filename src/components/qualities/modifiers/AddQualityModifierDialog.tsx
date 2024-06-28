@@ -18,10 +18,7 @@ export default function AddQualityModifierDialog(props: Props) {
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
-            if (!quality.modifiers.some(mod => mod.type === modifier.type)) {
-                quality.modifiers.push(modifier)
-                await QualityService.updateQuality(quality.name, quality)
-            }
+            await QualityService.addQualityModification(quality.name, modifier)
         }
         onClose()
     }

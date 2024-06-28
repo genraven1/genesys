@@ -9,7 +9,7 @@ import ExpansionList from "../navigation/ExpansionList";
 import Setting from "../../models/Setting";
 import SettingSelectionDialog from "../setting/SettingSelectionDialog";
 import SettingService from "../../services/SettingService";
-import QualityDialog from "../qualities/QualityDialog";
+import CreateQualityDialog from "../qualities/CreateQualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
@@ -100,8 +100,8 @@ export default function MainDashboard(): JSX.Element {
                                                          onClose={(): void => setOpenSettingCreationDialog(false)}/>}
             {openTalentCreationDialog && <CreateTalentDialog open={openTalentCreationDialog}
                                                              onClose={(): void => setOpenTalentCreationDialog(false)}/>}
-            {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
-                                                         onClose={(): void => setOpenQualityCreationDialog(false)}/>}
+            {openQualityCreationDialog && <CreateQualityDialog open={openQualityCreationDialog}
+                                                               onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}
                                                          onClose={(): void => setOpenCareerCreationDialog(false)}/>}
             {openArchetypeCreationDialog && <ArchetypeDialog open={openArchetypeCreationDialog}

@@ -1,6 +1,7 @@
 import Modifier from "./common/Modifier";
 
 export default interface Quality {
+    quality_id: number
     name: string
     description: string
     passive: boolean

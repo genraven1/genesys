@@ -4,7 +4,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
@@ -16,9 +15,9 @@ import Quality from "../../models/Quality";
 import GenesysQualityTypography from "../common/typography/GenesysQualityTypography";
 import QualityService from "../../services/QualityService";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
-import QualityDialog from "./QualityDialog";
-import {renderHeaders} from "../common/table/TableRenders";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import CreateQualityDialog from "./CreateQualityDialog";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {renderUsable} from "../../models/equipment/EquipmentHelper";
 
 interface RowProps {
@@ -29,15 +28,12 @@ function Row(props: RowProps) {
     const {quality} = props
     const [open, setOpen] = useState(false)
 
-    const renderActivation = (): JSX.Element => {
+    const renderActivation = () => {
         if (quality.passive === undefined) {
             return <Fragment/>
         }
-        if (quality.passive) {
-            return <GenesysDescriptionTypography text={'Passive'}/>
-        } else {
-            return <GenesysQualityTypography ranks={quality.cost}/>
-        }
+        return quality.passive ? <GenesysDescriptionTypography text={'Passive'}/> :
+            <GenesysQualityTypography ranks={quality.cost}/>
     }
 
     return (
@@ -72,13 +68,9 @@ export default function ViewAllQualities() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const qualitiesList = await QualityService.getQualities()
-            if (!qualitiesList) {
-                return
-            }
-            setQualities(qualitiesList)
+            setQualities(await QualityService.getQualities())
         })()
-    }, [])
+    }, [setQualities])
 
     return (
         <Card>
@@ -88,13 +80,10 @@ export default function ViewAllQualities() {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenQualityCreationDialog(true)}>Create Quality</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {(qualities || []).map((quality: Quality) => (
                                 <Row key={quality.name} quality={quality}/>
@@ -103,8 +92,8 @@ export default function ViewAllQualities() {
                     </Table>
                 </TableContainer>
             </CardContent>
-            {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
-                                                         onClose={(): void => setOpenQualityCreationDialog(false)}/>}
+            {openQualityCreationDialog && <CreateQualityDialog open={openQualityCreationDialog}
+                                                               onClose={(): void => setOpenQualityCreationDialog(false)}/>}
         </Card>
     );
 }
