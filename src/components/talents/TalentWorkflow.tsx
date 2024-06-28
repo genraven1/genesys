@@ -7,32 +7,29 @@ import TalentEdit from "./TalentEdit";
 import ViewAllTalents from "./ViewAllTalents";
 
 
-function useFetchTalent(name: string): Talent {
+function useFetchTalent(id: string): Talent {
     const [talent, setTalent] = useState<Talent>()
 
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
             try {
-                const talentData = await TalentService.getTalent(name)
-                if (talentData) {
-                    setTalent(talentData)
-                }
+                setTalent(await TalentService.getTalent(id))
             } catch (err) {
                 console.log(err)
             }
         })()
-        }, [name, setTalent])
+    }, [id, setTalent])
     return talent as Talent
 }
 
-export default function TalentWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const talent = useFetchTalent(name!!)
+export default function TalentWorkflow() {
+    const {talent_id} = useParams<{ talent_id?: string }>()
+    const talent = useFetchTalent(talent_id!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return talent && <TalentView talent={talent}/>

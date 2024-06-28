@@ -43,7 +43,7 @@ export default class InjuryService {
             })
     }
 
-    static async AddInjuryModification(id: string, modifier: Modifier) {
+    static async addInjuryModification(id: string, modifier: Modifier) {
         return await fetch(ModificationPath.ModificationInjury + `${id}`, {
             method: 'POST',
             body: JSON.stringify(modifier)

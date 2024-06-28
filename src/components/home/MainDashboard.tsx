@@ -3,7 +3,7 @@ import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import SettingDialog from "../setting/SettingDialog";
-import TalentDialog from "../talents/TalentDialog";
+import CreateTalentDialog from "../talents/CreateTalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
 import Setting from "../../models/Setting";
@@ -98,8 +98,8 @@ export default function MainDashboard(): JSX.Element {
             </CardContent>
             {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
                                                          onClose={(): void => setOpenSettingCreationDialog(false)}/>}
-            {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
-                                                       onClose={(): void => setOpenTalentCreationDialog(false)}/>}
+            {openTalentCreationDialog && <CreateTalentDialog open={openTalentCreationDialog}
+                                                             onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
             {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}

@@ -13,7 +13,8 @@ export enum RootPath {
 }
 
 export enum ModificationPath {
-    ModificationInjury = '/modifications/injuries/'
+    ModificationInjury = '/modifications' + RootPath.Injury,
+    ModificationTalent = '/modifications' + RootPath.Talent,
 }
 
 export enum LorePath {
