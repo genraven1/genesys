@@ -53,10 +53,7 @@ function useFetchSkill(name: string): Skill {
         }
         (async (): Promise<void> => {
             try {
-                const skillData = await SkillService.getSkill(name)
-                if (skillData) {
-                    setSkill(skillData)
-                }
+                setSkill(await SkillService.getSkill(name))
             } catch (err) {
                 console.log(err)
             }
@@ -65,9 +62,9 @@ function useFetchSkill(name: string): Skill {
     return skill as Skill
 }
 
-export default function SkillWorkflow(): JSX.Element {
-    const {name} = useParams<{ name: string }>()
-    const skill = useFetchSkill(name as string)
+export default function SkillWorkflow() {
+    const {skill_id} = useParams<{ skill_id: string }>()
+    const skill = useFetchSkill(skill_id!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname

@@ -44,16 +44,13 @@ export default function SkillEdit(props: Props) {
             case 'type':
                 copySkill.type = value
                 break
-            case 'name':
-                break
         }
 
         await updateSkill(copySkill)
     }
 
     const updateSkill = async (copySkill: Skill) => {
-        setSkill(copySkill)
-        await SkillService.updateSkill(copySkill.name, copySkill)
+        setSkill(await SkillService.updateSkill(copySkill))
     }
 
     const onView = () => {

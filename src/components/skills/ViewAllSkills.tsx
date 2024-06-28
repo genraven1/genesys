@@ -38,13 +38,9 @@ export default function ViewAllSkills() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const skillList = await SkillService.getSkills()
-            if (!skillList) {
-                return
-            }
-            setSkills(skillList)
+            setSkills(await SkillService.getSkills())
         })()
-    }, [])
+    }, [setSkills])
 
     return (
         <Card>

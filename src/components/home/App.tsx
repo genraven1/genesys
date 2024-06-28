@@ -59,8 +59,8 @@ export default function App() {
                     <Route path={RootPath.Qualities + ':name/edit'} element={<QualityWorkflow/>}/>
 
                     <Route path={RootPath.Skills} element={<SkillWorkflow/>}/>
-                    <Route path={RootPath.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
-                    <Route path={RootPath.Skills + ':name/view'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':skill_id/edit'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':skill_id/view'} element={<SkillWorkflow/>}/>
 
                     <Route path={RootPath.Career} element={<CareerWorkflow/>}/>
                     <Route path={RootPath.Career + ':name/edit'} element={<CareerWorkflow/>}/>
