@@ -5,7 +5,7 @@ import {useLocation, useParams} from "react-router-dom";
 import SkillEdit from "./SkillEdit";
 import SkillView from "./SkillView";
 import ViewAllSkills from "./ViewAllSkills";
-import {useFetchAllSettings, useFetchCurrentSetting} from "../setting/SettingWorkflow";
+import {useFetchCurrentSetting} from "../setting/SettingWorkflow";
 
 export function useFetchCurrentSettingSkills(): Skill[] {
     const [skills, setSkills] = useState<Skill[]>([])
@@ -20,13 +20,7 @@ export function useFetchCurrentSettingSkills(): Skill[] {
             if (!skillList) {
                 return
             }
-            let temp = [] as Skill[]
-            skillList.forEach((sk, index) => {
-                if (sk.settings.some(set => set.name === current.name)) {
-                    temp.push(sk)
-                }
-            })
-            setSkills(temp.sort((a, b) => a.name.localeCompare(b.name)))
+            setSkills(skillList.sort((a, b) => a.name.localeCompare(b.name)))
         })()
     }, [current, setSkills])
     return skills;
@@ -45,13 +39,7 @@ export function useFetchCurrentSettingSkillsByType(type: SkillType): Skill[] {
             if (!skillList) {
                 return
             }
-            let temp = [] as Skill[]
-            skillList.forEach((sk) => {
-                if (sk.type === type && sk.settings.some(set => set.name === current.name)) {
-                    temp.push(sk)
-                }
-            })
-            setSkills(temp.sort((a, b) => a.name.localeCompare(b.name)))
+            setSkills(skillList.sort((a, b) => a.name.localeCompare(b.name)))
         })()
     }, [current, setSkills, type])
     return skills;
@@ -80,14 +68,13 @@ function useFetchSkill(name: string): Skill {
 export default function SkillWorkflow(): JSX.Element {
     const {name} = useParams<{ name: string }>()
     const skill = useFetchSkill(name as string)
-    const settings = useFetchAllSettings()
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return skill && <SkillView skill={skill} settings={settings}/>
+            return skill && <SkillView skill={skill}/>
         } else if (pathname.endsWith('/edit')) {
-            return skill && <SkillEdit sk={skill} settings={settings}/>
+            return skill && <SkillEdit sk={skill}/>
         } else {
             return <ViewAllSkills/>
         }

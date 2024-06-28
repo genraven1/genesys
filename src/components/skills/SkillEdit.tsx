@@ -9,9 +9,6 @@ import {CharacteristicType} from '../../models/character/Characteristic';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
-import EditSettingsCard from "../common/setting/EditSettingsCard";
-import Setting from "../../models/Setting";
-import SettingService from "../../services/SettingService";
 
 const getSkillTypes = (): Option[] => {
     return Object.values(SkillType).map((value) => ({value}))
@@ -23,11 +20,10 @@ const getCharacteristicTypes = (): Option[] => {
 
 interface Props {
     sk: Skill
-    settings: Setting[]
 }
 
 export default function SkillEdit(props: Props) {
-    const {sk, settings} = props
+    const {sk} = props
     const [skill, setSkill] = useState<Skill>(sk)
 
     let navigate = useNavigate()
@@ -35,23 +31,6 @@ export default function SkillEdit(props: Props) {
     useEffect(() => {
         setSkill(sk)
     }, [sk])
-
-    const onSettingAddition = async (name: string) => {
-        const copySkill = {...skill} as Skill
-        let setting = await SettingService.getSetting(name)
-        copySkill.settings = copySkill.settings.concat(setting)
-        await updateSkill(copySkill)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copySkill = {...skill} as Skill
-        copySkill.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copySkill.settings.splice(index, 1)
-            }
-        })
-        await updateSkill(copySkill)
-    }
 
     const onChange = async (key: keyof Skill, value: any) => {
         if (value === null || (skill !== null && skill[key] === value)) {
@@ -78,7 +57,7 @@ export default function SkillEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(RootPath.Skills + skill.name + '/view');
+        navigate(RootPath.Skills + skill.skill_id + '/view');
     }
 
     return (
@@ -96,8 +75,6 @@ export default function SkillEdit(props: Props) {
                     <InputSelectFieldCard defaultValue={skill.characteristic} onCommit={(value: string): void => {
                         onChange('characteristic', value)
                     }} title={'Linked Characteristic'} options={getCharacteristicTypes()}/>
-                    <EditSettingsCard settings={skill.settings} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

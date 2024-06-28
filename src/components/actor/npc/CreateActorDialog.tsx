@@ -35,11 +35,7 @@ export default function CreateActorDialog(props: Props) {
                 let minion = {...await ActorService.createMinion(name)}
                 minion.settings.push(currentSetting)
                 skills.forEach((skill) => {
-                    skill.settings.forEach((setting) => {
-                        if (setting.name === currentSetting.name) {
-                            minion.skills.push({group: false, ...skill})
-                        }
-                    })
+                    minion.skills.push({group: false, ...skill})
                 })
                 await ActorService.updateMinion(minion.name, minion)
                 navigate(ActorPath.Minion + minion.name + '/edit')
@@ -48,11 +44,7 @@ export default function CreateActorDialog(props: Props) {
                 let rival = {...await ActorService.createRival(name)}
                 rival.settings.push(currentSetting)
                 skills.forEach((skill) => {
-                    skill.settings.forEach((setting) => {
-                        if (setting.name === currentSetting.name) {
-                            rival.skills.push({ranks: 0, ...skill})
-                        }
-                    })
+                    rival.skills.push({ranks: 0, ...skill})
                 })
                 await ActorService.updateRival(rival.name, rival)
                 navigate(ActorPath.Rival + rival.name + '/edit')
@@ -61,11 +53,7 @@ export default function CreateActorDialog(props: Props) {
                 let nemesis = {...await ActorService.createNemesis(name)}
                 nemesis.settings.push(currentSetting)
                 skills.forEach((skill) => {
-                    skill.settings.forEach((setting) => {
-                        if (setting.name === currentSetting.name) {
-                            nemesis.skills.push({ranks: 0, ...skill})
-                        }
-                    })
+                    nemesis.skills.push({ranks: 0, ...skill})
                 })
                 await ActorService.updateNemesis(nemesis.name, nemesis)
                 navigate(ActorPath.Nemesis + nemesis.name + '/edit')
@@ -75,11 +63,7 @@ export default function CreateActorDialog(props: Props) {
                 player = {...await ActorService.createPlayer(name)}
                 player.settings.push(currentSetting)
                 skills.forEach((skill, index) => {
-                    skill.settings.forEach((setting) => {
-                        if (setting.name === currentSetting.name) {
-                            player.skills.push({career: false, ranks: 0, ...skill})
-                        }
-                    })
+                    player.skills.push({career: false, ranks: 0, ...skill})
                 })
                 await ActorService.updatePlayer(player.name, player)
                 navigate(ActorPath.Player + player.name + '/edit')

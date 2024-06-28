@@ -81,6 +81,7 @@ DROP TABLE IF EXISTS Talent;
 DROP TABLE IF EXISTS TalentModification;
 DROP TABLE IF EXISTS Ability;
 DROP TABLE IF EXISTS AbilityModification;
+DROP TABLE IF EXISTS Skill;
 
 CREATE TABLE IF NOT EXISTS Talent
 (
@@ -112,4 +113,11 @@ CREATE TABLE IF NOT EXISTS AbilityModification
     type       TEXT,
     ranks      INTEGER,
     FOREIGN KEY (ability_id) REFERENCES Ability (ability_id)
+);
+CREATE TABLE IF NOT EXISTS Skill
+(
+    skill_id       INTEGER PRIMARY KEY,
+    name           TEXT,
+    type           TEXT,
+    characteristic TEXT
 );

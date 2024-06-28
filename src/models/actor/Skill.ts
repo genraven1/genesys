@@ -1,11 +1,10 @@
 import {CharacteristicType} from '../character/Characteristic';
-import Setting from "../Setting";
 
 export default interface Skill {
+    skill_id: number;
     characteristic: CharacteristicType
     type: SkillType
     name: string
-    settings: Setting[]
 }
 
 export enum SkillType {
