@@ -9,7 +9,7 @@ import {RootPath} from "../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import CheckButtonCard from "../common/CheckButtonCard";
-import TalentModifierCard from "../common/modifier/TalentModifierCard";
+import TalentModifierCard from "./modifier/TalentModifierCard";
 
 interface Props {
     tal: Talent

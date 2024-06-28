@@ -3,8 +3,8 @@ import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifie
 import {useState} from "react";
 import Talent from "../../../models/Talent";
 import TalentService from "../../../services/TalentService";
-import InputSelectFieldCard from "../InlineSelectFieldCard";
-import NumberRangeSelectCard from "../NumberRangeSelectCard";
+import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
+import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 
 interface Props {
     talent: Talent

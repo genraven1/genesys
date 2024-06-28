@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {RootPath} from "../../services/RootPath";
 import EditIcon from "@mui/icons-material/Edit";
 import {Fragment} from "react";
-import TalentModifierCard from "../common/modifier/TalentModifierCard";
+import TalentModifierCard from "./modifier/TalentModifierCard";
 
 interface Props {
     talent: Talent
