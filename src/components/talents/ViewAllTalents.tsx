@@ -57,7 +57,7 @@ function Row(props: Props) {
 export default function ViewAllTalents() {
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
-    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'Active', 'View']
+    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
