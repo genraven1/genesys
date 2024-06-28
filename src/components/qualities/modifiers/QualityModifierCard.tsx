@@ -25,7 +25,7 @@ export default function QualityModifierCard(props: Props) {
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
 
-    const renderTableFooter = (): JSX.Element => {
+    const renderTableFooter = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <TableFooter>

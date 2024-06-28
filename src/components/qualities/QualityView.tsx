@@ -18,7 +18,7 @@ export default function QualityView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(RootPath.Qualities + quality.name + '/edit')
+        navigate(RootPath.Qualities + quality.quality_id + '/edit')
     }
 
     const renderQualityUsable = (): JSX.Element => {
@@ -37,7 +37,6 @@ export default function QualityView(props: Props) {
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
