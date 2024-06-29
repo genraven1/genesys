@@ -1,5 +1,5 @@
 import axios from "axios";
-import {EquipmentPath, ModificationPath, RootPath} from "./RootPath";
+import {EquipmentPath, ModificationPath} from "./RootPath";
 import {Armor} from "../models/equipment/Armor";
 import {Gear} from "../models/equipment/Gear";
 import {Weapon} from "../models/equipment/Weapon";

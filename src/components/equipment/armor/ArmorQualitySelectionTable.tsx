@@ -34,7 +34,7 @@ function QualityRow(props: RowProps): JSX.Element {
         else {
             armor.qualities = armor.qualities.concat({...quality, ranks: 1})
         }
-        await EquipmentService.updateArmor(armor.name, armor)
+        // await EquipmentService.updateArmor(armor.name, armor)
     }
 
     return (
