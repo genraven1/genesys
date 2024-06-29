@@ -5,7 +5,6 @@ import EquipmentService from "../../../services/EquipmentService";
 import ArmorView from "./ArmorView";
 import ArmorEdit from "./ArmorEdit";
 import ViewAllArmor from "./ViewAllArmor";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 function useFetchArmor(id: string): Armor {
     const [armor, setArmor] = useState<Armor>()
@@ -25,14 +24,13 @@ function useFetchArmor(id: string): Armor {
 export default function ArmorWorkflow() {
     const {armor_id} = useParams<{ armor_id: string }>()
     const armor = useFetchArmor(armor_id!)
-    const settings = useFetchAllSettings()
 
     const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return armor && <ArmorView armor={armor} settings={settings}/>
+            return armor && <ArmorView armor={armor}/>
         } else if (pathname.endsWith('/edit')) {
-            return armor && <ArmorEdit ar={armor} settings={settings}/>
+            return armor && <ArmorEdit ar={armor}/>
         } else {
             return <ViewAllArmor/>
         }
