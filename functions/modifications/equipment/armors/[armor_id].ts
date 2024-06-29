@@ -1,4 +1,4 @@
-import Modifier from "../../../src/models/common/Modifier";
+import Modifier from "../../../../src/models/common/Modifier";
 
 interface Env {
     GENESYS: D1Database;
