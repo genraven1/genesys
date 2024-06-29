@@ -151,3 +151,34 @@ CREATE TABLE IF NOT EXISTS ArmorQuality
     FOREIGN KEY (armor_id) REFERENCES Armor (armor_id),
     FOREIGN KEY (quality_id) REFERENCES Quality (quality_id)
 );
+CREATE TABLE IF NOT EXISTS Weapon
+(
+    weapon_id   INTEGER PRIMARY KEY,
+    name        TEXT,
+    description TEXT,
+    price       INTEGER,
+    restricted  INTEGER,
+    encumbrance INTEGER,
+    rarity      INTEGER,
+    damage      INTEGER,
+    critical    INTEGER,
+    range       TEXT,
+    brawn       INTEGER,
+    hands       INTEGER,
+    skill_id    INTEGER
+);
+CREATE TABLE IF NOT EXISTS WeaponModification
+(
+    weapon_id INTEGER,
+    type      TEXT,
+    ranks     INTEGER,
+    FOREIGN KEY (weapon_id) REFERENCES Weapon (weapon_id)
+);
+CREATE TABLE IF NOT EXISTS WeaponQuality
+(
+    weapon_id  INTEGER,
+    quality_id INTEGER,
+    ranks      INTEGER,
+    FOREIGN KEY (weapon_id) REFERENCES Weapon (weapon_id),
+    FOREIGN KEY (quality_id) REFERENCES Quality (quality_id)
+);

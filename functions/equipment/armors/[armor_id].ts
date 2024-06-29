@@ -10,7 +10,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     const armor = await context.env.GENESYS.prepare('SELECT * FROM Armor WHERE armor_id = ?').bind(context.params.armor_id).first<Armor>();
     // const {results} = await context.env.GENESYS.prepare(`SELECT * FROM ArmorModification WHERE armor_id = ?`).bind(context.params.armor_id).all<Modifier>();
     // armor.modifiers = results
-    const {results} = await context.env.GENESYS.prepare(`SELECT * FROM ArmorQualiy WHERE armor_id = ?`).bind(context.params.armor_id).all<Quality>();
+    const {results} = await context.env.GENESYS.prepare(`SELECT * FROM ArmorQuality WHERE armor_id = ?`).bind(context.params.armor_id).all<Quality>();
     return Response.json(armor);
 }
 
