@@ -26,12 +26,12 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                                                        )
                                   )
                           ) AS "qualities"
-                   FROM ArmorQuality AS aq
-                            JOIN ArmorModification am ON aq.armor_id = am.armor_id
+                   FROM Armor AS a
+                            JOIN ArmorModification am ON a.armor_id = am.armor_id
                             JOIN QualityModification qm ON aq.quality_id = qm.quality_id
                             JOIN Quality AS q ON aq.quality_id = q.quality_id
-                            JOIN Armor AS a ON aq.armor_id = a.armor_id
-                   WHERE aq.armor_id = ?;`
+                            JOIN ArmorQuality AS aq ON a.armor_id = aq.armor_id
+                   WHERE a.armor_id = ?;`
     const armor = await context.env.GENESYS.prepare(query).bind(context.params.armor_id).first<Armor>();
     return Response.json(armor);
 }
