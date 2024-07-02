@@ -31,7 +31,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             JOIN QualityModification qm ON aq.quality_id = qm.quality_id
                             JOIN Quality AS q ON aq.quality_id = q.quality_id
                             JOIN Armor AS a ON aq.armor_id = a.armor_id
-                   WHERE aq.armor_id = 1;`
+                   WHERE aq.armor_id = ?;`
     const armor = await context.env.GENESYS.prepare(query).bind(context.params.armor_id).first<Armor>();
     return Response.json(armor);
 }
