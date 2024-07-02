@@ -14,8 +14,7 @@ function useFetchArmor(id: string): Armor {
             return
         }
         (async (): Promise<void> => {
-            const armorData = await EquipmentService.getArmor(id)
-            armorData.qualities = []
+            setArmor(await EquipmentService.getArmor(id))
         })()
     }, [id, setArmor])
     return armor as Armor
