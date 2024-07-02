@@ -13,6 +13,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderPrice, renderQualities, renderSoak} from "../../../models/equipment/EquipmentHelper";
+import ArmorModifierCard from "./modifier/ArmorModifierCard";
 
 interface Props {
     armor: Armor
@@ -36,7 +37,6 @@ export default function ArmorView(props: Props) {
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
@@ -60,6 +60,7 @@ export default function ArmorView(props: Props) {
                         </Table>
                     </TableContainer>
                 </Grid>
+                <ArmorModifierCard armor={armor}/>
             </CardContent>
         </Card>
     )
