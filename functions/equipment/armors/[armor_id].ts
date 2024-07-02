@@ -30,6 +30,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         'JOIN Quality AS q ON aq.quality_id = q.quality_id\n' +
         'JOIN Armor AS a ON aq.armor_id = a.armor_id\n' +
         'WHERE aq.armor_id = ?;').bind(context.params.armor_id).first<Armor>();
+    console.log(armor)
     return Response.json(armor);
 }
 
