@@ -32,7 +32,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             LEFT JOIN QualityModification qm ON aq.quality_id = qm.quality_id
                             LEFT JOIN Quality AS q ON aq.quality_id = q.quality_id
                    WHERE a.armor_id = ?;`
-    const armor = await context.env.GENESYS.prepare(query).bind(context.params.armor_id).first<Armor>();
+    const armor = await context.env.GENESYS.prepare(query)
+        .bind(context.params.armor_id)
+        .first<Armor>();
     if (typeof armor.modifiers === 'string') armor.modifiers = []
     if (typeof armor.qualities === 'string') armor.qualities = []
     return Response.json(armor);
@@ -40,6 +42,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
 export const onRequestPut: PagesFunction<Env> = async (context) => {
     const updatedResult = await context.request.json() as Armor;
-    const result = await context.env.GENESYS.prepare('UPDATE Armor SET description = ?2 WHERE armor_id = ?1 RETURNING *').bind(context.params.armor_id, updatedResult.description).first<Armor>();
+    const result = await context.env.GENESYS.prepare('UPDATE Armor SET description = ?2 WHERE armor_id = ?1 RETURNING *')
+        .bind(context.params.armor_id, updatedResult.description)
+        .first<Armor>();
     return Response.json(result);
 }

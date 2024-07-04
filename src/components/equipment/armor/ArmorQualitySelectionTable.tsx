@@ -11,6 +11,7 @@ import Quality from "../../../models/Quality";
 import QualityBackdrop from "../QualityBackdrop";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Armor} from "../../../models/equipment/Armor";
+import EquipmentService from "../../../services/EquipmentService";
 
 interface RowProps {
     quality: Quality
@@ -30,9 +31,9 @@ function QualityRow(props: RowProps) {
                 }
             })
         } else {
-            armor.qualities = armor.qualities.concat({...quality, ranks: 1})
+            let equipmentQuality = await EquipmentService.addArmorQuality(String(armor.armor_id), {...quality, ranks: 1})
+            armor.qualities = armor.qualities.concat(equipmentQuality)
         }
-        // await EquipmentService.updateArmor(armor.name, armor)
     }
 
     return (

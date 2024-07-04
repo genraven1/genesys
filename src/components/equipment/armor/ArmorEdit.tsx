@@ -8,6 +8,8 @@ import {EquipmentPath} from '../../../services/RootPath';
 import {EditNumberFieldCard, EditStringFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Armor} from "../../../models/equipment/Armor";
+import ArmorModifierCard from "./modifier/ArmorModifierCard";
+import ArmorQualityCard from "./ArmorQualityCard";
 
 interface Props {
     ar: Armor
@@ -102,6 +104,8 @@ export default function ArmorEdit(props: Props) {
                         }} min={0} max={11}/>
                     </Grid>
                 </Grid>
+                <ArmorQualityCard armor={armor}/>
+                <ArmorModifierCard armor={armor}/>
             </CardContent>
         </Card>
     )

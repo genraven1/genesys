@@ -18,6 +18,10 @@ export enum EquipmentPath {
     Gear = '/equipment/gears/',
 }
 
+export enum EquipmentQualityPath {
+    ArmorQuality = '/qualities' + EquipmentPath.Armor,
+}
+
 export enum ModificationPath {
     ModificationInjury = '/modifications' + RootPath.Injury,
     ModificationTalent = '/modifications' + RootPath.Talent,
