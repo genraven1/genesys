@@ -18,8 +18,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
 export const onRequestPut: PagesFunction<Env> = async (context) => {
     const updatedResult = await context.request.json() as Quality
-    const result = await context.env.GENESYS.prepare('UPDATE Quality SET description = ?2 WHERE quality_id = ?1 RETURNING *')
-        .bind(context.params.quality_id, updatedResult.description)
+    const result = await context.env.GENESYS.prepare('UPDATE Quality SET description = ?2, passive = ?3, cost= ?4, weapon = ?5, armor = ?6 WHERE quality_id = ?1 RETURNING *')
+        .bind(context.params.quality_id, updatedResult.description, updatedResult.passive, updatedResult.cost, updatedResult.weapon, updatedResult.armor)
         .first<Quality>();
     return Response.json(result)
 }
