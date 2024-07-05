@@ -1,6 +1,4 @@
 import {Armor} from "../../../src/models/equipment/Armor";
-import Modifier from "../../../src/models/common/Modifier";
-import Quality, {EquipmentQuality} from "../../../src/models/Quality";
 
 interface Env {
     GENESYS: D1Database;
@@ -42,8 +40,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
 export const onRequestPut: PagesFunction<Env> = async (context) => {
     const updatedResult = await context.request.json() as Armor;
-    const result = await context.env.GENESYS.prepare('UPDATE Armor SET description = ?2 WHERE armor_id = ?1 RETURNING *')
-        .bind(context.params.armor_id, updatedResult.description)
+    const result = await context.env.GENESYS.prepare('UPDATE Armor SET description = ?2, soak = ?3, defense = ?4, encumbrance = ?5, price = ?6, rarity = ?7, restricted = ?8 WHERE armor_id = ?1 RETURNING *')
+        .bind(context.params.armor_id, updatedResult.description, updatedResult.soak, updatedResult.defense, updatedResult.encumbrance, updatedResult.price, updatedResult.rarity, updatedResult.restricted)
         .first<Armor>();
     return Response.json(result);
 }
