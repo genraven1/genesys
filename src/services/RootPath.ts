@@ -20,6 +20,7 @@ export enum EquipmentPath {
 
 export enum EquipmentQualityPath {
     ArmorQuality = '/qualities' + EquipmentPath.Armor,
+    WeaponQuality = '/qualities' + EquipmentPath.Weapon
 }
 
 export enum ModificationPath {
@@ -27,6 +28,7 @@ export enum ModificationPath {
     ModificationTalent = '/modifications' + RootPath.Talent,
     ModificationQuality = '/modifications' + RootPath.Qualities,
     ModificationArmor = '/modifications' + EquipmentPath.Armor,
+    ModificationWeapon = '/modifications' + EquipmentPath.Weapon
 }
 
 export enum LorePath {
