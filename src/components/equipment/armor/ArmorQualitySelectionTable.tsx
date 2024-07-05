@@ -24,12 +24,14 @@ function QualityRow(props: RowProps) {
 
     const addQuality = async () => {
         if (armor.qualities.find(equipmentQuality => equipmentQuality.name === quality.name)) {
-            armor.qualities.forEach((equipmentQuality, index) => {
+            for (const equipmentQuality of armor.qualities) {
+                const index = armor.qualities.indexOf(equipmentQuality);
                 if (equipmentQuality.name === quality.name) {
                     equipmentQuality.ranks = equipmentQuality.ranks + 1
+                    await EquipmentService.updateArmorQuality(String(armor.armor_id), equipmentQuality)
                     armor.qualities[index] = equipmentQuality
                 }
-            })
+            }
         } else {
             let equipmentQuality = await EquipmentService.addArmorQuality(String(armor.armor_id), {...quality, ranks: 1})
             armor.qualities = armor.qualities.concat(equipmentQuality)

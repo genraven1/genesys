@@ -18,23 +18,25 @@ interface RowProps {
     weapon: Weapon
 }
 
-function QualityRow(props: RowProps): JSX.Element {
+function QualityRow(props: RowProps) {
     const {quality, weapon} = props;
     const [openQualityBackDrop, setOpenQualityBackDrop] = useState(false)
 
     const addQuality = async () => {
-        if (weapon.qualities.find(equipmentQuality  => equipmentQuality.name === quality.name)) {
-            weapon.qualities.forEach((equipmentQuality, index) => {
-                if (equipmentQuality.name === quality.name) {
-                    equipmentQuality.ranks = equipmentQuality.ranks + 1
-                    weapon.qualities[index] = equipmentQuality
+        if (weapon.qualities.find(equipmentQuality => equipmentQuality.name === quality.name)) {
+            for (const equipmentQuality1 of weapon.qualities) {
+                const index = weapon.qualities.indexOf(equipmentQuality1);
+                if (equipmentQuality1.name === quality.name) {
+                    equipmentQuality1.ranks = equipmentQuality1.ranks + 1
+                    await EquipmentService.updateWeaponQuality(String(weapon.weapon_id), equipmentQuality1)
+                    weapon.qualities[index] = equipmentQuality1
                 }
-            })
-        }
-        else {
+            }
+        } else {
             weapon.qualities = weapon.qualities.concat({...quality, ranks: 1})
         }
-        await EquipmentService.updateWeapon(weapon.name, weapon)
+        let equipmentQuality = await EquipmentService.addWeaponQuality(String(weapon.weapon_id), {...quality, ranks: 1})
+        weapon.qualities = weapon.qualities.concat(equipmentQuality)
     }
 
     return (
@@ -63,11 +65,7 @@ export default function WeaponQualitySelectionTable(props: TableProps) {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const qualityList = await QualityService.getQualities()
-            if (!qualityList) {
-                return
-            }
-            setQualities(qualityList)
+            setQualities(await QualityService.getQualities())
         })()
     }, [setQualities])
 
