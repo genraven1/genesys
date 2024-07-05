@@ -85,6 +85,9 @@ DROP TABLE IF EXISTS Skill;
 DROP TABLE IF EXISTS Armor;
 DROP TABLE IF EXISTS ArmorModification;
 DROP TABLE IF EXISTS ArmorQuality;
+DROP TABLE IF EXISTS Weapon;
+DROP TABLE IF EXISTS WeaponModification;
+DROP TABLE IF EXISTS WeaponQuality;
 
 CREATE TABLE IF NOT EXISTS Talent
 (
@@ -165,7 +168,8 @@ CREATE TABLE IF NOT EXISTS Weapon
     range       TEXT,
     brawn       INTEGER,
     hands       INTEGER,
-    skill_id    INTEGER
+    skill_id    INTEGER,
+    FOREIGN KEY (skill_id) REFERENCES Skill (skill_id)
 );
 CREATE TABLE IF NOT EXISTS WeaponModification
 (
