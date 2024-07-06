@@ -29,13 +29,13 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                                   'characteristic', s.characteristic,
                                   'type', s.type,
                                   'name', s.name
-                          ) as "skill"
+                          ) as "skill",
                    FROM Weapon AS w
                             LEFT JOIN WeaponModification wm ON w.weapon_id = wm.weapon_id
                             LEFT JOIN WeaponQuality AS wq ON w.weapon_id = wq.weapon_id
                             LEFT JOIN QualityModification qm ON wq.quality_id = qm.quality_id
                             LEFT JOIN Quality AS q ON wq.quality_id = q.quality_id
-                            LEFT JOIN Skill s ON a.skill_id = s.skill_id
+                            LEFT JOIN Skill s ON w.skill_id = s.skill_id
                    WHERE w.weapon_id = ?;`
     const weapon = await context.env.GENESYS.prepare(query)
         .bind(context.params.weapon_id)
