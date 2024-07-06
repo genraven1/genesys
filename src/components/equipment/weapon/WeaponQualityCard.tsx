@@ -11,7 +11,7 @@ interface Props {
     weapon: Weapon
 }
 
-export default function WeaponQualityCard(props: Props): JSX.Element {
+export default function WeaponQualityCard(props: Props) {
     const {weapon} = props
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 

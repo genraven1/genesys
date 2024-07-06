@@ -1,34 +1,28 @@
 import Equipment from "./Equipment";
 import {Armor} from "./Armor";
 import {Weapon} from "./Weapon";
-import Quality from "../Quality";
+import Quality, {EquipmentQuality} from "../Quality";
 
 export const renderPrice = (equipment: Equipment): string => {
-    let price: string
-    if (equipment?.restricted!!) {
-        price = equipment?.price!! + '(R)'
-    } else {
-        price = String(equipment?.price!!)
-    }
-    return price
+    return equipment.restricted ? equipment.price + '(R)' : String(equipment.price);
 }
 
-export const renderQualities = (equipment: Equipment): string => {
-    let qualities = ''
-    if (equipment?.qualities!!.length > 0) {
-        let qualityList = equipment?.qualities!!.sort((a, b) => a.name.localeCompare(b.name))
+export const renderQualities = (qualities: EquipmentQuality[]) => {
+    if (qualities === undefined || qualities.length === 0) {
+        return 'None'
+    } else {
+        let qualityList = qualities.sort((a, b) => a.name.localeCompare(b.name));
+        let quals = '';
         for (let i = 0; i < qualityList.length; i++) {
             const quality = qualityList[i];
             if (i !== qualityList.length - 1) {
-                qualities = qualities.concat(quality.name + ' ' + quality.ranks + ', ')
+                quals = quals.concat(quality.name + ' ' + quality.ranks + ', ')
             } else {
-                qualities = qualities.concat(quality.name + ' ' + quality.ranks)
+                quals = quals.concat(quality.name + ' ' + quality.ranks)
             }
         }
-    } else {
-        qualities = 'None'
+        return quals
     }
-    return qualities
 }
 
 export const renderSoak = (armor: Armor): string => {
@@ -46,13 +40,7 @@ export const renderActorDamage = (weapon: Weapon, brawn: number): string => {
 }
 
 export const renderDamage = (weapon: Weapon): string => {
-    let damage: string
-    if (weapon?.brawn!!) {
-        damage = 'Brawn + ' + weapon?.damage!!
-    } else {
-        damage = String(weapon?.damage!!)
-    }
-    return damage
+    return weapon.brawn ? 'Brawn + ' + weapon.damage : String(weapon.damage);
 }
 
 export const renderUsable = (quality: Quality): string => {

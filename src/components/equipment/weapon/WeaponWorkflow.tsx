@@ -6,31 +6,24 @@ import WeaponView from "./WeaponView";
 import WeaponEdit from "./WeaponEdit";
 import ViewAllWeapon from "./ViewAllWeapon";
 
-function useFetchWeapon(name: string): Weapon {
+function useFetchWeapon(id: string): Weapon {
     const [weapon, setWeapon] = useState<Weapon>()
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
-            try {
-                const weaponData = await EquipmentService.getWeapon(name)
-                if (weaponData) {
-                    setWeapon(weaponData)
-                }
-            } catch (err) {
-                console.log(err)
-            }
+            setWeapon(await EquipmentService.getWeapon(id))
         })()
-    }, [name, setWeapon])
+    }, [id, setWeapon])
     return weapon as Weapon
 }
 
-export default function WeaponWorkflow(): JSX.Element {
-    const {name} = useParams<{ name: string }>()
-    const weapon = useFetchWeapon(name as string)
+export default function WeaponWorkflow() {
+    const {weapon_id} = useParams<{ weapon_id: string }>()
+    const weapon = useFetchWeapon(weapon_id!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return weapon && <WeaponView weapon={weapon}/>
