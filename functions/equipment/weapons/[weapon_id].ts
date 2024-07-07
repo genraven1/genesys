@@ -29,7 +29,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                                   'characteristic', s.characteristic,
                                   'type', s.type,
                                   'name', s.name
-                          ) as "skill",
+                          ) as "skill"
                    FROM Weapon AS w
                             LEFT JOIN WeaponModification wm ON w.weapon_id = wm.weapon_id
                             LEFT JOIN WeaponQuality AS wq ON w.weapon_id = wq.weapon_id
