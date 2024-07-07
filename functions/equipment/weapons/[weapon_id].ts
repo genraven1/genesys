@@ -1,4 +1,5 @@
 import {Weapon} from "../../../src/models/equipment/Weapon";
+import Skill from "../../../src/models/actor/Skill";
 
 interface Env {
     GENESYS: D1Database;
@@ -29,7 +30,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                                   'characteristic', s.characteristic,
                                   'type', s.type,
                                   'name', s.name
-                          ) as "skill"
+                          ) AS "skill"
                    FROM Weapon AS w
                             LEFT JOIN WeaponModification wm ON w.weapon_id = wm.weapon_id
                             LEFT JOIN WeaponQuality AS wq ON w.weapon_id = wq.weapon_id
@@ -42,6 +43,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         .first<Weapon>();
     if (typeof weapon.modifiers === 'string') weapon.modifiers = []
     if (typeof weapon.qualities === 'string') weapon.qualities = []
+    if (typeof weapon.skill ==='string') weapon.skill = {} as Skill
     return Response.json(weapon);
 }
 
