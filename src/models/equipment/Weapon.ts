@@ -7,6 +7,7 @@ export interface Weapon extends Equipment {
     weapon_id: number
     damage: number
     skill: Skill
+    skill_id: number
     critical: number
     range: RangeBand
     brawn: boolean
