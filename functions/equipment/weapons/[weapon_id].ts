@@ -1,6 +1,4 @@
 import {Weapon} from "../../../src/models/equipment/Weapon";
-import Skill from "../../../src/models/actor/Skill";
-import SkillService from "../../../src/services/SkillService";
 
 interface Env {
     GENESYS: D1Database;
@@ -44,7 +42,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         .first<Weapon>();
     if (typeof weapon.modifiers === 'string') weapon.modifiers = []
     if (typeof weapon.qualities === 'string') weapon.qualities = []
-    if (typeof weapon.skill ==='string') weapon.skill = {} as Skill
+    // if (typeof weapon.skill ==='string') weapon.skill = {} as Skill
     return Response.json(weapon);
 }
 
@@ -53,8 +51,5 @@ export const onRequestPut: PagesFunction<Env> = async (context) => {
     const result = await context.env.GENESYS.prepare('UPDATE Weapon SET description = ?2, encumbrance = ?3, price = ?4, rarity = ?5, restricted = ?6, damage = ?7, critical = ?8, range = ?9, brawn= ?10, hands = ?11, skill_id = ?12 WHERE weapon_id = ?1 RETURNING *')
         .bind(context.params.weapon_id, updatedResult.description, updatedResult.encumbrance, updatedResult.price, updatedResult.rarity, updatedResult.restricted, updatedResult.damage, updatedResult.critical, updatedResult.range, updatedResult.brawn, updatedResult.hands, updatedResult.skill.skill_id)
         .first<Weapon>();
-    if (!result.skill) {
-        result.skill = await SkillService.getSkill(String(result.skill_id));
-    }
     return Response.json(result);
 }
