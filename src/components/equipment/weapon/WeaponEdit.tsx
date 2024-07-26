@@ -35,6 +35,7 @@ export default function WeaponEdit(props: Props) {
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
+        copyWeapon.skill_id = value.skill_id
         await updateWeapon(copyWeapon)
     }
 
