@@ -15,6 +15,7 @@ import {renderDamage, renderPrice, renderQualities,} from "../../../models/equip
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import SkillTableCell from "../../common/table/SkillTableCell";
 import WeaponQualityCard from "./WeaponQualityCard";
+import WeaponModifierCard from "./modifier/WeaponModifierCard";
 
 interface Props {
     weapon: Weapon
@@ -63,6 +64,7 @@ export default function WeaponView(props: Props) {
                     </TableContainer>
                 </Grid>
                 <WeaponQualityCard weapon={weapon}/>
+                <WeaponModifierCard weapon={weapon}/>
             </CardContent>
         </Card>
     )

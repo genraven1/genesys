@@ -17,6 +17,7 @@ import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import WeaponQualityCard from "./WeaponQualityCard";
 import {useFetchCurrentSettingSkillsByType} from "../../skills/SkillWorkflow";
+import WeaponModifierCard from "./modifier/WeaponModifierCard";
 
 
 interface Props {
@@ -149,6 +150,7 @@ export default function WeaponEdit(props: Props) {
                     <Divider/>
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
+                        <WeaponModifierCard weapon={weapon}/>
                     </Grid>
                 </Grid>
             </CardContent>
