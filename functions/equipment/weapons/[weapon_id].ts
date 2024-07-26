@@ -42,7 +42,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         .first<Weapon>();
     if (typeof weapon.modifiers === 'string') weapon.modifiers = []
     if (typeof weapon.qualities === 'string') weapon.qualities = []
-    // if (typeof weapon.skill ==='string') weapon.skill = {} as Skill
+    if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill)
     return Response.json(weapon);
 }
 
