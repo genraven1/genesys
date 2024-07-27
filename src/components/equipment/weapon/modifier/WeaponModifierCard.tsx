@@ -9,7 +9,6 @@ import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useState} from "react";
 import * as React from "react";
 import AddWeaponModifierDialog from "./AddWeaponModifierDialog";
-import {Armor} from "../../../../models/equipment/Armor";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import Modifier from "../../../../models/common/Modifier";
