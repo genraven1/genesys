@@ -51,7 +51,5 @@ export const onRequestPut: PagesFunction<Env> = async (context) => {
     const weapon = await context.env.GENESYS.prepare('UPDATE Weapon SET description = ?2, encumbrance = ?3, price = ?4, rarity = ?5, restricted = ?6, damage = ?7, critical = ?8, range = ?9, brawn= ?10, hands = ?11, skill_id = ?12 WHERE weapon_id = ?1 RETURNING *')
         .bind(context.params.weapon_id, updatedResult.description, updatedResult.encumbrance, updatedResult.price, updatedResult.rarity, updatedResult.restricted, updatedResult.damage, updatedResult.critical, updatedResult.range, updatedResult.brawn, updatedResult.hands, updatedResult.skill.skill_id)
         .first<Weapon>();
-    if (typeof weapon.modifiers === 'string') weapon.modifiers = []
-    if (typeof weapon.qualities === 'string') weapon.qualities = []
     return Response.json(weapon);
 }
