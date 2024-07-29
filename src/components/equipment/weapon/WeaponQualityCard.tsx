@@ -16,7 +16,7 @@ export default function WeaponQualityCard(props: Props) {
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 
     const renderTable = () => {
-        if (weapon.qualities.length === undefined || weapon.qualities.length === 0) {
+        if (weapon.qualities === undefined || weapon.qualities.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <WeaponQualityTable weapon={weapon}/>
