@@ -55,7 +55,7 @@ export default function QualityModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {(quality.modifiers).map((modifier) => (
+                            {(quality.modifiers || []).map((modifier) => (
                                 <ModifierRow modifier={modifier}/>
                             ))}
                         </TableBody>
