@@ -12,7 +12,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                                 'characteristic', s.characteristic,
                                 'type', s.type,
                                 'name', s.name
-                        ) AS "skill",
+                        ) AS "skill"
                  FROM Weapon AS w
                           INNER JOIN Skill AS s ON w.skill_id = s.skill_id;`
     const {results} = await context.env.GENESYS.prepare(query)
