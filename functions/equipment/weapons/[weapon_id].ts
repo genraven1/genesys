@@ -41,7 +41,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         .bind(context.params.weapon_id)
         .first<Weapon>();
     if (typeof weapon.modifiers === 'string') weapon.modifiers = []
-    // if (typeof weapon.qualities === 'string') weapon.qualities = []
+    if (typeof weapon.qualities === 'string') JSON.parse(weapon.qualities)
     if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill)
     return Response.json(weapon);
 }
