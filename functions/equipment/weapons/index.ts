@@ -6,7 +6,16 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const {results} = await context.env.GENESYS.prepare('SELECT * FROM Weapon')
+    let query = `SELECT w.*, 
+                            JSON_OBJECT(
+                                'skill_id', s.skill_id,
+                                'characteristic', s.characteristic,
+                                'type', s.type,
+                                'name', s.name
+                        ) AS "skill" 
+                        FROM Weapon AS w 
+                            INNER JOIN Skill AS s ON w.skill_id = s.skill_id;`
+    const {results} = await context.env.GENESYS.prepare(query)
         .all<Weapon>();
     return Response.json(results);
 }
