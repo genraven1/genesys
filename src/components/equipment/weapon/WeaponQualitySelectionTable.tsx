@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import QualityService from "../../../services/QualityService";
-import Quality, {EquipmentQuality} from "../../../models/Quality";
+import Quality from "../../../models/Quality";
 import QualityBackdrop from "../QualityBackdrop";
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
@@ -15,7 +15,7 @@ import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import EquipmentQualityRankTableCell from "../../common/table/EquipmentQualityRankTableCell";
 
 interface RowProps {
-    quality: EquipmentQuality
+    quality: Quality
     weapon: Weapon
 }
 
@@ -48,7 +48,7 @@ function QualityRow(props: RowProps) {
                     <QualityBackdrop open={openQualityBackDrop} onClose={(): void => setOpenQualityBackDrop(false)}
                                      quality={quality}/>}
             </TableCell>
-            <EquipmentQualityRankTableCell equipmentQuality={quality} onEquipmentQualityChange={addQuality}/>
+            <EquipmentQualityRankTableCell equipmentQuality={{...quality, ranks: 0}} onEquipmentQualityChange={addQuality}/>
         </TableRow>
     )
 }
@@ -59,17 +59,12 @@ interface TableProps {
 
 export default function WeaponQualitySelectionTable(props: TableProps) {
     const {weapon} = props
-    const [qualities, setQualities] = useState<EquipmentQuality[]>([])
+    const [qualities, setQualities] = useState<Quality[]>([])
     const headers = ['Name', 'Add']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            let qualities = await QualityService.getQualities() as Quality[]
-            let equipmentQualities = [] as EquipmentQuality[]
-            for (let quality of qualities) {
-                equipmentQualities.concat({...quality, ranks: 0})
-            }
-            setQualities(equipmentQualities)
+            setQualities(await QualityService.getQualities())
         })()
     }, [setQualities])
 
@@ -78,7 +73,7 @@ export default function WeaponQualitySelectionTable(props: TableProps) {
             <Table>
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    {qualities.map((quality: EquipmentQuality) => (
+                    {qualities.map((quality: Quality) => (
                         <QualityRow quality={quality} weapon={weapon}/>
                     ))}
                 </TableBody>
