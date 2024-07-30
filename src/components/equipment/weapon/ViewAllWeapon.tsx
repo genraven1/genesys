@@ -11,7 +11,7 @@ import * as React from 'react';
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {ViewActionTableCell} from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
@@ -40,7 +40,7 @@ function Row(props: Props) {
                 <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.rarity)}/>
-                <ActionsTableCell name={weapon.name} path={EquipmentPath.Weapon}/>
+                <ViewActionTableCell id={weapon.weapon_id} path={EquipmentPath.Weapon}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
