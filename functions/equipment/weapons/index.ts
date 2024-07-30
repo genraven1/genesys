@@ -17,6 +17,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             INNER JOIN Skill AS s ON w.skill_id = s.skill_id;`
     const {results} = await context.env.GENESYS.prepare(query)
         .all<Weapon>();
+    for (let weapon of results) {
+        if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill)
+    }
     return Response.json(results);
 }
 
