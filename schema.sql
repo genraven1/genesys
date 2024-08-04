@@ -88,6 +88,7 @@ DROP TABLE IF EXISTS ArmorQuality;
 DROP TABLE IF EXISTS Weapon;
 DROP TABLE IF EXISTS WeaponModification;
 DROP TABLE IF EXISTS WeaponQuality;
+DROP TABLE IF EXISTS Gear;
 
 CREATE TABLE IF NOT EXISTS Talent
 (
@@ -185,4 +186,140 @@ CREATE TABLE IF NOT EXISTS WeaponQuality
     ranks      INTEGER,
     FOREIGN KEY (weapon_id) REFERENCES Weapon (weapon_id),
     FOREIGN KEY (quality_id) REFERENCES Quality (quality_id)
+);
+CREATE TABLE IF NOT EXISTS Gear
+(
+    armor_id    INTEGER PRIMARY KEY,
+    name        TEXT,
+    description TEXT,
+    price       INTEGER,
+    restricted  INTEGER,
+    encumbrance INTEGER,
+    rarity      INTEGER
+);
+
+-- Actor Tables
+DROP TABLE IF EXISTS Player;
+DROP TABLE IF EXISTS Nemesis;
+DROP TABLE IF EXISTS NemesisSkill;
+DROP TABLE IF EXISTS NemesisTalent;
+DROP TABLE IF EXISTS NemesisInjury;
+DROP TABLE IF EXISTS RivalAbility;
+DROP TABLE IF EXISTS Rival;
+DROP TABLE IF EXISTS RivalSkill;
+DROP TABLE IF EXISTS RivalTalent;
+DROP TABLE IF EXISTS RivalInjury;
+DROP TABLE IF EXISTS RivalAbility;
+DROP TABLE IF EXISTS RivalWeapons;
+DROP TABLE IF EXISTS RivalArmor;
+DROP TABLE IF EXISTS RivalGear;
+DROP TABLE IF EXISTS Minion;
+DROP TABLE IF EXISTS MinionSkill;
+DROP TABLE IF EXISTS MinionTalent;
+DROP TABLE IF EXISTS MinionAbility;
+
+CREATE TABLE IF NOT EXISTS Nemesis
+(
+    actor_id  INTEGER PRIMARY KEY,
+    name      TEXT,
+    combat    INTEGER,
+    social    INTEGER,
+    general   INTEGER,
+    type      TEXT,
+    brawn     INTEGER,
+    agility   INTEGER,
+    intellect INTEGER,
+    cunning   INTEGER,
+    willpower INTEGER,
+    presence  INTEGER,
+    wounds    INTEGER,
+    strain    INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS Rival
+(
+    actor_id  INTEGER PRIMARY KEY,
+    name      TEXT,
+    combat    INTEGER,
+    social    INTEGER,
+    general   INTEGER,
+    type      TEXT,
+    brawn     INTEGER,
+    agility   INTEGER,
+    intellect INTEGER,
+    cunning   INTEGER,
+    willpower INTEGER,
+    presence  INTEGER,
+    wounds    INTEGER
+);
+CREATE TABLE IF NOT EXISTS RivalSkill
+(
+    actor_id INTEGER,
+    skill_id INTEGER,
+    ranks    INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (skill_id) REFERENCES Skill (skill_id)
+);
+CREATE TABLE IF NOT EXISTS RivalTalent
+(
+    actor_id  INTEGER,
+    talent_id INTEGER,
+    ranks     INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (talent_id) REFERENCES Talent (talent_id)
+);
+CREATE TABLE IF NOT EXISTS RivalInjury
+(
+    actor_id  INTEGER,
+    injury_id INTEGER,
+    ranks     INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (injury_id) REFERENCES Injury (injury_id)
+);
+CREATE TABLE IF NOT EXISTS RivalAbility
+(
+    actor_id   INTEGER,
+    ability_id INTEGER,
+    ranks      INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (ability_id) REFERENCES Ability (ability_id)
+);
+CREATE TABLE IF NOT EXISTS RivalWeapon
+(
+    actor_id  INTEGER,
+    weapon_id INTEGER,
+    slot      TEXT,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (weapon_id) REFERENCES Weapon (weapon_id)
+);
+CREATE TABLE IF NOT EXISTS RivalArmor
+(
+    actor_id  INTEGER,
+    armor_id INTEGER,
+    slot      TEXT,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (armor_id) REFERENCES Armor (armor_id)
+);
+CREATE TABLE IF NOT EXISTS RivalArmor
+(
+    actor_id  INTEGER,
+    gear_id INTEGER,
+    FOREIGN KEY (actor_id) REFERENCES Rival (actor_id),
+    FOREIGN KEY (gear_id) REFERENCES Gear (gear_id)
+);
+CREATE TABLE IF NOT EXISTS Minion
+(
+    actor_id  INTEGER PRIMARY KEY,
+    name      TEXT,
+    combat    INTEGER,
+    social    INTEGER,
+    general   INTEGER,
+    type      TEXT,
+    brawn     INTEGER,
+    agility   INTEGER,
+    intellect INTEGER,
+    cunning   INTEGER,
+    willpower INTEGER,
+    presence  INTEGER,
+    wounds    INTEGER
 );
