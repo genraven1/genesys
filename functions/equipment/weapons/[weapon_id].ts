@@ -40,9 +40,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     const weapon = await context.env.GENESYS.prepare(query)
         .bind(context.params.weapon_id)
         .first<Weapon>();
-    if (typeof weapon.modifiers === 'string') weapon.modifiers = JSON.parse(weapon.modifiers)
-    if (typeof weapon.qualities === 'string') weapon.qualities = JSON.parse(weapon.qualities)
-    if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill)
+    if (typeof weapon.modifiers === 'string') weapon.modifiers = JSON.parse(weapon.modifiers);
+    if (typeof weapon.qualities === 'string') weapon.qualities = JSON.parse(weapon.qualities);
+    if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill);
     return Response.json(weapon);
 }
 

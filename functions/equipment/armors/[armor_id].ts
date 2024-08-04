@@ -30,11 +30,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             LEFT JOIN QualityModification qm ON aq.quality_id = qm.quality_id
                             LEFT JOIN Quality AS q ON aq.quality_id = q.quality_id
                    WHERE a.armor_id = ?;`
-    const armor = await context.env.GENESYS.prepare(query)
-        .bind(context.params.armor_id)
-        .first<Armor>();
-    if (typeof armor.modifiers === 'string') armor.modifiers = []
-    if (typeof armor.qualities === 'string') armor.qualities = []
+    const armor = await context.env.GENESYS.prepare(query).bind(context.params.armor_id).first<Armor>();
+    if (typeof armor.modifiers === 'string') armor.modifiers = JSON.parse(armor.modifiers);
+    if (typeof armor.qualities === 'string') armor.qualities = JSON.parse(armor.qualities);
     return Response.json(armor);
 }
 
