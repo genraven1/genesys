@@ -1,6 +1,5 @@
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -14,7 +13,7 @@ interface Props {
     armor: ActorArmor[]
 }
 
-export default function ViewNonPlayerCharacterArmorTable(props: Props): JSX.Element {
+export default function ViewNonPlayerCharacterArmorTable(props: Props) {
     const {armor} = props
     const headers = ['Name', 'Defense', 'Soak', 'Special Qualities']
 
@@ -31,9 +30,7 @@ export default function ViewNonPlayerCharacterArmorTable(props: Props): JSX.Elem
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderHeaders(headers)}
                 <TableBody>
                     {renderTableBody()}
                 </TableBody>
@@ -46,15 +43,15 @@ interface RowProps {
     armor: ActorArmor
 }
 
-function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps) {
     const {armor} = props
 
     return (
         <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TypographyLeftTableCell value={armor?.name!!}/>
-            <TypographyCenterTableCell value={String(armor?.defense!!)}/>
+            <TypographyLeftTableCell value={armor.name}/>
+            <TypographyCenterTableCell value={String(armor.defense)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
-            <TypographyCenterTableCell value={renderQualities(armor!!)}/>
+            <TypographyCenterTableCell value={renderQualities(armor.qualities)}/>
         </TableRow>
     )
 }

@@ -19,7 +19,7 @@ interface Props {
     title: string
 }
 
-export default function SkillSelectCard(props: Props): JSX.Element {
+export default function SkillSelectCard(props: Props) {
     const {defaultValue, onCommit, skills, title} = props
 
     return (
@@ -41,7 +41,7 @@ interface FieldProps {
     onChange?: (value: Skill) => void
 }
 
-function SkillSelectField(props: FieldProps): JSX.Element {
+function SkillSelectField(props: FieldProps) {
     const {defaultValue, skills, onCommit, onChange} = props
     const [skill, setSkill] = useState(defaultValue)
     const [edit, setEdit] = useState(false)

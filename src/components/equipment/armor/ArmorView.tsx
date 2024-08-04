@@ -54,7 +54,7 @@ export default function ArmorView(props: Props) {
                                     <TypographyCenterTableCell value={String(armor.encumbrance)}/>
                                     <TypographyCenterTableCell value={renderPrice(armor)}/>
                                     <TypographyCenterTableCell value={String(armor.rarity)}/>
-                                    <TypographyCenterTableCell value={renderQualities(armor)}/>
+                                    <TypographyCenterTableCell value={renderQualities(armor.qualities)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>

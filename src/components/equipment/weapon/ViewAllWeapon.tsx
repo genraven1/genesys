@@ -4,20 +4,19 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Fragment, useEffect, useState } from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {ViewActionTableCell} from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderDamage, renderPrice} from "../../../models/equipment/EquipmentHelper";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
 import {EquipmentType} from "../../../models/equipment/Equipment";
 
@@ -26,13 +25,13 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {weapon, columns} = props
     const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={weapon.name}/>
                 <TypographyCenterTableCell value={weapon.skill.name}/>
                 <TypographyCenterTableCell value={renderDamage(weapon)}/>
@@ -41,12 +40,12 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.rarity)}/>
-                <ActionsTableCell name={weapon.name} path={EquipmentPath.Weapon}/>
+                <ViewActionTableCell id={weapon.weapon_id} path={EquipmentPath.Weapon}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{margin: 1}}>
                             <Table size="small">
                                 <TableBody>
                                     <GenesysDescriptionTypography text={weapon.description}/>
@@ -60,16 +59,14 @@ function Row(props: Props): JSX.Element {
     )
 }
 
-export default function ViewAllWeapon(): JSX.Element {
+export default function ViewAllWeapon() {
     const [weapons, setWeapons] = useState<Weapon[]>([])
     const [openEquipmentCreationDialog, setOpenEquipmentCreationDialog] = useState(false)
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Encumbrance', 'Price', 'Rarity', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const weaponList = await EquipmentService.getWeapons()
-            if (!weaponList) {return}
-            setWeapons(weaponList)
+            setWeapons(await EquipmentService.getWeapons())
         })()
     }, [setWeapons])
 
@@ -81,13 +78,10 @@ export default function ViewAllWeapon(): JSX.Element {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Weapon</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {weapons.map((weapon: Weapon) => (
                                 <Row key={weapon?.name!!} weapon={weapon!!} columns={headers.length}/>

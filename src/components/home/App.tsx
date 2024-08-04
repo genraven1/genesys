@@ -93,8 +93,8 @@ export default function App() {
                     <Route path={EquipmentPath.Armor + ':armor_id/view'} element={<ArmorWorkflow/>}/>
 
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>}/>
-                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>}/>
-                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':weapon_id/edit'} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':weapon_id/view'} element={<WeaponWorkflow/>}/>
 
                     <Route path={EquipmentPath.Gear} element={<GearWorkflow/>}/>
                     <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>}/>

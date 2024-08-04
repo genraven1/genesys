@@ -1,18 +1,19 @@
 import Injury from "../../src/models/Injury";
-import Modifier from "../../src/models/common/Modifier";
 
 interface Env {
     GENESYS: D1Database;
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const injury = await context.env.GENESYS.prepare('SELECT * FROM Injury WHERE injury_id = ?')
-        .bind(context.params.injury_id)
-        .first<Injury>();
-    const {results} = await context.env.GENESYS.prepare(`SELECT * FROM InjuryModification WHERE injury_id = ?`)
-        .bind(context.params.injury_id)
-        .all<Modifier>();
-    injury.modifiers = results;
+    const query = `SELECT i.*,
+                          JSON_ARRAY(
+                                  JSON_OBJECT('type', im.type, 'ranks', im.ranks)
+                          ) AS "modifiers"
+                   FROM Injury AS i
+                            LEFT JOIN InjuryModification im ON i.injury_id = im.injury_id
+                   WHERE injury_id = ?`
+    const injury = await context.env.GENESYS.prepare(query).bind(context.params.injury_id).first<Injury>();
+    if (typeof injury.modifiers === 'string') injury.modifiers = JSON.parse(injury.modifiers);
     return Response.json(injury);
 }
 

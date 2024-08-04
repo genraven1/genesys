@@ -16,10 +16,8 @@ import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import WeaponQualityCard from "./WeaponQualityCard";
-import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import SettingService from "../../../services/SettingService";
 import {useFetchCurrentSettingSkillsByType} from "../../skills/SkillWorkflow";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
+import WeaponModifierCard from "./modifier/WeaponModifierCard";
 
 
 interface Props {
@@ -35,26 +33,10 @@ export default function WeaponEdit(props: Props) {
         setWeapon(wea)
     }, [wea])
 
-    const onSettingAddition = async (name: string) => {
-        const copyWeapon = {...weapon} as Weapon
-        let setting = await SettingService.getSetting(name)
-        copyWeapon.settings = copyWeapon.settings.concat(setting)
-        await updateWeapon(copyWeapon)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyWeapon = {...weapon} as Weapon
-        copyWeapon.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyWeapon.settings.splice(index, 1)
-            }
-        })
-        await updateWeapon(copyWeapon)
-    }
-
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
         copyWeapon.skill = value
+        copyWeapon.skill_id = value.skill_id
         await updateWeapon(copyWeapon)
     }
 
@@ -102,12 +84,11 @@ export default function WeaponEdit(props: Props) {
     }
 
     const updateWeapon = async (copyWeapon: Weapon) => {
-        setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
+        setWeapon(await EquipmentService.updateWeapon(copyWeapon))
     }
 
     const onView = () => {
-        navigate(EquipmentPath.Weapon + weapon.name + '/view');
+        navigate(EquipmentPath.Weapon + weapon.weapon_id + '/view');
     }
 
     return (
@@ -169,9 +150,8 @@ export default function WeaponEdit(props: Props) {
                     <Divider/>
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
+                        <WeaponModifierCard weapon={weapon}/>
                     </Grid>
-                    <EditSettingsCard settings={weapon.settings} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>

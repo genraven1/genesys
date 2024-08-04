@@ -25,9 +25,8 @@ export default function CreateEquipmentDialog(props: Props) {
                 navigate(EquipmentPath.Armor + armor.armor_id + '/view')
                 break
             case EquipmentType.Weapon:
-                await EquipmentService.createWeapon(name)
-                path = EquipmentPath.Weapon
-                navigate(path + name + '/view')
+                let weapon = await EquipmentService.createWeapon(name)
+                navigate(EquipmentPath.Weapon + weapon.weapon_id + '/view')
                 break
             case EquipmentType.Gear:
                 await EquipmentService.createGear(name)

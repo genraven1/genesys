@@ -1,4 +1,3 @@
-import Modifier from "../../src/models/common/Modifier";
 import Quality from "../../src/models/Quality";
 
 interface Env {
@@ -6,13 +5,15 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const quality = await context.env.GENESYS.prepare('SELECT * FROM Quality WHERE quality_id = ?')
-        .bind(context.params.quality_id)
-        .first<Quality>();
-    const {results} = await context.env.GENESYS.prepare(`SELECT * FROM QualityModification WHERE quality_id = ?`)
-        .bind(context.params.quality_id)
-        .all<Modifier>();
-    quality.modifiers = results;
+    const query = `SELECT q.*,
+                          JSON_ARRAY(
+                                  JSON_OBJECT('type', qm.type, 'ranks', qm.ranks)
+                          ) AS "modifiers"
+                   FROM Quality AS q
+                            LEFT JOIN QualityModification qm ON q.quality_id = qm.quality_id
+                   WHERE quality_id = ?;`
+    const quality = await context.env.GENESYS.prepare(query).bind(context.params.quality_id).first<Quality>();
+    if (typeof quality.modifiers === 'string') quality.modifiers = JSON.parse(quality.modifiers);
     return Response.json(quality);
 }
 

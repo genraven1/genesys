@@ -1,25 +1,46 @@
-import {Button, Card, CardContent} from "@mui/material";
+import {Button, Card, CardContent, TableFooter} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import {Weapon} from "../../../models/equipment/Weapon";
 import WeaponQualityTable from "./WeaponQualityTable";
 import WeaponQualitySelectionDialog from "./WeaponQualitySelectionDialog";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import TableRow from "@mui/material/TableRow";
+import {useLocation} from "react-router-dom";
 
 interface Props {
     weapon: Weapon
 }
 
-export default function WeaponQualityCard(props: Props): JSX.Element {
+export default function WeaponQualityCard(props: Props) {
     const {weapon} = props
+    const pathname = useLocation().pathname
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 
-    const renderTable = (): JSX.Element => {
-        if (weapon?.qualities!!.length === 0) {
+    const renderTable = () => {
+        if (weapon.qualities === undefined || weapon.qualities.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <WeaponQualityTable weapon={weapon}/>
+    }
+
+    const renderTableFooter = () => {
+        if (pathname.endsWith('/edit')) {
+            return (
+                <TableFooter>
+                    <TableRow>
+                        <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponQualityDialog(true)}>Add
+                            Special Quality</Button>
+                        {openAddWeaponQualityDialog &&
+                            <WeaponQualitySelectionDialog weapon={weapon} open={openAddWeaponQualityDialog}
+                                                          onClose={(): void => setOpenAddWeaponQualityDialog(false)}/>}
+                    </TableRow>
+                </TableFooter>
+            )
+        } else {
+            return <Fragment/>
+        }
     }
 
     return (
@@ -27,11 +48,7 @@ export default function WeaponQualityCard(props: Props): JSX.Element {
             <CenteredCardHeader title={'Weapon Special Qualities'}/>
             <CardContent>
                 {renderTable()}
-                <Button color='primary' variant='contained' onClick={(): void => setOpenAddWeaponQualityDialog(true)}>Add
-                    Special Quality</Button>
-                {openAddWeaponQualityDialog &&
-                    <WeaponQualitySelectionDialog weapon={weapon} open={openAddWeaponQualityDialog}
-                                                  onClose={(): void => setOpenAddWeaponQualityDialog(false)}/>}
+                {renderTableFooter()}
             </CardContent>
         </Card>
     )

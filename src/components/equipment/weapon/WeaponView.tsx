@@ -5,7 +5,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/RootPath";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -15,7 +14,8 @@ import TableContainer from "@mui/material/TableContainer";
 import {renderDamage, renderPrice, renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import SkillTableCell from "../../common/table/SkillTableCell";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
+import WeaponQualityCard from "./WeaponQualityCard";
+import WeaponModifierCard from "./modifier/WeaponModifierCard";
 
 interface Props {
     weapon: Weapon
@@ -27,7 +27,7 @@ export default function WeaponView(props: Props) {
     const headers = ['Name', 'Skill', 'Hands', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities']
 
     const onEdit = () => {
-        navigate(EquipmentPath.Weapon + weapon.name + '/edit')
+        navigate(EquipmentPath.Weapon + weapon.weapon_id + '/edit')
     }
 
     return (
@@ -39,7 +39,6 @@ export default function WeaponView(props: Props) {
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
@@ -58,14 +57,14 @@ export default function WeaponView(props: Props) {
                                     <TypographyCenterTableCell value={String(weapon.critical)}/>
                                     <TypographyCenterTableCell value={weapon.range}/>
                                     <TypographyCenterTableCell value={renderPrice(weapon)}/>
-                                    <TypographyCenterTableCell value={renderQualities(weapon)}/>
+                                    <TypographyCenterTableCell value={renderQualities(weapon.qualities)}/>
                                 </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Divider/>
-                    <ViewSettingsCard settings={weapon.settings} allSettings={useFetchAllSettings()}/>
                 </Grid>
+                <WeaponQualityCard weapon={weapon}/>
+                <WeaponModifierCard weapon={weapon}/>
             </CardContent>
         </Card>
     )

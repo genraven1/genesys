@@ -103,7 +103,7 @@ function Row(props: RowProps): JSX.Element {
             <TypographyCenterTableCell value={renderActorDamage(weapon, npc.brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
-            <TypographyCenterTableCell value={renderQualities(weapon!!)}/>
+            <TypographyCenterTableCell value={renderQualities(weapon.qualities)}/>
             <GenesysDicePoolCenterTableCell actor={npc} skill={getActorSkill()}/>
         </TableRow>
     )
