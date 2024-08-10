@@ -37,9 +37,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             LEFT JOIN Quality AS q ON wq.quality_id = q.quality_id
                             LEFT JOIN Skill s ON w.skill_id = s.skill_id
                    WHERE w.weapon_id = ?;`
-    const weapon = await context.env.GENESYS.prepare(query)
-        .bind(context.params.weapon_id)
-        .first<Weapon>();
+    const weapon = await context.env.GENESYS.prepare(query).bind(context.params.weapon_id).first<Weapon>();
     if (typeof weapon.modifiers === 'string') weapon.modifiers = JSON.parse(weapon.modifiers);
     if (typeof weapon.qualities === 'string') weapon.qualities = JSON.parse(weapon.qualities);
     if (typeof weapon.skill ==='string') weapon.skill = JSON.parse(weapon.skill);

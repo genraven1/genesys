@@ -6,8 +6,7 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const {results} = await context.env.GENESYS.prepare('SELECT * FROM Campaign')
-        .all<Campaign>();
+    const {results} = await context.env.GENESYS.prepare('SELECT * FROM Campaign').all<Campaign>();
     return Response.json(results);
 }
 
