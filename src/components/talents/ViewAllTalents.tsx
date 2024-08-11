@@ -22,7 +22,7 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props) {
+export function TalentRow(props: Props) {
     const {talent, columns} = props
     const [open, setOpen] = useState(false)
 
@@ -79,7 +79,7 @@ export default function ViewAllTalents() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {talents.map((talent: Talent) => (
-                                <Row key={talent.name} talent={talent} columns={headers.length}/>
+                                <TalentRow key={talent.name} talent={talent} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>

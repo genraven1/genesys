@@ -65,11 +65,11 @@ export default function PartyCard(props: Props) {
                 <TableContainer component={Paper}>
                     <Table>
                         {renderDoubleRowTableHeader(headers, 'Players')}
-                        {renderPlayerTableBody()}
+                        {/*{renderPlayerTableBody()}*/}
                     </Table>
                     <Table>
                         {renderDoubleRowTableHeader(headers, 'NPCs')}
-                        {renderNonPlayerTableBody()}
+                        {/*{renderNonPlayerTableBody()}*/}
                     </Table>
                 </TableContainer>
             </CardContent>

@@ -49,4 +49,5 @@ export enum CampaignPath {
     Party = '/party/',
     Session = '/sessions/',
     Scene = '/scenes/',
+    Talents = CampaignPath.Campaign + 'talents/'
 }

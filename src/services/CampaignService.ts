@@ -3,6 +3,7 @@ import axios from "axios";
 import {CampaignPath} from "./RootPath";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
+import Talent from "../models/Talent";
 
 export default class CampaignService {
     static async createCampaign(name: string): Promise<Campaign> {
@@ -27,6 +28,16 @@ export default class CampaignService {
 
     static async getCampaign(id: string): Promise<Campaign> {
         return await fetch(CampaignPath.Campaign + `${id}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async getCampaignTalents(id: string): Promise<Talent[]> {
+        return await fetch(CampaignPath.Talents + `${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
