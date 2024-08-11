@@ -68,7 +68,7 @@ export default function PartyCard(props: Props) {
                         {renderPlayerTableBody()}
                     </Table>
                     <Table>
-                        {renderDoubleRowTableHeader(headers, 'Players')}
+                        {renderDoubleRowTableHeader(headers, 'NPCs')}
                         {renderNonPlayerTableBody()}
                     </Table>
                 </TableContainer>
