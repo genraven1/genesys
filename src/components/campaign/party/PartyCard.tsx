@@ -20,6 +20,7 @@ interface Props {
 
 export default function PartyCard(props: Props) {
     const {party} = props;
+    console.log(party);
     const headers = ['Name', 'View']
 
     // const renderPlayerTableBody = () => {
