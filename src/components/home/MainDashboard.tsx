@@ -16,7 +16,7 @@ import CreateSpellDialog from "../spell/CreateSpellDialog";
 import CareerDialog from "../career/CareerDialog";
 import ArchetypeDialog from "../archetype/ArchetypeDialog";
 
-export default function MainDashboard(): JSX.Element {
+export default function MainDashboard() {
     const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)

@@ -7,7 +7,7 @@ import ExpansionList from "../navigation/ExpansionList";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import {ActorType} from "../../models/actor/Actor";
 
-export default function ActorDashboard(): JSX.Element {
+export default function ActorDashboard() {
     const [openMinionCreationDialog, setOpenMinionCreationDialog] = useState(false)
     const [openRivalCreationDialog, setOpenRivalCreationDialog] = useState(false)
     const [openNemesisCreationDialog, setOpenNemesisCreationDialog] = useState(false)

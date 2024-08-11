@@ -7,7 +7,7 @@ import {EquipmentType} from "../../models/equipment/Equipment";
 import ExpansionList from "../navigation/ExpansionList";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 
-export default function EquipmentDashboard(): JSX.Element {
+export default function EquipmentDashboard() {
     const [openArmorCreationDialog, setOpenArmorCreationDialog] = useState(false)
     const [openWeaponCreationDialog, setOpenWeaponCreationDialog] = useState(false)
     const [openGearCreationDialog, setOpenGearCreationDialog] = useState(false)
