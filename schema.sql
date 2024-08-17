@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS Campaign
     campaign_id INTEGER PRIMARY KEY,
     name        TEXT,
     party_id    INTEGER,
+    current     INTGER,
     FOREIGN KEY (party_id) REFERENCES Party (party_id)
 );
 CREATE TABLE IF NOT EXISTS Party

@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader} from "@mui/material";
 import * as React from "react";
 import ViewAllCampaigns from "../campaign/ViewAllCampaigns";
 
-export default function CampaignDashboard() {
+export default function HomeCampaignDashboard() {
 
     return (
         <Card>

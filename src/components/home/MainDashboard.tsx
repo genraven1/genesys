@@ -28,23 +28,23 @@ export default function MainDashboard() {
     const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
     const [setting, setSetting] = useState<Setting>()
 
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const current = await SettingService.getCurrentSetting()
-            if (!current) {
-                return
-            }
-            setSetting(current)
-        })()
-    }, [setSetting])
+    // useEffect(() => {
+    //     (async (): Promise<void> => {
+    //         const current = await SettingService.getCurrentSetting()
+    //         if (!current) {
+    //             return
+    //         }
+    //         setSetting(current)
+    //     })()
+    // }, [setSetting])
 
-    const getSubHeader = (): string => {
-        return 'Current Setting: ' + setting?.name!!
-    }
+    // const getSubHeader = (): string => {
+    //     return 'Current Setting: ' + setting?.name!!
+    // }
 
     return (
         <Card>
-            <CenteredCardHeader title={getSubHeader()}/>
+            {/*<CenteredCardHeader title={getSubHeader()}/>*/}
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>

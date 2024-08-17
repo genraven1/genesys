@@ -46,8 +46,24 @@ export default class CampaignService {
             })
     }
 
-    static async updateCampaign(name: string, campaign: Campaign): Promise<Campaign> {
-        return await (await axios.put(CampaignPath.Campaign + name, campaign)).data;
+    static async getCurrentCampaign(): Promise<Campaign> {
+        return await fetch(CampaignPath.Current)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async setCurrentCampaign(id: string): Promise<Campaign> {
+        return await fetch(CampaignPath.Current  + `${id}`, {method: "PUT"})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async createSession(campaignName: string, sessionName: string): Promise<CampaignSession> {
