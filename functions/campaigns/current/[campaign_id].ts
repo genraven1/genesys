@@ -7,7 +7,7 @@ interface Env {
 export const onRequestPut: PagesFunction<Env> = async (context) => {
     let query = `UPDATE Campaign
                  SET current = CASE
-                                   WHEN campaign_id = ? THEN 1
+                                   WHEN campaign_id = ?1 THEN 1
                                    ELSE 0
                      END
                      RETURNING *;`

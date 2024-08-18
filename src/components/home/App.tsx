@@ -19,7 +19,6 @@ import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
-import HomeDashboard from "./HomeDashboard";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
@@ -27,6 +26,7 @@ import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import SessionWorkflow from "../campaign/session/SessionWorkflow";
 import SceneWorkflow from "../campaign/scene/SceneWorkflow";
+import HomeCampaignDashboard from "./HomeCampaignDashboard";
 
 export default function App() {
 
@@ -36,7 +36,7 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={RootPath.Home} element={<HomeDashboard/>}/>
+                    <Route path={RootPath.Home} element={<HomeCampaignDashboard/>}/>
 
                     <Route path={RootPath.Injury} element={<InjuryWorkflow/>}/>
                     <Route path={RootPath.Injury + ':injury_id/view'} element={<InjuryWorkflow/>}/>

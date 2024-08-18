@@ -28,9 +28,8 @@ export default function CampaignSelection(props: Props) {
     const render = () => {
         if (campaigns.length === undefined || campaigns.length === 0) {
             return <Fragment></Fragment>
-        }
-        else {
-            <Select value={campaign?.name!!} onChange={onChange}>
+        } else {
+            <Select value={campaign?.name!!} onChange={onChange} variant={'outlined'}>
                 {campaigns.map((set) => (<MenuItem key={set.name} value={set.name}>{set.name}</MenuItem>))}
             </Select>
         }

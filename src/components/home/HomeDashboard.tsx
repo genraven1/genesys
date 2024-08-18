@@ -18,23 +18,23 @@ export default function HomeDashboard() {
         setValue(newValue)
     }
 
-    const renderDefaultDashboard = (): JSX.Element => {
+    const renderDefaultDashboard = () => {
         return <MainDashboard/>
     }
 
-    const renderActorDashboard = (): JSX.Element => {
+    const renderActorDashboard = () => {
         return <ActorDashboard/>
     }
 
-    const renderEquipmentDashboard = (): JSX.Element => {
+    const renderEquipmentDashboard = () => {
         return <EquipmentDashboard/>
     }
 
-    const renderLoreDashboard = (): JSX.Element => {
+    const renderLoreDashboard = () => {
         return <LoreDashboard/>
     }
 
-    const renderCampaignDashboard = (): JSX.Element => {
+    const renderCampaignDashboard = () => {
         return <HomeCampaignDashboard/>
     }
 
