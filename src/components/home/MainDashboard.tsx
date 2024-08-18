@@ -1,16 +1,12 @@
 import {RootPath} from "../../services/RootPath";
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import SettingDialog from "../setting/SettingDialog";
 import CreateTalentDialog from "../talents/CreateTalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import Setting from "../../models/Setting";
-import SettingSelectionDialog from "../setting/SettingSelectionDialog";
-import SettingService from "../../services/SettingService";
 import CreateQualityDialog from "../qualities/CreateQualityDialog";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
 import CareerDialog from "../career/CareerDialog";
@@ -25,26 +21,9 @@ export default function MainDashboard() {
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
-    const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
-    const [setting, setSetting] = useState<Setting>()
-
-    // useEffect(() => {
-    //     (async (): Promise<void> => {
-    //         const current = await SettingService.getCurrentSetting()
-    //         if (!current) {
-    //             return
-    //         }
-    //         setSetting(current)
-    //     })()
-    // }, [setSetting])
-
-    // const getSubHeader = (): string => {
-    //     return 'Current Setting: ' + setting?.name!!
-    // }
 
     return (
         <Card>
-            {/*<CenteredCardHeader title={getSubHeader()}/>*/}
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
@@ -89,11 +68,6 @@ export default function MainDashboard() {
                     </Card>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained'
-                            onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
-                    {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog}
-                                                                           onClose={(): void => setOpenSettingSelectionDialog(false)}
-                                                                           current={setting!!}/>}
                 </Grid>
             </CardContent>
             {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
