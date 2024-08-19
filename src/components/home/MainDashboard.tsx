@@ -2,7 +2,6 @@ import {RootPath} from "../../services/RootPath";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import SettingDialog from "../setting/SettingDialog";
 import CreateTalentDialog from "../talents/CreateTalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
@@ -13,7 +12,6 @@ import CareerDialog from "../career/CareerDialog";
 import ArchetypeDialog from "../archetype/ArchetypeDialog";
 
 export default function MainDashboard() {
-    const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
@@ -30,9 +28,6 @@ export default function MainDashboard() {
                         <CardHeader style={{textAlign: 'center'}} title={'Setting Information'}/>
                         <CardContent>
                             <Grid container justifyContent={'center'}>
-                                <ExpansionList header={'Settings'} viewTitle={'View All Settings'} to={RootPath.Setting}
-                                               dialogTitle={'Create Setting'}
-                                               onClick={(): void => setOpenSettingCreationDialog(true)}/>
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={RootPath.Talent}
                                                dialogTitle={'Create Talent'}
                                                onClick={(): void => setOpenTalentCreationDialog(true)}/>
@@ -67,11 +62,7 @@ export default function MainDashboard() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid container justifyContent={'center'}>
-                </Grid>
             </CardContent>
-            {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
-                                                         onClose={(): void => setOpenSettingCreationDialog(false)}/>}
             {openTalentCreationDialog && <CreateTalentDialog open={openTalentCreationDialog}
                                                              onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <CreateQualityDialog open={openQualityCreationDialog}
