@@ -8,9 +8,6 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
-import Setting from "../../../models/Setting";
-import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import SettingService from "../../../services/SettingService";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
@@ -24,11 +21,10 @@ import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 interface Props {
     play: Player
-    settings: Setting[]
 }
 
 export default function PlayerView(props: Props) {
-    const {play, settings} = props
+    const {play} = props
     const [player, setPlayer] = useState<Player>(play)
     const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false)
     let navigate = useNavigate()
@@ -36,23 +32,6 @@ export default function PlayerView(props: Props) {
     useEffect(() => {
         setPlayer(play)
     }, [play])
-
-    const onSettingAddition = async (name: string) => {
-        const copyPlayer = {...player} as Player
-        let setting = await SettingService.getSetting(name)
-        copyPlayer.settings = copyPlayer.settings.concat(setting)
-        await updatePlayer(copyPlayer)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyPlayer = {...player} as Player
-        copyPlayer.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyPlayer.settings.splice(index, 1)
-            }
-        })
-        await updatePlayer(copyPlayer)
-    }
 
     const onSkillChange = async (skill: PlayerSkill) => {
         player.skills.forEach((playerSkill) => {
@@ -138,8 +117,6 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <PlayerTalentCard player={player}/>
                 </Grid>
-                <EditSettingsCard settings={player.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )
