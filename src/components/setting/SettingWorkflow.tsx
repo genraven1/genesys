@@ -46,28 +46,11 @@ function useFetchSetting(name: string): Setting {
     return setting as Setting
 }
 
-export function useFetchCurrentSetting(): Setting {
-    const [setting, setSetting] = useState<Setting>()
-    useEffect(() => {
-        (async (): Promise<void> => {
-            try {
-                const currentSetting = await SettingService.getCurrentSetting()
-                if (currentSetting) {
-                    setSetting(currentSetting)
-                }
-            } catch (err) {
-                console.log(err)
-            }
-        })()
-    }, [setSetting])
-    return setting as Setting
-}
-
-export default function SettingWorkflow(): JSX.Element {
+export default function SettingWorkflow() {
     const {name} = useParams<{ name?: string }>()
     const setting = useFetchSetting(name as string)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return setting && <SettingView setting={setting}/>

@@ -17,7 +17,7 @@ import {StatsType} from "../../models/actor/Stats";
 import Skill from "../../models/actor/Skill";
 import SkillSelectCard from "../common/skill/SkillSelectCard";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
-import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
+import {useFetchAllSkills} from "../skills/SkillWorkflow";
 import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 import EditNumberCard from "../common/EditNumberCard";
 
@@ -163,7 +163,7 @@ export default function ArchetypeEdit(props: Props) {
                     <Grid container spacing={2}>
                         <SkillSelectCard defaultValue={archetype?.skill!} onCommit={(value: Skill): void => {
                             onSkillChange(value)
-                        }} skills={useFetchCurrentSettingSkills()} title={'Starting Skill'}/>
+                        }} skills={useFetchAllSkills()} title={'Starting Skill'}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <EditNumberCard title={'Base Experience'} value={archetype.experience}

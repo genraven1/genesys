@@ -7,7 +7,7 @@ import Career from "../../models/actor/player/Career";
 import Skill from "../../models/actor/Skill";
 import {useState} from "react";
 import CareerService from "../../services/CareerService";
-import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
+import {useFetchAllSkills} from "../skills/SkillWorkflow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -53,7 +53,7 @@ export default function EditSkillsCard(props: Props): JSX.Element {
                 <TableContainer component={Paper}>
                     <Table>
                         <TableBody>
-                            {useFetchCurrentSettingSkills().map((skill: Skill) => (
+                            {useFetchAllSkills().map((skill: Skill) => (
                                 <TableRow key={skill.name}>
                                     <TypographyCenterTableCell value={skill.name}/>
                                     <CheckboxTableCell value={skills.some(sk => sk.name === skill.name)}

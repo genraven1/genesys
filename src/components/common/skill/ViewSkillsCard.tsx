@@ -3,20 +3,20 @@ import * as React from "react";
 import CenteredCardHeader from "../card/CenteredCardHeader";
 import Skill from "../../../models/actor/Skill";
 import {renderViewSkills} from "./SkillRenders";
-import {useFetchCurrentSettingSkills} from "../../skills/SkillWorkflow";
+import {useFetchAllSkills} from "../../skills/SkillWorkflow";
 
 interface Props {
     skills: Skill[]
 }
 
-export default function ViewSkillsCard(props: Props): JSX.Element {
+export default function ViewSkillsCard(props: Props) {
     const {skills} = props
 
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Career Skills'}/>
             <CardContent>
-                {renderViewSkills(skills, useFetchCurrentSettingSkills())}
+                {renderViewSkills(skills, useFetchAllSkills())}
             </CardContent>
         </Card>
     )

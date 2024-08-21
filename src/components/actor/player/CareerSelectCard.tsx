@@ -4,7 +4,6 @@ import EditField from "../../common/EditField";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
-import {useFetchCurrentSetting} from "../../setting/SettingWorkflow";
 
 interface AllProps {
     defaultValue: Career
@@ -14,7 +13,6 @@ interface AllProps {
 export default function CareerSelectCard(props: AllProps): JSX.Element {
     const {defaultValue, onCommit} = props
     const [careers, setCareers] = useState<Career[]>([])
-    const current = useFetchCurrentSetting()
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -22,15 +20,9 @@ export default function CareerSelectCard(props: AllProps): JSX.Element {
             if (!careerList) {
                 return
             }
-            let temp = [] as Career[]
-            careerList.forEach((career, index) => {
-                if (career.settings.some(set => set.name === current.name)) {
-                    temp.push(career)
-                }
-            })
-            setCareers(temp)
+            setCareers(careerList)
         })()
-    }, [current])
+    }, [setCareers])
 
     return (
         <Grid item xs>
