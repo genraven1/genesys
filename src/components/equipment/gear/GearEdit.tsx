@@ -13,40 +13,19 @@ import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
-import Setting from "../../../models/Setting";
-import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import SettingService from "../../../services/SettingService";
 import {useFetchAllSkills} from "../../skills/SkillWorkflow";
 
 interface Props {
     gea: Gear
-    settings: Setting[]
 }
 
 export default function GearEdit(props: Props) {
-    const {gea, settings} = props
+    const {gea} = props
     const [gear, setGear] = useState<Gear>(gea)
 
     let navigate = useNavigate()
 
     useEffect(() => {setGear(gea)}, [gea])
-
-    const onSettingAddition = async (name: string) => {
-        const copyGear = {...gear} as Gear
-        let setting = await SettingService.getSetting(name)
-        copyGear.settings = copyGear.settings.concat(setting)
-        await updateGear(copyGear)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyGear = {...gear} as Gear
-        copyGear.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyGear.settings.splice(index, 1)
-            }
-        })
-        await updateGear(copyGear)
-    }
 
     const onSkillChange = async (value: Skill) => {
         const copyGear = {...gear} as Gear
@@ -116,8 +95,6 @@ export default function GearEdit(props: Props) {
                         <EditPriceCheckBoxCard check={gear.restricted} value={gear.price} checkTitle={'Restricted'} onBooleanChange={(value: boolean): void => { onChange('restricted', String(value))}} onNumberChange={(value: number): void => { onChange('price', String(value))}} />
                         <EditNumberFieldCard value={gear.rarity} title={'Rarity'} onChange={(value: number): void => { onChange('rarity', String(value))}} min={0} max={11} />
                     </Grid>
-                    <EditSettingsCard settings={gear?.settings!!} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

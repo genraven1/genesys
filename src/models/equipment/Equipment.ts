@@ -1,5 +1,4 @@
 import {EquipmentQuality} from "../Quality";
-import Setting from "../Setting";
 import Modifier from "../common/Modifier";
 
 export default interface Equipment {
@@ -11,7 +10,6 @@ export default interface Equipment {
     rarity: number
     modifiers: Modifier[]
     qualities: EquipmentQuality[]
-    settings: Setting[]
 }
 
 export enum EquipmentType {

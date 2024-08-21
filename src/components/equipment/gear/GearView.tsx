@@ -6,16 +6,13 @@ import {Gear} from "../../../models/equipment/Gear";
 import {EquipmentPath} from "../../../services/RootPath";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
-import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     gear: Gear
-    settings: Setting[]
 }
 
 export default function GearView(props: Props) {
-    const {gear, settings} = props
+    const {gear} = props
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
@@ -49,8 +46,6 @@ export default function GearView(props: Props) {
                                                 checkTitle={'Restricted'}/>
                         <ViewFieldCard name={'Rarity'} value={String(gear?.rarity!!)}/>
                     </Grid>
-                    <Divider/>
-                    <ViewSettingsCard settings={gear?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>
