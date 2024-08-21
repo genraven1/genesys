@@ -4,7 +4,6 @@ import NemesisEdit from "./NemesisEdit";
 import NemesisView from "./NemesisView";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from "../../../../services/ActorService";
-import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 import ViewAllNemeses from "./ViewAllNemeses";
 
 function useFetchNemesis(name: string): Nemesis {
@@ -27,17 +26,16 @@ function useFetchNemesis(name: string): Nemesis {
     return nemesis as Nemesis
 }
 
-export default function NemesisWorkflow(): JSX.Element {
+export default function NemesisWorkflow() {
     const {name} = useParams<{ name: string }>()
     const nemesis = useFetchNemesis(name as string)
-    const settings = useFetchAllSettings()
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return nemesis && <NemesisView nemesis={nemesis} settings={settings}/>
+            return nemesis && <NemesisView nemesis={nemesis}/>
         } else if (pathname.endsWith('/edit')) {
-            return nemesis && <NemesisEdit nem={nemesis} settings={settings}/>
+            return nemesis && <NemesisEdit nem={nemesis}/>
         } else {
             return <ViewAllNemeses/>
         }
