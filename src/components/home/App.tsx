@@ -17,7 +17,6 @@ import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
-import SettingWorkflow from "../setting/SettingWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
@@ -45,10 +44,6 @@ export default function App() {
                     <Route path={RootPath.Spell} element={<SpellWorkflow/>}/>
                     <Route path={RootPath.Spell + ':name/view'} element={<SpellWorkflow/>}/>
                     <Route path={RootPath.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
-
-                    <Route path={RootPath.Setting} element={<SettingWorkflow/>}/>
-                    <Route path={RootPath.Setting + ':name/view'} element={<SettingWorkflow/>}/>
-                    <Route path={RootPath.Setting + ':name/edit'} element={<SettingWorkflow/>}/>
 
                     <Route path={RootPath.Talent} element={<TalentWorkflow/>}/>
                     <Route path={RootPath.Talent + ':talent_id/view'} element={<TalentWorkflow/>}/>
