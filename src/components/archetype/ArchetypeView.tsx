@@ -58,7 +58,6 @@ export default function ArchetypeView(props: Props) {
                     </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
-                <ViewSettingsCard settings={archetype.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )
