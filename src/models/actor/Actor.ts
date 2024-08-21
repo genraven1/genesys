@@ -18,7 +18,6 @@ export default interface Actor {
     weapons: ActorWeapon[],
     armors: ActorArmor[],
     gear: ActorGear[],
-    settings: Setting[]
 }
 
 export interface ActorSkill extends Skill {
