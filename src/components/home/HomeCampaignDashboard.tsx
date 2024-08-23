@@ -41,6 +41,7 @@ export default function HomeCampaignDashboard() {
 
     const getSubHeader = () => {
         if (campaign) {
+            console.log('HERE')
             return campaign?.name!
         }
         else {
