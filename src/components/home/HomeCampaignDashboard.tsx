@@ -11,11 +11,13 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
+import CampaignDialog from "../campaign/CampaignDialog";
 
 export default function HomeCampaignDashboard() {
     const campaign = useFetchCurrentCampaign();
     const [value, setValue] = useState('1');
     const [openCampaignSelectionDialog, setOpenCampaignSelectionDialog] = useState(false);
+    const [openCampaignCreationDialog, setOpenCampaignCreationDialog] = useState(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -38,7 +40,23 @@ export default function HomeCampaignDashboard() {
     }
 
     const getSubHeader = () => {
-        return campaign?.name!
+        if (campaign) {
+            return campaign?.name!
+        }
+        else {
+            return 'No Campaign Selected'
+        }
+    }
+
+    const renderButton = () => {
+        if (campaign) {
+            return <Button color='primary' variant='contained'
+                           onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button>
+        }
+        else {
+            return <Button color='primary' variant='contained'
+                           onClick={(): void => setOpenCampaignCreationDialog(true)}>Create Campaign</Button>
+        }
     }
 
     return (
@@ -47,11 +65,7 @@ export default function HomeCampaignDashboard() {
                 style={{textAlign: 'center'}}
                 title={'Campaign Dashboard'}>
                 subheader={getSubHeader()}
-                action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button>}
-                {openCampaignSelectionDialog && <CampaignSelectionDialog open={openCampaignSelectionDialog}
-                                                                         onClose={(): void => setOpenCampaignSelectionDialog(false)}
-                                                                         current={campaign}/>}
+                action={renderButton()}
             </CardHeader>
             <CardContent>
                 <Grid sx={{width: 1}}>
@@ -71,6 +85,11 @@ export default function HomeCampaignDashboard() {
                     </TabContext>
                 </Grid>
             </CardContent>
+            {openCampaignSelectionDialog && <CampaignSelectionDialog open={openCampaignSelectionDialog}
+                                                                     onClose={(): void => setOpenCampaignSelectionDialog(false)}
+                                                                     current={campaign}/>}
+            {openCampaignCreationDialog && <CampaignDialog open={openCampaignCreationDialog}
+                                                           onClose={(): void => setOpenCampaignCreationDialog(false)}/>}
         </Card>
     );
 }
