@@ -5,6 +5,6 @@ interface Env {
 }
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
-    const result = await context.env.GENESYS.prepare('SELECT * FROM Campaign WHERE active = 1').first<Campaign>();
+    const result = await context.env.GENESYS.prepare('SELECT * FROM Campaign WHERE current = 1').first<Campaign>();
     return Response.json(result);
 }
