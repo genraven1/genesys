@@ -40,6 +40,7 @@ export default function HomeCampaignDashboard() {
     }
 
     const getSubHeader = () => {
+        console.log('SubHeader')
         if (campaign) {
             console.log('HERE')
             return campaign?.name!
@@ -50,6 +51,7 @@ export default function HomeCampaignDashboard() {
     }
 
     const renderButton = () => {
+        console.log('Button')
         if (campaign) {
             return <Button color='primary' variant='contained'
                            onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button>
