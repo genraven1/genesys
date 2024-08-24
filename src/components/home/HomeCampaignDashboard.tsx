@@ -40,26 +40,14 @@ export default function HomeCampaignDashboard() {
     }
 
     const getSubHeader = () => {
-        console.log('SubHeader')
-        if (campaign) {
-            console.log('HERE')
-            return campaign?.name!
-        }
-        else {
-            return 'No Campaign Selected'
-        }
+        return campaign ? campaign?.name! : 'No Campaign Selected';
     }
 
     const renderButton = () => {
-        console.log('Button')
-        if (campaign) {
-            return <Button color='primary' variant='contained'
-                           onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button>
-        }
-        else {
-            return <Button color='primary' variant='contained'
-                           onClick={(): void => setOpenCampaignCreationDialog(true)}>Create Campaign</Button>
-        }
+        return campaign ? <Button color='primary' variant='contained'
+                                  onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button> :
+            <Button color='primary' variant='contained'
+                    onClick={(): void => setOpenCampaignCreationDialog(true)}>Create Campaign</Button>;
     }
 
     return (
@@ -68,10 +56,9 @@ export default function HomeCampaignDashboard() {
                 style={{textAlign: 'center'}}
                 title={'Campaign Dashboard'}>
                 subheader={getSubHeader()}
-                action={renderButton()}
             </CardHeader>
             <CardContent>
-                <Grid sx={{width: 1}}>
+                <Grid sx={{width: 1}} container justifyContent={'center'}>
                     {renderButton()}
                     <TabContext value={value}>
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
