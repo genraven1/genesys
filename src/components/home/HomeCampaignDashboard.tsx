@@ -72,6 +72,7 @@ export default function HomeCampaignDashboard() {
             </CardHeader>
             <CardContent>
                 <Grid sx={{width: 1}}>
+                    {renderButton()}
                     <TabContext value={value}>
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
