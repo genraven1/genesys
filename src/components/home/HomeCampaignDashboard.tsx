@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
 import {useFetchCurrentCampaign} from "../campaign/CampaignWorkflow";
 import {useState} from "react";
@@ -51,15 +51,14 @@ export default function HomeCampaignDashboard() {
     }
 
     return (
-        <Card>
+        <Card  sx={{width: 1}}>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'Campaign Dashboard'}>
-                subheader={getSubHeader()}
+                title={'Campaign Dashboard'}
+                subheader={getSubHeader()}>
             </CardHeader>
             <CardContent>
-                <Grid sx={{width: 1}} container justifyContent={'center'}>
-                    {renderButton()}
+                <Grid sx={{width: 1}}>
                     <TabContext value={value}>
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
@@ -76,6 +75,11 @@ export default function HomeCampaignDashboard() {
                     </TabContext>
                 </Grid>
             </CardContent>
+            <CardActions>
+                <Grid container justifyContent={'center'}>
+                    {renderButton()}
+                </Grid>
+            </CardActions>
             {openCampaignSelectionDialog && <CampaignSelectionDialog open={openCampaignSelectionDialog}
                                                                      onClose={(): void => setOpenCampaignSelectionDialog(false)}
                                                                      current={campaign}/>}
