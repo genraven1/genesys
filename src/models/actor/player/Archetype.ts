@@ -1,4 +1,3 @@
-import Setting from "../../Setting";
 import Skill from "../Skill";
 import Ability from "../../Ability";
 
@@ -16,5 +15,4 @@ export default interface Archetype {
     experience: number
     skill: Skill
     abilities: Ability[]
-    settings: Setting[]
 }

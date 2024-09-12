@@ -1,11 +1,9 @@
 import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import * as React from "react";
 import Archetype from "../../models/actor/player/Archetype";
 import {RootPath} from "../../services/RootPath";
-import ViewSettingsCard from "../common/setting/ViewSettingsCard";
 import {ViewCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {ViewStatsCard} from "../actor/StatsCard";
@@ -58,7 +56,6 @@ export default function ArchetypeView(props: Props) {
                     </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
-                <ViewSettingsCard settings={archetype.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

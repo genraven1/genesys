@@ -9,8 +9,6 @@ import {ActorPath} from "../../../../services/RootPath";
 import Minion from "../../../../models/actor/npc/Minion";
 import CharacteristicRow from "../../common/CharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
-import Setting from "../../../../models/Setting";
-import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
@@ -20,11 +18,10 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     minion: Minion
-    settings: Setting[]
 }
 
 export default function MinionView(props: Props) {
-    const {minion, settings} = props
+    const {minion} = props
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -60,7 +57,6 @@ export default function MinionView(props: Props) {
                     <Divider/>
                     <MinionTalentCard minion={minion}/>
                 </Grid>
-                <ViewSettingsCard settings={minion?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

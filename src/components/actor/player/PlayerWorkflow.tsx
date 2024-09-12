@@ -4,7 +4,6 @@ import PlayerView from "./PlayerView";
 import Player from "../../../models/actor/player/Player";
 import ActorService from "../../../services/ActorService";
 import PlayerEdit from "./PlayerEdit";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 function useFetchPlayer(name: string): Player {
     const [player, setPlayer] = useState<Player>()
@@ -26,17 +25,16 @@ function useFetchPlayer(name: string): Player {
     return player as Player
 }
 
-export default function PlayerWorkflow(): JSX.Element {
+export default function PlayerWorkflow() {
     const {name} = useParams<{ name?: string }>()
     const player = useFetchPlayer(name!!)
-    const settings = useFetchAllSettings()
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return player && <PlayerView player={player} settings={settings}/>
+            return player && <PlayerView player={player}/>
         } else if (pathname.endsWith('/edit')) {
-            return player && <PlayerEdit play={player} settings={settings}/>
+            return player && <PlayerEdit play={player}/>
         } else {
             return <Fragment/>
         }

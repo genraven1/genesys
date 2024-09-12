@@ -5,7 +5,7 @@ import * as React from "react";
 import {LoreType} from "../../models/lore/Lore";
 import {NavigateFunction} from "react-router";
 
-export default function LoreDashboard(): JSX.Element {
+export default function LoreDashboard() {
     let navigate = useNavigate()
 
     return (

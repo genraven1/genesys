@@ -3,7 +3,6 @@ import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
-import Setting from "../Setting";
 
 export default interface Actor {
     name: string,
@@ -18,7 +17,6 @@ export default interface Actor {
     weapons: ActorWeapon[],
     armors: ActorArmor[],
     gear: ActorGear[],
-    settings: Setting[]
 }
 
 export interface ActorSkill extends Skill {

@@ -1,15 +1,12 @@
-import Setting from "../../models/Setting";
 import {Fragment, useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import SettingTableCell from "../common/table/SettingsTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {RootPath} from "../../services/RootPath";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import SettingService from "../../services/SettingService";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -21,19 +18,17 @@ import CareerDialog from "./CareerDialog";
 
 interface Props {
     career: Career
-    setting: Setting
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
-    const {career, setting, columns} = props
+function Row(props: Props) {
+    const {career, columns} = props
     const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={career.name}/>
-                <SettingTableCell settings={career.settings} setting={setting}/>
                 <ActionsTableCell name={career.name} path={RootPath.Career}/>
             </TableRow>
             <TableRow>
@@ -54,18 +49,7 @@ function Row(props: Props): JSX.Element {
 export default function ViewAllCareers() {
     const [careers, setCareers] = useState<Career[]>([])
     const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
-    const [setting, setSetting] = useState<Setting>()
     const headers = ['Name', 'Active', 'View']
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
-        })()
-    }, [setSetting])
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -91,7 +75,7 @@ export default function ViewAllCareers() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {careers.map((career: Career) => (
-                                <Row key={career.name} career={career} setting={setting!!} columns={headers.length}/>
+                                <Row key={career.name} career={career} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>

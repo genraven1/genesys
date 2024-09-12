@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -10,35 +10,17 @@ import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {ViewActionTableCell} from "../common/table/ActionsTableCell";
 import {CampaignPath} from "../../services/RootPath";
 import Campaign from "../../models/campaign/Campaign";
-import CampaignService from "../../services/CampaignService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import CampaignDialog from "./CampaignDialog";
 
 interface Props {
-    campaign: Campaign
+    campaigns: Campaign[]
 }
 
-function Row(props: Props) {
-    const {campaign} = props
-
-    return (
-        <TableRow>
-            <TypographyCenterTableCell value={campaign.name}/>
-            <ViewActionTableCell id={campaign.campaign_id} path={CampaignPath.Campaign}/>
-        </TableRow>
-    )
-}
-
-export default function ViewAllCampaigns() {
-    const [campaigns, setCampaigns] = useState<Campaign[]>([])
+export default function ViewAllCampaigns(props: Props) {
+    const {campaigns} = props
     const [openCampaignCreationDialog, setOpenCampaignCreationDialog] = useState(false)
     const headers = ['Name', 'View']
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            setCampaigns(await CampaignService.getAllCampaigns())
-        })()
-    }, [setCampaigns])
 
     return (
         <Card>
@@ -54,7 +36,10 @@ export default function ViewAllCampaigns() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {(campaigns || []).map((campaign: Campaign) => (
-                                <Row key={campaign.name} campaign={campaign}/>
+                                <TableRow>
+                                    <TypographyCenterTableCell value={campaign.name}/>
+                                    <ViewActionTableCell id={campaign.campaign_id} path={CampaignPath.Campaign}/>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>

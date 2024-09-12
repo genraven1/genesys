@@ -4,7 +4,6 @@ export enum RootPath {
     Skills = '/skills/',
     Lore = '/lore',
     Roll = '/roll',
-    Setting = '/settings/',
     Qualities = '/qualities/',
     Injury = '/injuries/',
     Spell = '/spells/',
@@ -49,4 +48,6 @@ export enum CampaignPath {
     Party = '/party/',
     Session = '/sessions/',
     Scene = '/scenes/',
+    Current = CampaignPath.Campaign + 'current',
+    Talents = CampaignPath.Campaign + 'talents/'
 }
