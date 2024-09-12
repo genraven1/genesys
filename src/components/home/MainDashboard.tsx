@@ -25,7 +25,7 @@ export default function MainDashboard() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'Setting Information'}/>
+                        <CardHeader style={{textAlign: 'center'}} title={'Campaign Information'}/>
                         <CardContent>
                             <Grid container justifyContent={'center'}>
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={RootPath.Talent}
