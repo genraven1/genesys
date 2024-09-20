@@ -1,7 +1,6 @@
 import {Card, CardContent, ClickAwayListener, Grid, MenuItem, TextField, Typography} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import {ChangeEvent, useEffect, useState} from "react";
-import {useFetchCurrentSetting} from "../../setting/SettingWorkflow";
 import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";
 import EditField from "../../common/EditField";
@@ -11,10 +10,9 @@ interface AllProps {
     onCommit: (value: Archetype) => void
 }
 
-export default function ArchetypeSelectCard(props: AllProps): JSX.Element {
+export default function ArchetypeSelectCard(props: AllProps) {
     const {defaultValue, onCommit} = props
     const [archetypes, setArchetypes] = useState<Archetype[]>([])
-    const current = useFetchCurrentSetting()
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -22,15 +20,9 @@ export default function ArchetypeSelectCard(props: AllProps): JSX.Element {
             if (!archetypeList) {
                 return
             }
-            let temp = [] as Archetype[]
-            archetypeList.forEach((archetype, index) => {
-                if (archetype.settings.some(set => set.name === current.name)) {
-                    temp.push(archetype)
-                }
-            })
-            setArchetypes(temp)
+            setArchetypes(archetypeList)
         })()
-    }, [current])
+    }, [])
 
     return (
         <Grid item xs>
@@ -51,7 +43,7 @@ interface FieldProps {
     onChange?: (value: Archetype) => void
 }
 
-function ArchetypeSelectField(props: FieldProps): JSX.Element {
+function ArchetypeSelectField(props: FieldProps) {
     const {defaultValue, archetypes, onCommit, onChange} = props
     const [archetype, setArchetype] = useState(defaultValue)
     const [edit, setEdit] = useState(false)

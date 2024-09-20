@@ -5,7 +5,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
@@ -15,7 +14,6 @@ import TableContainer from "@mui/material/TableContainer";
 import {renderDamage, renderPrice, renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import SkillTableCell from "../../common/table/SkillTableCell";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 interface Props {
     weapon: Weapon
@@ -63,8 +61,6 @@ export default function WeaponView(props: Props) {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Divider/>
-                    <ViewSettingsCard settings={weapon.settings} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>

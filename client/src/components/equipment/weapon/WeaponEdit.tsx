@@ -7,8 +7,7 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import SkillSelectCard from "../../common/skill/SkillSelectCard";
-import Skill, {SkillType} from "../../../models/actor/Skill";
+import Skill from "../../../models/actor/Skill";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 import CheckButtonCard from "../../common/CheckButtonCard";
 import {getRangeOptions, RangeBand} from "../../../models/common/RangeBand";
@@ -16,10 +15,8 @@ import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import WeaponQualityCard from "./WeaponQualityCard";
-import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import SettingService from "../../../services/SettingService";
-import {useFetchCurrentSettingSkillsByType} from "../../skills/SkillWorkflow";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
+import {useFetchAllSkills} from "../../skills/SkillWorkflow";
+import SkillSelectCard from "../../common/skill/SkillSelectCard";
 
 
 interface Props {
@@ -34,23 +31,6 @@ export default function WeaponEdit(props: Props) {
     useEffect(() => {
         setWeapon(wea)
     }, [wea])
-
-    const onSettingAddition = async (name: string) => {
-        const copyWeapon = {...weapon} as Weapon
-        let setting = await SettingService.getSetting(name)
-        copyWeapon.settings = copyWeapon.settings.concat(setting)
-        await updateWeapon(copyWeapon)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyWeapon = {...weapon} as Weapon
-        copyWeapon.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyWeapon.settings.splice(index, 1)
-            }
-        })
-        await updateWeapon(copyWeapon)
-    }
 
     const onSkillChange = async (value: Skill) => {
         const copyWeapon = {...weapon} as Weapon
@@ -128,7 +108,7 @@ export default function WeaponEdit(props: Props) {
                     <Grid container spacing={10}>
                         <SkillSelectCard defaultValue={weapon.skill} onCommit={(value: Skill): void => {
                             onSkillChange(value)
-                        }} skills={useFetchCurrentSettingSkillsByType(SkillType.Combat)} title={'Required Skill'}/>
+                        }} skills={useFetchAllSkills()} title={'Required Skill'}/>
                         <NumberRangeSelectCard title={'Damage'} defaultValue={weapon.damage}
                                                onChange={(value: number): void => {
                                                    onChange('damage', String(value))
@@ -170,8 +150,6 @@ export default function WeaponEdit(props: Props) {
                     <Grid container>
                         <WeaponQualityCard weapon={weapon}/>
                     </Grid>
-                    <EditSettingsCard settings={weapon.settings} onSettingAddition={onSettingAddition}
-                                      onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>

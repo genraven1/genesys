@@ -9,8 +9,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ActorPath} from "../../../../services/Path";
 import CharacteristicRow from "../../common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
-import Setting from "../../../../models/Setting";
-import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
 import NemesisSkillCard from "./skill/NemesisSkillCard";
 import NemesisTalentCard from "./talent/NemesisTalentCard";
@@ -20,11 +18,10 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     nemesis: Nemesis
-    settings: Setting[]
 }
 
 export default function NemesisView(props: Props) {
-    const {nemesis, settings} = props
+    const {nemesis} = props
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -61,7 +58,6 @@ export default function NemesisView(props: Props) {
                     <Divider/>
                     <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
-                <ViewSettingsCard settings={nemesis.settings} allSettings={settings}/>
             </CardContent>
         </Card>
     )

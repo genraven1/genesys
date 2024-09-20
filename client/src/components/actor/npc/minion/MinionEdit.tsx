@@ -13,9 +13,6 @@ import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
 import Minion from "../../../../models/actor/npc/Minion";
-import Setting from "../../../../models/Setting";
-import EditSettingsCard from "../../../common/setting/EditSettingsCard";
-import SettingService from "../../../../services/SettingService";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import * as React from "react";
@@ -25,34 +22,16 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     min: Minion
-    settings: Setting[]
 }
 
 export default function MinionEdit(props: Props) {
-    const {min, settings} = props
+    const {min} = props
     const [minion, setMinion] = useState<Minion>(min)
     let navigate = useNavigate()
 
     useEffect(() => {
         setMinion(min)
     }, [min])
-
-    const onSettingAddition = async (name: string) => {
-        const copyMinion = {...minion} as Minion
-        let setting = await SettingService.getSetting(name)
-        copyMinion.settings = copyMinion.settings.concat(setting)
-        await updateMinion(copyMinion)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyMinion = {...minion} as Minion
-        copyMinion.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyMinion.settings.splice(index, 1)
-            }
-        })
-        await updateMinion(copyMinion)
-    }
 
     const onChange = async (key: keyof Minion, value: number) => {
         if (value === null) {
@@ -173,8 +152,6 @@ export default function MinionEdit(props: Props) {
                     <Divider/>
                     <MinionTalentCard minion={minion}/>
                 </Grid>
-                <EditSettingsCard settings={minion?.settings!!} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

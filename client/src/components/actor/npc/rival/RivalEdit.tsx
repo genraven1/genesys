@@ -14,9 +14,6 @@ import Rival from "../../../../models/actor/npc/Rival";
 import {ActorPath} from "../../../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
-import Setting from "../../../../models/Setting";
-import EditSettingsCard from "../../../common/setting/EditSettingsCard";
-import SettingService from "../../../../services/SettingService";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
@@ -25,34 +22,16 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     riv: Rival
-    settings: Setting[]
 }
 
 export default function RivalEdit(props: Props) {
-    const {riv, settings} = props
+    const {riv} = props
     const [rival, setRival] = useState<Rival>(riv)
     let navigate = useNavigate()
 
     useEffect(() => {
         setRival(riv)
     }, [riv])
-
-    const onSettingAddition = async (name: string) => {
-        const copyRival = {...rival} as Rival
-        let setting = await SettingService.getSetting(name)
-        copyRival.settings = copyRival.settings.concat(setting)
-        await updateRival(copyRival)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyRival = {...rival} as Rival
-        copyRival.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyRival.settings.splice(index, 1)
-            }
-        })
-        await updateRival(copyRival)
-    }
 
     const onChange = async (key: keyof Rival, value: number) => {
         if (value === null) {
@@ -174,8 +153,6 @@ export default function RivalEdit(props: Props) {
                     <Divider/>
                     <RivalTalentCard rival={rival}/>
                 </Grid>
-                <EditSettingsCard settings={rival.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

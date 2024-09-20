@@ -26,11 +26,11 @@ function useFetchWeapon(name: string): Weapon {
     return weapon as Weapon
 }
 
-export default function WeaponWorkflow(): JSX.Element {
+export default function WeaponWorkflow() {
     const {name} = useParams<{ name: string }>()
     const weapon = useFetchWeapon(name as string)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return weapon && <WeaponView weapon={weapon}/>

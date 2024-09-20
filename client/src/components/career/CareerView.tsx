@@ -3,8 +3,6 @@ import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import {Path} from "../../services/Path";
 import EditIcon from "@mui/icons-material/Edit";
-import ViewSettingsCard from "../common/setting/ViewSettingsCard";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import ViewSkillsCard from "../common/skill/ViewSkillsCard";
 import Career from '../../models/actor/player/Career';
 
@@ -32,7 +30,6 @@ export default function CareerView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <ViewSkillsCard skills={career.skills}/>
-                    <ViewSettingsCard settings={career.settings} allSettings={useFetchAllSettings()}/>
                 </Grid>
             </CardContent>
         </Card>

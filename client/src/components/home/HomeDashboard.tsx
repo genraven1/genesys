@@ -10,30 +10,30 @@ import CampaignDashboard from "./CampaignDashboard";
 import ActorDashboard from "./ActorDashboard";
 import EquipmentDashboard from "./EquipmentDashboard";
 
-export default function HomeDashboard(): JSX.Element {
+export default function HomeDashboard() {
     const [value, setValue] = useState('1')
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue)
     }
 
-    const renderDefaultDashboard = (): JSX.Element => {
+    const renderDefaultDashboard = () => {
         return <MainDashboard/>
     }
 
-    const renderActorDashboard = (): JSX.Element => {
+    const renderActorDashboard = () => {
         return <ActorDashboard/>
     }
 
-    const renderEquipmentDashboard = (): JSX.Element => {
+    const renderEquipmentDashboard = () => {
         return <EquipmentDashboard/>
     }
 
-    const renderLoreDashboard = (): JSX.Element => {
+    const renderLoreDashboard = () => {
         return <LoreDashboard/>
     }
 
-    const renderCampaignDashboard = (): JSX.Element => {
+    const renderCampaignDashboard = () => {
         return <CampaignDashboard/>
     }
 

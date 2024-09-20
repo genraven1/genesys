@@ -11,15 +11,13 @@ interface Props {
     weapon: Weapon
 }
 
-export default function WeaponQualityCard(props: Props): JSX.Element {
+export default function WeaponQualityCard(props: Props) {
     const {weapon} = props
     const [openAddWeaponQualityDialog, setOpenAddWeaponQualityDialog] = useState(false)
 
-    const renderTable = (): JSX.Element => {
-        if (weapon?.qualities!!.length === 0) {
-            return <Typography style={{textAlign: 'center'}}>None</Typography>
-        }
-        return <WeaponQualityTable weapon={weapon}/>
+    const renderTable = () => {
+        return weapon.qualities.length === 0 ? <Typography style={{textAlign: 'center'}}>None</Typography> :
+            <WeaponQualityTable weapon={weapon}/>;
     }
 
     return (

@@ -26,7 +26,7 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {armor, columns} = props
     const [open, setOpen] = useState(false)
 

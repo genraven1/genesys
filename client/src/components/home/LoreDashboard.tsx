@@ -5,7 +5,7 @@ import * as React from "react";
 import {LoreType} from "../../models/lore/Lore";
 import {NavigateFunction} from "react-router";
 
-export default function LoreDashboard(): JSX.Element {
+export default function LoreDashboard() {
     let navigate = useNavigate()
 
     return (
@@ -33,7 +33,7 @@ interface DashboardProps {
     navigate: NavigateFunction
 }
 
-function DashboardButton(props: DashboardProps): JSX.Element {
+function DashboardButton(props: DashboardProps) {
     const {path, title, navigate} = props
     return (
         <Button color='primary' variant='contained' onClick={() => navigate(path)}>{title}</Button>

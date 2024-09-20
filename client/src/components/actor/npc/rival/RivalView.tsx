@@ -9,8 +9,6 @@ import {ActorPath} from "../../../../services/Path";
 import Rival from "../../../../models/actor/npc/Rival";
 import CharacteristicRow from "../../common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
-import Setting from "../../../../models/Setting";
-import ViewSettingsCard from "../../../common/setting/ViewSettingsCard";
 import {ViewStatsCard} from "../../StatsCard";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
@@ -20,11 +18,10 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     rival: Rival
-    settings: Setting[]
 }
 
 export default function RivalView(props: Props) {
-    const {rival, settings} = props
+    const {rival} = props
     let navigate = useNavigate()
 
     const onEdit = () => {
@@ -59,7 +56,6 @@ export default function RivalView(props: Props) {
                     <Divider/>
                     <RivalTalentCard rival={rival}/>
                 </Grid>
-                <ViewSettingsCard settings={rival.settings} allSettings={settings}/>
             </CardContent>
         </Card>
     )

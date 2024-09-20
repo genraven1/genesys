@@ -5,25 +5,21 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {EquipmentPath} from "../../../services/Path";
-import Setting from "../../../models/Setting";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderPrice, renderQualities, renderSoak} from "../../../models/equipment/EquipmentHelper";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     armor: Armor
-    settings: Setting[]
 }
 
 export default function ArmorView(props: Props) {
-    const {armor, settings} = props
+    const {armor} = props
     let navigate = useNavigate()
     const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'Qualities']
 
@@ -48,10 +44,8 @@ export default function ArmorView(props: Props) {
                     </Grid>
                     <Divider/>
                     <TableContainer component={Paper}>
-                        <Table aria-label="collapsible table">
-                            <TableHead>
-                                {renderHeaders(headers)}
-                            </TableHead>
+                        <Table>
+                            {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow>
                                     <TypographyCenterTableCell value={armor?.name!!}/>
@@ -66,8 +60,6 @@ export default function ArmorView(props: Props) {
                         </Table>
                     </TableContainer>
                 </Grid>
-                <Divider/>
-                <ViewSettingsCard settings={armor?.settings!!} allSettings={settings}/>
             </CardContent>
         </Card>
     )

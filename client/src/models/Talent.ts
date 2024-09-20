@@ -1,5 +1,4 @@
 import {Option} from "../components/common/InputSelectField";
-import Setting from "./Setting";
 import Modifier from "./common/Modifier";
 
 export default interface Talent {
@@ -10,7 +9,6 @@ export default interface Talent {
     summary: string
     description: string
     modifiers: Modifier[]
-    settings: Setting[]
 }
 
 export enum Activation {

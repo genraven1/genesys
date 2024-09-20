@@ -26,11 +26,11 @@ function useFetchCareer(name: string): Career {
     return career as Career
 }
 
-export default function CareerWorkflow(): JSX.Element {
+export default function CareerWorkflow() {
     const {name} = useParams<{ name?: string }>()
     const career = useFetchCareer(name!!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return career && <CareerView career={career}/>

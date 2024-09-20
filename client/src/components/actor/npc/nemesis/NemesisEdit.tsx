@@ -14,9 +14,6 @@ import {EditStatsCard} from "../../StatsCard"
 import {ActorPath} from "../../../../services/Path"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
-import Setting from "../../../../models/Setting";
-import EditSettingsCard from "../../../common/setting/EditSettingsCard";
-import SettingService from "../../../../services/SettingService";
 import NemesisSkillCard from "./skill/NemesisSkillCard";
 import NemesisTalentCard from "./talent/NemesisTalentCard";
 import NemesisEquipmentCard from "./equipment/NemesisEquipmentCard";
@@ -24,34 +21,16 @@ import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 
 interface Props {
     nem: Nemesis
-    settings: Setting[]
 }
 
 export default function NemesisEdit(props: Props) {
-    const {nem, settings} = props
+    const {nem} = props
     const [nemesis, setNemesis] = useState<Nemesis>(nem)
     let navigate = useNavigate()
 
     useEffect(() => {
         setNemesis(nem)
     }, [nem])
-
-    const onSettingAddition = async (name: string) => {
-        const copyNemesis = {...nemesis} as Nemesis
-        let setting = await SettingService.getSetting(name)
-        copyNemesis.settings = copyNemesis.settings.concat(setting)
-        await updateNemesis(copyNemesis)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyNemesis = {...nemesis} as Nemesis
-        copyNemesis.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyNemesis.settings.splice(index, 1)
-            }
-        })
-        await updateNemesis(copyNemesis)
-    }
 
     const onChange = async (key: keyof Nemesis, value: number) => {
         if (value === null) {
@@ -180,8 +159,6 @@ export default function NemesisEdit(props: Props) {
                     <Divider/>
                     <NemesisTalentCard nemesis={nemesis}/>
                 </Grid>
-                <EditSettingsCard settings={nemesis.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={settings}/>
             </CardContent>
         </Card>
     )

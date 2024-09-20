@@ -4,7 +4,6 @@ import ActorService from "../../../../services/ActorService";
 import Minion from "../../../../models/actor/npc/Minion";
 import MinionView from "./MinionView";
 import MinionEdit from "./MinionEdit";
-import {useFetchAllSettings} from "../../../setting/SettingWorkflow";
 import ViewAllMinions from "./ViewAllMinion";
 
 function useFetchMinion(name: string): Minion {
@@ -27,17 +26,16 @@ function useFetchMinion(name: string): Minion {
     return minion as Minion
 }
 
-export default function MinionWorkflow(): JSX.Element {
+export default function MinionWorkflow() {
     const {name} = useParams<{ name: string }>()
     const minion = useFetchMinion(name as string)
-    const settings = useFetchAllSettings()
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return minion && <MinionView minion={minion} settings={settings}/>
+            return minion && <MinionView minion={minion}/>
         } else if (pathname.endsWith('/edit')) {
-            return minion && <MinionEdit min={minion} settings={settings}/>
+            return minion && <MinionEdit min={minion}/>
         } else {
             return <ViewAllMinions/>
         }

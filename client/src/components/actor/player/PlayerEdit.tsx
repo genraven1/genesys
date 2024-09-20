@@ -8,8 +8,6 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
-import EditSettingsCard from "../../common/setting/EditSettingsCard";
-import SettingService from "../../../services/SettingService";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
@@ -20,7 +18,6 @@ import Archetype from "../../../models/actor/player/Archetype";
 import CharacteristicRow from "../common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 interface Props {
     play: Player
@@ -35,23 +32,6 @@ export default function PlayerEdit(props: Props) {
     useEffect(() => {
         setPlayer(play)
     }, [play])
-
-    const onSettingAddition = async (name: string) => {
-        const copyPlayer = {...player} as Player
-        let setting = await SettingService.getSetting(name)
-        copyPlayer.settings = copyPlayer.settings.concat(setting)
-        await updatePlayer(copyPlayer)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyPlayer = {...player} as Player
-        copyPlayer.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyPlayer.settings.splice(index, 1)
-            }
-        })
-        await updatePlayer(copyPlayer)
-    }
 
     const onSkillChange = async (skill: PlayerSkill) => {
         player.skills.forEach((playerSkill) => {
@@ -137,8 +117,6 @@ export default function PlayerEdit(props: Props) {
                     <Divider/>
                     <PlayerTalentCard player={player}/>
                 </Grid>
-                <EditSettingsCard settings={player.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

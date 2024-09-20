@@ -13,22 +13,18 @@ import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {Path} from "../../services/Path";
-import Setting from "../../models/Setting";
-import SettingService from "../../services/SettingService";
 import {renderHeaders} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TalentDialog from "./TalentDialog";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import SettingTableCell from "../common/table/SettingsTableCell";
 
 interface Props {
     talent: Talent
-    setting: Setting
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
-    const {talent, setting, columns} = props
+function Row(props: Props) {
+    const {talent, columns} = props
     const [open, setOpen] = useState(false)
 
     const renderRanked = (): string => {
@@ -46,7 +42,6 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={renderRanked()}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
-                <SettingTableCell settings={talent.settings} setting={setting}/>
                 <ActionsTableCell name={talent.name} path={Path.Talent}/>
             </TableRow>
             <TableRow>
@@ -67,18 +62,7 @@ function Row(props: Props): JSX.Element {
 export default function ViewAllTalents() {
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
-    const [setting, setSetting] = useState<Setting>()
     const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'Active', 'View']
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const currentSetting = await SettingService.getCurrentSetting()
-            if (!currentSetting) {
-                return
-            }
-            setSetting(currentSetting)
-        })()
-    }, [setSetting])
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -106,7 +90,7 @@ export default function ViewAllTalents() {
                         </TableHead>
                         <TableBody>
                             {talents.map((talent: Talent) => (
-                                <Row key={talent.name} talent={talent} setting={setting!!} columns={headers.length}/>
+                                <Row key={talent.name} talent={talent} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>

@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader} from "@mui/material";
 import * as React from "react";
 import ViewAllCampaigns from "../campaign/ViewAllCampaigns";
 
-export default function CampaignDashboard(): JSX.Element {
+export default function CampaignDashboard() {
 
     return (
         <Card>

@@ -4,20 +4,17 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import Archetype from "../../models/actor/player/Archetype";
-import SettingService from "../../services/SettingService";
 import ArchetypeService from "../../services/ArchetypeService";
 import {Path} from "../../services/Path";
 import {EditCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {ActorKey} from "../../models/actor/Actor";
-import EditSettingsCard from "../common/setting/EditSettingsCard";
-import {useFetchAllSettings} from "../setting/SettingWorkflow";
 import {EditStatsCard} from "../actor/StatsCard";
 import {StatsType} from "../../models/actor/Stats";
 import Skill from "../../models/actor/Skill";
 import SkillSelectCard from "../common/skill/SkillSelectCard";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
-import {useFetchCurrentSettingSkills} from "../skills/SkillWorkflow";
+import {useFetchAllSkills} from "../skills/SkillWorkflow";
 import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 import EditNumberCard from "../common/EditNumberCard";
 
@@ -34,23 +31,6 @@ export default function ArchetypeEdit(props: Props) {
     useEffect(() => {
         setArchetype(arch)
     }, [arch])
-
-    const onSettingAddition = async (name: string) => {
-        const copyArchetype = {...archetype} as Archetype
-        let setting = await SettingService.getSetting(name)
-        copyArchetype.settings = copyArchetype.settings.concat(setting)
-        await updateArchetype(copyArchetype)
-    }
-
-    const onSettingRemoval = async (name: string) => {
-        const copyArchetype = {...archetype} as Archetype
-        copyArchetype.settings.forEach((set, index) => {
-            if (set.name === name) {
-                copyArchetype.settings.splice(index, 1)
-            }
-        })
-        await updateArchetype(copyArchetype)
-    }
 
     const onSkillChange = async (value: Skill) => {
         archetype.skill = value
@@ -163,7 +143,7 @@ export default function ArchetypeEdit(props: Props) {
                     <Grid container spacing={2}>
                         <SkillSelectCard defaultValue={archetype?.skill!} onCommit={(value: Skill): void => {
                             onSkillChange(value)
-                        }} skills={useFetchCurrentSettingSkills()} title={'Starting Skill'}/>
+                        }} skills={useFetchAllSkills()} title={'Starting Skill'}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <EditNumberCard title={'Base Experience'} value={archetype.experience}
@@ -173,8 +153,6 @@ export default function ArchetypeEdit(props: Props) {
                     </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
-                <EditSettingsCard settings={archetype.settings} onSettingAddition={onSettingAddition}
-                                  onSettingRemoval={onSettingRemoval} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

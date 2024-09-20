@@ -4,17 +4,15 @@ import EditField from "../../common/EditField";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
-import {useFetchCurrentSetting} from "../../setting/SettingWorkflow";
 
 interface AllProps {
     defaultValue: Career
     onCommit: (value: Career) => void
 }
 
-export default function CareerSelectCard(props: AllProps): JSX.Element {
+export default function CareerSelectCard(props: AllProps) {
     const {defaultValue, onCommit} = props
     const [careers, setCareers] = useState<Career[]>([])
-    const current = useFetchCurrentSetting()
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -22,15 +20,9 @@ export default function CareerSelectCard(props: AllProps): JSX.Element {
             if (!careerList) {
                 return
             }
-            let temp = [] as Career[]
-            careerList.forEach((career, index) => {
-                if (career.settings.some(set => set.name === current.name)) {
-                    temp.push(career)
-                }
-            })
-            setCareers(temp)
+            setCareers(careerList)
         })()
-    }, [current])
+    }, [])
 
     return (
         <Grid item xs>
@@ -51,7 +43,7 @@ interface FieldProps {
     onChange?: (value: Career) => void
 }
 
-function CardSelectField(props: FieldProps): JSX.Element {
+function CardSelectField(props: FieldProps) {
     const {defaultValue, careers, onCommit, onChange} = props
     const [career, setCareer] = useState(defaultValue)
     const [edit, setEdit] = useState(false)

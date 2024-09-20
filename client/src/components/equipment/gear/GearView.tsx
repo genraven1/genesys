@@ -6,16 +6,13 @@ import {Gear} from "../../../models/equipment/Gear";
 import {EquipmentPath} from "../../../services/Path";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {ViewNumberCheckBoxCard} from "../../common/NumberCheckBox";
-import Setting from "../../../models/Setting";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 
 interface Props {
     gear: Gear
-    settings: Setting[]
 }
 
 export default function GearView(props: Props) {
-    const {gear, settings} = props
+    const {gear} = props
     const path = EquipmentPath.Gear
     let navigate = useNavigate()
 
@@ -35,22 +32,20 @@ export default function GearView(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={gear?.description!!}/>
+                        <ViewFieldCard name={'Description'} value={gear.description}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Required Skill'} value={String(gear?.skill?.name!!)}/>
-                        <ViewFieldCard name={'Range'} value={String(gear?.range!!)}/>
+                        <ViewFieldCard name={'Required Skill'} value={String(gear.skill.name)}/>
+                        <ViewFieldCard name={'Range'} value={String(gear.range)}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Encumbrance'} value={String(gear?.encumbrance!!)}/>
-                        <ViewNumberCheckBoxCard title={'Price'} check={gear?.restricted!!} value={gear?.price!!}
+                        <ViewFieldCard name={'Encumbrance'} value={String(gear.encumbrance)}/>
+                        <ViewNumberCheckBoxCard title={'Price'} check={gear.restricted} value={gear.price}
                                                 checkTitle={'Restricted'}/>
-                        <ViewFieldCard name={'Rarity'} value={String(gear?.rarity!!)}/>
+                        <ViewFieldCard name={'Rarity'} value={String(gear.rarity)}/>
                     </Grid>
-                    <Divider/>
-                    <ViewSettingsCard settings={gear?.settings!!} allSettings={settings}/>
                 </Grid>
             </CardContent>
         </Card>

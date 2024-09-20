@@ -17,7 +17,7 @@ interface Props {
     quality: EquipmentQuality
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {quality} = props
 
     return (

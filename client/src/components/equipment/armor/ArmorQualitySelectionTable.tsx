@@ -18,7 +18,7 @@ interface RowProps {
     armor: Armor
 }
 
-function QualityRow(props: RowProps): JSX.Element {
+function QualityRow(props: RowProps) {
     const {quality, armor} = props;
     const [openQualityBackDrop, setOpenQualityBackDrop] = useState(false)
 

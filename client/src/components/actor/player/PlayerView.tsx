@@ -5,12 +5,10 @@ import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";
-import ViewSettingsCard from "../../common/setting/ViewSettingsCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
-import {useFetchAllSettings} from "../../setting/SettingWorkflow";
 
 interface Props {
     player: Player
@@ -51,7 +49,6 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <PlayerTalentCard player={player}/>
                 </Grid>
-                <ViewSettingsCard settings={player.settings} allSettings={useFetchAllSettings()}/>
             </CardContent>
         </Card>
     )

@@ -1,14 +1,10 @@
 import {Path} from "../../services/Path";
-import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import {useEffect, useState} from "react";
-import SettingDialog from "../setting/SettingDialog";
+import {useState} from "react";
 import TalentDialog from "../talents/TalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import Setting from "../../models/Setting";
-import SettingSelectionDialog from "../setting/SettingSelectionDialog";
-import SettingService from "../../services/SettingService";
 import QualityDialog from "../qualities/QualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
@@ -16,8 +12,7 @@ import CreateSpellDialog from "../spell/CreateSpellDialog";
 import CareerDialog from "../career/CareerDialog";
 import ArchetypeDialog from "../archetype/ArchetypeDialog";
 
-export default function MainDashboard(): JSX.Element {
-    const [openSettingCreationDialog, setOpenSettingCreationDialog] = useState(false)
+export default function MainDashboard() {
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const [openQualityCreationDialog, setOpenQualityCreationDialog] = useState(false)
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
@@ -25,35 +20,16 @@ export default function MainDashboard(): JSX.Element {
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
-    const [openSettingSelectionDialog, setOpenSettingSelectionDialog] = useState(false)
-    const [setting, setSetting] = useState<Setting>()
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const current = await SettingService.getCurrentSetting()
-            if (!current) {
-                return
-            }
-            setSetting(current)
-        })()
-    }, [setSetting])
-
-    const getSubHeader = (): string => {
-        return 'Current Setting: ' + setting?.name!!
-    }
 
     return (
         <Card>
-            <CenteredCardHeader title={getSubHeader()}/>
+            <CenteredCardHeader title={"Title"}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'Setting Information'}/>
+                        <CardHeader style={{textAlign: 'center'}} title={'Campaign Information'}/>
                         <CardContent>
                             <Grid container justifyContent={'center'}>
-                                <ExpansionList header={'Settings'} viewTitle={'View All Settings'} to={Path.Setting}
-                                               dialogTitle={'Create Setting'}
-                                               onClick={(): void => setOpenSettingCreationDialog(true)}/>
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={Path.Talent}
                                                dialogTitle={'Create Talent'}
                                                onClick={(): void => setOpenTalentCreationDialog(true)}/>
@@ -88,16 +64,7 @@ export default function MainDashboard(): JSX.Element {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid container justifyContent={'center'}>
-                    <Button color='primary' variant='contained'
-                            onClick={(): void => setOpenSettingSelectionDialog(true)}>Setting</Button>
-                    {openSettingSelectionDialog && <SettingSelectionDialog open={openSettingSelectionDialog}
-                                                                           onClose={(): void => setOpenSettingSelectionDialog(false)}
-                                                                           current={setting!!}/>}
-                </Grid>
             </CardContent>
-            {openSettingCreationDialog && <SettingDialog open={openSettingCreationDialog}
-                                                         onClose={(): void => setOpenSettingCreationDialog(false)}/>}
             {openTalentCreationDialog && <TalentDialog open={openTalentCreationDialog}
                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
