@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import SpellService from "../../services/SpellService";
@@ -17,7 +17,7 @@ export default function CreateSpellDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let spell = await SpellService.createSpell(name)
-        navigate(Path.Spell + spell.name + '/edit')
+        navigate(RootPath.Spell + spell.name + '/edit')
         onClose()
     }
 

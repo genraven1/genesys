@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import CareerService from "../../services/CareerService";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
@@ -17,7 +17,7 @@ export default function CareerDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let career = await CareerService.createCareer(name)
-        navigate(Path.Career + career?.name!! + '/edit')
+        navigate(RootPath.Career + career?.name!! + '/edit')
         onClose()
     }
 

@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import ArchetypeService from "../../services/ArchetypeService";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
@@ -17,7 +17,7 @@ export default function ArchetypeDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let archetype = await ArchetypeService.createArchetype(name)
-        navigate(Path.Archetype + archetype?.name!! + '/edit')
+        navigate(RootPath.Archetype + archetype?.name!! + '/edit')
         onClose()
     }
 

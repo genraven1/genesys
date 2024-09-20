@@ -1,7 +1,7 @@
 import Skill from "../../models/actor/Skill";
 import {Card, CardContent, CardHeader, Grid, IconButton} from "@mui/material";
 import {ViewFieldCard} from "../common/ViewFieldCard";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import {useNavigate, useParams} from "react-router-dom";
@@ -13,11 +13,10 @@ interface Props {
 export default function SkillView(props: Props) {
     const {skill} = props
     const {id} = useParams<{ id: string }>()
-    let path = Path.Skills
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(path + id + '/edit')
+        navigate(RootPath.Skills + id + '/edit')
     }
 
     return (

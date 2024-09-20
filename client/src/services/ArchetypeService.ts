@@ -1,21 +1,44 @@
-import axios from "axios";
-import {Path} from "./Path";
+import {RootPath} from "./Path";
 import Archetype from "../models/actor/player/Archetype";
 
 export default class ArchetypeService {
-    static async createArchetype(name: string): Promise<Archetype> {
-        return await (await axios.post(Path.Archetype + name)).data;
+    static async getArchetypes(): Promise<Archetype[]> {
+        return await fetch(RootPath.Archetype)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async getArchetype(name: string): Promise<Archetype> {
-        return await (await axios.get(Path.Archetype + name)).data;
+        return await fetch(RootPath.Archetype + `${name}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async updateArchetype(name: string, archetype: Archetype): Promise<Archetype> {
-        return await (await axios.put(Path.Archetype + name, archetype)).data;
+    static async createArchetype(name: string): Promise<Archetype> {
+        return await fetch(RootPath.Archetype, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getArchetypes(): Promise<Archetype[]> {
-        return await (await axios.get(Path.Archetype)).data;
+    static async updateArchetype(archetype: Archetype): Promise<Archetype> {
+        return await fetch(RootPath.Archetype + `${archetype.name}`, {method: 'PUT', body: JSON.stringify(archetype)})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 }

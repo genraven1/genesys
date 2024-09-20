@@ -2,7 +2,7 @@ import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import SkillService from "../../services/SkillService";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 
 interface Props {
@@ -17,7 +17,7 @@ export default function CreateSkillDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         await SkillService.createSkill(name)
-        navigate(Path.Skills + name  + '/edit')
+        navigate(RootPath.Skills + name  + '/edit')
         onClose()
     }
 

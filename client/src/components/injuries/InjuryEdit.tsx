@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Injury from "../../models/Injury";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
@@ -48,12 +48,11 @@ export default function InjuryEdit(props: Props): JSX.Element {
     }
 
     const updateInjury = async (copyInjury: Injury) => {
-        setInjury(copyInjury)
-        await InjuryService.updateInjury(injury.name, copyInjury)
+        setInjury(await InjuryService.updateInjury(copyInjury))
     }
 
     const onView = () => {
-        navigate(Path.Injury + injury.name + '/view');
+        navigate(RootPath.Injury + injury.name + '/view');
     }
 
     return (

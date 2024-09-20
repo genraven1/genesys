@@ -11,7 +11,7 @@ import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import Quality from "../../models/Quality";
 import GenesysQualityTypography from "../common/typography/GenesysQualityTypography";
 import QualityService from "../../services/QualityService";
@@ -46,7 +46,7 @@ function Row(props: RowProps): JSX.Element {
                 <TypographyCenterTableCell value={quality.name}/>
                 <TableCell style={{textAlign: 'center'}}>{renderActivation()}</TableCell>
                 <TypographyCenterTableCell value={renderUsable(quality)}/>
-                <ActionsTableCell name={quality.name} path={Path.Qualities}/>
+                <ActionsTableCell name={quality.name} path={RootPath.Qualities}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>

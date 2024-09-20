@@ -1,14 +1,14 @@
 import {Button, Card, CardContent, TableFooter} from "@mui/material";
-import CenteredCardHeader from "../card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {useLocation} from "react-router-dom";
 import Modifier from "../../../models/common/Modifier";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../table/TypographyTableCell";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useState} from "react";
 import * as React from "react";

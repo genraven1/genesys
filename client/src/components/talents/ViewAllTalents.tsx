@@ -12,7 +12,7 @@ import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {renderHeaders} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TalentDialog from "./TalentDialog";
@@ -42,7 +42,7 @@ function Row(props: Props) {
                 <TypographyCenterTableCell value={renderRanked()}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
-                <ActionsTableCell name={talent.name} path={Path.Talent}/>
+                <ActionsTableCell name={talent.name} path={RootPath.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>

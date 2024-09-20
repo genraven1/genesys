@@ -5,11 +5,11 @@ import TalentService from '../../services/TalentService';
 import {useNavigate} from 'react-router-dom';
 import {InputTextFieldCard} from '../common/InputTextFieldCard';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import CheckButtonCard from "../common/CheckButtonCard";
-import TalentModifierCard from "../common/modifier/TalentModifierCard";
+import TalentModifierCard from "./modifier/TalentModifierCard";
 
 interface Props {
     tal: Talent
@@ -50,12 +50,11 @@ export default function TalentEdit(props: Props) {
     }
 
     const updateTalent = async (copyTalent: Talent) => {
-        setTalent(copyTalent)
-        await TalentService.updateTalent(talent.name, copyTalent)
+        setTalent(await TalentService.updateTalent(copyTalent))
     }
 
     const onView = () => {
-        navigate(Path.Talent + talent.name + '/view');
+        navigate(RootPath.Talent + talent.name + '/view');
     }
 
     return (

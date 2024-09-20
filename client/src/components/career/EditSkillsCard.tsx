@@ -43,7 +43,7 @@ export default function EditSkillsCard(props: Props) {
 
     const updateCareer = async () => {
         career.skills = skills
-        await CareerService.updateCareer(career.name, career)
+        await CareerService.updateCareer(career)
     }
 
     return (

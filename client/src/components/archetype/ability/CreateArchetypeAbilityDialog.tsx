@@ -32,7 +32,7 @@ export default function CreateArchetypeAbilityDialog(props: Props) {
                     ability.limit = DefaultLimit.create()
                 }
                 archetype.abilities.push(ability)
-                await ArchetypeService.updateArchetype(archetype.name, archetype)
+                await ArchetypeService.updateArchetype(archetype)
             }
         }
         onClose()

@@ -2,7 +2,7 @@ import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material"
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import InjuryService from "../../services/InjuryService";
 
 
@@ -18,7 +18,7 @@ export default function CreateInjuryDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let injury = await InjuryService.createInjury(name)
-        navigate(Path.Injury + injury.name + '/edit')
+        navigate(RootPath.Injury + injury.name + '/edit')
         onClose()
     }
 

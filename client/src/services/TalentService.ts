@@ -1,22 +1,59 @@
-import axios from "axios";
 import Talent from "../models/Talent";
-import {Path} from "./Path";
+import {ModificationPath, RootPath} from "./Path";
+import Modifier from "../models/common/Modifier";
 
 export default class TalentService {
 
     static async getTalents(): Promise<Talent[]> {
-        return await (await axios.get(Path.Talent)).data;
+        return await fetch(RootPath.Talent)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async getTalent(name: string): Promise<Talent> {
-        return await (await axios.get(Path.Talent + name)).data;
+        return await fetch(RootPath.Talent + `${name}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async createTalent(name: string): Promise<Talent> {
-        return await (await axios.post(Path.Talent + name)).data;
+        return await fetch(RootPath.Talent, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async updateTalent(name: string, talent: Talent): Promise<Talent> {
-        return await (await axios.put(Path.Talent + name, talent)).data;
+    static async updateTalent(talent: Talent): Promise<Talent> {
+        return await fetch(RootPath.Talent + `${talent.name}`, {method: 'PUT', body: JSON.stringify(talent)})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async addTalentModification(name: string, modifier: Modifier) {
+        return await fetch(ModificationPath.ModificationTalent + `${name}`, {
+            method: 'POST',
+            body: JSON.stringify(modifier)
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 }

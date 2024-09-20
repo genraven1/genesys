@@ -3,8 +3,8 @@ import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifie
 import {useState} from "react";
 import Talent from "../../../models/Talent";
 import TalentService from "../../../services/TalentService";
-import InputSelectFieldCard from "../InlineSelectFieldCard";
-import NumberRangeSelectCard from "../NumberRangeSelectCard";
+import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
+import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 
 interface Props {
     talent: Talent
@@ -20,7 +20,7 @@ export default function AddTalentModifierDialog(props: Props) {
         if (modifier) {
             if (!talent.modifiers.some(mod => mod.type === modifier.type)) {
                 talent.modifiers.push(modifier)
-                await TalentService.updateTalent(talent.name, talent)
+                await TalentService.updateTalent(talent)
             }
         }
         onClose()

@@ -9,7 +9,7 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import Archetype from "../../models/actor/player/Archetype";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import ArchetypeService from "../../services/ArchetypeService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import ArchetypeDialog from "./ArchetypeDialog";
@@ -25,7 +25,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow key={archetype.name}>
             <TypographyCenterTableCell value={archetype.name}/>
-            <ActionsTableCell name={archetype.name} path={Path.Archetype}/>
+            <ActionsTableCell name={archetype.name} path={RootPath.Archetype}/>
         </TableRow>
     )
 }

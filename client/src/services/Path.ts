@@ -1,4 +1,4 @@
-export enum Path {
+export enum RootPath {
     Home = 'home',
     Talent = '/talents/',
     Skills = '/skills/',
@@ -11,14 +11,27 @@ export enum Path {
     Archetype = '/archetypes/',
 }
 
-export enum LorePath {
-    Organization = '/lore/organizations/',
-}
-
 export enum EquipmentPath {
     Armor = '/equipment/armors/',
     Weapon = '/equipment/weapons/',
     Gear = '/equipment/gears/',
+}
+
+export enum EquipmentQualityPath {
+    ArmorQuality = '/qualities' + EquipmentPath.Armor,
+    WeaponQuality = '/qualities' + EquipmentPath.Weapon
+}
+
+export enum ModificationPath {
+    ModificationInjury = '/modifications' + RootPath.Injury,
+    ModificationTalent = '/modifications' + RootPath.Talent,
+    ModificationQuality = '/modifications' + RootPath.Qualities,
+    ModificationArmor = '/modifications' + EquipmentPath.Armor,
+    ModificationWeapon = '/modifications' + EquipmentPath.Weapon
+}
+
+export enum LorePath {
+    Organization = '/lore/organizations/',
 }
 
 export enum ActorPath {
@@ -35,4 +48,6 @@ export enum CampaignPath {
     Party = '/party/',
     Session = '/sessions/',
     Scene = '/scenes/',
+    Current = '/campaigns/current',
+    Talents = '/campaigns/talents/'
 }

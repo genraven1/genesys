@@ -21,7 +21,7 @@ export default function CreateSpellEffectDialog(props: Props) {
         if (effect) {
             if (!spell.effects.some(spellEffects => spellEffects.name === effect.name)) {
                 spell.effects.push(effect)
-                await SpellService.updateSpell(spell.name, spell)
+                await SpellService.updateSpell(spell)
             }
         }
         onClose()

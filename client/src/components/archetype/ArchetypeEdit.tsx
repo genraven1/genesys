@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";
 import Archetype from "../../models/actor/player/Archetype";
 import ArchetypeService from "../../services/ArchetypeService";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import {EditCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {ActorKey} from "../../models/actor/Actor";
@@ -34,8 +34,7 @@ export default function ArchetypeEdit(props: Props) {
 
     const onSkillChange = async (value: Skill) => {
         archetype.skill = value
-        setArchetype(archetype)
-        await ArchetypeService.updateArchetype(archetype.name, archetype)
+        await updateArchetype(archetype)
     }
 
     const onChange = async (key: keyof Archetype, value: string) => {
@@ -79,12 +78,11 @@ export default function ArchetypeEdit(props: Props) {
     }
 
     const updateArchetype = async (copyArchetype: Archetype) => {
-        setArchetype(copyArchetype)
-        await ArchetypeService.updateArchetype(copyArchetype.name, copyArchetype)
+        setArchetype(await ArchetypeService.updateArchetype(copyArchetype))
     }
 
     const onView = () => {
-        navigate(Path.Archetype + archetype.name + '/view')
+        navigate(RootPath.Archetype + archetype.name + '/view')
     }
 
     return (

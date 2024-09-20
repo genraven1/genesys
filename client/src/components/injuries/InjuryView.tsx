@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function InjuryView(props: Props):JSX.Element {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(Path.Injury + injury.name + '/edit')
+        navigate(RootPath.Injury + injury.name + '/edit')
     }
 
     return (

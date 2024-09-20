@@ -1,7 +1,7 @@
 import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {ActorPath, CampaignPath, EquipmentPath, LorePath, Path} from '../../services/Path';
+import {ActorPath, CampaignPath, EquipmentPath, LorePath, RootPath} from '../../services/Path';
 import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
@@ -35,35 +35,35 @@ export default function App() {
                 <NavBar/>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/home"/>}/>
-                    <Route path={Path.Home} element={<HomeDashboard/>}/>
+                    <Route path={RootPath.Home} element={<HomeDashboard/>}/>
 
-                    <Route path={Path.Injury} element={<InjuryWorkflow/>}/>
-                    <Route path={Path.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
-                    <Route path={Path.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
+                    <Route path={RootPath.Injury} element={<InjuryWorkflow/>}/>
+                    <Route path={RootPath.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
+                    <Route path={RootPath.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
 
-                    <Route path={Path.Spell} element={<SpellWorkflow/>}/>
-                    <Route path={Path.Spell + ':name/view'} element={<SpellWorkflow/>}/>
-                    <Route path={Path.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
+                    <Route path={RootPath.Spell} element={<SpellWorkflow/>}/>
+                    <Route path={RootPath.Spell + ':name/view'} element={<SpellWorkflow/>}/>
+                    <Route path={RootPath.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
 
-                    <Route path={Path.Talent} element={<TalentWorkflow/>}/>
-                    <Route path={Path.Talent + ':name/view'} element={<TalentWorkflow/>}/>
-                    <Route path={Path.Talent + ':name/edit'} element={<TalentWorkflow/>}/>
+                    <Route path={RootPath.Talent} element={<TalentWorkflow/>}/>
+                    <Route path={RootPath.Talent + ':name/view'} element={<TalentWorkflow/>}/>
+                    <Route path={RootPath.Talent + ':name/edit'} element={<TalentWorkflow/>}/>
 
-                    <Route path={Path.Qualities} element={<QualityWorkflow/>}/>
-                    <Route path={Path.Qualities + ':name/view'} element={<QualityWorkflow/>}/>
-                    <Route path={Path.Qualities + ':name/edit'} element={<QualityWorkflow/>}/>
+                    <Route path={RootPath.Qualities} element={<QualityWorkflow/>}/>
+                    <Route path={RootPath.Qualities + ':name/view'} element={<QualityWorkflow/>}/>
+                    <Route path={RootPath.Qualities + ':name/edit'} element={<QualityWorkflow/>}/>
 
-                    <Route path={Path.Skills} element={<SkillWorkflow/>}/>
-                    <Route path={Path.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
-                    <Route path={Path.Skills + ':name/view'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':name/view'} element={<SkillWorkflow/>}/>
 
-                    <Route path={Path.Career} element={<CareerWorkflow/>}/>
-                    <Route path={Path.Career + ':name/edit'} element={<CareerWorkflow/>}/>
-                    <Route path={Path.Career + ':name/view'} element={<CareerWorkflow/>}/>
+                    <Route path={RootPath.Career} element={<CareerWorkflow/>}/>
+                    <Route path={RootPath.Career + ':name/edit'} element={<CareerWorkflow/>}/>
+                    <Route path={RootPath.Career + ':name/view'} element={<CareerWorkflow/>}/>
 
-                    <Route path={Path.Archetype} element={<ArchetypeWorkflow/>}/>
-                    <Route path={Path.Archetype + ':name/edit'} element={<ArchetypeWorkflow/>}/>
-                    <Route path={Path.Archetype + ':name/view'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={RootPath.Archetype} element={<ArchetypeWorkflow/>}/>
+                    <Route path={RootPath.Archetype + ':name/edit'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={RootPath.Archetype + ':name/view'} element={<ArchetypeWorkflow/>}/>
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
@@ -96,7 +96,7 @@ export default function App() {
                     <Route path={EquipmentPath.Gear + ':name/view'} element={<GearWorkflow/>}/>
 
                     {/*Lore Routes*/}
-                    <Route path={Path.Lore} element={<ViewAllLore/>}/>
+                    <Route path={RootPath.Lore} element={<ViewAllLore/>}/>
 
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
@@ -114,9 +114,9 @@ export default function App() {
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/view'} element={<SceneWorkflow/>}/>
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
 
-                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={RootPath.Scene} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={RootPath.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
+                    {/*<Route path={RootPath.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
                 </Routes>
             </HashRouter>
         </ThemeProvider>

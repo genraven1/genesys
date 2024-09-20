@@ -1,7 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import QualityService from "../../services/QualityService";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function QualityDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let quality = await QualityService.createQuality(name)
-        navigate(Path.Qualities + quality.name + '/view')
+        navigate(RootPath.Qualities + quality.name + '/view')
         onClose()
     }
 

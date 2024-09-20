@@ -2,7 +2,7 @@ import {Fragment, useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {Path} from "../../services/Path";
+import {RootPath} from "../../services/Path";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -31,7 +31,7 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={spell.name}/>
                 <GenesysDifficultyCenterTableCell difficulty={spell.difficulty}/>
-                <ActionsTableCell name={spell.name} path={Path.Spell}/>
+                <ActionsTableCell name={spell.name} path={RootPath.Spell}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
