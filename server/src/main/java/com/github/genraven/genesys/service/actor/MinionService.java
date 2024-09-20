@@ -46,7 +46,6 @@ public class MinionService {
             min.setAbilities(minion.getAbilities());
             min.setSkills(minion.getSkills());
             min.setTalents(minion.getTalents());
-            min.setSettings(minion.getSettings());
             min.setWeapons(minion.getWeapons());
             min.setArmors(minion.getArmors());
             return min;

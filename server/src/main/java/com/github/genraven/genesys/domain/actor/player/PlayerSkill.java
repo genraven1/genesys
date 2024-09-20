@@ -14,7 +14,6 @@ public class PlayerSkill extends ActorSkill {
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
-        this.setSettings(skill.getSettings());
         this.setRanks(skill.getRanks());
     }
 

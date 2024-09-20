@@ -31,7 +31,6 @@ public class CareerService {
     public Mono<Career> updateCareer(final String name, final Career career) {
         return getCareer(name).map(car -> {
             car.setSkills(career.getSkills());
-            car.setSettings(career.getSettings());
             return car;
         }).flatMap(careerRepository::save);
     }

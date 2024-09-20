@@ -1,7 +1,6 @@
 package com.github.genraven.genesys.domain.equipment;
 
 import com.github.genraven.genesys.domain.Modifier;
-import com.github.genraven.genesys.domain.Setting;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -11,7 +10,8 @@ import java.util.List;
 @Data
 public class Equipment {
 
-    protected Equipment() {}
+    protected Equipment() {
+    }
 
     public Equipment(final String name) {
         this.name = name;
@@ -26,5 +26,4 @@ public class Equipment {
     private int rarity = 0;
     private List<Modifier> modifiers = new ArrayList<>();
     private List<EquipmentQuality> qualities = new ArrayList<>();
-    private List<Setting> settings = new ArrayList<>();
 }

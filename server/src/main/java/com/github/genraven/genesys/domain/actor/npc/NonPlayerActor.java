@@ -23,7 +23,6 @@ public class NonPlayerActor extends Actor {
         this.setWillpower(actor.getWillpower());
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
-        this.setSettings(actor.getSettings());
     }
 
     private int combat = 1;

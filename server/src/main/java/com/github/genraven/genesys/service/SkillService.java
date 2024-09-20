@@ -33,7 +33,6 @@ public class SkillService {
         return getSkill(name).map(sk -> {
             sk.setCharacteristic(skill.getCharacteristic());
             sk.setType(skill.getType());
-            sk.setSettings(skill.getSettings());
             return sk;
         }).flatMap(skillRepository::save);
     }

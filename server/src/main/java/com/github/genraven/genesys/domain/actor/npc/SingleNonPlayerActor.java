@@ -25,7 +25,6 @@ public class SingleNonPlayerActor extends NonPlayerActor {
         this.setWillpower(nonPlayerActor.getWillpower());
         this.setPresence(nonPlayerActor.getPresence());
         this.setWounds(nonPlayerActor.getWounds());
-        this.setSettings(nonPlayerActor.getSettings());
         this.setCombat(nonPlayerActor.getCombat());
         this.setSocial(nonPlayerActor.getSocial());
         this.setGeneral(nonPlayerActor.getGeneral());

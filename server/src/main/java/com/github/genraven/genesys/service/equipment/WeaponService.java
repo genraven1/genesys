@@ -45,7 +45,6 @@ public class WeaponService {
             wea.setBrawn(weapon.isBrawn());
             wea.setHands(weapon.getHands());
             wea.setModifiers(weapon.getModifiers());
-            wea.setSettings(weapon.getSettings());
             return wea;
         }).flatMap(weaponRepository::save);
     }

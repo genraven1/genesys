@@ -15,7 +15,6 @@ public class ActorSkill extends Skill {
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
-        this.setSettings(skill.getSettings());
     }
 
     private int ranks = 0;

@@ -40,7 +40,6 @@ public class GearService {
             ge.setRange(gear.getRange());
             ge.setAmount(gear.getAmount());
             ge.setDescription(gear.getDescription());
-            ge.setSettings(gear.getSettings());
             ge.setModifiers(gear.getModifiers());
             return ge;
         }).flatMap(gearRepository::save);

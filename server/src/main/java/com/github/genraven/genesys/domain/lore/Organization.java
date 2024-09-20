@@ -17,7 +17,6 @@ public class Organization extends Lore {
     public Organization(final Lore lore) {
         this.setName(lore.getName());
         this.setType(Type.ORGANIZATION);
-        this.setSettings(lore.getSettings());
     }
 
     private OrgType orgType;

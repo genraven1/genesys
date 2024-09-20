@@ -47,7 +47,6 @@ public class NemesisService {
             nem.setAbilities(nemesis.getAbilities());
             nem.setSkills(nemesis.getSkills());
             nem.setTalents(nemesis.getTalents());
-            nem.setSettings(nemesis.getSettings());
             nem.setStrain(nemesis.getStrain());
             nem.setWeapons(nemesis.getWeapons());
             nem.setArmors(nemesis.getArmors());

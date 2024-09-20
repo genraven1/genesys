@@ -47,7 +47,6 @@ public class RivalService {
             riv.setAbilities(rival.getAbilities());
             riv.setSkills(rival.getSkills());
             riv.setTalents(rival.getTalents());
-            riv.setSettings(rival.getSettings());
             riv.setWeapons(rival.getWeapons());
             riv.setArmors(rival.getArmors());
             return riv;

@@ -42,7 +42,6 @@ public class ArchetypeService {
             arch.setExperience(archetype.getExperience());
             arch.setSkill(archetype.getSkill());
             arch.setAbilities(archetype.getAbilities());
-            arch.setSettings(archetype.getSettings());
             return arch;
         }).flatMap(archetypeRepository::save);
     }

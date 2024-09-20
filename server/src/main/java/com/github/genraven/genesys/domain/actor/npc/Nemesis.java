@@ -26,7 +26,6 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setWillpower(singleNonPlayerActor.getWillpower());
         this.setPresence(singleNonPlayerActor.getPresence());
         this.setWounds(singleNonPlayerActor.getWounds());
-        this.setSettings(singleNonPlayerActor.getSettings());
         this.setCombat(singleNonPlayerActor.getCombat());
         this.setSocial(singleNonPlayerActor.getSocial());
         this.setGeneral(singleNonPlayerActor.getGeneral());

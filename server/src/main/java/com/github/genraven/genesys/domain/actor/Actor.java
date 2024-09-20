@@ -1,7 +1,5 @@
 package com.github.genraven.genesys.domain.actor;
 
-
-import com.github.genraven.genesys.domain.Setting;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -11,7 +9,8 @@ import java.util.List;
 @Data
 public class Actor {
 
-    protected Actor() {}
+    protected Actor() {
+    }
 
     public Actor(final String name) {
         this.name = name;
@@ -29,5 +28,4 @@ public class Actor {
     private int wounds = 1;
     private List<ActorWeapon> weapons = new ArrayList<>();
     private List<ActorArmor> armors = new ArrayList<>();
-    private List<Setting> settings = new ArrayList<>();
 }

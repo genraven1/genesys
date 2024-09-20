@@ -1,7 +1,6 @@
 package com.github.genraven.genesys.domain.actor.player;
 
 import com.github.genraven.genesys.domain.Ability;
-import com.github.genraven.genesys.domain.Setting;
 import com.github.genraven.genesys.domain.skill.Skill;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -35,5 +34,4 @@ public class Archetype {
     private int experience = 0;
     private Skill skill;
     private List<Ability> abilities = new ArrayList<>();
-    private List<Setting> settings = new ArrayList<>();
 }

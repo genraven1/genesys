@@ -22,7 +22,6 @@ public class Weapon extends Equipment {
         this.setRarity(equipment.getRarity());
         this.setModifiers(equipment.getModifiers());
         this.setQualities(equipment.getQualities());
-        this.setSettings(equipment.getSettings());
     }
 
     private int damage = 0;

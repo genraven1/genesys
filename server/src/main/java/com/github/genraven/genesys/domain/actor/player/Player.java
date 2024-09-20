@@ -30,7 +30,6 @@ public class Player extends Actor {
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
         this.setWeapons(actor.getWeapons());
-        this.setSettings(actor.getSettings());
     }
     private int strain = 1;
     private int encumbrance = 5 + getBrawn();

@@ -1,6 +1,5 @@
 package com.github.genraven.genesys.domain.actor.player;
 
-import com.github.genraven.genesys.domain.Setting;
 import com.github.genraven.genesys.domain.skill.Skill;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -13,7 +12,8 @@ import java.util.List;
 @Document(collection = "careers")
 public class Career {
 
-    protected Career() {}
+    protected Career() {
+    }
 
     public Career(final String name) {
         this.name = name;
@@ -22,5 +22,4 @@ public class Career {
     @Id
     private String name;
     private List<Skill> skills = new ArrayList<>();
-    private List<Setting> settings = new ArrayList<>();
 }

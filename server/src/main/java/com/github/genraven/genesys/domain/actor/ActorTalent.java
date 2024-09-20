@@ -17,7 +17,6 @@ public class ActorTalent extends Talent {
         this.setTier(talent.getTier());
         this.setDescription(talent.getDescription());
         this.setSummary(talent.getSummary());
-        this.setSettings(talent.getSettings());
     }
 
     private int ranks = 1;

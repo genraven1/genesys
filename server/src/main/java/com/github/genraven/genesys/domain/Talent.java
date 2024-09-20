@@ -17,7 +17,9 @@ public class Talent {
     public Talent(final String name) {
         this.name = name;
     }
-    protected Talent() {}
+
+    protected Talent() {
+    }
 
     @Id
     private String name;
@@ -26,7 +28,6 @@ public class Talent {
     private boolean ranked = false;
     private String summary;
     private String description;
-    private List<Setting> settings = new ArrayList<>();
     private List<Modifier> modifiers = new ArrayList<>();
 
     @AllArgsConstructor
