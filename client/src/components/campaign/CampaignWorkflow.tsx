@@ -3,41 +3,54 @@ import {Fragment, useEffect, useState} from "react";
 import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
 import ViewAllCampaigns from "./ViewAllCampaigns";
-import {CampaignPath} from "../../services/Path";
 import CampaignPage from "./CampaignPage";
+import {CampaignPath} from "../../services/Path";
 
-
-export function useFetchCampaign(name: string): Campaign {
-    const [campaign, setCampaign] = useState<Campaign>()
+export function useFetchCampaign(id: string): Campaign {
+    const [campaign, setCampaign] = useState<Campaign>();
 
     useEffect(() => {
-        if (!name) {
-            return
+        if (!id) {
+            return;
         }
         (async (): Promise<void> => {
-            try {
-                const campaignData = await CampaignService.getCampaign(name)
-                if (campaignData) {
-                    setCampaign(campaignData)
-                }
-            } catch (err) {
-                console.log(err)
-            }
+            setCampaign(await CampaignService.getCampaign(id));
         })()
-    }, [name, setCampaign])
-    return campaign as Campaign
+    }, [id, setCampaign])
+    return campaign as Campaign;
 }
 
-export default function CampaignWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const campaign = useFetchCampaign(name!)
+export function useFetchAllCampaigns() {
+    const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
-    const useWorkflowRender = (): JSX.Element => {
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setCampaigns(await CampaignService.getAllCampaigns());
+        })()
+    }, [setCampaigns])
+    return campaigns as Campaign[];
+}
+
+export function useFetchCurrentCampaign() {
+    const [campaign, setCampaign] = useState<Campaign>();
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setCampaign(await CampaignService.getCurrentCampaign());
+        })()
+    }, [setCampaign]);
+    return campaign as Campaign;
+}
+
+export default function CampaignWorkflow() {
+    const {campaign_id} = useParams<{ campaign_id?: string }>()
+    const campaign = useFetchCampaign(campaign_id!)
+    let campaigns = useFetchAllCampaigns()
+
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith(CampaignPath.Campaign)) {
-            return <ViewAllCampaigns/>
-        }
-        else {
+            return campaigns && <ViewAllCampaigns campaigns={campaigns}/>
+        } else {
             return campaign && <CampaignPage campaign={campaign}/>
         }
     }

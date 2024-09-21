@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -10,24 +10,17 @@ import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {SingleActionTableCell} from "../common/table/ActionsTableCell";
 import {CampaignPath} from "../../services/Path";
 import Campaign from "../../models/campaign/Campaign";
-import CampaignService from "../../services/CampaignService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import CampaignDialog from "./CampaignDialog";
 
-export default function ViewAllCampaigns(): JSX.Element {
-    const [campaigns, setCampaigns] = useState<Campaign[]>([])
+interface Props {
+    campaigns: Campaign[]
+}
+
+export default function ViewAllCampaigns(props: Props) {
+    const {campaigns} = props;
     const [openCampaignCreationDialog, setOpenCampaignCreationDialog] = useState(false)
     const headers = ['Name', 'View']
-
-    useEffect(() => {
-        (async (): Promise<void> => {
-            const campaignList = await CampaignService.getCampaigns()
-            if (!campaignList) {
-                return
-            }
-            setCampaigns(campaignList)
-        })()
-    }, [])
 
     return (
         <Card>
