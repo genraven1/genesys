@@ -29,8 +29,8 @@ public class CampaignService {
         return campaignRepository.findById(name);
     }
 
-    public Mono<Campaign> createCampaign(final String name) {
-        return campaignRepository.save(new Campaign(name));
+    public Mono<Campaign> createCampaign(final Campaign campaign) {
+        return campaignRepository.save(campaign);
     }
 
     public Mono<Campaign> updateCampaign(final String name, final Campaign campaign) {

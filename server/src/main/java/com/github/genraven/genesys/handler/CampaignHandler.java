@@ -47,8 +47,13 @@ public class CampaignHandler {
     }
 
     public Mono<ServerResponse> createCampaign(final ServerRequest serverRequest) {
-        return campaignService.createCampaign(serverRequest.pathVariable(NAME))
-                .flatMap(campaign -> ServerResponse.created(getURI(campaign)).bodyValue(campaign));
+        final Mono<Campaign> campaignMono = serverRequest.bodyToMono(Campaign.class);
+        return campaignMono
+                .flatMap(campaignService::createCampaign)
+                .flatMap(campaign -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(campaign))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     public Mono<ServerResponse> updateCampaign(final ServerRequest serverRequest) {

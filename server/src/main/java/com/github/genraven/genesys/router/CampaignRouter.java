@@ -15,7 +15,7 @@ public class CampaignRouter {
         return RouterFunctions.route()
                 .path("/campaigns", builder -> builder
                         .GET("/", campaignHandler::getAllCampaigns)
-                        .POST("/{name}", campaignHandler::createCampaign)
+                        .POST("/", campaignHandler::createCampaign)
                         .GET("/{name}", campaignHandler::getCampaign)
                         .PUT("/{name}", campaignHandler::updateCampaign)
                         .PUT("/{campaignName}/sessions/{sessionName}", campaignHandler::createSession)

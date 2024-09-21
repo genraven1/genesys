@@ -4,6 +4,7 @@ import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {CampaignPath} from "../../services/Path";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 import CampaignService from "../../services/CampaignService";
+import Campaign from "../../models/campaign/Campaign";
 
 interface Props {
     open: boolean
@@ -16,7 +17,8 @@ export default function CampaignDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let campaign = await CampaignService.createCampaign(name)
+        let campaign = {"name": name} as Campaign
+        await CampaignService.createCampaign(campaign)
         navigate(CampaignPath.Campaign + campaign.name)
         onClose()
     }
