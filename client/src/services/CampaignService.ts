@@ -7,7 +7,7 @@ import Talent from "../models/Talent";
 
 export default class CampaignService {
     static async createCampaign(name: string): Promise<Campaign> {
-        return await fetch(CampaignPath.Campaign, {method: "POST", body: JSON.stringify({name: name})})
+        return await fetch(CampaignPath.Campaign + `${name}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

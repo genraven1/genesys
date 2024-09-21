@@ -30,7 +30,6 @@ public class CampaignService {
     }
 
     public Mono<Campaign> createCampaign(final String name) {
-        final Campaign campaign = new Campaign(name);
         return campaignRepository.save(new Campaign(name));
     }
 
@@ -65,9 +64,9 @@ public class CampaignService {
         getCampaign(campaignName).map(campaign -> {
             campaign.getSessions().stream()
                     .filter(ses -> ses.getName().equals(sessionName)).forEach(ses -> {
-                ses.setScenes(session.getScenes());
-                ses.setParty(session.getParty());
-            });
+                        ses.setScenes(session.getScenes());
+                        ses.setParty(session.getParty());
+                    });
             return campaign;
         }).flatMap(campaignRepository::save);
         return getSession(campaignName, sessionName);

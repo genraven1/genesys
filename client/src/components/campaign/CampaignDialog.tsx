@@ -9,9 +9,10 @@ interface Props {
     open: boolean
     onClose: () => void
 }
-export default function CampaignDialog(props: Props): JSX.Element {
-    const {open,onClose} = props
-    const [name,setName] = useState('')
+
+export default function CampaignDialog(props: Props) {
+    const {open, onClose} = props
+    const [name, setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
@@ -21,7 +22,7 @@ export default function CampaignDialog(props: Props): JSX.Element {
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 
