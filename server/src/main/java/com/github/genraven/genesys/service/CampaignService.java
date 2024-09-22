@@ -42,6 +42,17 @@ public class CampaignService {
         }).flatMap(campaignRepository::save);
     }
 
+    public Mono<Campaign> getCurrentCampaign(){
+        return campaignRepository.findByCurrent(true);
+    }
+
+    public Mono<Campaign> setCurrentCampaign(final String name) {
+        return getCampaign(name).map(campaign -> {
+            campaign.setCurrent(true);
+            return campaign;
+        }).flatMap(campaignRepository::save);
+    }
+
     public Mono<Session> createSession(final String campaignName, final String sessionName) {
         getCampaign(campaignName).map(campaign -> {
             final Session session = new Session(sessionName);

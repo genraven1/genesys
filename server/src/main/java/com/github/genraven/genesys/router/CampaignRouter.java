@@ -23,7 +23,6 @@ public class CampaignRouter {
                         .PATCH("/{campaignName}/sessions/{sessionName}", campaignHandler::updateSession)
                         .PUT("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::createScene)
                         .GET("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::getScene)
-                )
-                .build();
+                ).build();
     }
 }

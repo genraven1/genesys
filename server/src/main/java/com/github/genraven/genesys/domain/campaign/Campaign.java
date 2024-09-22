@@ -22,4 +22,5 @@ public class Campaign {
     private String name;
     private Party party = new Party();
     private List<Session> sessions = new ArrayList<>();
+    private boolean current = false;
 }

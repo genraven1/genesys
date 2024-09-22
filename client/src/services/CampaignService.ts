@@ -7,7 +7,13 @@ import Talent from "../models/Talent";
 
 export default class CampaignService {
     static async createCampaign(campaign: Campaign): Promise<Campaign> {
-        return await fetch(CampaignPath.Campaign, {method: "POST", body: JSON.stringify({campaign})})
+        return await fetch(CampaignPath.Campaign, {
+            method: "POST",
+            body: JSON.stringify(campaign),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -67,7 +73,7 @@ export default class CampaignService {
     }
 
     static async setCurrentCampaign(campaign_id: string): Promise<Campaign> {
-        return await fetch(CampaignPath.Current  + `${campaign_id}`, {method: "PUT"})
+        return await fetch(CampaignPath.Current + `${campaign_id}`, {method: "PUT"})
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

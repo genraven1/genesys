@@ -6,4 +6,5 @@ export default interface Campaign {
     name: string;
     party: Party
     sessions: CampaignSession[]
+    current: boolean;
 }

@@ -1,5 +1,5 @@
 import {RootPath} from "../../services/Path";
-import {Card, CardContent, CardHeader, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import TalentDialog from "../talents/TalentDialog";
@@ -23,11 +23,10 @@ export default function MainDashboard() {
 
     return (
         <Card>
-            <CenteredCardHeader title={"Title"}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'Campaign Information'}/>
+                        <CenteredCardHeader title={'Campaign Information'}/>
                         <CardContent>
                             <Grid container justifyContent={'center'}>
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={RootPath.Talent}
@@ -48,7 +47,7 @@ export default function MainDashboard() {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Card>
-                        <CardHeader style={{textAlign: 'center'}} title={'System Information'}/>
+                        <CenteredCardHeader title={'System Information'}/>
                         <CardContent>
                             <Grid container justifyContent={'center'}>
                                 <ExpansionList header={'Critical Injuries'} viewTitle={'View All Critical Injuries'} to={RootPath.Injury}
