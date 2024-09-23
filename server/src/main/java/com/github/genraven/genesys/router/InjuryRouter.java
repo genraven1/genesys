@@ -15,7 +15,7 @@ public class InjuryRouter {
         return RouterFunctions.route()
                 .path("/injuries", builder -> builder
                         .GET("/", injuryHandler::getAllInjuries)
-                        .POST("/", injuryHandler::createInjury)
+                        .POST("/{name}", injuryHandler::createInjury)
                         .GET("/{name}", injuryHandler::getInjury)
                         .PUT("/{name}", injuryHandler::updateInjury))
                 .build();

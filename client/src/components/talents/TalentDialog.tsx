@@ -3,7 +3,6 @@ import {ChangeEvent, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import TalentService from "../../services/TalentService";
 import {RootPath} from "../../services/Path";
-import Talent from "../../models/Talent";
 
 interface Props {
     open: boolean
@@ -16,8 +15,7 @@ export default function TalentDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let talent = {"name": name} as Talent
-        await TalentService.createTalent(talent)
+        let talent = await TalentService.createTalent(name)
         navigate(RootPath.Talent + talent.name + '/edit')
         onClose()
     }

@@ -45,13 +45,8 @@ public class TalentHandler {
     }
 
     public Mono<ServerResponse> createTalent(final ServerRequest serverRequest) {
-        final Mono<Talent> talentMono = serverRequest.bodyToMono(Talent.class);
-        return talentMono
-                .flatMap(talentService::createTalent)
-                .flatMap(talent -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(talent))
-                        .switchIfEmpty(ServerResponse.notFound().build()));
+        return talentService.createTalent(serverRequest.pathVariable("name"))
+                .flatMap(talent -> ServerResponse.created(getURI(talent)).bodyValue(talent));
     }
 
     public Mono<ServerResponse> updateTalent(final ServerRequest serverRequest) {

@@ -24,7 +24,7 @@ export default class SpellService {
     }
 
     static async createSpell(name: string): Promise<Spell> {
-        return await fetch(RootPath.Spell, {method: "POST", body: JSON.stringify({name: name})})
+        return await fetch(RootPath.Spell + `${name}`, {method: "POST"})
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

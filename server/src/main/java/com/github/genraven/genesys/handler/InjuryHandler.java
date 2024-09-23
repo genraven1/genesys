@@ -1,7 +1,6 @@
 package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.CriticalInjury;
-import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.service.InjuryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -47,13 +46,8 @@ public class InjuryHandler {
     }
 
     public Mono<ServerResponse> createInjury(final ServerRequest serverRequest) {
-        final Mono<CriticalInjury> injuryMono = serverRequest.bodyToMono(CriticalInjury.class);
-        return injuryMono
-                .flatMap(injuryService::createInjury)
-                .flatMap(criticalInjury -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromValue(criticalInjury))
-                        .switchIfEmpty(ServerResponse.notFound().build()));
+        return injuryService.createInjury(serverRequest.pathVariable(NAME))
+                .flatMap(injury -> ServerResponse.created(getURI(injury)).bodyValue(injury));
     }
 
     public Mono<ServerResponse> updateInjury(final ServerRequest serverRequest) {

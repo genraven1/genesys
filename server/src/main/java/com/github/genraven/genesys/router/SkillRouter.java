@@ -15,7 +15,7 @@ public class SkillRouter {
         return RouterFunctions.route()
                 .path("/skills", builder -> builder
                         .GET("/", skillHandler::getAllSkills)
-                        .POST("/", skillHandler::createSkill)
+                        .POST("/{name}", skillHandler::createSkill)
                         .GET("/{name}", skillHandler::getSkill)
                         .PUT("/{name}", skillHandler::updateSkill))
                 .build();
