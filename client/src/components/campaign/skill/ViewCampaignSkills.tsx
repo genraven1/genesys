@@ -6,7 +6,6 @@ import {useEffect, useState} from 'react';
 import * as React from 'react';
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CampaignService from "../../../services/CampaignService";
-import Talent from "../../../models/Talent";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";

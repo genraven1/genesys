@@ -8,6 +8,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import ViewCampaignTalents from "./talents/ViewCampaignTalents";
+import ViewCampaignSkills from "./skill/ViewCampaignSkills";
 
 interface Props {
     campaign: Campaign
@@ -21,16 +22,16 @@ export default function CampaignPage(props: Props) {
         setValue(newValue);
     }
 
-    const renderDefaultDashboard = () => {
+    const renderPartyDashboard = () => {
         return <PartyCard party={campaign.party}/>
     }
 
-    // const renderActorDashboard = () => {
-    //     return <ViewAllSessions campaign={campaign}/>
-    // }
-
-    const renderEquipmentDashboard = () => {
+    const renderTalentDashboard = () => {
         return <ViewCampaignTalents campaign_name={campaign.name}/>
+    }
+
+    const renderSkillDashboard = () => {
+        return <ViewCampaignSkills campaign_name={campaign.name}/>
     }
 
     return (
@@ -45,11 +46,13 @@ export default function CampaignPage(props: Props) {
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
                                 <Tab label="Party" value="1"/>
-                                <Tab label="Talents" value="3"/>
+                                <Tab label="Talents" value="2"/>
+                                <Tab label="Skills" value="3"/>
                             </TabList>
                         </Grid>
-                        <TabPanel value="1">{renderDefaultDashboard()}</TabPanel>
-                        <TabPanel value="3">{renderEquipmentDashboard()}</TabPanel>
+                        <TabPanel value="1">{renderPartyDashboard()}</TabPanel>
+                        <TabPanel value="2">{renderTalentDashboard()}</TabPanel>
+                        <TabPanel value="3">{renderSkillDashboard()}</TabPanel>
                     </TabContext>
                 </Grid>
             </CardContent>
