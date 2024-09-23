@@ -2,7 +2,7 @@ import {Box, Collapse, List, ListItemButton, ListItemText} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 import ListMenuItemDialog from "../../navigation/ListMenuItemDialog";
 import React, {useState} from "react";
-import CreateActorDialog from "../../actor/npc/CreateActorDialog";
+import CreateActorDialog from "../../actor/common/CreateActorDialog";
 import {ActorType} from "../../../models/actor/Actor";
 
 interface Props {

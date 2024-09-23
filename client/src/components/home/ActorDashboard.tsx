@@ -2,7 +2,7 @@ import {ActorPath} from "../../services/Path";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import CreateActorDialog from "../actor/npc/CreateActorDialog";
+import CreateActorDialog from "../actor/common/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import {ActorType} from "../../models/actor/Actor";

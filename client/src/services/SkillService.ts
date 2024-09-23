@@ -40,7 +40,13 @@ export default class SkillService {
     }
 
     static async updateSkill(skill: Skill): Promise<Skill> {
-        return await fetch(RootPath.Skills + `${skill.name}`, {method: 'PUT', body: JSON.stringify(skill)})
+        return await fetch(RootPath.Skills + `${skill.name}`, {
+            method: "PUT",
+            body: JSON.stringify(skill),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

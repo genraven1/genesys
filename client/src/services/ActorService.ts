@@ -59,8 +59,14 @@ export default class ActorService {
             })
     }
 
-    static async createRival(name: string): Promise<Rival> {
-        return await fetch(ActorPath.Rival, {method: "POST", body: JSON.stringify({name: name})})
+    static async createRival(rival: Rival): Promise<Rival> {
+        return await fetch(ActorPath.Rival, {
+            method: "POST",
+            body: JSON.stringify(rival),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

@@ -15,7 +15,7 @@ import {ActorPath} from "../../../../services/Path";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
-import CreateActorDialog from "../CreateActorDialog";
+import CreateActorDialog from "../../common/CreateActorDialog";
 import {ActorType} from "../../../../models/actor/Actor";
 
 interface Props {

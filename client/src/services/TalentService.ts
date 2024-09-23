@@ -41,7 +41,13 @@ export default class TalentService {
     }
 
     static async updateTalent(talent: Talent): Promise<Talent> {
-        return await fetch(RootPath.Talent + `${talent.name}`, {method: 'PUT', body: JSON.stringify(talent)})
+        return await fetch(RootPath.Talent + `${talent.name}`, {
+            method: "PUT",
+            body: JSON.stringify(talent),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

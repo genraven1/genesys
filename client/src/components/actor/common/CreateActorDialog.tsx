@@ -7,6 +7,7 @@ import {ActorType} from "../../../models/actor/Actor";
 import InputSelectField, {Option} from "../../common/InputSelectField";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 import Player from "../../../models/actor/player/Player";
+import Rival from "../../../models/actor/npc/Rival";
 
 interface Props {
     open: boolean
@@ -31,7 +32,8 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Minion + minion.name + '/edit')
                 break
             case ActorType.Rival:
-                let rival = {...await ActorService.createRival(name)}
+                let rival = {'name': name} as Rival
+                await ActorService.createRival(rival)
                 navigate(ActorPath.Rival + rival.name + '/edit')
                 break
             case ActorType.Nemesis:

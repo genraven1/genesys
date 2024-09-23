@@ -4,7 +4,7 @@ import Modifier from "../models/common/Modifier";
 
 export default class InjuryService {
     static async createInjury(injury: Injury): Promise<Injury> {
-        return await fetch(RootPath.Skills, {
+        return await fetch(RootPath.Injury, {
             method: "POST",
             body: JSON.stringify(injury),
             headers: {
@@ -30,7 +30,13 @@ export default class InjuryService {
     }
 
     static async updateInjury(injury: Injury): Promise<Injury> {
-        return await fetch(RootPath.Injury + `${injury.name}`, {method: 'PUT', body: JSON.stringify(injury)})
+        return await fetch(RootPath.Injury + `${injury.name}`, {
+            method: "PUT",
+            body: JSON.stringify(injury),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
