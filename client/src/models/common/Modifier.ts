@@ -1,7 +1,7 @@
 import {Option} from '../../components/common/InputSelectField';
 
 export default interface Modifier {
-    type: Type
+    type: string
     ranks: number
 }
 
