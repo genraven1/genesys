@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import Nemesis from "../../../../../models/actor/npc/Nemesis";
 import Talent from "../../../../../models/Talent";
-import TalentBackdrop from "../../../common/talent/TalentBackdrop";
+import TalentBackdrop from "../../../../talents/TalentBackdrop";
 import TalentService from "../../../../../services/TalentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import ActorService from "../../../../../services/ActorService";

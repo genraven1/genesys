@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import TalentBackdrop from "../../../common/talent/TalentBackdrop";
+import TalentBackdrop from "../../../../talents/TalentBackdrop";
 import Talent from "../../../../../models/Talent";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import Minion from "../../../../../models/actor/npc/Minion";

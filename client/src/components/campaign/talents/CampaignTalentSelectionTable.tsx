@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import Talent from "../../../models/Talent";
-import TalentBackdrop from "../../actor/common/talent/TalentBackdrop";
+import TalentBackdrop from "../../talents/TalentBackdrop";
 import TalentService from "../../../services/TalentService";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CampaignService from "../../../services/CampaignService";

@@ -10,7 +10,7 @@ import ActorService from "../../../../services/ActorService";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {Button} from "@mui/material";
-import TalentBackdrop from "../../../actor/common/talent/TalentBackdrop";
+import TalentBackdrop from "../../../talents/TalentBackdrop";
 import Campaign from "../../../../models/campaign/Campaign";
 import PlayerBackdrop from "./PlayerBackdrop";
 

@@ -10,7 +10,7 @@ import {Button} from "@mui/material";
 import Talent from "../../../../models/Talent";
 import ActorService from "../../../../services/ActorService";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import TalentBackdrop from "../../common/talent/TalentBackdrop";
+import TalentBackdrop from "../../../talents/TalentBackdrop";
 import Player from "../../../../models/actor/player/Player";
 
 interface RowProps {

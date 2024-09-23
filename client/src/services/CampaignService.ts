@@ -4,6 +4,7 @@ import {CampaignPath, RootPath} from "./Path";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
 import Talent from "../models/Talent";
+import Skill from "../models/actor/Skill";
 
 export default class CampaignService {
     static async createCampaign(campaign: Campaign): Promise<Campaign> {
@@ -56,6 +57,32 @@ export default class CampaignService {
         return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Talent, {
             method: "POST",
             body: JSON.stringify(talent),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async getCampaignSkills(name: string): Promise<Skill[]> {
+        return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Skills)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async addCampaignSkill(name: string, skill: Skill): Promise<Campaign> {
+        return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Skills, {
+            method: "POST",
+            body: JSON.stringify(skill),
             headers: {
                 'Content-Type': 'application/json'
             }

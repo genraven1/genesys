@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import Talent from "../../../../../models/Talent";
 import Rival from "../../../../../models/actor/npc/Rival";
-import TalentBackdrop from "../../../common/talent/TalentBackdrop";
+import TalentBackdrop from "../../../../talents/TalentBackdrop";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import TalentService from "../../../../../services/TalentService";
 import ActorService from "../../../../../services/ActorService";
