@@ -14,7 +14,7 @@ interface Props {
 
 export default function CreateInjuryDialog(props: Props) {
     const {open, onClose} = props
-    const [name,setName] = useState('')
+    const [name, setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
@@ -25,7 +25,7 @@ export default function CreateInjuryDialog(props: Props) {
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 
