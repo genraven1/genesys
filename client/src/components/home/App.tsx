@@ -38,24 +38,24 @@ export default function App() {
                     <Route path={RootPath.Home} element={<HomeCampaignDashboard/>}/>
 
                     <Route path={RootPath.Injury} element={<InjuryWorkflow/>}/>
-                    <Route path={RootPath.Injury + ':injury_id/view'} element={<InjuryWorkflow/>}/>
-                    <Route path={RootPath.Injury + ':injury_id/edit'} element={<InjuryWorkflow/>}/>
+                    <Route path={RootPath.Injury + ':name/view'} element={<InjuryWorkflow/>}/>
+                    <Route path={RootPath.Injury + ':name/edit'} element={<InjuryWorkflow/>}/>
 
                     <Route path={RootPath.Spell} element={<SpellWorkflow/>}/>
                     <Route path={RootPath.Spell + ':name/view'} element={<SpellWorkflow/>}/>
                     <Route path={RootPath.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
 
                     <Route path={RootPath.Talent} element={<TalentWorkflow/>}/>
-                    <Route path={RootPath.Talent + ':talent_id/view'} element={<TalentWorkflow/>}/>
-                    <Route path={RootPath.Talent + ':talent_id/edit'} element={<TalentWorkflow/>}/>
+                    <Route path={RootPath.Talent + ':name/view'} element={<TalentWorkflow/>}/>
+                    <Route path={RootPath.Talent + ':name/edit'} element={<TalentWorkflow/>}/>
 
                     <Route path={RootPath.Qualities} element={<QualityWorkflow/>}/>
-                    <Route path={RootPath.Qualities + ':quality_id/view'} element={<QualityWorkflow/>}/>
-                    <Route path={RootPath.Qualities + ':quality_id/edit'} element={<QualityWorkflow/>}/>
+                    <Route path={RootPath.Qualities + ':name/view'} element={<QualityWorkflow/>}/>
+                    <Route path={RootPath.Qualities + ':name/edit'} element={<QualityWorkflow/>}/>
 
                     <Route path={RootPath.Skills} element={<SkillWorkflow/>}/>
-                    <Route path={RootPath.Skills + ':skill_id/edit'} element={<SkillWorkflow/>}/>
-                    <Route path={RootPath.Skills + ':skill_id/view'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':name/edit'} element={<SkillWorkflow/>}/>
+                    <Route path={RootPath.Skills + ':name/view'} element={<SkillWorkflow/>}/>
 
                     <Route path={RootPath.Career} element={<CareerWorkflow/>}/>
                     <Route path={RootPath.Career + ':name/edit'} element={<CareerWorkflow/>}/>
@@ -84,12 +84,12 @@ export default function App() {
 
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>}/>
-                    <Route path={EquipmentPath.Armor + ':armor_id/edit'} element={<ArmorWorkflow/>}/>
-                    <Route path={EquipmentPath.Armor + ':armor_id/view'} element={<ArmorWorkflow/>}/>
+                    <Route path={EquipmentPath.Armor + ':name/edit'} element={<ArmorWorkflow/>}/>
+                    <Route path={EquipmentPath.Armor + ':name/view'} element={<ArmorWorkflow/>}/>
 
                     <Route path={EquipmentPath.Weapon} element={<WeaponWorkflow/>}/>
-                    <Route path={EquipmentPath.Weapon + ':weapon_id/edit'} element={<WeaponWorkflow/>}/>
-                    <Route path={EquipmentPath.Weapon + ':weapon_id/view'} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':name/edit'} element={<WeaponWorkflow/>}/>
+                    <Route path={EquipmentPath.Weapon + ':name/view'} element={<WeaponWorkflow/>}/>
 
                     <Route path={EquipmentPath.Gear} element={<GearWorkflow/>}/>
                     <Route path={EquipmentPath.Gear + ':name/edit'} element={<GearWorkflow/>}/>
@@ -104,7 +104,7 @@ export default function App() {
 
                     {/*Campaign Routes*/}
                     <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>
-                    <Route path={CampaignPath.Campaign + ':campaign_id'} element={<CampaignWorkflow/>}/>
+                    <Route path={CampaignPath.Campaign + ':name'} element={<CampaignWorkflow/>}/>
 
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session} element={<SessionWorkflow/>}/>
                     <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/view'} element={<SessionWorkflow/>}/>

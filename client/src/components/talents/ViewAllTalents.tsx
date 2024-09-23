@@ -27,11 +27,7 @@ function Row(props: Props) {
     const [open, setOpen] = useState(false)
 
     const renderRanked = (): string => {
-        let ranked = 'No'
-        if (talent.ranked) {
-            ranked = 'Yes'
-        }
-        return ranked
+        return talent.ranked ? 'Yes' : 'No'
     }
 
     return (
@@ -44,9 +40,9 @@ function Row(props: Props) {
                 <ActionsTableCell name={talent.name} path={RootPath.Talent}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
+                        <Table sx={{margin: 1}}>
                             <TableBody>
                                 <GenesysDescriptionTypography text={talent.description}/>
                             </TableBody>
@@ -61,15 +57,11 @@ function Row(props: Props) {
 export default function ViewAllTalents() {
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
-    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'Active', 'View']
+    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents()
-            if (!talentList) {
-                return
-            }
-            setTalents(talentList)
+            setTalents(await TalentService.getTalents())
         })()
     }, [])
 

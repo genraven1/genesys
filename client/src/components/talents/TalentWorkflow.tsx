@@ -28,11 +28,11 @@ function useFetchTalent(name: string): Talent {
     return talent as Talent
 }
 
-export default function TalentWorkflow(): JSX.Element {
+export default function TalentWorkflow() {
     const {name} = useParams<{ name?: string }>()
     const talent = useFetchTalent(name!!)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return talent && <TalentView talent={talent}/>

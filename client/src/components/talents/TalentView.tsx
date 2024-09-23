@@ -20,7 +20,7 @@ export default function TalentView(props: Props) {
         navigate(RootPath.Talent + talent.name + '/edit')
     }
 
-    const renderRanked = (): JSX.Element => {
+    const renderRanked = () => {
         return talent.ranked === undefined ? <Fragment/> :
             <ViewFieldCard name={'Ranked'} value={talent.ranked ? 'Yes' : 'No'}/>;
     }
