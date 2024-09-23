@@ -49,12 +49,24 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
 
-    static async createRival(name: string): Promise<Rival> {
-        return await (await axios.post( ActorPath.Rival + name)).data;
+    static async getRival(name: string): Promise<Rival> {
+        return await fetch(ActorPath.Rival + `${name}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getRival(name: string): Promise<Rival> {
-        return await (await axios.get(ActorPath.Rival + name)).data;
+    static async createRival(name: string): Promise<Rival> {
+        return await fetch(ActorPath.Rival, {method: "POST", body: JSON.stringify({name: name})})
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async getRivals(): Promise<Rival[]> {

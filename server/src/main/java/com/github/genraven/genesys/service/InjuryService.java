@@ -25,8 +25,8 @@ public class InjuryService {
         return injuryRepository.findById(name);
     }
 
-    public Mono<CriticalInjury> createInjury(final String name) {
-        return injuryRepository.save(new CriticalInjury(name));
+    public Mono<CriticalInjury> createInjury(final CriticalInjury criticalInjury) {
+        return injuryRepository.save(criticalInjury);
     }
 
     public Mono<CriticalInjury> updateInjury(final String name, final CriticalInjury criticalInjury) {

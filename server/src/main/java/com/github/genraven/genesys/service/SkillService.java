@@ -25,8 +25,8 @@ public class SkillService {
         return skillRepository.findById(name);
     }
 
-    public Mono<Skill> createSkill(final String name) {
-        return skillRepository.save(new Skill(name));
+    public Mono<Skill> createSkill(final Skill skill) {
+        return skillRepository.save(skill);
     }
 
     public Mono<Skill> updateSkill(final String name, final Skill skill) {

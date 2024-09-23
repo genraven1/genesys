@@ -13,7 +13,7 @@ public class TalentRouter {
         return RouterFunctions.route()
                 .path("/talents", builder -> builder
                         .GET("/", talentHandler::getAllTalents)
-                        .POST("/{name}", talentHandler::createTalent)
+                        .POST("/", talentHandler::createTalent)
                         .GET("/{name}", talentHandler::getTalent)
                         .PUT("/{name}", talentHandler::updateTalent))
                 .build();

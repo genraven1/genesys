@@ -24,8 +24,14 @@ export default class TalentService {
             })
     }
 
-    static async createTalent(name: string): Promise<Talent> {
-        return await fetch(RootPath.Talent, {method: "POST", body: JSON.stringify({name: name})})
+    static async createTalent(talent: Talent): Promise<Talent> {
+        return await fetch(RootPath.Talent, {
+            method: "POST",
+            body: JSON.stringify(talent),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

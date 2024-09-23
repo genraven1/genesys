@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.handler;
 
+import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,13 @@ public class SkillHandler {
     }
 
     public Mono<ServerResponse> createSkill(final ServerRequest serverRequest) {
-        return skillService.createSkill(serverRequest.pathVariable("name"))
-                .flatMap(skill -> ServerResponse.created(getURI(skill)).bodyValue(skill));
+        final Mono<Skill> skillMono = serverRequest.bodyToMono(Skill.class);
+        return skillMono
+                .flatMap(skillService::createSkill)
+                .flatMap(skill -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(skill))
+                        .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
     public Mono<ServerResponse> updateSkill(final ServerRequest serverRequest) {

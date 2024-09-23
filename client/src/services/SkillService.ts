@@ -3,8 +3,14 @@ import Skill from '../models/actor/Skill';
 
 export default class SkillService {
 
-    static async createSkill(name: string): Promise<Skill> {
-        return await fetch(RootPath.Skills, {method: "POST", body: JSON.stringify({name: name})})
+    static async createSkill(skill: Skill): Promise<Skill> {
+        return await fetch(RootPath.Skills, {
+            method: "POST",
+            body: JSON.stringify(skill),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

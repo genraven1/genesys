@@ -25,8 +25,8 @@ public class TalentService {
         return talentRepository.findById(name);
     }
 
-    public Mono<Talent> createTalent(final String name) {
-        return talentRepository.save(new Talent(name));
+    public Mono<Talent> createTalent(final Talent talent) {
+        return talentRepository.save(talent);
     }
 
     public Mono<Talent> updateTalent(final String name, final Talent talent) {
