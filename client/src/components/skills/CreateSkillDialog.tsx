@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SkillService from "../../services/SkillService";
 import {RootPath} from "../../services/Path";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
+import Skill from "../../models/actor/Skill";
 
 interface Props {
     open: boolean
@@ -16,7 +17,8 @@ export default function CreateSkillDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        await SkillService.createSkill(name)
+        let skill = {"name": name} as Skill
+        await SkillService.createSkill(skill)
         navigate(RootPath.Skills + name  + '/edit')
         onClose()
     }

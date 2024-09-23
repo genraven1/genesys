@@ -3,8 +3,14 @@ import Injury from "../models/Injury";
 import Modifier from "../models/common/Modifier";
 
 export default class InjuryService {
-    static async createInjury(name: string): Promise<Injury> {
-        return await fetch(RootPath.Injury, {method: "POST", body: JSON.stringify({name: name})})
+    static async createInjury(injury: Injury): Promise<Injury> {
+        return await fetch(RootPath.Skills, {
+            method: "POST",
+            body: JSON.stringify(injury),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

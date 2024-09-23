@@ -4,6 +4,7 @@ import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {RootPath} from "../../services/Path";
 import InjuryService from "../../services/InjuryService";
+import Injury from "../../models/Injury";
 
 
 interface Props {
@@ -17,7 +18,8 @@ export default function CreateInjuryDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let injury = await InjuryService.createInjury(name)
+        let injury = {"name": name} as Injury
+        await InjuryService.createInjury(injury)
         navigate(RootPath.Injury + injury.name + '/edit')
         onClose()
     }
