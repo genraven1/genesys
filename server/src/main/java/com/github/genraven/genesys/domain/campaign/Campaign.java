@@ -23,4 +23,5 @@ public class Campaign {
     private Party party = new Party();
     private List<Session> sessions = new ArrayList<>();
     private boolean current = false;
+    private List<String> talentIds = new ArrayList<>();
 }

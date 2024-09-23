@@ -1,6 +1,6 @@
 import Campaign from "../models/campaign/Campaign";
 import axios from "axios";
-import {CampaignPath} from "./Path";
+import {CampaignPath, RootPath} from "./Path";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
 import Talent from "../models/Talent";
@@ -43,7 +43,7 @@ export default class CampaignService {
     }
 
     static async getCampaignTalents(name: string): Promise<Talent[]> {
-        return await fetch(CampaignPath.Talents + `${name}`)
+        return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Talent)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

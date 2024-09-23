@@ -1,9 +1,11 @@
 package com.github.genraven.genesys.service;
 
+import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.domain.campaign.Session;
 import com.github.genraven.genesys.repository.CampaignRepository;
+import com.github.genraven.genesys.repository.TalentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -15,10 +17,12 @@ import java.util.List;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final TalentRepository talentRepository;
 
     @Autowired
-    public CampaignService(final CampaignRepository campaignRepository) {
+    public CampaignService(final CampaignRepository campaignRepository, final TalentRepository talentRepository) {
         this.campaignRepository = campaignRepository;
+        this.talentRepository = talentRepository;
     }
 
     public Flux<Campaign> getAllCampaigns() {
@@ -42,7 +46,7 @@ public class CampaignService {
         }).flatMap(campaignRepository::save);
     }
 
-    public Mono<Campaign> getCurrentCampaign(){
+    public Mono<Campaign> getCurrentCampaign() {
         return campaignRepository.findByCurrent(true);
     }
 
@@ -51,6 +55,21 @@ public class CampaignService {
             campaign.setCurrent(true);
             return campaign;
         }).flatMap(campaignRepository::save);
+    }
+
+    public Mono<Campaign> addTalentToCampaign(String campaignId, String talentId) {
+        return campaignRepository.findById(campaignId)
+                .flatMap(existingCampaign -> {
+                    existingCampaign.getTalentIds().add(talentId);
+                    return campaignRepository.save(existingCampaign);
+                });
+    }
+
+    public Mono<List<Talent>> getTalentsByCampaignId(String campaignId) {
+        return campaignRepository.findById(campaignId)
+                .flatMap(campaign -> Flux.fromIterable(campaign.getTalentIds())
+                        .flatMap(talentRepository::findById)
+                        .collectList());
     }
 
     public Mono<Session> createSession(final String campaignName, final String sessionName) {

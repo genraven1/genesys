@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.handler;
 
+import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Session;
 import com.github.genraven.genesys.service.CampaignService;
@@ -8,10 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
-
-import java.net.URI;
 
 import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
@@ -83,6 +81,21 @@ public class CampaignHandler {
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
+    public Mono<ServerResponse> addTalentToCampaign(final ServerRequest request) {
+        final String name = request.pathVariable(NAME);
+        return request.bodyToMono(Talent.class)
+                .flatMap(talent -> campaignService.addTalentToCampaign(name, talent.getName()))
+                .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getTalentsByCampaign(ServerRequest request) {
+        final String name = request.pathVariable(NAME);
+        return campaignService.getTalentsByCampaignId(name)
+                .flatMap(talents -> ServerResponse.ok().bodyValue(talents))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
     public Mono<ServerResponse> createSession(final ServerRequest serverRequest) {
         final String campaignName = serverRequest.pathVariable("campaignName");
         final String sessionName = serverRequest.pathVariable("sessionName");
@@ -135,9 +148,5 @@ public class CampaignHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(session))
                         .switchIfEmpty(ServerResponse.notFound().build()));
-    }
-
-    private URI getURI(final Campaign campaign) {
-        return UriComponentsBuilder.fromPath(("/{id}")).buildAndExpand(campaign.getName()).toUri();
     }
 }
