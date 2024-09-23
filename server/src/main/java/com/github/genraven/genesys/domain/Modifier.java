@@ -13,7 +13,8 @@ public class Modifier {
     @AllArgsConstructor
     @Getter
     public enum Type {
-        DECREASE_CRITICAL_INJURY("Decrease Critical Injury");
+        DECREASE_CRITICAL_INJURY("Decrease Critical Injury"),
+        SUFFER_STRAIN("Suffer Strain");
 
         @JsonValue
         private final String label;
