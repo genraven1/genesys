@@ -4,7 +4,9 @@ import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.domain.campaign.Session;
+import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.repository.CampaignRepository;
+import com.github.genraven.genesys.repository.SkillRepository;
 import com.github.genraven.genesys.repository.TalentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,13 @@ public class CampaignService {
 
     private final CampaignRepository campaignRepository;
     private final TalentRepository talentRepository;
+    private final SkillRepository skillRepository;
 
     @Autowired
-    public CampaignService(final CampaignRepository campaignRepository, final TalentRepository talentRepository) {
+    public CampaignService(final CampaignRepository campaignRepository, final TalentRepository talentRepository, final SkillRepository skillRepository) {
         this.campaignRepository = campaignRepository;
         this.talentRepository = talentRepository;
+        this.skillRepository = skillRepository;
     }
 
     public Flux<Campaign> getAllCampaigns() {
@@ -69,6 +73,21 @@ public class CampaignService {
         return campaignRepository.findById(campaignId)
                 .flatMap(campaign -> Flux.fromIterable(campaign.getTalentIds())
                         .flatMap(talentRepository::findById)
+                        .collectList());
+    }
+
+    public Mono<Campaign> addSkillToCampaign(String campaignId, String skillId) {
+        return campaignRepository.findById(campaignId)
+                .flatMap(existingCampaign -> {
+                    existingCampaign.getSkillIds().add(skillId);
+                    return campaignRepository.save(existingCampaign);
+                });
+    }
+
+    public Mono<List<Skill>> getSkillsByCampaignId(String campaignId) {
+        return campaignRepository.findById(campaignId)
+                .flatMap(campaign -> Flux.fromIterable(campaign.getSkillIds())
+                        .flatMap(skillRepository::findById)
                         .collectList());
     }
 

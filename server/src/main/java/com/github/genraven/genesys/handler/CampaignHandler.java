@@ -3,6 +3,7 @@ package com.github.genraven.genesys.handler;
 import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Session;
+import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -93,6 +94,21 @@ public class CampaignHandler {
         final String name = request.pathVariable(NAME);
         return campaignService.getTalentsByCampaignId(name)
                 .flatMap(talents -> ServerResponse.ok().bodyValue(talents))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> addSkillToCampaign(final ServerRequest request) {
+        final String name = request.pathVariable(NAME);
+        return request.bodyToMono(Skill.class)
+                .flatMap(skill -> campaignService.addSkillToCampaign(name, skill.getName()))
+                .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getSkillsByCampaign(ServerRequest request) {
+        final String name = request.pathVariable(NAME);
+        return campaignService.getSkillsByCampaignId(name)
+                .flatMap(skills -> ServerResponse.ok().bodyValue(skills))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
