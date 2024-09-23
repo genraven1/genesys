@@ -1,7 +1,6 @@
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -13,7 +12,7 @@ import {
     TypographyLeftTableCell
 } from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities,} from "../../../../../models/equipment/EquipmentHelper";
-import {renderHeaders} from "../../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import NonPlayerActor, {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerActor";
 import {ActorSkill, ActorType} from "../../../../../models/actor/Actor";
 import Minion from "../../../../../models/actor/npc/Minion";
@@ -24,7 +23,7 @@ interface Props {
     npc: NonPlayerActor
 }
 
-export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Element {
+export default function ViewNonPlayerCharacterWeaponTable(props: Props) {
     const {weapons, npc} = props
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool']
 
@@ -41,9 +40,7 @@ export default function ViewNonPlayerCharacterWeaponTable(props: Props): JSX.Ele
     return (
         <TableContainer component={Paper}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {renderTableBody()}
                 </TableBody>
@@ -57,7 +54,7 @@ interface RowProps {
     npc: NonPlayerActor
 }
 
-function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps) {
     const {weapon, npc} = props
     const [open, setOpen] = useState(false)
 

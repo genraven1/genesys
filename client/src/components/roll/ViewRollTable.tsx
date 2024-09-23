@@ -2,14 +2,13 @@ import * as React from "react";
 import {useState} from "react";
 import Roll, {DieType} from "../../models/Roll";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {Box, Card, IconButton} from "@mui/material";
 import {Add, Remove} from "@mui/icons-material";
-import {renderHeaders} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {GenesysDescriptionTypographyCenterTableCell} from "../common/table/TypographyTableCell";
 
 interface TableProps {
@@ -77,9 +76,7 @@ export default function ViewRollTable(props: TableProps): JSX.Element {
     return (
         <TableContainer component={Card}>
             <Table>
-                <TableHead>
-                    {renderHeaders(headers)}
-                </TableHead>
+                {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     <Row type={DieType.Boost} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange} roll={roll}/>
                     <Row type={DieType.Ability} onAddDie={onAddDiceChange} onRemoveDie={onRemoveDiceChange}

@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-export const renderHeaders = (headers: string[]): JSX.Element => {
+const renderHeaders = (headers: string[]) => {
     return (
         <TableRow key={'Header'}>
             {headers.map((header: string) => (
@@ -18,7 +18,7 @@ export const renderHeaders = (headers: string[]): JSX.Element => {
     )
 }
 
-export const renderSingleRowTableHeader = (headers: string[]): JSX.Element => {
+export const renderSingleRowTableHeader = (headers: string[]) => {
     return (
         <TableHead>
             {renderHeaders(headers)}
@@ -26,7 +26,7 @@ export const renderSingleRowTableHeader = (headers: string[]): JSX.Element => {
     )
 }
 
-export const renderDoubleRowTableHeader = (headers: string[], value: string, colSpan: number): JSX.Element => {
+export const renderDoubleRowTableHeader = (headers: string[], value: string, colSpan: number) => {
     return (
         <TableHead>
             <TableRow key={'Main Header'}>
@@ -37,11 +37,11 @@ export const renderDoubleRowTableHeader = (headers: string[], value: string, col
     )
 }
 
-export const renderSkillName = (skill: Skill): JSX.Element => {
+export const renderSkillName = (skill: Skill) => {
     return <TypographyLeftTableCell value={skill.name + '(' + skill.characteristic + ')'}/>
 }
 
-export const renderBooleanTableCell = (value: boolean): JSX.Element => {
+export const renderBooleanTableCell = (value: boolean) => {
     return (
         <TableCell>
             <Typography style={{textAlign: 'center'}}>{value ? <CheckIcon color='primary' fontSize='small'/> :

@@ -4,7 +4,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
@@ -18,18 +17,18 @@ import QualityService from "../../services/QualityService";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
 import QualityDialog from "./QualityDialog";
-import {renderHeaders} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {renderUsable} from "../../models/equipment/EquipmentHelper";
 
 interface RowProps {
     quality: Quality
 }
 
-function Row(props: RowProps): JSX.Element {
+function Row(props: RowProps) {
     const {quality} = props
     const [open, setOpen] = useState(false)
 
-    const renderActivation = (): JSX.Element => {
+    const renderActivation = () => {
         if (quality.passive === undefined) {
             return <Fragment/>
         }
@@ -92,9 +91,7 @@ export default function ViewAllQualities() {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {qualities.map((quality: Quality) => (
                                 <Row key={quality.name} quality={quality}/>

@@ -4,12 +4,11 @@ import {Armor} from "../../../models/equipment/Armor";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderPrice, renderSoak} from "../../../models/equipment/EquipmentHelper";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
@@ -33,9 +32,7 @@ export default function ArmorViewShort(props: Props) {
                     <Divider/>
                     <TableContainer component={Paper}>
                         <Table>
-                            <TableHead>
-                                {renderHeaders(headers)}
-                            </TableHead>
+                            {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow>
                                     <TypographyCenterTableCell value={armor?.name!!}/>

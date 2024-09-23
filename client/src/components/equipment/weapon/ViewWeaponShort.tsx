@@ -4,13 +4,12 @@ import {Weapon} from "../../../models/equipment/Weapon";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
-import {renderHeaders} from '../../common/table/TableRenders';
+import {renderSingleRowTableHeader} from '../../common/table/TableRenders';
 
 interface Props {
     weapon: Weapon
@@ -64,9 +63,7 @@ export default function WeaponViewShort(props: Props) {
                     <Divider/>
                     <TableContainer component={Paper}>
                         <Table>
-                            <TableHead>
-                                {renderHeaders(headers)}
-                            </TableHead>
+                            {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow>
                                     <TypographyCenterTableCell value={weapon.name}/>

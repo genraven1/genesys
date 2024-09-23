@@ -3,7 +3,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Talent from '../../models/Talent';
@@ -13,7 +12,7 @@ import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import {RootPath} from "../../services/Path";
-import {renderHeaders} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TalentDialog from "./TalentDialog";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
@@ -29,7 +28,7 @@ function Row(props: Props) {
 
     const renderRanked = (): string => {
         let ranked = 'No'
-        if (talent?.ranked!!) {
+        if (talent.ranked) {
             ranked = 'Yes'
         }
         return ranked
@@ -85,9 +84,7 @@ export default function ViewAllTalents() {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {talents.map((talent: Talent) => (
                                 <Row key={talent.name} talent={talent} columns={headers.length}/>

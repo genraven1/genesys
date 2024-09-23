@@ -3,7 +3,6 @@ import {Fragment, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {Box, Button} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
@@ -13,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import NonPlayerCharacterEditSkillDialog from "./RivalEditSkillDialog";
 import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
-import {renderHeaders, renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import Rival from "../../../../../models/actor/npc/Rival";
 
@@ -22,7 +21,7 @@ interface RowProps {
     rival: Rival
 }
 
-function SkillRow(props: RowProps): JSX.Element {
+function SkillRow(props: RowProps) {
     const {skill, rival} = props
     const [openEditSkillDialog, setOpenEditSkillDialog] = useState(false)
 
@@ -64,9 +63,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Table>
-                                <TableHead>
-                                    {renderHeaders(headers)}
-                                </TableHead>
+                                {renderSingleRowTableHeader(headers)}
                                 <TableBody>
                                     {(rival.skills || [])
                                         .sort((a, b) => a.name.localeCompare(b.name))

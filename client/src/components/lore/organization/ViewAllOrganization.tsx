@@ -7,11 +7,10 @@ import LoreService from "../../../services/LoreService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {GenesysDescriptionTypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {renderHeaders} from "../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import LoreCreationDialog from "../common/LoreCreationDialog";
 import {LoreType} from "../../../models/lore/Lore";
@@ -57,9 +56,7 @@ export function ViewAllOrganizations(): JSX.Element {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {organizations.map((organization: Organization) => (
                                 <OrganizationRow key={organization.name} organization={organization}/>

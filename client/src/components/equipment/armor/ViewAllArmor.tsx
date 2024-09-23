@@ -4,7 +4,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import * as React from 'react';
@@ -15,7 +14,7 @@ import GenesysDescriptionTypography from "../../common/typography/GenesysDescrip
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {renderHeaders} from '../../common/table/TableRenders';
+import {renderSingleRowTableHeader} from '../../common/table/TableRenders';
 import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
@@ -65,11 +64,7 @@ export default function ViewAllArmor() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const armorList = await EquipmentService.getArmors()
-            if (!armorList) {
-                return
-            }
-            setArmors(armorList)
+            setArmors(await EquipmentService.getArmors())
         })()
     }, [])
 
@@ -84,9 +79,7 @@ export default function ViewAllArmor() {
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
-                            {renderHeaders(headers)}
-                        </TableHead>
+                        {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {armors.map((armor: Armor) => (
                                 <Row key={armor.name} armor={armor} columns={headers.length}/>
