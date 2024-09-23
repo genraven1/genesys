@@ -9,7 +9,10 @@ export default class CampaignService {
     static async createCampaign(campaign: Campaign): Promise<Campaign> {
         return await fetch(CampaignPath.Campaign, {
             method: "POST",
-            body: JSON.stringify(campaign)
+            body: JSON.stringify(campaign),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
             .then((res) => {
                 if (!res.ok) {
@@ -49,10 +52,13 @@ export default class CampaignService {
             })
     }
 
-    static async addCampaignTalent(name: string, talent: Talent): Promise<void> {
+    static async addCampaignTalent(name: string, talent: Talent): Promise<Campaign> {
         return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Talent, {
             method: "POST",
-            body: JSON.stringify(talent)
+            body: JSON.stringify(talent),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
             .then((res) => {
                 if (!res.ok) {
