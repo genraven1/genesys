@@ -5,16 +5,15 @@ import Rival from "../../../../models/actor/npc/Rival";
 import RivalEdit from "./RivalEdit";
 import RivalView from "./RivalView";
 import ViewAllRivals from "./ViewAllRivals";
-import {useFetchCurrentCampaign} from "../../../campaign/CampaignWorkflow";
 
 function useFetchRival(name: string): Rival {
     const [rival, setRival] = useState<Rival>()
-    let campaign = useFetchCurrentCampaign()
+
     useEffect(() => {
         (async (): Promise<void> => {
-            setRival(await ActorService.getRival(campaign.name, name))
+            setRival(await ActorService.getRival(name))
         })()
-    }, [name, setRival, campaign.name])
+    }, [name, setRival])
     return rival as Rival
 }
 

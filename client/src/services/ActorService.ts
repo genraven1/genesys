@@ -49,8 +49,8 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
 
-    static async getRival(campaignName: string, rivalName: string): Promise<Rival> {
-        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival + `${rivalName}`)
+    static async getRival(name: string): Promise<Rival> {
+        return await fetch(ActorPath.Rival + `${name}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
