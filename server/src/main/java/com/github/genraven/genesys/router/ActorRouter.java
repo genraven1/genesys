@@ -28,6 +28,10 @@ public class ActorRouter {
                         .POST("/{name}", actorHandler::createRival)
                         .GET("/{name}", actorHandler::getRival)
                         .PUT("/{name}", actorHandler::updateRival))
+                .path("/campaigns/{name}", builder -> builder
+                        .POST("/rivals/{rivalName}", actorHandler::createRival)
+                        .GET("/rivals/{rivalName}", actorHandler::getRival)
+                )
                 .path("/actors/minions", builder -> builder
                         .GET("/", actorHandler::getAllMinions)
                         .POST("/{name}", actorHandler::createMinion)

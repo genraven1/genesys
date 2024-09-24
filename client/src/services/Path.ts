@@ -38,7 +38,7 @@ export enum ActorPath {
     Actor = '/actors/',
     Player = '/actors/players/',
     Nemesis = '/actors/nemeses/',
-    Rival = '/actors/rivals/',
+    Rival = '/rivals/',
     Minion = '/actors/minions/',
     Npc = '/actors/npcs'
 }

@@ -17,12 +17,13 @@ import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCe
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateActorDialog from "../../common/CreateActorDialog";
 import {ActorType} from "../../../../models/actor/Actor";
+import {useFetchCurrentCampaign} from "../../../campaign/CampaignWorkflow";
 
 interface Props {
     rival: Rival
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {rival} = props
     const [open, setOpen] = useState(false)
 
@@ -49,19 +50,16 @@ function Row(props: Props): JSX.Element {
 }
 
 export default function ViewAllRivals() {
-    const [rivals, setRivals] = useState<Rival[]>([])
-    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+    const [rivals, setRivals] = useState<Rival[]>([]);
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false);
+    let campaign = useFetchCurrentCampaign();
+    const headers = ['Name', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const rivalList = await ActorService.getRivals()
-            if (!rivalList) {
-                return
-            }
-            setRivals(rivalList)
+            setRivals(await ActorService.getRivals(campaign.name));
         })()
-    }, [])
+    }, [campaign.name]);
 
     return (
         <Card>

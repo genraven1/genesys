@@ -49,8 +49,8 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
 
-    static async getRival(name: string): Promise<Rival> {
-        return await fetch(ActorPath.Rival + `${name}`)
+    static async getRival(campaignName: string, rivalName: string): Promise<Rival> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival + `${rivalName}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -71,8 +71,14 @@ export default class ActorService {
             })
     }
 
-    static async getRivals(): Promise<Rival[]> {
-        return await (await axios.get(ActorPath.Rival)).data;
+    static async getRivals(campaignName: string): Promise<Rival[]> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async updateRival(name: string, rival: Rival): Promise<Rival> {
