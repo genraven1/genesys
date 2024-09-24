@@ -41,7 +41,7 @@ export default function ViewCampaignSkills(props: TableProps) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {skills.map((skill: Skill) => (
+                            {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
                                 <TableRow key={skill.name}>
                                     <TypographyCenterTableCell value={skill.name}/>
                                     <TypographyCenterTableCell value={skill.characteristic}/>

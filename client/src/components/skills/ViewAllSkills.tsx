@@ -34,15 +34,11 @@ function Row(props: Props) {
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
-    const headers = ['Name', 'Type', 'Linked Characteristic', 'Active', 'View']
+    const headers = ['Name', 'Type', 'Linked Characteristic', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const skillList = await SkillService.getSkills()
-            if (!skillList) {
-                return
-            }
-            setSkills(skillList)
+            setSkills(await SkillService.getSkills())
         })()
     }, [])
 

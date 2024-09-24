@@ -60,7 +60,7 @@ export default function CampaignSkillSelectionTable(props: TableProps) {
             <Table>
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    {skills.map((skill: Skill) => (
+                    {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
                         <SkillNameRow skill={skill} campaign_name={campaign_name}/>
                     ))}
                 </TableBody>
