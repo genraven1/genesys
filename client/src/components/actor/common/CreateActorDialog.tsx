@@ -3,11 +3,11 @@ import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../services/ActorService";
 import {ActorPath} from "../../../services/Path";
-import {ActorType} from "../../../models/actor/Actor";
-import InputSelectField, {Option} from "../../common/InputSelectField";
+import {ActorType, getActorTypes} from "../../../models/actor/Actor";
+import InputSelectField from "../../common/InputSelectField";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 import Player from "../../../models/actor/player/Player";
-import Rival from "../../../models/actor/npc/Rival";
+import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 interface Props {
     open: boolean
@@ -15,15 +15,12 @@ interface Props {
     onClose: () => void
 }
 
-const getActorTypes = (): Option[] => {
-    return Object.values(ActorType).map((value) => ({value}))
-}
-
 export default function CreateActorDialog(props: Props) {
     const {open, actorType, onClose} = props
     const [name, setName] = useState('')
     const [type, setType] = useState<ActorType>(actorType)
     let navigate = useNavigate()
+    let campaign = useFetchCurrentCampaign()
 
     const handleCreate = async (): Promise<void> => {
         switch (type) {
@@ -32,8 +29,7 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Minion + minion.name + '/edit')
                 break
             case ActorType.Rival:
-                let rival = {'name': name} as Rival
-                await ActorService.createRival(rival)
+                let rival = await ActorService.createRival(campaign.name, name)
                 navigate(ActorPath.Rival + rival.name + '/edit')
                 break
             case ActorType.Nemesis:

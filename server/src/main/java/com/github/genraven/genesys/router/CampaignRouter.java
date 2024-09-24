@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.router;
 
+import com.github.genraven.genesys.handler.ActorHandler;
 import com.github.genraven.genesys.handler.CampaignHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,15 @@ public class CampaignRouter {
                         .PATCH("/{campaignName}/sessions/{sessionName}", campaignHandler::updateSession)
                         .PUT("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::createScene)
                         .GET("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::getScene)
+                ).build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> actorRouterMethod(final ActorHandler actorHandler) {
+        return RouterFunctions.route()
+                .path("/campaigns/{name}", builder -> builder
+                        .POST("/rivals/{rivalName}", actorHandler::createRival)
+                        .GET("/rivals/{rivalName}", actorHandler::getRival)
                 ).build();
     }
 }

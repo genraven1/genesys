@@ -12,7 +12,8 @@ import java.util.List;
 @Data
 public class NonPlayerActor extends Actor {
 
-    protected NonPlayerActor() {}
+    protected NonPlayerActor() {
+    }
 
     public NonPlayerActor(final Actor actor) {
         this.setName(actor.getName());
@@ -23,6 +24,8 @@ public class NonPlayerActor extends Actor {
         this.setWillpower(actor.getWillpower());
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
+        this.setWeapons(actor.getWeapons());
+        this.setArmors(actor.getArmors());
     }
 
     private int combat = 1;

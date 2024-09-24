@@ -1,7 +1,7 @@
 import axios from "axios";
 import Player from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
-import {ActorPath} from "./Path";
+import {ActorPath, CampaignPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
 import Actor from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";
@@ -18,7 +18,7 @@ export default class ActorService {
     }
 
     static async createPlayer(name: string): Promise<Player> {
-        return await (await axios.post( ActorPath.Player + name)).data;
+        return await (await axios.post(ActorPath.Player + name)).data;
     }
 
     static async getPlayer(name: string): Promise<Player> {
@@ -34,7 +34,7 @@ export default class ActorService {
     }
 
     static async createNemesis(name: string): Promise<Nemesis> {
-        return await (await axios.post( ActorPath.Nemesis + name)).data;
+        return await (await axios.post(ActorPath.Nemesis + name)).data;
     }
 
     static async getNemesis(name: string): Promise<Nemesis> {
@@ -59,13 +59,9 @@ export default class ActorService {
             })
     }
 
-    static async createRival(rival: Rival): Promise<Rival> {
-        return await fetch(ActorPath.Rival, {
-            method: "POST",
-            body: JSON.stringify(rival),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+    static async createRival(campaignName: string, rivalName: string): Promise<Rival> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival + `${rivalName}`, {
+            method: "POST"
         })
             .then((res) => {
                 if (!res.ok) {
@@ -84,7 +80,7 @@ export default class ActorService {
     }
 
     static async createMinion(name: string): Promise<Minion> {
-        return await (await axios.post( ActorPath.Minion + name)).data;
+        return await (await axios.post(ActorPath.Minion + name)).data;
     }
 
     static async getMinion(name: string): Promise<Minion> {

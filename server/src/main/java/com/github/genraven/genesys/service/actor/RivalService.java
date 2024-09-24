@@ -1,23 +1,32 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.ActorSkill;
 import com.github.genraven.genesys.domain.actor.npc.NonPlayerActor;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.actor.npc.SingleNonPlayerActor;
+import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.repository.actor.RivalRepository;
+import com.github.genraven.genesys.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RivalService {
 
     private final RivalRepository rivalRepository;
+    private final CampaignService campaignService;
 
     @Autowired
-    public RivalService(final RivalRepository rivalRepository) {
+    public RivalService(final RivalRepository rivalRepository, final CampaignService campaignService) {
         this.rivalRepository = rivalRepository;
+        this.campaignService = campaignService;
     }
 
     public Flux<Rival> getAllRivals() {
@@ -28,8 +37,10 @@ public class RivalService {
         return rivalRepository.findById(name);
     }
 
-    public Mono<Rival> createRival(final String name) {
-        return rivalRepository.save(new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(name)))));
+    public Mono<Rival> createRival(final String rivalName) {
+        final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
+        addCampaignSkillsToRival(rival);
+        return rivalRepository.save(rival);
     }
 
     public Mono<Rival> updateRival(final String name, final Rival rival) {
@@ -51,5 +62,15 @@ public class RivalService {
             riv.setArmors(rival.getArmors());
             return riv;
         }).flatMap(rivalRepository::save);
+    }
+
+    private void addCampaignSkillsToRival(final Rival rival) {
+        campaignService.getCurrentCampaign().map(campaign -> {
+            campaignService.getSkillsByCampaignId(campaign.getName()).map(skillList -> {
+                rival.setSkills(skillList.stream().map(ActorSkill::new).collect(Collectors.toList()));
+                return skillList;
+            });
+            return campaign;
+        });
     }
 }

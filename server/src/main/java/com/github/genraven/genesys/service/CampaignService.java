@@ -61,7 +61,7 @@ public class CampaignService {
         }).flatMap(campaignRepository::save);
     }
 
-    public Mono<Campaign> addTalentToCampaign(String campaignId, String talentId) {
+    public Mono<Campaign> addTalentToCampaign(final String campaignId, final String talentId) {
         return campaignRepository.findById(campaignId)
                 .flatMap(existingCampaign -> {
                     existingCampaign.getTalentIds().add(talentId);
@@ -69,14 +69,14 @@ public class CampaignService {
                 });
     }
 
-    public Mono<List<Talent>> getTalentsByCampaignId(String campaignId) {
+    public Mono<List<Talent>> getTalentsByCampaignId(final String campaignId) {
         return campaignRepository.findById(campaignId)
                 .flatMap(campaign -> Flux.fromIterable(campaign.getTalentIds())
                         .flatMap(talentRepository::findById)
                         .collectList());
     }
 
-    public Mono<Campaign> addSkillToCampaign(String campaignId, String skillId) {
+    public Mono<Campaign> addSkillToCampaign(final String campaignId, final String skillId) {
         return campaignRepository.findById(campaignId)
                 .flatMap(existingCampaign -> {
                     existingCampaign.getSkillIds().add(skillId);
@@ -84,7 +84,7 @@ public class CampaignService {
                 });
     }
 
-    public Mono<List<Skill>> getSkillsByCampaignId(String campaignId) {
+    public Mono<List<Skill>> getSkillsByCampaignId(final String campaignId) {
         return campaignRepository.findById(campaignId)
                 .flatMap(campaign -> Flux.fromIterable(campaign.getSkillIds())
                         .flatMap(skillRepository::findById)

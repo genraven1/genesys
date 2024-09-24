@@ -124,6 +124,7 @@ public class ActorHandler {
 
     public Mono<ServerResponse> getRival(final ServerRequest serverRequest) {
         final String name = serverRequest.pathVariable(NAME);
+        final String rivalName = serverRequest.pathVariable("rivalName");
         return rivalService.getRival(name)
                 .flatMap(rival -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -132,7 +133,8 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> createRival(final ServerRequest serverRequest) {
-        return rivalService.createRival(serverRequest.pathVariable("name"))
+        final String rivalName = serverRequest.pathVariable("rivalName");
+        return rivalService.createRival(rivalName)
                 .flatMap(rival -> ServerResponse.created(getURI(rival)).bodyValue(rival));
     }
 
