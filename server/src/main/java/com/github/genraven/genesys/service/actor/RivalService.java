@@ -38,9 +38,13 @@ public class RivalService {
     }
 
     public Mono<Rival> createRival(final String rivalName) {
-        final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
-        addCampaignSkillsToRival(rival);
-        return rivalRepository.save(rival);
+        return campaignService.getCurrentCampaign()
+                .flatMap(campaign -> campaignService.getSkillsByCampaignId(campaign.getName())
+                        .flatMap(skills -> {
+                            final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
+                            rival.setSkills(skills.stream().map(ActorSkill::new).collect(Collectors.toList()));
+                            return rivalRepository.save(rival);
+                        }));
     }
 
     public Mono<Rival> updateRival(final String name, final Rival rival) {
@@ -62,15 +66,5 @@ public class RivalService {
             riv.setArmors(rival.getArmors());
             return riv;
         }).flatMap(rivalRepository::save);
-    }
-
-    private void addCampaignSkillsToRival(final Rival rival) {
-        campaignService.getCurrentCampaign().map(campaign -> {
-            campaignService.getSkillsByCampaignId(campaign.getName()).map(skillList -> {
-                rival.setSkills(skillList.stream().map(ActorSkill::new).collect(Collectors.toList()));
-                return skillList;
-            });
-            return campaign;
-        });
     }
 }
