@@ -25,7 +25,7 @@ export default class QualityService {
     }
 
     static async createQuality(name: string): Promise<Quality> {
-        return await fetch(RootPath.Qualities, {method: "POST", body: JSON.stringify({name: name})})
+        return await fetch(RootPath.Qualities + `${name}`, {method: "POST"})
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -35,7 +35,13 @@ export default class QualityService {
     }
 
     static async updateQuality(quality: Quality): Promise<Quality> {
-        return await fetch(RootPath.Qualities + `${quality.name}`, {method: 'PUT', body: JSON.stringify(quality)})
+        return await fetch(RootPath.Qualities + `${quality.name}`, {
+            method: "PUT",
+            body: JSON.stringify(quality),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

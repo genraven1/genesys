@@ -1,6 +1,6 @@
 package com.github.genraven.genesys.domain.equipment;
 
-import com.github.genraven.genesys.domain.Modifier;
+import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 

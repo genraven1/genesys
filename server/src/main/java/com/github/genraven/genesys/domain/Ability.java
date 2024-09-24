@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.domain;
 
+import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 
 import java.util.ArrayList;
