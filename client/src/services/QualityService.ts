@@ -1,6 +1,5 @@
-import {ModificationPath, RootPath} from "./Path";
+import {RootPath} from "./Path";
 import Quality from "../models/Quality";
-import Modifier from "../models/common/Modifier";
 
 export default class QualityService {
 
@@ -41,19 +40,6 @@ export default class QualityService {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async addQualityModification(name: string, modifier: Modifier) {
-        return await fetch(ModificationPath.ModificationQuality + `${name}`, {
-            method: 'POST',
-            body: JSON.stringify(modifier)
         })
             .then((res) => {
                 if (!res.ok) {

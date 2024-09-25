@@ -11,6 +11,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 public class ModifierRouter {
     @Bean
     public RouterFunction<ServerResponse> modifierRouterMethod(final ModifierHandler modifierHandler) {
-        return RouterFunctions.route().path("/modifiers", builder -> builder.GET("/{name}", modifierHandler::getModifiersByType)).build();
+        return RouterFunctions.route().path("/modifiers", builder -> builder.GET("/{type}", modifierHandler::getModifiersByType)).build();
     }
 }

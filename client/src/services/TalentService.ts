@@ -1,6 +1,5 @@
 import Talent from "../models/Talent";
-import {ModificationPath, RootPath} from "./Path";
-import Modifier from "../models/common/Modifier";
+import {RootPath} from "./Path";
 
 export default class TalentService {
 
@@ -41,19 +40,6 @@ export default class TalentService {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async addTalentModification(name: string, modifier: Modifier) {
-        return await fetch(ModificationPath.ModificationTalent + `${name}`, {
-            method: 'POST',
-            body: JSON.stringify(modifier)
         })
             .then((res) => {
                 if (!res.ok) {

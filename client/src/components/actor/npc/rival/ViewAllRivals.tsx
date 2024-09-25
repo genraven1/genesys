@@ -57,9 +57,10 @@ export default function ViewAllRivals() {
 
     useEffect(() => {
         (async (): Promise<void> => {
+            if (!campaign) return;
             setRivals(await ActorService.getRivals(campaign.name));
         })()
-    }, [campaign.name]);
+    }, [campaign]);
 
     return (
         <Card>

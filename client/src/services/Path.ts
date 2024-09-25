@@ -22,14 +22,6 @@ export enum EquipmentQualityPath {
     WeaponQuality = '/qualities' + EquipmentPath.Weapon
 }
 
-export enum ModificationPath {
-    ModificationInjury = '/modifications' + RootPath.Injury,
-    ModificationTalent = '/modifications' + RootPath.Talent,
-    ModificationQuality = '/modifications' + RootPath.Qualities,
-    ModificationArmor = '/modifications' + EquipmentPath.Armor,
-    ModificationWeapon = '/modifications' + EquipmentPath.Weapon
-}
-
 export enum LorePath {
     Organization = '/lore/organizations/',
 }

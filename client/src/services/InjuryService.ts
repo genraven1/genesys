@@ -1,6 +1,5 @@
-import {ModificationPath, RootPath} from "./Path";
+import {RootPath} from "./Path";
 import Injury from "../models/Injury";
-import Modifier from "../models/common/Modifier";
 
 export default class InjuryService {
     static async createInjury(name: string): Promise<Injury> {
@@ -41,19 +40,6 @@ export default class InjuryService {
 
     static async getAllInjuries(): Promise<Injury[]> {
         return await fetch(RootPath.Injury)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async addInjuryModification(name: string, modifier: Modifier) {
-        return await fetch(ModificationPath.ModificationInjury + `${name}`, {
-            method: 'POST',
-            body: JSON.stringify(modifier)
-        })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
