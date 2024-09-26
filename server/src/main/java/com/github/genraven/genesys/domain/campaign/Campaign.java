@@ -19,6 +19,7 @@ public class Campaign {
     }
 
     @Id
+    private String id;
     private String name;
     private Party party = new Party();
     private List<Session> sessions = new ArrayList<>();

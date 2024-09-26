@@ -112,6 +112,7 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> getAllRivals(final ServerRequest serverRequest) {
+        final String name = serverRequest.pathVariable(NAME);
         return rivalService.getAllRivals().collectList().flatMap(rivals -> {
             if (rivals.isEmpty()) {
                 return ServerResponse.noContent().build();

@@ -2,6 +2,7 @@ import {Option} from "../components/common/InputSelectField";
 import Modifier from "./common/Modifier";
 
 export default interface Talent {
+    id: string
     name: string
     ranked: boolean
     activation: Activation

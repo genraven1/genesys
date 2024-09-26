@@ -37,7 +37,7 @@ function Row(props: Props) {
                 <TypographyCenterTableCell value={renderRanked()}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
-                <ActionsTableCell name={talent.name} path={RootPath.Talent}/>
+                <ActionsTableCell name={talent.id} path={RootPath.Talent}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>

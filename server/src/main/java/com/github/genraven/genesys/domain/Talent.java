@@ -23,6 +23,7 @@ public class Talent {
     }
 
     @Id
+    private String id;
     private String name;
     private Activation activation;
     private Tier tier;

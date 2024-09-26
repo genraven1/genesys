@@ -9,7 +9,7 @@ interface Props {
     path: string
 }
 
-export default function ActionsTableCell(props: Props): JSX.Element {
+export default function ActionsTableCell(props: Props) {
     const {name, path} = props
 
     const handleView = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): React.ReactElement => (

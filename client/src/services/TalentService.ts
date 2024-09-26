@@ -34,7 +34,7 @@ export default class TalentService {
     }
 
     static async updateTalent(talent: Talent): Promise<Talent> {
-        return await fetch(RootPath.Talent + `${talent.name}`, {
+        return await fetch(RootPath.Talent + `${talent.id}`, {
             method: "PUT",
             body: JSON.stringify(talent),
             headers: {
