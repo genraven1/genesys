@@ -17,24 +17,27 @@ public class ActorRouter {
                         .GET("/", actorHandler::getAllPlayers)
                         .POST("/{name}", actorHandler::createPlayer)
                         .GET("/{name}", actorHandler::getPlayer)
-                        .PUT("/{name}", actorHandler::updatePlayer))
+                        .PUT("/{name}", actorHandler::updatePlayer)
+                )
                 .path("/actors/nemeses", builder -> builder
                         .GET("/", actorHandler::getAllNemeses)
                         .POST("/{name}", actorHandler::createNemesis)
                         .GET("/{name}", actorHandler::getNemesis)
-                        .PUT("/{name}", actorHandler::updateNemesis))
+                        .PUT("/{name}", actorHandler::updateNemesis)
+                )
                 .path("/rivals", builder -> builder
                         .GET("/{name}", actorHandler::getRival)
-                        .PUT("/{name}", actorHandler::updateRival))
+                        .PUT("/{name}", actorHandler::updateRival)
+                )
                 .path("/campaigns/{name}", builder -> builder
-                        .POST("/rivals/", actorHandler::getAllRivals)
+                        .GET("/rivals/", actorHandler::getAllRivals)
                         .POST("/rivals/{rivalName}", actorHandler::createRival)
                 )
                 .path("/actors/minions", builder -> builder
                         .GET("/", actorHandler::getAllMinions)
                         .POST("/{name}", actorHandler::createMinion)
                         .GET("/{name}", actorHandler::getMinion)
-                        .PUT("/{name}", actorHandler::updateMinion))
-                .build();
+                        .PUT("/{name}", actorHandler::updateMinion)
+                ).build();
     }
 }
