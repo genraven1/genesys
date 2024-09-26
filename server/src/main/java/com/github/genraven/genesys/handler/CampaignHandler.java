@@ -85,7 +85,7 @@ public class CampaignHandler {
     public Mono<ServerResponse> addTalentToCampaign(final ServerRequest request) {
         final String name = request.pathVariable(NAME);
         return request.bodyToMono(Talent.class)
-                .flatMap(talent -> campaignService.addTalentToCampaign(name, talent.getName()))
+                .flatMap(talent -> campaignService.addTalentToCampaign(name, talent.getId()))
                 .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }

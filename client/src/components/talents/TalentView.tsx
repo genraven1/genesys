@@ -17,7 +17,7 @@ export default function TalentView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(RootPath.Talent + talent.name + '/edit')
+        navigate(RootPath.Talent + talent.id + '/edit')
     }
 
     const renderRanked = () => {

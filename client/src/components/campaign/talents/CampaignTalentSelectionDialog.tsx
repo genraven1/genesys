@@ -2,19 +2,19 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/ma
 import CampaignTalentSelectionTable from "./CampaignTalentSelectionTable";
 
 interface Props {
-    campaign_name: string
+    campaign_id: string
     open: boolean
     onClose: () => void
 }
 
 export default function CampaignTalentSelectionDialog(props: Props) {
-    const {campaign_name, open, onClose} = props
+    const {campaign_id, open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={'Add Talent'}/>
             <DialogContent>
-                <CampaignTalentSelectionTable campaign_name={campaign_name}/>
+                <CampaignTalentSelectionTable campaign_id={campaign_id}/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

@@ -13,20 +13,20 @@ import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell"
 import CampaignTalentSelectionDialog from "./CampaignTalentSelectionDialog";
 
 interface TableProps {
-    campaign_name: string
+    campaign_id: string
 }
 
 export default function ViewCampaignTalents(props: TableProps) {
-    const {campaign_name} = props
+    const {campaign_id} = props
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const headers = ['Name', 'Ranked', 'Activation', 'Tier']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setTalents(await CampaignService.getCampaignTalents(campaign_name))
+            setTalents(await CampaignService.getCampaignTalents(campaign_id))
         })()
-    }, [setTalents, campaign_name])
+    }, [setTalents, campaign_id])
 
     const renderRanked = (talent: Talent): string => {
         return talent.ranked ? 'Yes' : 'No'
@@ -58,7 +58,7 @@ export default function ViewCampaignTalents(props: TableProps) {
                 </TableContainer>
             </CardContent>
             {openTalentCreationDialog && <CampaignTalentSelectionDialog open={openTalentCreationDialog}
-                                                                        onClose={(): void => setOpenTalentCreationDialog(false)} campaign_name={campaign_name}/>}
+                                                                        onClose={(): void => setOpenTalentCreationDialog(false)} campaign_id={campaign_id}/>}
         </Card>
     );
 }

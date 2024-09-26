@@ -27,11 +27,11 @@ export default function CampaignPage(props: Props) {
     }
 
     const renderTalentDashboard = () => {
-        return <ViewCampaignTalents campaign_name={campaign.name}/>
+        return <ViewCampaignTalents campaign_id={campaign.id}/>
     }
 
     const renderSkillDashboard = () => {
-        return <ViewCampaignSkills campaign_name={campaign.name}/>
+        return <ViewCampaignSkills campaign_id={campaign.id}/>
     }
 
     return (

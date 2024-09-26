@@ -54,7 +54,7 @@ export default function TalentEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(RootPath.Talent + talent.name + '/view');
+        navigate(RootPath.Talent + talent.id + '/view');
     }
 
     return (

@@ -13,20 +13,20 @@ import CampaignSkillSelectionDialog from "./CampaignSkillSelectionDialog";
 import Skill from "../../../models/actor/Skill";
 
 interface TableProps {
-    campaign_name: string
+    campaign_id: string
 }
 
 export default function ViewCampaignSkills(props: TableProps) {
-    const {campaign_name} = props
+    const {campaign_id} = props
     const [skills, setSkills] = useState<Skill[]>([])
     const [openSkillAdditionDialog, setOpenSkillAdditionDialog] = useState(false)
     const headers = ['Name', 'Characteristic', 'Type']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setSkills(await CampaignService.getCampaignSkills(campaign_name))
+            setSkills(await CampaignService.getCampaignSkills(campaign_id))
         })()
-    }, [setSkills, campaign_name])
+    }, [setSkills, campaign_id])
 
     return (
         <Card>
@@ -53,7 +53,7 @@ export default function ViewCampaignSkills(props: TableProps) {
                 </TableContainer>
             </CardContent>
             {openSkillAdditionDialog && <CampaignSkillSelectionDialog open={openSkillAdditionDialog}
-                                                                      onClose={(): void => setOpenSkillAdditionDialog(false)} campaign_name={campaign_name}/>}
+                                                                      onClose={(): void => setOpenSkillAdditionDialog(false)} campaign_name={campaign_id}/>}
         </Card>
     );
 }
