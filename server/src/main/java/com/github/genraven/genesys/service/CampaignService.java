@@ -52,14 +52,6 @@ public class CampaignService {
         }).flatMap(campaignRepository::save);
     }
 
-    public Mono<Campaign> addSkillToCampaign(final String campaignId, final String skillId) {
-        return campaignRepository.findById(campaignId)
-                .flatMap(existingCampaign -> {
-                    existingCampaign.getSkillIds().add(skillId);
-                    return campaignRepository.save(existingCampaign);
-                });
-    }
-
     public Mono<List<Skill>> getSkillsByCampaignId(final String campaignId) {
         return campaignRepository.findById(campaignId)
                 .flatMap(campaign -> Flux.fromIterable(campaign.getSkillIds())

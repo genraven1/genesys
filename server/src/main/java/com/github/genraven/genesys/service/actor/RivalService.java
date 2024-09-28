@@ -8,6 +8,8 @@ import com.github.genraven.genesys.domain.actor.npc.SingleNonPlayerActor;
 
 import com.github.genraven.genesys.repository.actor.RivalRepository;
 import com.github.genraven.genesys.service.CampaignService;
+import com.github.genraven.genesys.service.SkillService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -16,16 +18,12 @@ import reactor.core.publisher.Mono;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RivalService {
 
     private final RivalRepository rivalRepository;
     private final CampaignService campaignService;
-
-    @Autowired
-    public RivalService(final RivalRepository rivalRepository, final CampaignService campaignService) {
-        this.rivalRepository = rivalRepository;
-        this.campaignService = campaignService;
-    }
+    private final SkillService skillService;
 
     public Flux<Rival> getAllRivals() {
         return rivalRepository.findAll();
@@ -36,13 +34,12 @@ public class RivalService {
     }
 
     public Mono<Rival> createRival(final String rivalName) {
-        return campaignService.getCurrentCampaign()
-                .flatMap(campaign -> campaignService.getSkillsByCampaignId(campaign.getId())
-                        .flatMap(skills -> {
-                            final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
-                            rival.setSkills(skills.stream().map(ActorSkill::new).collect(Collectors.toList()));
-                            return rivalRepository.save(rival);
-                        }));
+        return skillService.getSkillsForCurrentCampaign()
+                .flatMap(skills -> {
+                    final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
+                    rival.setSkills(skills.stream().map(ActorSkill::new).collect(Collectors.toList()));
+                    return rivalRepository.save(rival);
+                });
     }
 
     public Mono<Rival> updateRival(final String name, final Rival rival) {

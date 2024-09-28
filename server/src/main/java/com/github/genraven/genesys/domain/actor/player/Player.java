@@ -4,7 +4,6 @@ import com.github.genraven.genesys.domain.CriticalInjury;
 import com.github.genraven.genesys.domain.actor.Actor;
 
 import com.github.genraven.genesys.domain.actor.ActorTalent;
-import com.github.genraven.genesys.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;

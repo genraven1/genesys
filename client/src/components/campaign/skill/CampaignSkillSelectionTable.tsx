@@ -14,15 +14,14 @@ import SkillBackdrop from "../../skills/SkillBackdrop";
 
 interface RowProps {
     skill: Skill
-    campaign_name: string
 }
 
 function SkillNameRow(props: RowProps) {
-    const {skill, campaign_name} = props;
+    const {skill} = props;
     const [openSkillBackDrop, setOpenSkillBackDrop] = useState(false);
 
     const addSkill = async () => {
-        await CampaignService.addCampaignSkill(campaign_name, skill);
+        await CampaignService.addCampaignSkill(skill);
     }
 
     return (
@@ -40,12 +39,8 @@ function SkillNameRow(props: RowProps) {
     );
 }
 
-interface TableProps {
-    campaign_name: string
-}
 
-export default function CampaignSkillSelectionTable(props: TableProps) {
-    const {campaign_name} = props
+export default function CampaignSkillSelectionTable() {
     const [skills, setSkills] = useState<Skill[]>([])
     const headers = ['Name', 'Add']
 
@@ -61,7 +56,7 @@ export default function CampaignSkillSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                        <SkillNameRow skill={skill} campaign_name={campaign_name}/>
+                        <SkillNameRow skill={skill}/>
                     ))}
                 </TableBody>
             </Table>

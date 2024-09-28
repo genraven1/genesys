@@ -12,21 +12,16 @@ import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell"
 import CampaignSkillSelectionDialog from "./CampaignSkillSelectionDialog";
 import Skill from "../../../models/actor/Skill";
 
-interface TableProps {
-    campaign_id: string
-}
-
-export default function ViewCampaignSkills(props: TableProps) {
-    const {campaign_id} = props
+export default function ViewCampaignSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
     const [openSkillAdditionDialog, setOpenSkillAdditionDialog] = useState(false)
     const headers = ['Name', 'Characteristic', 'Type']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setSkills(await CampaignService.getCampaignSkills(campaign_id))
+            setSkills(await CampaignService.getCampaignSkills())
         })()
-    }, [setSkills, campaign_id])
+    }, [setSkills])
 
     return (
         <Card>
@@ -53,7 +48,7 @@ export default function ViewCampaignSkills(props: TableProps) {
                 </TableContainer>
             </CardContent>
             {openSkillAdditionDialog && <CampaignSkillSelectionDialog open={openSkillAdditionDialog}
-                                                                      onClose={(): void => setOpenSkillAdditionDialog(false)} campaign_name={campaign_id}/>}
+                                                                      onClose={(): void => setOpenSkillAdditionDialog(false)}/>}
         </Card>
     );
 }

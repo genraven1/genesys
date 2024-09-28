@@ -82,21 +82,6 @@ public class CampaignHandler {
                         .switchIfEmpty(ServerResponse.notFound().build()));
     }
 
-    public Mono<ServerResponse> addSkillToCampaign(final ServerRequest request) {
-        final String name = request.pathVariable(NAME);
-        return request.bodyToMono(Skill.class)
-                .flatMap(skill -> campaignService.addSkillToCampaign(name, skill.getName()))
-                .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
-                .switchIfEmpty(ServerResponse.notFound().build());
-    }
-
-    public Mono<ServerResponse> getSkillsByCampaign(ServerRequest request) {
-        final String name = request.pathVariable(NAME);
-        return campaignService.getSkillsByCampaignId(name)
-                .flatMap(skills -> ServerResponse.ok().bodyValue(skills))
-                .switchIfEmpty(ServerResponse.notFound().build());
-    }
-
     public Mono<ServerResponse> createSession(final ServerRequest serverRequest) {
         final String campaignName = serverRequest.pathVariable("campaignName");
         final String sessionName = serverRequest.pathVariable("sessionName");

@@ -31,7 +31,7 @@ export default function CampaignPage(props: Props) {
     }
 
     const renderSkillDashboard = () => {
-        return <ViewCampaignSkills campaign_id={campaign.id}/>
+        return <ViewCampaignSkills/>
     }
 
     return (

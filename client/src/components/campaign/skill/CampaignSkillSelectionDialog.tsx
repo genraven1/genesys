@@ -2,19 +2,18 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/ma
 import CampaignSkillSelectionTable from "./CampaignSkillSelectionTable";
 
 interface Props {
-    campaign_name: string
     open: boolean
     onClose: () => void
 }
 
 export default function CampaignSkillSelectionDialog(props: Props) {
-    const {campaign_name, open, onClose} = props
+    const {open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle title={'Add Skill'}/>
             <DialogContent>
-                <CampaignSkillSelectionTable campaign_name={campaign_name}/>
+                <CampaignSkillSelectionTable/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

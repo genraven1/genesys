@@ -11,6 +11,7 @@ public class ActorTalent extends Talent {
     protected ActorTalent() {}
 
     public ActorTalent(final Talent talent) {
+        this.setId(talent.getId());
         this.setName(talent.getName());
         this.setActivation(talent.getActivation());
         this.setRanked(talent.isRanked());

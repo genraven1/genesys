@@ -45,9 +45,9 @@ public class SkillService {
                         .collectList());
     }
 
-    public Mono<Campaign> addSkillToCurrentCampaign(final String talentId) {
+    public Mono<Campaign> addSkillToCurrentCampaign(final String skillId) {
         return campaignRepository.findByCurrent(true).flatMap(existingCampaign -> {
-            existingCampaign.getSkillIds().add(talentId);
+            existingCampaign.getSkillIds().add(skillId);
             return campaignRepository.save(existingCampaign);
         });
     }

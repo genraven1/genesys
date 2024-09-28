@@ -1,6 +1,6 @@
 import Campaign from "../models/campaign/Campaign";
 import axios from "axios";
-import {CampaignPath, RootPath} from "./Path";
+import {CampaignPath} from "./Path";
 import CampaignSession from "../models/campaign/CampaignSession";
 import Scene from "../models/campaign/Scene";
 import Talent from "../models/Talent";
@@ -69,8 +69,8 @@ export default class CampaignService {
             })
     }
 
-    static async getCampaignSkills(name: string): Promise<Skill[]> {
-        return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Skills)
+    static async getCampaignSkills(): Promise<Skill[]> {
+        return await fetch(CampaignPath.Skills)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -79,8 +79,8 @@ export default class CampaignService {
             })
     }
 
-    static async addCampaignSkill(name: string, skill: Skill): Promise<Campaign> {
-        return await fetch(CampaignPath.Campaign + `${name}` + RootPath.Skills, {
+    static async addCampaignSkill(skill: Skill): Promise<Campaign> {
+        return await fetch(CampaignPath.Skills, {
             method: "POST",
             body: JSON.stringify(skill),
             headers: {

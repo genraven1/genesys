@@ -1,6 +1,5 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
-import com.github.genraven.genesys.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;

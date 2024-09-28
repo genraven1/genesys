@@ -1,6 +1,9 @@
 package com.github.genraven.genesys.domain.actor;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -29,4 +32,16 @@ public class Actor {
     private int wounds = 1;
     private List<ActorWeapon> weapons = new ArrayList<>();
     private List<ActorArmor> armors = new ArrayList<>();
+
+    @AllArgsConstructor
+    @Getter
+    public enum ActorType {
+        MINION("Minion"),
+        RIVAL("Rival"),
+        NEMESIS("Nemesis"),
+        PLAYER("Player");
+
+        @JsonValue
+        private final String label;
+    }
 }

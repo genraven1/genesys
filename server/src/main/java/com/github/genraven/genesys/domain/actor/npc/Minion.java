@@ -17,6 +17,7 @@ public class Minion extends NonPlayerActor {
 
     public Minion(final NonPlayerActor nonPlayerActor) {
         this.setName(nonPlayerActor.getName());
+        this.setType(ActorType.MINION);
         this.setBrawn(nonPlayerActor.getBrawn());
         this.setAgility(nonPlayerActor.getAgility());
         this.setIntellect(nonPlayerActor.getIntellect());

@@ -12,6 +12,7 @@ public class ActorSkill extends Skill {
     protected ActorSkill() {}
 
     public ActorSkill(final Skill skill) {
+        this.setId(skill.getId());
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());

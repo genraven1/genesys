@@ -18,13 +18,16 @@ public class CampaignRouter {
                         .POST("/", campaignHandler::createCampaign)
                         .GET("/{name}", campaignHandler::getCampaign)
                         .PUT("/{name}", campaignHandler::updateCampaign)
-                        .GET("/{name}/skills/", campaignHandler::getSkillsByCampaign)
-                        .POST("/{name}/skills/", campaignHandler::addSkillToCampaign)
                         .PUT("/{campaignName}/sessions/{sessionName}", campaignHandler::createSession)
                         .GET("/{campaignName}/sessions/{sessionName}", campaignHandler::getSession)
                         .PATCH("/{campaignName}/sessions/{sessionName}", campaignHandler::updateSession)
                         .PUT("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::createScene)
                         .GET("/{campaignName}/sessions/{sessionName}/scenes/{sceneName}", campaignHandler::getScene)
-                ).build();
+                )
+                .path("/current", builder -> builder
+                        .PUT(campaignHandler::setCurrentCampaign)
+                        .GET(campaignHandler::getCurrentCampaign)
+                )
+                .build();
     }
 }
