@@ -17,6 +17,7 @@ public class Skill {
     }
 
     @Id
+    private String id;
     private String name;
     private CharacteristicType characteristic;
     private SkillType type;

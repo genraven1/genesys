@@ -26,7 +26,7 @@ export default function RivalEditSkillDialog(props: Props) {
                 rival.skills[index] = actorSkill
             }
         })
-        await ActorService.updateRival(rival.name, rival)
+        await ActorService.updateRival(rival)
         onClose()
     }
 

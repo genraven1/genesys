@@ -10,7 +10,6 @@ import Talent from "../../../../../models/Talent";
 import Rival from "../../../../../models/actor/npc/Rival";
 import TalentBackdrop from "../../../../talents/TalentBackdrop";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import TalentService from "../../../../../services/TalentService";
 import ActorService from "../../../../../services/ActorService";
 import CampaignService from "../../../../../services/CampaignService";
 

@@ -41,5 +41,6 @@ export enum CampaignPath {
     Session = '/sessions/',
     Scene = '/scenes/',
     Current = '/current',
-    Talents = '/campaigns/talents/'
+    Talents = '/campaigns/talents/',
+    Skills = '/campaigns/skills/'
 }

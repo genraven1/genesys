@@ -17,7 +17,12 @@ public class SkillRouter {
                         .GET("/", skillHandler::getAllSkills)
                         .POST("/{name}", skillHandler::createSkill)
                         .GET("/{name}", skillHandler::getSkill)
-                        .PUT("/{name}", skillHandler::updateSkill))
+                        .PUT("/{name}", skillHandler::updateSkill)
+                )
+                .path("campaigns/skills/", builder -> builder
+                        .GET(skillHandler::getSkillsForCurrentCampaign)
+                        .POST(skillHandler::addSkillToCurrentCampaign)
+                )
                 .build();
     }
 }

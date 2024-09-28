@@ -21,7 +21,7 @@ export default function CreateRivalArmorDialog(props: Props) {
     const onCreate = async (): Promise<void> => {
         if (armor) {
             rival.armors.push({...armor, slot: ArmorSlot.None})
-            await ActorService.updateRival(rival.name, rival)
+            await ActorService.updateRival(rival)
         }
         onClose()
     }

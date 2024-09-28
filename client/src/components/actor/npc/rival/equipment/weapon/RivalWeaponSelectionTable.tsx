@@ -24,7 +24,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
 
     const addWeapon = async () => {
         rival.weapons.push({slot: WeaponSlot.None, ...weapon})
-        await ActorService.updateRival(rival.name, rival)
+        await ActorService.updateRival(rival)
     }
 
     return (

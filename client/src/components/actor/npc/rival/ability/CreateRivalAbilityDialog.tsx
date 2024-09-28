@@ -23,7 +23,7 @@ export default function CreateRivalAbilityDialog(props: Props) {
         if (ability) {
             if (!rival.abilities.some(npcAbility => npcAbility.name === ability.name)) {
                 rival.abilities.push(ability)
-                await ActorService.updateRival(rival.name, rival)
+                await ActorService.updateRival(rival)
             }
         }
         onClose()

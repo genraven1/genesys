@@ -78,7 +78,7 @@ export default function RivalEdit(props: Props) {
 
     const updateRival = async (copyRival: Rival) => {
         setRival(copyRival)
-        await ActorService.updateRival(copyRival.id, copyRival)
+        await ActorService.updateRival(copyRival)
     }
 
     const onView = () => {

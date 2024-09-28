@@ -37,7 +37,7 @@ export default function RivalArmorEquipDialog(props: Props) {
                 }
             })
         }
-        await ActorService.updateRival(rival.name, rival)
+        await ActorService.updateRival(rival)
     }
 
     return (
