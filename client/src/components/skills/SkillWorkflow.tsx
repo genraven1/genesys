@@ -16,29 +16,22 @@ export function useFetchAllSkills(): Skill[] {
     return skills;
 }
 
-function useFetchSkill(name: string): Skill {
+function useFetchSkill(id: string): Skill {
     const [skill, setSkill] = useState<Skill>()
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
-            try {
-                const skillData = await SkillService.getSkill(name)
-                if (skillData) {
-                    setSkill(skillData)
-                }
-            } catch (err) {
-                console.log(err)
-            }
+            setSkill(await SkillService.getSkill(id))
         })()
-    }, [name, setSkill])
+    }, [id, setSkill])
     return skill as Skill
 }
 
 export default function SkillWorkflow() {
-    const {name} = useParams<{ name: string }>()
-    const skill = useFetchSkill(name as string)
+    const {id} = useParams<{ id: string }>()
+    const skill = useFetchSkill(id as string)
 
     const useWorkflowRender = () => {
         const pathname = useLocation().pathname

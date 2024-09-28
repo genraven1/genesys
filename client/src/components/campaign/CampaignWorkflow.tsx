@@ -42,8 +42,8 @@ export function useFetchCurrentCampaign() {
 }
 
 export default function CampaignWorkflow() {
-    const {campaign_id} = useParams<{ campaign_id?: string }>()
-    const campaign = useFetchCampaign(campaign_id!)
+    const {id} = useParams<{ id?: string }>()
+    const campaign = useFetchCampaign(id!)
     let campaigns = useFetchAllCampaigns()
 
     const useWorkflowRender = () => {
