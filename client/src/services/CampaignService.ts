@@ -43,8 +43,8 @@ export default class CampaignService {
             })
     }
 
-    static async getCampaignTalents(id: string): Promise<Talent[]> {
-        return await fetch(CampaignPath.Campaign + `${id}` + RootPath.Talent)
+    static async getCampaignTalents(): Promise<Talent[]> {
+        return await fetch(CampaignPath.Talents)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -53,8 +53,8 @@ export default class CampaignService {
             })
     }
 
-    static async addCampaignTalent(id: string, talent: Talent): Promise<Campaign> {
-        return await fetch(CampaignPath.Campaign + `${id}` + RootPath.Talent, {
+    static async addCampaignTalent(talent: Talent): Promise<Campaign> {
+        return await fetch(CampaignPath.Talents, {
             method: "POST",
             body: JSON.stringify(talent),
             headers: {

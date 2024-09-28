@@ -56,7 +56,7 @@ export default function SkillEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(RootPath.Skills + skill.name + '/view');
+        navigate(RootPath.Skills + skill.id + '/view');
     }
 
     return (

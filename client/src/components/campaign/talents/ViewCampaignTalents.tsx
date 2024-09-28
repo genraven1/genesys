@@ -12,21 +12,16 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import CampaignTalentSelectionDialog from "./CampaignTalentSelectionDialog";
 
-interface TableProps {
-    campaign_id: string
-}
-
-export default function ViewCampaignTalents(props: TableProps) {
-    const {campaign_id} = props
+export default function ViewCampaignTalents() {
     const [talents, setTalents] = useState<Talent[]>([])
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
     const headers = ['Name', 'Ranked', 'Activation', 'Tier']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setTalents(await CampaignService.getCampaignTalents(campaign_id))
+            setTalents(await CampaignService.getCampaignTalents())
         })()
-    }, [setTalents, campaign_id])
+    }, [setTalents])
 
     const renderRanked = (talent: Talent): string => {
         return talent.ranked ? 'Yes' : 'No'
@@ -58,7 +53,7 @@ export default function ViewCampaignTalents(props: TableProps) {
                 </TableContainer>
             </CardContent>
             {openTalentCreationDialog && <CampaignTalentSelectionDialog open={openTalentCreationDialog}
-                                                                        onClose={(): void => setOpenTalentCreationDialog(false)} campaign_id={campaign_id}/>}
+                                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
         </Card>
     );
 }

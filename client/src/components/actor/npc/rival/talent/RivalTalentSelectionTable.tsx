@@ -12,13 +12,14 @@ import TalentBackdrop from "../../../../talents/TalentBackdrop";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import TalentService from "../../../../../services/TalentService";
 import ActorService from "../../../../../services/ActorService";
+import CampaignService from "../../../../../services/CampaignService";
 
 interface RowProps {
     talent: Talent
     rival: Rival
 }
 
-function TalentNameRow(props: RowProps): JSX.Element {
+function TalentNameRow(props: RowProps) {
     const {talent, rival} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false)
 
@@ -33,7 +34,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
         } else {
             rival.talents.push({...talent, ranks: 1})
         }
-        await ActorService.updateRival(rival.name, rival)
+        await ActorService.updateRival(rival)
     }
 
     return (
@@ -62,11 +63,7 @@ export default function RivalTalentSelectionTable(props: TableProps) {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const talentList = await TalentService.getTalents()
-            if (!talentList) {
-                return
-            }
-            setTalents(talentList)
+            setTalents(await CampaignService.getCampaignTalents())
         })()
     }, [setTalents])
 

@@ -49,8 +49,8 @@ export default class ActorService {
         return await (await axios.put(ActorPath.Nemesis + name, nemesis)).data;
     }
 
-    static async getRival(name: string): Promise<Rival> {
-        return await fetch(ActorPath.Rival + `${name}`)
+    static async getRival(id: string): Promise<Rival> {
+        return await fetch(ActorPath.Rival + `${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -59,11 +59,12 @@ export default class ActorService {
             })
     }
 
-    static async createRival(campaignName: string, rivalName: string): Promise<Rival> {
-        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival + `${rivalName}`, {
+    static async createRival(id: string, rivalName: string): Promise<Rival> {
+        return await fetch(CampaignPath.Campaign + `${id}` + ActorPath.Rival + `${rivalName}`, {
             method: "POST"
         })
             .then((res) => {
+                console.log(res)
                 if (!res.ok) {
                     throw new Error(res.statusText)
                 }
@@ -81,8 +82,20 @@ export default class ActorService {
             })
     }
 
-    static async updateRival(name: string, rival: Rival): Promise<Rival> {
-        return await (await axios.put(ActorPath.Rival + name, rival)).data;
+    static async updateRival(rival: Rival): Promise<Rival> {
+        return await fetch(ActorPath.Rival + `${rival.id}`, {
+            method: "PUT",
+            body: JSON.stringify(rival),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async createMinion(name: string): Promise<Minion> {

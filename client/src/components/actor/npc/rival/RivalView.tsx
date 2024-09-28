@@ -25,7 +25,7 @@ export default function RivalView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Rival + rival.name + '/edit')
+        navigate(ActorPath.Rival + rival.id + '/edit')
     }
 
     return (

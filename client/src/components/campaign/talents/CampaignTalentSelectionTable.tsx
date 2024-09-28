@@ -14,15 +14,14 @@ import CampaignService from "../../../services/CampaignService";
 
 interface RowProps {
     talent: Talent
-    campaign_id: string
 }
 
 function TalentNameRow(props: RowProps) {
-    const {talent, campaign_id} = props;
+    const {talent} = props;
     const [openTalentBackDrop, setOpenTalentBackDrop] = useState(false);
 
     const addTalent = async () => {
-        await CampaignService.addCampaignTalent(campaign_id,talent);
+        await CampaignService.addCampaignTalent(talent);
     }
 
     return (
@@ -40,12 +39,7 @@ function TalentNameRow(props: RowProps) {
     );
 }
 
-interface TableProps {
-    campaign_id: string
-}
-
-export default function CampaignTalentSelectionTable(props: TableProps) {
-    const {campaign_id} = props
+export default function CampaignTalentSelectionTable() {
     const [talents, setTalents] = useState<Talent[]>([])
     const headers = ['Name', 'Add']
 
@@ -61,7 +55,7 @@ export default function CampaignTalentSelectionTable(props: TableProps) {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {talents.map((talent: Talent) => (
-                        <TalentNameRow talent={talent} campaign_id={campaign_id}/>
+                        <TalentNameRow talent={talent}/>
                     ))}
                 </TableBody>
             </Table>

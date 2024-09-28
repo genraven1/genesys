@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
@@ -36,7 +37,7 @@ public class TalentHandler {
     }
 
     public Mono<ServerResponse> getTalent(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         return talentService.getTalent(name)
                 .flatMap(talent -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -45,12 +46,12 @@ public class TalentHandler {
     }
 
     public Mono<ServerResponse> createTalent(final ServerRequest serverRequest) {
-        return talentService.createTalent(serverRequest.pathVariable("name"))
+        return talentService.createTalent(serverRequest.pathVariable(NAME))
                 .flatMap(talent -> ServerResponse.created(getURI(talent)).bodyValue(talent));
     }
 
     public Mono<ServerResponse> updateTalent(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         final Mono<Talent> talentMono = serverRequest.bodyToMono(Talent.class);
         return talentMono
                 .flatMap(talent -> talentService.updateTalent(name, talent))
@@ -58,6 +59,19 @@ public class TalentHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(talent))
                 .switchIfEmpty(ServerResponse.notFound().build()));
+    }
+
+    public Mono<ServerResponse> getTalentsForCurrentCampaign(final ServerRequest serverRequest) {
+        return talentService.getTalentsForCurrentCampaign()
+                .flatMap(talents -> ServerResponse.ok().bodyValue(talents))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> addTalentToCurrentCampaign(final ServerRequest request) {
+        return request.bodyToMono(Talent.class)
+                .flatMap(talent -> talentService.addTalentToCurrentCampaign(talent.getId()))
+                .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     private URI getURI(final Talent talent) {

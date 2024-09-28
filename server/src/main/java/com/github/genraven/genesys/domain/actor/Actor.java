@@ -17,6 +17,7 @@ public class Actor {
     }
 
     @Id
+    private String id;
     private String name;
     private ActorType type;
     private int brawn = 1;

@@ -37,7 +37,7 @@ public class RivalService {
 
     public Mono<Rival> createRival(final String rivalName) {
         return campaignService.getCurrentCampaign()
-                .flatMap(campaign -> campaignService.getSkillsByCampaignId(campaign.getName())
+                .flatMap(campaign -> campaignService.getSkillsByCampaignId(campaign.getId())
                         .flatMap(skills -> {
                             final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
                             rival.setSkills(skills.stream().map(ActorSkill::new).collect(Collectors.toList()));

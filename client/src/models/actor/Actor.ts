@@ -6,6 +6,7 @@ import {ActorGear} from "../equipment/Gear";
 import {Option} from "../../components/common/InputSelectField";
 
 export default interface Actor {
+    id: string
     name: string,
     type: ActorType,
     brawn: number,

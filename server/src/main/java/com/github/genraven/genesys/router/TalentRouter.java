@@ -15,7 +15,12 @@ public class TalentRouter {
                         .GET("/", talentHandler::getAllTalents)
                         .POST("/{name}", talentHandler::createTalent)
                         .GET("/{name}", talentHandler::getTalent)
-                        .PUT("/{name}", talentHandler::updateTalent))
+                        .PUT("/{name}", talentHandler::updateTalent)
+                )
+                .path("campaigns/talents/", builder -> builder
+                        .GET(talentHandler::getTalentsForCurrentCampaign)
+                        .POST(talentHandler::addTalentToCurrentCampaign)
+                )
                 .build();
     }
 }

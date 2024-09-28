@@ -26,7 +26,7 @@ function Row(props: Props) {
             <TypographyCenterTableCell value={skill.name}/>
             <TypographyCenterTableCell value={skill.type}/>
             <TypographyCenterTableCell value={skill.characteristic}/>
-            <ActionsTableCell name={skill.name} path={RootPath.Skills}/>
+            <ActionsTableCell name={skill.id} path={RootPath.Skills}/>
         </TableRow>
     )
 }

@@ -29,8 +29,8 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Minion + minion.name + '/edit')
                 break
             case ActorType.Rival:
-                let rival = await ActorService.createRival(campaign.name, name)
-                navigate(ActorPath.Rival + rival.name + '/edit')
+                let rival = await ActorService.createRival(campaign.id, name)
+                navigate(ActorPath.Rival + rival.id + '/edit')
                 break
             case ActorType.Nemesis:
                 let nemesis = {...await ActorService.createNemesis(name)}

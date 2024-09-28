@@ -4,7 +4,7 @@ import {ViewFieldCard} from "../common/ViewFieldCard";
 import {RootPath} from "../../services/Path";
 import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     skill: Skill
@@ -12,11 +12,10 @@ interface Props {
 
 export default function SkillView(props: Props) {
     const {skill} = props
-    const {id} = useParams<{ id: string }>()
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(RootPath.Skills + id + '/edit')
+        navigate(RootPath.Skills + skill.id + '/edit')
     }
 
     return (

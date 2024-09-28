@@ -31,7 +31,7 @@ function Row(props: Props) {
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={rival.name}/>
-                <ActionsTableCell name={rival.name} path={ActorPath.Rival}/>
+                <ActionsTableCell name={rival.id} path={ActorPath.Rival}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
