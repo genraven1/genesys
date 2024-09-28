@@ -18,8 +18,6 @@ public class CampaignRouter {
                         .POST("/", campaignHandler::createCampaign)
                         .GET("/{name}", campaignHandler::getCampaign)
                         .PUT("/{name}", campaignHandler::updateCampaign)
-                        .GET("/{name}/talents/", campaignHandler::getTalentsByCampaign)
-                        .POST("/{name}/talents/", campaignHandler::addTalentToCampaign)
                         .GET("/{name}/skills/", campaignHandler::getSkillsByCampaign)
                         .POST("/{name}/skills/", campaignHandler::addSkillToCampaign)
                         .PUT("/{campaignName}/sessions/{sessionName}", campaignHandler::createSession)

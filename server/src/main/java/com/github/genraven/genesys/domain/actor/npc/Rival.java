@@ -1,13 +1,9 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
-import com.github.genraven.genesys.domain.CriticalInjury;
 import com.github.genraven.genesys.domain.actor.ActorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

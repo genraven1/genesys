@@ -4,7 +4,7 @@ import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.repository.CampaignRepository;
 import com.github.genraven.genesys.repository.TalentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,16 +12,11 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TalentService {
 
     private final TalentRepository talentRepository;
     private final CampaignRepository campaignRepository;
-
-    @Autowired
-    public TalentService(final TalentRepository talentRepository, final CampaignRepository campaignRepository) {
-        this.talentRepository = talentRepository;
-        this.campaignRepository = campaignRepository;
-    }
 
     public Flux<Talent> getAllTalents() {
         return talentRepository.findAll();
