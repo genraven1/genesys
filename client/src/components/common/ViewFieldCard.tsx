@@ -12,7 +12,7 @@ interface ViewProps {
     value: string
 }
 
-export function ViewFieldCard(props: ViewProps): JSX.Element {
+export function ViewFieldCard(props: ViewProps) {
     const {name, value} = props
     return (
         <Grid item xs>
@@ -30,7 +30,7 @@ interface ViewNumberProps {
     value: number
 }
 
-export function ViewNumberFieldCard(props: ViewNumberProps): JSX.Element {
+export function ViewNumberFieldCard(props: ViewNumberProps) {
     const {name, value} = props
     return (
         <Grid item xs>
@@ -50,7 +50,7 @@ interface EditStringProps {
     errorText?: string,
 }
 
-export function EditStringFieldCard(props: EditStringProps): JSX.Element {
+export function EditStringFieldCard(props: EditStringProps) {
     const { defaultValue, onCommit, title, errorText } = props;
     return (
         <Grid item xs>
@@ -71,7 +71,7 @@ interface EditNumberProps {
     max: number
 }
 
-export function EditNumberFieldCard(props: EditNumberProps): JSX.Element {
+export function EditNumberFieldCard(props: EditNumberProps) {
     const { value, title, onChange, min, max } = props;
 
     return (
@@ -91,10 +91,10 @@ interface QualityActivationProps {
     quality: Quality
 }
 
-export function ViewQualityActivationCard(props: QualityActivationProps): JSX.Element {
+export function ViewQualityActivationCard(props: QualityActivationProps) {
     const {quality} = props
 
-    const renderActivation = (): JSX.Element => {
+    const renderActivation = () => {
         if(quality?.passive!!) {return <GenesysDescriptionTypography text={'Passive'}/>}
         else {return <GenesysQualityTypography ranks={quality?.cost}/>}
     }

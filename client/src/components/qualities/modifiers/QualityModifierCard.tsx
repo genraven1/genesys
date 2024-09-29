@@ -11,7 +11,6 @@ import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import Quality from "../../../models/Quality";
-import AddQualityModifierDialog from "./AddQualityModifierDialog";
 import Modifier from "../../../models/common/Modifier";
 import ModifierService from "../../../services/ModifierService";
 import TableCell from "@mui/material/TableCell";
@@ -23,7 +22,6 @@ interface Props {
 
 export default function QualityModifierCard(props: Props) {
     const {quality} = props
-    const [openDialog, setOpenDialog] = useState(false)
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
     const [rows, setRows] = useState<Modifier[]>(quality.modifiers)
@@ -39,12 +37,9 @@ export default function QualityModifierCard(props: Props) {
         if (pathname.endsWith('/edit')) {
             return (
                 <TableFooter>
-                    <TableRow>
+                    <TableRow key={'footer'}>
                         <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
                             Modifier</Button>
-                        {openDialog && <AddQualityModifierDialog open={openDialog}
-                                                                 onClose={(): void => setOpenDialog(false)}
-                                                                 quality={quality}/>}
                     </TableRow>
                 </TableFooter>
             )
@@ -55,21 +50,22 @@ export default function QualityModifierCard(props: Props) {
 
     const handleTypeChange = (index: number, value: string) => {
         const updatedRows = rows.map((row, i) =>
-            i === index ? { ...row, type: value } : row
+            i === index ? {...row, type: value} : row
         );
         setRows(updatedRows);
     };
 
     const handleRanksChange = (index: number, value: string) => {
         const updatedRows = rows.map((row, i) =>
-            i === index ? { ...row, ranks: Number(value) } : row
+            i === index ? {...row, ranks: Number(value)} : row
         );
         setRows(updatedRows);
     };
 
     const addRow = () => {
-        setOpenDialog(true)
-    }
+        const newRow: Modifier = {type: '', ranks: 1};
+        setRows([...rows, newRow]);
+    };
 
     return (
         <Card sx={{"width": 1}}>
@@ -87,15 +83,18 @@ export default function QualityModifierCard(props: Props) {
                                             getOptionLabel={(option) => option}
                                             value={row.type}
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
-                                            renderInput={(params) => <TextField {...params} label="Type" variant="outlined" />}
+                                            renderInput={(params) => <TextField {...params} label="Type"
+                                                                                variant="outlined"/>}
+                                            disabled={pathname.endsWith('/view')}
                                         />
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell style={{textAlign: "center"}}>
                                         <TextField
                                             type="number"
                                             value={row.ranks}
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
-                                            inputProps={{ min: 1, max: 10 }}
+                                            inputProps={{min: 1, max: 10}}
+                                            disabled={pathname.endsWith('/view')}
                                         />
                                     </TableCell>
                                 </TableRow>
