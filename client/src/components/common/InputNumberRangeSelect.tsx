@@ -1,5 +1,5 @@
-import { ClickAwayListener, MenuItem, TextField, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import {ClickAwayListener, MenuItem, TextField, Typography} from "@mui/material";
+import {ChangeEvent, useState} from "react";
 import EditField from "./EditField";
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
     helperText?: string
 }
 
-export default function InputNumberRangeSelectField(props: Props): JSX.Element {
-    const { defaultValue, defaultEdit, min, max, editable, onChange, onCommit, helperText } = props;
+export default function InputNumberRangeSelectField(props: Props) {
+    const {defaultValue, defaultEdit, min, max, editable, onChange, onCommit, helperText} = props;
     const [value, setValue] = useState(defaultValue);
     const [edit, setEdit] = useState(defaultEdit ?? false);
 
@@ -41,7 +41,7 @@ export default function InputNumberRangeSelectField(props: Props): JSX.Element {
         </ClickAwayListener>
     );
 
-    const viewElement = <Typography style={{ wordWrap: 'break-word' }}>{value}</Typography>;
+    const viewElement = <Typography style={{wordWrap: 'break-word'}}>{value}</Typography>;
 
     const onCancel = (): void => {
         setEdit(!edit);
@@ -49,6 +49,7 @@ export default function InputNumberRangeSelectField(props: Props): JSX.Element {
     };
 
     return (
-        <EditField viewElement={viewElement} edit={edit} editable={editable} editElement={editElement} onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit} />
+        <EditField viewElement={viewElement} edit={edit} editable={editable} editElement={editElement}
+                   onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit}/>
     );
 }

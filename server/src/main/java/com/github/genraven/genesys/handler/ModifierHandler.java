@@ -20,9 +20,8 @@ public class ModifierHandler {
         this.modifierService = modifierService;
     }
 
-    public Mono<ServerResponse> getModifiersByType(final ServerRequest serverRequest) {
-        final String type = serverRequest.pathVariable("type");
-        return modifierService.getModifierTypes(type).collectList().flatMap(modifierTypes -> {
+    public Mono<ServerResponse> getModifiers(final ServerRequest serverRequest) {
+        return modifierService.getModifiers().collectList().flatMap(modifierTypes -> {
             if (modifierTypes.isEmpty()) {
                 return ServerResponse.noContent().build();
             }

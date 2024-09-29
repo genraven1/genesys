@@ -1,5 +1,5 @@
-import { ClickAwayListener, TextField } from "@mui/material";
-import { ChangeEvent, InputHTMLAttributes, useState } from "react";
+import {ClickAwayListener, TextField} from "@mui/material";
+import {ChangeEvent, InputHTMLAttributes, useState} from "react";
 import EditField from "./EditField";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 
@@ -17,8 +17,20 @@ interface Props {
     inputProps?: InputHTMLAttributes<HTMLInputElement>
 }
 
-export default function InlineTextRowsField(props: Props): JSX.Element {
-    const { defaultValue, defaultEdit, editable, onChange, onCommit, helperText, disabled, placeholder, errorText, inputProps, rows } = props;
+export default function InlineTextRowsField(props: Props) {
+    const {
+        defaultValue,
+        defaultEdit,
+        editable,
+        onChange,
+        onCommit,
+        helperText,
+        disabled,
+        placeholder,
+        errorText,
+        inputProps,
+        rows
+    } = props;
     const [textValue, setTextValue] = useState(defaultValue);
     const [edit, setEdit] = useState(defaultEdit ?? false);
     const [error, setError] = useState(false);
@@ -26,7 +38,7 @@ export default function InlineTextRowsField(props: Props): JSX.Element {
     const handleOnCommit = (): void => {
         setEdit(false);
 
-        if(!error) {
+        if (!error) {
             onCommit(textValue);
         }
 
@@ -39,7 +51,7 @@ export default function InlineTextRowsField(props: Props): JSX.Element {
     }
 
     const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target;
+        const {value} = event.target;
         let isValid = value.trim() !== '';
 
         setError(!isValid);
@@ -53,7 +65,8 @@ export default function InlineTextRowsField(props: Props): JSX.Element {
     const editElement = (
         <ClickAwayListener onClickAway={handleOnCommit}>
             <TextField defaultValue={textValue} onChange={inputOnChange} helperText={error ? errorText : helperText}
-                       disabled={Boolean(disabled)} placeholder={placeholder} error={error} inputProps={{ autoFocus: true, ...inputProps}} fullWidth multiline rows={rows}/>
+                       disabled={Boolean(disabled)} placeholder={placeholder} error={error}
+                       inputProps={{autoFocus: true, ...inputProps}} fullWidth multiline rows={rows}/>
         </ClickAwayListener>
     )
 
@@ -61,6 +74,6 @@ export default function InlineTextRowsField(props: Props): JSX.Element {
 
     return (
         <EditField edit={edit} editable={editable} viewElement={viewElement} editElement={editElement}
-                   onEdit={(): void => setEdit(!edit)} onCancel={handleOnCancel} onCommit={handleOnCommit} />
+                   onEdit={(): void => setEdit(!edit)} onCancel={handleOnCancel} onCommit={handleOnCommit}/>
     )
 }

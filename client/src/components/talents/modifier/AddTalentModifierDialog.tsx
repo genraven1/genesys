@@ -1,5 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifier";
+import Modifier, {getModifierCategories, Type} from "../../../models/common/Modifier";
 import {useState} from "react";
 import Talent from "../../../models/Talent";
 import TalentService from "../../../services/TalentService";
@@ -50,7 +50,7 @@ export default function AddTalentModifierDialog(props: Props) {
             <DialogContent>
                 <InputSelectFieldCard defaultValue={modifier?.type!} onCommit={(value: string): void => {
                     onChange('type', value)
-                }} title={'Modifier Type'} options={getModifierOptions()}/>
+                }} title={'Modifier Type'} options={getModifierCategories()}/>
                 <NumberRangeSelectCard defaultValue={modifier?.ranks!} title={'Modifier Ranks'} onChange={(value: number): void => {
                     onChange('ranks', String(value))
                 }} min={1} max={6}/>

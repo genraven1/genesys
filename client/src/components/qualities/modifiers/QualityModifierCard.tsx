@@ -1,19 +1,21 @@
-import {Button, Card, CardContent, TableFooter} from "@mui/material";
+import {Button, Card, CardContent, TableFooter, TextField} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {useLocation} from "react-router-dom";
-import Modifier from "../../../models/common/Modifier";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import AddIcon from '@mui/icons-material/Add';
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import Quality from "../../../models/Quality";
 import AddQualityModifierDialog from "./AddQualityModifierDialog";
+import Modifier from "../../../models/common/Modifier";
+import ModifierService from "../../../services/ModifierService";
+import TableCell from "@mui/material/TableCell";
+import {Autocomplete} from "@mui/lab";
 
 interface Props {
     quality: Quality
@@ -24,8 +26,16 @@ export default function QualityModifierCard(props: Props) {
     const [openDialog, setOpenDialog] = useState(false)
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
+    const [rows, setRows] = useState<Modifier[]>(quality.modifiers)
+    const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
-    const renderTableFooter = (): JSX.Element => {
+    useEffect(() => {
+        (async () => {
+            setTypeOptions(await ModifierService.getModifiers())
+        })()
+    }, [])
+
+    const renderTableFooter = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <TableFooter>
@@ -43,6 +53,20 @@ export default function QualityModifierCard(props: Props) {
         }
     }
 
+    const handleTypeChange = (index: number, value: string) => {
+        const updatedRows = rows.map((row, i) =>
+            i === index ? { ...row, type: value } : row
+        );
+        setRows(updatedRows);
+    };
+
+    const handleRanksChange = (index: number, value: string) => {
+        const updatedRows = rows.map((row, i) =>
+            i === index ? { ...row, ranks: Number(value) } : row
+        );
+        setRows(updatedRows);
+    };
+
     const addRow = () => {
         setOpenDialog(true)
     }
@@ -55,8 +79,26 @@ export default function QualityModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {(quality.modifiers).map((modifier) => (
-                                <ModifierRow modifier={modifier}/>
+                            {rows.map((row, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>
+                                        <Autocomplete
+                                            options={typeOptions}
+                                            getOptionLabel={(option) => option}
+                                            value={row.type}
+                                            onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
+                                            renderInput={(params) => <TextField {...params} label="Type" variant="outlined" />}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={row.ranks}
+                                            onChange={(e) => handleRanksChange(index, e.target.value)}
+                                            inputProps={{ min: 1, max: 10 }}
+                                        />
+                                    </TableCell>
+                                </TableRow>
                             ))}
                         </TableBody>
                         {renderTableFooter()}
@@ -64,20 +106,5 @@ export default function QualityModifierCard(props: Props) {
                 </TableContainer>
             </CardContent>
         </Card>
-    )
-}
-
-interface RowProps {
-    modifier: Modifier;
-}
-
-function ModifierRow(props: RowProps) {
-    const {modifier} = props
-
-    return (
-        <TableRow key={modifier.type}>
-            <TypographyCenterTableCell value={modifier.type}/>
-            <TypographyCenterTableCell value={String(modifier.ranks)}/>
-        </TableRow>
-    )
+    );
 }

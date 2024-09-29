@@ -1,7 +1,7 @@
 export default class ModifierService {
 
-    static async getModifiersByType(type: string): Promise<string[]> {
-        return await fetch("/modifiers/" + `${type}`)
+    static async getModifiers(): Promise<string[]> {
+        return await fetch('/modifiers/')
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

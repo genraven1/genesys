@@ -18,6 +18,7 @@ public class Quality {
     protected Quality() {}
 
     @Id
+    private String id;
     private String name;
     private String description;
     private boolean passive = false;

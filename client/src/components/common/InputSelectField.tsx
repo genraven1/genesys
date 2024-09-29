@@ -6,10 +6,6 @@ export interface Option {
     value: string
 }
 
-export interface ObjectOption extends Option {
-    id: number
-}
-
 interface Props {
     defaultValue: string
     options: Option[]
@@ -20,7 +16,7 @@ interface Props {
     helperText?: string
 }
 
-export default function InputSelectField(props: Props): JSX.Element {
+export default function InputSelectField(props: Props) {
     const {defaultValue, defaultEdit, options, editable, onChange, onCommit, helperText} = props
     const [option, setOption] = useState(defaultValue)
     const [edit, setEdit] = useState(defaultEdit ?? false)
@@ -52,7 +48,7 @@ export default function InputSelectField(props: Props): JSX.Element {
         </ClickAwayListener>
     )
 
-    const viewElement = <Typography style={{ wordWrap: 'break-word', textAlign: 'center' }}>{option}</Typography>
+    const viewElement = <Typography style={{wordWrap: 'break-word', textAlign: 'center'}}>{option}</Typography>
 
     const onCancel = (): void => {
         setEdit(!edit)

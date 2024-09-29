@@ -1,8 +1,9 @@
-import {Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {RootPath} from "../../services/Path";
 import QualityService from "../../services/QualityService";
+import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean
@@ -16,7 +17,7 @@ export default function QualityDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let quality = await QualityService.createQuality(name)
-        navigate(RootPath.Qualities + quality.name + '/view')
+        navigate(RootPath.Qualities + quality.id + '/view')
         onClose()
     }
 
@@ -31,10 +32,7 @@ export default function QualityDialog(props: Props) {
             <DialogContentText>
                 <TextField onChange={onChange} value={name} required fullWidth/>
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
     )
 }

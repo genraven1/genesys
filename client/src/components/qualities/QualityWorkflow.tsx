@@ -7,31 +7,24 @@ import QualityView from "./QualityView";
 import QualityEdit from "./QualityEdit";
 
 
-function useFetchQuality(name: string): Quality {
+function useFetchQuality(id: string): Quality {
     const [quality, setQuality] = useState<Quality>()
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
-            try {
-                const qualityData = await QualityService.getQuality(name)
-                if (qualityData) {
-                    setQuality(qualityData)
-                }
-            } catch (err) {
-                console.log(err)
-            }
+            setQuality(await QualityService.getQuality(id))
         })()
-    }, [name, setQuality])
+    }, [id, setQuality])
     return quality as Quality
 }
 
-export default function QualityWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const quality = useFetchQuality(name!)
+export default function QualityWorkflow() {
+    const {id} = useParams<{ id?: string }>()
+    const quality = useFetchQuality(id as string)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return quality && <QualityView quality={quality}/>

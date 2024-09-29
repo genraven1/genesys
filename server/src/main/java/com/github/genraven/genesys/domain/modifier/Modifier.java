@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Data
 public class Modifier {
-    private ModifierType type;
+    private Type type;
     private int ranks;
 
     @AllArgsConstructor

@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
@@ -36,7 +37,7 @@ public class QualityHandler {
     }
 
     public Mono<ServerResponse> getQuality(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         return qualityService.getQuality(name)
                 .flatMap(quality -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -45,12 +46,12 @@ public class QualityHandler {
     }
 
     public Mono<ServerResponse> createQuality(final ServerRequest serverRequest) {
-        return qualityService.createQuality(serverRequest.pathVariable("name"))
+        return qualityService.createQuality(serverRequest.pathVariable(NAME))
                 .flatMap(quality -> ServerResponse.created(getURI(quality)).bodyValue(quality));
     }
 
     public Mono<ServerResponse> updateQuality(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         final Mono<Quality> qualityMono = serverRequest.bodyToMono(Quality.class);
         return qualityMono
                 .flatMap(quality -> qualityService.updateQuality(name, quality))

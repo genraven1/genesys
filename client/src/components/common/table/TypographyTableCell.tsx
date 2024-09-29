@@ -1,5 +1,5 @@
 import React from "react";
-import {TableCell, Typography} from "@mui/material";
+import { TableCell, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 import Actor, {ActorSkill, getCharacteristicRanks} from "../../../models/actor/Actor";
 import GenesysSkillDiceTypography from "../typography/GenesysSkillDiceTypography";
@@ -12,7 +12,7 @@ interface LeftProps {
     value: string
 }
 
-export function TypographyLeftTableCell(props: LeftProps): JSX.Element {
+export function TypographyLeftTableCell(props: LeftProps) {
     const {value} = props
     return (
         <TableCell style={{textAlign: 'left'}}>
@@ -26,7 +26,7 @@ interface CenterProps {
     span?: number
 }
 
-export function TypographyCenterTableCell(props: CenterProps): JSX.Element {
+export function TypographyCenterTableCell(props: CenterProps) {
     const {value, span} = props
     return (
         <TableCell style={{textAlign: 'center'}} colSpan={span}>
@@ -40,7 +40,7 @@ interface CostProps {
     span?: number
 }
 
-export function CostTableCell(props: CostProps): JSX.Element {
+export function CostTableCell(props: CostProps) {
     const {cost, span} = props
 
     const renderCost = () => {
@@ -66,7 +66,7 @@ interface LimitProps {
     span?: number
 }
 
-export function LimitTableCell(props: LimitProps): JSX.Element {
+export function LimitTableCell(props: LimitProps) {
     const {limit, span} = props
 
     const renderLimit = () => {
@@ -94,7 +94,7 @@ interface DescriptionCenterProps {
     span?: number
 }
 
-export function GenesysDescriptionTypographyCenterTableCell(props: DescriptionCenterProps): JSX.Element {
+export function GenesysDescriptionTypographyCenterTableCell(props: DescriptionCenterProps) {
     const {value, span} = props
     return (
         <TableCell style={{textAlign: 'center'}} colSpan={span}>
@@ -108,7 +108,7 @@ interface SkillCenterProps {
     skill: ActorSkill
 }
 
-export function GenesysDicePoolCenterTableCell(props: SkillCenterProps): JSX.Element {
+export function GenesysDicePoolCenterTableCell(props: SkillCenterProps) {
     const {actor, skill} = props
     return (
         <TableCell style={{textAlign: 'center'}}>
@@ -122,7 +122,7 @@ interface DifficultyProps {
     difficulty: Difficulty
 }
 
-export function GenesysDifficultyCenterTableCell(props: DifficultyProps): JSX.Element {
+export function GenesysDifficultyCenterTableCell(props: DifficultyProps) {
     const {difficulty} = props
     return (
         <TableCell style={{textAlign: 'center'}}>

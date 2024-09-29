@@ -45,7 +45,7 @@ function Row(props: RowProps) {
                 <TypographyCenterTableCell value={quality.name}/>
                 <TableCell style={{textAlign: 'center'}}>{renderActivation()}</TableCell>
                 <TypographyCenterTableCell value={renderUsable(quality)}/>
-                <ActionsTableCell name={quality.name} path={RootPath.Qualities}/>
+                <ActionsTableCell name={quality.id} path={RootPath.Qualities}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -71,11 +71,7 @@ export default function ViewAllQualities() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const qualitiesList = await QualityService.getQualities()
-            if (!qualitiesList) {
-                return
-            }
-            setQualities(qualitiesList)
+            setQualities(await QualityService.getQualities())
         })()
     }, [])
 

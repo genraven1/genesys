@@ -1,4 +1,4 @@
-import { Card, CardHeader, Divider, Grid } from "@mui/material"
+import {Card, CardHeader, Divider, Grid} from "@mui/material"
 import InlineTextField from "./InlineTextField"
 import InlineTextRowsField from "./InlineTextRowsField";
 
@@ -11,14 +11,15 @@ interface TextProps {
     errorText?: string
 }
 
-export function InputTextFieldCard(props: TextProps): JSX.Element {
-    const { defaultValue, onCommit, title, helperText, placeholder, errorText } = props;
+export function InputTextFieldCard(props: TextProps) {
+    const {defaultValue, onCommit, title, helperText, placeholder, errorText} = props;
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
-                <InlineTextField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={helperText} placeholder={placeholder} errorText={errorText} />
+                <CardHeader title={title} style={{textAlign: 'center'}}/>
+                <Divider/>
+                <InlineTextField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={helperText}
+                                 placeholder={placeholder} errorText={errorText}/>
             </Card>
         </Grid>
     )
@@ -34,14 +35,16 @@ interface RowProps {
     rows: number
 }
 
-export function InputTextRowsFieldCard(props: RowProps): JSX.Element {
-    const { defaultValue, onCommit, title, helperText, placeholder, errorText, rows } = props;
+export function InputTextRowsFieldCard(props: RowProps) {
+    const {defaultValue, onCommit, title, helperText, placeholder, errorText, rows} = props;
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
-                <InlineTextRowsField defaultValue={defaultValue} editable={true} onCommit={onCommit} helperText={helperText} placeholder={placeholder} errorText={errorText} rows={rows}/>
+                <CardHeader title={title} style={{textAlign: 'center'}}/>
+                <Divider/>
+                <InlineTextRowsField defaultValue={defaultValue} editable={true} onCommit={onCommit}
+                                     helperText={helperText} placeholder={placeholder} errorText={errorText}
+                                     rows={rows}/>
             </Card>
         </Grid>
     )

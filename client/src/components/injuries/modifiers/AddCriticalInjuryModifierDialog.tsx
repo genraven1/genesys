@@ -1,6 +1,6 @@
 import Injury from "../../../models/Injury";
 import {useState} from "react";
-import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifier";
+import Modifier, {getModifierCategories, Type} from "../../../models/common/Modifier";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
@@ -51,7 +51,7 @@ export default function AddCriticalInjuryModifierDialog(props: Props) {
             <DialogContent>
                 <InputSelectFieldCard defaultValue={modifier?.type!} onCommit={(value: string): void => {
                     onChange('type', value)
-                }} title={'Modifier Type'} options={getModifierOptions()}/>
+                }} title={'Modifier Type'} options={getModifierCategories()}/>
                 <NumberRangeSelectCard defaultValue={modifier?.ranks!} title={'Modifier Ranks'}
                                        onChange={(value: number): void => {
                                            onChange('ranks', String(value))

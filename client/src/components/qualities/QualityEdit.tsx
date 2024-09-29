@@ -51,7 +51,7 @@ export default function QualityEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(RootPath.Qualities + quality.name + '/view');
+        navigate(RootPath.Qualities + quality.id + '/view');
     }
 
     return (
@@ -61,32 +61,31 @@ export default function QualityEdit(props: Props) {
                             <CheckIcon color='primary' fontSize='small'/>
                         </IconButton>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <InputTextFieldCard defaultValue={quality?.description!!} onCommit={(value: string): void => {
+                        <InputTextFieldCard defaultValue={quality.description} onCommit={(value: string) => {
                             onChange('description', value)
                         }} title={'Description'} helperText={'Description'} placeholder={'Description'}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <CheckButtonCard title={'Usable on Armor'} value={quality?.armor!!}
-                                         onChange={(value: boolean): void => {
+                        <CheckButtonCard title={'Usable on Armor'} value={quality.armor}
+                                         onChange={(value: boolean) => {
                                              onChange('armor', String(value))
                                          }}/>
-                        <CheckButtonCard title={'Usable on Weapons'} value={quality?.weapon!!}
-                                         onChange={(value: boolean): void => {
+                        <CheckButtonCard title={'Usable on Weapons'} value={quality.weapon}
+                                         onChange={(value: boolean) => {
                                              onChange('weapon', String(value))
                                          }}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <CheckButtonCard title={'Passive Quality'} value={quality?.passive!!}
+                        <CheckButtonCard title={'Passive Quality'} value={quality.passive}
                                          onChange={(value: boolean): void => {
                                              onChange('passive', String(value))
                                          }}/>
-                        <InputNumberRangeSelectField defaultValue={quality?.cost!!} min={0} max={4}
+                        <InputNumberRangeSelectField defaultValue={quality.cost} min={0} max={4}
                                                      onCommit={(value: number): void => {
                                                          onChange('cost', String(value))
                                                      }}/>

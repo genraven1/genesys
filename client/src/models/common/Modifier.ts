@@ -6,6 +6,8 @@ export default interface Modifier {
 }
 
 export enum Type {
+    Default = "Default",
+    CriticalInjury = "Critical Injury",
     IncreaseEncumbranceCapacity = 'Increase Encumbrance Capacity',
     IncreaseBaseEncumbranceCapacity = 'Increase Base Encumbrance Capacity',
     MoveStoryPoint = 'Move Story Point',
@@ -23,6 +25,6 @@ export enum Type {
     IncreaseRangedDefense = 'Increase Ranged Defense',
 }
 
-export const getModifierOptions = (): Option[] => {
+export const getModifierCategories = (): Option[] => {
     return Object.values(Type).map((value) => ({value}))
 }

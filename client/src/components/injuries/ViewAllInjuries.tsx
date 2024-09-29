@@ -59,7 +59,7 @@ export default function ViewAllInjuries() {
     const headers = ['Name', 'Min-Max', 'Severity', 'View']
 
     useEffect(() => {
-        (async (): Promise<void> => {
+        (async () => {
             setInjuries(await InjuryService.getAllInjuries())
         })()
     }, [])

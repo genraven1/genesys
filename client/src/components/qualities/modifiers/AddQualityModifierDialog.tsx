@@ -1,10 +1,13 @@
-import {useState} from "react";
-import Modifier, {getModifierOptions, Type} from "../../../models/common/Modifier";
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {useEffect, useState} from "react";
+import Modifier, {Type} from "../../../models/common/Modifier";
+import {Dialog, DialogContent, DialogTitle} from "@mui/material";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
 import Quality from "../../../models/Quality";
 import QualityService from "../../../services/QualityService";
+import ModifierService from "../../../services/ModifierService";
+import {Option} from "../../common/InputSelectField";
+import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 
 interface Props {
     quality: Quality
@@ -13,8 +16,19 @@ interface Props {
 }
 
 export default function AddQualityModifierDialog(props: Props) {
-    const {quality, open, onClose} = props
-    const [modifier, setModifier] = useState<Modifier>()
+    const {quality, open, onClose} = props;
+    const [modifiers, setModifiers] = useState<string[]>([]);
+    const [modifier, setModifier] = useState<Modifier>();
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setModifiers(await ModifierService.getModifiers())
+        })()
+    }, [])
+
+    const getModifierOptions = (): Option[] => {
+        return Object.values(modifiers).map((value) => ({value}))
+    }
 
     const handleAdd = async (): Promise<void> => {
         if (modifier) {
@@ -49,17 +63,15 @@ export default function AddQualityModifierDialog(props: Props) {
             <DialogTitle title={'Add Modifier'}/>
             <DialogContent>
                 <InputSelectFieldCard defaultValue={modifier?.type!} onCommit={(value: string): void => {
-                    onChange('type', value)
+                    onChange('type', value);
                 }} title={'Modifier Type'} options={getModifierOptions()}/>
-                <NumberRangeSelectCard defaultValue={modifier?.ranks!} title={'Modifier Ranks'}
-                                       onChange={(value: number): void => {
-                                           onChange('ranks', String(value))
-                                       }} min={1} max={6}/>
+                <NumberRangeSelectCard
+                    defaultValue={modifier?.ranks!} title={'Modifier Ranks'}
+                    onChange={(value: number): void => {
+                        onChange('ranks', String(value));
+                    }} min={1} max={6}/>
             </DialogContent>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleAdd}>ADD</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleAdd} onClose={onClose}/>
         </Dialog>
     )
 }
