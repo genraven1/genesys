@@ -16,7 +16,7 @@ export default function InjuryView(props: Props):JSX.Element {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(RootPath.Injury + injury.name + '/edit')
+        navigate(RootPath.Injury + injury.id + '/edit')
     }
 
     return (

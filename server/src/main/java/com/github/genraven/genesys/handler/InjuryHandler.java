@@ -51,7 +51,7 @@ public class InjuryHandler {
     }
 
     public Mono<ServerResponse> updateInjury(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable("name");
+        final String name = serverRequest.pathVariable(NAME);
         final Mono<CriticalInjury> criticalInjuryMono = serverRequest.bodyToMono(CriticalInjury.class);
         return criticalInjuryMono
                 .flatMap(injury -> injuryService.updateInjury(name, injury))

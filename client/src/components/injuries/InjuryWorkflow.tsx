@@ -6,31 +6,24 @@ import InjuryEdit from "./InjuryEdit";
 import InjuryView from "./InjuryView";
 import ViewAllInjuries from "./ViewAllInjuries";
 
-function useFetchInjury(name: string): Injury {
+function useFetchInjury(id: string): Injury {
     const [injury, setInjury] = useState<Injury>()
     useEffect(() => {
-        if (!name) {
+        if (!id) {
             return
         }
         (async (): Promise<void> => {
-            try {
-                const injuryData = await InjuryService.getInjury(name)
-                if (injuryData) {
-                    setInjury(injuryData)
-                }
-            } catch (err) {
-                console.log(err)
-            }
+            setInjury(await InjuryService.getInjury(id))
         })()
-    }, [name, setInjury])
+    }, [id, setInjury])
     return injury as Injury
 }
 
-export default function InjuryWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const injury = useFetchInjury(name!!)
+export default function InjuryWorkflow() {
+    const {id} = useParams<{ id?: string }>()
+    const injury = useFetchInjury(id as string)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
             return injury && <InjuryView injury={injury}/>

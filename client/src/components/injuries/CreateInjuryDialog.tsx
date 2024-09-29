@@ -18,7 +18,7 @@ export default function CreateInjuryDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let injury = await InjuryService.createInjury(name)
-        navigate(RootPath.Injury + injury.name + '/edit')
+        navigate(RootPath.Injury + injury.id + '/edit')
         onClose()
     }
 

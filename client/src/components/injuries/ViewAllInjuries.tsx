@@ -36,7 +36,7 @@ function Row(props: Props) {
                 <TypographyCenterTableCell value={injury.name}/>
                 <TypographyCenterTableCell value={renderDiceRange()}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
-                <ActionsTableCell name={injury.name} path={RootPath.Injury}/>
+                <ActionsTableCell name={injury.id} path={RootPath.Injury}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>

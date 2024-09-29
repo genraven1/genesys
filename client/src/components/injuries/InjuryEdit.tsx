@@ -52,7 +52,7 @@ export default function InjuryEdit(props: Props): JSX.Element {
     }
 
     const onView = () => {
-        navigate(RootPath.Injury + injury.name + '/view');
+        navigate(RootPath.Injury + injury.id + '/view');
     }
 
     return (

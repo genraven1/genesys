@@ -20,6 +20,7 @@ public class CriticalInjury {
     }
 
     @Id
+    private String id;
     private String name;
     private String description;
     private Difficulty severity;
