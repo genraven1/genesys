@@ -46,7 +46,7 @@ export default function TalentView(props: Props) {
                         <ViewFieldCard name={'Tier'} value={talent.tier}/>
                     </Grid>
                 </Grid>
-                <TalentModifierCard talent={talent}/>
+                <TalentModifierCard tal={talent}/>
             </CardContent>
         </Card>
     )

@@ -11,20 +11,20 @@ import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import Talent from "../../../models/Talent";
-import Modifier from "../../../models/common/Modifier";
 import ModifierService from "../../../services/ModifierService";
 import TableCell from "@mui/material/TableCell";
 import {Autocomplete} from "@mui/lab";
+import TalentService from "../../../services/TalentService";
 
 interface Props {
-    talent: Talent
+    tal: Talent
 }
 
 export default function TalentModifierCard(props: Props) {
-    const {talent} = props
+    const {tal} = props
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
-    const [rows, setRows] = useState<Modifier[]>(talent.modifiers)
+    const [talent, setTalent] = useState(tal);
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
@@ -48,23 +48,25 @@ export default function TalentModifierCard(props: Props) {
         }
     }
 
-    const handleTypeChange = (index: number, value: string) => {
-        const updatedRows = rows.map((row, i) =>
+    const handleTypeChange = async (index: number, value: string) => {
+        const updatedModifiers = talent.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setRows(updatedRows);
+        setTalent(await TalentService.updateTalent({...talent, modifiers: updatedModifiers}));
     };
 
-    const handleRanksChange = (index: number, value: string) => {
-        const updatedRows = rows.map((row, i) =>
+    const handleRanksChange = async (index: number, value: string) => {
+        const updatedModifiers = talent.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setRows(updatedRows);
+        setTalent(await TalentService.updateTalent({...talent, modifiers: updatedModifiers}));
     };
 
-    const addRow = () => {
-        const newRow: Modifier = {type: '', ranks: 1};
-        setRows([...rows, newRow]);
+    const addRow = async () => {
+        setTalent(await TalentService.updateTalent({
+            ...talent,
+            modifiers: [...talent.modifiers, {type: "Default", ranks: 1}]
+        }));
     };
 
     return (
@@ -75,13 +77,13 @@ export default function TalentModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {talent.modifiers.map((modifier, index) => (
                                 <TableRow key={index}>
-                                    <TableCell>
+                                    <TableCell style={{textAlign: "center"}}>
                                         <Autocomplete
                                             options={typeOptions}
                                             getOptionLabel={(option) => option}
-                                            value={row.type}
+                                            value={modifier.type}
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
@@ -91,7 +93,7 @@ export default function TalentModifierCard(props: Props) {
                                     <TableCell style={{textAlign: "center"}}>
                                         <TextField
                                             type="number"
-                                            value={row.ranks}
+                                            value={modifier.ranks}
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
                                             disabled={pathname.endsWith('/view')}

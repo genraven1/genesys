@@ -13,8 +13,10 @@ public class Modifier {
     @AllArgsConstructor
     @Getter
     public enum Type {
+        DEFAULT("Default"),
         DECREASE_CRITICAL_INJURY("Decrease Critical Injury"),
         INCREASE_CRITICAL_INJURY("Increase Critical Injury"),
+        RESET_CRITICAL_INJURY("Reset Critical Injury"),
         SUFFER_STRAIN("Suffer Strain");
 
         @JsonValue

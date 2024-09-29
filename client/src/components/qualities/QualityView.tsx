@@ -47,7 +47,7 @@ export default function QualityView(props: Props) {
                         {renderQualityUsable()}
                         <ViewQualityActivationCard quality={quality}/>
                     </Grid>
-                    <QualityModifierCard quality={quality}/>
+                    <QualityModifierCard qual={quality}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -11,20 +11,20 @@ import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import Quality from "../../../models/Quality";
-import Modifier from "../../../models/common/Modifier";
 import ModifierService from "../../../services/ModifierService";
 import TableCell from "@mui/material/TableCell";
 import {Autocomplete} from "@mui/lab";
+import QualityService from "../../../services/QualityService";
 
 interface Props {
-    quality: Quality
+    qual: Quality
 }
 
 export default function QualityModifierCard(props: Props) {
-    const {quality} = props
+    const {qual} = props
     const pathname = useLocation().pathname
     const headers = ['Type', 'Ranks']
-    const [rows, setRows] = useState<Modifier[]>(quality.modifiers)
+    const [quality, setQuality] = useState(qual);
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
@@ -48,23 +48,25 @@ export default function QualityModifierCard(props: Props) {
         }
     }
 
-    const handleTypeChange = (index: number, value: string) => {
-        const updatedRows = rows.map((row, i) =>
+    const handleTypeChange = async (index: number, value: string) => {
+        const updatedModifiers = quality.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setRows(updatedRows);
+        setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
     };
 
-    const handleRanksChange = (index: number, value: string) => {
-        const updatedRows = rows.map((row, i) =>
+    const handleRanksChange = async (index: number, value: string) => {
+        const updatedModifiers = quality.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setRows(updatedRows);
+        setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
     };
 
-    const addRow = () => {
-        const newRow: Modifier = {type: '', ranks: 1};
-        setRows([...rows, newRow]);
+    const addRow = async () => {
+        setQuality(await QualityService.updateQuality({
+            ...quality,
+            modifiers: [...quality.modifiers, {type: "Default", ranks: 1}]
+        }));
     };
 
     return (
@@ -75,13 +77,13 @@ export default function QualityModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {quality.modifiers.map((modifiers, index) => (
                                 <TableRow key={index}>
                                     <TableCell>
                                         <Autocomplete
                                             options={typeOptions}
                                             getOptionLabel={(option) => option}
-                                            value={row.type}
+                                            value={modifiers.type}
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
@@ -91,7 +93,7 @@ export default function QualityModifierCard(props: Props) {
                                     <TableCell style={{textAlign: "center"}}>
                                         <TextField
                                             type="number"
-                                            value={row.ranks}
+                                            value={modifiers.ranks}
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
                                             disabled={pathname.endsWith('/view')}

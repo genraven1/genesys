@@ -90,7 +90,7 @@ export default function QualityEdit(props: Props) {
                                                          onChange('cost', String(value))
                                                      }}/>
                     </Grid>
-                    <QualityModifierCard quality={quality}/>
+                    <QualityModifierCard qual={quality}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -89,7 +89,7 @@ export default function TalentEdit(props: Props) {
                             onChange('tier', value)
                         }} title={'Tier'} options={getTierOptions()}/>
                     </Grid>
-                    <TalentModifierCard talent={talent}/>
+                    <TalentModifierCard tal={talent}/>
                 </Grid>
             </CardContent>
         </Card>
