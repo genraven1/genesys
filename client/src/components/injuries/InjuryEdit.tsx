@@ -81,7 +81,7 @@ export default function InjuryEdit(props: Props): JSX.Element {
                             onChange('max', String(value))
                         }}/>
                     </Grid>
-                    <CriticalInjuryModifierCard injury={injury}/>
+                    <CriticalInjuryModifierCard crit={injury}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -77,13 +77,13 @@ export default function QualityModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {quality.modifiers.map((modifiers, index) => (
+                            {quality.modifiers.map((modifier, index) => (
                                 <TableRow key={index}>
                                     <TableCell>
                                         <Autocomplete
                                             options={typeOptions}
                                             getOptionLabel={(option) => option}
-                                            value={modifiers.type}
+                                            value={modifier.type}
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
@@ -93,7 +93,7 @@ export default function QualityModifierCard(props: Props) {
                                     <TableCell style={{textAlign: "center"}}>
                                         <TextField
                                             type="number"
-                                            value={modifiers.ranks}
+                                            value={modifier.ranks}
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
                                             disabled={pathname.endsWith('/view')}

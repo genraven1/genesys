@@ -39,7 +39,7 @@ export default function InjuryView(props: Props):JSX.Element {
                         <ViewFieldCard name={'Min'} value={String(injury.min)}/>
                         <ViewFieldCard name={'Max'} value={String(injury.max)}/>
                     </Grid>
-                    <CriticalInjuryModifierCard injury={injury}/>
+                    <CriticalInjuryModifierCard crit={injury}/>
                 </Grid>
             </CardContent>
         </Card>
