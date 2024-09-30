@@ -9,7 +9,9 @@ export const renderPrice = (equipment: Equipment): string => {
 
 export const renderQualities = (equipment: Equipment): string => {
     let qualities = ''
-    if (equipment?.qualities!!.length > 0) {
+    if (!(equipment.qualities === undefined || equipment.qualities.length > 0)) {
+        qualities = 'None'
+    } else {
         let qualityList = equipment?.qualities!!.sort((a, b) => a.name.localeCompare(b.name))
         for (let i = 0; i < qualityList.length; i++) {
             const quality = qualityList[i];
@@ -19,8 +21,6 @@ export const renderQualities = (equipment: Equipment): string => {
                 qualities = qualities.concat(quality.name + ' ' + quality.ranks)
             }
         }
-    } else {
-        qualities = 'None'
     }
     return qualities
 }

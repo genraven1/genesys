@@ -20,7 +20,7 @@ interface Props {
     player: Player
 }
 
-export default function PlayerEquipmentCard(props: Props): JSX.Element {
+export default function PlayerEquipmentCard(props: Props) {
     const {player} = props
     const [value, setValue] = useState('1')
     const [openSelectWeaponDialog, setOpenSelectWeaponDialog] = useState(false)
@@ -33,7 +33,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         setValue(newValue)
     }
 
-    const renderWeaponsTab = (): JSX.Element => {
+    const renderWeaponsTab = () => {
         return (
             <Fragment>
                 {renderWeaponsTable()}
@@ -42,14 +42,14 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderWeaponsTable = (): JSX.Element => {
+    const renderWeaponsTable = () => {
         if (player.weapons === undefined || player.weapons.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <PlayerWeaponTable weapons={player.weapons} player={player}/>
     }
 
-    const renderWeaponTableButtons = (): JSX.Element => {
+    const renderWeaponTableButtons = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -69,7 +69,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         }
     }
 
-    const renderArmorTab = (): JSX.Element => {
+    const renderArmorTab = () => {
         return (
             <Fragment>
                 {renderArmorTable()}
@@ -78,14 +78,14 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderArmorTable = (): JSX.Element => {
+    const renderArmorTable = () => {
         if (player.armors === undefined || player.armors.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <PlayerArmorTable armor={player.armors}/>
     }
 
-    const renderArmorTableButtons = (): JSX.Element => {
+    const renderArmorTableButtons = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -108,7 +108,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
 
     }
 
-    const renderGearTab = (): JSX.Element => {
+    const renderGearTab = () => {
         return (
             <Fragment>
                 {renderGearTable()}
@@ -117,7 +117,7 @@ export default function PlayerEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderGearTable = (): JSX.Element => {
+    const renderGearTable = () => {
         if (player.gear === undefined || player.gear.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
