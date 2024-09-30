@@ -14,6 +14,7 @@ public class Gear extends Equipment {
     protected Gear() {}
 
     public Gear(final Equipment equipment) {
+        this.setId(equipment.getId());
         this.setName(equipment.getName());
         this.setDescription(equipment.getDescription());
         this.setPrice(equipment.getPrice());

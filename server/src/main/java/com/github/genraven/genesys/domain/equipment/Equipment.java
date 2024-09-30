@@ -18,6 +18,7 @@ public class Equipment {
     }
 
     @Id
+    private String id;
     private String name;
     private String description;
     private int price = 0;

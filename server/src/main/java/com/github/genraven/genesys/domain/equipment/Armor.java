@@ -12,6 +12,7 @@ public class Armor extends Equipment {
     protected Armor() {}
 
     public Armor(final Equipment equipment) {
+        this.setId(equipment.getId());
         this.setName(equipment.getName());
         this.setDescription(equipment.getDescription());
         this.setPrice(equipment.getPrice());
