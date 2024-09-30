@@ -18,7 +18,7 @@ interface RowProps {
     rival: Rival
 }
 
-function WeaponNameRow(props: RowProps): JSX.Element {
+function WeaponNameRow(props: RowProps) {
     const {weapon, rival} = props;
     const [openWeaponBackDrop, setOpenWeaponBackDrop] = useState(false)
 
@@ -31,7 +31,9 @@ function WeaponNameRow(props: RowProps): JSX.Element {
         <TableRow>
             <TableCell>
                 <Button onClick={(): void => setOpenWeaponBackDrop(true)}>{weapon?.name!!}</Button>
-                {openWeaponBackDrop && <WeaponBackdrop open={openWeaponBackDrop} onClose={(): void => setOpenWeaponBackDrop(false)} weapon={weapon!!}/>}
+                {openWeaponBackDrop &&
+                    <WeaponBackdrop open={openWeaponBackDrop} onClose={(): void => setOpenWeaponBackDrop(false)}
+                                    weapon={weapon!!}/>}
             </TableCell>
             <TableCell>
                 <Button onClick={addWeapon}>Add</Button>
@@ -51,9 +53,7 @@ export default function RivalWeaponSelectionTable(props: TableProps) {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const weaponList = await EquipmentService.getWeapons()
-            if (!weaponList) { return }
-            setWeapons(weaponList)
+            setWeapons(await EquipmentService.getWeapons())
         })()
     }, [setWeapons])
 

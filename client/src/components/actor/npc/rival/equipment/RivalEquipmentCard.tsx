@@ -21,7 +21,7 @@ interface Props {
     rival: Rival
 }
 
-export default function RivalEquipmentCard(props: Props): JSX.Element {
+export default function RivalEquipmentCard(props: Props) {
     const {rival} = props
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
@@ -35,7 +35,7 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         setValue(newValue)
     }
 
-    const renderWeaponsTab = (): JSX.Element => {
+    const renderWeaponsTab = () => {
         return (
             <Fragment>
                 {renderWeaponsTable()}
@@ -44,14 +44,14 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderWeaponsTable = (): JSX.Element => {
+    const renderWeaponsTable = () => {
         if (rival.weapons === undefined || rival.weapons.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
         return <ViewNonPlayerCharacterWeaponTable weapons={rival?.weapons!!} npc={rival!!}/>
     }
 
-    const renderWeaponTableButtons = (): JSX.Element => {
+    const renderWeaponTableButtons = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -71,7 +71,7 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         }
     }
 
-    const renderArmorTab = (): JSX.Element => {
+    const renderArmorTab = () => {
         return (
             <Fragment>
                 {renderArmorTable()}
@@ -80,14 +80,14 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderArmorTable = (): JSX.Element => {
+    const renderArmorTable = () => {
         if (rival.armors === undefined || rival.armors.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
         return <ViewNonPlayerCharacterArmorTable armor={rival?.armors!!}/>
     }
 
-    const renderArmorTableButtons = (): JSX.Element => {
+    const renderArmorTableButtons = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
@@ -114,7 +114,7 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
 
     }
 
-    const renderGearTab = (): JSX.Element => {
+    const renderGearTab = () => {
         return (
             <Fragment>
                 {renderGearTable()}
@@ -123,7 +123,7 @@ export default function RivalEquipmentCard(props: Props): JSX.Element {
         )
     }
 
-    const renderGearTable = (): JSX.Element => {
+    const renderGearTable = () => {
         if (rival.gear === undefined || rival.gear.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }

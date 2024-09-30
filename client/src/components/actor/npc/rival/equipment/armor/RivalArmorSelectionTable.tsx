@@ -18,7 +18,7 @@ interface RowProps {
     rival: Rival
 }
 
-function ArmorNameRow(props: RowProps): JSX.Element {
+function ArmorNameRow(props: RowProps) {
     const {armor, rival} = props;
     const [openArmorBackDrop, setOpenArmorBackDrop] = useState(false)
 
@@ -31,7 +31,9 @@ function ArmorNameRow(props: RowProps): JSX.Element {
         <TableRow>
             <TableCell>
                 <Button onClick={(): void => setOpenArmorBackDrop(true)}>{armor?.name!!}</Button>
-                {openArmorBackDrop && <ArmorBackdrop open={openArmorBackDrop} onClose={(): void => setOpenArmorBackDrop(false)} armor={armor!!}/>}
+                {openArmorBackDrop &&
+                    <ArmorBackdrop open={openArmorBackDrop} onClose={(): void => setOpenArmorBackDrop(false)}
+                                   armor={armor!!}/>}
             </TableCell>
             <TableCell>
                 <Button onClick={addArmor}>Add</Button>
@@ -51,9 +53,7 @@ export default function RivalArmorSelectionTable(props: TableProps) {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const armorList = await EquipmentService.getArmors()
-            if (!armorList) { return }
-            setArmors(armorList)
+            setArmors(await EquipmentService.getArmors())
         })()
     }, [setArmors])
 
