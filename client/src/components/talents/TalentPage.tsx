@@ -153,7 +153,7 @@ export default function TalentPage() {
                             variant="outlined"
                             fullWidth
                             multiline
-                            rows={4}
+                            rows={2}
                             value={talent.description}
                             onChange={handleDescriptionChange}
                             disabled={pathname.endsWith('/view')}
