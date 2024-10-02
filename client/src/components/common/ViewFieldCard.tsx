@@ -95,8 +95,8 @@ export function ViewQualityActivationCard(props: QualityActivationProps) {
     const {quality} = props
 
     const renderActivation = () => {
-        if(quality?.passive!!) {return <GenesysDescriptionTypography text={'Passive'}/>}
-        else {return <GenesysQualityTypography ranks={quality?.cost}/>}
+        return quality?.passive!! ? <GenesysDescriptionTypography text={'Passive'}/> :
+            <GenesysQualityTypography ranks={quality?.cost}/>;
     }
 
     return (

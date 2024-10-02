@@ -14,23 +14,6 @@ import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateSkillDialog from "./CreateSkillDialog";
 
-interface Props {
-    skill: Skill
-}
-
-function Row(props: Props) {
-    const {skill} = props
-
-    return (
-        <TableRow key={skill.name}>
-            <TypographyCenterTableCell value={skill.name}/>
-            <TypographyCenterTableCell value={skill.type}/>
-            <TypographyCenterTableCell value={skill.characteristic}/>
-            <ActionsTableCell name={skill.id} path={RootPath.Skills}/>
-        </TableRow>
-    )
-}
-
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
@@ -56,7 +39,12 @@ export default function ViewAllSkills() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                                <Row skill={skill}/>
+                                <TableRow key={skill.id}>
+                                    <TypographyCenterTableCell value={skill.name}/>
+                                    <TypographyCenterTableCell value={skill.type}/>
+                                    <TypographyCenterTableCell value={skill.characteristic}/>
+                                    <ActionsTableCell name={skill.id} path={RootPath.Skills}/>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>

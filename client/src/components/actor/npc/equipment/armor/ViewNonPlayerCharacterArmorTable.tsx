@@ -8,6 +8,7 @@ import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../co
 import {ActorArmor} from "../../../../../models/equipment/Armor";
 import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {Fragment} from "react";
 
 interface Props {
     armor: ActorArmor[]
@@ -19,11 +20,21 @@ export default function ViewNonPlayerCharacterArmorTable(props: Props) {
 
     const renderTableBody = () => {
         if (!armor) {
-            return
+            return <Fragment/>
         } else {
-            return armor.map((weapon: ActorArmor) => (
-                <Row key={weapon.name} armor={weapon}/>
-            ))
+            return (
+                <TableBody>
+                    {armor.map((armor: ActorArmor) => (
+                        <TableRow key={armor.id}>
+                            <TypographyLeftTableCell value={armor?.name!!}/>
+                            <TypographyCenterTableCell value={String(armor?.defense!!)}/>
+                            <TypographyCenterTableCell value={renderSoak(armor)}/>
+                            <TypographyCenterTableCell value={renderQualities(armor!!)}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            )
+
         }
     }
 
@@ -31,27 +42,8 @@ export default function ViewNonPlayerCharacterArmorTable(props: Props) {
         <TableContainer component={Paper}>
             <Table>
                 {renderSingleRowTableHeader(headers)}
-                <TableBody>
-                    {renderTableBody()}
-                </TableBody>
+                {renderTableBody()}
             </Table>
         </TableContainer>
-    )
-}
-
-interface RowProps {
-    armor: ActorArmor
-}
-
-function Row(props: RowProps) {
-    const {armor} = props
-
-    return (
-        <TableRow sx={{'& > *': {borderBottom: 'unset'}}}>
-            <TypographyLeftTableCell value={armor?.name!!}/>
-            <TypographyCenterTableCell value={String(armor?.defense!!)}/>
-            <TypographyCenterTableCell value={renderSoak(armor)}/>
-            <TypographyCenterTableCell value={renderQualities(armor!!)}/>
-        </TableRow>
     )
 }

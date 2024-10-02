@@ -1,3 +1,5 @@
+import {Option} from "../../components/common/InputSelectField";
+
 export enum CharacteristicType {
     Brawn = 'Brawn',
     Agility = 'Agility',
@@ -10,4 +12,8 @@ export enum CharacteristicType {
 export interface Characteristic {
     current: number,
     type: CharacteristicType
+}
+
+export const getCharacteristicTypes = (): Option[] => {
+    return Object.values(CharacteristicType).map((value) => ({value}))
 }

@@ -10,11 +10,11 @@ interface Props {
 }
 
 export default function SkillBackdrop(props: Props) {
-    const {skill, open, onClose} = props
+    const {skill, open, onClose} = props;
 
     return (
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
             <SkillView skill={skill}/>
         </Backdrop>
-    )
+    );
 }

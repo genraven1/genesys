@@ -12,43 +12,20 @@ import Skill from "../../../models/actor/Skill";
 import SkillService from "../../../services/SkillService";
 import SkillBackdrop from "../../skills/SkillBackdrop";
 
-interface RowProps {
-    skill: Skill
-}
-
-function SkillNameRow(props: RowProps) {
-    const {skill} = props;
-    const [openSkillBackDrop, setOpenSkillBackDrop] = useState(false);
-
-    const addSkill = async () => {
-        await CampaignService.addCampaignSkill(skill);
-    }
-
-    return (
-        <TableRow key={skill.name}>
-            <TableCell>
-                <Button onClick={(): void => setOpenSkillBackDrop(true)}>{skill.name}</Button>
-                {openSkillBackDrop &&
-                    <SkillBackdrop open={openSkillBackDrop} onClose={(): void => setOpenSkillBackDrop(false)}
-                                   skill={skill}/>}
-            </TableCell>
-            <TableCell>
-                <Button onClick={addSkill}>Add</Button>
-            </TableCell>
-        </TableRow>
-    );
-}
-
-
 export default function CampaignSkillSelectionTable() {
-    const [skills, setSkills] = useState<Skill[]>([])
-    const headers = ['Name', 'Add']
+    const [skills, setSkills] = useState<Skill[]>([]);
+    const [openSkillBackDrop, setOpenSkillBackDrop] = useState(false);
+    const headers = ['Name', 'Add'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setSkills(await SkillService.getSkills())
+            setSkills(await SkillService.getSkills());
         })()
     }, [setSkills]);
+
+    const addSkill = async (skill: Skill) => {
+        await CampaignService.addCampaignSkill(skill);
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -56,7 +33,18 @@ export default function CampaignSkillSelectionTable() {
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
                     {skills.sort((a, b) => a.name.localeCompare(b.name)).map((skill: Skill) => (
-                        <SkillNameRow skill={skill}/>
+                        <TableRow key={skill.id}>
+                            <TableCell>
+                                <Button onClick={(): void => setOpenSkillBackDrop(true)}>{skill.name}</Button>
+                                {openSkillBackDrop &&
+                                    <SkillBackdrop open={openSkillBackDrop}
+                                                   onClose={(): void => setOpenSkillBackDrop(false)}
+                                                   skill={skill}/>}
+                            </TableCell>
+                            <TableCell>
+                                <Button onClick={() => addSkill(skill)}>Add</Button>
+                            </TableCell>
+                        </TableRow>
                     ))}
                 </TableBody>
             </Table>

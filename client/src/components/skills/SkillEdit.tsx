@@ -3,20 +3,11 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import SkillService from '../../services/SkillService';
-import Skill, {SkillType} from '../../models/actor/Skill';
-import {Option} from '../common/InputSelectField';
-import {CharacteristicType} from '../../models/character/Characteristic';
+import Skill, {getSkillTypes} from '../../models/actor/Skill';
+import {getCharacteristicTypes} from '../../models/character/Characteristic';
 import InputSelectFieldCard from "../common/InlineSelectFieldCard";
 import {RootPath} from "../../services/Path";
 import CheckIcon from "@mui/icons-material/Check";
-
-const getSkillTypes = (): Option[] => {
-    return Object.values(SkillType).map((value) => ({value}))
-}
-
-const getCharacteristicTypes = (): Option[] => {
-    return Object.values(CharacteristicType).map((value) => ({value}))
-}
 
 interface Props {
     sk: Skill

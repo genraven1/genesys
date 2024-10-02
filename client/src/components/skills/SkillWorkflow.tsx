@@ -1,10 +1,10 @@
 import {Fragment, useEffect, useState} from "react";
-import Skill from "../../models/actor/Skill";
+import Skill, {SkillType} from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
-import {useLocation, useParams} from "react-router-dom";
-import SkillEdit from "./SkillEdit";
-import SkillView from "./SkillView";
+import {useLocation} from "react-router-dom";
 import ViewAllSkills from "./ViewAllSkills";
+import {RootPath} from "../../services/Path";
+import SkillPage from "./SkillPage";
 
 export function useFetchAllSkills(): Skill[] {
     const [skills, setSkills] = useState<Skill[]>([])
@@ -16,7 +16,21 @@ export function useFetchAllSkills(): Skill[] {
     return skills;
 }
 
-function useFetchSkill(id: string): Skill {
+export function useFetchSkillsByType(type: SkillType): Skill[] {
+    const [skills, setSkills] = useState<Skill[]>([])
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const skillList = await SkillService.getSkills()
+            if (!skillList) {
+                return
+            }
+            setSkills(skillList.sort((a, b) => a.name.localeCompare(b.name)))
+        })()
+    }, [setSkills, type])
+    return skills;
+}
+
+export function useFetchSkill(id: string): Skill {
     const [skill, setSkill] = useState<Skill>()
     useEffect(() => {
         if (!id) {
@@ -30,23 +44,9 @@ function useFetchSkill(id: string): Skill {
 }
 
 export default function SkillWorkflow() {
-    const {id} = useParams<{ id: string }>()
-    const skill = useFetchSkill(id as string)
-
-    const useWorkflowRender = () => {
-        const pathname = useLocation().pathname
-        if (pathname.endsWith('/view')) {
-            return skill && <SkillView skill={skill}/>
-        } else if (pathname.endsWith('/edit')) {
-            return skill && <SkillEdit sk={skill}/>
-        } else {
-            return <ViewAllSkills/>
-        }
-    }
-
     return (
         <Fragment>
-            {useWorkflowRender()}
+            {useLocation().pathname.endsWith(RootPath.Skills) ? <ViewAllSkills/> : <SkillPage/>}
         </Fragment>
     )
 }
