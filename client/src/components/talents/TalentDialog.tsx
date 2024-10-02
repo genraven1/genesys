@@ -1,8 +1,9 @@
-import { Button, Dialog, DialogActions, DialogContentText, DialogTitle, TextField } from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import TalentService from "../../services/TalentService";
 import {RootPath} from "../../services/Path";
+import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean
@@ -10,8 +11,8 @@ interface Props {
 }
 
 export default function TalentDialog(props: Props) {
-    const {open,onClose} = props
-    const [name,setName] = useState('')
+    const {open, onClose} = props
+    const [name, setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
@@ -21,7 +22,7 @@ export default function TalentDialog(props: Props) {
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 
@@ -31,10 +32,7 @@ export default function TalentDialog(props: Props) {
             <DialogContentText>
                 <TextField onChange={onChange} value={name} required/>
             </DialogContentText>
-            <DialogActions>
-                <Button color='primary' variant='contained' onClick={handleCreate}>CREATE</Button>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
-            </DialogActions>
+            <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
     )
 }

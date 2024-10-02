@@ -17,8 +17,8 @@ export default class TalentService {
             })
     }
 
-    static async getTalent(name: string): Promise<Talent> {
-        return await fetch(RootPath.Talent + `${name}`)
+    static async getTalent(id: string): Promise<Talent> {
+        return await fetch(RootPath.Talent + `${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

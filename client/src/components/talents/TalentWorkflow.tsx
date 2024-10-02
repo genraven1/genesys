@@ -1,10 +1,10 @@
 import {Fragment, useEffect, useState} from "react";
 import Talent from "../../models/Talent";
 import TalentService from "../../services/TalentService";
-import {useLocation, useParams} from "react-router-dom";
-import TalentView from "./TalentView";
-import TalentEdit from "./TalentEdit";
+import {useLocation} from "react-router-dom";
 import ViewAllTalents from "./ViewAllTalents";
+import TalentPage from "./TalentPage";
+import {RootPath} from "../../services/Path";
 
 
 function useFetchTalent(id: string): Talent {
@@ -22,23 +22,9 @@ function useFetchTalent(id: string): Talent {
 }
 
 export default function TalentWorkflow() {
-    const {id} = useParams<{ id?: string }>()
-    const talent = useFetchTalent(id as string)
-
-    const useWorkflowRender = () => {
-        const pathname = useLocation().pathname
-        if (pathname.endsWith('/view')) {
-            return talent && <TalentView talent={talent}/>
-        } else if (pathname.endsWith('/edit')) {
-            return talent && <TalentEdit tal={talent}/>
-        } else {
-            return <ViewAllTalents/>
-        }
-    }
-
     return (
         <Fragment>
-            {useWorkflowRender()}
+            {useLocation().pathname.endsWith(RootPath.Talent) ? <ViewAllTalents/> : <TalentPage/>}
         </Fragment>
     )
 }

@@ -13,8 +13,8 @@ import {CharacteristicType} from "../../models/character/Characteristic";
 export default function SkillPage() {
     const {id} = useParams<{ id: string }>()
     const [skill, setSkill] = useState<Skill | null>(null)
-    let navigate = useNavigate()
     let pathname = useLocation().pathname
+    let navigate = useNavigate()
 
     useEffect(() => {
         if (!id) {
