@@ -49,7 +49,7 @@ export default function ViewAllQualities() {
                                     <TableRow onClick={() => setOpen(!open)}>
                                         <TypographyCenterTableCell value={quality.name}/>
                                         <TableCell style={{textAlign: 'center'}}>
-                                            {quality.passive ? <GenesysDescriptionTypography text={'Passive'}/> :
+                                            {quality.cost === 0 ? <GenesysDescriptionTypography text={'Passive'}/> :
                                                 <GenesysQualityTypography ranks={quality.cost}/>}
                                         </TableCell>
                                         <TypographyCenterTableCell value={renderUsable(quality)}/>

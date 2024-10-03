@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import QualityService from "../../../services/QualityService";
 import Quality from "../../../models/Quality";
-import QualityBackdrop from "../QualityBackdrop";
+import QualityBackdrop from "../../qualities/QualityBackdrop";
 import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
