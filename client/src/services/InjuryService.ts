@@ -12,8 +12,8 @@ export default class InjuryService {
             })
     }
 
-    static async getInjury(name: string): Promise<Injury> {
-        return await fetch(RootPath.Injury + `${name}`)
+    static async getInjury(id: string): Promise<Injury> {
+        return await fetch(RootPath.Injury + `${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

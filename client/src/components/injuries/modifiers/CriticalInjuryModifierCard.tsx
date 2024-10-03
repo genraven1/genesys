@@ -94,6 +94,7 @@ export default function CriticalInjuryModifierCard(props: Props) {
                                         <TextField
                                             type="number"
                                             value={modifier.ranks}
+                                            label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
                                             disabled={pathname.endsWith('/view')}

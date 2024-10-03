@@ -26,15 +26,11 @@ function Row(props: Props) {
     const {injury, columns} = props
     const [open, setOpen] = useState(false)
 
-    const renderDiceRange = (): string => {
-        return String(injury.min) + '-' + String(injury.max)
-    }
-
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={injury.name}/>
-                <TypographyCenterTableCell value={renderDiceRange()}/>
+                <TypographyCenterTableCell value={String(injury.min) + '-' + String(injury.max)}/>
                 <GenesysDifficultyCenterTableCell difficulty={injury.severity}/>
                 <ActionsTableCell name={injury.id} path={RootPath.Injury}/>
             </TableRow>

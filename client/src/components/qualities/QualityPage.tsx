@@ -75,7 +75,9 @@ export default function QualityPage() {
     };
 
     const handleCostChange = async (value: string) => {
-        setQuality(await QualityService.updateQuality({...quality, cost: Number(value)}));
+        if (quality) {
+            setQuality(await QualityService.updateQuality({...quality, cost: Number(value)}));
+        }
     };
 
     return (
@@ -130,6 +132,7 @@ export default function QualityPage() {
                             <TextField
                                 type="number"
                                 value={quality.cost}
+                                label="Advantage Cost"
                                 onChange={(e) => handleCostChange(e.target.value)}
                                 inputProps={{min: 0, max: 3}}
                                 disabled={pathname.endsWith('/view')}
