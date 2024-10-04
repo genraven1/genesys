@@ -21,9 +21,9 @@ interface Props {
 }
 
 export default function TalentModifierCard(props: Props) {
-    const {tal} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
+    const {tal} = props;
+    const pathname = useLocation().pathname;
+    const headers = ['Type', 'Ranks'];
     const [talent, setTalent] = useState(tal);
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
@@ -34,7 +34,7 @@ export default function TalentModifierCard(props: Props) {
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith('/edit')) {
+        if (pathname.endsWith(talent.id + '/edit')) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
@@ -87,7 +87,7 @@ export default function TalentModifierCard(props: Props) {
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
-                                            disabled={pathname.endsWith('/view')}
+                                            disabled={!pathname.endsWith(talent.id + '/edit')}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -97,7 +97,7 @@ export default function TalentModifierCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={pathname.endsWith('/view')}
+                                            disabled={!pathname.endsWith(talent.id + '/edit')}
                                         />
                                     </TableCell>
                                 </TableRow>

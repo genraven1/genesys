@@ -42,14 +42,14 @@ export default function QualityPage() {
         if (pathname.endsWith('/view')) {
             return (
                 <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Skills + id + '/edit')}>
+                            onClick={(): void => navigate(RootPath.Qualities + id + '/edit')}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>
             )
         } else {
             return (
                 <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Skills + id + '/view')}>
+                            onClick={(): void => navigate(RootPath.Qualities + id + '/view')}>
                     <CheckIcon color='primary' fontSize='small'/>
                 </IconButton>
             )

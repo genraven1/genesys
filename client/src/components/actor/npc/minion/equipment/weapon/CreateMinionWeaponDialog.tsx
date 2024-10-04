@@ -2,7 +2,7 @@ import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import {ActorWeapon} from "../../../../../../models/equipment/Weapon";
-import Skill from "../../../../../../models/actor/Skill";
+import Skill, {SkillType} from "../../../../../../models/actor/Skill";
 import {getRangeOptions, RangeBand} from "../../../../../../models/common/RangeBand";
 import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
 import SkillSelectCard from "../../../../../common/skill/SkillSelectCard";
@@ -13,7 +13,7 @@ import NonPlayerCharacterWeaponQualityCard from "../../../equipment/weapon/NonPl
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
 import ActorService from "../../../../../../services/ActorService";
 import Minion from "../../../../../../models/actor/npc/Minion";
-import {useFetchAllSkills} from "../../../../../skills/SkillWorkflow";
+import {useFetchSkillsByType} from "../../../../../skills/SkillWorkflow";
 
 interface Props {
     minion: Minion
@@ -79,7 +79,7 @@ export default function CreateMinionWeaponDialog(props: Props) {
                 <Grid container spacing={10}>
                     <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
                         onSkillChange(value)
-                    }} skills={useFetchAllSkills()} title={'Required Skill'}/>
+                    }} skills={useFetchSkillsByType(SkillType.Combat)} title={'Required Skill'}/>
                     <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
                                            onChange={(value: number): void => {
                                                onChange('damage', String(value))

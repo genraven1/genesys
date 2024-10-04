@@ -25,6 +25,7 @@ public class Minion extends NonPlayerActor {
         this.setWillpower(nonPlayerActor.getWillpower());
         this.setPresence(nonPlayerActor.getPresence());
         this.setWounds(nonPlayerActor.getWounds());
+        this.setSoak(nonPlayerActor.getSoak());
         this.setCombat(nonPlayerActor.getCombat());
         this.setSocial(nonPlayerActor.getSocial());
         this.setGeneral(nonPlayerActor.getGeneral());

@@ -28,7 +28,9 @@ public class Player extends Actor {
         this.setWillpower(actor.getWillpower());
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
+        this.setSoak(actor.getSoak());
         this.setWeapons(actor.getWeapons());
+        this.setArmors(actor.getArmors());
     }
     private int strain = 1;
     private int encumbrance = 5 + getBrawn();

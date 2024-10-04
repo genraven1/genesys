@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import Nemesis from "../../../../../../models/actor/npc/Nemesis";
 import {ActorWeapon} from "../../../../../../models/equipment/Weapon";
-import Skill from "../../../../../../models/actor/Skill";
+import Skill, {SkillType} from "../../../../../../models/actor/Skill";
 import {getRangeOptions, RangeBand} from "../../../../../../models/common/RangeBand";
 import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
 import SkillSelectCard from "../../../../../common/skill/SkillSelectCard";
@@ -13,7 +13,7 @@ import InputSelectFieldCard from "../../../../../common/InlineSelectFieldCard";
 import NonPlayerCharacterWeaponQualityCard from "../../../equipment/weapon/NonPlayerCharacterWeaponQualityCard";
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
 import ActorService from "../../../../../../services/ActorService";
-import {useFetchAllSkills} from "../../../../../skills/SkillWorkflow";
+import {useFetchSkillsByType} from "../../../../../skills/SkillWorkflow";
 
 interface Props {
     nemesis: Nemesis
@@ -79,7 +79,7 @@ export default function CreateNemesisWeaponDialog(props: Props) {
                 <Grid container spacing={10}>
                     <SkillSelectCard defaultValue={weapon?.skill!!} onCommit={(value: Skill): void => {
                         onSkillChange(value)
-                    }} skills={useFetchAllSkills()} title={'Required Skill'}/>
+                    }} skills={useFetchSkillsByType(SkillType.Combat)} title={'Required Skill'}/>
                     <NumberRangeSelectCard title={'Damage'} defaultValue={weapon?.damage!!}
                                            onChange={(value: number): void => {
                                                onChange('damage', String(value))

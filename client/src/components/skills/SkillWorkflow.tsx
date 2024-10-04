@@ -20,10 +20,8 @@ export function useFetchSkillsByType(type: SkillType): Skill[] {
     const [skills, setSkills] = useState<Skill[]>([])
     useEffect(() => {
         (async (): Promise<void> => {
-            const skillList = await SkillService.getSkills()
-            if (!skillList) {
-                return
-            }
+            let skillList = await SkillService.getSkills()
+            skillList = skillList.filter((skill) => skill.type === type)
             setSkills(skillList.sort((a, b) => a.name.localeCompare(b.name)))
         })()
     }, [setSkills, type])
