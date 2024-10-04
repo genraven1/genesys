@@ -20,6 +20,7 @@ public class Career {
     }
 
     @Id
+    private String id;
     private String name;
     private List<Skill> skills = new ArrayList<>();
 }

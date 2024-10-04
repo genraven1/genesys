@@ -7,10 +7,8 @@ import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.actor.npc.SingleNonPlayerActor;
 
 import com.github.genraven.genesys.repository.actor.RivalRepository;
-import com.github.genraven.genesys.service.CampaignService;
 import com.github.genraven.genesys.service.SkillService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 public class RivalService {
 
     private final RivalRepository rivalRepository;
-    private final CampaignService campaignService;
     private final SkillService skillService;
 
     public Flux<Rival> getAllRivals() {

@@ -17,7 +17,7 @@ export default function CareerDialog(props: Props) {
 
     const handleCreate = async (): Promise<void> => {
         let career = await CareerService.createCareer(name)
-        navigate(RootPath.Career + career?.name!! + '/edit')
+        navigate(RootPath.Career + career.id + '/edit')
         onClose()
     }
 

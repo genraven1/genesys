@@ -34,14 +34,14 @@ export default function InjuryPage() {
         if (pathname.endsWith('/view')) {
             return (
                 <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Skills + id + '/edit')}>
+                            onClick={(): void => navigate(RootPath.Injury + id + '/edit')}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>
             )
         } else {
             return (
                 <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Skills + id + '/view')}>
+                            onClick={(): void => navigate(RootPath.Injury + id + '/view')}>
                     <CheckIcon color='primary' fontSize='small'/>
                 </IconButton>
             )

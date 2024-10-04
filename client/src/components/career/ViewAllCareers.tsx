@@ -29,7 +29,7 @@ function Row(props: Props) {
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={career.name}/>
-                <ActionsTableCell name={career.name} path={RootPath.Career}/>
+                <ActionsTableCell name={career.id} path={RootPath.Career}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
@@ -53,11 +53,7 @@ export default function ViewAllCareers() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const careerList = await CareerService.getCareers()
-            if (!careerList) {
-                return
-            }
-            setCareers(careerList)
+            setCareers(await CareerService.getCareers())
         })()
     }, [])
 
