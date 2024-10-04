@@ -6,7 +6,7 @@ import {ViewFieldCard} from "../common/ViewFieldCard";
 import * as React from "react";
 import Spell from "../../models/spell/Spell";
 import {ViewSpellSkillCard} from "./SpellSkillCard";
-import SpellEffectCard from "./SpellEffectCard";
+import SpellEffectCard from "./effect/SpellEffectCard";
 
 interface Props {
     spell: Spell

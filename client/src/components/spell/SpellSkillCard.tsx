@@ -20,7 +20,7 @@ interface Props {
     onSkillRemoval: (name: string) => void
 }
 
-export default function SpellSkillCard(props: Props): JSX.Element {
+export default function SpellSkillCard(props: Props) {
     const {spell, onSkillAddition, onSkillRemoval} = props
     const [skills, setSkills] = useState<Skill[]>([])
     const pathname = useLocation().pathname
@@ -35,7 +35,7 @@ export default function SpellSkillCard(props: Props): JSX.Element {
         })()
     }, [])
 
-    const renderTableBody = (): JSX.Element => {
+    const renderTableBody = () => {
         return (
             <TableBody>
                 {skills.map((skill: Skill) => (
@@ -48,7 +48,7 @@ export default function SpellSkillCard(props: Props): JSX.Element {
         )
     }
 
-    const renderSkillSelection = (skill: Skill): JSX.Element => {
+    const renderSkillSelection = (skill: Skill) => {
         if (pathname.endsWith('/edit')) {
             return <CheckboxTableCell value={spell.skills.some(magic => magic.name === skill.name)}
                                       onAddition={() => onSkillAddition(skill.name)}
@@ -76,10 +76,10 @@ interface ViewProps {
     spell: Spell
 }
 
-export function ViewSpellSkillCard(props: ViewProps): JSX.Element {
+export function ViewSpellSkillCard(props: ViewProps) {
     const {spell} = props
 
-    const renderTableBody = (): JSX.Element => {
+    const renderTableBody = () => {
         return (
             <TableBody>
                 {spell.skills.map((skill: Skill) => (

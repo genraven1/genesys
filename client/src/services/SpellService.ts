@@ -6,10 +6,14 @@ export default class SpellService {
     static async getSpells(): Promise<Spell[]> {
         return await fetch(RootPath.Spell)
             .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
+                switch (res.status) {
+                    case 204:
+                        return []
+                    case 200:
+                        return res.json()
+                    default:
+                        throw new Error(res.statusText)
                 }
-                return res.json()
             })
     }
 

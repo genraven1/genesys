@@ -12,17 +12,17 @@ interface Props {
 
 export default function CreateSpellDialog(props: Props) {
     const {open, onClose} = props
-    const [name,setName] = useState('')
+    const [name, setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         let spell = await SpellService.createSpell(name)
-        navigate(RootPath.Spell + spell.name + '/edit')
+        navigate(RootPath.Spell + spell.id + '/edit')
         onClose()
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 

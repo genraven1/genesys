@@ -22,7 +22,7 @@ interface Props {
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {spell, columns} = props
     const [open, setOpen] = useState(false)
 
@@ -31,12 +31,12 @@ function Row(props: Props): JSX.Element {
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={spell.name}/>
                 <GenesysDifficultyCenterTableCell difficulty={spell.difficulty}/>
-                <ActionsTableCell name={spell.name} path={RootPath.Spell}/>
+                <ActionsTableCell name={spell.id} path={RootPath.Spell}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
+                        <Table sx={{margin: 1}}>
                             <TableBody>
                                 <GenesysDescriptionTypography text={spell.description}/>
                             </TableBody>
@@ -48,18 +48,14 @@ function Row(props: Props): JSX.Element {
     );
 }
 
-export default function ViewAllSpells():JSX.Element {
+export default function ViewAllSpells() {
     const [spells, setSpells] = useState<Spell[]>([])
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
     const headers = ['Name', 'Base Difficulty', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const spellList = await SpellService.getSpells()
-            if (!spellList) {
-                return
-            }
-            setSpells(spellList)
+            setSpells(await SpellService.getSpells())
         })()
     }, [])
 
@@ -84,7 +80,7 @@ export default function ViewAllSpells():JSX.Element {
                 </TableContainer>
             </CardContent>
             {openSpellCreationDialog && <CreateSpellDialog open={openSpellCreationDialog}
-                                                            onClose={(): void => setOpenSpellCreationDialog(false)}/>}
+                                                           onClose={(): void => setOpenSpellCreationDialog(false)}/>}
         </Card>
     );
 }

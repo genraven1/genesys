@@ -11,7 +11,7 @@ import Spell from "../../models/spell/Spell";
 import SpellService from "../../services/SpellService";
 import CheckButtonCard from "../common/CheckButtonCard";
 import SkillService from "../../services/SkillService";
-import SpellEffectCard from "./SpellEffectCard";
+import SpellEffectCard from "./effect/SpellEffectCard";
 import SpellSkillCard from "./SpellSkillCard";
 
 interface Props {

@@ -20,6 +20,7 @@ public class Spell {
     }
 
     @Id
+    private String id;
     private String name;
     private boolean concentration = false;
     private Difficulty difficulty = Difficulty.EASY;

@@ -1,15 +1,15 @@
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {Button, Card, CardActions, CardContent} from "@mui/material";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import * as React from "react";
-import Spell, {Effect} from "../../models/spell/Spell";
-import {Difficulty} from "../../models/common/Difficulty";
+import Spell, {Effect} from "../../../models/spell/Spell";
+import {Difficulty} from "../../../models/common/Difficulty";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
 import CreateSpellEffectDialog from "./CreateSpellEffectDialog";
@@ -18,12 +18,12 @@ interface Props {
     spell: Spell
 }
 
-export default function SpellEffectCard(props: Props): JSX.Element {
+export default function SpellEffectCard(props: Props) {
     const {spell} = props
     const [openCreateSpellEffectDialog, setOpenCreateSpellEffectDialog] = useState(false)
     const pathname = useLocation().pathname
 
-    const renderDifficulty = (effect: Effect): JSX.Element => {
+    const renderDifficulty = (effect: Effect) => {
         if (effect.increase === 0) {
             return <GenesysDescriptionTypography text={'-'}/>
         } else {
@@ -41,7 +41,7 @@ export default function SpellEffectCard(props: Props): JSX.Element {
         return <Fragment/>
     }
 
-    const renderTableBody = (): JSX.Element => {
+    const renderTableBody = () => {
         if (!spell.effects) {
             return <GenesysDescriptionTypography text={'None'}/>
         } else {
@@ -59,7 +59,7 @@ export default function SpellEffectCard(props: Props): JSX.Element {
         }
     }
 
-    const renderCreateSpellEffectButton = (): JSX.Element => {
+    const renderCreateSpellEffectButton = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
