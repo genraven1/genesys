@@ -65,7 +65,7 @@ export default function CareerPage() {
 
     const handleSkillChange = async (index: number, value: Skill) => {
         const updatedSkills = career.skills.map((row, i) =>
-            i === index ? {...row} : row
+            i === index ? {...value} : row
         );
         setCareer(await CareerService.updateCareer({...career, skills: updatedSkills}));
     };
