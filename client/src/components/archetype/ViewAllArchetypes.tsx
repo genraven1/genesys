@@ -14,34 +14,14 @@ import ArchetypeService from "../../services/ArchetypeService";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import ArchetypeDialog from "./ArchetypeDialog";
 
-interface Props {
-    archetype: Archetype
-}
-
-function Row(props: Props): JSX.Element {
-    const {archetype} = props
-
-
-    return (
-        <TableRow key={archetype.name}>
-            <TypographyCenterTableCell value={archetype.name}/>
-            <ActionsTableCell name={archetype.name} path={RootPath.Archetype}/>
-        </TableRow>
-    )
-}
-
 export default function ViewAllArchetypes() {
-    const [archetypes, setArchetypes] = useState<Archetype[]>([])
-    const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+    const [archetypes, setArchetypes] = useState<Archetype[]>([]);
+    const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false);
+    const headers = ['Name', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const archetypeList = await ArchetypeService.getArchetypes()
-            if (!archetypeList) {
-                return
-            }
-            setArchetypes(archetypeList)
+            setArchetypes(await ArchetypeService.getArchetypes())
         })()
     }, [])
 
@@ -59,7 +39,10 @@ export default function ViewAllArchetypes() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {archetypes.map((archetype: Archetype) => (
-                                <Row key={archetype.name} archetype={archetype}/>
+                                <TableRow key={archetype.name}>
+                                    <TypographyCenterTableCell value={archetype.name}/>
+                                    <ActionsTableCell name={archetype.id} path={RootPath.Archetype}/>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>

@@ -21,6 +21,7 @@ public class Archetype {
     }
 
     @Id
+    private String id;
     private String name;
     private String description;
     private int brawn = 1;
@@ -29,9 +30,9 @@ public class Archetype {
     private int cunning = 1;
     private int willpower = 1;
     private int presence = 1;
-    private int wounds = 1;
-    private int strain = 1;
-    private int experience = 0;
+    private int wounds = 10;
+    private int strain = 10;
+    private int experience = 100;
     private Skill skill;
     private List<Ability> abilities = new ArrayList<>();
 }

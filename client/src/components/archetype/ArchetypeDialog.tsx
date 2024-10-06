@@ -11,18 +11,18 @@ interface Props {
 }
 
 export default function ArchetypeDialog(props: Props) {
-    const {open,onClose} = props
-    const [name,setName] = useState('')
+    const {open, onClose} = props
+    const [name, setName] = useState('')
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
         let archetype = await ArchetypeService.createArchetype(name)
-        navigate(RootPath.Archetype + archetype?.name!! + '/edit')
+        navigate(RootPath.Archetype + archetype.id + '/edit')
         onClose()
     }
 
     const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
+        const {value} = event.target
         setName(value)
     }
 

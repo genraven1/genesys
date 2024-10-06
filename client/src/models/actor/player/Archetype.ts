@@ -2,6 +2,7 @@ import Skill from "../Skill";
 import Ability from "../../Ability";
 
 export default interface Archetype {
+    id: string
     name: string
     description: string
     brawn: number

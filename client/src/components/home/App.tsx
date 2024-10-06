@@ -62,8 +62,8 @@ export default function App() {
                     <Route path={RootPath.Career + ':id/view'} element={<CareerWorkflow/>}/>
 
                     <Route path={RootPath.Archetype} element={<ArchetypeWorkflow/>}/>
-                    <Route path={RootPath.Archetype + ':name/edit'} element={<ArchetypeWorkflow/>}/>
-                    <Route path={RootPath.Archetype + ':name/view'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={RootPath.Archetype + ':id/edit'} element={<ArchetypeWorkflow/>}/>
+                    <Route path={RootPath.Archetype + ':id/view'} element={<ArchetypeWorkflow/>}/>
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
