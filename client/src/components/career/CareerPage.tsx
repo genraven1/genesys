@@ -17,6 +17,7 @@ import {Autocomplete} from "@mui/lab";
 import TableContainer from "@mui/material/TableContainer";
 import SkillService from "../../services/SkillService";
 import Skill from "../../models/actor/Skill";
+import {renderSkillName} from "../common/skill/SkillRenders";
 
 export default function CareerPage() {
     const {id} = useParams<{ id: string }>()
@@ -24,7 +25,7 @@ export default function CareerPage() {
     const [skills, setSkills] = useState<Skill[]>([])
     let pathname = useLocation().pathname
     let navigate = useNavigate()
-    let headers = ['Name']
+    let headers = ['Skills']
 
     useEffect(() => {
         if (!id) {
@@ -84,7 +85,7 @@ export default function CareerPage() {
                                         <TableCell>
                                             <Autocomplete
                                                 options={skills}
-                                                getOptionLabel={(option) => option.name}
+                                                getOptionLabel={(option) => renderSkillName(option)}
                                                 value={skill}
                                                 onChange={(e, newValue) => handleSkillChange(index, newValue as Skill)}
                                                 renderInput={(params) => <TextField {...params} label="Skill"
