@@ -3,7 +3,7 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
 import {ActorWeapon} from "../../../../../models/equipment/Weapon";
-import WeaponQualitySelectionDialog from "../../../../equipment/weapon/WeaponQualitySelectionDialog";
+import WeaponQualitySelectionDialog from "../../../../equipment/weapon/quality/WeaponQualitySelectionDialog";
 import WeaponQualityTable from "../../../../equipment/weapon/WeaponQualityTable";
 
 interface Props {

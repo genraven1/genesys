@@ -64,26 +64,27 @@ export default function ArchetypePage() {
     };
 
     const handleCharacteristicChange = async (characteristic: CharacteristicType, value: string) => {
-        switch (characteristic) {
-            case CharacteristicType.Brawn:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, brawn: Number(value)}));
-                break;
-            case CharacteristicType.Agility:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, agility: Number(value)}));
-                break;
-            case CharacteristicType.Intellect:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, intellect: Number(value)}));
-                break;
-            case CharacteristicType.Cunning:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, cunning: Number(value)}));
-                break;
-            case CharacteristicType.Willpower:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, willpower: Number(value)}));
-                break;
-            case CharacteristicType.Presence:
-                setArchetype(await ArchetypeService.updateArchetype({...archetype, presence: Number(value)}));
-                break;
-
+        if (archetype) {
+            switch (characteristic) {
+                case CharacteristicType.Brawn:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, brawn: Number(value)}));
+                    break;
+                case CharacteristicType.Agility:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, agility: Number(value)}));
+                    break;
+                case CharacteristicType.Intellect:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, intellect: Number(value)}));
+                    break;
+                case CharacteristicType.Cunning:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, cunning: Number(value)}));
+                    break;
+                case CharacteristicType.Willpower:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, willpower: Number(value)}));
+                    break;
+                case CharacteristicType.Presence:
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, presence: Number(value)}));
+                    break;
+            }
         }
     };
 

@@ -14,7 +14,7 @@ import {getRangeOptions, RangeBand} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
-import WeaponQualityCard from "./WeaponQualityCard";
+import WeaponQualityCard from "./quality/WeaponQualityCard";
 import {useFetchAllSkills} from "../../skills/SkillWorkflow";
 import SkillSelectCard from "../../common/skill/SkillSelectCard";
 
@@ -83,7 +83,7 @@ export default function WeaponEdit(props: Props) {
 
     const updateWeapon = async (copyWeapon: Weapon) => {
         setWeapon(copyWeapon)
-        await EquipmentService.updateWeapon(copyWeapon.name, copyWeapon)
+        await EquipmentService.updateWeapon(copyWeapon)
     }
 
     const onView = () => {

@@ -2,7 +2,7 @@ import {EquipmentType} from "../../models/equipment/Equipment";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {EquipmentPath} from "../../services/Path";
-import {Dialog, DialogContentText, DialogTitle, Divider, TextField,} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, TextField,} from "@mui/material";
 import EquipmentService from "../../services/EquipmentService";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
 
@@ -18,22 +18,20 @@ export default function CreateEquipmentDialog(props: Props) {
     let navigate = useNavigate()
 
     const handleCreate = async (): Promise<void> => {
-        let path = ''
         switch (type) {
             case EquipmentType.Armor:
-                await EquipmentService.createArmor(name)
-                path = EquipmentPath.Armor
-                break
+                let armor = await EquipmentService.createArmor(name);
+                navigate(EquipmentPath.Armor + armor.id + '/view');
+                break;
             case EquipmentType.Weapon:
-                await EquipmentService.createWeapon(name)
-                path = EquipmentPath.Weapon
-                break
+                let weapon = await EquipmentService.createWeapon(name)
+                navigate(EquipmentPath.Weapon + weapon.id + '/view');
+                break;
             case EquipmentType.Gear:
-                await EquipmentService.createGear(name)
-                path = EquipmentPath.Gear
-                break
+                let gear = await EquipmentService.createGear(name)
+                navigate(EquipmentPath.Gear + gear.id + '/view');
+                break;
         }
-        navigate(path + name + '/view')
         onClose()
     }
 
@@ -51,7 +49,6 @@ export default function CreateEquipmentDialog(props: Props) {
             <DialogTitle>{getTitle()}</DialogTitle>
             <DialogContentText>
                 <TextField onChange={onNameChange} value={name} required/>
-                <Divider />
             </DialogContentText>
             <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>

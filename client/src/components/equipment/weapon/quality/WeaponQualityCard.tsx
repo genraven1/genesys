@@ -2,10 +2,10 @@ import {Button, Card, CardContent} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
-import {Weapon} from "../../../models/equipment/Weapon";
-import WeaponQualityTable from "./WeaponQualityTable";
+import {Weapon} from "../../../../models/equipment/Weapon";
+import WeaponQualityTable from "../WeaponQualityTable";
 import WeaponQualitySelectionDialog from "./WeaponQualitySelectionDialog";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     weapon: Weapon

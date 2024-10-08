@@ -31,7 +31,7 @@ function Row(props: Props): JSX.Element {
 
     return (
         <Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
+            <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={weapon.name}/>
                 <TypographyCenterTableCell value={weapon.skill.name}/>
                 <TypographyCenterTableCell value={renderDamage(weapon)}/>
@@ -40,7 +40,7 @@ function Row(props: Props): JSX.Element {
                 <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
                 <TypographyCenterTableCell value={renderPrice(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.rarity)}/>
-                <ActionsTableCell name={weapon.name} path={EquipmentPath.Weapon}/>
+                <ActionsTableCell name={weapon.id} path={EquipmentPath.Weapon}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
@@ -85,7 +85,7 @@ export default function ViewAllWeapon() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {weapons.map((weapon: Weapon) => (
-                                <Row key={weapon?.name!!} weapon={weapon!!} columns={headers.length}/>
+                                <Row key={weapon.name} weapon={weapon} columns={headers.length}/>
                             ))}
                         </TableBody>
                     </Table>

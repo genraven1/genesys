@@ -5,6 +5,10 @@ import EquipmentService from "../../../services/EquipmentService";
 import WeaponView from "./WeaponView";
 import WeaponEdit from "./WeaponEdit";
 import ViewAllWeapon from "./ViewAllWeapon";
+import {EquipmentPath, RootPath} from "../../../services/Path";
+import ViewAllInjuries from "../../injuries/ViewAllInjuries";
+import InjuryPage from "../../injuries/InjuryPage";
+import WeaponPage from "./WeaponPage";
 
 function useFetchWeapon(name: string): Weapon {
     const [weapon, setWeapon] = useState<Weapon>()
@@ -27,23 +31,28 @@ function useFetchWeapon(name: string): Weapon {
 }
 
 export default function WeaponWorkflow() {
-    const {name} = useParams<{ name: string }>()
-    const weapon = useFetchWeapon(name as string)
-
-    const useWorkflowRender = () => {
-        const pathname = useLocation().pathname
-        if (pathname.endsWith('/view')) {
-            return weapon && <WeaponView weapon={weapon}/>
-        } else if (pathname.endsWith('/edit')) {
-            return weapon && <WeaponEdit wea={weapon}/>
-        } else {
-            return <ViewAllWeapon/>
-        }
-    }
-
+    // const {id} = useParams<{ id: string }>()
+    // const weapon = useFetchWeapon(id as string)
+    //
+    // const useWorkflowRender = () => {
+    //     const pathname = useLocation().pathname
+    //     if (pathname.endsWith('/view')) {
+    //         return weapon && <WeaponView weapon={weapon}/>
+    //     } else if (pathname.endsWith('/edit')) {
+    //         return weapon && <WeaponEdit wea={weapon}/>
+    //     } else {
+    //         return <ViewAllWeapon/>
+    //     }
+    // }
+    //
+    // return (
+    //     <Fragment>
+    //         {useWorkflowRender()}
+    //     </Fragment>
+    // )
     return (
         <Fragment>
-            {useWorkflowRender()}
+            {useLocation().pathname.endsWith(EquipmentPath.Weapon) ? <ViewAllWeapon/> : <WeaponPage/>}
         </Fragment>
     )
 }

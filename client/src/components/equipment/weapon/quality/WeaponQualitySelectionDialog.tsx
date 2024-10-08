@@ -1,6 +1,6 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import WeaponQualitySelectionTable from "./WeaponQualitySelectionTable";
-import {Weapon} from "../../../models/equipment/Weapon";
+import {Weapon} from "../../../../models/equipment/Weapon";
 
 interface Props {
     weapon: Weapon
