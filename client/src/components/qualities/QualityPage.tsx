@@ -56,9 +56,9 @@ export default function QualityPage() {
         }
     }
 
-    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (quality) {
-            setQuality({...quality, description: event.target.value});
+            setQuality(await QualityService.updateQuality({...quality, description: event.target.value}));
         }
     };
 

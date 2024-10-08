@@ -57,9 +57,9 @@ export default function ArchetypePage() {
         }
     }
 
-    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (archetype) {
-            setArchetype({...archetype, description: event.target.value});
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, description: event.target.value}));
         }
     };
 
@@ -88,7 +88,9 @@ export default function ArchetypePage() {
     };
 
     const handleSkillChange = async (value: Skill) => {
-        setArchetype(await ArchetypeService.updateArchetype({...archetype, skill: value}));
+        if (archetype) {
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, skill: value}));
+        }
     };
 
     const handleWoundsChange = async (value: string) => {
@@ -219,6 +221,17 @@ export default function ArchetypePage() {
                                 disabled={pathname.endsWith('/view')}
                             />
                         </Grid>
+                        <Grid item xs>
+                            <TextField
+                                type="number"
+                                value={archetype.experience}
+                                label="Base Experience"
+                                fullWidth
+                                onChange={(e) => handleExperienceChange(e.target.value)}
+                                inputProps={{min: 70, max: 170, step: 5}}
+                                disabled={pathname.endsWith('/view')}
+                            />
+                        </Grid>
                     </Grid>
                     <Grid container spacing={2}>
                         <Grid item xs>
@@ -231,19 +244,6 @@ export default function ArchetypePage() {
                                 renderInput={(params) => <TextField {...params} label="Starting Skill"
                                                                     variant="outlined"/>}
                                 disabled={!pathname.endsWith(archetype.id + '/edit')}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.experience}
-                                label="Base Experience"
-                                fullWidth
-                                onChange={(e) => handleExperienceChange(e.target.value)}
-                                inputProps={{min: 70, max: 170, step: 5}}
-                                disabled={pathname.endsWith('/view')}
                             />
                         </Grid>
                     </Grid>

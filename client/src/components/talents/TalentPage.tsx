@@ -59,34 +59,31 @@ export default function TalentPage() {
 
     const handleRankedChange = async (value: boolean) => {
         if (talent) {
-            const updatedTalent = {...talent, ranked: value};
-            setTalent(await TalentService.updateTalent(updatedTalent));
+            setTalent(await TalentService.updateTalent({...talent, ranked: value}));
         }
     };
 
     const handleActivationChange = async (value: Activation) => {
         if (talent) {
-            const updatedTalent = {...talent, activation: value};
-            setTalent(await TalentService.updateTalent(updatedTalent));
+            setTalent(await TalentService.updateTalent({...talent, activation: value}));
         }
     };
 
     const handleTierChange = async (value: Tier) => {
         if (talent) {
-            const updatedTalent = {...talent, tier: value};
-            setTalent(await TalentService.updateTalent(updatedTalent));
+            setTalent(await TalentService.updateTalent({...talent, tier: value}));
         }
     };
 
-    const handleSummaryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSummaryChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (talent) {
-            setTalent({...talent, summary: event.target.value});
+            setTalent(await TalentService.updateTalent({...talent, summary: event.target.value}));
         }
     };
 
-    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (talent) {
-            setTalent({...talent, description: event.target.value});
+            setTalent(await TalentService.updateTalent({...talent, description: event.target.value}));
         }
     };
 
