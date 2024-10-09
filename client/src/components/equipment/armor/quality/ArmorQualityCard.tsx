@@ -1,7 +1,6 @@
 import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@mui/material";
 import * as React from "react";
 import {Fragment, useEffect, useState} from "react";
-import {Weapon} from "../../../../models/equipment/Weapon";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {useLocation} from "react-router-dom";
 import {EquipmentQuality} from "../../../../models/Quality";
@@ -15,15 +14,16 @@ import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
-    weap: Weapon
+    arm: Armor
 }
 
 export default function WeaponQualityCard(props: Props) {
-    const {weap} = props;
+    const {arm} = props;
     const pathname = useLocation().pathname;
-    const [weapon, setWeapon] = useState(weap);
+    const [armor, setArmor] = useState(arm);
     const [equipmentQualities, setEquipmentQualities] = useState<EquipmentQuality[]>([]);
     const headers = ['Quality', 'Ranks'];
 
@@ -31,7 +31,7 @@ export default function WeaponQualityCard(props: Props) {
     useEffect(() => {
         (async () => {
             let qualities = await QualityService.getQualities();
-            let updatedQualities = qualities.filter((quality) => quality.weapon).map((quality) => ({
+            let updatedQualities = qualities.filter((quality) => quality.armor).map((quality) => ({
                 ...quality,
                 ranks: 1,
             } as EquipmentQuality));
@@ -40,7 +40,7 @@ export default function WeaponQualityCard(props: Props) {
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(weapon.id + '/edit')) {
+        if (pathname.endsWith(armor.id + '/edit')) {
             return (
                 <TableFooter>
                     <TableRow key={'footer'}>
@@ -55,21 +55,21 @@ export default function WeaponQualityCard(props: Props) {
     }
 
     const addRow = async () => {
-        setWeapon({...weapon, qualities: [...weapon.qualities, {} as EquipmentQuality]});
+        setArmor({...armor, qualities: [...armor.qualities, {} as EquipmentQuality]});
     };
 
     const handleQualityChange = async (index: number, value: EquipmentQuality) => {
-        const updatedQualities = weapon.qualities.map((row, i) =>
+        const updatedQualities = armor.qualities.map((row, i) =>
             i === index ? {...value} : row
         );
-        setWeapon(await EquipmentService.updateWeapon({...weapon, qualities: updatedQualities}));
+        setArmor(await EquipmentService.updateArmor({...armor, qualities: updatedQualities}));
     };
 
     const handleRanksChange = async (index: number, value: string) => {
-        const updatedQualities = weapon.qualities.map((row, i) =>
+        const updatedQualities = armor.qualities.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setWeapon(await EquipmentService.updateWeapon({...weapon, qualities: updatedQualities}));
+        setArmor(await EquipmentService.updateArmor({...armor, qualities: updatedQualities}));
     };
 
     return (
@@ -80,7 +80,7 @@ export default function WeaponQualityCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {weapon.qualities.map((quality, index) => (
+                            {armor.qualities.map((quality, index) => (
                                 <TableRow key={index}>
                                     <TableCell>
                                         <Autocomplete
@@ -90,7 +90,7 @@ export default function WeaponQualityCard(props: Props) {
                                             onChange={(e, newValue) => handleQualityChange(index, newValue as EquipmentQuality)}
                                             renderInput={(params) => <TextField {...params} label="Quality"
                                                                                 variant="outlined"/>}
-                                            disabled={!pathname.endsWith(weapon.id + '/edit')}
+                                            disabled={!pathname.endsWith(armor.id + '/edit')}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -100,7 +100,7 @@ export default function WeaponQualityCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(weapon.id + '/edit')}
+                                            disabled={!pathname.endsWith(armor.id + '/edit')}
                                         />
                                     </TableCell>
                                 </TableRow>
