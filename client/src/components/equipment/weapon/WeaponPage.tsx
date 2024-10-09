@@ -34,6 +34,7 @@ import TableCell from "@mui/material/TableCell";
 import {useFetchSkillsByType} from "../../skills/SkillWorkflow";
 import {RangeBand} from "../../../models/common/RangeBand";
 import WeaponQualityCard from "./quality/WeaponQualityCard";
+import WeaponModifierCard from "./modifier/WeaponModifierCard";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
@@ -244,6 +245,7 @@ export default function WeaponPage() {
                         </Table>
                     </TableContainer>
                     <WeaponQualityCard weap={weapon}/>
+                    <WeaponModifierCard weap={weapon}/>
                 </Grid>
             </CardContent>
         </Card>
