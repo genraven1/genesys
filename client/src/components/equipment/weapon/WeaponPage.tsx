@@ -33,6 +33,7 @@ import Skill, {SkillType} from "../../../models/actor/Skill";
 import TableCell from "@mui/material/TableCell";
 import {useFetchSkillsByType} from "../../skills/SkillWorkflow";
 import {RangeBand} from "../../../models/common/RangeBand";
+import WeaponQualityCard from "./quality/WeaponQualityCard";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
@@ -230,7 +231,7 @@ export default function WeaponPage() {
                                         </FormControl>
                                         <TextField
                                             type="number"
-                                            value={weapon.restricted && pathname.endsWith('/view') ? `${weapon.price} (R)` : weapon.price}
+                                            value={weapon.restricted && pathname.endsWith('/view') ? `${weapon.price}(R)` : weapon.price}
                                             label="Price"
                                             onChange={(e) => handlePriceChange(e.target.value)}
                                             inputProps={{min: 0, max: 1000000}}
@@ -242,6 +243,7 @@ export default function WeaponPage() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <WeaponQualityCard weap={weapon}/>
                 </Grid>
             </CardContent>
         </Card>

@@ -33,7 +33,7 @@ export default function GearEdit(props: Props) {
         const copyGear = {...gear} as Gear
         copyGear.skill = value
         setGear(copyGear)
-        await EquipmentService.updateGear(copyGear.name, copyGear)
+        await EquipmentService.updateGear(copyGear)
     }
 
     const onChange = async (key: keyof Gear, value: string) => {
@@ -68,7 +68,7 @@ export default function GearEdit(props: Props) {
 
     const updateGear = async (copyGear: Gear) => {
         setGear(copyGear)
-        await EquipmentService.updateGear(copyGear.name, copyGear)
+        await EquipmentService.updateGear(copyGear)
     }
 
     const onView = () => {

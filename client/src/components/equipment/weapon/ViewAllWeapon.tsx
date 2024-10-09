@@ -16,16 +16,17 @@ import {EquipmentPath} from "../../../services/Path";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderDamage, renderPrice} from "../../../models/equipment/EquipmentHelper";
-import {Button, Card, CardContent, CardHeader, Divider} from "@mui/material";
+import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
 import {EquipmentType} from "../../../models/equipment/Equipment";
+import {renderSkillName} from "../../common/skill/SkillRenders";
 
 interface Props {
     weapon: Weapon
     columns: number
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {weapon, columns} = props
     const [open, setOpen] = useState(false)
 
@@ -33,7 +34,7 @@ function Row(props: Props): JSX.Element {
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={weapon.name}/>
-                <TypographyCenterTableCell value={weapon.skill.name}/>
+                <TypographyCenterTableCell value={renderSkillName(weapon.skill)}/>
                 <TypographyCenterTableCell value={renderDamage(weapon)}/>
                 <TypographyCenterTableCell value={String(weapon.critical)}/>
                 <TypographyCenterTableCell value={weapon.range}/>
@@ -78,7 +79,6 @@ export default function ViewAllWeapon() {
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Weapon</Button>}>
             </CardHeader>
-            <Divider/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

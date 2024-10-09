@@ -34,7 +34,7 @@ function QualityRow(props: RowProps) {
         else {
             weapon.qualities = weapon.qualities.concat({...quality, ranks: 1})
         }
-        await EquipmentService.updateWeapon(weapon.name, weapon)
+        await EquipmentService.updateWeapon(weapon)
     }
 
     return (

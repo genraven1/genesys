@@ -90,7 +90,7 @@ export default class EquipmentService {
     }
 
     static async updateWeapon(weapon: Weapon): Promise<Weapon> {
-        return await fetch(EquipmentPath.Armor + `${weapon.id}`, {
+        return await fetch(EquipmentPath.Weapon + `${weapon.id}`, {
             method: "PUT",
             body: JSON.stringify(weapon),
             headers: {
@@ -140,7 +140,7 @@ export default class EquipmentService {
     }
 
     static async updateGear(gear: Gear): Promise<Gear> {
-        return await fetch(EquipmentPath.Armor + `${gear.id}`, {
+        return await fetch(EquipmentPath.Gear + `${gear.id}`, {
             method: "PUT",
             body: JSON.stringify(gear),
             headers: {
