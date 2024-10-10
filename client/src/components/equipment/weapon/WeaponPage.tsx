@@ -117,6 +117,12 @@ export default function WeaponPage() {
         }
     };
 
+    const handleEncumbranceChange = async (value: string) => {
+        if (weapon) {
+            setWeapon(await EquipmentService.updateWeapon({...weapon, encumbrance: Number(value)}));
+        }
+    };
+
     const handleRestrictedChange = async (value: boolean) => {
         if (weapon) {
             setWeapon(await EquipmentService.updateWeapon({...weapon, restricted: value}));
@@ -126,6 +132,12 @@ export default function WeaponPage() {
     const handlePriceChange = async (value: string) => {
         if (weapon) {
             setWeapon(await EquipmentService.updateWeapon({...weapon, price: Number(value)}));
+        }
+    };
+
+    const handleRarityChange = async (value: string) => {
+        if (weapon) {
+            setWeapon(await EquipmentService.updateWeapon({...weapon, rarity: Number(value)}));
         }
     };
 
@@ -152,7 +164,6 @@ export default function WeaponPage() {
                             {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow key={weapon.id}>
-                                    <TypographyCenterTableCell value={weapon.name}/>
                                     <TableCell>
                                         <Autocomplete
                                             options={skills}
@@ -218,6 +229,16 @@ export default function WeaponPage() {
                                         />
                                     </TableCell>
                                     <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={weapon.encumbrance}
+                                            label="Encumbrance"
+                                            onChange={(e) => handleEncumbranceChange(e.target.value)}
+                                            inputProps={{min: 1, max: 10}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
                                         <FormControl fullWidth>
                                             <InputLabel>Restricted</InputLabel>
                                             <Select
@@ -236,6 +257,16 @@ export default function WeaponPage() {
                                             label="Price"
                                             onChange={(e) => handlePriceChange(e.target.value)}
                                             inputProps={{min: 0, max: 1000000}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={weapon.rarity}
+                                            label="Rarity"
+                                            onChange={(e) => handleRarityChange(e.target.value)}
+                                            inputProps={{min: 0, max: 10}}
                                             disabled={pathname.endsWith('/view')}
                                         />
                                     </TableCell>

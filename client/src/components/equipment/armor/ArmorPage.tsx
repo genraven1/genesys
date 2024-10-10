@@ -1,4 +1,14 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    Divider,
+    FormControl,
+    Grid,
+    IconButton,
+    InputLabel, MenuItem, Select,
+    TextField
+} from '@mui/material';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
@@ -14,11 +24,11 @@ import TableContainer from "@mui/material/TableContainer";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {renderPrice, renderQualities, renderSoak} from "../../../models/equipment/EquipmentHelper";
 import {Fragment, useEffect, useState} from "react";
-import {Weapon} from "../../../models/equipment/Weapon";
 import EquipmentService from "../../../services/EquipmentService";
 import CheckIcon from "@mui/icons-material/Check";
 import ArmorModifierCard from "./modifier/ArmorModifierCard";
 import ArmorQualityCard from './quality/ArmorQualityCard';
+import TableCell from "@mui/material/TableCell";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();
@@ -58,26 +68,134 @@ export default function ArmorPage() {
         }
     }
 
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, description: event.target.value}));
+        }
+    };
+
+    const handleSoakChange = async (value: string) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, soak: Number(value)}));
+        }
+    };
+
+    const handleDefenseChange = async (value: string) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, defense: Number(value)}));
+        }
+    };
+
+    const handleEncumbranceChange = async (value: string) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, encumbrance: Number(value)}));
+        }
+    };
+
+    const handleRestrictedChange = async (value: boolean) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, restricted: value}));
+        }
+    };
+
+    const handlePriceChange = async (value: string) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, price: Number(value)}));
+        }
+    };
+
+    const handleRarityChange = async (value: string) => {
+        if (armor) {
+            setArmor(await EquipmentService.updateArmor({...armor, rarity: Number(value)}));
+        }
+    };
+
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={armor.name} action={onPageChange()}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={10}>
-                        <ViewFieldCard name={'Description'} value={armor?.description!!}/>
+                        <Grid item xs>
+                            <TextField
+                                label="Description"
+                                variant="outlined"
+                                fullWidth
+                                multiline
+                                rows={2}
+                                value={armor.description}
+                                onChange={handleDescriptionChange}
+                                disabled={pathname.endsWith('/view')}
+                            />
+                        </Grid>
                     </Grid>
                     <TableContainer component={Paper}>
                         <Table>
                             {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow>
-                                    <TypographyCenterTableCell value={armor?.name!!}/>
-                                    <TypographyCenterTableCell value={String(armor?.defense!!)}/>
-                                    <TypographyCenterTableCell value={renderSoak(armor)}/>
-                                    <TypographyCenterTableCell value={String(armor?.encumbrance!!)}/>
-                                    <TypographyCenterTableCell value={renderPrice(armor)}/>
-                                    <TypographyCenterTableCell value={String(armor?.rarity!!)}/>
-                                    <TypographyCenterTableCell value={renderQualities(armor)}/>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={'+' + armor.soak}
+                                            label="Soak"
+                                            onChange={(e) => handleSoakChange(e.target.value)}
+                                            inputProps={{min: 1, max: 6}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={armor.defense}
+                                            label="Defense"
+                                            onChange={(e) => handleDefenseChange(e.target.value)}
+                                            inputProps={{min: 1, max: 6}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={armor.encumbrance}
+                                            label="Encumbrance"
+                                            onChange={(e) => handleEncumbranceChange(e.target.value)}
+                                            inputProps={{min: 1, max: 10}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <FormControl fullWidth>
+                                            <InputLabel>Restricted</InputLabel>
+                                            <Select
+                                                value={armor.restricted ? 'Yes' : 'No'}
+                                                onChange={(e) => handleRestrictedChange(e.target.value === 'Yes')}
+                                                label="Restricted"
+                                                disabled={pathname.endsWith('/view')}
+                                            >
+                                                <MenuItem value="Yes">Yes</MenuItem>
+                                                <MenuItem value="No">No</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <TextField
+                                            type="number"
+                                            value={armor.restricted && pathname.endsWith('/view') ? `${armor.price}(R)` : armor.price}
+                                            label="Price"
+                                            onChange={(e) => handlePriceChange(e.target.value)}
+                                            inputProps={{min: 0, max: 1000000}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <TextField
+                                            type="number"
+                                            value={armor.rarity}
+                                            label="Rarity"
+                                            onChange={(e) => handleRarityChange(e.target.value)}
+                                            inputProps={{min: 0, max: 10}}
+                                            disabled={pathname.endsWith('/view')}
+                                        />
+                                    </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
