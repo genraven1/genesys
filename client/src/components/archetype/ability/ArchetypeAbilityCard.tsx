@@ -12,19 +12,19 @@ interface Props {
     archetype: Archetype
 }
 
-export default function ArchetypeAbilityCard(props: Props): JSX.Element {
+export default function ArchetypeAbilityCard(props: Props) {
     const {archetype} = props
     const [openCreateAbilityDialog, setOpenCreateAbilityDialog] = useState(false)
     const pathname = useLocation().pathname
 
-    const renderTable = (): JSX.Element => {
+    const renderTable = () => {
         if (archetype.abilities.length === 0) {
             return <Typography style={{textAlign: 'center'}}>None</Typography>
         }
         return <ArchetypeAbilityTable archetype={archetype}/>
     }
 
-    const renderCreateAbilityButton = (): JSX.Element => {
+    const renderCreateAbilityButton = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
