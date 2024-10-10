@@ -2,7 +2,6 @@ import {
     Card,
     CardContent,
     CardHeader,
-    Divider,
     FormControl,
     Grid,
     IconButton,
@@ -13,16 +12,13 @@ import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import * as React from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
-import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {EquipmentPath} from "../../../services/Path";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import {renderPrice, renderQualities, renderSoak} from "../../../models/equipment/EquipmentHelper";
 import {Fragment, useEffect, useState} from "react";
 import EquipmentService from "../../../services/EquipmentService";
 import CheckIcon from "@mui/icons-material/Check";
