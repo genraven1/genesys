@@ -24,7 +24,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
 
     const addArmor = async () => {
         player.armors.push({slot: ArmorSlot.None, ...armor})
-        await ActorService.updatePlayer(player.name, player)
+        await ActorService.updatePlayer(player)
     }
 
     return (

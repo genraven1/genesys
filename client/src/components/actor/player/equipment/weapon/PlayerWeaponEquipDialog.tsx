@@ -37,7 +37,7 @@ export default function PlayerWeaponEquipDialog(props: Props) {
                 }
             })
         }
-        await ActorService.updatePlayer(player.name, player)
+        await ActorService.updatePlayer(player)
     }
 
     return (

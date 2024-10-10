@@ -43,7 +43,7 @@ export default function CareerSkillSelectDialog(props: Props): JSX.Element {
                 }
             })
         })
-        await ActorService.updatePlayer(player.name, player)
+        await ActorService.updatePlayer(player)
         onClose()
     }
 

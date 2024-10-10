@@ -17,18 +17,13 @@ export enum EquipmentPath {
     Gear = '/equipment/gears/',
 }
 
-export enum EquipmentQualityPath {
-    ArmorQuality = '/qualities' + EquipmentPath.Armor,
-    WeaponQuality = '/qualities' + EquipmentPath.Weapon
-}
-
 export enum LorePath {
     Organization = '/lore/organizations/',
 }
 
 export enum ActorPath {
     Actor = '/actors/',
-    Player = '/actors/players/',
+    Player = '/players/',
     Nemesis = '/actors/nemeses/',
     Rival = '/rivals/',
     Minion = '/actors/minions/',

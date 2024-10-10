@@ -20,7 +20,7 @@ export default function PlayerEditSkillDialog(props: Props) {
                 player.skills[index] = skill
             }
         })
-        await ActorService.updatePlayer(player.name, player)
+        await ActorService.updatePlayer(player)
         onClose()
     }
 

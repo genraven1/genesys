@@ -78,7 +78,7 @@ export default function PlayerEdit(props: Props) {
     const updatePlayer = async (copyPlayer: Player) => {
         copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
-        await ActorService.updatePlayer(copyPlayer.name, copyPlayer)
+        await ActorService.updatePlayer(copyPlayer)
     }
 
     const onView = () => {

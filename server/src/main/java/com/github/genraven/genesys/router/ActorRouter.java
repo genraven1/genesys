@@ -13,11 +13,13 @@ public class ActorRouter {
     @Bean
     public RouterFunction<ServerResponse> actorRouterMethod(final ActorHandler actorHandler) {
         return RouterFunctions.route()
-                .path("/actors/players", builder -> builder
-                        .GET("/", actorHandler::getAllPlayers)
-                        .POST("/{name}", actorHandler::createPlayer)
+                .path("/players", builder -> builder
                         .GET("/{name}", actorHandler::getPlayer)
                         .PUT("/{name}", actorHandler::updatePlayer)
+                )
+                .path("/campaigns/{name}", builder -> builder
+                        .GET("/players/", actorHandler::getAllPlayers)
+                        .POST("/players/{playerName}", actorHandler::createPlayer)
                 )
                 .path("/actors/nemeses", builder -> builder
                         .GET("/", actorHandler::getAllNemeses)

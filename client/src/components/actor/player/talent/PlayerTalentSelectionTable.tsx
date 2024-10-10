@@ -33,7 +33,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
         } else {
             player.talents.push({...talent, ranks: 1})
         }
-        await ActorService.updatePlayer(player.name, player)
+        await ActorService.updatePlayer(player)
     }
 
     return (

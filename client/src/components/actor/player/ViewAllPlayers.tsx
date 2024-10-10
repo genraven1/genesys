@@ -14,37 +14,19 @@ import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell"
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateActorDialog from "../common/CreateActorDialog";
 import {ActorType} from "../../../models/actor/Actor";
-
-interface Props {
-    player: Player
-}
-
-function Row(props: Props): JSX.Element {
-    const {player} = props
-
-
-    return (
-        <TableRow key={player.name}>
-            <TypographyCenterTableCell value={player.name}/>
-            <ActionsTableCell name={player.name} path={ActorPath.Player}/>
-        </TableRow>
-    )
-}
+import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 export default function ViewAllPlayers() {
-    const [players, setPlayers] = useState<Player[]>([])
-    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+    const [players, setPlayers] = useState<Player[]>([]);
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false);
+    const headers = ['Name', 'View'];
+    let campaign = useFetchCurrentCampaign();
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const playerList = await ActorService.getPlayers()
-            if (!playerList) {
-                return
-            }
-            setPlayers(playerList)
+            setPlayers(await ActorService.getPlayers(campaign.id));
         })()
-    }, [])
+    }, [campaign.id])
 
     return (
         <Card>
@@ -60,7 +42,10 @@ export default function ViewAllPlayers() {
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
                             {players.map((player: Player) => (
-                                <Row key={player.name} player={player}/>
+                                <TableRow key={player.name}>
+                                    <TypographyCenterTableCell value={player.name}/>
+                                    <ActionsTableCell name={player.name} path={ActorPath.Player}/>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>
@@ -70,5 +55,5 @@ export default function ViewAllPlayers() {
                                                            onClose={(): void => setOpenActorCreationDialog(false)}
                                                            actorType={ActorType.Player}/>}
         </Card>
-    )
+    );
 }

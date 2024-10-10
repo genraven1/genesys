@@ -13,6 +13,7 @@ import {Button} from "@mui/material";
 import TalentBackdrop from "../../../talents/TalentBackdrop";
 import Campaign from "../../../../models/campaign/Campaign";
 import PlayerBackdrop from "./PlayerBackdrop";
+import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 
 interface RowProps {
     campaign: Campaign
@@ -47,13 +48,13 @@ interface Props {
 }
 
 export default function PlayerSelectionTable(props: Props) {
-    const {campaign} = props
-    const headers = ['Name', 'Add']
-    const [players, setPlayers] = useState<Player[]>([])
+    const {campaign} = props;
+    const headers = ['Name', 'Add'];
+    const [players, setPlayers] = useState<Player[]>([]);
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const playerList = await ActorService.getPlayers()
+            const playerList = await ActorService.getPlayers(campaign.id)
             if (!playerList) {
                 return
             }

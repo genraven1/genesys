@@ -67,8 +67,8 @@ export default function App() {
 
                     {/*Actor Routes*/}
                     <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
-                    <Route path={ActorPath.Player + ':name/edit'} element={<PlayerWorkflow/>}/>
-                    <Route path={ActorPath.Player + ':name/view'} element={<PlayerWorkflow/>}/>
+                    <Route path={ActorPath.Player + ':id/edit'} element={<PlayerWorkflow/>}/>
+                    <Route path={ActorPath.Player + ':id/view'} element={<PlayerWorkflow/>}/>
 
                     <Route path={ActorPath.Nemesis} element={<AllNemesesView/>}/>
                     <Route path={ActorPath.Nemesis + ':name/edit'} element={<NemesisWorkflow/>}/>

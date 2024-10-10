@@ -17,20 +17,57 @@ export default class ActorService {
         return await (await axios.get(ActorPath.Npc)).data;
     }
 
-    static async createPlayer(name: string): Promise<Player> {
-        return await (await axios.post(ActorPath.Player + name)).data;
+    static async createPlayer(id: string, playerName: string): Promise<Player> {
+        return await fetch(CampaignPath.Campaign + `${id}` + ActorPath.Player + `${playerName}`, {
+            method: "POST"
+        })
+            .then((res) => {
+                console.log(res)
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getPlayer(name: string): Promise<Player> {
-        return await (await axios.get(ActorPath.Player + name)).data;
+    static async getPlayer(id: string): Promise<Player> {
+        return await fetch(ActorPath.Player + `${id}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
-    static async getPlayers(): Promise<Player[]> {
-        return await (await axios.get(ActorPath.Player)).data;
+    static async getPlayers(campaignName: string): Promise<Player[]> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Player)
+            .then((res) => {
+                switch (res.status) {
+                    case 204:
+                        return []
+                    case 200:
+                        return res.json()
+                    default:
+                        throw new Error(res.statusText)
+                }
+            })
     }
 
-    static async updatePlayer(name: string, player: Player): Promise<Player> {
-        return await (await axios.put(ActorPath.Player + name, player)).data;
+    static async updatePlayer(player: Player): Promise<Player> {
+        return await fetch(ActorPath.Player + `${player.id}`, {
+            method: "PUT",
+            body: JSON.stringify(player),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
     }
 
     static async createNemesis(name: string): Promise<Nemesis> {
@@ -75,10 +112,14 @@ export default class ActorService {
     static async getRivals(campaignName: string): Promise<Rival[]> {
         return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival)
             .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
+                switch (res.status) {
+                    case 204:
+                        return []
+                    case 200:
+                        return res.json()
+                    default:
+                        throw new Error(res.statusText)
                 }
-                return res.json()
             })
     }
 

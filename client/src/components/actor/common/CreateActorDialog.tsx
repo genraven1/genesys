@@ -6,7 +6,6 @@ import {ActorPath} from "../../../services/Path";
 import {ActorType, getActorTypes} from "../../../models/actor/Actor";
 import InputSelectField from "../../common/InputSelectField";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
-import Player from "../../../models/actor/player/Player";
 import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 interface Props {
@@ -29,7 +28,7 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Minion + minion.name + '/edit')
                 break
             case ActorType.Rival:
-                let rival = await ActorService.createRival(campaign.id, name)
+                let rival = await ActorService.createRival(campaign.id, name);
                 navigate(ActorPath.Rival + rival.id + '/edit')
                 break
             case ActorType.Nemesis:
@@ -37,9 +36,8 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Nemesis + nemesis.name + '/edit')
                 break
             case ActorType.Player:
-                let player = {} as Player
-                player = {...await ActorService.createPlayer(name)}
-                navigate(ActorPath.Player + player.name + '/edit')
+                let player = await ActorService.createPlayer(campaign.id, name);
+                navigate(ActorPath.Player + player.id + '/edit')
                 break
         }
         onClose()
