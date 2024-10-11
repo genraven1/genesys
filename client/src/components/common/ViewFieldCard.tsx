@@ -1,5 +1,15 @@
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
-import {Autocomplete, Card, CardActions, CardHeader, Grid, TextField} from "@mui/material";
+import {
+    Autocomplete,
+    Card,
+    CardActions,
+    CardHeader, FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField
+} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import * as React from "react";
 import Quality from "../../models/Quality";
@@ -8,6 +18,7 @@ import {renderSkillName} from "./skill/SkillRenders";
 import Skill from "../../models/actor/Skill";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import GenesysTextField from "./GenesysTextField";
+import {Activation, Tier} from "../../models/Talent";
 
 interface ViewProps {
     name: string
@@ -76,6 +87,36 @@ export function NumberTextFieldCard(props: NumberTextFieldProps) {
     )
 }
 
+interface BooleanTextFieldProps {
+    title: string;
+    value: boolean;
+    disabled: boolean;
+    onChange: (value: boolean) => void
+}
+
+export function BooleanTextFieldCard(props: BooleanTextFieldProps) {
+    const {title, value, disabled, onChange} = props
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <FormControl fullWidth>
+                    <InputLabel>{title}</InputLabel>
+                    <Select
+                        value={value ? 'Yes' : 'No'}
+                        onChange={(e) => onChange(e.target.value === 'Yes')}
+                        label="Ranked"
+                        disabled={disabled}
+                    >
+                        <MenuItem value="Yes">Yes</MenuItem>
+                        <MenuItem value="No">No</MenuItem>
+                    </Select>
+                </FormControl>
+            </Card>
+        </Grid>
+    )
+}
+
 interface CharacteristicProps {
     type: CharacteristicType
     value: number
@@ -99,6 +140,68 @@ export function CharacteristicCard(props: CharacteristicProps) {
                     inputProps={{min: 1, max: 5}}
                     disabled={disabled}
                 />
+            </Card>
+        </Grid>
+    )
+}
+
+interface ActivationProps {
+    value: Activation
+    onChange: (value: Activation) => void
+    disabled: boolean
+}
+
+export function ActivationCard(props: ActivationProps) {
+    const {value, onChange, disabled} = props;
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={'Activation'} style={{ textAlign: 'center' }} />
+                <Select
+                    value={value}
+                    onChange={(e) => onChange(e.target.value as Activation)}
+                    disabled={disabled}
+                    fullWidth
+                    label={'Activation'}
+                >
+                    {Object.values(Activation).map(option => (
+                        <MenuItem key={option} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </Card>
+        </Grid>
+    )
+}
+
+interface TierProps {
+    value: Tier
+    onChange: (value: Tier) => void
+    disabled: boolean
+}
+
+export function TierCard(props: TierProps) {
+    const {value, onChange, disabled} = props;
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={'Tier'} style={{ textAlign: 'center' }} />
+                <Select
+                    value={value}
+                    onChange={(e) => onChange(e.target.value as Tier)}
+                    disabled={disabled}
+                    fullWidth
+                    label={'Tier'}
+                >
+                    {Object.values(Tier).map(option => (
+                        <MenuItem key={option} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
             </Card>
         </Grid>
     )

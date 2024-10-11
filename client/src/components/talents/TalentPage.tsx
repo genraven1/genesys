@@ -1,14 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    FormControl,
-    Grid,
-    IconButton, InputLabel,
-    MenuItem,
-    Select,
-    TextField
-} from '@mui/material';
+import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
 import Talent, {Activation, Tier} from "../../models/Talent";
 import * as React from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
@@ -18,14 +8,13 @@ import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import CheckIcon from "@mui/icons-material/Check";
 import TalentService from "../../services/TalentService";
-import {Autocomplete} from "@mui/lab";
-import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {ActivationCard, BooleanTextFieldCard, TextFieldCard, TierCard, ViewFieldCard} from "../common/ViewFieldCard";
 
 export default function TalentPage() {
-    const {id} = useParams<{ id: string }>()
-    const [talent, setTalent] = useState<Talent | null>(null)
-    let pathname = useLocation().pathname
-    let navigate = useNavigate()
+    const {id} = useParams<{ id: string }>();
+    const [talent, setTalent] = useState<Talent | null>(null);
+    let pathname = useLocation().pathname;
+    let navigate = useNavigate();
 
     useEffect(() => {
         if (!id) {
@@ -106,42 +95,12 @@ export default function TalentPage() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <FormControl fullWidth>
-                                <InputLabel>Ranked</InputLabel>
-                                <Select
-                                    value={talent.ranked ? 'Yes' : 'No'}
-                                    onChange={(e) => handleRankedChange(e.target.value === 'Yes')}
-                                    label="Ranked"
-                                    disabled={pathname.endsWith('/view')}
-                                >
-                                    <MenuItem value="Yes">Yes</MenuItem>
-                                    <MenuItem value="No">No</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs>
-                            <Autocomplete
-                                options={Object.values(Activation)}
-                                getOptionLabel={(option) => option}
-                                value={talent.activation}
-                                onChange={(e, newValue) => handleActivationChange(newValue as Activation)}
-                                renderInput={(params) => <TextField {...params} label="Activation"
-                                                                    variant="outlined"/>}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <Autocomplete
-                                options={Object.values(Tier)}
-                                getOptionLabel={(option) => option}
-                                value={talent.tier}
-                                onChange={(e, newValue) => handleTierChange(newValue as Tier)}
-                                renderInput={(params) => <TextField {...params} label="Tier"
-                                                                    variant="outlined"/>}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        <BooleanTextFieldCard title={'Ranked Talent'} value={talent.ranked}
+                                              onChange={handleRankedChange} disabled={pathname.endsWith('/view')}/>
+                        <ActivationCard value={talent.activation} onChange={handleActivationChange}
+                                        disabled={pathname.endsWith('/view')}/>
+                        <TierCard value={talent.tier} onChange={handleTierChange}
+                                  disabled={pathname.endsWith('/view')}/>
                     </Grid>
                 </Grid>
                 <Grid container justifyContent={'center'}>
