@@ -5,7 +5,7 @@ interface Props {
     title: string
 }
 
-export default function CenteredCardHeader(props: Props): JSX.Element {
+export default function CenteredCardHeader(props: Props) {
     const {title} = props
 
     return (

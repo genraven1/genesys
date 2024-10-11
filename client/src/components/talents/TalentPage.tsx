@@ -1,20 +1,18 @@
-import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
+import {Card, CardContent, Grid} from '@mui/material';
 import Talent, {Activation, Tier} from "../../models/Talent";
 import * as React from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {RootPath} from "../../services/Path";
-import EditIcon from "@mui/icons-material/Edit";
 import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
-import CheckIcon from "@mui/icons-material/Check";
 import TalentService from "../../services/TalentService";
 import {ActivationCard, BooleanTextFieldCard, TextFieldCard, TierCard, ViewFieldCard} from "../common/ViewFieldCard";
+import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
     const [talent, setTalent] = useState<Talent | null>(null);
     let pathname = useLocation().pathname;
-    let navigate = useNavigate();
 
     useEffect(() => {
         if (!id) {
@@ -27,24 +25,6 @@ export default function TalentPage() {
 
     if (!talent) {
         return <Fragment/>;
-    }
-
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Talent + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Talent + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        }
     }
 
     const handleRankedChange = async (value: boolean) => {
@@ -91,7 +71,7 @@ export default function TalentPage() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={talent.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={talent.name} path={RootPath.Talent + talent.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
