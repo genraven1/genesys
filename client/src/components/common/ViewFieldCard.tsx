@@ -1,5 +1,5 @@
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
-import {Autocomplete, Card, CardActions, CardHeader, Divider, Grid, TextField} from "@mui/material";
+import {Autocomplete, Card, CardActions, CardHeader, Grid, TextField} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import * as React from "react";
 import Quality from "../../models/Quality";
@@ -20,7 +20,6 @@ export function ViewFieldCard(props: ViewProps) {
         <Grid item xs>
             <Card>
                 <CardHeader title={name} style={{ textAlign: 'center' }} />
-                <Divider />
                 <GenesysDescriptionTypography text={value}/>
             </Card>
         </Grid>
@@ -149,7 +148,6 @@ export function EditNumberFieldCard(props: EditNumberProps) {
         <Grid item xs>
             <Card>
                 <CardHeader title={title} style={{ textAlign: 'center' }} />
-                <Divider />
                 <CardActions>
                     <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange} />
                 </CardActions>
@@ -174,7 +172,6 @@ export function ViewQualityActivationCard(props: QualityActivationProps) {
         <Grid item xs>
             <Card>
                 <CardHeader title={quality?.name!!} style={{ textAlign: 'center' }} />
-                <Divider />
                 {renderActivation()}
             </Card>
         </Grid>

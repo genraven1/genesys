@@ -1,4 +1,4 @@
-import {Card, CardContent, CardHeader, Grid, IconButton, TextField} from '@mui/material';
+import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";
@@ -11,7 +11,13 @@ import SkillService from "../../services/SkillService";
 import ArchetypeService from "../../services/ArchetypeService";
 import Skill from "../../models/actor/Skill";
 import CheckIcon from "@mui/icons-material/Check";
-import {CharacteristicCard, NumberTextFieldCard, SkillAutocompleteCard, TextFieldCard} from "../common/ViewFieldCard";
+import {
+    CharacteristicCard,
+    NumberTextFieldCard,
+    SkillAutocompleteCard,
+    TextFieldCard,
+    ViewFieldCard
+} from "../common/ViewFieldCard";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()
@@ -112,26 +118,19 @@ export default function ArchetypePage() {
         }
     };
 
+    const renderDescriptionCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={archetype.description}/> :
+            <TextFieldCard title={"Description"} value={archetype.description}
+                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
+    }
+
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={archetype.name} action={onPageChange()}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container justifyContent={'center'}>
-                        <TextFieldCard title={"Description"} value={archetype.description}
-                                       disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>
-                        <Grid item xs>
-                            <TextField
-                                label="Description"
-                                variant="outlined"
-                                fullWidth
-                                multiline
-                                rows={4}
-                                value={archetype.description}
-                                onChange={(e) => handleDescriptionChange}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        {renderDescriptionCard()}
                     </Grid>
                     <Grid container spacing={2}>
                         <CharacteristicCard type={CharacteristicType.Brawn} value={archetype.brawn}
