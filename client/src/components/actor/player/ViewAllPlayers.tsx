@@ -26,7 +26,7 @@ export default function ViewAllPlayers() {
         (async (): Promise<void> => {
             setPlayers(await ActorService.getPlayers(campaign.id));
         })()
-    }, [campaign.id])
+    }, [campaign])
 
     return (
         <Card>
@@ -34,8 +34,7 @@ export default function ViewAllPlayers() {
                 style={{textAlign: 'center'}}
                 title={'View All Players'}
                 action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Player</Button>}>
-            </CardHeader>
+                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Player</Button>}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
@@ -44,7 +43,7 @@ export default function ViewAllPlayers() {
                             {players.map((player: Player) => (
                                 <TableRow key={player.name}>
                                     <TypographyCenterTableCell value={player.name}/>
-                                    <ActionsTableCell name={player.name} path={ActorPath.Player}/>
+                                    <ActionsTableCell name={player.id} path={ActorPath.Player}/>
                                 </TableRow>
                             ))}
                         </TableBody>

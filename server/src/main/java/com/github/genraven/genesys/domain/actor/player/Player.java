@@ -34,9 +34,9 @@ public class Player extends Actor {
     }
     private int strain = 1;
     private int encumbrance = 5 + getBrawn();
-    private Experience experience;
-    private Career career;
-    private Archetype archetype;
+    private Experience experience = new Experience();
+    private Career career = new Career();
+    private Archetype archetype = new Archetype();
     private List<ActorTalent> talents = new ArrayList<>();
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();

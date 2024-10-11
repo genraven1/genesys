@@ -25,9 +25,9 @@ function useFetchPlayer(name: string): Player {
     return player as Player
 }
 
-export default function PlayerWorkflow(): JSX.Element {
-    const {name} = useParams<{ name?: string }>()
-    const player = useFetchPlayer(name!!)
+export default function PlayerWorkflow() {
+    const {id} = useParams<{ id?: string }>()
+    const player = useFetchPlayer(id!!)
 
     const useWorkflowRender = (): JSX.Element => {
         const pathname = useLocation().pathname
