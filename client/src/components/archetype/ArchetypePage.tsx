@@ -1,4 +1,4 @@
-import {Autocomplete, Card, CardContent, CardHeader, Grid, IconButton, TextField} from '@mui/material';
+import {Card, CardContent, CardHeader, Grid, IconButton, TextField} from '@mui/material';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";
@@ -11,7 +11,7 @@ import SkillService from "../../services/SkillService";
 import ArchetypeService from "../../services/ArchetypeService";
 import Skill from "../../models/actor/Skill";
 import CheckIcon from "@mui/icons-material/Check";
-import {renderSkillName} from "../common/skill/SkillRenders";
+import {CharacteristicCard, NumberTextFieldCard, SkillAutocompleteCard, TextFieldCard} from "../common/ViewFieldCard";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()
@@ -57,32 +57,32 @@ export default function ArchetypePage() {
         }
     }
 
-    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = async (value: string) => {
         if (archetype) {
-            setArchetype(await ArchetypeService.updateArchetype({...archetype, description: event.target.value}));
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, description: value}));
         }
     };
 
-    const handleCharacteristicChange = async (characteristic: CharacteristicType, value: string) => {
+    const handleCharacteristicChange = async (characteristic: CharacteristicType, value: number) => {
         if (archetype) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, brawn: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, brawn: value}));
                     break;
                 case CharacteristicType.Agility:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, agility: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, agility: value}));
                     break;
                 case CharacteristicType.Intellect:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, intellect: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, intellect: value}));
                     break;
                 case CharacteristicType.Cunning:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, cunning: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, cunning: value}));
                     break;
                 case CharacteristicType.Willpower:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, willpower: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, willpower: value}));
                     break;
                 case CharacteristicType.Presence:
-                    setArchetype(await ArchetypeService.updateArchetype({...archetype, presence: Number(value)}));
+                    setArchetype(await ArchetypeService.updateArchetype({...archetype, presence: value}));
                     break;
             }
         }
@@ -94,21 +94,21 @@ export default function ArchetypePage() {
         }
     };
 
-    const handleWoundsChange = async (value: string) => {
+    const handleWoundsChange = async (value: number) => {
         if (archetype) {
-            setArchetype(await ArchetypeService.updateArchetype({...archetype, wounds: Number(value)}));
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, wounds: value}));
         }
     };
 
-    const handleStrainChange = async (value: string) => {
+    const handleStrainChange = async (value: number) => {
         if (archetype) {
-            setArchetype(await ArchetypeService.updateArchetype({...archetype, strain: Number(value)}));
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, strain: value}));
         }
     };
 
-    const handleExperienceChange = async (value: string) => {
+    const handleExperienceChange = async (value: number) => {
         if (archetype) {
-            setArchetype(await ArchetypeService.updateArchetype({...archetype, experience: Number(value)}));
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, experience: value}));
         }
     };
 
@@ -118,135 +118,56 @@ export default function ArchetypePage() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container justifyContent={'center'}>
+                        <TextFieldCard title={"Description"} value={archetype.description}
+                                       disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>
                         <Grid item xs>
                             <TextField
                                 label="Description"
                                 variant="outlined"
                                 fullWidth
                                 multiline
-                                rows={2}
+                                rows={4}
                                 value={archetype.description}
-                                onChange={handleDescriptionChange}
+                                onChange={(e) => handleDescriptionChange}
                                 disabled={pathname.endsWith('/view')}
                             />
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.brawn}
-                                label={CharacteristicType.Brawn}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Brawn, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.agility}
-                                label={CharacteristicType.Agility}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Agility, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.intellect}
-                                label={CharacteristicType.Intellect}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Intellect, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.cunning}
-                                label={CharacteristicType.Cunning}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Cunning, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.willpower}
-                                label={CharacteristicType.Willpower}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Willpower, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.presence}
-                                label={CharacteristicType.Presence}
-                                fullWidth
-                                onChange={(e) => handleCharacteristicChange(CharacteristicType.Presence, e.target.value)}
-                                inputProps={{min: 1, max: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        <CharacteristicCard type={CharacteristicType.Brawn} value={archetype.brawn}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
+                        <CharacteristicCard type={CharacteristicType.Agility} value={archetype.agility}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
+                        <CharacteristicCard type={CharacteristicType.Intellect} value={archetype.intellect}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
+                        <CharacteristicCard type={CharacteristicType.Cunning} value={archetype.cunning}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
+                        <CharacteristicCard type={CharacteristicType.Willpower} value={archetype.willpower}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
+                        <CharacteristicCard type={CharacteristicType.Presence} value={archetype.presence}
+                                            handleCharacteristicChange={handleCharacteristicChange}
+                                            disabled={pathname.endsWith('/view')}/>
                     </Grid>
                     <Grid container justifyContent={'center'}>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.wounds}
-                                label="Wound Threshold"
-                                fullWidth
-                                onChange={(e) => handleWoundsChange(e.target.value)}
-                                inputProps={{min: 7, max: 13}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.strain}
-                                label="Strain Threshold"
-                                fullWidth
-                                onChange={(e) => handleStrainChange(e.target.value)}
-                                inputProps={{min: 7, max: 13}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={archetype.experience}
-                                label="Base Experience"
-                                fullWidth
-                                onChange={(e) => handleExperienceChange(e.target.value)}
-                                inputProps={{min: 70, max: 170, step: 5}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        <NumberTextFieldCard title={"Wound Threshold"} value={archetype.wounds}
+                                             onChange={handleWoundsChange} min={7} max={13}
+                                             disabled={pathname.endsWith('/view')}/>
+                        <NumberTextFieldCard title={"Strain Threshold"} value={archetype.strain}
+                                             onChange={handleStrainChange} min={7} max={13}
+                                             disabled={pathname.endsWith('/view')}/>
+                        <NumberTextFieldCard title={"Base Experience"} value={archetype.experience}
+                                             onChange={handleExperienceChange} min={70} max={170}
+                                             disabled={pathname.endsWith('/view')} steps={5}/>
                     </Grid>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <Autocomplete
-                                options={skills}
-                                getOptionLabel={(option) => renderSkillName(option)}
-                                value={archetype.skill}
-                                fullWidth
-                                onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
-                                renderInput={(params) => <TextField {...params} label="Starting Skill"
-                                                                    variant="outlined"/>}
-                                disabled={!pathname.endsWith(archetype.id + '/edit')}
-                            />
-                        </Grid>
+                        <SkillAutocompleteCard disabled={!pathname.endsWith(archetype.id + '/edit')}
+                                               handleSkillChange={handleSkillChange} skills={skills}
+                                               startingSkill={archetype.skill}/>
                     </Grid>
                 </Grid>
                 <ArchetypeAbilityCard archetype={archetype}/>
