@@ -23,7 +23,7 @@ export default class InjuryService {
     }
 
     static async updateInjury(injury: Injury): Promise<Injury> {
-        return await fetch(RootPath.Injury + `${injury.name}`, {
+        return await fetch(RootPath.Injury + `${injury.id}`, {
             method: "PUT",
             body: JSON.stringify(injury),
             headers: {

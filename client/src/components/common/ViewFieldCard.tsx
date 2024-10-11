@@ -30,7 +30,7 @@ interface TextFieldProps {
     title: string;
     value: string;
     disabled: boolean;
-    onChange: (value: string) => void
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export function TextFieldCard(props: TextFieldProps) {

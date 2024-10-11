@@ -1,10 +1,11 @@
 import {TextField} from "@mui/material";
+import * as React from "react";
 
 interface GenesysTextFieldProps {
     text: string;
     label: string;
     disabled: boolean;
-    onChange: (value: string) => void
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function GenesysTextField(props: GenesysTextFieldProps) {
@@ -19,7 +20,7 @@ export default function GenesysTextField(props: GenesysTextFieldProps) {
             rows={4}
             disabled={disabled}
             label={label}
-            onChange={(e) => onChange}
+            onChange={onChange}
         />
     );
 }

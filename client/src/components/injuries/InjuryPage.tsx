@@ -10,6 +10,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import InjuryService from "../../services/InjuryService";
 import {Autocomplete} from "@mui/lab";
 import {Difficulty} from "../../models/common/Difficulty";
+import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 
 export default function InjuryPage() {
     const {id} = useParams<{ id: string }>()
@@ -48,9 +49,9 @@ export default function InjuryPage() {
         }
     }
 
-    const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (injury) {
-            setInjury({...injury, description: event.target.value});
+            setInjury(await InjuryService.updateInjury({...injury, description: event.target.value}));
         }
     };
 
@@ -70,6 +71,12 @@ export default function InjuryPage() {
         if (injury) {
             setInjury(await InjuryService.updateInjury({...injury, max: Number(value)}));
         }
+    };
+
+    const renderDescriptionCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={injury.description}/> :
+            <TextFieldCard title={"Description"} value={injury.description}
+                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
     };
 
     return (
@@ -112,18 +119,7 @@ export default function InjuryPage() {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <TextField
-                                label="Description"
-                                variant="outlined"
-                                fullWidth
-                                multiline
-                                rows={2}
-                                value={injury.description}
-                                onChange={handleDescriptionChange}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        {renderDescriptionCard()}
                     </Grid>
                     <CriticalInjuryModifierCard crit={injury}/>
                 </Grid>

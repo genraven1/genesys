@@ -19,6 +19,7 @@ import TalentModifierCard from "./modifier/TalentModifierCard";
 import CheckIcon from "@mui/icons-material/Check";
 import TalentService from "../../services/TalentService";
 import {Autocomplete} from "@mui/lab";
+import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>()
@@ -87,6 +88,18 @@ export default function TalentPage() {
         }
     };
 
+    const renderDescriptionCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={talent.description}/> :
+            <TextFieldCard title={"Description"} value={talent.description}
+                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
+    };
+
+    const renderSummaryCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Summary"} value={talent.summary}/> :
+            <TextFieldCard title={"Summary"} value={talent.summary}
+                           disabled={pathname.endsWith('/view')} onChange={handleSummaryChange}/>;
+    };
+
     return (
         <Card>
             <CardHeader style={{textAlign: 'center'}} title={talent.name} action={onPageChange()}/>
@@ -132,30 +145,10 @@ export default function TalentPage() {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Grid item xs>
-                        <TextField
-                            label="Player Summary"
-                            variant="outlined"
-                            fullWidth
-                            value={talent.summary}
-                            onChange={handleSummaryChange}
-                            disabled={pathname.endsWith('/view')}
-                        />
-                    </Grid>
+                    {renderSummaryCard()}
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <Grid item xs>
-                        <TextField
-                            label="Description"
-                            variant="outlined"
-                            fullWidth
-                            multiline
-                            rows={2}
-                            value={talent.description}
-                            onChange={handleDescriptionChange}
-                            disabled={pathname.endsWith('/view')}
-                        />
-                    </Grid>
+                    {renderDescriptionCard()}
                 </Grid>
                 <TalentModifierCard tal={talent}/>
             </CardContent>

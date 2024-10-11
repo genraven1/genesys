@@ -63,9 +63,9 @@ export default function ArchetypePage() {
         }
     }
 
-    const handleDescriptionChange = async (value: string) => {
+    const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (archetype) {
-            setArchetype(await ArchetypeService.updateArchetype({...archetype, description: value}));
+            setArchetype(await ArchetypeService.updateArchetype({...archetype, description: event.target.value}));
         }
     };
 
