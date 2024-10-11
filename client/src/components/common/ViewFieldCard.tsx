@@ -19,6 +19,7 @@ import Skill from "../../models/actor/Skill";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import GenesysTextField from "./GenesysTextField";
 import {Activation, Tier} from "../../models/Talent";
+import {Difficulty} from "../../models/common/Difficulty";
 
 interface ViewProps {
     name: string
@@ -197,6 +198,37 @@ export function TierCard(props: TierProps) {
                     label={'Tier'}
                 >
                     {Object.values(Tier).map(option => (
+                        <MenuItem key={option} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </Card>
+        </Grid>
+    )
+}
+
+interface DifficultyProps {
+    value: Difficulty
+    onChange: (value: Difficulty) => void
+    disabled: boolean
+}
+
+export function DifficultyCard(props: DifficultyProps) {
+    const {value, onChange, disabled} = props;
+
+    return (
+        <Grid item xs>
+            <Card>
+                <CardHeader title={'Difficulty'} style={{ textAlign: 'center' }} />
+                <Select
+                    value={value}
+                    onChange={(e) => onChange(e.target.value as Difficulty)}
+                    disabled={disabled}
+                    fullWidth
+                    label={'Difficulty'}
+                >
+                    {Object.values(Difficulty).map(option => (
                         <MenuItem key={option} value={option}>
                             {option}
                         </MenuItem>

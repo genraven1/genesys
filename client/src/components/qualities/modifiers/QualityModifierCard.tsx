@@ -1,52 +1,29 @@
-import {Button, Card, CardContent, TableFooter, TextField} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import AddIcon from '@mui/icons-material/Add';
-import {Fragment, useEffect, useState} from "react";
+import {useState} from "react";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import Quality from "../../../models/Quality";
-import ModifierService from "../../../services/ModifierService";
-import TableCell from "@mui/material/TableCell";
-import {Autocomplete} from "@mui/lab";
 import QualityService from "../../../services/QualityService";
+import NumberTextFieldTableCell from "../../common/table/NumberTextFieldTableCell";
+import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";
+import ModifierTableFooter from "../../common/table/ModifierTableFooter";
 
 interface Props {
     qual: Quality
 }
 
 export default function QualityModifierCard(props: Props) {
-    const {qual} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
+    const {qual} = props;
+    const headers = ['Type', 'Ranks'];
     const [quality, setQuality] = useState(qual);
-    const [typeOptions, setTypeOptions] = useState<string[]>([]);
-
-    useEffect(() => {
-        (async () => {
-            setTypeOptions(await ModifierService.getModifiers())
-        })()
-    }, [])
-
-    const renderTableFooter = () => {
-        if (pathname.endsWith(quality.id + '/edit')) {
-            return (
-                <TableFooter>
-                    <TableRow key={'footer'}>
-                        <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
-                            Modifier</Button>
-                    </TableRow>
-                </TableFooter>
-            )
-        } else {
-            return <Fragment/>
-        }
-    }
+    const disabled = !useLocation().pathname.endsWith(quality.id + '/edit');
 
     const handleTypeChange = async (index: number, value: string) => {
         const updatedModifiers = quality.modifiers.map((row, i) =>
@@ -55,9 +32,9 @@ export default function QualityModifierCard(props: Props) {
         setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
     };
 
-    const handleRanksChange = async (index: number, value: string) => {
+    const handleRanksChange = async (index: number, value: number) => {
         const updatedModifiers = quality.modifiers.map((row, i) =>
-            i === index ? {...row, ranks: Number(value)} : row
+            i === index ? {...row, ranks: value} : row
         );
         setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
     };
@@ -79,31 +56,15 @@ export default function QualityModifierCard(props: Props) {
                         <TableBody>
                             {quality.modifiers.map((modifier, index) => (
                                 <TableRow key={index}>
-                                    <TableCell>
-                                        <Autocomplete
-                                            options={typeOptions}
-                                            getOptionLabel={(option) => option}
-                                            value={modifier.type}
-                                            onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
-                                            renderInput={(params) => <TextField {...params} label="Type"
-                                                                                variant="outlined"/>}
-                                            disabled={!pathname.endsWith(quality.id + '/edit')}
-                                        />
-                                    </TableCell>
-                                    <TableCell style={{textAlign: "center"}}>
-                                        <TextField
-                                            type="number"
-                                            value={modifier.ranks}
-                                            label="Ranks"
-                                            onChange={(e) => handleRanksChange(index, e.target.value)}
-                                            inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(quality.id + '/edit')}
-                                        />
-                                    </TableCell>
+                                    <ModifierAutocompleteTableCell disabled={disabled} onChange={handleTypeChange}
+                                                                   type={modifier.type} index={index}/>
+                                    <NumberTextFieldTableCell title={'Ranks'} value={modifier.ranks}
+                                                              onChange={handleRanksChange} min={1} max={10}
+                                                              disabled={disabled} index={index}/>
                                 </TableRow>
                             ))}
                         </TableBody>
-                        {renderTableFooter()}
+                        <ModifierTableFooter id={quality.id} addRow={addRow}/>
                     </Table>
                 </TableContainer>
             </CardContent>

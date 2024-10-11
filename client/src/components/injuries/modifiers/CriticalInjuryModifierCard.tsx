@@ -21,15 +21,15 @@ interface Props {
 }
 
 export default function CriticalInjuryModifierCard(props: Props) {
-    const {crit} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
+    const {crit} = props;
+    const pathname = useLocation().pathname;
+    const headers = ['Type', 'Ranks'];
     const [injury, setInjury] = useState(crit);
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
         (async () => {
-            setTypeOptions(await ModifierService.getModifiers())
+            setTypeOptions(await ModifierService.getModifiers());
         })()
     }, [])
 

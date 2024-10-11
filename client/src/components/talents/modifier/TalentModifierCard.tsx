@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, TableFooter, TextField} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -7,14 +7,13 @@ import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import AddIcon from '@mui/icons-material/Add';
-import {Fragment, useEffect, useState} from "react";
+import {useState} from "react";
 import * as React from "react";
 import Talent from "../../../models/Talent";
-import ModifierService from "../../../services/ModifierService";
-import TableCell from "@mui/material/TableCell";
-import {Autocomplete} from "@mui/lab";
 import TalentService from "../../../services/TalentService";
+import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";
+import NumberTextFieldTableCell from "../../common/table/NumberTextFieldTableCell";
+import ModifierTableFooter from "../../common/table/ModifierTableFooter";
 
 interface Props {
     tal: Talent
@@ -22,31 +21,9 @@ interface Props {
 
 export default function TalentModifierCard(props: Props) {
     const {tal} = props;
-    const pathname = useLocation().pathname;
     const headers = ['Type', 'Ranks'];
     const [talent, setTalent] = useState(tal);
-    const [typeOptions, setTypeOptions] = useState<string[]>([]);
-
-    useEffect(() => {
-        (async () => {
-            setTypeOptions(await ModifierService.getModifiers())
-        })()
-    }, [])
-
-    const renderTableFooter = () => {
-        if (pathname.endsWith(talent.id + '/edit')) {
-            return (
-                <TableFooter>
-                    <TableRow key={'Footer'}>
-                        <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
-                            Modifier</Button>
-                    </TableRow>
-                </TableFooter>
-            )
-        } else {
-            return <Fragment/>
-        }
-    }
+    const disabled = !useLocation().pathname.endsWith(talent.id + '/edit');
 
     const handleTypeChange = async (index: number, value: string) => {
         const updatedModifiers = talent.modifiers.map((row, i) =>
@@ -55,9 +32,9 @@ export default function TalentModifierCard(props: Props) {
         setTalent(await TalentService.updateTalent({...talent, modifiers: updatedModifiers}));
     };
 
-    const handleRanksChange = async (index: number, value: string) => {
+    const handleRanksChange = async (index: number, value: number) => {
         const updatedModifiers = talent.modifiers.map((row, i) =>
-            i === index ? {...row, ranks: Number(value)} : row
+            i === index ? {...row, ranks: value} : row
         );
         setTalent(await TalentService.updateTalent({...talent, modifiers: updatedModifiers}));
     };
@@ -79,31 +56,15 @@ export default function TalentModifierCard(props: Props) {
                         <TableBody>
                             {talent.modifiers.map((modifier, index) => (
                                 <TableRow key={index}>
-                                    <TableCell style={{textAlign: "center"}}>
-                                        <Autocomplete
-                                            options={typeOptions}
-                                            getOptionLabel={(option) => option}
-                                            value={modifier.type}
-                                            onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
-                                            renderInput={(params) => <TextField {...params} label="Type"
-                                                                                variant="outlined"/>}
-                                            disabled={!pathname.endsWith(talent.id + '/edit')}
-                                        />
-                                    </TableCell>
-                                    <TableCell style={{textAlign: "center"}}>
-                                        <TextField
-                                            type="number"
-                                            value={modifier.ranks}
-                                            label="Ranks"
-                                            onChange={(e) => handleRanksChange(index, e.target.value)}
-                                            inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(talent.id + '/edit')}
-                                        />
-                                    </TableCell>
+                                    <ModifierAutocompleteTableCell disabled={disabled} onChange={handleTypeChange}
+                                                                   type={modifier.type} index={index}/>
+                                    <NumberTextFieldTableCell title={'Ranks'} value={modifier.ranks}
+                                                              onChange={handleRanksChange} min={1} max={10}
+                                                              disabled={disabled} index={index}/>
                                 </TableRow>
                             ))}
                         </TableBody>
-                        {renderTableFooter()}
+                        <ModifierTableFooter id={talent.id} addRow={addRow}/>
                     </Table>
                 </TableContainer>
             </CardContent>

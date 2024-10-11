@@ -1,5 +1,5 @@
 import Injury from "../../models/Injury";
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton, TextField} from "@mui/material";
+import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import * as React from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
@@ -8,9 +8,8 @@ import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 import {Fragment, useEffect, useState} from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import InjuryService from "../../services/InjuryService";
-import {Autocomplete} from "@mui/lab";
 import {Difficulty} from "../../models/common/Difficulty";
-import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {DifficultyCard, NumberTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 
 export default function InjuryPage() {
     const {id} = useParams<{ id: string }>()
@@ -61,15 +60,15 @@ export default function InjuryPage() {
         }
     };
 
-    const handleMinChange = async (value: string) => {
+    const handleMinChange = async (value: number) => {
         if (injury) {
-            setInjury(await InjuryService.updateInjury({...injury, min: Number(value)}));
+            setInjury(await InjuryService.updateInjury({...injury, min: value}));
         }
     };
 
-    const handleMaxChange = async (value: string) => {
+    const handleMaxChange = async (value: number) => {
         if (injury) {
-            setInjury(await InjuryService.updateInjury({...injury, max: Number(value)}));
+            setInjury(await InjuryService.updateInjury({...injury, max: value}));
         }
     };
 
@@ -85,37 +84,12 @@ export default function InjuryPage() {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <Grid item xs>
-                            <Autocomplete
-                                options={Object.values(Difficulty)}
-                                getOptionLabel={(option) => option}
-                                value={injury.severity}
-                                onChange={(e, newValue) => handleSeverityChange(newValue as Difficulty)}
-                                renderInput={(params) => <TextField {...params} label="Severity"
-                                                                    variant="outlined"/>}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={injury.min}
-                                label="Min"
-                                onChange={(e) => handleMinChange(e.target.value)}
-                                inputProps={{min: 0, max: 150}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                        <Grid item xs>
-                            <TextField
-                                type="number"
-                                value={injury.max}
-                                label="Max"
-                                onChange={(e) => handleMaxChange(e.target.value)}
-                                inputProps={{min: 0, max: 150}}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
+                        <DifficultyCard value={injury.severity} onChange={handleSeverityChange}
+                                        disabled={pathname.endsWith('/view')}/>
+                        <NumberTextFieldCard title={"Min"} value={injury.min} onChange={handleMinChange} min={0}
+                                             max={150} disabled={pathname.endsWith('/view')}/>
+                        <NumberTextFieldCard title={"Max"} value={injury.max} onChange={handleMaxChange} min={0}
+                                             max={150} disabled={pathname.endsWith('/view')}/>
                     </Grid>
                     <Divider/>
                     <Grid container spacing={2}>
