@@ -61,7 +61,7 @@ export default function InjuryPage() {
 
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={injury.name} path={RootPath.Injury}/>
+            <CenteredCardHeaderWithAction title={injury.name} path={RootPath.Injury + injury.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>

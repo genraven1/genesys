@@ -59,7 +59,7 @@ export default function QualityPage() {
 
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={quality.name} path={RootPath.Qualities}/>
+            <CenteredCardHeaderWithAction title={quality.name} path={RootPath.Qualities + quality.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container justifyContent={'center'}>

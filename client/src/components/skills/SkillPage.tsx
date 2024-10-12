@@ -44,7 +44,7 @@ export default function SkillPage() {
 
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={skill.name} path={RootPath.Skills}/>
+            <CenteredCardHeaderWithAction title={skill.name} path={RootPath.Skills + skill.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <SkillTypeCard value={skill.type} onChange={handleSkillTypeChange}
