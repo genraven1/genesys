@@ -14,10 +14,15 @@ public class Modifier {
     @Getter
     public enum Type {
         DEFAULT("Default"),
+        //Critical Injury
         DECREASE_CRITICAL_INJURY("Decrease Critical Injury"),
         INCREASE_CRITICAL_INJURY("Increase Critical Injury"),
         RESET_CRITICAL_INJURY("Reset Critical Injury"),
-        SUFFER_STRAIN("Suffer Strain");
+        //Strain
+        SUFFER_STRAIN("Suffer Strain"),
+        //Defense
+        INCREASE_MELEE_DEFENSE("Increase Melee Defense"),
+        INCREASE_RANGED_DEFENSE("Increase Ranged Defense");
 
         @JsonValue
         private final String label;
