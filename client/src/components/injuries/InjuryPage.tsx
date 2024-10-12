@@ -1,21 +1,20 @@
 import Injury from "../../models/Injury";
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import {Card, CardContent, Divider, Grid} from "@mui/material";
 import * as React from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {RootPath} from "../../services/Path";
 import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 import {Fragment, useEffect, useState} from "react";
-import CheckIcon from "@mui/icons-material/Check";
 import InjuryService from "../../services/InjuryService";
 import {Difficulty} from "../../models/common/Difficulty";
-import {DifficultyCard, NumberTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {NumberTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import DifficultyCard from "../common/card/select/DifficultyCard";
 
 export default function InjuryPage() {
     const {id} = useParams<{ id: string }>()
     const [injury, setInjury] = useState<Injury | null>(null)
     let pathname = useLocation().pathname
-    let navigate = useNavigate()
 
     useEffect(() => {
         if (!id) {
@@ -28,24 +27,6 @@ export default function InjuryPage() {
 
     if (!injury) {
         return <Fragment/>;
-    }
-
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Injury + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Injury + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        }
     }
 
     const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +61,7 @@ export default function InjuryPage() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={injury.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={injury.name} path={RootPath.Injury}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>

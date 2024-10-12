@@ -6,8 +6,10 @@ import {RootPath} from "../../services/Path";
 import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import TalentService from "../../services/TalentService";
-import {ActivationCard, BooleanTextFieldCard, TextFieldCard, TierCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {BooleanTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import ActivationCard from "../common/card/select/ActivationCard";
+import TierCard from "../common/card/select/TierCard";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();

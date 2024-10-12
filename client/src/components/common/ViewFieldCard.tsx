@@ -2,8 +2,7 @@ import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import {
     Autocomplete,
     Card,
-    CardActions,
-    CardHeader, FormControl,
+    CardActions, FormControl,
     Grid,
     InputLabel,
     MenuItem,
@@ -18,8 +17,7 @@ import {renderSkillName} from "./skill/SkillRenders";
 import Skill from "../../models/actor/Skill";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import GenesysTextField from "./GenesysTextField";
-import {Activation, Tier} from "../../models/Talent";
-import {Difficulty} from "../../models/common/Difficulty";
+import CenteredCardHeader from "./card/CenteredCardHeader";
 
 interface ViewProps {
     name: string
@@ -31,7 +29,7 @@ export function ViewFieldCard(props: ViewProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={name} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={name}/>
                 <GenesysDescriptionTypography text={value}/>
             </Card>
         </Grid>
@@ -50,7 +48,7 @@ export function TextFieldCard(props: TextFieldProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={title}/>
                 <GenesysTextField text={value} label={title} disabled={disabled} onChange={onChange}/>
             </Card>
         </Grid>
@@ -73,7 +71,7 @@ export function NumberTextFieldCard(props: NumberTextFieldProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={title}/>
                 <TextField
                     type="number"
                     value={value}
@@ -100,7 +98,7 @@ export function BooleanTextFieldCard(props: BooleanTextFieldProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={title}/>
                 <FormControl fullWidth>
                     <InputLabel>{title}</InputLabel>
                     <Select
@@ -131,7 +129,7 @@ export function CharacteristicCard(props: CharacteristicProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={type} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={'Characteristic Type'}/>
                 <TextField
                     type="number"
                     value={value}
@@ -141,99 +139,6 @@ export function CharacteristicCard(props: CharacteristicProps) {
                     inputProps={{min: 1, max: 5}}
                     disabled={disabled}
                 />
-            </Card>
-        </Grid>
-    )
-}
-
-interface ActivationProps {
-    value: Activation
-    onChange: (value: Activation) => void
-    disabled: boolean
-}
-
-export function ActivationCard(props: ActivationProps) {
-    const {value, onChange, disabled} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CardHeader title={'Activation'} style={{ textAlign: 'center' }} />
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as Activation)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Activation'}
-                >
-                    {Object.values(Activation).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </Card>
-        </Grid>
-    )
-}
-
-interface TierProps {
-    value: Tier
-    onChange: (value: Tier) => void
-    disabled: boolean
-}
-
-export function TierCard(props: TierProps) {
-    const {value, onChange, disabled} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CardHeader title={'Tier'} style={{ textAlign: 'center' }} />
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as Tier)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Tier'}
-                >
-                    {Object.values(Tier).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </Card>
-        </Grid>
-    )
-}
-
-interface DifficultyProps {
-    value: Difficulty
-    onChange: (value: Difficulty) => void
-    disabled: boolean
-}
-
-export function DifficultyCard(props: DifficultyProps) {
-    const {value, onChange, disabled} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CardHeader title={'Difficulty'} style={{ textAlign: 'center' }} />
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as Difficulty)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Difficulty'}
-                >
-                    {Object.values(Difficulty).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
             </Card>
         </Grid>
     )
@@ -252,14 +157,14 @@ export function SkillAutocompleteCard(props: SkillAutoCompleteProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={"Starting Skill"} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={'Skill'}/>
                 <Autocomplete
                     options={skills}
                     getOptionLabel={(option) => renderSkillName(option)}
                     value={startingSkill}
                     fullWidth
                     onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
-                    renderInput={(params) => <TextField {...params} label="Starting Skill"
+                    renderInput={(params) => <TextField {...params} label='Skill'
                                                         variant="outlined"/>}
                     disabled={disabled}
                 />
@@ -282,7 +187,7 @@ export function EditNumberFieldCard(props: EditNumberProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={title} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={title}/>
                 <CardActions>
                     <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange} />
                 </CardActions>
@@ -306,7 +211,7 @@ export function ViewQualityActivationCard(props: QualityActivationProps) {
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={quality?.name!!} style={{ textAlign: 'center' }} />
+                <CenteredCardHeader title={quality.name}/>
                 {renderActivation()}
             </Card>
         </Grid>
