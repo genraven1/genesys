@@ -6,8 +6,9 @@ import {Fragment, useEffect, useState} from "react";
 import Quality from "../../models/Quality";
 import QualityModifierCard from "./modifiers/QualityModifierCard";
 import QualityService from "../../services/QualityService";
-import {BooleanTextFieldCard, NumberTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {BooleanTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import {NumberTextFieldCard} from "../common/card/NumberTextField";
 
 export default function QualityPage() {
     const {id} = useParams<{ id: string }>()

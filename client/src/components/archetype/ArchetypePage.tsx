@@ -13,11 +13,11 @@ import Skill from "../../models/actor/Skill";
 import CheckIcon from "@mui/icons-material/Check";
 import {
     CharacteristicCard,
-    NumberTextFieldCard,
     SkillAutocompleteCard,
     TextFieldCard,
     ViewFieldCard
 } from "../common/ViewFieldCard";
+import {NumberTextFieldCard} from "../common/card/NumberTextField";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()

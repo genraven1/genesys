@@ -1,11 +1,9 @@
 import {
     Card,
     CardContent,
-    CardHeader,
     Divider,
     FormControl,
     Grid,
-    IconButton,
     InputLabel,
     MenuItem,
     Select,
@@ -13,8 +11,7 @@ import {
 } from '@mui/material';
 import * as React from "react";
 import {Fragment, useEffect, useState} from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
+import {useLocation, useParams} from "react-router-dom";
 import {Weapon} from "../../../models/equipment/Weapon";
 import {EquipmentPath} from "../../../services/Path";
 import Paper from "@mui/material/Paper";
@@ -25,23 +22,28 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import {renderQualities,} from "../../../models/equipment/EquipmentHelper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import CheckIcon from "@mui/icons-material/Check";
 import EquipmentService from "../../../services/EquipmentService";
-import {Autocomplete} from "@mui/lab";
-import {renderSkillName} from "../../common/skill/SkillRenders";
 import Skill, {SkillType} from "../../../models/actor/Skill";
 import TableCell from "@mui/material/TableCell";
 import {useFetchSkillsByType} from "../../skills/SkillWorkflow";
 import {RangeBand} from "../../../models/common/RangeBand";
 import WeaponQualityCard from "./quality/WeaponQualityCard";
 import WeaponModifierCard from "./modifier/WeaponModifierCard";
+import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import {
+    BooleanTextFieldCard,
+    SkillAutocompleteCard,
+    TextFieldCard,
+    ViewFieldCard
+} from "../../common/ViewFieldCard";
+import RangeBandCard from "../../common/card/select/RangeBandCard";
+import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
     const [weapon, setWeapon] = useState<Weapon | null>(null);
     const skills = useFetchSkillsByType(SkillType.Combat);
     let pathname = useLocation().pathname;
-    let navigate = useNavigate();
     const headers = ['Name', 'Skill', 'Hands', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities'];
 
     useEffect(() => {
@@ -57,24 +59,6 @@ export default function WeaponPage() {
         return <Fragment/>;
     }
 
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(EquipmentPath.Weapon + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(EquipmentPath.Weapon + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        }
-    }
-
     const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (weapon) {
             setWeapon(await EquipmentService.updateWeapon({...weapon, description: event.target.value}));
@@ -87,15 +71,15 @@ export default function WeaponPage() {
         }
     };
 
-    const handleHandsChange = async (value: string) => {
+    const handleHandsChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, hands: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, hands: value}));
         }
     };
 
-    const handleDamageChange = async (value: string) => {
+    const handleDamageChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, damage: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, damage: value}));
         }
     };
 
@@ -105,9 +89,9 @@ export default function WeaponPage() {
         }
     };
 
-    const handleCriticalChange = async (value: string) => {
+    const handleCriticalChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, critical: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, critical: value}));
         }
     };
 
@@ -141,93 +125,46 @@ export default function WeaponPage() {
         }
     };
 
+    const renderDescriptionCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={weapon.description}/> :
+            <TextFieldCard title={"Description"} value={weapon.description}
+                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
+    };
+
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={weapon.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={weapon.name} path={EquipmentPath.Weapon + weapon.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid item xs>
-                        <TextField
-                            label="Description"
-                            variant="outlined"
-                            fullWidth
-                            multiline
-                            rows={2}
-                            value={weapon.description}
-                            onChange={handleDescriptionChange}
-                            disabled={pathname.endsWith('/view')}
-                        />
+                    <Grid container justifyContent={'center'}>
+                        <SkillAutocompleteCard disabled={pathname.endsWith('/view')}
+                                               handleSkillChange={handleSkillChange} skills={skills}
+                                               startingSkill={weapon.skill}/>
+                        <RangeBandCard value={weapon.range} onChange={handleRangeBandChange}
+                                       disabled={pathname.endsWith('/view')}/>
                     </Grid>
+                    <Grid container justifyContent={'center'}>
+                        <NumberTextFieldCard title={'Hands'} value={weapon.hands} onChange={handleHandsChange} min={1}
+                                             max={2} disabled={pathname.endsWith('/view')}/>
+                        <BooleanTextFieldCard title={'Brawn Powered'} value={weapon.brawn}
+                                              disabled={pathname.endsWith('/view')} onChange={handleBrawnChange}/>
+                        <NumberTextFieldCard title={'Damage'} value={weapon.damage} onChange={handleDamageChange} min={1}
+                                             max={2} disabled={pathname.endsWith('/view')}/>
+                        <NumberTextFieldCard title={'Critical'} value={weapon.critical} onChange={handleCriticalChange} min={1}
+                                             max={2} disabled={pathname.endsWith('/view')}/>
+                    </Grid>
+                    <Grid container justifyContent={'center'}>
+
+                    </Grid>
+                    {renderDescriptionCard()}
                     <Divider/>
+
+
                     <TableContainer component={Paper}>
                         <Table>
                             {renderSingleRowTableHeader(headers)}
                             <TableBody>
                                 <TableRow key={weapon.id}>
-                                    <TableCell>
-                                        <Autocomplete
-                                            options={skills}
-                                            getOptionLabel={(option) => renderSkillName(option)}
-                                            value={weapon.skill}
-                                            onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
-                                            renderInput={(params) => <TextField {...params} label="Skill"
-                                                                                variant="outlined"/>}
-                                            disabled={!pathname.endsWith(weapon.id + '/edit')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.hands}
-                                            label="Number of Hands"
-                                            onChange={(e) => handleHandsChange(e.target.value)}
-                                            inputProps={{min: 1, max: 2}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <FormControl fullWidth>
-                                            <InputLabel>Brawn</InputLabel>
-                                            <Select
-                                                value={weapon.brawn ? 'Yes' : 'No'}
-                                                onChange={(e) => handleBrawnChange(e.target.value === 'Yes')}
-                                                label="Brawn Powered"
-                                                disabled={pathname.endsWith('/view')}
-                                            >
-                                                <MenuItem value="Yes">Yes</MenuItem>
-                                                <MenuItem value="No">No</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.brawn && pathname.endsWith('/view') ? `Brawn + ${weapon.damage}` : weapon.damage}
-                                            label="Damage"
-                                            onChange={(e) => handleDamageChange(e.target.value)}
-                                            inputProps={{min: 0, max: 20}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.critical}
-                                            label="Critical"
-                                            onChange={(e) => handleCriticalChange(e.target.value)}
-                                            inputProps={{min: 1, max: 6}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Autocomplete
-                                            options={Object.values(RangeBand)}
-                                            getOptionLabel={(option) => option}
-                                            value={weapon.range}
-                                            onChange={(e, newValue) => handleRangeBandChange(newValue as RangeBand)}
-                                            renderInput={(params) => <TextField {...params} label="Range"
-                                                                                variant="outlined"/>}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
                                     <TableCell>
                                         <TextField
                                             type="number"

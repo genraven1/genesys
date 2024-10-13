@@ -7,21 +7,22 @@ import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 import {Fragment, useEffect, useState} from "react";
 import InjuryService from "../../services/InjuryService";
 import {Difficulty} from "../../models/common/Difficulty";
-import {NumberTextFieldCard, TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
 import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
 import DifficultyCard from "../common/card/select/DifficultyCard";
+import {NumberTextFieldCard} from "../common/card/NumberTextField";
 
 export default function InjuryPage() {
-    const {id} = useParams<{ id: string }>()
-    const [injury, setInjury] = useState<Injury | null>(null)
-    let pathname = useLocation().pathname
+    const {id} = useParams<{ id: string }>();
+    const [injury, setInjury] = useState<Injury | null>(null);
+    let pathname = useLocation().pathname;
 
     useEffect(() => {
         if (!id) {
-            return
+            return;
         }
         (async (): Promise<void> => {
-            setInjury(await InjuryService.getInjury(id))
+            setInjury(await InjuryService.getInjury(id));
         })()
     }, [id, setInjury])
 

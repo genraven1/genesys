@@ -55,37 +55,6 @@ export function TextFieldCard(props: TextFieldProps) {
     )
 }
 
-interface NumberTextFieldProps {
-    title: string
-    value: number
-    onChange: (value: number) => void
-    min: number
-    max: number
-    disabled: boolean
-    steps?: number
-}
-
-export function NumberTextFieldCard(props: NumberTextFieldProps) {
-    const {title, value, onChange, min, max, disabled, steps} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={title}/>
-                <TextField
-                    type="number"
-                    value={value}
-                    label={title}
-                    fullWidth
-                    onChange={(e) => onChange(Number(e.target.value))}
-                    inputProps={{min: min, max: max, step: steps}}
-                    disabled={disabled}
-                />
-            </Card>
-        </Grid>
-    )
-}
-
 interface BooleanTextFieldProps {
     title: string;
     value: boolean;
