@@ -38,6 +38,8 @@ import {
 } from "../../common/ViewFieldCard";
 import RangeBandCard from "../../common/card/select/RangeBandCard";
 import {NumberTextFieldCard} from "../../common/card/NumberTextField";
+import WeaponDamageTextFieldCard from "../../common/card/WeaponDamageTextFieldCard";
+import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
@@ -101,9 +103,9 @@ export default function WeaponPage() {
         }
     };
 
-    const handleEncumbranceChange = async (value: string) => {
+    const handleEncumbranceChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, encumbrance: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, encumbrance: value}));
         }
     };
 
@@ -113,15 +115,15 @@ export default function WeaponPage() {
         }
     };
 
-    const handlePriceChange = async (value: string) => {
+    const handlePriceChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, price: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, price: value}));
         }
     };
 
-    const handleRarityChange = async (value: string) => {
+    const handleRarityChange = async (value: number) => {
         if (weapon) {
-            setWeapon(await EquipmentService.updateWeapon({...weapon, rarity: Number(value)}));
+            setWeapon(await EquipmentService.updateWeapon({...weapon, rarity: value}));
         }
     };
 
@@ -148,70 +150,76 @@ export default function WeaponPage() {
                                              max={2} disabled={pathname.endsWith('/view')}/>
                         <BooleanTextFieldCard title={'Brawn Powered'} value={weapon.brawn}
                                               disabled={pathname.endsWith('/view')} onChange={handleBrawnChange}/>
-                        <NumberTextFieldCard title={'Damage'} value={weapon.damage} onChange={handleDamageChange} min={1}
-                                             max={2} disabled={pathname.endsWith('/view')}/>
-                        <NumberTextFieldCard title={'Critical'} value={weapon.critical} onChange={handleCriticalChange} min={1}
-                                             max={2} disabled={pathname.endsWith('/view')}/>
+                        <WeaponDamageTextFieldCard damage={weapon.damage} brawn={weapon.brawn}
+                                                   onChange={handleDamageChange} min={0} max={15}
+                                                   disabled={pathname.endsWith('/view')}/>
+                        {/*<NumberTextFieldCard title={'Damage'} value={weapon.damage} onChange={handleDamageChange}*/}
+                        {/*                     min={1}*/}
+                        {/*                     max={15} disabled={pathname.endsWith('/view')}/>*/}
+                        <NumberTextFieldCard title={'Critical'} value={weapon.critical} onChange={handleCriticalChange}
+                                             min={1}
+                                             max={6} disabled={pathname.endsWith('/view')}/>
                     </Grid>
                     <Grid container justifyContent={'center'}>
-
+                        <NumberTextFieldCard title={'Hands'} value={weapon.encumbrance}
+                                             onChange={handleEncumbranceChange} min={1}
+                                             max={10} disabled={pathname.endsWith('/view')}/>
+                        <BooleanTextFieldCard title={'Brawn Powered'} value={weapon.restricted}
+                                              disabled={pathname.endsWith('/view')} onChange={handleRestrictedChange}/>
+                        <PriceTextFieldCard price={weapon.price} restricted={weapon.restricted}
+                                            onChange={handlePriceChange} min={1} max={10000000}
+                                            disabled={pathname.endsWith('/view')}/>
+                        {/*<NumberTextFieldCard title={'Damage'} value={weapon.price} onChange={handlePriceChange}*/}
+                        {/*                     min={1}*/}
+                        {/*                     max={10000000} disabled={pathname.endsWith('/view')}/>*/}
+                        <NumberTextFieldCard title={'Critical'} value={weapon.rarity} onChange={handleRarityChange}
+                                             min={0}
+                                             max={10} disabled={pathname.endsWith('/view')}/>
                     </Grid>
-                    {renderDescriptionCard()}
-                    <Divider/>
-
-
-                    <TableContainer component={Paper}>
-                        <Table>
-                            {renderSingleRowTableHeader(headers)}
-                            <TableBody>
-                                <TableRow key={weapon.id}>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.encumbrance}
-                                            label="Encumbrance"
-                                            onChange={(e) => handleEncumbranceChange(e.target.value)}
-                                            inputProps={{min: 1, max: 10}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <FormControl fullWidth>
-                                            <InputLabel>Restricted</InputLabel>
-                                            <Select
-                                                value={weapon.restricted ? 'Yes' : 'No'}
-                                                onChange={(e) => handleRestrictedChange(e.target.value === 'Yes')}
-                                                label="Restricted"
-                                                disabled={pathname.endsWith('/view')}
-                                            >
-                                                <MenuItem value="Yes">Yes</MenuItem>
-                                                <MenuItem value="No">No</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.restricted && pathname.endsWith('/view') ? `${weapon.price}(R)` : weapon.price}
-                                            label="Price"
-                                            onChange={(e) => handlePriceChange(e.target.value)}
-                                            inputProps={{min: 0, max: 1000000}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={weapon.rarity}
-                                            label="Rarity"
-                                            onChange={(e) => handleRarityChange(e.target.value)}
-                                            inputProps={{min: 0, max: 10}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TypographyCenterTableCell value={renderQualities(weapon)}/>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <Grid container justifyContent={'center'}>
+                        {renderDescriptionCard()}
+                    </Grid>
+                    {/*<TableContainer component={Paper}>*/}
+                    {/*    <Table>*/}
+                    {/*        {renderSingleRowTableHeader(headers)}*/}
+                    {/*        <TableBody>*/}
+                    {/*            <TableRow key={weapon.id}>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <TextField*/}
+                    {/*                        type="number"*/}
+                    {/*                        value={weapon.encumbrance}*/}
+                    {/*                        label="Encumbrance"*/}
+                    {/*                        onChange={(e) => handleEncumbranceChange(e.target.value)}*/}
+                    {/*                        inputProps={{min: 1, max: 10}}*/}
+                    {/*                        disabled={pathname.endsWith('/view')}*/}
+                    {/*                    />*/}
+                    {/*                </TableCell>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <FormControl fullWidth>*/}
+                    {/*                        <InputLabel>Restricted</InputLabel>*/}
+                    {/*                        <Select*/}
+                    {/*                            value={weapon.restricted ? 'Yes' : 'No'}*/}
+                    {/*                            onChange={(e) => handleRestrictedChange(e.target.value === 'Yes')}*/}
+                    {/*                            label="Restricted"*/}
+                    {/*                            disabled={pathname.endsWith('/view')}*/}
+                    {/*                        >*/}
+                    {/*                            <MenuItem value="Yes">Yes</MenuItem>*/}
+                    {/*                            <MenuItem value="No">No</MenuItem>*/}
+                    {/*                        </Select>*/}
+                    {/*                    </FormControl>*/}
+                    {/*                    <TextField*/}
+                    {/*                        type="number"*/}
+                    {/*                        value={weapon.restricted && pathname.endsWith('/view') ? `${weapon.price}(R)` : weapon.price}*/}
+                    {/*                        label="Price"*/}
+                    {/*                        onChange={(e) => handlePriceChange(e.target.value)}*/}
+                    {/*                        inputProps={{min: 0, max: 1000000}}*/}
+                    {/*                        disabled={pathname.endsWith('/view')}*/}
+                    {/*                    />*/}
+                    {/*                </TableCell>*/}
+                    {/*            </TableRow>*/}
+                    {/*        </TableBody>*/}
+                    {/*    </Table>*/}
+                    {/*</TableContainer>*/}
                     <WeaponQualityCard weap={weapon}/>
                     <WeaponModifierCard weap={weapon}/>
                 </Grid>
