@@ -1,67 +1,45 @@
-import {Card, CardContent, CardHeader, Grid, IconButton, TextField} from '@mui/material';
+import {Card, CardContent, Grid} from '@mui/material';
 import * as React from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {RootPath} from "../../services/Path";
-import EditIcon from "@mui/icons-material/Edit";
 import Career from '../../models/actor/player/Career';
 import {Fragment, useEffect, useState} from "react";
-import CheckIcon from "@mui/icons-material/Check";
 import CareerService from '../../services/CareerService';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import {Autocomplete} from "@mui/lab";
 import TableContainer from "@mui/material/TableContainer";
 import SkillService from "../../services/SkillService";
 import Skill from "../../models/actor/Skill";
-import {renderSkillName} from "../common/skill/SkillRenders";
+import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import SkillAutocompleteTableCell from "../common/table/SkillAutocompleteTableCell";
 
 export default function CareerPage() {
-    const {id} = useParams<{ id: string }>()
-    const [career, setCareer] = useState<Career | null>(null)
-    const [skills, setSkills] = useState<Skill[]>([])
-    let pathname = useLocation().pathname
-    let navigate = useNavigate()
-    let headers = ['Skills']
+    const {id} = useParams<{ id: string }>();
+    const [career, setCareer] = useState<Career | null>(null);
+    const [skills, setSkills] = useState<Skill[]>([]);
+    let pathname = useLocation().pathname;
+    let headers = ['Skills'];
 
     useEffect(() => {
         if (!id) {
             return
         }
         (async (): Promise<void> => {
-            setCareer(await CareerService.getCareer(id))
+            setCareer(await CareerService.getCareer(id));
         })()
     }, [id, setCareer])
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setSkills(await SkillService.getSkills())
+            setSkills(await SkillService.getSkills());
         })()
     }, [])
 
     if (!career) {
         return <Fragment/>;
-    }
-
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Career + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Career + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        }
     }
 
     const handleSkillChange = async (index: number, value: Skill) => {
@@ -73,7 +51,7 @@ export default function CareerPage() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={career.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={career.name} path={RootPath.Career + career.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <TableContainer component={Paper}>
@@ -82,17 +60,9 @@ export default function CareerPage() {
                             <TableBody>
                                 {career.skills.map((skill, index) => (
                                     <TableRow key={index}>
-                                        <TableCell>
-                                            <Autocomplete
-                                                options={skills}
-                                                getOptionLabel={(option) => renderSkillName(option)}
-                                                value={skill}
-                                                onChange={(e, newValue) => handleSkillChange(index, newValue as Skill)}
-                                                renderInput={(params) => <TextField {...params} label="Skill"
-                                                                                    variant="outlined"/>}
-                                                disabled={!pathname.endsWith(career.id + '/edit')}
-                                            />
-                                        </TableCell>
+                                        <SkillAutocompleteTableCell skill={skill} skills={skills}
+                                                                    onChange={handleSkillChange} index={index}
+                                                                    disabled={!pathname.endsWith(career.id + '/edit')}/>
                                     </TableRow>
                                 ))}
                             </TableBody>
