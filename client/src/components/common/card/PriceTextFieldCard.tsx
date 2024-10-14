@@ -23,7 +23,7 @@ export default function PriceTextFieldCard(props: Props) {
                 <TextField
                     type="number"
                     value={restricted && pathname.endsWith('/view') ? `${price}(R)` : price}
-                    label={"Damage"}
+                    label={"Price"}
                     fullWidth
                     onChange={(e) => onChange(Number(e.target.value))}
                     inputProps={{min: min, max: max}}
