@@ -1,10 +1,8 @@
-import {Autocomplete, Card, CardContent, Grid, TextField} from "@mui/material";
+import {Card, CardContent, Grid, TextField} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import * as React from "react";
 import Quality from "../../models/Quality";
 import GenesysQualityTypography from "./typography/GenesysQualityTypography";
-import {renderSkillName} from "./skill/SkillRenders";
-import Skill from "../../models/actor/Skill";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import CenteredCardHeader from "./card/CenteredCardHeader";
 
@@ -50,37 +48,6 @@ export function CharacteristicCard(props: CharacteristicProps) {
                         fullWidth
                         onChange={(e) => handleCharacteristicChange(type, Number(e.target.value))}
                         inputProps={{min: 1, max: 5}}
-                        disabled={disabled}
-                    />
-                </CardContent>
-            </Card>
-        </Grid>
-    )
-}
-
-interface SkillAutoCompleteProps {
-    disabled: boolean
-    handleSkillChange: (newValue: Skill) => void
-    skills: Skill[]
-    startingSkill: Skill
-}
-
-export function SkillAutocompleteCard(props: SkillAutoCompleteProps) {
-    const {handleSkillChange, disabled, startingSkill, skills} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={'Skill'}/>
-                <CardContent>
-                    <Autocomplete
-                        options={skills}
-                        getOptionLabel={(option) => renderSkillName(option)}
-                        value={startingSkill}
-                        fullWidth
-                        onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
-                        renderInput={(params) => <TextField {...params} label='Skill'
-                                                            variant="outlined"/>}
                         disabled={disabled}
                     />
                 </CardContent>

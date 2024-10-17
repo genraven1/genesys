@@ -11,13 +11,14 @@ import {RangeBand} from "../../../models/common/RangeBand";
 import WeaponQualityCard from "./quality/WeaponQualityCard";
 import WeaponModifierCard from "./modifier/WeaponModifierCard";
 import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
-import {SkillAutocompleteCard, ViewFieldCard} from "../../common/ViewFieldCard";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 import RangeBandCard from "../../common/card/select/RangeBandCard";
 import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 import WeaponDamageTextFieldCard from "../../common/card/WeaponDamageTextFieldCard";
 import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
+import SkillAutocompleteCard from "../../common/SkillAutocompleteCard";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
