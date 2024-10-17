@@ -4,6 +4,9 @@ import com.github.genraven.genesys.domain.CriticalInjury;
 import com.github.genraven.genesys.domain.actor.Actor;
 
 import com.github.genraven.genesys.domain.actor.ActorTalent;
+import com.github.genraven.genesys.domain.equipment.Armor;
+import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
+import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -40,4 +43,17 @@ public class Player extends Actor {
     private List<ActorTalent> talents = new ArrayList<>();
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();
+
+    public void getTotalSoak() {
+        int soak = getBrawn();
+        soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
+        for (ActorTalent talent : getTalents()) {
+            for (Modifier modifier : talent.getModifiers()) {
+                if (modifier.getType().equals(Modifier.Type.INCREASE_SOAK)) {
+                    soak = talent.isRanked() ? soak + modifier.getRanks() * talent.getRanks() : soak + modifier.getRanks();
+                }
+            }
+        }
+        this.setSoak(soak);
+    }
 }

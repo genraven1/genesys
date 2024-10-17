@@ -22,7 +22,9 @@ public class Modifier {
         SUFFER_STRAIN("Suffer Strain"),
         //Defense
         INCREASE_MELEE_DEFENSE("Increase Melee Defense"),
-        INCREASE_RANGED_DEFENSE("Increase Ranged Defense");
+        INCREASE_RANGED_DEFENSE("Increase Ranged Defense"),
+        //Soak
+        INCREASE_SOAK("Increase Soak");
 
         @JsonValue
         private final String label;

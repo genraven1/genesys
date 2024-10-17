@@ -20,11 +20,20 @@ public class PlayerService {
     private final SkillService skillService;
 
     public Flux<Player> getAllPlayers() {
-        return playerRepository.findAll();
+        return playerRepository.findAll()
+                .map(player -> {
+                    player.getTotalSoak();
+                    return player;
+                });
     }
 
-    public Mono<Player> getPlayer(final String name) {
-        return playerRepository.findById(name);
+
+    public Mono<Player> getPlayer(final String id) {
+        return playerRepository.findById(id)
+                .map(player -> {
+                    player.getTotalSoak();
+                    return player;
+                });
     }
 
     public Mono<Player> createPlayer(final String name) {

@@ -16,6 +16,7 @@ export default interface Actor {
     willpower: number,
     presence: number,
     wounds: number,
+    soak: number,
     weapons: ActorWeapon[],
     armors: ActorArmor[],
     gear: ActorGear[],
