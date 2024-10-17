@@ -8,10 +8,11 @@ import EquipmentService from "../../../services/EquipmentService";
 import ArmorModifierCard from "./modifier/ArmorModifierCard";
 import ArmorQualityCard from './quality/ArmorQualityCard';
 import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
-import {BooleanTextFieldCard, ViewFieldCard} from "../../common/ViewFieldCard";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
+import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();

@@ -1,14 +1,4 @@
-import InputNumberRangeSelectField from "./InputNumberRangeSelect";
-import {
-    Autocomplete,
-    Card,
-    CardActions, CardContent, FormControl,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField
-} from "@mui/material";
+import {Autocomplete, Card, CardContent, Grid, TextField} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import * as React from "react";
 import Quality from "../../models/Quality";
@@ -33,38 +23,6 @@ export function ViewFieldCard(props: ViewProps) {
                     <GenesysDescriptionTypography text={value}/>
                 </CardContent>
 
-            </Card>
-        </Grid>
-    )
-}
-
-interface BooleanTextFieldProps {
-    title: string;
-    value: boolean;
-    disabled: boolean;
-    onChange: (value: boolean) => void
-}
-
-export function BooleanTextFieldCard(props: BooleanTextFieldProps) {
-    const {title, value, disabled, onChange} = props
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={title}/>
-                <CardContent>
-                    <FormControl fullWidth>
-                        <InputLabel>{title}</InputLabel>
-                        <Select
-                            value={value ? 'Yes' : 'No'}
-                            onChange={(e) => onChange(e.target.value === 'Yes')}
-                            label="Ranked"
-                            disabled={disabled}
-                        >
-                            <MenuItem value="Yes">Yes</MenuItem>
-                            <MenuItem value="No">No</MenuItem>
-                        </Select>
-                    </FormControl>
-                </CardContent>
             </Card>
         </Grid>
     )
