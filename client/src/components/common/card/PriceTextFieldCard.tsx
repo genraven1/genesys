@@ -1,4 +1,4 @@
-import {Card, Grid, TextField} from "@mui/material";
+import {Card, CardContent, Grid, TextField} from "@mui/material";
 import CenteredCardHeader from "./CenteredCardHeader";
 import * as React from "react";
 import {useLocation} from "react-router-dom";
@@ -20,15 +20,17 @@ export default function PriceTextFieldCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={"Price"}/>
-                <TextField
-                    type="number"
-                    value={restricted && pathname.endsWith('/view') ? `${price}(R)` : price}
-                    label={"Price"}
-                    fullWidth
-                    onChange={(e) => onChange(Number(e.target.value))}
-                    inputProps={{min: min, max: max}}
-                    disabled={disabled}
-                />
+                <CardContent>
+                    <TextField
+                        type="number"
+                        value={restricted && pathname.endsWith('/view') ? `${price}(R)` : price}
+                        label={"Price"}
+                        fullWidth
+                        onChange={(e) => onChange(Number(e.target.value))}
+                        inputProps={{min: min, max: max}}
+                        disabled={disabled}
+                    />
+                </CardContent>
             </Card>
         </Grid>
     );

@@ -1,5 +1,5 @@
 import {Tier} from "../../../../models/Talent";
-import {Card, Grid, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../CenteredCardHeader";
 
@@ -16,19 +16,21 @@ export default function TierCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Tier'}/>
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as Tier)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Tier'}
-                >
-                    {Object.values(Tier).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <CardContent>
+                    <Select
+                        value={value}
+                        onChange={(e) => onChange(e.target.value as Tier)}
+                        disabled={disabled}
+                        fullWidth
+                        label={'Tier'}
+                    >
+                        {Object.values(Tier).map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </CardContent>
             </Card>
         </Grid>
     )

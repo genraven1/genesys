@@ -2,7 +2,7 @@ import InputNumberRangeSelectField from "./InputNumberRangeSelect";
 import {
     Autocomplete,
     Card,
-    CardActions, FormControl,
+    CardActions, CardContent, FormControl,
     Grid,
     InputLabel,
     MenuItem,
@@ -30,7 +30,10 @@ export function ViewFieldCard(props: ViewProps) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={name}/>
-                <GenesysDescriptionTypography text={value}/>
+                <CardContent>
+                    <GenesysDescriptionTypography text={value}/>
+                </CardContent>
+
             </Card>
         </Grid>
     )
@@ -49,7 +52,9 @@ export function TextFieldCard(props: TextFieldProps) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={title}/>
-                <GenesysTextField text={value} label={title} disabled={disabled} onChange={onChange}/>
+                <CardContent>
+                    <GenesysTextField text={value} label={title} disabled={disabled} onChange={onChange}/>
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -68,18 +73,20 @@ export function BooleanTextFieldCard(props: BooleanTextFieldProps) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={title}/>
-                <FormControl fullWidth>
-                    <InputLabel>{title}</InputLabel>
-                    <Select
-                        value={value ? 'Yes' : 'No'}
-                        onChange={(e) => onChange(e.target.value === 'Yes')}
-                        label="Ranked"
-                        disabled={disabled}
-                    >
-                        <MenuItem value="Yes">Yes</MenuItem>
-                        <MenuItem value="No">No</MenuItem>
-                    </Select>
-                </FormControl>
+                <CardContent>
+                    <FormControl fullWidth>
+                        <InputLabel>{title}</InputLabel>
+                        <Select
+                            value={value ? 'Yes' : 'No'}
+                            onChange={(e) => onChange(e.target.value === 'Yes')}
+                            label="Ranked"
+                            disabled={disabled}
+                        >
+                            <MenuItem value="Yes">Yes</MenuItem>
+                            <MenuItem value="No">No</MenuItem>
+                        </Select>
+                    </FormControl>
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -99,15 +106,17 @@ export function CharacteristicCard(props: CharacteristicProps) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Characteristic Type'}/>
-                <TextField
-                    type="number"
-                    value={value}
-                    label={type}
-                    fullWidth
-                    onChange={(e) => handleCharacteristicChange(type, Number(e.target.value))}
-                    inputProps={{min: 1, max: 5}}
-                    disabled={disabled}
-                />
+                <CardContent>
+                    <TextField
+                        type="number"
+                        value={value}
+                        label={type}
+                        fullWidth
+                        onChange={(e) => handleCharacteristicChange(type, Number(e.target.value))}
+                        inputProps={{min: 1, max: 5}}
+                        disabled={disabled}
+                    />
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -127,16 +136,18 @@ export function SkillAutocompleteCard(props: SkillAutoCompleteProps) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Skill'}/>
-                <Autocomplete
-                    options={skills}
-                    getOptionLabel={(option) => renderSkillName(option)}
-                    value={startingSkill}
-                    fullWidth
-                    onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
-                    renderInput={(params) => <TextField {...params} label='Skill'
-                                                        variant="outlined"/>}
-                    disabled={disabled}
-                />
+                <CardContent>
+                    <Autocomplete
+                        options={skills}
+                        getOptionLabel={(option) => renderSkillName(option)}
+                        value={startingSkill}
+                        fullWidth
+                        onChange={(e, newValue) => handleSkillChange(newValue as Skill)}
+                        renderInput={(params) => <TextField {...params} label='Skill'
+                                                            variant="outlined"/>}
+                        disabled={disabled}
+                    />
+                </CardContent>
             </Card>
         </Grid>
     )
@@ -151,14 +162,14 @@ interface EditNumberProps {
 }
 
 export function EditNumberFieldCard(props: EditNumberProps) {
-    const { value, title, onChange, min, max } = props;
+    const {value, title, onChange, min, max} = props;
 
     return (
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={title}/>
                 <CardActions>
-                    <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange} />
+                    <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange}/>
                 </CardActions>
             </Card>
         </Grid>

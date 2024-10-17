@@ -1,4 +1,4 @@
-import {Card, Grid, TextField} from "@mui/material";
+import {Card, CardContent, Grid, TextField} from "@mui/material";
 import CenteredCardHeader from "./CenteredCardHeader";
 import * as React from "react";
 
@@ -19,15 +19,17 @@ export function NumberTextFieldCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={title}/>
-                <TextField
-                    type="number"
-                    value={value}
-                    label={title}
-                    fullWidth
-                    onChange={(e) => onChange(Number(e.target.value))}
-                    inputProps={{min: min, max: max, step: steps}}
-                    disabled={disabled}
-                />
+                <CardContent>
+                    <TextField
+                        type="number"
+                        value={value}
+                        label={title}
+                        fullWidth
+                        onChange={(e) => onChange(Number(e.target.value))}
+                        inputProps={{min: min, max: max, step: steps}}
+                        disabled={disabled}
+                    />
+                </CardContent>
             </Card>
         </Grid>
     )

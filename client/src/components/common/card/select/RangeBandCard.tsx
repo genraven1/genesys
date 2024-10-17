@@ -1,4 +1,4 @@
-import {Card, Grid, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../CenteredCardHeader";
 import {RangeBand} from "../../../../models/common/RangeBand";
@@ -16,19 +16,21 @@ export default function RangeBandCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Range Band'}/>
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as RangeBand)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Range Band'}
-                >
-                    {Object.values(RangeBand).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <CardContent>
+                    <Select
+                        value={value}
+                        onChange={(e) => onChange(e.target.value as RangeBand)}
+                        disabled={disabled}
+                        fullWidth
+                        label={'Range Band'}
+                    >
+                        {Object.values(RangeBand).map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </CardContent>
             </Card>
         </Grid>
     )

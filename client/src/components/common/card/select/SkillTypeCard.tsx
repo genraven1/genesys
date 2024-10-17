@@ -1,4 +1,4 @@
-import {Card, Grid, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import {SkillType} from "../../../../models/actor/Skill";
 import CenteredCardHeader from "../CenteredCardHeader";
@@ -16,19 +16,21 @@ export default function SkillTypeCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Skill Type'}/>
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as SkillType)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Skill Type'}
-                >
-                    {Object.values(SkillType).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <CardContent>
+                    <Select
+                        value={value}
+                        onChange={(e) => onChange(e.target.value as SkillType)}
+                        disabled={disabled}
+                        fullWidth
+                        label={'Skill Type'}
+                    >
+                        {Object.values(SkillType).map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </CardContent>
             </Card>
         </Grid>
     )

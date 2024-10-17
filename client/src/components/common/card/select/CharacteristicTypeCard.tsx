@@ -1,4 +1,4 @@
-import {Card, Grid, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../CenteredCardHeader";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
@@ -16,19 +16,21 @@ export default function CharacteristicTypeCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Characteristic Type'}/>
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as CharacteristicType)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Characteristic Type'}
-                >
-                    {Object.values(CharacteristicType).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <CardContent>
+                    <Select
+                        value={value}
+                        onChange={(e) => onChange(e.target.value as CharacteristicType)}
+                        disabled={disabled}
+                        fullWidth
+                        label={'Characteristic Type'}
+                    >
+                        {Object.values(CharacteristicType).map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </CardContent>
             </Card>
         </Grid>
     )

@@ -1,37 +1,21 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    FormControl,
-    Grid,
-    IconButton,
-    InputLabel, MenuItem, Select,
-    TextField
-} from '@mui/material';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Card, CardContent, Grid,} from '@mui/material';
+import {useLocation, useParams} from 'react-router-dom';
 import * as React from 'react';
-import EditIcon from '@mui/icons-material/Edit';
 import {Armor} from "../../../models/equipment/Armor";
 import {EquipmentPath} from "../../../services/Path";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableRow from "@mui/material/TableRow";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Fragment, useEffect, useState} from "react";
 import EquipmentService from "../../../services/EquipmentService";
-import CheckIcon from "@mui/icons-material/Check";
 import ArmorModifierCard from "./modifier/ArmorModifierCard";
 import ArmorQualityCard from './quality/ArmorQualityCard';
-import TableCell from "@mui/material/TableCell";
+import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import {BooleanTextFieldCard, TextFieldCard, ViewFieldCard} from "../../common/ViewFieldCard";
+import {NumberTextFieldCard} from "../../common/card/NumberTextField";
+import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();
     const [armor, setArmor] = useState<Armor | null>(null);
     let pathname = useLocation().pathname;
-    let navigate = useNavigate();
-    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'Qualities']
 
     useEffect(() => {
         if (!id) {
@@ -46,45 +30,27 @@ export default function ArmorPage() {
         return <Fragment/>;
     }
 
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(EquipmentPath.Armor + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(EquipmentPath.Armor + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            )
-        }
-    }
-
     const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (armor) {
             setArmor(await EquipmentService.updateArmor({...armor, description: event.target.value}));
         }
     };
 
-    const handleSoakChange = async (value: string) => {
+    const handleSoakChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, soak: Number(value)}));
+            setArmor(await EquipmentService.updateArmor({...armor, soak: value}));
         }
     };
 
-    const handleDefenseChange = async (value: string) => {
+    const handleDefenseChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, defense: Number(value)}));
+            setArmor(await EquipmentService.updateArmor({...armor, defense: value}));
         }
     };
 
-    const handleEncumbranceChange = async (value: string) => {
+    const handleEncumbranceChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, encumbrance: Number(value)}));
+            setArmor(await EquipmentService.updateArmor({...armor, encumbrance: value}));
         }
     };
 
@@ -94,111 +60,58 @@ export default function ArmorPage() {
         }
     };
 
-    const handlePriceChange = async (value: string) => {
+    const handlePriceChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, price: Number(value)}));
+            setArmor(await EquipmentService.updateArmor({...armor, price: value}));
         }
     };
 
-    const handleRarityChange = async (value: string) => {
+    const handleRarityChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, rarity: Number(value)}));
+            setArmor(await EquipmentService.updateArmor({...armor, rarity: value}));
         }
+    };
+
+    const renderDescriptionCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={armor.description}/> :
+            <TextFieldCard title={"Description"} value={armor.description}
+                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
+    };
+
+    const renderSoakCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Soak"} value={'+' + armor.soak}/> :
+            <NumberTextFieldCard title={"Soak"} value={armor.soak}
+                                 disabled={pathname.endsWith('/view')} onChange={handleSoakChange} min={0} max={5}/>;
     };
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={armor.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={armor.name} path={EquipmentPath.Armor + armor.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <Grid item xs>
-                            <TextField
-                                label="Description"
-                                variant="outlined"
-                                fullWidth
-                                multiline
-                                rows={2}
-                                value={armor.description}
-                                onChange={handleDescriptionChange}
-                                disabled={pathname.endsWith('/view')}
-                            />
-                        </Grid>
-                    </Grid>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            {renderSingleRowTableHeader(headers)}
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={'+' + armor.soak}
-                                            label="Soak"
-                                            onChange={(e) => handleSoakChange(e.target.value)}
-                                            inputProps={{min: 1, max: 6}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={armor.defense}
-                                            label="Defense"
-                                            onChange={(e) => handleDefenseChange(e.target.value)}
-                                            inputProps={{min: 1, max: 6}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={armor.encumbrance}
-                                            label="Encumbrance"
-                                            onChange={(e) => handleEncumbranceChange(e.target.value)}
-                                            inputProps={{min: 1, max: 10}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <FormControl fullWidth>
-                                            <InputLabel>Restricted</InputLabel>
-                                            <Select
-                                                value={armor.restricted ? 'Yes' : 'No'}
-                                                onChange={(e) => handleRestrictedChange(e.target.value === 'Yes')}
-                                                label="Restricted"
-                                                disabled={pathname.endsWith('/view')}
-                                            >
-                                                <MenuItem value="Yes">Yes</MenuItem>
-                                                <MenuItem value="No">No</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <TextField
-                                            type="number"
-                                            value={armor.restricted && pathname.endsWith('/view') ? `${armor.price}(R)` : armor.price}
-                                            label="Price"
-                                            onChange={(e) => handlePriceChange(e.target.value)}
-                                            inputProps={{min: 0, max: 1000000}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TextField
-                                            type="number"
-                                            value={armor.rarity}
-                                            label="Rarity"
-                                            onChange={(e) => handleRarityChange(e.target.value)}
-                                            inputProps={{min: 0, max: 10}}
-                                            disabled={pathname.endsWith('/view')}
-                                        />
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <ArmorQualityCard arm={armor}/>
-                    <ArmorModifierCard arm={armor}/>
+                    {renderDescriptionCard()}
                 </Grid>
+                <Grid container justifyContent={'center'}>
+                    {renderSoakCard()}
+                    <NumberTextFieldCard title={'Defense'} value={armor.defense}
+                                         onChange={handleDefenseChange} min={0}
+                                         max={5} disabled={pathname.endsWith('/view')}/>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    <NumberTextFieldCard title={'Encumbrance'} value={armor.encumbrance}
+                                         onChange={handleEncumbranceChange} min={1}
+                                         max={10} disabled={pathname.endsWith('/view')}/>
+                    <BooleanTextFieldCard title={'Restricted'} value={armor.restricted}
+                                          disabled={pathname.endsWith('/view')} onChange={handleRestrictedChange}/>
+                    <PriceTextFieldCard price={armor.price} restricted={armor.restricted}
+                                        onChange={handlePriceChange} min={1} max={10000000}
+                                        disabled={pathname.endsWith('/view')}/>
+                    <NumberTextFieldCard title={'Rarity'} value={armor.rarity} onChange={handleRarityChange}
+                                         min={0}
+                                         max={10} disabled={pathname.endsWith('/view')}/>
+                </Grid>
+                <ArmorQualityCard arm={armor}/>
+                <ArmorModifierCard arm={armor}/>
             </CardContent>
         </Card>
     )

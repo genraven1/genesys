@@ -1,5 +1,5 @@
 import {Difficulty} from "../../../../models/common/Difficulty";
-import {Card, Grid, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../CenteredCardHeader";
 
@@ -16,19 +16,21 @@ export default function DifficultyCard(props: Props) {
         <Grid item xs>
             <Card>
                 <CenteredCardHeader title={'Difficulty'}/>
-                <Select
-                    value={value}
-                    onChange={(e) => onChange(e.target.value as Difficulty)}
-                    disabled={disabled}
-                    fullWidth
-                    label={'Difficulty'}
-                >
-                    {Object.values(Difficulty).map(option => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Select>
+                <CardContent>
+                    <Select
+                        value={value}
+                        onChange={(e) => onChange(e.target.value as Difficulty)}
+                        disabled={disabled}
+                        fullWidth
+                        label={'Difficulty'}
+                    >
+                        {Object.values(Difficulty).map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </CardContent>
             </Card>
         </Grid>
     )
