@@ -9,9 +9,10 @@ import TableContainer from "@mui/material/TableContainer";
 import Nemesis from "../../../../../models/actor/npc/Nemesis";
 import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
 import {SkillType} from "../../../../../models/actor/Skill";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
+import {ActorSkill, getCharacteristicRanks} from "../../../../../models/actor/Actor";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import GenesysSkillDiceTypography from "../../../../common/typography/GenesysSkillDiceTypography";
+import {renderSkillName} from "../../../../common/skill/SkillRenders";
 
 interface GroupProps {
     nemesis: Nemesis,
@@ -31,7 +32,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     .filter((skill) => skill.type === type)
                     .map((actorSkill: ActorSkill) => (
                         <TableRow>
-                            <TypographyCenterTableCell value={setSkillName(actorSkill)}/>
+                            <TypographyCenterTableCell value={renderSkillName(actorSkill)}/>
                             <TableCell style={{textAlign: 'center'}}>
                                 <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(nemesis, actorSkill)}
                                                              skillRanks={actorSkill.ranks}/>

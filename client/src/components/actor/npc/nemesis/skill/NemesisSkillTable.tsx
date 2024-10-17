@@ -10,11 +10,12 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import Nemesis from "../../../../../models/actor/npc/Nemesis";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
+import {ActorSkill, getCharacteristicRanks} from "../../../../../models/actor/Actor";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import GenesysSkillDiceTypography from "../../../../common/typography/GenesysSkillDiceTypography";
 import NemesisEditSkillDialog from "./NemesisEditSkillDialog";
 import {SkillType} from "../../../../../models/actor/Skill";
+import {renderSkillName} from "../../../../common/skill/SkillRenders";
 
 interface RowProps {
     skill: ActorSkill
@@ -27,7 +28,7 @@ function SkillRow(props: RowProps): JSX.Element {
 
     return (
         <TableRow>
-            <TypographyCenterTableCell value={setSkillName(skill)}/>
+            <TypographyCenterTableCell value={renderSkillName(skill)}/>
             <TypographyCenterTableCell value={String(skill?.ranks!!)}/>
             <TableCell>
                 <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(nemesis, skill)}

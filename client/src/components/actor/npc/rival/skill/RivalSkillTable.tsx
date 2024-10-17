@@ -11,10 +11,11 @@ import GenesysSkillDiceTypography from "../../../../common/typography/GenesysSki
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import NonPlayerCharacterEditSkillDialog from "./RivalEditSkillDialog";
-import {ActorSkill, getCharacteristicRanks, setSkillName} from "../../../../../models/actor/Actor";
+import {ActorSkill, getCharacteristicRanks} from "../../../../../models/actor/Actor";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import Rival from "../../../../../models/actor/npc/Rival";
+import {renderSkillName} from "../../../../common/skill/SkillRenders";
 
 interface RowProps {
     skill: ActorSkill
@@ -27,7 +28,7 @@ function SkillRow(props: RowProps) {
 
     return (
         <TableRow>
-            <TypographyCenterTableCell value={setSkillName(skill)}/>
+            <TypographyCenterTableCell value={renderSkillName(skill)}/>
             <TypographyCenterTableCell value={String(skill.ranks)}/>
             <TableCell>
                 <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(rival, skill)}

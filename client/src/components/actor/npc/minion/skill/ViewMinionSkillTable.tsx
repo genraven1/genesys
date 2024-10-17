@@ -6,10 +6,10 @@ import {Grid} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import {SkillType} from "../../../../../models/actor/Skill";
-import {setSkillName} from "../../../../../models/actor/Actor";
 import Minion, {GroupSkill} from "../../../../../models/actor/npc/Minion";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
+import {renderSkillName} from "../../../../common/skill/SkillRenders";
 
 interface GroupProps {
     minion: Minion,
@@ -37,7 +37,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     .filter((skill) => skill.type === type)
                     .map((actorSkill: GroupSkill) => (
                         <TableRow>
-                            <TypographyCenterTableCell value={setSkillName(actorSkill)}/>
+                            <TypographyCenterTableCell value={renderSkillName(actorSkill)}/>
                             {renderSkillRow(actorSkill)}
                         </TableRow>
                     ))}
