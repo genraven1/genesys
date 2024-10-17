@@ -9,11 +9,12 @@ import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import Skill from "../../../models/actor/Skill";
 import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
-import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
 import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import {useFetchAllSkills} from "../../skills/SkillWorkflow";
 import {NumberTextFieldCard} from "../../common/card/NumberTextField";
+import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
+import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 
 interface Props {
     gea: Gear
@@ -105,12 +106,15 @@ export default function GearEdit(props: Props) {
                                                  onChange('encumbrance', String(value))
                                              }} min={1}
                                              max={10} disabled={pathname.endsWith('/view')}/>
-                        <EditPriceCheckBoxCard check={gear.restricted} value={gear.price} checkTitle={'Restricted'}
-                                               onBooleanChange={(value: boolean): void => {
-                                                   onChange('restricted', String(value))
-                                               }} onNumberChange={(value: number): void => {
-                            onChange('price', String(value))
+                        <BooleanTextFieldCard title={'Restricted'} value={gear.restricted}
+                                              disabled={pathname.endsWith('/view')} onChange={(value: boolean): void => {
+                            onChange('restricted', String(value))
                         }}/>
+                        <PriceTextFieldCard price={gear.price} restricted={gear.restricted}
+                                            onChange={(value: number): void => {
+                                                onChange('price', String(value))
+                                            }} min={1} max={10000000}
+                                            disabled={pathname.endsWith('/view')}/>
                         <NumberTextFieldCard title={'Rarity'} value={gear.rarity} onChange={(value: number): void => {
                             onChange('rarity', String(value))
                         }}
