@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
 import {EquipmentPath} from '../../../services/Path';
@@ -9,20 +9,20 @@ import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import Skill from "../../../models/actor/Skill";
 import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
-import {EditNumberFieldCard} from "../../common/ViewFieldCard";
 import {EditPriceCheckBoxCard} from "../../common/NumberCheckBox";
 import {Gear} from "../../../models/equipment/Gear";
 import SkillSelectCard from "../../common/skill/SkillSelectCard";
 import {useFetchAllSkills} from "../../skills/SkillWorkflow";
+import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 
 interface Props {
     gea: Gear
 }
 
 export default function GearEdit(props: Props) {
-    const {gea} = props
-    const [gear, setGear] = useState<Gear>(gea)
-
+    const {gea} = props;
+    const [gear, setGear] = useState<Gear>(gea);
+    let pathname = useLocation().pathname;
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -100,19 +100,22 @@ export default function GearEdit(props: Props) {
                     </Grid>
                     <Divider/>
                     <Grid container spacing={10}>
-                        <EditNumberFieldCard value={gear.encumbrance} title={'Encumbrance'}
+                        <NumberTextFieldCard title={'Encumbrance'} value={gear.encumbrance}
                                              onChange={(value: number): void => {
                                                  onChange('encumbrance', String(value))
-                                             }} min={0} max={10}/>
+                                             }} min={1}
+                                             max={10} disabled={pathname.endsWith('/view')}/>
                         <EditPriceCheckBoxCard check={gear.restricted} value={gear.price} checkTitle={'Restricted'}
                                                onBooleanChange={(value: boolean): void => {
                                                    onChange('restricted', String(value))
                                                }} onNumberChange={(value: number): void => {
                             onChange('price', String(value))
                         }}/>
-                        <EditNumberFieldCard value={gear.rarity} title={'Rarity'} onChange={(value: number): void => {
+                        <NumberTextFieldCard title={'Rarity'} value={gear.rarity} onChange={(value: number): void => {
                             onChange('rarity', String(value))
-                        }} min={0} max={11}/>
+                        }}
+                                             min={0}
+                                             max={10} disabled={pathname.endsWith('/view')}/>
                     </Grid>
                 </Grid>
             </CardContent>

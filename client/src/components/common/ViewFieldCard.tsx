@@ -131,29 +131,6 @@ export function SkillAutocompleteCard(props: SkillAutoCompleteProps) {
     )
 }
 
-interface EditNumberProps {
-    value: number,
-    title: string,
-    onChange: (value: number) => void
-    min: number
-    max: number
-}
-
-export function EditNumberFieldCard(props: EditNumberProps) {
-    const {value, title, onChange, min, max} = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={title}/>
-                <CardActions>
-                    <InputNumberRangeSelectField defaultValue={value} min={min} max={max} onCommit={onChange}/>
-                </CardActions>
-            </Card>
-        </Grid>
-    )
-}
-
 interface QualityActivationProps {
     quality: Quality
 }

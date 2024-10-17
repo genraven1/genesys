@@ -7,7 +7,7 @@ import {Fragment, useEffect, useState} from "react";
 import CareerService from '../../services/CareerService';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../common/table/TableRenders";
+import {renderSingleRowTableHeaderWithColumns} from "../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
@@ -21,7 +21,7 @@ export default function CareerPage() {
     const [career, setCareer] = useState<Career | null>(null);
     const [skills, setSkills] = useState<Skill[]>([]);
     let pathname = useLocation().pathname;
-    let headers = ['Skills'];
+    let headers = ['Career Skills'];
 
     useEffect(() => {
         if (!id) {
@@ -56,14 +56,23 @@ export default function CareerPage() {
                 <Grid container justifyContent={'center'}>
                     <TableContainer component={Paper}>
                         <Table>
-                            {renderSingleRowTableHeader(headers)}
+                            {renderSingleRowTableHeaderWithColumns(headers, 2)}
                             <TableBody>
                                 {career.skills.map((skill, index) => (
-                                    <TableRow key={index}>
-                                        <SkillAutocompleteTableCell skill={skill} skills={skills}
-                                                                    onChange={handleSkillChange} index={index}
-                                                                    disabled={!pathname.endsWith(career.id + '/edit')}/>
-                                    </TableRow>
+                                    index % 2 === 0 && (
+                                        <TableRow key={index}>
+                                            <SkillAutocompleteTableCell skill={career.skills[index]} skills={skills}
+                                                                        onChange={handleSkillChange} index={index}
+                                                                        disabled={!pathname.endsWith(career.id + '/edit')}/>
+                                            {career.skills[index + 1] && (
+                                                <SkillAutocompleteTableCell skill={career.skills[index + 1]}
+                                                                            skills={skills}
+                                                                            onChange={handleSkillChange}
+                                                                            index={index + 1}
+                                                                            disabled={!pathname.endsWith(career.id + '/edit')}/>
+                                            )}
+                                        </TableRow>
+                                    )
                                 ))}
                             </TableBody>
                         </Table>

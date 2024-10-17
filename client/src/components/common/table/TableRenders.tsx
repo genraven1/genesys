@@ -8,11 +8,11 @@ import Typography from "@mui/material/Typography";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-const renderHeaders = (headers: string[]) => {
+const renderHeaders = (headers: string[], columns: number) => {
     return (
         <TableRow key={'Header'}>
             {headers.map((header: string) => (
-                <TypographyCenterTableCell value={header}/>
+                <TypographyCenterTableCell value={header} span={columns}/>
             ))}
         </TableRow>
     )
@@ -21,7 +21,15 @@ const renderHeaders = (headers: string[]) => {
 export const renderSingleRowTableHeader = (headers: string[]) => {
     return (
         <TableHead>
-            {renderHeaders(headers)}
+            {renderHeaders(headers, 1)}
+        </TableHead>
+    )
+}
+
+export const renderSingleRowTableHeaderWithColumns = (headers: string[], columns: number) => {
+    return (
+        <TableHead>
+            {renderHeaders(headers, columns)}
         </TableHead>
     )
 }
@@ -32,7 +40,7 @@ export const renderDoubleRowTableHeader = (headers: string[], value: string, col
             <TableRow key={'Main Header'}>
                 <TypographyCenterTableCell value={value} span={colSpan}/>
             </TableRow>
-            {renderHeaders(headers)}
+            {renderHeaders(headers, 1)}
         </TableHead>
     )
 }
