@@ -16,7 +16,6 @@ import GenesysQualityTypography from "./typography/GenesysQualityTypography";
 import {renderSkillName} from "./skill/SkillRenders";
 import Skill from "../../models/actor/Skill";
 import {CharacteristicType} from "../../models/character/Characteristic";
-import GenesysTextField from "./GenesysTextField";
 import CenteredCardHeader from "./card/CenteredCardHeader";
 
 interface ViewProps {
@@ -34,27 +33,6 @@ export function ViewFieldCard(props: ViewProps) {
                     <GenesysDescriptionTypography text={value}/>
                 </CardContent>
 
-            </Card>
-        </Grid>
-    )
-}
-
-interface TextFieldProps {
-    title: string;
-    value: string;
-    disabled: boolean;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
-
-export function TextFieldCard(props: TextFieldProps) {
-    const {title, value, disabled, onChange} = props
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={title}/>
-                <CardContent>
-                    <GenesysTextField text={value} label={title} disabled={disabled} onChange={onChange}/>
-                </CardContent>
             </Card>
         </Grid>
     )

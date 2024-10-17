@@ -11,13 +11,9 @@ import SkillService from "../../services/SkillService";
 import ArchetypeService from "../../services/ArchetypeService";
 import Skill from "../../models/actor/Skill";
 import CheckIcon from "@mui/icons-material/Check";
-import {
-    CharacteristicCard,
-    SkillAutocompleteCard,
-    TextFieldCard,
-    ViewFieldCard
-} from "../common/ViewFieldCard";
+import {CharacteristicCard, SkillAutocompleteCard, ViewFieldCard} from "../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
+import {TextFieldCard} from "../common/card/TextFieldCard";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()

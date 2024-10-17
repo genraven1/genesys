@@ -7,10 +7,11 @@ import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 import {Fragment, useEffect, useState} from "react";
 import InjuryService from "../../services/InjuryService";
 import {Difficulty} from "../../models/common/Difficulty";
-import {TextFieldCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {ViewFieldCard} from "../common/ViewFieldCard";
 import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
 import DifficultyCard from "../common/card/select/DifficultyCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
+import {TextFieldCard} from "../common/card/TextFieldCard";
 
 export default function InjuryPage() {
     const {id} = useParams<{ id: string }>();
