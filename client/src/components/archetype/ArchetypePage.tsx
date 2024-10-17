@@ -1,6 +1,5 @@
-import {Card, CardContent, CardHeader, Grid, IconButton} from '@mui/material';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
-import EditIcon from "@mui/icons-material/Edit";
+import {Card, CardContent, Grid} from '@mui/material';
+import {useLocation, useParams} from 'react-router-dom';
 import * as React from "react";
 import Archetype from "../../models/actor/player/Archetype";
 import {RootPath} from "../../services/Path";
@@ -10,17 +9,16 @@ import {Fragment, useEffect, useState} from "react";
 import SkillService from "../../services/SkillService";
 import ArchetypeService from "../../services/ArchetypeService";
 import Skill from "../../models/actor/Skill";
-import CheckIcon from "@mui/icons-material/Check";
 import {CharacteristicCard, SkillAutocompleteCard, ViewFieldCard} from "../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {TextFieldCard} from "../common/card/TextFieldCard";
+import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()
     const [archetype, setArchetype] = useState<Archetype | null>(null)
     const [skills, setSkills] = useState<Skill[]>([])
     let pathname = useLocation().pathname
-    let navigate = useNavigate()
 
     useEffect(() => {
         if (!id) {
@@ -39,24 +37,6 @@ export default function ArchetypePage() {
 
     if (!archetype) {
         return <Fragment/>;
-    }
-
-    const onPageChange = () => {
-        if (pathname.endsWith('/view')) {
-            return (
-                <IconButton title='Edit' size='small'
-                            onClick={(): void => navigate(RootPath.Archetype + id + '/edit')}>
-                    <EditIcon color='primary' fontSize='small'/>
-                </IconButton>
-            );
-        } else {
-            return (
-                <IconButton title='View' size='small'
-                            onClick={(): void => navigate(RootPath.Archetype + id + '/view')}>
-                    <CheckIcon color='primary' fontSize='small'/>
-                </IconButton>
-            );
-        }
     }
 
     const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,7 +102,7 @@ export default function ArchetypePage() {
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={archetype.name} action={onPageChange()}/>
+            <CenteredCardHeaderWithAction title={archetype.name} path={RootPath.Archetype + archetype.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container justifyContent={'center'}>
@@ -131,22 +111,22 @@ export default function ArchetypePage() {
                     <Grid container spacing={2}>
                         <CharacteristicCard type={CharacteristicType.Brawn} value={archetype.brawn}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                         <CharacteristicCard type={CharacteristicType.Agility} value={archetype.agility}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                         <CharacteristicCard type={CharacteristicType.Intellect} value={archetype.intellect}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                         <CharacteristicCard type={CharacteristicType.Cunning} value={archetype.cunning}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                         <CharacteristicCard type={CharacteristicType.Willpower} value={archetype.willpower}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                         <CharacteristicCard type={CharacteristicType.Presence} value={archetype.presence}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith('/view')}/>
+                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
                     </Grid>
                     <Grid container justifyContent={'center'}>
                         <NumberTextFieldCard title={"Wound Threshold"} value={archetype.wounds}
