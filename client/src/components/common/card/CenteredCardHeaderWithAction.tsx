@@ -21,18 +21,18 @@ export default function CenteredCardHeaderWithAction(props: Props) {
                             onClick={(): void => navigate(path + '/edit')}>
                     <EditIcon color='primary' fontSize='small'/>
                 </IconButton>
-            )
+            );
         } else {
             return (
                 <IconButton title='View' size='small'
                             onClick={(): void => navigate(path + '/view')}>
                     <CheckIcon color='primary' fontSize='small'/>
                 </IconButton>
-            )
+            );
         }
-    }
+    };
 
     return (
         <CardHeader style={{textAlign: 'center'}} title={title} action={onPageChange()}/>
-    )
+    );
 }

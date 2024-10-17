@@ -6,9 +6,9 @@ interface Props {
 }
 
 export default function CenteredCardHeader(props: Props) {
-    const {title} = props
+    const {title} = props;
 
     return (
         <CardHeader style={{textAlign: 'center'}} title={title}/>
-    )
+    );
 }
