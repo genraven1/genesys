@@ -9,11 +9,12 @@ import {Fragment, useEffect, useState} from "react";
 import SkillService from "../../services/SkillService";
 import ArchetypeService from "../../services/ArchetypeService";
 import Skill from "../../models/actor/Skill";
-import {CharacteristicCard, ViewFieldCard} from "../common/ViewFieldCard";
+import {ViewFieldCard} from "../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {TextFieldCard} from "../common/card/TextFieldCard";
 import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
-import SkillAutocompleteCard from "../common/SkillAutocompleteCard";
+import SkillAutocompleteCard from "../common/card/SkillAutocompleteCard";
+import CharacteristicCard from "../common/card/CharacteristicCard";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()

@@ -1,7 +1,7 @@
-import Skill from "../../models/actor/Skill";
+import Skill from "../../../models/actor/Skill";
 import {Autocomplete, Card, CardContent, Grid, TextField} from "@mui/material";
-import CenteredCardHeader from "./card/CenteredCardHeader";
-import {renderSkillName} from "./skill/SkillRenders";
+import CenteredCardHeader from "./CenteredCardHeader";
+import {renderSkillName} from "../skill/SkillRenders";
 import * as React from "react";
 
 interface SkillAutoCompleteProps {

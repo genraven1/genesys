@@ -18,7 +18,7 @@ import WeaponDamageTextFieldCard from "../../common/card/WeaponDamageTextFieldCa
 import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
-import SkillAutocompleteCard from "../../common/SkillAutocompleteCard";
+import SkillAutocompleteCard from "../../common/card/SkillAutocompleteCard";
 
 export default function WeaponPage() {
     const {id} = useParams<{ id: string }>();
