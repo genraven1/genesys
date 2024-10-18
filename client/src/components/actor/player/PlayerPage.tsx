@@ -4,7 +4,7 @@ import Player from '../../../models/actor/player/Player';
 import {ActorPath, RootPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
-import {PlayerCharacteristicRow} from "../common/CharacteristicRow";
+import CharacteristicRow, {PlayerCharacteristicRow} from "../common/CharacteristicRow";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
@@ -39,30 +39,30 @@ export default function PlayerPage() {
         return <Fragment/>;
     }
 
-    const handleCharacteristicChange = async (characteristic: CharacteristicType, value: number) => {
-        if (player) {
-            switch (characteristic) {
-                case CharacteristicType.Brawn:
-                    setPlayer(await ActorService.updatePlayer({...player, brawn: value}));
-                    break;
-                case CharacteristicType.Agility:
-                    setPlayer(await ActorService.updatePlayer({...player, agility: value}));
-                    break;
-                case CharacteristicType.Intellect:
-                    setPlayer(await ActorService.updatePlayer({...player, intellect: value}));
-                    break;
-                case CharacteristicType.Cunning:
-                    setPlayer(await ActorService.updatePlayer({...player, cunning: value}));
-                    break;
-                case CharacteristicType.Willpower:
-                    setPlayer(await ActorService.updatePlayer({...player, willpower: value}));
-                    break;
-                case CharacteristicType.Presence:
-                    setPlayer(await ActorService.updatePlayer({...player, presence: value}));
-                    break;
-            }
-        }
-    };
+    // const handleCharacteristicChange = async (characteristic: CharacteristicType, value: number) => {
+    //     if (player) {
+    //         switch (characteristic) {
+    //             case CharacteristicType.Brawn:
+    //                 setPlayer(await ActorService.updatePlayer({...player, brawn: value}));
+    //                 break;
+    //             case CharacteristicType.Agility:
+    //                 setPlayer(await ActorService.updatePlayer({...player, agility: value}));
+    //                 break;
+    //             case CharacteristicType.Intellect:
+    //                 setPlayer(await ActorService.updatePlayer({...player, intellect: value}));
+    //                 break;
+    //             case CharacteristicType.Cunning:
+    //                 setPlayer(await ActorService.updatePlayer({...player, cunning: value}));
+    //                 break;
+    //             case CharacteristicType.Willpower:
+    //                 setPlayer(await ActorService.updatePlayer({...player, willpower: value}));
+    //                 break;
+    //             case CharacteristicType.Presence:
+    //                 setPlayer(await ActorService.updatePlayer({...player, presence: value}));
+    //                 break;
+    //         }
+    //     }
+    // };
 
     return (
         <Card>
@@ -75,7 +75,8 @@ export default function PlayerPage() {
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>
-                    <PlayerCharacteristicRow player={player} handleCharacteristicChange={handleCharacteristicChange}/>
+                    <CharacteristicRow actor={player}/>
+                    {/*<PlayerCharacteristicRow player={player} handleCharacteristicChange={handleCharacteristicChange}/>*/}
                     <Divider/>
                     <DerivedPlayerStatsRow player={player}/>
                     <Divider/>

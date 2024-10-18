@@ -82,7 +82,7 @@ export default function PlayerEdit(props: Props) {
     }
 
     const onView = () => {
-        navigate(ActorPath.Player + player.name + '/view')
+        navigate(ActorPath.Player + player.id + '/view')
     }
 
     return (

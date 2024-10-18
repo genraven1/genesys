@@ -2,7 +2,6 @@ import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {ActorPath, CampaignPath, EquipmentPath, LorePath, RootPath} from '../../services/Path';
-import ViewAllPlayers from '../actor/player/ViewAllPlayers';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
@@ -66,7 +65,7 @@ export default function App() {
                     <Route path={RootPath.Archetype + ':id/view'} element={<ArchetypeWorkflow/>}/>
 
                     {/*Actor Routes*/}
-                    <Route path={ActorPath.Player} element={<ViewAllPlayers/>}/>
+                    <Route path={ActorPath.Player} element={<PlayerWorkflow/>}/>
                     <Route path={ActorPath.Player + ':id/edit'} element={<PlayerWorkflow/>}/>
                     <Route path={ActorPath.Player + ':id/view'} element={<PlayerWorkflow/>}/>
 

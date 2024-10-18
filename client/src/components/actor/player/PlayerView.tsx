@@ -19,7 +19,7 @@ export default function PlayerView(props: Props) {
     let navigate = useNavigate()
 
     const onEdit = () => {
-        navigate(ActorPath.Player + player.name + '/edit')
+        navigate(ActorPath.Player + player.id + '/edit')
     }
 
     return (

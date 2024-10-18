@@ -1,9 +1,21 @@
-import {Card, CardContent, ClickAwayListener, Grid, MenuItem, TextField, Typography} from "@mui/material";
+import {
+    Autocomplete,
+    Card,
+    CardContent,
+    ClickAwayListener,
+    Grid, IconButton,
+    MenuItem,
+    TextField,
+    Tooltip,
+    Typography
+} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import {ChangeEvent, useEffect, useState} from "react";
 import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";
 import EditField from "../../common/EditField";
+import InfoIcon from "@mui/icons-material/Info";
+import * as React from "react";
 
 interface AllProps {
     defaultValue: Archetype
@@ -11,16 +23,12 @@ interface AllProps {
 }
 
 export default function ArchetypeSelectCard(props: AllProps) {
-    const {defaultValue, onCommit} = props
-    const [archetypes, setArchetypes] = useState<Archetype[]>([])
+    const {defaultValue, onCommit} = props;
+    const [archetypes, setArchetypes] = useState<Archetype[]>([]);
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const archetypeList = await ArchetypeService.getArchetypes()
-            if (!archetypeList) {
-                return
-            }
-            setArchetypes(archetypeList)
+            setArchetypes(await ArchetypeService.getArchetypes())
         })()
     }, [])
 
@@ -29,7 +37,21 @@ export default function ArchetypeSelectCard(props: AllProps) {
             <Card>
                 <CenteredCardHeader title={'Archetype'}/>
                 <CardContent>
-                    <ArchetypeSelectField defaultValue={defaultValue} archetypes={archetypes} onCommit={onCommit}/>
+                    <Autocomplete
+                        options={archetypes}
+                        getOptionLabel={(option) => option.name}
+                        value={defaultValue}
+                        fullWidth
+                        onChange={(e, newValue) => onCommit(newValue as Archetype)}
+                        renderInput={(params) => <TextField {...params} label='Archetype'
+                                                            variant="outlined"/>}
+                        // disabled={disabled}
+                    />
+                    {defaultValue && <Tooltip title={defaultValue}>
+                        <IconButton>
+                            <InfoIcon/>
+                        </IconButton>
+                    </Tooltip>}
                 </CardContent>
             </Card>
         </Grid>
