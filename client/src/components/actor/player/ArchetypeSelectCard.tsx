@@ -1,23 +1,11 @@
-import {
-    Autocomplete,
-    Card,
-    CardContent,
-    ClickAwayListener,
-    Grid, IconButton,
-    MenuItem,
-    TextField,
-    Tooltip,
-    Typography
-} from "@mui/material";
+import {Autocomplete, Card, CardContent, Grid, IconButton, TextField} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
-import {ChangeEvent, Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";
 import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
-import ArchetypePage from "../../archetype/ArchetypePage";
 import ArchetypeBackdrop from "../../archetype/ArchetypeBackdrop";
-import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 interface AllProps {
     defaultValue: Archetype
@@ -40,87 +28,31 @@ export default function ArchetypeSelectCard(props: AllProps) {
             <Card>
                 <CenteredCardHeader title={'Archetype'}/>
                 <CardContent>
-                    <Autocomplete
-                        options={archetypes}
-                        getOptionLabel={(option) => option.name}
-                        value={defaultValue}
-                        fullWidth
-                        onChange={(e, newValue) => onCommit(newValue as Archetype)}
-                        renderInput={(params) => <TextField {...params} label='Archetype'
-                                                            variant="outlined"/>}
-                        // disabled={disabled}
-                    />
-                    {defaultValue && <Tooltip
-                        title={
-                            <Fragment>
-                                <ViewFieldCard name={'Archetype'} value={defaultValue.name}/>
-                            </Fragment>
-                        }
-                    >
-                        <IconButton>
-                            <InfoIcon/>
-                        </IconButton>
-                    </Tooltip>}
+                    <Grid container>
+                        <Grid item sx={{"width": .9}}>
+                            <Autocomplete
+                                options={archetypes}
+                                getOptionLabel={(option) => option.name}
+                                value={defaultValue}
+                                fullWidth
+                                onChange={(e, newValue) => onCommit(newValue as Archetype)}
+                                renderInput={(params) => <TextField {...params} label='Archetype'
+                                                                    variant="outlined"/>}
+                                // disabled={disabled}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <IconButton onClick={(): void => setOpenPlayerBackDrop(true)}>
+                                <InfoIcon/>
+                            </IconButton>
+                            {openPlayerBackDrop &&
+                                <ArchetypeBackdrop open={openPlayerBackDrop}
+                                                   onClose={(): void => setOpenPlayerBackDrop(false)}
+                                                   archetype={defaultValue}/>}
+                        </Grid>
+                    </Grid>
                 </CardContent>
             </Card>
         </Grid>
-    )
-}
-
-interface FieldProps {
-    defaultValue: Archetype
-    archetypes: Archetype[]
-    onCommit: (value: Archetype) => void
-    onChange?: (value: Archetype) => void
-}
-
-function ArchetypeSelectField(props: FieldProps) {
-    const {defaultValue, archetypes, onCommit, onChange} = props
-    const [archetype, setArchetype] = useState(defaultValue)
-    const [edit, setEdit] = useState(false)
-
-    const handleOnCommit = (): void => {
-        setEdit(!edit)
-        onCommit(archetype)
-    }
-
-    const inputOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
-
-        let selectedArchetype = archetypes.find((sk) => sk.name === event.target.value) as Archetype
-        setArchetype(selectedArchetype)
-
-        if (onChange) {
-            onChange(selectedArchetype)
-        }
-    }
-
-    const editElement = (
-        <ClickAwayListener mouseEvent="onMouseUp" onClickAway={handleOnCommit}>
-            <TextField value={archetype} helperText={'Archetype'} onChange={inputOnChange} select fullWidth>
-                {archetypes.map((archetype: Archetype) => (
-                    <MenuItem key={archetype.name} value={archetype.name}>{archetype.name}</MenuItem>))}
-            </TextField>
-        </ClickAwayListener>
-    )
-
-    const viewElement = archetype && <Typography style={{wordWrap: 'break-word'}}>{archetype.name}</Typography>
-
-    const onCancel = (): void => {
-        setEdit(!edit)
-        setArchetype(defaultValue)
-    }
-
-    return (
-        <Tooltip
-            title={
-                <Fragment>
-                    <ArchetypePage/>
-                </Fragment>
-            }
-        >
-            <IconButton>
-                <InfoIcon/>
-            </IconButton>
-        </Tooltip>
     )
 }

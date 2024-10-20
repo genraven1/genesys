@@ -16,7 +16,7 @@ export default function CharacteristicCard(props: CharacteristicProps) {
     return (
         <Grid item xs>
             <Card>
-                <CenteredCardHeader title={'Characteristic Type'}/>
+                <CenteredCardHeader title={type}/>
                 <CardContent>
                     <TextField
                         type="number"

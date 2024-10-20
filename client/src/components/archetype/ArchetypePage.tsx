@@ -141,7 +141,7 @@ export default function ArchetypePage() {
                                              onChange={handleExperienceChange} min={70} max={170}
                                              disabled={!pathname.endsWith(archetype.id + '/edit')} steps={5}/>
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container>
                         <SkillAutocompleteCard disabled={!pathname.endsWith(archetype.id + '/edit')}
                                                handleSkillChange={handleSkillChange} skills={skills}
                                                startingSkill={archetype.skill}/>
