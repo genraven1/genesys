@@ -29,7 +29,7 @@ import HomeCampaignDashboard from "./HomeCampaignDashboard";
 export default function App() {
 
     return (
-        <ThemeProvider theme={createTheme({palette: {mode: 'dark'}})}>
+        <ThemeProvider theme={createTheme({palette: {mode: 'light'}})}>
             <HashRouter>
                 <NavBar/>
                 <Routes>
