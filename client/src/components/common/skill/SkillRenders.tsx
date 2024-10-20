@@ -3,10 +3,7 @@ import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypogr
 import * as React from "react";
 
 export const renderSkillName = (skill: Skill): string => {
-    if (!skill) {
-        return 'None'
-    }
-    return skill.name
+    return !skill ? 'None' : skill.name;
 }
 
 export const renderSkillNames = (skills: Skill[]) => {
