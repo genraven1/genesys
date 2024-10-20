@@ -15,6 +15,7 @@ import * as React from "react";
 import Career from "../../models/actor/player/Career";
 import CareerService from "../../services/CareerService";
 import CareerDialog from "./CareerDialog";
+import { renderSkillNames } from "../common/skill/SkillRenders";
 
 interface Props {
     career: Career
@@ -32,13 +33,9 @@ function Row(props: Props) {
                 <ActionsTableCell name={career.id} path={RootPath.Career}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={columns}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0, textAlign: 'center' }} colSpan={columns}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Table sx={{ margin: 1 }}>
-                            <TableBody>
-                                {/*Insert Skill List*/}
-                            </TableBody>
-                        </Table>
+                        {renderSkillNames(career.skills)}
                     </Collapse>
                 </TableCell>
             </TableRow>

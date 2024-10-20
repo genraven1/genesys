@@ -18,7 +18,7 @@ export default function ArchetypeBackdrop(props: Props) {
     const {archetype, open, onClose} = props
 
     return (
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
+        <Backdrop sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}} open={open} onClick={onClose}>
             <Card>
                 <CenteredCardHeader title={archetype.name}/>
                 <Grid container>
