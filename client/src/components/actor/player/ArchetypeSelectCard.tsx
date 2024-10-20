@@ -15,11 +15,11 @@ interface AllProps {
 export default function ArchetypeSelectCard(props: AllProps) {
     const {defaultValue, onCommit} = props;
     const [archetypes, setArchetypes] = useState<Archetype[]>([]);
-    const [openPlayerBackDrop, setOpenPlayerBackDrop] = useState(false);
+    const [openArchetypeBackDrop, setOpenArchetypeBackDrop] = useState(false);
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setArchetypes(await ArchetypeService.getArchetypes())
+            setArchetypes(await ArchetypeService.getArchetypes());
         })()
     }, [])
 
@@ -38,21 +38,20 @@ export default function ArchetypeSelectCard(props: AllProps) {
                                 onChange={(e, newValue) => onCommit(newValue as Archetype)}
                                 renderInput={(params) => <TextField {...params} label='Archetype'
                                                                     variant="outlined"/>}
-                                // disabled={disabled}
                             />
                         </Grid>
                         <Grid item>
-                            <IconButton onClick={(): void => setOpenPlayerBackDrop(true)}>
+                            <IconButton onClick={(): void => setOpenArchetypeBackDrop(true)}>
                                 <InfoIcon/>
                             </IconButton>
-                            {openPlayerBackDrop &&
-                                <ArchetypeBackdrop open={openPlayerBackDrop}
-                                                   onClose={(): void => setOpenPlayerBackDrop(false)}
+                            {openArchetypeBackDrop &&
+                                <ArchetypeBackdrop open={openArchetypeBackDrop}
+                                                   onClose={(): void => setOpenArchetypeBackDrop(false)}
                                                    archetype={defaultValue}/>}
                         </Grid>
                     </Grid>
                 </CardContent>
             </Card>
         </Grid>
-    )
+    );
 }
