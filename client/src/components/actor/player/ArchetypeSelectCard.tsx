@@ -10,12 +10,14 @@ import {
     Typography
 } from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, Fragment, useEffect, useState} from "react";
 import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";
-import EditField from "../../common/EditField";
 import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
+import ArchetypePage from "../../archetype/ArchetypePage";
+import ArchetypeBackdrop from "../../archetype/ArchetypeBackdrop";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 interface AllProps {
     defaultValue: Archetype
@@ -25,6 +27,7 @@ interface AllProps {
 export default function ArchetypeSelectCard(props: AllProps) {
     const {defaultValue, onCommit} = props;
     const [archetypes, setArchetypes] = useState<Archetype[]>([]);
+    const [openPlayerBackDrop, setOpenPlayerBackDrop] = useState(false);
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -47,7 +50,13 @@ export default function ArchetypeSelectCard(props: AllProps) {
                                                             variant="outlined"/>}
                         // disabled={disabled}
                     />
-                    {defaultValue && <Tooltip title={defaultValue}>
+                    {defaultValue && <Tooltip
+                        title={
+                            <Fragment>
+                                <ViewFieldCard name={'Archetype'} value={defaultValue.name}/>
+                            </Fragment>
+                        }
+                    >
                         <IconButton>
                             <InfoIcon/>
                         </IconButton>
@@ -102,7 +111,16 @@ function ArchetypeSelectField(props: FieldProps) {
     }
 
     return (
-        <EditField viewElement={viewElement} edit={edit} editable={true} editElement={editElement}
-                   onEdit={(): void => setEdit(!edit)} onCancel={(): void => onCancel()} onCommit={handleOnCommit}/>
+        <Tooltip
+            title={
+                <Fragment>
+                    <ArchetypePage/>
+                </Fragment>
+            }
+        >
+            <IconButton>
+                <InfoIcon/>
+            </IconButton>
+        </Tooltip>
     )
 }

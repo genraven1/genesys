@@ -19,6 +19,8 @@ import ActorService from "../../../services/ActorService";
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import ArchetypeService from "../../../services/ArchetypeService";
 import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import ArchetypeSelectCard from "./ArchetypeSelectCard";
+import Archetype from "../../../models/actor/player/Archetype";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -64,13 +66,20 @@ export default function PlayerPage() {
     //     }
     // };
 
+    const handleArchetypeChange = async (value: Archetype) => {
+        if (player) {
+            setPlayer(await ActorService.updatePlayer({...player, archetype: value}));
+        }
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={player.name} path={ActorPath.Player + player.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <ViewFieldCard name={'Archetype'} value={player?.archetype?.name!}/>
+                        {/*<ViewFieldCard name={'Archetype'} value={player?.archetype?.name!}/>*/}
+                        <ArchetypeSelectCard defaultValue={player.archetype} onCommit={handleArchetypeChange}/>
                         <ViewFieldCard name={'Career'} value={player?.career?.name!}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>

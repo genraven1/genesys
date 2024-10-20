@@ -99,7 +99,7 @@ export default function ArchetypePage() {
     const renderDescriptionCard = () => {
         return pathname.endsWith('/view') ? <ViewFieldCard name={"Description"} value={archetype.description}/> :
             <TextFieldCard title={"Description"} value={archetype.description}
-                           disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
+                           disabled={!pathname.endsWith(archetype.id + '/edit')} onChange={handleDescriptionChange}/>;
     }
 
     return (
@@ -113,33 +113,33 @@ export default function ArchetypePage() {
                     <Grid container spacing={2}>
                         <CharacteristicCard type={CharacteristicType.Brawn} value={archetype.brawn}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <CharacteristicCard type={CharacteristicType.Agility} value={archetype.agility}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <CharacteristicCard type={CharacteristicType.Intellect} value={archetype.intellect}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <CharacteristicCard type={CharacteristicType.Cunning} value={archetype.cunning}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <CharacteristicCard type={CharacteristicType.Willpower} value={archetype.willpower}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <CharacteristicCard type={CharacteristicType.Presence} value={archetype.presence}
                                             handleCharacteristicChange={handleCharacteristicChange}
-                                            disabled={pathname.endsWith(archetype.id + '/view')}/>
+                                            disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                     </Grid>
                     <Grid container justifyContent={'center'}>
                         <NumberTextFieldCard title={"Wound Threshold"} value={archetype.wounds}
                                              onChange={handleWoundsChange} min={7} max={13}
-                                             disabled={pathname.endsWith('/view')}/>
+                                             disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <NumberTextFieldCard title={"Strain Threshold"} value={archetype.strain}
                                              onChange={handleStrainChange} min={7} max={13}
-                                             disabled={pathname.endsWith('/view')}/>
+                                             disabled={!pathname.endsWith(archetype.id + '/edit')}/>
                         <NumberTextFieldCard title={"Base Experience"} value={archetype.experience}
                                              onChange={handleExperienceChange} min={70} max={170}
-                                             disabled={pathname.endsWith('/view')} steps={5}/>
+                                             disabled={!pathname.endsWith(archetype.id + '/edit')} steps={5}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <SkillAutocompleteCard disabled={!pathname.endsWith(archetype.id + '/edit')}
