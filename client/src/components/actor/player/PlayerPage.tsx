@@ -55,7 +55,7 @@ export default function PlayerPage() {
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
                         <ArchetypeSelectCard defaultValue={player.archetype} onCommit={handleArchetypeChange}/>
-                        <CareerSelectCard defaultValue={player.career} onCommit={handleCareerChange}/>
+                        <CareerSelectCard player={player} onCommit={handleCareerChange}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>

@@ -17,7 +17,7 @@ export default function SkillAutocompleteTableCell(props: Props) {
     const {skill, skills, onChange, index, disabled} = props;
 
     return (
-        <TableCell  sx={{"width": .5}}>
+        <TableCell sx={{"width": .5}}>
             <Autocomplete
                 options={skills}
                 getOptionLabel={(option) => renderSkillName(option)}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import {Card, CardContent, Grid, Typography} from "@mui/material";
+import {Card, CardContent, Typography} from "@mui/material";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import Career from "../../models/actor/player/Career";
 import {renderSkillNames} from "../common/skill/SkillRenders";

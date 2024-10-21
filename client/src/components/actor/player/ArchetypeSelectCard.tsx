@@ -40,7 +40,7 @@ export default function ArchetypeSelectCard(props: AllProps) {
                                                                     variant="outlined"/>}
                             />
                         </Grid>
-                        <Grid item>
+                        <Grid item sx={{"width": .1}}>
                             <IconButton onClick={(): void => setOpenArchetypeBackDrop(true)}>
                                 <InfoIcon/>
                             </IconButton>

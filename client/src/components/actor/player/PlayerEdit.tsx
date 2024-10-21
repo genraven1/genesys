@@ -9,7 +9,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
-import CareerSelectCard from "./CareerSelectCard";
 import Career from "../../../models/actor/player/Career";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
 import Skill from "../../../models/actor/Skill";
@@ -97,9 +96,6 @@ export default function PlayerEdit(props: Props) {
                     <Grid container spacing={2}>
                         <ArchetypeSelectCard defaultValue={player.archetype} onCommit={(value: Archetype): void => {
                             onArchetypeChange(value)
-                        }}/>
-                        <CareerSelectCard defaultValue={player.career} onCommit={(value: Career): void => {
-                            onCareerChange(value)
                         }}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                         {openCareerSkillDialog && <CareerSkillSelectDialog open={openCareerSkillDialog}
