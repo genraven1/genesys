@@ -1,35 +1,24 @@
-import {ChangeEvent, useEffect, useState} from "react";
-import {
-    Autocomplete,
-    Card,
-    CardContent,
-    ClickAwayListener,
-    Grid,
-    IconButton,
-    MenuItem,
-    TextField,
-    Typography
-} from "@mui/material";
-import EditField from "../../common/EditField";
+import {useEffect, useState} from "react";
+import {Autocomplete, Card, CardContent, Grid, IconButton, TextField,} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
-import Archetype from "../../../models/actor/player/Archetype";
 import InfoIcon from "@mui/icons-material/Info";
-import ArchetypeBackdrop from "../../archetype/ArchetypeBackdrop";
 import * as React from "react";
 import CareerBackdrop from "../../career/CareerBackdrop";
 import EditIcon from "@mui/icons-material/Edit";
 import Player from "../../../models/actor/player/Player";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
+import Skill from "../../../models/actor/Skill";
 
 interface Props {
     player: Player
     onCommit: (value: Career) => void
+    onSkillSelect: (skills: Skill[]) => void
 }
 
 export default function CareerSelectCard(props: Props) {
-    const {player, onCommit} = props;
+    const {player, onCommit, onSkillSelect} = props;
     const [careers, setCareers] = useState<Career[]>([]);
     const [openCareerBackDrop, setOpenCareerBackDrop] = useState(false);
     const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false);
@@ -63,8 +52,8 @@ export default function CareerSelectCard(props: Props) {
                             </IconButton>
                             {openCareerSkillDialog &&
                                 <CareerSkillSelectDialog open={openCareerSkillDialog}
-                                                onClose={(): void => setOpenCareerSkillDialog(false)}
-                                                player={player}/>}
+                                                         onClose={(): void => setOpenCareerSkillDialog(false)}
+                                                         player={player} onSelect={onSkillSelect}/>}
                         </Grid>
                         <Grid item sx={{"width": .1}}>
                             <IconButton onClick={(): void => setOpenCareerBackDrop(true)}>
@@ -72,8 +61,8 @@ export default function CareerSelectCard(props: Props) {
                             </IconButton>
                             {openCareerBackDrop &&
                                 <CareerBackdrop open={openCareerBackDrop}
-                                                   onClose={(): void => setOpenCareerBackDrop(false)}
-                                                   career={player.career}/>}
+                                                onClose={(): void => setOpenCareerBackDrop(false)}
+                                                career={player.career}/>}
                         </Grid>
                     </Grid>
                 </CardContent>

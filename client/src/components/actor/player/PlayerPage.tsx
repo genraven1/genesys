@@ -1,5 +1,5 @@
 import {Card, CardContent, Divider, Grid} from '@mui/material';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import {ActorPath} from '../../../services/Path';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
@@ -16,12 +16,11 @@ import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWi
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
 import CareerSelectCard from "./CareerSelectCard";
+import Skill from "../../../models/actor/Skill";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
     const [player, setPlayer] = useState<Player | null>(null);
-    let pathname = useLocation().pathname;
-    let navigate = useNavigate();
 
     useEffect(() => {
         if (!id) {
@@ -38,13 +37,19 @@ export default function PlayerPage() {
 
     const handleArchetypeChange = async (value: Archetype) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayer({...player, archetype: value}));
+            setPlayer(await ActorService.updatePlayerArchetype(player.id, value));
         }
     };
 
     const handleCareerChange = async (value: Career) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayer({...player, career: value}));
+            setPlayer(await ActorService.updatePlayerCareer(player.id, value));
+        }
+    };
+
+    const handleCareerSkillChange = async (value: Skill[]) => {
+        if (player) {
+            setPlayer(await ActorService.updatePlayerCareerSkills(player.id, value));
         }
     };
 
@@ -55,7 +60,7 @@ export default function PlayerPage() {
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
                         <ArchetypeSelectCard defaultValue={player.archetype} onCommit={handleArchetypeChange}/>
-                        <CareerSelectCard player={player} onCommit={handleCareerChange}/>
+                        <CareerSelectCard player={player} onCommit={handleCareerChange} onSkillSelect={handleCareerSkillChange}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>

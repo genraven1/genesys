@@ -9,9 +9,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
-import Career from "../../../models/actor/player/Career";
-import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
-import Skill from "../../../models/actor/Skill";
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
 import CharacteristicRow from "../common/CharacteristicRow";
@@ -25,7 +22,6 @@ interface Props {
 export default function PlayerEdit(props: Props) {
     const {play} = props
     const [player, setPlayer] = useState<Player>(play)
-    const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false)
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -60,20 +56,6 @@ export default function PlayerEdit(props: Props) {
         await updatePlayer(player)
     }
 
-    const onCareerChange = async (value: Career) => {
-        player.career = value
-        player.skills.forEach((playerSkill, index) => {
-            player.career.skills.forEach((skill: Skill) => {
-                if (skill.name === playerSkill.name) {
-                    playerSkill.career = true
-                    player.skills[index] = playerSkill
-                }
-            })
-        })
-        setOpenCareerSkillDialog(true)
-        await updatePlayer(player)
-    }
-
     const updatePlayer = async (copyPlayer: Player) => {
         copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
@@ -98,9 +80,6 @@ export default function PlayerEdit(props: Props) {
                             onArchetypeChange(value)
                         }}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
-                        {openCareerSkillDialog && <CareerSkillSelectDialog open={openCareerSkillDialog}
-                                                                           onClose={(): void => setOpenCareerSkillDialog(false)}
-                                                                           player={player}/>}
                     </Grid>
                     <Divider/>
                     <CharacteristicRow actor={player}/>

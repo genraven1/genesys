@@ -16,6 +16,9 @@ public class ActorRouter {
                 .path("/players", builder -> builder
                         .GET("/{name}", actorHandler::getPlayer)
                         .PUT("/{name}", actorHandler::updatePlayer)
+                        .PATCH("/{id}/careers/", actorHandler::updatePlayerCareer)
+                        .PATCH("/{id}/careers/skills/", actorHandler::updatePlayerCareerSkills)
+                        .PATCH("/{id}/archetypes/", actorHandler::updatePlayerArchetype)
                 )
                 .path("/campaigns/{name}", builder -> builder
                         .GET("/players/", actorHandler::getAllPlayers)

@@ -8,18 +8,17 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import ActorService from "../../../../services/ActorService";
 import TableCell from "@mui/material/TableCell";
-import CareerService from "../../../../services/CareerService";
 
 interface Props {
     open: boolean
+    onSelect: (skills: Skill[]) => void
     onClose: () => void
     player: Player
 }
 
 export default function CareerSkillSelectDialog(props: Props) {
-    const {open, onClose, player} = props
+    const {open, onClose, onSelect, player} = props;
     const skills = player.career.skills;
     const [selectedSkills, setSelectedSkills] = useState<Skill[]>([]);
 
@@ -35,8 +34,9 @@ export default function CareerSkillSelectDialog(props: Props) {
     const isSelected = (skill: Skill) => selectedSkills.some(selectedSkill => selectedSkill.name === skill.name);
 
     const handleSelect = async (): Promise<void> => {
-        onClose()
-    }
+        onSelect(selectedSkills);
+        onClose();
+    };
 
     return (
         <Dialog open={open} onClose={onClose} fullWidth>

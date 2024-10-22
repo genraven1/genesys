@@ -4,12 +4,16 @@ import com.github.genraven.genesys.domain.actor.Actor;
 import com.github.genraven.genesys.domain.actor.npc.Minion;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
+import com.github.genraven.genesys.domain.actor.player.Archetype;
+import com.github.genraven.genesys.domain.actor.player.Career;
 import com.github.genraven.genesys.domain.actor.player.Player;
+import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.service.actor.MinionService;
 import com.github.genraven.genesys.service.actor.NemesisService;
 import com.github.genraven.genesys.service.actor.PlayerService;
 import com.github.genraven.genesys.service.actor.RivalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -18,7 +22,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.List;
 
+import static com.github.genraven.genesys.constants.CommonConstants.ID;
 import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
@@ -69,6 +75,39 @@ public class ActorHandler {
         final Mono<Player> playerMono = serverRequest.bodyToMono(Player.class);
         return playerMono
                 .flatMap(player -> playerService.updatePlayer(name, player))
+                .flatMap(player -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updatePlayerCareer(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<Career> careerMono = serverRequest.bodyToMono(Career.class);
+        return careerMono
+                .flatMap(career -> playerService.updatePlayerCareer(id, career))
+                .flatMap(player -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updatePlayerCareerSkills(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<List<Skill>> skillsMono = serverRequest.bodyToMono(new ParameterizedTypeReference<List<Skill>>() {});
+        return skillsMono
+                .flatMap(skills -> playerService.updatePlayerCareerSkills(id, skills))
+                .flatMap(player -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updatePlayerArchetype(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<Archetype> archetypeMono = serverRequest.bodyToMono(Archetype.class);
+        return archetypeMono
+                .flatMap(archetype -> playerService.updatePlayerArchetype(id, archetype))
                 .flatMap(player -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(player)))

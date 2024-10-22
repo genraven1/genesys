@@ -56,4 +56,15 @@ public class Player extends Actor {
         }
         this.setSoak(soak);
     }
+
+    public void getTotalEncumbrance() {
+        int encumbrance = getBrawn() + 5;
+        this.setEncumbrance(encumbrance);
+    }
+
+    public void updateAvailableExperience(final int experience) {
+        Experience oldExperience = getExperience();
+        oldExperience.setAvailable(experience);
+        this.experience = oldExperience;
+    }
 }
