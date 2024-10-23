@@ -1,7 +1,7 @@
 import {Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useState} from "react";
 import Skill from "../../../../models/actor/Skill";
-import Player from "../../../../models/actor/player/Player";
+import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,7 +12,7 @@ import TableCell from "@mui/material/TableCell";
 
 interface Props {
     open: boolean
-    onSelect: (skills: Skill[]) => void
+    onSelect: (skills: PlayerSkill[]) => void
     onClose: () => void
     player: Player
 }
@@ -34,7 +34,11 @@ export default function CareerSkillSelectDialog(props: Props) {
     const isSelected = (skill: Skill) => selectedSkills.some(selectedSkill => selectedSkill.name === skill.name);
 
     const handleSelect = async (): Promise<void> => {
-        onSelect(selectedSkills);
+        let playerSkills: PlayerSkill[] = [];
+        for (let skill of selectedSkills) {
+            playerSkills = playerSkills.concat({ ...skill, career: true, ranks: 1 });
+        }
+        onSelect(playerSkills);
         onClose();
     };
 

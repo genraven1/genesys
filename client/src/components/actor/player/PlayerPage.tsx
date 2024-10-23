@@ -1,6 +1,6 @@
 import {Card, CardContent, Divider, Grid} from '@mui/material';
 import {useParams} from 'react-router-dom';
-import Player from '../../../models/actor/player/Player';
+import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import {ActorPath} from '../../../services/Path';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";
@@ -16,7 +16,6 @@ import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWi
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
 import CareerSelectCard from "./CareerSelectCard";
-import Skill from "../../../models/actor/Skill";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -47,7 +46,7 @@ export default function PlayerPage() {
         }
     };
 
-    const handleCareerSkillChange = async (value: Skill[]) => {
+    const handleCareerSkillChange = async (value: PlayerSkill[]) => {
         if (player) {
             setPlayer(await ActorService.updatePlayerCareerSkills(player.id, value));
         }

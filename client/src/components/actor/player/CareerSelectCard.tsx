@@ -7,14 +7,13 @@ import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
 import CareerBackdrop from "../../career/CareerBackdrop";
 import EditIcon from "@mui/icons-material/Edit";
-import Player from "../../../models/actor/player/Player";
+import Player, {PlayerSkill} from "../../../models/actor/player/Player";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
-import Skill from "../../../models/actor/Skill";
 
 interface Props {
     player: Player
     onCommit: (value: Career) => void
-    onSkillSelect: (skills: Skill[]) => void
+    onSkillSelect: (skills: PlayerSkill[]) => void
 }
 
 export default function CareerSelectCard(props: Props) {

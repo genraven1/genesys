@@ -1,5 +1,5 @@
 import axios from "axios";
-import Player from "../models/actor/player/Player";
+import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import {ActorPath, CampaignPath, RootPath} from "./Path";
 import Rival from "../models/actor/npc/Rival";
@@ -8,7 +8,6 @@ import Minion from "../models/actor/npc/Minion";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
 import Career from "../models/actor/player/Career";
 import Archetype from "../models/actor/player/Archetype";
-import Skill from "../models/actor/Skill";
 
 export default class ActorService {
 
@@ -89,7 +88,7 @@ export default class ActorService {
             })
     }
 
-    static async updatePlayerCareerSkills(playerId: string, skills: Skill[]): Promise<Player> {
+    static async updatePlayerCareerSkills(playerId: string, skills: PlayerSkill[]): Promise<Player> {
         return await fetch(ActorPath.Player + `${playerId}` + RootPath.Career + 'skills/', {
             method: "PATCH",
             body: JSON.stringify(skills),

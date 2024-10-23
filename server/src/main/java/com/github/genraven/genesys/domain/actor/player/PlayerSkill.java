@@ -1,6 +1,5 @@
 package com.github.genraven.genesys.domain.actor.player;
 
-import com.github.genraven.genesys.domain.actor.ActorSkill;
 import com.github.genraven.genesys.domain.skill.Skill;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

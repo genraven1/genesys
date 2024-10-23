@@ -7,6 +7,7 @@ import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.actor.player.Archetype;
 import com.github.genraven.genesys.domain.actor.player.Career;
 import com.github.genraven.genesys.domain.actor.player.Player;
+import com.github.genraven.genesys.domain.actor.player.PlayerSkill;
 import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.service.actor.MinionService;
 import com.github.genraven.genesys.service.actor.NemesisService;
@@ -94,7 +95,8 @@ public class ActorHandler {
 
     public Mono<ServerResponse> updatePlayerCareerSkills(final ServerRequest serverRequest) {
         final String id = serverRequest.pathVariable(ID);
-        final Mono<List<Skill>> skillsMono = serverRequest.bodyToMono(new ParameterizedTypeReference<List<Skill>>() {});
+        final Mono<List<PlayerSkill>> skillsMono = serverRequest.bodyToMono(new ParameterizedTypeReference<>() {
+        });
         return skillsMono
                 .flatMap(skills -> playerService.updatePlayerCareerSkills(id, skills))
                 .flatMap(player -> ServerResponse.ok()

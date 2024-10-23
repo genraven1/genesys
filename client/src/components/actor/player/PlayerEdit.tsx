@@ -1,6 +1,6 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import Player, {Experience, PlayerSkill} from '../../../models/actor/player/Player';
+import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
 import {ActorPath} from '../../../services/Path';
 import * as React from 'react';
@@ -9,8 +9,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
-import ArchetypeSelectCard from "./ArchetypeSelectCard";
-import Archetype from "../../../models/actor/player/Archetype";
 import CharacteristicRow from "../common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
@@ -37,25 +35,6 @@ export default function PlayerEdit(props: Props) {
         await updatePlayer(player)
     }
 
-    const onArchetypeChange = async (archetype: Archetype) => {
-        player.archetype = archetype
-        player.brawn = archetype.brawn
-        player.agility = archetype.agility
-        player.intellect = archetype.intellect
-        player.cunning = archetype.cunning
-        player.willpower = archetype.willpower
-        player.presence = archetype.presence
-        player.wounds = archetype.wounds + archetype.brawn
-        player.strain = archetype.strain + archetype.willpower
-        player.experience = {total: archetype.experience, available: archetype.experience} as Experience
-        player.skills.forEach((playerSkill) => {
-            if (archetype.skill.name === playerSkill.name) {
-                playerSkill.ranks = 1
-            }
-        })
-        await updatePlayer(player)
-    }
-
     const updatePlayer = async (copyPlayer: Player) => {
         copyPlayer.encumbrance = 5 + copyPlayer.brawn
         setPlayer(copyPlayer)
@@ -76,9 +55,6 @@ export default function PlayerEdit(props: Props) {
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <ArchetypeSelectCard defaultValue={player.archetype} onCommit={(value: Archetype): void => {
-                            onArchetypeChange(value)
-                        }}/>
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>
