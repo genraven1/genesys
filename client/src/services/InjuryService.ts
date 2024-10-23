@@ -1,4 +1,4 @@
-import {RootPath} from "./Path";
+import {RootPath} from "./RootPath";
 import Injury from "../models/Injury";
 
 export default class InjuryService {

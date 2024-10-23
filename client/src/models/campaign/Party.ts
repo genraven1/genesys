@@ -1,5 +1,8 @@
-import Character from "../character/Character";
+import Player from "../actor/player/Player";
+import NonPlayerActor from "../actor/npc/NonPlayerActor";
 
 export default interface Party {
-    characters: Character[]
+    party_id: number
+    players: Player[]
+    npcs: NonPlayerActor[]
 }

@@ -8,7 +8,7 @@ import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import {Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
 import Player from "../../../../../models/actor/player/Player";
-import ArmorBackdrop from "../../../common/equipment/ArmorBackdrop";
+import ArmorBackdrop from "../../../../../../client/src/components/actor/common/common/equipment/ArmorBackdrop";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import ActorService from "../../../../../services/ActorService";

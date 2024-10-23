@@ -5,7 +5,6 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import {EquipmentQuality} from "../../../models/Quality";
-import {Weapon} from "../../../models/equipment/Weapon";
 import {
     GenesysDescriptionTypographyCenterTableCell,
     TypographyCenterTableCell
@@ -39,7 +38,7 @@ export default function ArmorQualityTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Armor Special Qualities', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Armor Special Qualities')}
                 <TableBody>
                     {(armor.qualities || []).map((quality: EquipmentQuality) => (
                         <Row key={quality.name} quality={quality}/>

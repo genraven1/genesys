@@ -56,7 +56,7 @@ function Row(props: RowProps) {
             <TypographyCenterTableCell value={renderEquipped()}/>
             <TypographyCenterTableCell value={String(armor.defense)}/>
             <TypographyCenterTableCell value={renderSoak(armor)}/>
-            <TypographyCenterTableCell value={renderQualities(armor!!)}/>
+            <TypographyCenterTableCell value={renderQualities(armor.qualities)}/>
         </TableRow>
     )
 }

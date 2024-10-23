@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RootPath} from './Path';
+import {RootPath} from './RootPath';
 import Roll, {Results} from "../models/Roll";
 
 export default class RollService {

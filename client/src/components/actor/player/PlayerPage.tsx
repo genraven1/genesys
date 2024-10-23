@@ -1,21 +1,17 @@
 import {Card, CardContent, Divider, Grid} from '@mui/material';
 import {useParams} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
-import {ActorPath} from '../../../services/Path';
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
-import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 import {Fragment, useEffect, useState} from "react";
 import Career from "../../../models/actor/player/Career";
 import * as React from "react";
 import ActorService from "../../../services/ActorService";
 import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
-import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import Archetype from "../../../models/actor/player/Archetype";
-import CareerSelectCard from "./CareerSelectCard";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();

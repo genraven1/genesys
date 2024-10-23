@@ -25,7 +25,7 @@ export function SkillTypeGroup(props: GroupProps) {
 
     return (
         <Table>
-            {renderDoubleRowTableHeader(headers, type, 2)}
+            {renderDoubleRowTableHeader(headers, type)}
             <TableBody>
                 {(rival.skills || [])
                     .sort((a, b) => a.name.localeCompare(b.name))

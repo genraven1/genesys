@@ -7,7 +7,7 @@ import * as React from "react";
 import CustomRollDialog from "../roll/CustomRollDialog";
 import {useState} from "react";
 import HomeIcon from '@mui/icons-material/Home';
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {useNavigate} from "react-router-dom";
 
 export default function NavBar() {

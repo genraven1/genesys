@@ -1,5 +1,5 @@
 import Talent from "../models/Talent";
-import {RootPath} from "./Path";
+import {RootPath} from "../../client/src/services/RootPath";
 
 export default class TalentService {
 

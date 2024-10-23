@@ -11,11 +11,11 @@ import * as React from 'react';
 import ActorService from '../../../../services/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
-import {ActorPath} from "../../../../services/Path";
+import {ActorPath} from "../../../../../client/src/services/RootPath";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import CreateActorDialog from "../../common/CreateActorDialog";
+import CreateActorDialog from "../../../../../client/src/components/actor/common/common/CreateActorDialog";
 import {ActorType} from "../../../../models/actor/Actor";
 
 interface Props {

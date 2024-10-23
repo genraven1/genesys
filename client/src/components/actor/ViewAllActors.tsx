@@ -9,7 +9,7 @@ import * as React from 'react';
 import Actor, {ActorType} from "../../models/actor/Actor";
 import ActionsTableCell from "../common/table/ActionsTableCell";
 import ActorService from "../../services/ActorService";
-import {ActorPath} from "../../services/Path";
+import {ActorPath} from "../../services/RootPath";
 import {Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 

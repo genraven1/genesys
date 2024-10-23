@@ -1,4 +1,4 @@
-import {RootPath} from './Path';
+import {RootPath} from './RootPath';
 import Skill from '../models/actor/Skill';
 
 export default class SkillService {

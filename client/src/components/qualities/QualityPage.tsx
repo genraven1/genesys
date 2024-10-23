@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid,} from '@mui/material';
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Fragment, useEffect, useState} from "react";
 import Quality from "../../models/Quality";
 import QualityModifierCard from "./modifiers/QualityModifierCard";

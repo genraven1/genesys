@@ -30,7 +30,7 @@ export function SkillTypeGroup(props: GroupProps) {
 
     return (
         <Table>
-            {renderDoubleRowTableHeader(headers, type, headers.length)}
+            {renderDoubleRowTableHeader(headers, type)}
             <TableBody>
                 {(minion?.skills!! || [])
                     .sort((a, b) => a.name.localeCompare(b.name))

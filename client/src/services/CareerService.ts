@@ -1,4 +1,4 @@
-import {RootPath} from "./Path";
+import {RootPath} from "./RootPath";
 import Career from "../models/actor/player/Career";
 
 export default class careerService {

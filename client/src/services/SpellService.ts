@@ -1,4 +1,4 @@
-import {RootPath} from "./Path";
+import {RootPath} from "./RootPath";
 import Spell from "../models/spell/Spell";
 
 export default class SpellService {

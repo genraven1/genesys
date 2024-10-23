@@ -23,7 +23,7 @@ function Row(props: Props): JSX.Element {
     return (
         <TableRow key={ability.name}>
             <TypographyLeftTableCell value={ability.name}/>
-            <LimitTableCell limit={ability.limit}/>
+            <LimitTableCell limit={ability.limiter}/>
             <CostTableCell cost={ability.cost}/>
             <TypographyCenterTableCell value={ability.activation}/>
             <GenesysDescriptionTypographyCenterTableCell value={ability.description}/>
@@ -42,7 +42,7 @@ export default function ArchetypeAbilityTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Abilities', headers.length)}
+                {renderDoubleRowTableHeader(headers, 'Abilities')}
                 <TableBody>
                     {(archetype?.abilities!! || []).map((ability: Ability) => (
                         <Row ability={ability}/>

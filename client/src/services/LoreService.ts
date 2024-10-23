@@ -1,7 +1,7 @@
 import axios from "axios";
-import {LorePath, RootPath} from "./Path";
 import {Organization} from "../models/lore/Organization";
 import Lore from "../models/lore/Lore";
+import { LorePath, RootPath } from "./RootPath";
 
 
 export default class LoreService {

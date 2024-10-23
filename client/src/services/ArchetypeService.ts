@@ -1,4 +1,4 @@
-import {RootPath} from "./Path";
+import {RootPath} from "./RootPath";
 import Archetype from "../models/actor/player/Archetype";
 
 export default class ArchetypeService {

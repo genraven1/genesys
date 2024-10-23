@@ -1,7 +1,7 @@
 import Campaign from "../../models/campaign/Campaign";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import PartyCard from "./party/PartyCard";
+import PartyCard from "../../../../src/components/campaign/party/PartyCard";
 import {useState} from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";

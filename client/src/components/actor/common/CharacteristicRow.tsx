@@ -2,7 +2,7 @@ import Actor from "../../../models/actor/Actor";
 import {Grid} from "@mui/material";
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import * as React from "react";
-import {ViewCharacteristicCard} from "../CharacteristicCard";
+import {ViewCharacteristicCard} from "../../CharacteristicCard";
 import Player from "../../../models/actor/player/Player";
 import {useLocation} from "react-router-dom";
 import CharacteristicCard from "../../common/card/CharacteristicCard";

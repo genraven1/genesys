@@ -1,4 +1,4 @@
-import {RootPath} from "./Path";
+import {RootPath} from "./RootPath";
 import Quality from "../models/Quality";
 
 export default class QualityService {

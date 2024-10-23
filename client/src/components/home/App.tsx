@@ -1,7 +1,7 @@
 import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {ActorPath, CampaignPath, EquipmentPath, LorePath, RootPath} from '../../services/Path';
+import {ActorPath, CampaignPath, EquipmentPath, LorePath, RootPath} from '../../services/RootPath';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
 import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
@@ -13,7 +13,6 @@ import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
 import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
 import GearWorkflow from "../equipment/gear/GearWorkflow";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
-import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
@@ -22,9 +21,8 @@ import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
-import SessionWorkflow from "../campaign/session/SessionWorkflow";
-import SceneWorkflow from "../campaign/scene/SceneWorkflow";
 import HomeCampaignDashboard from "./HomeCampaignDashboard";
+import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 
 export default function App() {
 
@@ -104,18 +102,6 @@ export default function App() {
                     {/*Campaign Routes*/}
                     <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>
                     <Route path={CampaignPath.Campaign + ':id'} element={<CampaignWorkflow/>}/>
-
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session} element={<SessionWorkflow/>}/>
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/view'} element={<SessionWorkflow/>}/>
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + ':sessionName/edit'} element={<SessionWorkflow/>}/>
-
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene} element={<SceneWorkflow/>}/>
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/view'} element={<SceneWorkflow/>}/>
-                    <Route path={CampaignPath.Campaign + ':campaignName' + CampaignPath.Session + CampaignPath.Scene + ':name/edit'} element={<SceneWorkflow/>}/>
-
-                    {/*<Route path={Path.Scene} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/view'} element={<SceneWorkflow/>}/>*/}
-                    {/*<Route path={Path.Scene + ':name/edit'} element={<SceneWorkflow/>}/>*/}
                 </Routes>
             </HashRouter>
         </ThemeProvider>

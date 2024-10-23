@@ -1,13 +1,13 @@
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
-import {ActorPath} from '../../../services/Path';
 import EditIcon from "@mui/icons-material/Edit";
 import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
-import CharacteristicRow from "../common/CharacteristicRow";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
+import { ActorPath } from '../../../services/RootPath';
+import CharacteristicRow from "../common/CharacteristicRow";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 interface Props {

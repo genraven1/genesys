@@ -9,15 +9,15 @@ import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import Quality from "../../models/Quality";
 import GenesysQualityTypography from "../common/typography/GenesysQualityTypography";
 import QualityService from "../../services/QualityService";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
-import QualityDialog from "./QualityDialog";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {renderUsable} from "../../models/equipment/EquipmentHelper";
+import QualityDialog from "./CreateQualityDialog";
 
 export default function ViewAllQualities() {
     const [qualities, setQualities] = useState<Quality[]>([])

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
-import {ActorPath, CampaignPath, RootPath} from "./Path";
+import {ActorPath, CampaignPath, RootPath} from "../../client/src/services/RootPath";
 import Rival from "../models/actor/npc/Rival";
 import Actor from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";

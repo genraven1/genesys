@@ -1,8 +1,8 @@
 import {Fragment} from "react";
 import {useLocation} from "react-router-dom";
-import {ActorPath} from "../../../services/Path";
-import ViewAllPlayers from "./ViewAllPlayers";
+import {ActorPath} from "../../../services/RootPath";
 import PlayerPage from "./PlayerPage";
+import ViewAllPlayers from "./ViewAllPlayers";
 
 export default function PlayerWorkflow() {
     return (
