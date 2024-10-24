@@ -1,7 +1,6 @@
 import {Card, CardContent, Divider, Grid} from '@mui/material';
-import {useParams} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
-import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import CharacteristicRow from "../common/CharacteristicRow";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
@@ -16,10 +15,12 @@ import {ActorPath} from "../../../services/RootPath";
 import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import CareerSelectCard from "./CareerSkillCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
+import PlayerSkillCard from "./skill/PlayerSkillCard";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
     const [player, setPlayer] = useState<Player | null>(null);
+    let pathname = useLocation().pathname
 
     useEffect(() => {
         if (!id) {
@@ -52,14 +53,24 @@ export default function PlayerPage() {
         }
     };
 
+    const renderArchetypeCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Archetype"} value={player.archetype.name}/> :
+            <ArchetypeSelectCard archetype={player.archetype} onCommit={handleArchetypeChange}/>;
+    }
+
+    const renderCareerCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Career"} value={player.career.name}/> :
+            <CareerSelectCard player={player} onCommit={handleCareerChange} onSkillSelect={handleCareerSkillChange}/>;
+    }
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={player.name} path={ActorPath.Player + player.id}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <Grid container spacing={2}>
-                        <ArchetypeSelectCard defaultValue={player.archetype} onCommit={handleArchetypeChange}/>
-                        <CareerSelectCard player={player} onCommit={handleCareerChange} onSkillSelect={handleCareerSkillChange}/>
+                        {renderArchetypeCard()}
+                        {renderCareerCard()}
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
                     </Grid>
                     <Divider/>
@@ -67,7 +78,7 @@ export default function PlayerPage() {
                     <Divider/>
                     <DerivedPlayerStatsRow player={player}/>
                     <Divider/>
-                    <ViewPlayerSkillTable player={player}/>
+                    <PlayerSkillCard player={player}/>
                     <Divider/>
                     <PlayerEquipmentCard player={player}/>
                     <Divider/>

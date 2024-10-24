@@ -18,8 +18,8 @@ function useFetchRival(name: string): Rival {
 }
 
 export default function RivalWorkflow() {
-    const {name} = useParams<{ name: string }>()
-    const rival = useFetchRival(name as string)
+    const {id} = useParams<{ id: string }>()
+    const rival = useFetchRival(id as string)
 
     const useWorkflowRender = () => {
         const pathname = useLocation().pathname

@@ -2,13 +2,13 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player from '../../../models/actor/player/Player';
 import EditIcon from "@mui/icons-material/Edit";
-import ViewPlayerSkillTable from './skill/ViewPlayerSkills';
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import { ActorPath } from '../../../services/RootPath';
 import CharacteristicRow from "../common/CharacteristicRow";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
+import PlayerSkillCard from "./skill/PlayerSkillCard";
 
 interface Props {
     player: Player
@@ -43,7 +43,7 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <DerivedPlayerStatsRow player={player}/>
                     <Divider/>
-                    <ViewPlayerSkillTable player={player}/>
+                    <PlayerSkillCard player={player}/>
                     <Divider/>
                     <PlayerEquipmentCard player={player}/>
                     <Divider/>
