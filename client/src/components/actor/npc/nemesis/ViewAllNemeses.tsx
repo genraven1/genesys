@@ -11,12 +11,12 @@ import * as React from 'react';
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import ActorService from '../../../../services/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
-import {ActorPath} from "../../../../../client/src/services/RootPath";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import CreateActorDialog from "../../../../../client/src/components/actor/common/common/CreateActorDialog";
 import {ActorType} from "../../../../models/actor/Actor";
+import {ActorPath} from "../../../../services/RootPath";
+import CreateActorDialog from "../../common/CreateActorDialog";
 
 interface Props {
     nemesis: Nemesis

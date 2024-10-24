@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
 import EquipmentService from '../../../services/EquipmentService';
-import {EquipmentPath} from '../../../services/Path';
+import {EquipmentPath} from "../../../services/RootPath";
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import Skill from "../../../models/actor/Skill";
 import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";

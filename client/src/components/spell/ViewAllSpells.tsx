@@ -2,7 +2,7 @@ import {Fragment, useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/Path";
+
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -16,6 +16,7 @@ import * as React from "react";
 import Spell from "../../models/spell/Spell";
 import SpellService from "../../services/SpellService";
 import CreateSpellDialog from "./CreateSpellDialog";
+import {RootPath} from "../../services/RootPath";
 
 interface Props {
     spell: Spell

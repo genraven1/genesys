@@ -12,7 +12,7 @@ import {Armor} from "../../../models/equipment/Armor";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from '../../common/table/TableRenders';
 import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';

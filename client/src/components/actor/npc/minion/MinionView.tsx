@@ -5,16 +5,16 @@ import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
-import {ActorPath} from "../../../../../client/src/services/RootPath";
 import Minion from "../../../../models/actor/npc/Minion";
-import CharacteristicRow from "../../../../../client/src/components/actor/common/common/CharacteristicRow";
 import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
-import {ViewStatsCard} from "../../../../../client/src/components/actor/StatsCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import MinionAbilityCard from "./ability/MinionAbilityCard";
 import MinionEquipmentCard from "./equipment/MinionEquipmentCard";
 import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
+import {ActorPath} from "../../../../services/RootPath";
+import CharacteristicRow from "../../common/CharacteristicRow";
+import { ViewStatsCard } from "../../StatsCard";
 
 interface Props {
     minion: Minion

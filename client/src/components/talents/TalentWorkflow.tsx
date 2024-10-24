@@ -2,7 +2,8 @@ import {Fragment} from "react";
 import {useLocation} from "react-router-dom";
 import ViewAllTalents from "./ViewAllTalents";
 import TalentPage from "./TalentPage";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
+
 
 export default function TalentWorkflow() {
     return (

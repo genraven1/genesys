@@ -8,11 +8,11 @@ import * as React from 'react';
 import Skill from "../../models/actor/Skill";
 import SkillService from "../../services/SkillService";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/Path";
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateSkillDialog from "./CreateSkillDialog";
+import {RootPath} from "../../services/RootPath";
 
 export default function ViewAllSkills() {
     const [skills, setSkills] = useState<Skill[]>([])

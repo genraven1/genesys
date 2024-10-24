@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
 import ArchetypeService from "../../services/ArchetypeService";
 import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";

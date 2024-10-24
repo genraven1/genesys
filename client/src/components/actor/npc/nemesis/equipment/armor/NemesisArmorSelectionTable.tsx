@@ -9,9 +9,9 @@ import {Button} from "@mui/material";
 import Nemesis from "../../../../../../models/actor/npc/Nemesis";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
 import {Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import ArmorBackdrop from "../../../../../../../client/src/components/actor/common/common/equipment/ArmorBackdrop";
 import EquipmentService from "../../../../../../services/EquipmentService";
 import ActorService from "../../../../../../services/ActorService";
+import ArmorBackdrop from "../../../../common/equipment/ArmorBackdrop";
 
 interface RowProps {
     armor: Armor

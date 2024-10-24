@@ -2,7 +2,7 @@ import Injury from "../../models/Injury";
 import {Card, CardContent, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import CriticalInjuryModifierCard from "./modifiers/CriticalInjuryModifierCard";
 import {Fragment, useEffect, useState} from "react";
 import InjuryService from "../../services/InjuryService";

@@ -4,7 +4,7 @@ import Campaign from "../../models/campaign/Campaign";
 import CampaignService from "../../services/CampaignService";
 import ViewAllCampaigns from "./ViewAllCampaigns";
 import CampaignPage from "./CampaignPage";
-import {CampaignPath} from "../../services/Path";
+import {CampaignPath} from "../../services/RootPath";
 
 export function useFetchCampaign(id: string): Campaign {
     const [campaign, setCampaign] = useState<Campaign>();

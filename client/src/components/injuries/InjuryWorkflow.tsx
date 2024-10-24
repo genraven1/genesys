@@ -1,7 +1,7 @@
 import {Fragment} from "react";
 import {useLocation} from "react-router-dom";
 import ViewAllInjuries from "./ViewAllInjuries";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import InjuryPage from "./InjuryPage";
 
 export default function InjuryWorkflow() {

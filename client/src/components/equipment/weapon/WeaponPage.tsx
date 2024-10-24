@@ -3,7 +3,7 @@ import * as React from "react";
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {Weapon} from "../../../models/equipment/Weapon";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import EquipmentService from "../../../services/EquipmentService";
 import Skill, {SkillType} from "../../../models/actor/Skill";
 import {useFetchSkillsByType} from "../../skills/SkillWorkflow";

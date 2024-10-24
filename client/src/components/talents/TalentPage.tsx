@@ -2,7 +2,7 @@ import {Card, CardContent, Grid} from '@mui/material';
 import Talent, {Activation, Tier} from "../../models/Talent";
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {RootPath} from "../../services/Path";
+
 import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import TalentService from "../../services/TalentService";
@@ -12,6 +12,7 @@ import ActivationCard from "../common/card/select/ActivationCard";
 import TierCard from "../common/card/select/TierCard";
 import {TextFieldCard} from "../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../common/card/BooleanTextFieldCard";
+import {RootPath} from "../../services/RootPath";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();

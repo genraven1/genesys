@@ -12,6 +12,10 @@ import * as React from "react";
 import ActorService from "../../../services/ActorService";
 import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
 import Archetype from "../../../models/actor/player/Archetype";
+import {ActorPath} from "../../../services/RootPath";
+import ArchetypeSelectCard from "./ArchetypeSelectCard";
+import CareerSelectCard from "./CareerSkillCard";
+import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();

@@ -1,4 +1,3 @@
-import {ActorPath} from "../../../client/src/services/RootPath";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
@@ -6,6 +5,7 @@ import CreateActorDialog from "../actor/common/CreateActorDialog";
 import ExpansionList from "../navigation/ExpansionList";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import {ActorType} from "../../models/actor/Actor";
+import {ActorPath} from "../../services/RootPath";
 
 export default function ActorDashboard() {
     const [openMinionCreationDialog, setOpenMinionCreationDialog] = useState(false)

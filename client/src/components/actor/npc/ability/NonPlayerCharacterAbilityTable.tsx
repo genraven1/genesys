@@ -38,7 +38,7 @@ export default function NonPlayerCharacterAbilityTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Abilities')}
+                {renderDoubleRowTableHeader(headers, 'Abilities', 1)}
                 <TableBody>
                     {(npc?.abilities!! || []).map((ability: Ability) => (
                         <Row key={ability.name} ability={ability}/>

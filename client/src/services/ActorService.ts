@@ -1,13 +1,13 @@
 import axios from "axios";
 import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
-import {ActorPath, CampaignPath, RootPath} from "../../client/src/services/RootPath";
 import Rival from "../models/actor/npc/Rival";
 import Actor from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
 import Career from "../models/actor/player/Career";
 import Archetype from "../models/actor/player/Archetype";
+import {ActorPath, CampaignPath, RootPath} from "./RootPath";
 
 export default class ActorService {
 

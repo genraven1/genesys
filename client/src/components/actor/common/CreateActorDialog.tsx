@@ -2,7 +2,7 @@ import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/m
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ActorService from "../../../services/ActorService";
-import {ActorPath} from "../../../services/Path";
+import {ActorPath} from "../../../services/RootPath";
 import {ActorType, getActorTypes} from "../../../models/actor/Actor";
 import InputSelectField from "../../common/InputSelectField";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";

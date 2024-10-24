@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid} from '@mui/material';
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import Career from '../../models/actor/player/Career';
 import {Fragment, useEffect, useState} from "react";
 import CareerService from '../../services/CareerService';

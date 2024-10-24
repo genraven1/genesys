@@ -11,11 +11,13 @@ import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/Path";
+
 import {renderSingleRowTableHeader} from "../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
-import TalentDialog from "./TalentDialog";
+
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
+import {RootPath} from "../../services/RootPath";
+import TalentDialog from "./CreateTalentDialog";
 
 interface Props {
     talent: Talent

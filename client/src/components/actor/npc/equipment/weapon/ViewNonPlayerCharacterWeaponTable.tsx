@@ -100,7 +100,7 @@ function Row(props: RowProps) {
             <TypographyCenterTableCell value={renderActorDamage(weapon, npc.brawn)}/>
             <TypographyCenterTableCell value={String(weapon.critical)}/>
             <TypographyCenterTableCell value={weapon.range}/>
-            <TypographyCenterTableCell value={renderQualities(weapon.qualities)}/>
+            <TypographyCenterTableCell value={renderQualities(weapon)}/>
             <GenesysDicePoolCenterTableCell actor={npc} skill={getActorSkill()}/>
         </TableRow>
     )

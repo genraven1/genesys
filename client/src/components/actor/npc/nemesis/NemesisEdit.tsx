@@ -6,18 +6,18 @@ import ActorService from "../../../../services/ActorService"
 import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/character/Characteristic"
 import {StatsType} from "../../../../models/actor/Stats"
-import {EditCharacteristicCard} from "../../../../../client/src/components/actor/CharacteristicCard"
 import RatingCard from "../RatingCard"
 import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor"
 import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard"
-import {EditStatsCard} from "../../../../../client/src/components/actor/StatsCard"
-import {ActorPath} from "../../../../../client/src/services/RootPath"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
 import NemesisSkillCard from "./skill/NemesisSkillCard";
 import NemesisTalentCard from "./talent/NemesisTalentCard";
 import NemesisEquipmentCard from "./equipment/NemesisEquipmentCard";
 import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
+import {ActorPath} from "../../../../services/RootPath";
+import {EditCharacteristicCard} from "../../CharacteristicCard";
+import {EditStatsCard} from "../../StatsCard";
 
 interface Props {
     nem: Nemesis

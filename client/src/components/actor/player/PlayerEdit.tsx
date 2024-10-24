@@ -2,7 +2,7 @@ import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from '@mui/mat
 import {useNavigate} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import ActorService from '../../../services/ActorService';
-import {ActorPath} from '../../../services/Path';
+import {ActorPath} from '../../../services/RootPath';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import CheckIcon from "@mui/icons-material/Check";

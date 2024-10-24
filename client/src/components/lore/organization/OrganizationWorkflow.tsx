@@ -1,5 +1,5 @@
 import {useLocation, useParams} from "react-router-dom";
-import {LorePath} from "../../../../client/src/services/RootPath";
+import {LorePath} from "../../../services/RootPath";
 import {Organization} from "../../../models/lore/Organization";
 import {Fragment, useEffect, useState} from "react";
 import LoreService from "../../../services/LoreService";

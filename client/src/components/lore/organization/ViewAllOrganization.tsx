@@ -2,7 +2,6 @@ import {Organization} from "../../../models/lore/Organization";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
-import {LorePath} from "../../../../client/src/services/RootPath";
 import LoreService from "../../../services/LoreService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -14,6 +13,7 @@ import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import LoreCreationDialog from "../common/LoreCreationDialog";
 import {LoreType} from "../../../models/lore/Lore";
+import {LorePath} from "../../../services/RootPath";
 
 interface RowProps {
     organization: Organization

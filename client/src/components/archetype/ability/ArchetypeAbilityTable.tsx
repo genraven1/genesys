@@ -42,7 +42,7 @@ export default function ArchetypeAbilityTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Abilities')}
+                {renderDoubleRowTableHeader(headers, 'Abilities', 1)}
                 <TableBody>
                     {(archetype?.abilities!! || []).map((ability: Ability) => (
                         <Row ability={ability}/>

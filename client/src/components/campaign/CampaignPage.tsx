@@ -1,7 +1,6 @@
 import Campaign from "../../models/campaign/Campaign";
 import {Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
-import PartyCard from "../../../../src/components/campaign/party/PartyCard";
 import {useState} from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -9,6 +8,7 @@ import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import ViewCampaignTalents from "./talents/ViewCampaignTalents";
 import ViewCampaignSkills from "./skill/ViewCampaignSkills";
+import PartyCard from "./party/PartyCard";
 
 interface Props {
     campaign: Campaign

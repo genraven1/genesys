@@ -12,12 +12,12 @@ import {Gear} from "../../../models/equipment/Gear";
 import EquipmentService from "../../../services/EquipmentService";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {EquipmentPath} from "../../../../client/src/services/RootPath";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
 import {EquipmentType} from "../../../models/equipment/Equipment";
 import {renderPrice} from "../../../models/equipment/EquipmentHelper";
+import {EquipmentPath} from "../../../services/RootPath";
 
 interface Props {
     gear: Gear

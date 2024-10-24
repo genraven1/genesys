@@ -5,16 +5,16 @@ import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 import EditIcon from "@mui/icons-material/Edit";
-import {ActorPath} from "../../../../../client/src/services/RootPath";
 import Rival from "../../../../models/actor/npc/Rival";
-import CharacteristicRow from "../../../../../client/src/components/actor/common/common/CharacteristicRow";
 import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
-import {ViewStatsCard} from "../../../../../client/src/components/actor/StatsCard";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
 import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
 import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
+import {ActorPath} from "../../../../services/RootPath";
+import CharacteristicRow from "../../common/CharacteristicRow";
+import {ViewStatsCard} from "../../StatsCard";
 
 interface Props {
     rival: Rival

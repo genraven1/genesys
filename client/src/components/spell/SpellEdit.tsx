@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Difficulty, getDifficultyOptions} from "../../models/common/Difficulty";
-import {RootPath} from "../../services/Path";
 import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import {InputTextFieldCard} from "../common/InputTextFieldCard";
@@ -13,6 +12,7 @@ import CheckButtonCard from "../common/CheckButtonCard";
 import SkillService from "../../services/SkillService";
 import SpellEffectCard from "./effect/SpellEffectCard";
 import SpellSkillCard from "./SpellSkillCard";
+import {RootPath} from "../../services/RootPath";
 
 interface Props {
     sp: Spell
@@ -100,7 +100,8 @@ export default function SpellEdit(props: Props): JSX.Element {
                                          }}/>
                     </Grid>
                     <Grid container spacing={2}>
-                        <SpellSkillCard spell={spell} onSkillAddition={onSkillAddition} onSkillRemoval={onSkillRemoval}/>
+                        <SpellSkillCard spell={spell} onSkillAddition={onSkillAddition}
+                                        onSkillRemoval={onSkillRemoval}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <SpellEffectCard spell={spell}/>

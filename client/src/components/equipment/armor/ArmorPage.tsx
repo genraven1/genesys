@@ -2,7 +2,7 @@ import {Card, CardContent, Grid,} from '@mui/material';
 import {useLocation, useParams} from 'react-router-dom';
 import * as React from 'react';
 import {Armor} from "../../../models/equipment/Armor";
-import {EquipmentPath} from "../../../services/Path";
+import {EquipmentPath} from "../../../services/RootPath";
 import {Fragment, useEffect, useState} from "react";
 import EquipmentService from "../../../services/EquipmentService";
 import ArmorModifierCard from "./modifier/ArmorModifierCard";

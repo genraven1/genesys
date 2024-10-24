@@ -62,24 +62,11 @@ export default function PlayerWeaponTable(props: Props) {
     }
 
     return (
-<<<<<<< HEAD:client/src/components/actor/player/equipment/weapon/PlayerWeaponTable.tsx
         <TableContainer component={Paper}>
             <Table>
                 {renderSingleRowTableHeader(headers)}
                 {renderTableBody()}
             </Table>
         </TableContainer>
-=======
-        <TableRow>
-            <TypographyCenterTableCell value={weapon.name}/>
-            <TypographyCenterTableCell value={renderEquipped()}/>
-            <TypographyCenterTableCell value={weapon.skill.name}/>
-            <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn)}/>
-            <TypographyCenterTableCell value={String(weapon.critical)}/>
-            <TypographyCenterTableCell value={weapon.range}/>
-            <TypographyCenterTableCell value={renderQualities(weapon.qualities)}/>
-            <GenesysDicePoolCenterTableCell actor={player} skill={getActorSkill()}/>
-        </TableRow>
->>>>>>> master:src/components/actor/player/equipment/weapon/PlayerWeaponTable.tsx
     )
 }

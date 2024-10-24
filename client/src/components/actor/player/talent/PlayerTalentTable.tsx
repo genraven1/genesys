@@ -40,7 +40,7 @@ export default function PlayerTalentTable(props: TableProps) {
     return (
         <TableContainer component={Paper}>
             <Table>
-                {renderDoubleRowTableHeader(headers, 'Talents')}
+                {renderDoubleRowTableHeader(headers, 'Talents', 1)}
                 <TableBody>
                     {(player.talents || []).map((talent: ActorTalent) => (
                         <Row key={talent.name} talent={talent}/>

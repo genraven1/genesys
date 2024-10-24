@@ -1,7 +1,7 @@
 import {useLocation} from "react-router-dom";
 import {Fragment} from "react";
 import ViewAllArchetypes from "./ViewAllArchetypes";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import ArchetypePage from "./ArchetypePage";
 
 export default function ArchetypeWorkflow() {

@@ -1,6 +1,6 @@
 import Skill, {SkillType} from "../../models/actor/Skill";
 import {Card, CardContent, Grid} from "@mui/material";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";

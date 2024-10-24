@@ -1,16 +1,16 @@
-import {RootPath} from "../../services/Path";
 import {Card, CardContent, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import TalentDialog from "../talents/TalentDialog";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import QualityDialog from "../qualities/QualityDialog";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
 import CareerDialog from "../career/CareerDialog";
 import ArchetypeDialog from "../archetype/ArchetypeDialog";
+import {RootPath} from "../../services/RootPath";
+import TalentDialog from "../talents/CreateTalentDialog";
+import QualityDialog from "../qualities/CreateQualityDialog";
 
 export default function MainDashboard() {
     const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)

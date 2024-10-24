@@ -11,7 +11,7 @@ import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import {EditStatsCard} from "../../StatsCard";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
-import {ActorPath} from "../../../../services/Path";
+import {ActorPath} from "../../../../services/RootPath";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
 import RivalSkillCard from "./skill/RivalSkillCard";

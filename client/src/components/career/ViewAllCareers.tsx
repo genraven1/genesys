@@ -2,7 +2,7 @@ import {Fragment, useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/Path";
+import {RootPath} from "../../services/RootPath";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";

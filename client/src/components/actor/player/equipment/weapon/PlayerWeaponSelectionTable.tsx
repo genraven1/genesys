@@ -7,11 +7,11 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import {Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
-import WeaponBackdrop from "../../../../../../client/src/components/actor/common/common/equipment/WeaponBackdrop";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import Player from "../../../../../models/actor/player/Player";
 import ActorService from "../../../../../services/ActorService";
+import WeaponBackdrop from "../../../common/equipment/WeaponBackdrop";
 
 interface RowProps {
     weapon: Weapon
