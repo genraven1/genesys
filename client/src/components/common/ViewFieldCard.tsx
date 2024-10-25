@@ -19,7 +19,6 @@ export function ViewFieldCard(props: ViewProps) {
                 <CardContent>
                     <GenesysDescriptionTypography text={value}/>
                 </CardContent>
-
             </Card>
         </Grid>
     )

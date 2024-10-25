@@ -7,13 +7,13 @@ import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
 import ArchetypeBackdrop from "../../archetype/ArchetypeBackdrop";
 
-interface AllProps {
-    defaultValue: Archetype
+interface Props {
+    archetype: Archetype
     onCommit: (value: Archetype) => void
 }
 
-export default function ArchetypeSelectCard(props: AllProps) {
-    const {defaultValue, onCommit} = props;
+export default function ArchetypeSelectCard(props: Props) {
+    const {archetype, onCommit} = props;
     const [archetypes, setArchetypes] = useState<Archetype[]>([]);
     const [openArchetypeBackDrop, setOpenArchetypeBackDrop] = useState(false);
 
@@ -33,7 +33,7 @@ export default function ArchetypeSelectCard(props: AllProps) {
                             <Autocomplete
                                 options={archetypes}
                                 getOptionLabel={(option) => option.name}
-                                value={defaultValue}
+                                value={archetype}
                                 fullWidth
                                 onChange={(e, newValue) => onCommit(newValue as Archetype)}
                                 renderInput={(params) => <TextField {...params} label='Archetype'
@@ -47,11 +47,11 @@ export default function ArchetypeSelectCard(props: AllProps) {
                             {openArchetypeBackDrop &&
                                 <ArchetypeBackdrop open={openArchetypeBackDrop}
                                                    onClose={(): void => setOpenArchetypeBackDrop(false)}
-                                                   archetype={defaultValue}/>}
+                                                   archetype={archetype}/>}
                         </Grid>
                     </Grid>
                 </CardContent>
             </Card>
         </Grid>
-    );
+    )
 }

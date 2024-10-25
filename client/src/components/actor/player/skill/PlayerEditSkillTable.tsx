@@ -29,7 +29,7 @@ function SkillRow(props: RowProps): JSX.Element {
             {renderBooleanTableCell(skill.career)}
             <TypographyLeftTableCell value={String(skill.ranks)}/>
             <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
-            <PlayerSkillRankTableCell skill={skill} onSkillChange={onSkillChange}/>
+            <PlayerSkillRankTableCell skill={skill} onSkillChange={onSkillChange} disabled={false}/>
         </TableRow>
     )
 }

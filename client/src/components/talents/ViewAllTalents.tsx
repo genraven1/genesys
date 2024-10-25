@@ -18,6 +18,7 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
 import {RootPath} from "../../services/RootPath";
 import TalentDialog from "./CreateTalentDialog";
+import BooleanTableCell from "../common/table/BooleanTableCell";
 
 interface Props {
     talent: Talent
@@ -25,18 +26,14 @@ interface Props {
 }
 
 function Row(props: Props) {
-    const {talent, columns} = props
-    const [open, setOpen] = useState(false)
-
-    const renderRanked = (): string => {
-        return talent.ranked ? 'Yes' : 'No'
-    }
+    const {talent, columns} = props;
+    const [open, setOpen] = useState(false);
 
     return (
         <Fragment>
             <TableRow onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={talent.name}/>
-                <TypographyCenterTableCell value={renderRanked()}/>
+                <BooleanTableCell bool={talent.ranked}/>
                 <TypographyCenterTableCell value={talent.activation}/>
                 <TypographyCenterTableCell value={talent.tier}/>
                 <ActionsTableCell name={talent.id} path={RootPath.Talent}/>
@@ -57,13 +54,13 @@ function Row(props: Props) {
 }
 
 export default function ViewAllTalents() {
-    const [talents, setTalents] = useState<Talent[]>([])
-    const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false)
-    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'View']
+    const [talents, setTalents] = useState<Talent[]>([]);
+    const [openTalentCreationDialog, setOpenTalentCreationDialog] = useState(false);
+    const headers = ['Name', 'Ranked', 'Activation', 'Tier', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setTalents(await TalentService.getTalents())
+            setTalents(await TalentService.getTalents());
         })()
     }, [])
 
