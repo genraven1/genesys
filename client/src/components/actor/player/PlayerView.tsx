@@ -43,7 +43,7 @@ export default function PlayerView(props: Props) {
                     <Divider/>
                     <DerivedPlayerStatsRow player={player}/>
                     <Divider/>
-                    <PlayerSkillCard player={player}/>
+                    {/*<PlayerSkillCard player={player}/>*/}
                     <Divider/>
                     <PlayerEquipmentCard player={player}/>
                     <Divider/>

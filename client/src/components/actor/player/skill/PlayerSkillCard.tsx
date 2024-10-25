@@ -9,7 +9,7 @@ import {SkillType} from "../../../../models/actor/Skill";
 import * as React from "react";
 import {renderDoubleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
-import {GenesysDicePoolCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {GenesysDicePoolCenterTableCell, TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import BooleanTableCell from "../../../common/table/BooleanTableCell";
 
 interface GroupProps {
@@ -19,7 +19,7 @@ interface GroupProps {
 
 export function SkillTypeGroup(props: GroupProps) {
     const {player, type} = props;
-    let headers = ['Skill', 'Career', 'Dice Pool'];
+    let headers = ['Skill', 'Career', 'Ranks', 'Dice Pool'];
 
     return (
         <Table>
@@ -29,6 +29,7 @@ export function SkillTypeGroup(props: GroupProps) {
                     <TableRow key={skill.name}>
                         {renderSkillName(skill)}
                         <BooleanTableCell bool={skill.career}/>
+                        <TypographyCenterTableCell value={String(skill.ranks)}/>
                         <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
                     </TableRow>
                 ))}
