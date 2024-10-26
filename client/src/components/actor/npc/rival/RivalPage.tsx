@@ -1,27 +1,22 @@
-import {Card, CardContent, CardHeader, Divider, Grid, IconButton} from "@mui/material";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Card, CardContent, Divider, Grid} from "@mui/material";
+import {useLocation, useParams} from "react-router-dom";
 import {StatsType} from "../../../../models/actor/Stats";
-import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import * as React from "react";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
-import EditIcon from "@mui/icons-material/Edit";
 import Rival from "../../../../models/actor/npc/Rival";
-import { getRatings } from "../../../../models/actor/npc/NonPlayerActor";
+import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
 import RivalEquipmentCard from "./equipment/RivalEquipmentCard";
-import NonPlayerActorDefenseCard from "../NonPlayerActorDefenseCard";
 import {ActorPath} from "../../../../services/RootPath";
-import CharacteristicRow, {ActorCharacteristicRow} from "../../common/CharacteristicRow";
-import {ViewStatsCard} from "../../StatsCard";
+import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
 import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
-import ArchetypeService from "../../../../services/ArchetypeService";
 import {Fragment, useEffect, useState} from "react";
-import Player from "../../../../models/actor/player/Player";
 import ActorService from "../../../../services/ActorService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
+import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
+import {DefenseType} from "../../../../models/actor/Defense";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
@@ -66,19 +61,27 @@ export default function RivalPage() {
         }
     };
 
+    const handleWoundsChange = async (value: number) => {
+        if (rival) {
+            setRival(await ActorService.updateRival({...rival, wounds: value}));
+        }
+    };
+
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id} subheader={getRatings(rival)}/>
+            <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
+                                          subheader={getRatings(rival)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
                     <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/>
-                    {/*<CharacteristicRow actor={rival}/>*/}
-                    <Divider />
+                    <Divider/>
                     <Grid container spacing={10}>
                         <ViewFieldCard name={'Soak'} value={String(rival.soak)}/>
-                        <NonPlayerActorSoakCard actor={rival} />
-                        <ViewStatsCard stats={rival.wounds} type={StatsType.Wounds}/>
-                        <NonPlayerActorDefenseCard npc={rival}/>
+                        <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
+                                             onChange={handleWoundsChange} min={1} max={20}
+                                             disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                        <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
+                        <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
                     <Divider/>
                     <RivalSkillCard rival={rival}/>

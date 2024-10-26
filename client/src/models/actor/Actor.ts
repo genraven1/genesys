@@ -17,6 +17,8 @@ export default interface Actor {
     presence: number,
     wounds: number,
     soak: number,
+    melee: number,
+    ranged: number,
     weapons: ActorWeapon[],
     armors: ActorArmor[],
     gear: ActorGear[],

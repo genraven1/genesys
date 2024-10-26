@@ -31,6 +31,8 @@ public class Actor {
     private int presence = 1;
     private int wounds = 1;
     private int soak = getBrawn();
+    private int melee = 0;
+    private int ranged = 0;
     private List<ActorWeapon> weapons = new ArrayList<>();
     private List<ActorArmor> armors = new ArrayList<>();
 

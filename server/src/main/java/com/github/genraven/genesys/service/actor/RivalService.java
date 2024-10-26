@@ -23,18 +23,28 @@ public class RivalService {
     private final SkillService skillService;
 
     public Flux<Rival> getAllRivals() {
-        return rivalRepository.findAll();
+        return rivalRepository.findAll().map(rival -> {
+            rival.getTotalSoak();
+            rival.getTotalMeleeDefense();
+            rival.getTotalRangedDefense();
+            return rival;
+        });
     }
 
     public Mono<Rival> getRival(final String name) {
-        return rivalRepository.findById(name);
+        return rivalRepository.findById(name).map(rival -> {
+            rival.getTotalSoak();
+            rival.getTotalMeleeDefense();
+            rival.getTotalRangedDefense();
+            return rival;
+        });
     }
 
     public Mono<Rival> createRival(final String rivalName) {
         return skillService.getSkillsForCurrentCampaign()
                 .flatMap(skills -> {
                     final Rival rival = new Rival(new SingleNonPlayerActor(new NonPlayerActor(new Actor(rivalName))));
-                    rival.setSkills(skills.stream().map(ActorSkill::new).collect(Collectors.toList()));
+                    rival.setSkills(skills.stream().map(ActorSkill::new).toList());
                     return rivalRepository.save(rival);
                 });
     }
