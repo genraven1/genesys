@@ -22,12 +22,6 @@ export interface SingleNonPlayerCharacter extends NonPlayerActor {
     injuries: Injury[]
 }
 
-export enum NonPlayerCharacterKey {
-    Combat = 'combat',
-    General = 'general',
-    Social = 'social'
-}
-
 export const getRatings = (npc: NonPlayerActor): string => {
     return '[combat] ' + String(npc?.combat!!) + ' [social] ' + String(npc?.social!!) + ' [general] ' + String(npc?.general!!)
 }

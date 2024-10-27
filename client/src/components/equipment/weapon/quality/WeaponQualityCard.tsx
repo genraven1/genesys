@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import NumberTextFieldTableCell from "../../../common/table/NumberTextFieldTableCell";
+import NumberTextFieldIndexTableCell from "../../../common/table/NumberTextFieldIndexTableCell";
 import QualityAutocompleteTableCell from "../../../common/table/QualityAutocompleteTableCell";
 import QualityTableFooter from "../../../common/table/QualityTableFooter";
 
@@ -57,10 +57,10 @@ export default function WeaponQualityCard(props: Props) {
                                     <QualityAutocompleteTableCell disabled={!pathname.endsWith(weapon.id + '/edit')}
                                                                   onChange={handleQualityChange} quality={quality}
                                                                   index={index}/>
-                                    <NumberTextFieldTableCell title={'Ranks'} value={quality.ranks}
-                                                              onChange={handleRanksChange} min={1} max={10}
-                                                              disabled={!pathname.endsWith(weapon.id + '/edit')}
-                                                              index={index}/>
+                                    <NumberTextFieldIndexTableCell title={'Ranks'} value={quality.ranks}
+                                                                   onChange={handleRanksChange} min={1} max={10}
+                                                                   disabled={!pathname.endsWith(weapon.id + '/edit')}
+                                                                   index={index}/>
                                 </TableRow>
                             ))}
                         </TableBody>

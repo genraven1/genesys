@@ -31,8 +31,9 @@ public class ActorRouter {
                         .PUT("/{name}", actorHandler::updateNemesis)
                 )
                 .path("/rivals", builder -> builder
-                        .GET("/{name}", actorHandler::getRival)
-                        .PUT("/{name}", actorHandler::updateRival)
+                        .GET("/{id}", actorHandler::getRival)
+                        .PUT("/{id}", actorHandler::updateRival)
+                        .PATCH("/{id}/skills/", actorHandler::updateRivalSkill)
                 )
                 .path("/campaigns/{name}", builder -> builder
                         .GET("/rivals/", actorHandler::getAllRivals)

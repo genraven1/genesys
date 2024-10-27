@@ -3,7 +3,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {StatsType} from "../../../../models/actor/Stats";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
-import {getRatings} from "../../../../models/actor/npc/NonPlayerActor";
+import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
 import RivalAbilityCard from "./ability/RivalAbilityCard";
@@ -17,11 +17,13 @@ import ActorService from "../../../../services/ActorService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {DefenseType} from "../../../../models/actor/Defense";
+import {ActorSkill} from "../../../../models/actor/Actor";
+import RatingCard from "../RatingCard";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
     const [rival, setRival] = useState<Rival | null>(null);
-    let pathname = useLocation().pathname
+    let pathname = useLocation().pathname;
 
     useEffect(() => {
         if (!id) {
@@ -67,6 +69,28 @@ export default function RivalPage() {
         }
     };
 
+    const handleRatingsChange = async (value: number, type: RatingType) => {
+        if (rival) {
+            switch (type) {
+                case RatingType.Combat:
+                    setRival(await ActorService.updateRival({...rival, combat: value}));
+                    break;
+                case RatingType.Social:
+                    setRival(await ActorService.updateRival({...rival, social: value}));
+                    break;
+                case RatingType.General:
+                    setRival(await ActorService.updateRival({...rival, general: value}));
+                    break;
+            }
+        }
+    };
+
+    const handleSkillChange = async (value: ActorSkill) => {
+        if (rival) {
+            setRival(await ActorService.updateRivalSkill(rival.id, value));
+        }
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
@@ -75,7 +99,7 @@ export default function RivalPage() {
                 <Grid container justifyContent={'center'}>
                     <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/>
                     <Divider/>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(rival.soak)}/>
                         <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
                                              onChange={handleWoundsChange} min={1} max={20}
@@ -83,8 +107,19 @@ export default function RivalPage() {
                         <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
+                    <Grid container spacing={2}>
+                        <RatingCard type={RatingType.Combat} value={rival.combat}
+                                    onChange={handleRatingsChange}
+                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                        <RatingCard type={RatingType.Social} value={rival.social}
+                                    onChange={handleRatingsChange}
+                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                        <RatingCard type={RatingType.General} value={rival.general}
+                                    onChange={handleRatingsChange}
+                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                    </Grid>
                     <Divider/>
-                    <RivalSkillCard rival={rival}/>
+                    <RivalSkillCard rival={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>
                     <RivalEquipmentCard rival={rival}/>
                     <Divider/>

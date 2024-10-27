@@ -1,25 +1,33 @@
-import { Grid, Card, CardHeader, Divider, Typography, CardActions } from "@mui/material";
+import {Card, CardContent, Grid, TextField} from "@mui/material";
+import * as React from "react";
 import {RatingType} from "../../../models/actor/npc/NonPlayerActor";
-import InputNumberRangeSelectField from "../../common/InputNumberRangeSelect";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 interface Props {
-    rating: number,
-    type: RatingType,
-    onChange: (value: number) => void
+    type: RatingType
+    value: number
+    onChange: (value: number, type: RatingType) => void
+    disabled: boolean
 }
 
-export default function RatingCard(props: Props): JSX.Element {
-    let { rating, type, onChange } = props;
+export default function RatingCard(props: Props) {
+    const {type, value, onChange, disabled} = props;
 
     return (
         <Grid item xs>
             <Card>
-                <CardHeader title={type} style={{ textAlign: 'center' }} />
-                <Divider />
-                <Typography style={{ textAlign: 'center' }} >{rating}</Typography>
-                <CardActions>
-                    <InputNumberRangeSelectField defaultValue={rating} min={1} max={20} onCommit={onChange} />
-                </CardActions>
+                <CenteredCardHeader title={type}/>
+                <CardContent>
+                    <TextField
+                        type="number"
+                        value={value}
+                        label={type}
+                        fullWidth
+                        onChange={(e) => onChange(Number(e.target.value), type)}
+                        inputProps={{min: 1, max: 20}}
+                        disabled={disabled}
+                    />
+                </CardContent>
             </Card>
         </Grid>
     )

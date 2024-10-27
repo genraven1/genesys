@@ -5,7 +5,7 @@ import ActorService from "../../../../services/ActorService";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {StatsType} from "../../../../models/actor/Stats";
 import RatingCard from "../RatingCard";
-import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
+import {RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard";
 import CheckIcon from "@mui/icons-material/Check";
 import {ActorKey} from "../../../../models/actor/Actor";
@@ -129,20 +129,20 @@ export default function MinionEdit(props: Props) {
                         <NonPlayerActorDefenseCard npc={minion}/>
                     </Grid>
                     <Divider/>
-                    <Grid container spacing={10}>
-                        <RatingCard rating={minion?.combat!!} type={RatingType.Combat}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.Combat, value)
-                                    }}/>
-                        <RatingCard rating={minion?.social!!} type={RatingType.Social}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.Social, value)
-                                    }}/>
-                        <RatingCard rating={minion?.general!!} type={RatingType.General}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.General, value)
-                                    }}/>
-                    </Grid>
+                    {/*<Grid container spacing={10}>*/}
+                    {/*    <RatingCard rating={minion?.combat!!} type={RatingType.Combat}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.Combat, value)*/}
+                    {/*                }}/>*/}
+                    {/*    <RatingCard rating={minion?.social!!} type={RatingType.Social}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.Social, value)*/}
+                    {/*                }}/>*/}
+                    {/*    <RatingCard rating={minion?.general!!} type={RatingType.General}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.General, value)*/}
+                    {/*                }}/>*/}
+                    {/*</Grid>*/}
                     <Divider/>
                     <MinionSkillCard minion={minion}/>
                     <Divider/>

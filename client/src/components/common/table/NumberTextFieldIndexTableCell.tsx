@@ -13,7 +13,7 @@ interface Props {
     steps?: number
 }
 
-export default function NumberTextFieldTableCell(props: Props) {
+export default function NumberTextFieldIndexTableCell(props: Props) {
     const {title, value, onChange, min, max, disabled, index, steps} = props;
 
     return (

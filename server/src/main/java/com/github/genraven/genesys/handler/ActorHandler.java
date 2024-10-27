@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.ActorSkill;
 import com.github.genraven.genesys.domain.actor.npc.Minion;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
@@ -8,7 +9,6 @@ import com.github.genraven.genesys.domain.actor.player.Archetype;
 import com.github.genraven.genesys.domain.actor.player.Career;
 import com.github.genraven.genesys.domain.actor.player.Player;
 import com.github.genraven.genesys.domain.actor.player.PlayerSkill;
-import com.github.genraven.genesys.domain.skill.Skill;
 import com.github.genraven.genesys.service.actor.MinionService;
 import com.github.genraven.genesys.service.actor.NemesisService;
 import com.github.genraven.genesys.service.actor.PlayerService;
@@ -153,7 +153,6 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> getAllRivals(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable(NAME);
         return rivalService.getAllRivals().collectList().flatMap(rivals -> {
             if (rivals.isEmpty()) {
                 return ServerResponse.noContent().build();
@@ -165,8 +164,8 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> getRival(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable(NAME);
-        return rivalService.getRival(name)
+        final String id = serverRequest.pathVariable(ID);
+        return rivalService.getRival(id)
                 .flatMap(rival -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(rival)))
@@ -180,10 +179,20 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> updateRival(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable(NAME);
+        final String id = serverRequest.pathVariable(ID);
         final Mono<Rival> rivalMono = serverRequest.bodyToMono(Rival.class);
         return rivalMono
-                .flatMap(rival -> rivalService.updateRival(name, rival))
+                .flatMap(rival -> rivalService.updateRival(id, rival))
+                .flatMap(rival -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(rival)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updateRivalSkill(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<ActorSkill> skillMono = serverRequest.bodyToMono(ActorSkill.class);
+        return skillMono.flatMap(skill -> rivalService.updateRivalSkill(id, skill))
                 .flatMap(rival -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(rival)))

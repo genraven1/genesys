@@ -47,8 +47,8 @@ export default function RivalView(props: Props) {
                         <ViewStatsCard stats={rival.wounds} type={StatsType.Wounds}/>
                         <NonPlayerActorDefenseCard npc={rival}/>
                     </Grid>
-                    <Divider/>
-                    <RivalSkillCard rival={rival}/>
+                    {/*<Divider/>*/}
+                    {/*<RivalSkillCard rival={rival}/>*/}
                     <Divider/>
                     <RivalEquipmentCard rival={rival}/>
                     <Divider/>

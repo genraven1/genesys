@@ -12,7 +12,7 @@ import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import InjuryService from "../../../services/InjuryService";
 import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";
-import NumberTextFieldTableCell from "../../common/table/NumberTextFieldTableCell";
+import NumberTextFieldIndexTableCell from "../../common/table/NumberTextFieldIndexTableCell";
 import ModifierTableFooter from "../../common/table/ModifierTableFooter";
 
 interface Props {
@@ -58,9 +58,9 @@ export default function CriticalInjuryModifierCard(props: Props) {
                                 <TableRow key={index}>
                                     <ModifierAutocompleteTableCell disabled={disabled} onChange={handleTypeChange}
                                                                    type={modifier.type} index={index}/>
-                                    <NumberTextFieldTableCell title={'Ranks'} value={modifier.ranks}
-                                                              onChange={handleRanksChange} min={1} max={10}
-                                                              disabled={disabled} index={index}/>
+                                    <NumberTextFieldIndexTableCell title={'Ranks'} value={modifier.ranks}
+                                                                   onChange={handleRanksChange} min={1} max={10}
+                                                                   disabled={disabled} index={index}/>
                                 </TableRow>
                             ))}
                         </TableBody>

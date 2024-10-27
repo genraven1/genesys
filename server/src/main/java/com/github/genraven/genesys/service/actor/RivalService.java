@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class RivalService {
@@ -31,8 +29,8 @@ public class RivalService {
         });
     }
 
-    public Mono<Rival> getRival(final String name) {
-        return rivalRepository.findById(name).map(rival -> {
+    public Mono<Rival> getRival(final String id) {
+        return rivalRepository.findById(id).map(rival -> {
             rival.getTotalSoak();
             rival.getTotalMeleeDefense();
             rival.getTotalRangedDefense();
@@ -49,8 +47,8 @@ public class RivalService {
                 });
     }
 
-    public Mono<Rival> updateRival(final String name, final Rival rival) {
-        return rivalRepository.findById(name).map(riv -> {
+    public Mono<Rival> updateRival(final String id, final Rival rival) {
+        return rivalRepository.findById(id).map(riv -> {
             riv.setBrawn(rival.getBrawn());
             riv.setAgility(rival.getAgility());
             riv.setIntellect(rival.getIntellect());
@@ -68,5 +66,13 @@ public class RivalService {
             riv.setArmors(rival.getArmors());
             return riv;
         }).flatMap(rivalRepository::save);
+    }
+
+    public Mono<Rival> updateRivalSkill(final String id, final ActorSkill skill) {
+        return rivalRepository.findById(id).flatMap(rival -> {
+            rival.getSkills().stream().filter(actorSkill -> actorSkill.getId().equals(skill.getId()))
+                    .forEach(actorSkill -> actorSkill.setRanks(skill.getRanks()));
+            return rivalRepository.save(rival);
+        });
     }
 }
