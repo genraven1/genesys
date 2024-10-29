@@ -10,34 +10,32 @@ import {renderQualities, renderSoak} from "../../../../../../models/equipment/Eq
 import {ActorArmor, Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
 import {Button, TableFooter} from "@mui/material";
-import Rival from "../../../../../../models/actor/npc/Rival";
 import {useLocation} from "react-router-dom";
-import ActorService from "../../../../../../services/ActorService";
 import ArmorSelectionDialog from "../../../../common/equipment/ArmorSelectionDialog";
 import ArmorEquipDialog from "../../../../common/equipment/ArmorEquipDialog";
 import BooleanTableCell from "../../../../../common/table/BooleanTableCell";
 import CreateArmorDialog from "../../../rival/equipment/armor/CreateArmorDialog";
 
 interface Props {
-    rival: Rival
+    armors: ActorArmor[]
+    updateArmors: (armors: ActorArmor[]) => void
 }
 
-export default function RivalArmorTable(props: Props) {
-    const {rival} = props;
+export default function ArmorTable(props: Props) {
+    const {armors, updateArmors} = props;
     const headers = ['Name', 'Equipped', 'Defense', 'Soak', 'Special Qualities'];
-    const [armor, setArmor] = useState<ActorArmor[]>(rival.armors);
     const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false);
     const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false);
     const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false);
     const pathname = useLocation().pathname;
 
     const renderTableBody = () => {
-        if (!armor) {
+        if (!armors) {
             return <Fragment/>
         } else {
             return (
                 <TableBody>
-                    {armor.map((armor: ActorArmor) => (
+                    {armors.map((armor: ActorArmor) => (
                         <TableRow key={armor.id}>
                             <TypographyLeftTableCell value={armor.name}/>
                             <BooleanTableCell bool={armor.slot === ArmorSlot.Body}/>
@@ -52,47 +50,35 @@ export default function RivalArmorTable(props: Props) {
     }
 
     const createArmor = async () => {
-        let updatedRival = await ActorService.updateRival({
-            ...rival,
-            armors: [...rival.armors, {
-                slot: ArmorSlot.None,
-                id: 'custom',
-                modifiers: [],
-                soak: 0,
-                defense: 0,
-                name: 'Default',
-                price: 0,
-                rarity: 0,
-                restricted: false,
-                encumbrance: 0,
-                description: '',
-                qualities: []
-            }]
-        })
-        setArmor(updatedRival.armors);
+        updateArmors([...armors, {
+            slot: ArmorSlot.None,
+            id: 'custom',
+            modifiers: [],
+            soak: 0,
+            defense: 0,
+            name: 'Default',
+            price: 0,
+            rarity: 0,
+            restricted: false,
+            encumbrance: 0,
+            description: '',
+            qualities: []
+        }]);
     };
 
     const addArmor = async (armor: Armor) => {
-        let updatedRival = await ActorService.updateRival({
-            ...rival,
-            armors: [...rival.armors, {
-                slot: ArmorSlot.None,
-                ...armor
-            }]
-        });
-        setArmor(updatedRival.armors);
+        updateArmors([...armors, {
+            slot: ArmorSlot.None,
+            ...armor
+        }]);
     };
 
-    const equipArmor = async (armors: ActorArmor[]) => {
-        let updatedRival = await ActorService.updateRival({
-            ...rival,
-            armors: armors
-        });
-        setArmor(updatedRival.armors);
+    const equipArmor = async (updatedArmors: ActorArmor[]) => {
+        updateArmors(updatedArmors);
     }
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(rival.id + '/edit')) {
+        if (pathname.endsWith('/edit')) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
@@ -101,7 +87,7 @@ export default function RivalArmorTable(props: Props) {
                             Armor</Button>
                         {openCreateArmorDialog && <CreateArmorDialog open={openCreateArmorDialog}
                                                                      onClose={(): void => setOpenCreateArmorDialog(false)}
-                                                                     onCreateArmor={addArmor}/>}
+                                                                     onCreateArmor={createArmor}/>}
                         <Button color='primary' variant='contained'
                                 onClick={(): void => setOpenSelectArmorDialog(true)}>Add
                             Armor</Button>
@@ -112,7 +98,7 @@ export default function RivalArmorTable(props: Props) {
                             Armor</Button>
                         {openEquipArmorDialog && <ArmorEquipDialog open={openEquipArmorDialog}
                                                                    onClose={(): void => setOpenEquipArmorDialog(false)}
-                                                                   updateArmors={equipArmor} armors={rival.armors}/>}
+                                                                   updateArmors={equipArmor} armors={armors}/>}
                     </TableRow>
                 </TableFooter>
             )
