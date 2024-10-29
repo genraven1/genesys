@@ -3,12 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
 import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import {InputTextFieldCard} from "../../../../../common/InputTextFieldCard";
-import NumberRangeSelectCard from "../../../../../common/NumberRangeSelectCard";
-import {ViewFieldCard} from "../../../../../common/ViewFieldCard";
-import {NumberTextFieldCard} from "../../../../../common/card/NumberTextField";
 import {useLocation} from "react-router-dom";
-import EquipmentService from "../../../../../../services/EquipmentService";
 import SoakCard from "../../../../../common/card/SoakCard";
 import DefenseCard from "../../../../../common/card/DefenseCard";
 

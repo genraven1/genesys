@@ -9,26 +9,25 @@ import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import TableCell from "@mui/material/TableCell";
-import EquipmentService from "../../../../services/EquipmentService";
 import ModifierService from "../../../../services/ModifierService";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
-    arm: Armor
+    armor: Armor
+    updateArmor: (armor: Armor) => void
 }
 
 export default function ArmorModifierCard(props: Props) {
-    const {arm} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
-    const [armor, setArmor] = useState(arm);
+    const {armor, updateArmor} = props;
+    const pathname = useLocation().pathname;
+    const headers = ['Type', 'Ranks'];
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
         (async () => {
-            setTypeOptions(await ModifierService.getModifiers())
+            setTypeOptions(await ModifierService.getModifiers());
         })()
     }, [])
 
@@ -51,21 +50,18 @@ export default function ArmorModifierCard(props: Props) {
         const updatedModifiers = armor.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, modifiers: updatedModifiers}));
+        updateArmor({...armor, modifiers: updatedModifiers});
     };
 
     const handleRanksChange = async (index: number, value: string) => {
         const updatedModifiers = armor.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, modifiers: updatedModifiers}));
+        updateArmor({...armor, modifiers: updatedModifiers});
     };
 
     const addRow = async () => {
-        setArmor(await EquipmentService.updateArmor({
-            ...armor,
-            modifiers: [...armor.modifiers, {type: "Default", ranks: 1}]
-        }));
+        updateArmor({...armor, modifiers: [...armor.modifiers, {type: "Default", ranks: 1}]});
     };
 
     return (

@@ -7,7 +7,6 @@ import {EquipmentQuality} from "../../../../models/Quality";
 import QualityService from "../../../../services/QualityService";
 import TableRow from "@mui/material/TableRow";
 import AddIcon from "@mui/icons-material/Add";
-import EquipmentService from "../../../../services/EquipmentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -17,16 +16,15 @@ import TableCell from "@mui/material/TableCell";
 import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
-    arm: Armor
+    armor: Armor
+    updateArmor: (armor: Armor) => void
 }
 
-export default function WeaponQualityCard(props: Props) {
-    const {arm} = props;
+export default function ArmorQualityCard(props: Props) {
+    const {armor, updateArmor} = props;
     const pathname = useLocation().pathname;
-    const [armor, setArmor] = useState(arm);
     const [equipmentQualities, setEquipmentQualities] = useState<EquipmentQuality[]>([]);
     const headers = ['Quality', 'Ranks'];
-
 
     useEffect(() => {
         (async () => {
@@ -55,21 +53,21 @@ export default function WeaponQualityCard(props: Props) {
     }
 
     const addRow = async () => {
-        setArmor({...armor, qualities: [...armor.qualities, {} as EquipmentQuality]});
+        updateArmor({...armor, qualities: [...armor.qualities, {} as EquipmentQuality]});
     };
 
     const handleQualityChange = async (index: number, value: EquipmentQuality) => {
         const updatedQualities = armor.qualities.map((row, i) =>
             i === index ? {...value} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, qualities: updatedQualities}));
+        updateArmor({...armor, qualities: updatedQualities});
     };
 
     const handleRanksChange = async (index: number, value: string) => {
         const updatedQualities = armor.qualities.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, qualities: updatedQualities}));
+        updateArmor({...armor, qualities: updatedQualities});
     };
 
     return (

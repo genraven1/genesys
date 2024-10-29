@@ -14,6 +14,7 @@ import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
 import SoakCard from "../../common/card/SoakCard";
+import DefenseCard from "../../common/card/DefenseCard";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();
@@ -71,7 +72,7 @@ export default function ArmorPage() {
 
     const handleRarityChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, rarity: value}));
+            await updateArmor({...armor, rarity: value})
         }
     };
 
@@ -81,10 +82,8 @@ export default function ArmorPage() {
                            disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
     };
 
-    const renderDefenseCard = () => {
-        return pathname.endsWith('/view') ? <ViewFieldCard name={"Defense"} value={String(armor.defense)}/> :
-            <NumberTextFieldCard title={"Defense"} value={armor.defense}
-                                 disabled={pathname.endsWith('/view')} onChange={handleDefenseChange} min={0} max={4}/>;
+    const updateArmor = async (updatedArmor: Armor) => {
+        setArmor(await EquipmentService.updateArmor(updatedArmor));
     };
 
     return (
@@ -96,7 +95,7 @@ export default function ArmorPage() {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <SoakCard armor={armor} updateSoak={handleSoakChange}/>
-                    {renderDefenseCard()}
+                    <DefenseCard armor={armor} updateDefense={handleDefenseChange}/>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <NumberTextFieldCard title={'Encumbrance'} value={armor.encumbrance}
@@ -111,8 +110,8 @@ export default function ArmorPage() {
                                          min={0}
                                          max={10} disabled={pathname.endsWith('/view')}/>
                 </Grid>
-                <ArmorQualityCard arm={armor}/>
-                <ArmorModifierCard arm={armor}/>
+                <ArmorQualityCard armor={armor} updateArmor={updateArmor}/>
+                <ArmorModifierCard armor={armor} updateArmor={updateArmor}/>
             </CardContent>
         </Card>
     )
