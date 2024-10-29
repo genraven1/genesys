@@ -2,7 +2,6 @@ import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@
 import * as React from "react";
 import {Fragment, useEffect, useState} from "react";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
-import {useLocation} from "react-router-dom";
 import {EquipmentQuality} from "../../../../models/Quality";
 import QualityService from "../../../../services/QualityService";
 import TableRow from "@mui/material/TableRow";
@@ -18,11 +17,11 @@ import {Armor} from "../../../../models/equipment/Armor";
 interface Props {
     armor: Armor
     updateArmor: (armor: Armor) => void
+    disabled: boolean
 }
 
 export default function ArmorQualityCard(props: Props) {
-    const {armor, updateArmor} = props;
-    const pathname = useLocation().pathname;
+    const {armor, updateArmor, disabled} = props;
     const [equipmentQualities, setEquipmentQualities] = useState<EquipmentQuality[]>([]);
     const headers = ['Quality', 'Ranks'];
 
@@ -38,7 +37,7 @@ export default function ArmorQualityCard(props: Props) {
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(armor.id + '/edit')) {
+        if (!disabled) {
             return (
                 <TableFooter>
                     <TableRow key={'footer'}>
@@ -88,7 +87,7 @@ export default function ArmorQualityCard(props: Props) {
                                             onChange={(e, newValue) => handleQualityChange(index, newValue as EquipmentQuality)}
                                             renderInput={(params) => <TextField {...params} label="Quality"
                                                                                 variant="outlined"/>}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -98,7 +97,7 @@ export default function ArmorQualityCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                 </TableRow>

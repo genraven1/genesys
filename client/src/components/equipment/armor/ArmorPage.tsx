@@ -110,8 +110,8 @@ export default function ArmorPage() {
                                          min={0}
                                          max={10} disabled={pathname.endsWith('/view')}/>
                 </Grid>
-                <ArmorQualityCard armor={armor} updateArmor={updateArmor}/>
-                <ArmorModifierCard armor={armor} updateArmor={updateArmor}/>
+                <ArmorQualityCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
+                <ArmorModifierCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
             </CardContent>
         </Card>
     )

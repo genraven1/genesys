@@ -1,11 +1,13 @@
-import {Dialog, DialogContent, DialogTitle, Divider, Grid, TextField} from "@mui/material";
+import {Dialog, DialogContent, DialogTitle, Grid, TextField} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
 import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
-import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import {useLocation} from "react-router-dom";
+import {ActorArmor, Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
 import SoakCard from "../../../../../common/card/SoakCard";
 import DefenseCard from "../../../../../common/card/DefenseCard";
+import ArmorQualityCard from "../../../../../equipment/armor/quality/ArmorQualityCard";
+import ArmorModifierCard from "../../../../../equipment/armor/modifier/ArmorModifierCard";
+import {useLocation} from "react-router-dom";
 
 interface Props {
     open: boolean
@@ -29,24 +31,28 @@ export default function CreateArmorDialog(props: Props) {
         description: '',
         qualities: []
     });
-    let pathname = useLocation().pathname
+    let pathname = useLocation().pathname;
 
     const onCreate = async (): Promise<void> => {
         onCreateArmor({...armor, slot: ArmorSlot.None} as ActorArmor)
         onClose()
     }
 
-    const handleSoakChange = async (value: number) => {
+    const handleSoakChange = (value: number) => {
         setArmor({...armor, soak: value});
     };
 
-    const handleDefenseChange = async (value: number) => {
+    const handleDefenseChange = (value: number) => {
         setArmor({...armor, defense: value});
     };
 
-    const handleNameChange = async (value: string) => {
+    const handleNameChange = (value: string) => {
         setArmor({...armor, name: value});
     };
+
+    const updateArmor = (updatedArmor: Armor) => {
+        setArmor({...updatedArmor, slot: ArmorSlot.None});
+    }
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -61,10 +67,13 @@ export default function CreateArmorDialog(props: Props) {
                         onChange={e => handleNameChange(e.target.value)}
                     />
                 </Grid>
-                <Divider/>
                 <Grid container>
                     <SoakCard armor={armor} updateSoak={handleSoakChange}/>
                     <DefenseCard armor={armor} updateDefense={handleDefenseChange}/>
+                </Grid>
+                <Grid container>
+                    <ArmorQualityCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
+                    <ArmorModifierCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
                 </Grid>
             </DialogContent>
             <GenesysDialogActions handleCreate={onCreate} onClose={onClose}/>

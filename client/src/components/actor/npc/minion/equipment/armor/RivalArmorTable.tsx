@@ -16,6 +16,7 @@ import ActorService from "../../../../../../services/ActorService";
 import ArmorSelectionDialog from "../../../../common/equipment/ArmorSelectionDialog";
 import ArmorEquipDialog from "../../../../common/equipment/ArmorEquipDialog";
 import BooleanTableCell from "../../../../../common/table/BooleanTableCell";
+import CreateArmorDialog from "../../../rival/equipment/armor/CreateArmorDialog";
 
 interface Props {
     rival: Rival
@@ -95,11 +96,12 @@ export default function RivalArmorTable(props: Props) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
-                        <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create
+                        <Button color='primary' variant='contained'
+                                onClick={(): void => setOpenCreateArmorDialog(true)}>Create
                             Armor</Button>
-                        {openCreateArmorDialog && <ArmorSelectionDialog open={openCreateArmorDialog}
-                                                                        onClose={(): void => setOpenCreateArmorDialog(false)}
-                                                                        addArmor={addArmor}/>}
+                        {openCreateArmorDialog && <CreateArmorDialog open={openCreateArmorDialog}
+                                                                     onClose={(): void => setOpenCreateArmorDialog(false)}
+                                                                     onCreateArmor={addArmor}/>}
                         <Button color='primary' variant='contained'
                                 onClick={(): void => setOpenSelectArmorDialog(true)}>Add
                             Armor</Button>

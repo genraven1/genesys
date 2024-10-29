@@ -2,7 +2,6 @@ import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import AddIcon from '@mui/icons-material/Add';
@@ -17,11 +16,11 @@ import {Armor} from "../../../../models/equipment/Armor";
 interface Props {
     armor: Armor
     updateArmor: (armor: Armor) => void
+    disabled: boolean
 }
 
 export default function ArmorModifierCard(props: Props) {
-    const {armor, updateArmor} = props;
-    const pathname = useLocation().pathname;
+    const {armor, updateArmor, disabled} = props;
     const headers = ['Type', 'Ranks'];
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
@@ -32,7 +31,7 @@ export default function ArmorModifierCard(props: Props) {
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(armor.id + '/edit')) {
+        if (!disabled) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
@@ -82,7 +81,7 @@ export default function ArmorModifierCard(props: Props) {
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -92,7 +91,7 @@ export default function ArmorModifierCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                 </TableRow>
