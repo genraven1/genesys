@@ -14,8 +14,9 @@ import ViewNonPlayerCharacterArmorTable from "../../equipment/armor/ViewNonPlaye
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Rival from "../../../../../models/actor/npc/Rival";
 import CreateRivalArmorDialog from "./armor/CreateRivalArmorDialog";
-import RivalArmorSelectionDialog from "./armor/RivalArmorSelectionDialog";
-import RivalArmorEquipDialog from "./armor/RivalArmorEquipDialog";
+import ArmorSelectionDialog from "../../../common/equipment/ArmorSelectionDialog";
+import ArmorEquipDialog from "./armor/ArmorEquipDialog";
+import RivalArmorTable from "../../minion/equipment/armor/RivalArmorTable";
 
 interface Props {
     rival: Rival
@@ -26,9 +27,6 @@ export default function RivalEquipmentCard(props: Props) {
     const [value, setValue] = useState('1')
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false)
     const [openAddWeaponDialog, setOpenAddWeaponDialog] = useState(false)
-    const [openCreateArmorDialog, setOpenCreateArmorDialog] = useState(false)
-    const [openSelectArmorDialog, setOpenSelectArmorDialog] = useState(false)
-    const [openEquipArmorDialog, setOpenEquipArmorDialog] = useState(false)
     const pathname = useLocation().pathname
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -71,45 +69,6 @@ export default function RivalEquipmentCard(props: Props) {
         }
     }
 
-    const renderArmorTab = () => {
-        return (
-            <Fragment>
-                {renderArmorTable()}
-                {renderArmorTableButtons()}
-            </Fragment>
-        )
-    }
-
-    const renderArmorTable = () => {
-        if (rival.armors === undefined || rival.armors.length === 0) {
-            return <GenesysDescriptionTypography text={'None'}/>
-        }
-        return <ViewNonPlayerCharacterArmorTable armor={rival?.armors!!}/>
-    }
-
-    const renderArmorTableButtons = () => {
-        if (pathname.endsWith('/edit')) {
-            return (
-                <Fragment>
-                    <Button color='primary' variant='contained' onClick={(): void => setOpenCreateArmorDialog(true)}>Create
-                        Armor</Button>
-                    {openCreateArmorDialog && <CreateRivalArmorDialog rival={rival} open={openCreateArmorDialog}
-                                                                        onClose={(): void => setOpenCreateArmorDialog(false)}/>}
-                    <Button color='primary' variant='contained' onClick={(): void => setOpenSelectArmorDialog(true)}>Add
-                        Armor</Button>
-                    {openSelectArmorDialog && <RivalArmorSelectionDialog rival={rival} open={openSelectArmorDialog}
-                                                                           onClose={(): void => setOpenSelectArmorDialog(false)}/>}
-                    <Button color='primary' variant='contained' onClick={(): void => setOpenEquipArmorDialog(true)}>Equip
-                        Armor</Button>
-                    {openEquipArmorDialog && <RivalArmorEquipDialog rival={rival} open={openEquipArmorDialog}
-                                                                      onClose={(): void => setOpenEquipArmorDialog(false)}/>}
-                </Fragment>
-            )
-        } else {
-            return <Fragment/>
-        }
-    }
-
     const addGear = () => {
 
     }
@@ -144,7 +103,9 @@ export default function RivalEquipmentCard(props: Props) {
                             </TabList>
                         </Grid>
                         <TabPanel value="1">{renderWeaponsTab()}</TabPanel>
-                        <TabPanel value="2">{renderArmorTab()}</TabPanel>
+                        <TabPanel value="2">
+                            <RivalArmorTable rival={rival}/>
+                        </TabPanel>
                         <TabPanel value="3">{renderGearTab()}</TabPanel>
                     </TabContext>
                 </Grid>

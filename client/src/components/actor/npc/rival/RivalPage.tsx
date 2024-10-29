@@ -103,20 +103,20 @@ export default function RivalPage() {
                         <ViewFieldCard name={'Soak'} value={String(rival.soak)}/>
                         <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
                                              onChange={handleWoundsChange} min={1} max={20}
-                                             disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                                             disabled={!pathname.endsWith(rival.id + '/edit')}/>
                         <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
                     <Grid container spacing={2}>
                         <RatingCard type={RatingType.Combat} value={rival.combat}
                                     onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
                         <RatingCard type={RatingType.Social} value={rival.social}
                                     onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
                         <RatingCard type={RatingType.General} value={rival.general}
                                     onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(ActorPath.Rival + '/edit')}/>
+                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
                     </Grid>
                     <Divider/>
                     <RivalSkillCard rival={rival} onSkillChange={handleSkillChange}/>
