@@ -1,12 +1,12 @@
 import {Dialog, DialogContent, DialogTitle, Grid, TextField} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import {GenesysDialogActions} from "../../../../../common/dialog/GenesysDialogActions";
-import {ActorArmor, Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import SoakCard from "../../../../../common/card/SoakCard";
-import DefenseCard from "../../../../../common/card/DefenseCard";
-import ArmorQualityCard from "../../../../../equipment/armor/quality/ArmorQualityCard";
-import ArmorModifierCard from "../../../../../equipment/armor/modifier/ArmorModifierCard";
+import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
+import {ActorArmor, Armor, ArmorSlot} from "../../../../models/equipment/Armor";
+import SoakCard from "../../../common/card/SoakCard";
+import DefenseCard from "../../../common/card/DefenseCard";
+import ArmorQualityCard from "../../../equipment/armor/quality/ArmorQualityCard";
+import ArmorModifierCard from "../../../equipment/armor/modifier/ArmorModifierCard";
 import {useLocation} from "react-router-dom";
 
 interface Props {

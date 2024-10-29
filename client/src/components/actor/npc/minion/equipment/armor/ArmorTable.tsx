@@ -14,7 +14,7 @@ import {useLocation} from "react-router-dom";
 import ArmorSelectionDialog from "../../../../common/equipment/ArmorSelectionDialog";
 import ArmorEquipDialog from "../../../../common/equipment/ArmorEquipDialog";
 import BooleanTableCell from "../../../../../common/table/BooleanTableCell";
-import CreateArmorDialog from "../../../rival/equipment/armor/CreateArmorDialog";
+import CreateArmorDialog from "../../../../common/equipment/CreateArmorDialog";
 
 interface Props {
     armors: ActorArmor[]
