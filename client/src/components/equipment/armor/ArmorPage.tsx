@@ -13,6 +13,7 @@ import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
+import SoakCard from "../../common/card/SoakCard";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();
@@ -80,10 +81,10 @@ export default function ArmorPage() {
                            disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
     };
 
-    const renderSoakCard = () => {
-        return pathname.endsWith('/view') ? <ViewFieldCard name={"Soak"} value={'+' + armor.soak}/> :
-            <NumberTextFieldCard title={"Soak"} value={armor.soak}
-                                 disabled={pathname.endsWith('/view')} onChange={handleSoakChange} min={0} max={5}/>;
+    const renderDefenseCard = () => {
+        return pathname.endsWith('/view') ? <ViewFieldCard name={"Defense"} value={String(armor.defense)}/> :
+            <NumberTextFieldCard title={"Defense"} value={armor.defense}
+                                 disabled={pathname.endsWith('/view')} onChange={handleDefenseChange} min={0} max={4}/>;
     };
 
     return (
@@ -94,10 +95,8 @@ export default function ArmorPage() {
                     {renderDescriptionCard()}
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    {renderSoakCard()}
-                    <NumberTextFieldCard title={'Defense'} value={armor.defense}
-                                         onChange={handleDefenseChange} min={0}
-                                         max={5} disabled={pathname.endsWith('/view')}/>
+                    <SoakCard armor={armor} updateSoak={handleSoakChange}/>
+                    {renderDefenseCard()}
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <NumberTextFieldCard title={'Encumbrance'} value={armor.encumbrance}

@@ -14,7 +14,7 @@ import Rival from "../../../../../../models/actor/npc/Rival";
 import {useLocation} from "react-router-dom";
 import ActorService from "../../../../../../services/ActorService";
 import ArmorSelectionDialog from "../../../../common/equipment/ArmorSelectionDialog";
-import ArmorEquipDialog from "../../../rival/equipment/armor/ArmorEquipDialog";
+import ArmorEquipDialog from "../../../../common/equipment/ArmorEquipDialog";
 import BooleanTableCell from "../../../../../common/table/BooleanTableCell";
 
 interface Props {

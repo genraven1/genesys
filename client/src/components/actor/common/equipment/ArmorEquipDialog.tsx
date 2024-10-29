@@ -4,10 +4,10 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
-import {TypographyLeftTableCell} from "../../../../../common/table/TypographyTableCell";
-import {ArmorSlotTableCell} from "../../../../../common/table/EquipmentSlotTableCell";
+import {ActorArmor, ArmorSlot} from "../../../../models/equipment/Armor";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
+import {ArmorSlotTableCell} from "../../../common/table/EquipmentSlotTableCell";
 
 interface Props {
     armors: ActorArmor[]

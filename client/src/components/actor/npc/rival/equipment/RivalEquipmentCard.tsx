@@ -10,12 +10,8 @@ import GenesysDescriptionTypography from "../../../../common/typography/GenesysD
 import ViewNonPlayerCharacterWeaponTable from "../../equipment/weapon/ViewNonPlayerCharacterWeaponTable";
 import CreateRivalWeaponDialog from "./weapon/CreateRivalWeaponDialog";
 import RivalWeaponSelectionDialog from "./weapon/RivalWeaponSelectionDialog";
-import ViewNonPlayerCharacterArmorTable from "../../equipment/armor/ViewNonPlayerCharacterArmorTable";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Rival from "../../../../../models/actor/npc/Rival";
-import CreateRivalArmorDialog from "./armor/CreateRivalArmorDialog";
-import ArmorSelectionDialog from "../../../common/equipment/ArmorSelectionDialog";
-import ArmorEquipDialog from "./armor/ArmorEquipDialog";
 import RivalArmorTable from "../../minion/equipment/armor/RivalArmorTable";
 
 interface Props {
