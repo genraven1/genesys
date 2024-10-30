@@ -1,6 +1,6 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import RivalWeaponSelectionTable from "./RivalWeaponSelectionTable";
-import Rival from "../../../../../../models/actor/npc/Rival";
+import Rival from "../../../../../models/actor/npc/Rival";
 
 interface Props {
     rival: Rival
@@ -8,7 +8,7 @@ interface Props {
     onClose: () => void
 }
 
-export default function RivalWeaponSelectionDialog(props: Props) {
+export default function WeaponSelectionDialog(props: Props) {
     const {rival, open, onClose} = props
 
     return (

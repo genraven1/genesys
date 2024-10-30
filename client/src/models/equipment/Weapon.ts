@@ -6,7 +6,6 @@ import {Option} from "../../components/common/InputSelectField";
 export interface Weapon extends Equipment {
     damage: number
     skill: Skill
-    skill_id: number
     critical: number
     range: RangeBand
     brawn: boolean

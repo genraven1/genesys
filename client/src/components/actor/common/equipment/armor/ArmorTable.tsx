@@ -5,16 +5,16 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {Fragment, useState} from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../../common/table/TypographyTableCell";
-import {renderQualities, renderSoak} from "../../../../../../models/equipment/EquipmentHelper";
-import {ActorArmor, Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
-import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
+import {ActorArmor, Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {Button, TableFooter} from "@mui/material";
 import {useLocation} from "react-router-dom";
-import ArmorSelectionDialog from "../../../../common/equipment/ArmorSelectionDialog";
-import ArmorEquipDialog from "../../../../common/equipment/ArmorEquipDialog";
-import BooleanTableCell from "../../../../../common/table/BooleanTableCell";
-import CreateArmorDialog from "../../../../common/equipment/CreateArmorDialog";
+import ArmorSelectionDialog from "./ArmorSelectionDialog";
+import ArmorEquipDialog from "./ArmorEquipDialog";
+import BooleanTableCell from "../../../../common/table/BooleanTableCell";
+import CreateArmorDialog from "./CreateArmorDialog";
 
 interface Props {
     armors: ActorArmor[]

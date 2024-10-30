@@ -6,12 +6,12 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import {Weapon, WeaponSlot} from "../../../../../../models/equipment/Weapon";
-import EquipmentService from "../../../../../../services/EquipmentService";
-import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
-import ActorService from "../../../../../../services/ActorService";
-import Rival from "../../../../../../models/actor/npc/Rival";
-import WeaponBackdrop from "../../../../common/equipment/WeaponBackdrop";
+import {Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
+import EquipmentService from "../../../../../services/EquipmentService";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import ActorService from "../../../../../services/ActorService";
+import Rival from "../../../../../models/actor/npc/Rival";
+import WeaponBackdrop from "../WeaponBackdrop";
 
 interface RowProps {
     weapon: Weapon

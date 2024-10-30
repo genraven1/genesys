@@ -14,16 +14,17 @@ import EquipmentService from "../../../../services/EquipmentService";
 import ModifierService from "../../../../services/ModifierService";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
-    weap: Weapon
+    weapon: Weapon
+    updateWeapon: (weapon: Weapon) => void
+    disabled: boolean
 }
 
 export default function WeaponModifierCard(props: Props) {
-    const {weap} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
-    const [weapon, setWeapon] = useState(weap);
+    const {weapon, updateWeapon, disabled} = props;
+    const headers = ['Type', 'Ranks'];
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export default function WeaponModifierCard(props: Props) {
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(weapon.id + '/edit')) {
+        if (!disabled) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
@@ -51,21 +52,21 @@ export default function WeaponModifierCard(props: Props) {
         const updatedModifiers = weapon.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setWeapon(await EquipmentService.updateWeapon({...weapon, modifiers: updatedModifiers}));
+        updateWeapon({...weapon, modifiers: updatedModifiers});
     };
 
     const handleRanksChange = async (index: number, value: string) => {
         const updatedModifiers = weapon.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setWeapon(await EquipmentService.updateWeapon({...weapon, modifiers: updatedModifiers}));
+        updateWeapon({...weapon, modifiers: updatedModifiers});
     };
 
     const addRow = async () => {
-        setWeapon(await EquipmentService.updateWeapon({
+        updateWeapon({
             ...weapon,
             modifiers: [...weapon.modifiers, {type: "Default", ranks: 1}]
-        }));
+        });
     };
 
     return (
@@ -86,7 +87,7 @@ export default function WeaponModifierCard(props: Props) {
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
-                                            disabled={!pathname.endsWith(weapon.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -96,7 +97,7 @@ export default function WeaponModifierCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(weapon.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                 </TableRow>

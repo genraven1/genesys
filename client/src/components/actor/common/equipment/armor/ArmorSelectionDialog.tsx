@@ -1,17 +1,17 @@
 import {Button, Card, CardContent, Dialog, DialogActions, DialogContent} from "@mui/material";
 import {useEffect, useState} from "react";
-import {Armor} from "../../../../models/equipment/Armor";
-import EquipmentService from "../../../../services/EquipmentService";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import {Armor} from "../../../../../models/equipment/Armor";
+import EquipmentService from "../../../../../services/EquipmentService";
+import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import {renderPrice, renderQualities, renderSoak} from "../../../../models/equipment/EquipmentHelper";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import {renderPrice, renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
 import TableCell from "@mui/material/TableCell";
 
 interface Props {

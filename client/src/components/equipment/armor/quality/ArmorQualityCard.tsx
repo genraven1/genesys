@@ -1,18 +1,17 @@
-import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import * as React from "react";
-import {Fragment, useEffect, useState} from "react";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {EquipmentQuality} from "../../../../models/Quality";
-import QualityService from "../../../../services/QualityService";
 import TableRow from "@mui/material/TableRow";
-import AddIcon from "@mui/icons-material/Add";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import {Armor} from "../../../../models/equipment/Armor";
+import QualityAutocompleteTableCell from "../../../common/table/QualityAutocompleteTableCell";
+import NumberTextFieldIndexTableCell from "../../../common/table/NumberTextFieldIndexTableCell";
+import QualityTableFooter from "../../../common/table/QualityTableFooter";
 
 interface Props {
     armor: Armor
@@ -22,34 +21,7 @@ interface Props {
 
 export default function ArmorQualityCard(props: Props) {
     const {armor, updateArmor, disabled} = props;
-    const [equipmentQualities, setEquipmentQualities] = useState<EquipmentQuality[]>([]);
     const headers = ['Quality', 'Ranks'];
-
-    useEffect(() => {
-        (async () => {
-            let qualities = await QualityService.getQualities();
-            let updatedQualities = qualities.filter((quality) => quality.armor).map((quality) => ({
-                ...quality,
-                ranks: 1,
-            } as EquipmentQuality));
-            setEquipmentQualities(updatedQualities);
-        })()
-    }, [])
-
-    const renderTableFooter = () => {
-        if (!disabled) {
-            return (
-                <TableFooter>
-                    <TableRow key={'footer'}>
-                        <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
-                            Quality</Button>
-                    </TableRow>
-                </TableFooter>
-            )
-        } else {
-            return <Fragment/>
-        }
-    }
 
     const addRow = async () => {
         updateArmor({...armor, qualities: [...armor.qualities, {} as EquipmentQuality]});
@@ -62,7 +34,7 @@ export default function ArmorQualityCard(props: Props) {
         updateArmor({...armor, qualities: updatedQualities});
     };
 
-    const handleRanksChange = async (index: number, value: string) => {
+    const handleRanksChange = async (index: number, value: number) => {
         const updatedQualities = armor.qualities.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
@@ -79,31 +51,17 @@ export default function ArmorQualityCard(props: Props) {
                         <TableBody>
                             {armor.qualities.map((quality, index) => (
                                 <TableRow key={index}>
-                                    <TableCell>
-                                        <Autocomplete
-                                            options={equipmentQualities}
-                                            getOptionLabel={(option) => option.name}
-                                            value={quality}
-                                            onChange={(e, newValue) => handleQualityChange(index, newValue as EquipmentQuality)}
-                                            renderInput={(params) => <TextField {...params} label="Quality"
-                                                                                variant="outlined"/>}
-                                            disabled={disabled}
-                                        />
-                                    </TableCell>
-                                    <TableCell style={{textAlign: "center"}}>
-                                        <TextField
-                                            type="number"
-                                            value={quality.ranks}
-                                            label="Ranks"
-                                            onChange={(e) => handleRanksChange(index, e.target.value)}
-                                            inputProps={{min: 1, max: 10}}
-                                            disabled={disabled}
-                                        />
-                                    </TableCell>
+                                    <QualityAutocompleteTableCell disabled={disabled}
+                                                                  onChange={handleQualityChange} quality={quality}
+                                                                  index={index}/>
+                                    <NumberTextFieldIndexTableCell title={'Ranks'} value={quality.ranks}
+                                                                   onChange={handleRanksChange} min={1} max={10}
+                                                                   disabled={disabled}
+                                                                   index={index}/>
                                 </TableRow>
                             ))}
                         </TableBody>
-                        {renderTableFooter()}
+                        <QualityTableFooter id={armor.id} addRow={addRow}/>
                     </Table>
                 </TableContainer>
             </CardContent>

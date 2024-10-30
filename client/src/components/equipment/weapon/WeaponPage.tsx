@@ -111,6 +111,10 @@ export default function WeaponPage() {
                            disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
     };
 
+    const updateWeapon = async (updatedWeapon: Weapon) => {
+        setWeapon(await EquipmentService.updateWeapon(updatedWeapon));
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={weapon.name} path={EquipmentPath.Weapon + weapon.id}/>
@@ -151,8 +155,8 @@ export default function WeaponPage() {
                     <Grid container justifyContent={'center'}>
                         {renderDescriptionCard()}
                     </Grid>
-                    <WeaponQualityCard weap={weapon}/>
-                    <WeaponModifierCard weap={weapon}/>
+                    <WeaponQualityCard weapon={weapon} updateWeapon={updateWeapon} disabled={pathname.endsWith('/view')}/>
+                    <WeaponModifierCard weapon={weapon} updateWeapon={updateWeapon} disabled={pathname.endsWith('/view')}/>
                 </Grid>
             </CardContent>
         </Card>
