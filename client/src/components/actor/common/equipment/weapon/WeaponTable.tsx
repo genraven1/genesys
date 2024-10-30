@@ -15,6 +15,8 @@ import {ActorWeapon, Weapon, WeaponSlot} from "../../../../../models/equipment/W
 import {RangeBand} from "../../../../../models/common/RangeBand";
 import {ActorSkill} from "../../../../../models/actor/Actor";
 import CreateWeaponDialog from "./CreateWeaponDialog";
+import WeaponSelectionDialog from "./WeaponSelectionDialog";
+import WeaponEquipDialog from "./WeaponEquipDialog";
 
 interface Props {
     weapons: ActorWeapon[]
@@ -93,14 +95,14 @@ export default function WeaponTable(props: Props) {
                         <Button color='primary' variant='contained'
                                 onClick={(): void => setOpenSelectWeaponDialog(true)}>Add
                             Weapon</Button>
-                        {openSelectWeaponDialog && <ArmorSelectionDialog open={openSelectWeaponDialog}
+                        {openSelectWeaponDialog && <WeaponSelectionDialog open={openSelectWeaponDialog}
                                                                          onClose={(): void => setOpenSelectWeaponDialog(false)}
-                                                                         addArmor={addWeapon}/>}
+                                                                          addWeapon={addWeapon}/>}
                         <Button color='primary' variant='contained' onClick={(): void => setOpenEquipWeaponDialog(true)}>Equip
                             Weapon</Button>
-                        {openEquipWeaponDialog && <ArmorEquipDialog open={openEquipWeaponDialog}
+                        {openEquipWeaponDialog && <WeaponEquipDialog open={openEquipWeaponDialog}
                                                                     onClose={(): void => setOpenEquipWeaponDialog(false)}
-                                                                    updateArmors={equipWeapon} armors={weapons}/>}
+                                                                    updateWeapons={equipWeapon} weapons={weapons}/>}
                     </TableRow>
                 </TableFooter>
             )

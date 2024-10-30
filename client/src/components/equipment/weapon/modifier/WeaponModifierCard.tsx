@@ -2,7 +2,6 @@ import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import AddIcon from '@mui/icons-material/Add';
@@ -10,11 +9,9 @@ import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import TableCell from "@mui/material/TableCell";
 import {Weapon} from "../../../../models/equipment/Weapon";
-import EquipmentService from "../../../../services/EquipmentService";
 import ModifierService from "../../../../services/ModifierService";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
     weapon: Weapon

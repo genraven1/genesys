@@ -14,7 +14,7 @@ export default interface Character {
     willpower: Characteristic,
     presence: Characteristic,
     wounds: Wounds
-    weapons: ActorWeapon[]
+    weapons: ActorArmor[]
     armors: ActorArmor[]
     injuries: Injury[]
     disoriented: StatusEffect

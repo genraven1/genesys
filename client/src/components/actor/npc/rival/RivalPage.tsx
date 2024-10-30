@@ -19,8 +19,8 @@ import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {DefenseType} from "../../../../models/actor/Defense";
 import {ActorSkill} from "../../../../models/actor/Actor";
 import RatingCard from "../RatingCard";
-import {ActorArmor} from "../../../../models/equipment/Armor";
 import {ActorWeapon} from "../../../../models/equipment/Weapon";
+import {ActorArmor} from "../../../../models/equipment/Armor";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
