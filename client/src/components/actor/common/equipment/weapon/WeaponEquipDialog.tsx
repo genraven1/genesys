@@ -18,15 +18,36 @@ interface Props {
 
 export default function WeaponEquipDialog(props: Props) {
     const {weapons, open, updateWeapons, onClose} = props;
-    const headers = ['Name', 'Armor Slot'];
+    const headers = ['Name', 'Weapon Slot'];
 
     const onChange = async (value: ActorWeapon) => {
         switch (value.slot) {
             case WeaponSlot.Main:
+                weapons.forEach((weapon) => {
+                    if (weapon.name === value.name) {
+                        weapon.slot = value.slot;
+                    } else {
+                        if (weapon.slot !== WeaponSlot.Off) {
+                            weapon.slot = WeaponSlot.None;
+                        }
+                    }
+                })
                 break;
             case WeaponSlot.Off:
+                weapons.forEach((weapon) => {
+                    if (weapon.name === value.name) {
+                        weapon.slot = value.slot;
+                    } else {
+                        if (weapon.slot !== WeaponSlot.Main) {
+                            weapon.slot = WeaponSlot.None;
+                        }
+                    }
+                })
                 break;
             case WeaponSlot.Both:
+                weapons.forEach((weapon) => {
+                    weapon.slot = weapon.name === value.name ? value.slot : WeaponSlot.None;
+                })
                 break;
             default:
                 weapons.forEach((armor) => {

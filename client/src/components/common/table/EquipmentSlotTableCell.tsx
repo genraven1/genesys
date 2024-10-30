@@ -39,6 +39,10 @@ interface WeaponProps {
 export function WeaponSlotTableCell(props: WeaponProps) {
     const {weapon, onChange} = props;
 
+    const weaponSlotOptions = () => {
+        return weapon.hands === 2 ? [WeaponSlot.Both, WeaponSlot.None] : [WeaponSlot.Main, WeaponSlot.Off, WeaponSlot.None];
+    }
+
     return (
         <TableCell style={{textAlign: 'center'}}>
             <Select
@@ -48,7 +52,7 @@ export function WeaponSlotTableCell(props: WeaponProps) {
                 fullWidth
                 label={'Weapon Slot'}
                 variant={'standard'}>
-                {Object.values(WeaponSlot).map(option => (
+                {Object.values(weaponSlotOptions).map(option => (
                     <MenuItem key={option} value={option}>
                         {option}
                     </MenuItem>
