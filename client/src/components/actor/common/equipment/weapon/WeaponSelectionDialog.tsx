@@ -26,7 +26,7 @@ interface Props {
 export default function WeaponSelectionDialog(props: Props) {
     const {open, addWeapon, onClose} = props;
     const [weapons, setWeapons] = useState<Weapon[]>([]);
-    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'Special Qualities', 'Add'];
+    const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Encumbrance', 'Price', 'Rarity', 'Special Qualities', 'Add'];
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -47,6 +47,10 @@ export default function WeaponSelectionDialog(props: Props) {
                                     {weapons.map((weapon: Weapon) => (
                                         <TableRow key={weapon.name}>
                                             <TypographyCenterTableCell value={weapon.name}/>
+                                            <TypographyCenterTableCell value={weapon.skill.name || ''}/>
+                                            <TypographyCenterTableCell value={weapon.brawn ? `Brawn + ${weapon.damage}` : String(weapon.damage)}/>
+                                            <TypographyCenterTableCell value={String(weapon.critical)}/>
+                                            <TypographyCenterTableCell value={weapon.range}/>
                                             <TypographyCenterTableCell value={String(weapon.encumbrance)}/>
                                             <TypographyCenterTableCell value={renderPrice(weapon)}/>
                                             <TypographyCenterTableCell value={String(weapon.rarity)}/>

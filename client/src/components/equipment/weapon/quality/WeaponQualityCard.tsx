@@ -61,7 +61,7 @@ export default function WeaponQualityCard(props: Props) {
                                 </TableRow>
                             ))}
                         </TableBody>
-                        <QualityTableFooter id={weapon.id} addRow={addRow}/>
+                        <QualityTableFooter addRow={addRow} disabled={disabled}/>
                     </Table>
                 </TableContainer>
             </CardContent>

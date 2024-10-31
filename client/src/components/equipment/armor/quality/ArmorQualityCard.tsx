@@ -61,7 +61,7 @@ export default function ArmorQualityCard(props: Props) {
                                 </TableRow>
                             ))}
                         </TableBody>
-                        <QualityTableFooter id={armor.id} addRow={addRow}/>
+                        <QualityTableFooter addRow={addRow} disabled={disabled}/>
                     </Table>
                 </TableContainer>
             </CardContent>

@@ -40,7 +40,7 @@ export default function EquipmentCard(props: Props) {
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
-                            <WeaponTable weapons={actor.weapons} updateWeapons={updateWeapons}/>
+                            <WeaponTable actor={actor} updateWeapons={updateWeapons}/>
                         </TabPanel>
                         <TabPanel value="2">
                             <ArmorTable armors={actor.armors} updateArmors={updateArmors}/>

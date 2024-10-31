@@ -38,26 +38,52 @@ interface WeaponProps {
 
 export function WeaponSlotTableCell(props: WeaponProps) {
     const {weapon, onChange} = props;
+    let pathname = useLocation().pathname
 
-    const weaponSlotOptions = () => {
-        return weapon.hands === 2 ? [WeaponSlot.Both, WeaponSlot.None] : [WeaponSlot.Main, WeaponSlot.Off, WeaponSlot.None];
+    const renderWeaponSlotSelect = () => {
+        if (weapon.hands === 2) {
+            return (
+                <Select
+                    value={weapon.slot}
+                    onChange={(e) => onChange({...weapon, slot: e.target.value as WeaponSlot})}
+                    disabled={!pathname.endsWith('/edit')}
+                    fullWidth
+                    label={'Weapon Slot'}
+                    variant={'standard'}>
+                    <MenuItem key={WeaponSlot.None} value={WeaponSlot.None}>
+                        {WeaponSlot.None}
+                    </MenuItem>
+                    <MenuItem key={WeaponSlot.Both} value={WeaponSlot.Both}>
+                        {WeaponSlot.Both}
+                    </MenuItem>
+                </Select>
+            )
+        } else {
+            return (
+                <Select
+                    value={weapon.slot}
+                    onChange={(e) => onChange({...weapon, slot: e.target.value as WeaponSlot})}
+                    disabled={!pathname.endsWith('/edit')}
+                    fullWidth
+                    label={'Weapon Slot'}
+                    variant={'standard'}>
+                    <MenuItem key={WeaponSlot.None} value={WeaponSlot.None}>
+                        {WeaponSlot.None}
+                    </MenuItem>
+                    <MenuItem key={WeaponSlot.Main} value={WeaponSlot.Main}>
+                        {WeaponSlot.Main}
+                    </MenuItem>
+                    <MenuItem key={WeaponSlot.Off} value={WeaponSlot.Off}>
+                        {WeaponSlot.Off}
+                    </MenuItem>
+                </Select>
+            )
+        }
     }
 
     return (
         <TableCell style={{textAlign: 'center'}}>
-            <Select
-                value={weapon.slot}
-                onChange={(e) => onChange({...weapon, slot: e.target.value as WeaponSlot})}
-                disabled={!useLocation().pathname.endsWith('/edit')}
-                fullWidth
-                label={'Weapon Slot'}
-                variant={'standard'}>
-                {Object.values(weaponSlotOptions).map(option => (
-                    <MenuItem key={option} value={option}>
-                        {option}
-                    </MenuItem>
-                ))}
-            </Select>
+            {renderWeaponSlotSelect()}
         </TableCell>
     )
 }

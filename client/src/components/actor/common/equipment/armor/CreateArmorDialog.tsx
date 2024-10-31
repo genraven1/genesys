@@ -55,7 +55,7 @@ export default function CreateArmorDialog(props: Props) {
     };
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} fullScreen>
             <DialogTitle>Add Custom Armor</DialogTitle>
             <DialogContent>
                 <Grid container>

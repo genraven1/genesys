@@ -82,7 +82,7 @@ export default function CreateWeaponDialog(props: Props) {
     };
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} fullScreen>
             <DialogTitle>Add Custom Weapon</DialogTitle>
             <DialogContent>
                 <Grid container>

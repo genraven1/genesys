@@ -5,27 +5,33 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {Fragment, useState} from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
+import {
+    GenesysDicePoolCenterTableCell,
+    TypographyCenterTableCell,
+    TypographyLeftTableCell
+} from "../../../../common/table/TypographyTableCell";
 import {renderQualities} from "../../../../../models/equipment/EquipmentHelper";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {Button, TableFooter} from "@mui/material";
 import {useLocation} from "react-router-dom";
-import BooleanTableCell from "../../../../common/table/BooleanTableCell";
 import {ActorWeapon, Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
 import {RangeBand} from "../../../../../models/common/RangeBand";
-import {ActorSkill} from "../../../../../models/actor/Actor";
+import Actor, {ActorSkill} from "../../../../../models/actor/Actor";
 import CreateWeaponDialog from "./CreateWeaponDialog";
 import WeaponSelectionDialog from "./WeaponSelectionDialog";
 import WeaponEquipDialog from "./WeaponEquipDialog";
+import {getActorSkill} from "../../../../common/skill/SkillRenders";
+import NonPlayerActor from "../../../../../models/actor/npc/NonPlayerActor";
 
 interface Props {
-    weapons: ActorWeapon[]
+    actor: Actor
     updateWeapons: (armors: ActorWeapon[]) => void
 }
 
 export default function WeaponTable(props: Props) {
-    const {weapons, updateWeapons} = props;
-    const headers = ['Name', 'Equipped', 'Defense', 'Soak', 'Special Qualities'];
+    const {actor, updateWeapons} = props;
+    const weapons = actor.weapons;
+    const headers = ['Name', 'Equipped Slot', 'Skill', 'Damage', 'Critical', 'Range', 'Special Qualities', 'Dice Pool'];
     const [openCreateWeaponDialog, setOpenCreateWeaponDialog] = useState(false);
     const [openSelectWeaponDialog, setOpenSelectWeaponDialog] = useState(false);
     const [openEquipWeaponDialog, setOpenEquipWeaponDialog] = useState(false);
@@ -40,8 +46,13 @@ export default function WeaponTable(props: Props) {
                     {weapons.map((weapon: ActorWeapon) => (
                         <TableRow key={weapon.id}>
                             <TypographyLeftTableCell value={weapon.name}/>
-                            <BooleanTableCell bool={!(weapon.slot === WeaponSlot.None)}/>
+                            <TypographyCenterTableCell value={weapon.slot}/>
+                            <TypographyCenterTableCell value={weapon.skill.name || ''}/>
+                            <TypographyCenterTableCell value={weapon.brawn ? String(actor.brawn + weapon.damage) : String(weapon.damage)}/>
+                            <TypographyCenterTableCell value={String(weapon.critical)}/>
+                            <TypographyCenterTableCell value={weapon.range}/>
                             <TypographyCenterTableCell value={renderQualities(weapon)}/>
+                            <GenesysDicePoolCenterTableCell actor={actor} skill={getActorSkill(actor as NonPlayerActor, weapon)}/>
                         </TableRow>
                     ))}
                 </TableBody>
