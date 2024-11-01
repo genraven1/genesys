@@ -6,7 +6,6 @@ import Rival from "../../../../models/actor/npc/Rival";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import RivalSkillCard from "./skill/RivalSkillCard";
 import RivalTalentCard from "./talent/RivalTalentCard";
-import RivalAbilityCard from "./ability/RivalAbilityCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
@@ -21,6 +20,8 @@ import {ActorSkill} from "../../../../models/actor/Actor";
 import RatingCard from "../RatingCard";
 import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import {ActorArmor} from "../../../../models/equipment/Armor";
+import AbilityTableCard from "../../common/ability/AbilityTableCard";
+import Ability from "../../../../models/Ability";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
@@ -105,6 +106,12 @@ export default function RivalPage() {
         }
     };
 
+    const handleAbilityChange = async (values: Ability[]) => {
+        if (rival) {
+            setRival(await ActorService.updateRival({...rival, abilities: values}));
+        }
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
@@ -137,7 +144,7 @@ export default function RivalPage() {
                     <Divider/>
                     <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
-                    <RivalAbilityCard rival={rival}/>
+                    <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
                     <RivalTalentCard rival={rival}/>
                 </Grid>

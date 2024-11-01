@@ -24,26 +24,6 @@ export default function HomeCampaignDashboard() {
         setValue(newValue);
     }
 
-    const renderDefaultDashboard = () => {
-        return <MainDashboard/>
-    }
-
-    const renderActorDashboard = () => {
-        return <ActorDashboard/>
-    }
-
-    const renderEquipmentDashboard = () => {
-        return <EquipmentDashboard/>
-    }
-
-    const renderLoreDashboard = () => {
-        return <LoreDashboard/>
-    }
-
-    const renderCampaignPage = () => {
-        return <CampaignPage campaign={campaign}/>
-    }
-
     const getSubHeader = () => {
         return campaign ? campaign?.name! : 'No Campaign Selected';
     }
@@ -74,11 +54,21 @@ export default function HomeCampaignDashboard() {
                                 <Tab label="Campaign" value="5"/>
                             </TabList>
                         </Grid>
-                        <TabPanel value="1">{renderDefaultDashboard()}</TabPanel>
-                        <TabPanel value="2">{renderActorDashboard()}</TabPanel>
-                        <TabPanel value="3">{renderEquipmentDashboard()}</TabPanel>
-                        <TabPanel value="4">{renderLoreDashboard()}</TabPanel>
-                        <TabPanel value="5">{renderCampaignPage()}</TabPanel>
+                        <TabPanel value="1">
+                            <MainDashboard/>
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <ActorDashboard/>
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <EquipmentDashboard/>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <LoreDashboard/>
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <CampaignPage campaign={campaign}/>
+                        </TabPanel>
                     </TabContext>
                 </Grid>
             </CardContent>

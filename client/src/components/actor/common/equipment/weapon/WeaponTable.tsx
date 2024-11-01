@@ -25,7 +25,7 @@ import NonPlayerActor from "../../../../../models/actor/npc/NonPlayerActor";
 
 interface Props {
     actor: Actor
-    updateWeapons: (armors: ActorWeapon[]) => void
+    updateWeapons: (weapons: ActorWeapon[]) => void
 }
 
 export default function WeaponTable(props: Props) {
