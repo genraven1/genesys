@@ -11,19 +11,19 @@ interface Props {
     rival: Rival
 }
 
-export default function RivalTalentCard(props: Props): JSX.Element {
+export default function RivalTalentCard(props: Props) {
     const {rival} = props
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
     const pathname = useLocation().pathname
 
-    const renderTable = (): JSX.Element => {
+    const renderTable = () => {
         if (rival.talents.length === 0) {
             return <GenesysDescriptionTypography text={'None'}/>
         }
         return <RivalTalentTable rival={rival} />
     }
 
-    const renderButton = (): JSX.Element => {
+    const renderButton = () => {
         if (pathname.endsWith('/edit')) {
             return (
                 <Fragment>
