@@ -27,7 +27,7 @@ export default function EquipmentCard(props: Props) {
     };
 
     return (
-        <Card sx={{"width": 1}}>
+        <Card sx={{width: 1}}>
             <CenteredCardHeader title={'Equipment'}/>
             <CardContent>
                 <Grid sx={{width: 1}}>

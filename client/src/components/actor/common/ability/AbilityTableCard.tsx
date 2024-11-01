@@ -3,8 +3,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import * as React from "react";
-import NonPlayerActor from "../../../../models/actor/npc/NonPlayerActor";
-import {Button, TableFooter} from "@mui/material";
+import {Button, Card, CardContent, TableFooter} from "@mui/material";
 import TableRow from "@mui/material/TableRow";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
@@ -15,6 +14,7 @@ import {
     GenesysDescriptionTypographyCenterTableCell,
     TypographyLeftTableCell
 } from "../../../common/table/TypographyTableCell";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 
 interface Props {
     abilities: Ability[]
@@ -65,12 +65,17 @@ export default function AbilityTableCard(props: Props) {
     }
 
     return (
-        <TableContainer component={Paper}>
-            <Table>
-                {renderSingleRowTableHeader(headers)}
-                {renderTableBody()}
-                {renderTableFooter()}
-            </Table>
-        </TableContainer>
+        <Card sx={{width: 1}}>
+            <CenteredCardHeader title={'Abilities'}/>
+            <CardContent>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        {renderTableBody()}
+                        {renderTableFooter()}
+                    </Table>
+                </TableContainer>
+            </CardContent>
+        </Card>
     )
 }
