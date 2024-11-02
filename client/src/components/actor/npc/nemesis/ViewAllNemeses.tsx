@@ -17,12 +17,13 @@ import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCe
 import {ActorType} from "../../../../models/actor/Actor";
 import {ActorPath} from "../../../../services/RootPath";
 import CreateActorDialog from "../../common/CreateActorDialog";
+import {useFetchCurrentCampaign} from "../../../campaign/CampaignWorkflow";
 
 interface Props {
     nemesis: Nemesis
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {nemesis} = props
     const [open, setOpen] = useState(false)
 
@@ -49,19 +50,17 @@ function Row(props: Props): JSX.Element {
 }
 
 export default function ViewAllNemeses() {
-    const [nemeses, setNemeses] = useState<Nemesis[]>([])
-    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+    const [nemeses, setNemeses] = useState<Nemesis[]>([]);
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false);
+    let campaign = useFetchCurrentCampaign();
+    const headers = ['Name', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const nemesisList = await ActorService.getNemeses()
-            if (!nemesisList) {
-                return
-            }
-            setNemeses(nemesisList)
+            if (!campaign) return;
+            setNemeses(await ActorService.getNemeses(campaign.id));
         })()
-    }, [])
+    }, [campaign]);
 
     return (
         <Card>

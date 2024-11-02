@@ -1,7 +1,6 @@
 import {Card, CardContent, Grid} from "@mui/material";
 import {useLocation} from "react-router-dom";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
-import Rival from "../../../../../models/actor/npc/Rival";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -13,14 +12,15 @@ import TableRow from "@mui/material/TableRow";
 import {GenesysDicePoolCenterTableCell} from "../../../../common/table/TypographyTableCell";
 import {ActorSkill} from "../../../../../models/actor/Actor";
 import SkillRanksTextFieldTableCell from "../../../../common/table/SkillRanksTextFieldTableCell";
+import {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerActor";
 
 interface Props {
-    rival: Rival
+    actor: SingleNonPlayerCharacter
     onSkillChange: (skill: ActorSkill) => void
 }
 
 export default function RivalSkillCard(props: Props) {
-    const {rival, onSkillChange} = props;
+    const {actor, onSkillChange} = props;
     let headers = ['Skill', 'Ranks', 'Dice Pool'];
     const pathname = useLocation().pathname;
 
@@ -29,13 +29,13 @@ export default function RivalSkillCard(props: Props) {
             <Table>
                 {renderDoubleRowTableHeader(headers, type, 3)}
                 <TableBody>
-                    {(rival.skills || []).filter((skill) => skill.type === type).map((skill: ActorSkill) => (
+                    {(actor.skills || []).filter((skill) => skill.type === type).map((skill: ActorSkill) => (
                         <TableRow key={skill.name}>
                             {renderSkillName(skill)}
                             <SkillRanksTextFieldTableCell onChange={onSkillChange}
-                                                          disabled={!pathname.endsWith(rival.id + '/edit')}
+                                                          disabled={!pathname.endsWith(actor.id + '/edit')}
                                                           skill={skill}/>
-                            <GenesysDicePoolCenterTableCell actor={rival} skill={skill}/>
+                            <GenesysDicePoolCenterTableCell actor={actor} skill={skill}/>
                         </TableRow>
                     ))}
                 </TableBody>

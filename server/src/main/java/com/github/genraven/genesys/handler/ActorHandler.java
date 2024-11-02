@@ -137,7 +137,7 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> createNemesis(final ServerRequest serverRequest) {
-        return nemesisService.createNemesis(serverRequest.pathVariable("name"))
+        return nemesisService.createNemesis(serverRequest.pathVariable("nemesisName"))
                 .flatMap(nemesis -> ServerResponse.created(getURI(nemesis)).bodyValue(nemesis));
     }
 
@@ -146,6 +146,16 @@ public class ActorHandler {
         final Mono<Nemesis> nemesisMono = serverRequest.bodyToMono(Nemesis.class);
         return nemesisMono
                 .flatMap(nemesis -> nemesisService.updateNemesis(name, nemesis))
+                .flatMap(nemesis -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(nemesis)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updateNemesisSkill(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<ActorSkill> skillMono = serverRequest.bodyToMono(ActorSkill.class);
+        return skillMono.flatMap(skill -> nemesisService.updateNemesisSkill(id, skill))
                 .flatMap(nemesis -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(nemesis)))

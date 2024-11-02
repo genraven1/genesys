@@ -1,35 +1,49 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.ActorSkill;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.NonPlayerActor;
 import com.github.genraven.genesys.domain.actor.npc.SingleNonPlayerActor;
 import com.github.genraven.genesys.repository.actor.NemesisRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.genraven.genesys.service.SkillService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class NemesisService {
 
     private final NemesisRepository nemesisRepository;
-
-    @Autowired
-    public NemesisService(final NemesisRepository nemesisRepository) {
-        this.nemesisRepository = nemesisRepository;
-    }
+    private final SkillService skillService;
 
     public Flux<Nemesis> getAllNemeses() {
-        return nemesisRepository.findAll();
+        return nemesisRepository.findAll().map(nemesis -> {
+            nemesis.getTotalSoak();
+            nemesis.getTotalMeleeDefense();
+            nemesis.getTotalRangedDefense();
+            return nemesis;
+        });
     }
 
     public Mono<Nemesis> getNemesis(final String name) {
-        return nemesisRepository.findById(name);
+        return nemesisRepository.findById(name).map(nemesis -> {
+            nemesis.getTotalSoak();
+            nemesis.getTotalMeleeDefense();
+            nemesis.getTotalRangedDefense();
+            return nemesis;
+        });
     }
 
     public Mono<Nemesis> createNemesis(final String name) {
-        return nemesisRepository.save(new Nemesis(new SingleNonPlayerActor(new NonPlayerActor(new Actor(name)))));
+        return skillService.getSkillsForCurrentCampaign()
+                .flatMap(skills -> {
+                    final Nemesis nemesis = new Nemesis(new SingleNonPlayerActor(new NonPlayerActor(new Actor(name))));
+                    nemesis.setSkills(skills.stream().map(ActorSkill::new).toList());
+                    return nemesisRepository.save(nemesis);
+                });
     }
 
     public Mono<Nemesis> updateNemesis(final String name, final Nemesis nemesis) {
@@ -52,5 +66,13 @@ public class NemesisService {
             nem.setArmors(nemesis.getArmors());
             return nem;
         }).flatMap(nemesisRepository::save);
+    }
+
+    public Mono<Nemesis> updateNemesisSkill(final String id, final ActorSkill skill) {
+        return nemesisRepository.findById(id).flatMap(nemesis -> {
+            nemesis.getSkills().stream().filter(actorSkill -> actorSkill.getId().equals(skill.getId()))
+                    .forEach(actorSkill -> actorSkill.setRanks(skill.getRanks()));
+            return nemesisRepository.save(nemesis);
+        });
     }
 }

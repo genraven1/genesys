@@ -24,11 +24,14 @@ public class ActorRouter {
                         .GET("/players/", actorHandler::getAllPlayers)
                         .POST("/players/{playerName}", actorHandler::createPlayer)
                 )
-                .path("/actors/nemeses", builder -> builder
-                        .GET("/", actorHandler::getAllNemeses)
-                        .POST("/{name}", actorHandler::createNemesis)
+                .path("/campaigns/{name}", builder -> builder
+                        .GET("/nemeses/", actorHandler::getAllNemeses)
+                        .POST("/nemeses/{nemesisName}", actorHandler::createNemesis)
+                )
+                .path("/nemeses", builder -> builder
                         .GET("/{name}", actorHandler::getNemesis)
                         .PUT("/{name}", actorHandler::updateNemesis)
+                        .PATCH("/{id}/skills/", actorHandler::updateNemesisSkill)
                 )
                 .path("/rivals", builder -> builder
                         .GET("/{id}", actorHandler::getRival)

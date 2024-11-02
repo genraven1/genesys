@@ -156,7 +156,7 @@ export default function RivalPage() {
                     </Grid>
                     {renderRatingRow()}
                     <Divider/>
-                    <RivalSkillCard rival={rival} onSkillChange={handleSkillChange}/>
+                    <RivalSkillCard actor={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>
                     <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
