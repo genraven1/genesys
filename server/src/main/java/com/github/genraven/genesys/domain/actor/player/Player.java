@@ -32,6 +32,8 @@ public class Player extends Actor {
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
         this.setSoak(actor.getSoak());
+        this.setMelee(actor.getMelee());
+        this.setRanged(actor.getRanged());
         this.setWeapons(actor.getWeapons());
         this.setArmors(actor.getArmors());
     }
@@ -66,5 +68,17 @@ public class Player extends Actor {
         Experience oldExperience = getExperience();
         oldExperience.setAvailable(experience);
         this.experience = oldExperience;
+    }
+
+    public void getTotalMeleeDefense() {
+        int melee = 0;
+        melee += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        this.setMelee(melee);
+    }
+
+    public void getTotalRangedDefense() {
+        int ranged = 0;
+        ranged += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        this.setRanged(ranged);
     }
 }

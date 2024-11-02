@@ -29,6 +29,8 @@ public class PlayerService {
         return playerRepository.findAll().map(player -> {
             player.getTotalSoak();
             player.getTotalEncumbrance();
+            player.getTotalMeleeDefense();
+            player.getTotalRangedDefense();
             return player;
         });
     }
@@ -38,6 +40,8 @@ public class PlayerService {
         return playerRepository.findById(id).map(player -> {
             player.getTotalSoak();
             player.getTotalEncumbrance();
+            player.getTotalMeleeDefense();
+            player.getTotalRangedDefense();
             return player;
         });
     }

@@ -24,6 +24,8 @@ public class SingleNonPlayerActor extends NonPlayerActor {
         this.setPresence(nonPlayerActor.getPresence());
         this.setWounds(nonPlayerActor.getWounds());
         this.setSoak(nonPlayerActor.getSoak());
+        this.setMelee(nonPlayerActor.getMelee());
+        this.setRanged(nonPlayerActor.getRanged());
         this.setCombat(nonPlayerActor.getCombat());
         this.setSocial(nonPlayerActor.getSocial());
         this.setGeneral(nonPlayerActor.getGeneral());

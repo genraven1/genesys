@@ -24,7 +24,7 @@ export default function WeaponBackdrop(props: Props) {
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Price', 'Special Qualities'];
 
     return (
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open} onClick={onClose}>
+        <Backdrop sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}} open={open} onClick={onClose}>
             <Card>
                 <CenteredCardHeader title={weapon.name}/>
                 <CardContent>

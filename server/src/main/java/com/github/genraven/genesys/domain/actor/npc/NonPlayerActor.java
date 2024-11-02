@@ -25,6 +25,8 @@ public class NonPlayerActor extends Actor {
         this.setPresence(actor.getPresence());
         this.setWounds(actor.getWounds());
         this.setSoak(actor.getSoak());
+        this.setMelee(actor.getMelee());
+        this.setRanged(actor.getRanged());
         this.setWeapons(actor.getWeapons());
         this.setArmors(actor.getArmors());
     }

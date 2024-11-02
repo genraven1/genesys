@@ -2,7 +2,7 @@ import axios from "axios";
 import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import Rival from "../models/actor/npc/Rival";
-import Actor from "../models/actor/Actor";
+import Actor, {ActorSkill} from "../models/actor/Actor";
 import Minion from "../models/actor/npc/Minion";
 import NonPlayerActor from "../models/actor/npc/NonPlayerActor";
 import Career from "../models/actor/player/Career";
@@ -177,6 +177,22 @@ export default class ActorService {
         return await fetch(ActorPath.Rival + `${rival.id}`, {
             method: "PUT",
             body: JSON.stringify(rival),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async updateRivalSkill(id: string, skill: ActorSkill): Promise<Rival> {
+        return await fetch(ActorPath.Rival + `${id}` + RootPath.Skills, {
+            method: "PATCH",
+            body: JSON.stringify(skill),
             headers: {
                 'Content-Type': 'application/json'
             }

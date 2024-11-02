@@ -3,7 +3,6 @@ import NavBar from '../navigation/NavBar';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {ActorPath, CampaignPath, EquipmentPath, LorePath, RootPath} from '../../services/RootPath';
 import AllNemesesView from '../actor/npc/nemesis/ViewAllNemeses';
-import AllRivalsView from '../actor/npc/rival/ViewAllRivals';
 import * as React from 'react';
 import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
@@ -71,7 +70,7 @@ export default function App() {
                     <Route path={ActorPath.Nemesis + ':name/edit'} element={<NemesisWorkflow/>}/>
                     <Route path={ActorPath.Nemesis + ':name/view'} element={<NemesisWorkflow/>}/>
 
-                    <Route path={ActorPath.Rival} element={<AllRivalsView/>}/>
+                    <Route path={ActorPath.Rival} element={<RivalWorkflow/>}/>
                     <Route path={ActorPath.Rival + ':id/edit'} element={<RivalWorkflow/>}/>
                     <Route path={ActorPath.Rival + ':id/view'} element={<RivalWorkflow/>}/>
 

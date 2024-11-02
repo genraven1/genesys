@@ -13,6 +13,8 @@ import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
+import SoakCard from "../../common/card/SoakCard";
+import DefenseCard from "../../common/card/DefenseCard";
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();
@@ -70,7 +72,7 @@ export default function ArmorPage() {
 
     const handleRarityChange = async (value: number) => {
         if (armor) {
-            setArmor(await EquipmentService.updateArmor({...armor, rarity: value}));
+            await updateArmor({...armor, rarity: value})
         }
     };
 
@@ -80,10 +82,8 @@ export default function ArmorPage() {
                            disabled={pathname.endsWith('/view')} onChange={handleDescriptionChange}/>;
     };
 
-    const renderSoakCard = () => {
-        return pathname.endsWith('/view') ? <ViewFieldCard name={"Soak"} value={'+' + armor.soak}/> :
-            <NumberTextFieldCard title={"Soak"} value={armor.soak}
-                                 disabled={pathname.endsWith('/view')} onChange={handleSoakChange} min={0} max={5}/>;
+    const updateArmor = async (updatedArmor: Armor) => {
+        setArmor(await EquipmentService.updateArmor(updatedArmor));
     };
 
     return (
@@ -94,10 +94,8 @@ export default function ArmorPage() {
                     {renderDescriptionCard()}
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    {renderSoakCard()}
-                    <NumberTextFieldCard title={'Defense'} value={armor.defense}
-                                         onChange={handleDefenseChange} min={0}
-                                         max={5} disabled={pathname.endsWith('/view')}/>
+                    <SoakCard armor={armor} updateSoak={handleSoakChange}/>
+                    <DefenseCard armor={armor} updateDefense={handleDefenseChange}/>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <NumberTextFieldCard title={'Encumbrance'} value={armor.encumbrance}
@@ -112,8 +110,8 @@ export default function ArmorPage() {
                                          min={0}
                                          max={10} disabled={pathname.endsWith('/view')}/>
                 </Grid>
-                <ArmorQualityCard arm={armor}/>
-                <ArmorModifierCard arm={armor}/>
+                <ArmorQualityCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
+                <ArmorModifierCard armor={armor} updateArmor={updateArmor} disabled={pathname.endsWith('/view')}/>
             </CardContent>
         </Card>
     )

@@ -3,14 +3,16 @@ import * as React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import {useLocation, useNavigate} from "react-router-dom";
+import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 
 interface Props {
     title: string
     path: string
+    subheader?: string
 }
 
 export default function CenteredCardHeaderWithAction(props: Props) {
-    const {title, path} = props;
+    const {title, path, subheader} = props;
     let pathname = useLocation().pathname;
     let navigate = useNavigate();
 
@@ -33,6 +35,7 @@ export default function CenteredCardHeaderWithAction(props: Props) {
     };
 
     return (
-        <CardHeader style={{textAlign: 'center'}} title={title} action={onPageChange()}/>
+        <CardHeader style={{textAlign: 'center'}} title={title} action={onPageChange()}
+                    subheader={<GenesysDescriptionTypography text={subheader || ''}/>}/>
     );
 }

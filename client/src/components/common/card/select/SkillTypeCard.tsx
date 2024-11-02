@@ -23,7 +23,7 @@ export default function SkillTypeCard(props: Props) {
                         disabled={disabled}
                         fullWidth
                         label={'Skill Type'}
-                    >
+                        variant={'standard'}>
                         {Object.values(SkillType).map(option => (
                             <MenuItem key={option} value={option}>
                                 {option}

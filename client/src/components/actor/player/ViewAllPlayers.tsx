@@ -24,6 +24,7 @@ export default function ViewAllPlayers() {
 
     useEffect(() => {
         (async (): Promise<void> => {
+            if (!campaign) return;
             setPlayers(await ActorService.getPlayers(campaign.id));
         })()
     }, [campaign])

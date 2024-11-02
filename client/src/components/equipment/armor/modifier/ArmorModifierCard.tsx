@@ -2,38 +2,36 @@ import {Autocomplete, Button, Card, CardContent, TableFooter, TextField} from "@
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import TableCell from "@mui/material/TableCell";
-import EquipmentService from "../../../../services/EquipmentService";
 import ModifierService from "../../../../services/ModifierService";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {Armor} from "../../../../models/equipment/Armor";
 
 interface Props {
-    arm: Armor
+    armor: Armor
+    updateArmor: (armor: Armor) => void
+    disabled: boolean
 }
 
 export default function ArmorModifierCard(props: Props) {
-    const {arm} = props
-    const pathname = useLocation().pathname
-    const headers = ['Type', 'Ranks']
-    const [armor, setArmor] = useState(arm);
+    const {armor, updateArmor, disabled} = props;
+    const headers = ['Type', 'Ranks'];
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
         (async () => {
-            setTypeOptions(await ModifierService.getModifiers())
+            setTypeOptions(await ModifierService.getModifiers());
         })()
     }, [])
 
     const renderTableFooter = () => {
-        if (pathname.endsWith(armor.id + '/edit')) {
+        if (!disabled) {
             return (
                 <TableFooter>
                     <TableRow key={'Footer'}>
@@ -51,21 +49,18 @@ export default function ArmorModifierCard(props: Props) {
         const updatedModifiers = armor.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, modifiers: updatedModifiers}));
+        updateArmor({...armor, modifiers: updatedModifiers});
     };
 
     const handleRanksChange = async (index: number, value: string) => {
         const updatedModifiers = armor.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        setArmor(await EquipmentService.updateArmor({...armor, modifiers: updatedModifiers}));
+        updateArmor({...armor, modifiers: updatedModifiers});
     };
 
     const addRow = async () => {
-        setArmor(await EquipmentService.updateArmor({
-            ...armor,
-            modifiers: [...armor.modifiers, {type: "Default", ranks: 1}]
-        }));
+        updateArmor({...armor, modifiers: [...armor.modifiers, {type: "Default", ranks: 1}]});
     };
 
     return (
@@ -86,7 +81,7 @@ export default function ArmorModifierCard(props: Props) {
                                             onChange={(e, newValue) => handleTypeChange(index, newValue as string)}
                                             renderInput={(params) => <TextField {...params} label="Type"
                                                                                 variant="outlined"/>}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                     <TableCell style={{textAlign: "center"}}>
@@ -96,7 +91,7 @@ export default function ArmorModifierCard(props: Props) {
                                             label="Ranks"
                                             onChange={(e) => handleRanksChange(index, e.target.value)}
                                             inputProps={{min: 1, max: 10}}
-                                            disabled={!pathname.endsWith(armor.id + '/edit')}
+                                            disabled={disabled}
                                         />
                                     </TableCell>
                                 </TableRow>

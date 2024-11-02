@@ -44,6 +44,25 @@ interface Props {
 
 export default function PlayerSkillCard(props: Props) {
     const {player} = props;
+    let headers = ['Skill', 'Career', 'Ranks', 'Dice Pool'];
+
+    const renderSkillGroupTable = (type: SkillType) => {
+        return (
+            <Table>
+                {renderDoubleRowTableHeader(headers, type, 3)}
+                <TableBody>
+                    {(player.skills || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
+                        <TableRow key={skill.name}>
+                            {renderSkillName(skill)}
+                            <BooleanTableCell bool={skill.career}/>
+                            <TypographyCenterTableCell value={String(skill.ranks)}/>
+                            <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        )
+    }
 
     return (
         <Card sx={{"width": 1}}>
@@ -54,8 +73,10 @@ export default function PlayerSkillCard(props: Props) {
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableBody>
-                                    <SkillTypeGroup player={player} type={SkillType.General}/>
-                                    <SkillTypeGroup player={player} type={SkillType.Magic}/>
+                                    {renderSkillGroupTable(SkillType.General)}
+                                    {/*<SkillTypeGroup player={player} type={SkillType.General}/>*/}
+                                    {renderSkillGroupTable(SkillType.Magic)}
+                                    {/*<SkillTypeGroup player={player} type={SkillType.Magic}/>*/}
                                 </TableBody>
                             </Table>
                         </TableContainer>

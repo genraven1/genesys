@@ -7,7 +7,7 @@ import Nemesis from "../../../../models/actor/npc/Nemesis"
 import {CharacteristicType} from "../../../../models/character/Characteristic"
 import {StatsType} from "../../../../models/actor/Stats"
 import RatingCard from "../RatingCard"
-import {NonPlayerCharacterKey, RatingType} from "../../../../models/actor/npc/NonPlayerActor"
+import {RatingType} from "../../../../models/actor/npc/NonPlayerActor"
 import NonPlayerActorSoakCard from "../NonPlayerActorSoakCard"
 import CheckIcon from '@mui/icons-material/Check'
 import {ActorKey} from "../../../../models/actor/Actor"
@@ -136,20 +136,20 @@ export default function NemesisEdit(props: Props) {
                         <NonPlayerActorDefenseCard npc={nemesis}/>
                     </Grid>
                     <Divider/>
-                    <Grid container spacing={10}>
-                        <RatingCard rating={nemesis?.combat!!} type={RatingType.Combat}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.Combat, value)
-                                    }}/>
-                        <RatingCard rating={nemesis?.social!!} type={RatingType.Social}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.Social, value)
-                                    }}/>
-                        <RatingCard rating={nemesis?.general!!} type={RatingType.General}
-                                    onChange={(value: number): void => {
-                                        onChange(NonPlayerCharacterKey.General, value)
-                                    }}/>
-                    </Grid>
+                    {/*<Grid container spacing={10}>*/}
+                    {/*    <RatingCard rating={nemesis?.combat!!} type={RatingType.Combat}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.Combat, value)*/}
+                    {/*                }}/>*/}
+                    {/*    <RatingCard rating={nemesis?.social!!} type={RatingType.Social}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.Social, value)*/}
+                    {/*                }}/>*/}
+                    {/*    <RatingCard rating={nemesis?.general!!} type={RatingType.General}*/}
+                    {/*                onChange={(value: number): void => {*/}
+                    {/*                    onChange(NonPlayerCharacterKey.General, value)*/}
+                    {/*                }}/>*/}
+                    {/*</Grid>*/}
                     <Divider/>
                     <NemesisSkillCard nemesis={nemesis}/>
                     <Divider/>

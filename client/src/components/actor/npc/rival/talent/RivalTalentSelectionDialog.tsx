@@ -1,21 +1,58 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import RivalTalentSelectionTable from "./RivalTalentSelectionTable";
-import Rival from "../../../../../models/actor/npc/Rival";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import TableBody from "@mui/material/TableBody";
+import Talent from "../../../../../models/Talent";
+import TableContainer from "@mui/material/TableContainer";
+import {useEffect, useState} from "react";
+import CampaignService from "../../../../../services/CampaignService";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../../common/table/TypographyTableCell";
+import * as React from "react";
 
 interface Props {
-    rival: Rival
     open: boolean
+    addTalent: (talent: Talent) => void
     onClose: () => void
 }
 
 export default function RivalTalentSelectionDialog(props: Props) {
-    const {rival, open, onClose} = props
+    const {open, addTalent, onClose} = props;
+    const [talents, setTalents] = useState<Talent[]>([]);
+    const headers = ['Name', 'Activation', 'Description', 'Add'];
+
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setTalents(await CampaignService.getCampaignTalents());
+        })()
+    }, [setTalents]);
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} fullScreen>
             <DialogTitle title={'Add Talent'}/>
             <DialogContent>
-                <RivalTalentSelectionTable rival={rival}/>
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        <TableBody>
+                            {talents.map((talent: Talent) => (
+                                <TableRow key={talent.name}>
+                                    <TypographyCenterTableCell value={talent.name}/>
+                                    <TypographyCenterTableCell value={talent.activation}/>
+                                    <GenesysDescriptionTypographyCenterTableCell value={talent.description}/>
+                                    <TableCell style={{textAlign: "center"}}>
+                                        <Button onClick={() => addTalent(talent)}>Add</Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

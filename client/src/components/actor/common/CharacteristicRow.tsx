@@ -27,32 +27,32 @@ export default function CharacteristicRow(props: Props) {
 }
 
 interface PlayerProps {
-    player: Player
+    actor: Actor
     handleCharacteristicChange: (characteristic: CharacteristicType, value: number) => void
 }
 
-export function PlayerCharacteristicRow(props: PlayerProps) {
-    const {player, handleCharacteristicChange} = props;
+export function ActorCharacteristicRow(props: PlayerProps) {
+    const {actor, handleCharacteristicChange} = props;
     let pathname = useLocation().pathname;
 
     return (
         <Grid container spacing={2}>
-            <CharacteristicCard type={CharacteristicType.Brawn} value={player.brawn}
+            <CharacteristicCard type={CharacteristicType.Brawn} value={actor.brawn}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
-            <CharacteristicCard type={CharacteristicType.Agility} value={player.agility}
+            <CharacteristicCard type={CharacteristicType.Agility} value={actor.agility}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
-            <CharacteristicCard type={CharacteristicType.Intellect} value={player.intellect}
+            <CharacteristicCard type={CharacteristicType.Intellect} value={actor.intellect}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
-            <CharacteristicCard type={CharacteristicType.Cunning} value={player.cunning}
+            <CharacteristicCard type={CharacteristicType.Cunning} value={actor.cunning}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
-            <CharacteristicCard type={CharacteristicType.Willpower} value={player.willpower}
+            <CharacteristicCard type={CharacteristicType.Willpower} value={actor.willpower}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
-            <CharacteristicCard type={CharacteristicType.Presence} value={player.presence}
+            <CharacteristicCard type={CharacteristicType.Presence} value={actor.presence}
                                 handleCharacteristicChange={handleCharacteristicChange}
                                 disabled={pathname.endsWith('/view')}/>
         </Grid>

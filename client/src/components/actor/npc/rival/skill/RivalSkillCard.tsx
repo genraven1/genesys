@@ -1,36 +1,76 @@
-import {Card, CardContent} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import {useLocation} from "react-router-dom";
-import {Fragment} from "react";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
-import ViewRivalSkillTable from "./ViewRivalSkillTable";
-import RivalSkillTable from "./RivalSkillTable";
 import Rival from "../../../../../models/actor/npc/Rival";
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import {SkillType} from "../../../../../models/actor/Skill";
+import * as React from "react";
+import {renderDoubleRowTableHeader, renderSkillName} from "../../../../common/table/TableRenders";
+import TableRow from "@mui/material/TableRow";
+import {GenesysDicePoolCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import {ActorSkill} from "../../../../../models/actor/Actor";
+import SkillRanksTextFieldTableCell from "../../../../common/table/SkillRanksTextFieldTableCell";
 
 interface Props {
     rival: Rival
+    onSkillChange: (skill: ActorSkill) => void
 }
 
-export default function RivalSkillCard(props: Props): JSX.Element {
-    const {rival} = props
-    const pathname = useLocation().pathname
+export default function RivalSkillCard(props: Props) {
+    const {rival, onSkillChange} = props;
+    let headers = ['Skill', 'Ranks', 'Dice Pool'];
+    const pathname = useLocation().pathname;
 
-    const renderSkillTable = (): JSX.Element => {
-        if (pathname.endsWith('/view')) {
-            return <ViewRivalSkillTable rival={rival}/>
-        } else if (pathname.endsWith('/edit')) {
-            return <RivalSkillTable rival={rival}/>
-        } else {
-            return <Fragment/>
-        }
-    }
-
+    const renderSkillGroupTable = (type: SkillType) => {
+        return (
+            <Table>
+                {renderDoubleRowTableHeader(headers, type, 3)}
+                <TableBody>
+                    {(rival.skills || []).filter((skill) => skill.type === type).map((skill: ActorSkill) => (
+                        <TableRow key={skill.name}>
+                            {renderSkillName(skill)}
+                            <SkillRanksTextFieldTableCell onChange={onSkillChange}
+                                                          disabled={!pathname.endsWith(rival.id + '/edit')}
+                                                          skill={skill}/>
+                            <GenesysDicePoolCenterTableCell actor={rival} skill={skill}/>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        );
+    };
 
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Skills'}/>
             <CardContent>
-                {renderSkillTable()}
+                <Grid container>
+                    <Grid item xs={6}>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableBody>
+                                    {renderSkillGroupTable(SkillType.General)}
+                                    {renderSkillGroupTable(SkillType.Magic)}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableBody>
+                                    {renderSkillGroupTable(SkillType.Combat)}
+                                    {renderSkillGroupTable(SkillType.Social)}
+                                    {renderSkillGroupTable(SkillType.Knowledge)}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
-    )
+    );
 }

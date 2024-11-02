@@ -23,6 +23,7 @@ export default function TierCard(props: Props) {
                         disabled={disabled}
                         fullWidth
                         label={'Tier'}
+                        variant={"standard"}
                     >
                         {Object.values(Tier).map(option => (
                             <MenuItem key={option} value={option}>
