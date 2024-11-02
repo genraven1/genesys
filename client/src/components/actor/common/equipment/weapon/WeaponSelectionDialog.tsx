@@ -1,16 +1,13 @@
-import {Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import RivalWeaponSelectionTable from "./RivalWeaponSelectionTable";
-import Rival from "../../../../../models/actor/npc/Rival";
+import {Button, Card, CardContent, Dialog, DialogActions, DialogContent} from "@mui/material";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import {Armor} from "../../../../../models/equipment/Armor";
 import TableRow from "@mui/material/TableRow";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
-import {renderPrice, renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
+import {renderPrice, renderQualities} from "../../../../../models/equipment/EquipmentHelper";
 import TableCell from "@mui/material/TableCell";
 import * as React from "react";
 import {Weapon} from "../../../../../models/equipment/Weapon";
