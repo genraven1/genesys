@@ -15,8 +15,7 @@ import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders"
 import {Button, TableFooter} from "@mui/material";
 import {useLocation} from "react-router-dom";
 import {ActorWeapon, Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
-import {RangeBand} from "../../../../../models/common/RangeBand";
-import Actor, {ActorSkill} from "../../../../../models/actor/Actor";
+import Actor from "../../../../../models/actor/Actor";
 import CreateWeaponDialog from "./CreateWeaponDialog";
 import WeaponSelectionDialog from "./WeaponSelectionDialog";
 import WeaponEquipDialog from "./WeaponEquipDialog";
@@ -60,25 +59,8 @@ export default function WeaponTable(props: Props) {
         }
     }
 
-    const createWeapon = async () => {
-        updateWeapons([...weapons, {
-            slot: WeaponSlot.None,
-            id: 'custom',
-            modifiers: [],
-            name: 'Default',
-            price: 0,
-            rarity: 0,
-            restricted: false,
-            encumbrance: 0,
-            description: '',
-            qualities: [],
-            brawn: false,
-            damage: 0,
-            critical: 3,
-            hands: 1,
-            range: RangeBand.Engaged,
-            skill: {} as ActorSkill
-        }]);
+    const createWeapon = async (weapon: ActorWeapon) => {
+        updateWeapons([...weapons, weapon]);
     };
 
     const addWeapon = async (weapon: Weapon) => {

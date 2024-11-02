@@ -49,21 +49,8 @@ export default function ArmorTable(props: Props) {
         }
     }
 
-    const createArmor = async () => {
-        updateArmors([...armors, {
-            slot: ArmorSlot.None,
-            id: 'custom',
-            modifiers: [],
-            soak: 0,
-            defense: 0,
-            name: 'Default',
-            price: 0,
-            rarity: 0,
-            restricted: false,
-            encumbrance: 0,
-            description: '',
-            qualities: []
-        }]);
+    const createArmor = async (armor: ActorArmor) => {
+        updateArmors([...armors, armor]);
     };
 
     const addArmor = async (armor: Armor) => {
