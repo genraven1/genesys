@@ -1,4 +1,4 @@
-import {Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select} from "@mui/material";
+import {Card, CardContent, FormControl, Grid, MenuItem, Select} from "@mui/material";
 import CenteredCardHeader from "./CenteredCardHeader";
 import * as React from "react";
 
@@ -17,13 +17,12 @@ export function BooleanTextFieldCard(props: BooleanTextFieldProps) {
                 <CenteredCardHeader title={title}/>
                 <CardContent>
                     <FormControl fullWidth>
-                        <InputLabel>{title}</InputLabel>
                         <Select
                             value={value ? 'Yes' : 'No'}
                             onChange={(e) => onChange(e.target.value === 'Yes')}
                             label="Ranked"
                             disabled={disabled}
-                        >
+                            variant={"standard"}>
                             <MenuItem value="Yes">Yes</MenuItem>
                             <MenuItem value="No">No</MenuItem>
                         </Select>

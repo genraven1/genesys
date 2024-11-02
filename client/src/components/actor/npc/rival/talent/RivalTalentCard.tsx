@@ -1,18 +1,14 @@
 import {Button, Card, CardContent, TableFooter} from "@mui/material";
-import RivalTalentTable from "./RivalTalentTable";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
-import Rival from "../../../../../models/actor/npc/Rival";
-import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import RivalTalentSelectionDialog from "./RivalTalentSelectionDialog";
 import TableRow from "@mui/material/TableRow";
-import {ActorTalent} from "../../../../../models/Talent";
+import Talent, {ActorTalent} from "../../../../../models/Talent";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
@@ -28,22 +24,22 @@ export default function RivalTalentCard(props: Props) {
     const headers = ['Name', 'Summary'];
     const pathname = useLocation().pathname;
 
+    const addTalent = (talent: Talent) => {
+        updateTalents([...talents, {...talent, ranks: 1}]);
+    };
+
     const renderTableBody = () => {
         return (
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableBody>
-                        {(talents).map((talent: ActorTalent) => (
-                            <TableRow>
-                                <TypographyCenterTableCell value={talent.name}/>
-                                <TypographyCenterTableCell value={talent.summary}/>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <TableBody>
+                {(talents).map((talent: ActorTalent) => (
+                    <TableRow>
+                        <TypographyCenterTableCell value={talent.name}/>
+                        <TypographyCenterTableCell value={talent.summary}/>
+                    </TableRow>
+                ))}
+            </TableBody>
         )
-    }
+    };
 
     const renderTableFooter = () => {
         if (pathname.endsWith('/edit')) {
@@ -54,22 +50,27 @@ export default function RivalTalentCard(props: Props) {
                                 onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                         {openSelectTalentDialog &&
                             <RivalTalentSelectionDialog open={openSelectTalentDialog}
-                                                        onClose={(): void => setOpenSelectTalentDialog(false)} addTalent={}/>}
+                                                        onClose={(): void => setOpenSelectTalentDialog(false)}
+                                                        addTalent={addTalent}/>}
                     </TableRow>
                 </TableFooter>
             )
         } else {
             return <Fragment/>
         }
-    }
+    };
 
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Talents'}/>
             <CardContent>
-                {renderSingleRowTableHeader(headers)}
-                {renderTableBody()}
-                {renderTableFooter()}
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        {renderTableBody()}
+                        {renderTableFooter()}
+                    </Table>
+                </TableContainer>
             </CardContent>
         </Card>
     )

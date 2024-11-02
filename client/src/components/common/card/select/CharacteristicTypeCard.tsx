@@ -23,6 +23,7 @@ export default function CharacteristicTypeCard(props: Props) {
                         disabled={disabled}
                         fullWidth
                         label={'Characteristic Type'}
+                        variant={"standard"}
                     >
                         {Object.values(CharacteristicType).map(option => (
                             <MenuItem key={option} value={option}>

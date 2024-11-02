@@ -22,6 +22,7 @@ import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import AbilityTableCard from "../../common/ability/AbilityTableCard";
 import Ability from "../../../../models/Ability";
+import {ActorTalent} from "../../../../models/Talent";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
@@ -112,6 +113,12 @@ export default function RivalPage() {
         }
     };
 
+    const handleTalentChange = async (values: ActorTalent[]) => {
+        if (rival) {
+            setRival(await ActorService.updateRival({...rival, talents: values}));
+        }
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
@@ -146,7 +153,7 @@ export default function RivalPage() {
                     <Divider/>
                     <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
-                    <RivalTalentCard rival={rival}/>
+                    <RivalTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>

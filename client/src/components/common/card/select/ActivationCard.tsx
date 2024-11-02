@@ -23,6 +23,7 @@ export default function ActivationCard(props: Props) {
                         disabled={disabled}
                         fullWidth
                         label={'Activation'}
+                        variant={"standard"}
                     >
                         {Object.values(Activation).map(option => (
                             <MenuItem key={option} value={option}>
