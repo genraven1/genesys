@@ -119,6 +119,25 @@ export default function RivalPage() {
         }
     };
 
+    const renderRatingRow = () => {
+        if (pathname.endsWith(rival.id + '/edit')) {
+            return (
+                <Grid container spacing={2}>
+                    <RatingCard type={RatingType.Combat} value={rival.combat}
+                                onChange={handleRatingsChange}
+                                disabled={!pathname.endsWith(rival.id + '/edit')}/>
+                    <RatingCard type={RatingType.Social} value={rival.social}
+                                onChange={handleRatingsChange}
+                                disabled={!pathname.endsWith(rival.id + '/edit')}/>
+                    <RatingCard type={RatingType.General} value={rival.general}
+                                onChange={handleRatingsChange}
+                                disabled={!pathname.endsWith(rival.id + '/edit')}/>
+                </Grid>
+            )
+        }
+        return <Fragment/>
+    }
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
@@ -135,17 +154,7 @@ export default function RivalPage() {
                         <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
-                    <Grid container spacing={2}>
-                        <RatingCard type={RatingType.Combat} value={rival.combat}
-                                    onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
-                        <RatingCard type={RatingType.Social} value={rival.social}
-                                    onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
-                        <RatingCard type={RatingType.General} value={rival.general}
-                                    onChange={handleRatingsChange}
-                                    disabled={!pathname.endsWith(rival.id + '/edit')}/>
-                    </Grid>
+                    {renderRatingRow()}
                     <Divider/>
                     <RivalSkillCard rival={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>

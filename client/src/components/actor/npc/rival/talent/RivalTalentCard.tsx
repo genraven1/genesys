@@ -8,7 +8,10 @@ import Talent, {ActorTalent} from "../../../../../models/Talent";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../../common/table/TypographyTableCell";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
@@ -21,7 +24,7 @@ interface Props {
 export default function RivalTalentCard(props: Props) {
     const {talents, updateTalents} = props;
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
-    const headers = ['Name', 'Summary'];
+    const headers = ['Name', 'Activation', 'Summary'];
     const pathname = useLocation().pathname;
 
     const addTalent = (talent: Talent) => {
@@ -34,7 +37,8 @@ export default function RivalTalentCard(props: Props) {
                 {(talents).map((talent: ActorTalent) => (
                     <TableRow>
                         <TypographyCenterTableCell value={talent.name}/>
-                        <TypographyCenterTableCell value={talent.summary}/>
+                        <TypographyCenterTableCell value={talent.activation}/>
+                        <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
                     </TableRow>
                 ))}
             </TableBody>

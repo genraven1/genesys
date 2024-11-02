@@ -11,7 +11,7 @@ import CreateAbilityDialog from "./CreateAbilityDialog";
 import Ability from "../../../../models/Ability";
 import TableBody from "@mui/material/TableBody";
 import {
-    GenesysDescriptionTypographyCenterTableCell,
+    GenesysDescriptionTypographyCenterTableCell, TypographyCenterTableCell,
     TypographyLeftTableCell
 } from "../../../common/table/TypographyTableCell";
 import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
@@ -25,7 +25,7 @@ export default function AbilityTableCard(props: Props) {
     const {abilities, updateAbilities} = props;
     const [openCreateAbilityDialog, setOpenCreateAbilityDialog] = useState(false);
     const pathname = useLocation().pathname;
-    const headers = ['Name', 'Summary'];
+    const headers = ['Name', 'Activation', 'Summary'];
 
     const createAbility = (ability: Ability) => {
         updateAbilities([...abilities, ability]);
@@ -37,6 +37,7 @@ export default function AbilityTableCard(props: Props) {
                 {(abilities).map((ability: Ability) => (
                     <TableRow key={ability.name}>
                         <TypographyLeftTableCell value={ability.name}/>
+                        <TypographyCenterTableCell value={ability.activation}/>
                         <GenesysDescriptionTypographyCenterTableCell value={ability.description}/>
                     </TableRow>
                 ))}
