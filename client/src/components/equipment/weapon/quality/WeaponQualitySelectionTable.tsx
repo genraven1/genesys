@@ -5,10 +5,8 @@ import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
-import {Button} from "@mui/material";
 import QualityService from "../../../../services/QualityService";
 import Quality from "../../../../models/Quality";
-import QualityBackdrop from "../../../qualities/QualityBackdrop";
 import {Weapon} from "../../../../models/equipment/Weapon";
 import EquipmentService from "../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
@@ -40,10 +38,10 @@ function QualityRow(props: RowProps) {
     return (
         <TableRow>
             <TableCell>
-                <Button onClick={(): void => setOpenQualityBackDrop(true)}>{quality.name}</Button>
-                {openQualityBackDrop &&
-                    <QualityBackdrop open={openQualityBackDrop} onClose={(): void => setOpenQualityBackDrop(false)}
-                                     quality={quality}/>}
+                {/*<Button onClick={(): void => setOpenQualityBackDrop(true)}>{quality.name}</Button>*/}
+                {/*{openQualityBackDrop &&*/}
+                {/*    <QualityBackdrop open={openQualityBackDrop} onClose={(): void => setOpenQualityBackDrop(false)}*/}
+                {/*                     quality={quality}/>}*/}
             </TableCell>
         </TableRow>
     )

@@ -146,7 +146,7 @@ export default function NemesisPage() {
 
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={nemesis.name} path={ActorPath.Rival + nemesis.id}
+            <CenteredCardHeaderWithAction title={nemesis.name} path={ActorPath.Nemesis + nemesis.id}
                                           subheader={getRatings(nemesis)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
@@ -155,10 +155,10 @@ export default function NemesisPage() {
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(nemesis.soak)}/>
                         <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={nemesis.wounds}
-                                             onChange={handleWoundsChange} min={1} max={20}
+                                             onChange={handleWoundsChange} min={1} max={35}
                                              disabled={!pathname.endsWith(nemesis.id + '/edit')}/>
                         <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={nemesis.strain}
-                                             onChange={handleStrainChange} min={1} max={20}
+                                             onChange={handleStrainChange} min={1} max={35}
                                              disabled={!pathname.endsWith(nemesis.id + '/edit')}/>
                         <ViewFieldCard name={DefenseType.Melee} value={String(nemesis.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(nemesis.ranged)}/>

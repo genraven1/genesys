@@ -29,7 +29,10 @@ export default function SingleNonPlayerCharacterSkillCard(props: Props) {
             <Table>
                 {renderDoubleRowTableHeader(headers, type, 3)}
                 <TableBody>
-                    {(actor.skills || []).filter((skill) => skill.type === type).map((skill: ActorSkill) => (
+                    {(actor.skills || [])
+                        .filter((skill) => skill.type === type)
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((skill: ActorSkill) => (
                         <TableRow key={skill.name}>
                             {renderSkillName(skill)}
                             <SkillRanksTextFieldTableCell onChange={onSkillChange}

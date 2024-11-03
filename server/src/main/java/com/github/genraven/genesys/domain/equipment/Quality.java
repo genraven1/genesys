@@ -21,7 +21,6 @@ public class Quality {
     private String id;
     private String name;
     private String description;
-    private boolean passive = false;
     private int cost = 2;
     private boolean armor = false;
     private boolean weapon = false;
