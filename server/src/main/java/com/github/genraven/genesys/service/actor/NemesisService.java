@@ -47,7 +47,7 @@ public class NemesisService {
     }
 
     public Mono<Nemesis> updateNemesis(final String name, final Nemesis nemesis) {
-        return nemesisRepository.findById(name).map(nem -> {
+        return getNemesis(name).map(nem -> {
             nem.setBrawn(nemesis.getBrawn());
             nem.setAgility(nemesis.getAgility());
             nem.setIntellect(nemesis.getIntellect());

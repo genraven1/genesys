@@ -55,7 +55,7 @@ public class PlayerService {
     }
 
     public Mono<Player> updatePlayer(final String name, final Player player) {
-        return playerRepository.findById(name).map(existingPlayer -> {
+        return getPlayer(name).map(existingPlayer -> {
             existingPlayer.setExperience(player.getExperience());
             existingPlayer.setSkills(player.getSkills());
             existingPlayer.setTalents(player.getTalents());
@@ -66,7 +66,7 @@ public class PlayerService {
     }
 
     public Mono<Player> updatePlayerCareer(final String id, final Career career) {
-        return playerRepository.findById(id).flatMap(existingPlayer -> {
+        return getPlayer(id).flatMap(existingPlayer -> {
             existingPlayer.setCareer(career);
             existingPlayer.getSkills().forEach(playerSkill -> career.getSkills().forEach(skill -> {
                 playerSkill.setCareer(playerSkill.getId().equals(skill.getId()));
@@ -78,7 +78,7 @@ public class PlayerService {
 
     public Mono<Player> updatePlayerCareerSkills(final String id, final List<PlayerSkill> skills) {
         final List<String> ids = skills.stream().map(PlayerSkill::getId).toList();
-        return playerRepository.findById(id).flatMap(existingPlayer -> {
+        return getPlayer(id).flatMap(existingPlayer -> {
             getCareerSkills(existingPlayer).forEach(playerSkill -> playerSkill.setRanks(ids.contains(playerSkill.getId()) ? 1 : 0));
             return playerRepository.save(existingPlayer);
         });
@@ -89,7 +89,7 @@ public class PlayerService {
     }
 
     public Mono<Player> updatePlayerArchetype(final String id, final Archetype archetype) {
-        return playerRepository.findById(id).flatMap(existingPlayer -> {
+        return getPlayer(id).flatMap(existingPlayer -> {
             existingPlayer.setArchetype(archetype);
             existingPlayer.setBrawn(archetype.getBrawn());
             existingPlayer.setAgility(archetype.getAgility());
