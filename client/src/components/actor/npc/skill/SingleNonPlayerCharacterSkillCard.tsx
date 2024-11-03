@@ -1,25 +1,25 @@
 import {Card, CardContent, Grid} from "@mui/material";
 import {useLocation} from "react-router-dom";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import {SkillType} from "../../../../../models/actor/Skill";
+import {SkillType} from "../../../../models/actor/Skill";
 import * as React from "react";
-import {renderDoubleRowTableHeader, renderSkillName} from "../../../../common/table/TableRenders";
+import {renderDoubleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
-import {GenesysDicePoolCenterTableCell} from "../../../../common/table/TypographyTableCell";
-import {ActorSkill} from "../../../../../models/actor/Actor";
-import SkillRanksTextFieldTableCell from "../../../../common/table/SkillRanksTextFieldTableCell";
-import {SingleNonPlayerCharacter} from "../../../../../models/actor/npc/NonPlayerActor";
+import {GenesysDicePoolCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {ActorSkill} from "../../../../models/actor/Actor";
+import SkillRanksTextFieldTableCell from "../../../common/table/SkillRanksTextFieldTableCell";
+import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
 
 interface Props {
     actor: SingleNonPlayerCharacter
     onSkillChange: (skill: ActorSkill) => void
 }
 
-export default function RivalSkillCard(props: Props) {
+export default function SingleNonPlayerCharacterSkillCard(props: Props) {
     const {actor, onSkillChange} = props;
     let headers = ['Skill', 'Ranks', 'Dice Pool'];
     const pathname = useLocation().pathname;

@@ -15,45 +15,45 @@ interface Props {
 }
 
 export default function CreateActorDialog(props: Props) {
-    const {open, actorType, onClose} = props
-    const [name, setName] = useState('')
-    const [type, setType] = useState<ActorType>(actorType)
-    let navigate = useNavigate()
-    let campaign = useFetchCurrentCampaign()
+    const {open, actorType, onClose} = props;
+    const [name, setName] = useState('');
+    const [type, setType] = useState<ActorType>(actorType);
+    let navigate = useNavigate();
+    let campaign = useFetchCurrentCampaign();
 
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case ActorType.Minion:
-                let minion = {...await ActorService.createMinion(name)}
-                navigate(ActorPath.Minion + minion.name + '/edit')
+                let minion = {...await ActorService.createMinion(name)};
+                navigate(ActorPath.Minion + minion.name + '/edit');
                 break
             case ActorType.Rival:
                 let rival = await ActorService.createRival(campaign.id, name);
-                navigate(ActorPath.Rival + rival.id + '/edit')
+                navigate(ActorPath.Rival + rival.id + '/edit');
                 break
             case ActorType.Nemesis:
-                let nemesis = {...await ActorService.createNemesis(name)}
-                navigate(ActorPath.Nemesis + nemesis.name + '/edit')
+                let nemesis = await ActorService.createNemesis(campaign.id, name);
+                navigate(ActorPath.Nemesis + nemesis.name + '/edit');
                 break
             case ActorType.Player:
                 let player = await ActorService.createPlayer(campaign.id, name);
-                navigate(ActorPath.Player + player.id + '/edit')
+                navigate(ActorPath.Player + player.id + '/edit');
                 break
         }
-        onClose()
+        onClose();
     }
 
     const onTypeChange = (value: ActorType): void => {
-        setType(value)
+        setType(value);
     }
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const {value} = event.target
-        setName(value)
+        const {value} = event.target;
+        setName(value);
     }
 
     const getTitle = (): string => {
-        return 'Create ' + type
+        return 'Create ' + type;
     }
 
     return (
@@ -69,5 +69,5 @@ export default function CreateActorDialog(props: Props) {
             </DialogContentText>
             <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
-    )
+    );
 }

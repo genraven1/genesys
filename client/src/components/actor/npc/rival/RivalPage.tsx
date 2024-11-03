@@ -4,8 +4,8 @@ import {StatsType} from "../../../../models/actor/Stats";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
-import RivalSkillCard from "./skill/RivalSkillCard";
-import RivalTalentCard from "./talent/RivalTalentCard";
+import SingleNonPlayerCharacterSkillCard from "../skill/SingleNonPlayerCharacterSkillCard";
+import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
@@ -156,13 +156,13 @@ export default function RivalPage() {
                     </Grid>
                     {renderRatingRow()}
                     <Divider/>
-                    <RivalSkillCard actor={rival} onSkillChange={handleSkillChange}/>
+                    <SingleNonPlayerCharacterSkillCard actor={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>
                     <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
                     <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
-                    <RivalTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
+                    <SingleNonPlayerCharacterTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>

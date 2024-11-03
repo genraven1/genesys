@@ -1,6 +1,5 @@
 import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
-import Rival from "../../../../models/actor/npc/Rival";
 import ActorService from "../../../../services/ActorService";
 import * as React from "react";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
@@ -13,10 +12,10 @@ import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {StatsType} from "../../../../models/actor/Stats";
 import {DefenseType} from "../../../../models/actor/Defense";
-import RivalSkillCard from "../rival/skill/RivalSkillCard";
+import SingleNonPlayerCharacterSkillCard from "../skill/SingleNonPlayerCharacterSkillCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import AbilityTableCard from "../../common/ability/AbilityTableCard";
-import RivalTalentCard from "../rival/talent/RivalTalentCard";
+import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import RatingCard from "../RatingCard";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {ActorSkill} from "../../../../models/actor/Actor";
@@ -166,13 +165,13 @@ export default function NemesisPage() {
                     </Grid>
                     {renderRatingRow()}
                     <Divider/>
-                    <RivalSkillCard actor={nemesis} onSkillChange={handleSkillChange}/>
+                    <SingleNonPlayerCharacterSkillCard actor={nemesis} onSkillChange={handleSkillChange}/>
                     <Divider/>
                     <EquipmentCard actor={nemesis} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
                     <AbilityTableCard abilities={nemesis.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
-                    <RivalTalentCard talents={nemesis.talents} updateTalents={handleTalentChange}/>
+                    <SingleNonPlayerCharacterTalentCard talents={nemesis.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>
