@@ -8,7 +8,7 @@ import SingleNonPlayerCharacterSkillCard from "../skill/SingleNonPlayerCharacter
 import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
-import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
+import CharacteristicRow, {ActorCharacteristicRow} from "../../common/CharacteristicRow";
 import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
@@ -136,7 +136,21 @@ export default function RivalPage() {
             )
         }
         return <Fragment/>
-    }
+    };
+
+    const renderCharacteristicRow = () => {
+        return pathname.endsWith(rival.id + '/edit') ?
+            <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/> :
+            <CharacteristicRow actor={rival}/>;
+    };
+
+    const renderWoundsCard = () => {
+        return pathname.endsWith(rival.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
+                                 onChange={handleWoundsChange} min={1} max={20}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(rival.wounds)}/>
+    };
 
     return (
         <Card>
@@ -144,13 +158,11 @@ export default function RivalPage() {
                                           subheader={getRatings(rival)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/>
+                    {renderCharacteristicRow()}
                     <Divider/>
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(rival.soak)}/>
-                        <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
-                                             onChange={handleWoundsChange} min={1} max={20}
-                                             disabled={!pathname.endsWith(rival.id + '/edit')}/>
+                        {renderWoundsCard()}
                         <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
