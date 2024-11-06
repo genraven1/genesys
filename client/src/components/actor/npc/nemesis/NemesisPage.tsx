@@ -7,7 +7,7 @@ import {Card, CardContent, Divider, Grid} from "@mui/material";
 import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
 import {ActorPath} from "../../../../services/RootPath";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
-import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
+import CharacteristicRow, {ActorCharacteristicRow} from "../../common/CharacteristicRow";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {StatsType} from "../../../../models/actor/Stats";
@@ -142,7 +142,13 @@ export default function NemesisPage() {
             )
         }
         return <Fragment/>
-    }
+    };
+
+    const renderCharacteristicRow = () => {
+        return pathname.endsWith(nemesis.id + '/edit') ?
+            <ActorCharacteristicRow actor={nemesis} handleCharacteristicChange={handleCharacteristicChange}/> :
+            <CharacteristicRow actor={nemesis}/>;
+    };
 
     return (
         <Card>
@@ -150,7 +156,7 @@ export default function NemesisPage() {
                                           subheader={getRatings(nemesis)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ActorCharacteristicRow actor={nemesis} handleCharacteristicChange={handleCharacteristicChange}/>
+                    {renderCharacteristicRow()}
                     <Divider/>
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(nemesis.soak)}/>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import Archetype from "../../models/actor/player/Archetype";
-import {ViewCharacteristicCard} from "../actor/CharacteristicCard";
 import {CharacteristicType} from "../../models/character/Characteristic";
 import {Card, CardContent, Grid} from "@mui/material";
 import {StatsType} from "../../models/actor/Stats";
@@ -23,14 +22,12 @@ export default function ArchetypeBackdrop(props: Props) {
                 <CenteredCardHeader title={archetype.name}/>
                 <CardContent>
                     <Grid container>
-                        <ViewCharacteristicCard characteristic={archetype.brawn} type={CharacteristicType.Brawn}/>
-                        <ViewCharacteristicCard characteristic={archetype.agility} type={CharacteristicType.Agility}/>
-                        <ViewCharacteristicCard characteristic={archetype.intellect}
-                                                type={CharacteristicType.Intellect}/>
-                        <ViewCharacteristicCard characteristic={archetype.cunning} type={CharacteristicType.Cunning}/>
-                        <ViewCharacteristicCard characteristic={archetype.willpower}
-                                                type={CharacteristicType.Willpower}/>
-                        <ViewCharacteristicCard characteristic={archetype.presence} type={CharacteristicType.Presence}/>
+                        <ViewFieldCard name={CharacteristicType.Brawn} value={String(archetype.brawn)}/>
+                        <ViewFieldCard name={CharacteristicType.Agility} value={String(archetype.agility)}/>
+                        <ViewFieldCard name={CharacteristicType.Intellect} value={String(archetype.intellect)}/>
+                        <ViewFieldCard name={CharacteristicType.Cunning} value={String(archetype.cunning)}/>
+                        <ViewFieldCard name={CharacteristicType.Willpower} value={String(archetype.willpower)}/>
+                        <ViewFieldCard name={CharacteristicType.Presence} value={String(archetype.presence)}/>
                     </Grid>
                     <Grid container>
                         <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(archetype.wounds)}/>

@@ -27,23 +27,3 @@ export function EditCharacteristicCard(props: EditProps): JSX.Element {
         </Grid>
     )
 }
-
-interface ViewProps {
-    characteristic: number
-    type: CharacteristicType
-}
-
-export function ViewCharacteristicCard(props: ViewProps): JSX.Element {
-    const { characteristic, type } = props;
-
-    return (
-        <Grid item xs>
-            <Card>
-                <CenteredCardHeader title={type}/>
-                <CardContent>
-                    <GenesysDescriptionTypography text={String(characteristic)}/>
-                </CardContent>
-            </Card>
-        </Grid>
-    )
-}
