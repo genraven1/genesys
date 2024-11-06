@@ -150,6 +150,22 @@ export default function NemesisPage() {
             <CharacteristicRow actor={nemesis}/>;
     };
 
+    const renderWoundsCard = () => {
+        return pathname.endsWith(nemesis.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={nemesis.wounds}
+                                 onChange={handleWoundsChange} min={1} max={35}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(nemesis.wounds)}/>
+    };
+
+    const renderStrainCard = () => {
+        return pathname.endsWith(nemesis.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={nemesis.strain}
+                                 onChange={handleStrainChange} min={1} max={35}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(nemesis.strain)}/>
+    };
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={nemesis.name} path={ActorPath.Nemesis + nemesis.id}
@@ -160,12 +176,8 @@ export default function NemesisPage() {
                     <Divider/>
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(nemesis.soak)}/>
-                        <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={nemesis.wounds}
-                                             onChange={handleWoundsChange} min={1} max={35}
-                                             disabled={!pathname.endsWith(nemesis.id + '/edit')}/>
-                        <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={nemesis.strain}
-                                             onChange={handleStrainChange} min={1} max={35}
-                                             disabled={!pathname.endsWith(nemesis.id + '/edit')}/>
+                        {renderWoundsCard()}
+                        {renderStrainCard()}
                         <ViewFieldCard name={DefenseType.Melee} value={String(nemesis.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(nemesis.ranged)}/>
                     </Grid>
