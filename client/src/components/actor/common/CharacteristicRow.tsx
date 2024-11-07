@@ -2,10 +2,9 @@ import Actor from "../../../models/actor/Actor";
 import {Grid} from "@mui/material";
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import * as React from "react";
-import Player from "../../../models/actor/player/Player";
 import {useLocation} from "react-router-dom";
 import CharacteristicCard from "../../common/card/CharacteristicCard";
-import {ViewCharacteristicCard} from "../CharacteristicCard";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
 
 interface Props {
     actor: Actor
@@ -16,12 +15,12 @@ export default function CharacteristicRow(props: Props) {
 
     return (
         <Grid container spacing={2}>
-            <ViewCharacteristicCard characteristic={actor?.brawn!!} type={CharacteristicType.Brawn}/>
-            <ViewCharacteristicCard characteristic={actor?.agility!!} type={CharacteristicType.Agility}/>
-            <ViewCharacteristicCard characteristic={actor?.intellect!!} type={CharacteristicType.Intellect}/>
-            <ViewCharacteristicCard characteristic={actor?.cunning!!} type={CharacteristicType.Cunning}/>
-            <ViewCharacteristicCard characteristic={actor?.willpower!!} type={CharacteristicType.Willpower}/>
-            <ViewCharacteristicCard characteristic={actor?.presence!!} type={CharacteristicType.Presence}/>
+            <ViewFieldCard name={CharacteristicType.Brawn} value={String(actor.brawn)}/>
+            <ViewFieldCard name={CharacteristicType.Agility} value={String(actor.agility)}/>
+            <ViewFieldCard name={CharacteristicType.Intellect} value={String(actor.intellect)}/>
+            <ViewFieldCard name={CharacteristicType.Cunning} value={String(actor.cunning)}/>
+            <ViewFieldCard name={CharacteristicType.Willpower} value={String(actor.willpower)}/>
+            <ViewFieldCard name={CharacteristicType.Presence} value={String(actor.presence)}/>
         </Grid>
     )
 }

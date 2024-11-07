@@ -33,7 +33,6 @@ public class QualityService {
         return getQuality(name).map(qual -> {
             qual.setDescription(quality.getDescription());
             qual.setCost(quality.getCost());
-            qual.setPassive(quality.isPassive());
             qual.setWeapon(quality.isWeapon());
             qual.setArmor(quality.isArmor());
             qual.setModifiers(quality.getModifiers());

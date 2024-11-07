@@ -1,18 +1,18 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import Talent from "../../../../../models/Talent";
+import Talent from "../../../../models/Talent";
 import TableContainer from "@mui/material/TableContainer";
 import {useEffect, useState} from "react";
-import CampaignService from "../../../../../services/CampaignService";
+import CampaignService from "../../../../services/CampaignService";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import {
     GenesysDescriptionTypographyCenterTableCell,
     TypographyCenterTableCell
-} from "../../../../common/table/TypographyTableCell";
+} from "../../../common/table/TypographyTableCell";
 import * as React from "react";
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
     onClose: () => void
 }
 
-export default function RivalTalentSelectionDialog(props: Props) {
+export default function SingleNonPlayerCharacterTalentSelectionDialog(props: Props) {
     const {open, addTalent, onClose} = props;
     const [talents, setTalents] = useState<Talent[]>([]);
     const headers = ['Name', 'Activation', 'Description', 'Add'];

@@ -5,45 +5,40 @@ import Table from "@mui/material/Table";
 import {useLocation} from "react-router-dom";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {useState} from "react";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 import Quality from "../../../models/Quality";
-import QualityService from "../../../services/QualityService";
 import NumberTextFieldIndexTableCell from "../../common/table/NumberTextFieldIndexTableCell";
 import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";
 import ModifierTableFooter from "../../common/table/ModifierTableFooter";
 
 interface Props {
-    qual: Quality
+    quality: Quality
+    updateQuality: (quality: Quality) => void
 }
 
 export default function QualityModifierCard(props: Props) {
-    const {qual} = props;
+    const {quality, updateQuality} = props;
     const headers = ['Type', 'Ranks'];
-    const [quality, setQuality] = useState(qual);
     const disabled = !useLocation().pathname.endsWith(quality.id + '/edit');
 
     const handleTypeChange = async (index: number, value: string) => {
         const updatedModifiers = quality.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
+        updateQuality({...quality, modifiers: updatedModifiers});
     };
 
     const handleRanksChange = async (index: number, value: number) => {
         const updatedModifiers = quality.modifiers.map((row, i) =>
             i === index ? {...row, ranks: value} : row
         );
-        setQuality(await QualityService.updateQuality({...quality, modifiers: updatedModifiers}));
+        updateQuality({...quality, modifiers: updatedModifiers});
     };
 
     const addRow = async () => {
-        setQuality(await QualityService.updateQuality({
-            ...quality,
-            modifiers: [...quality.modifiers, {type: "Default", ranks: 1}]
-        }));
+        updateQuality({...quality, modifiers: [...quality.modifiers, {type: "Default", ranks: 1}]});
     };
 
     return (

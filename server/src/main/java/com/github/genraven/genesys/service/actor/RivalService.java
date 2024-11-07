@@ -48,7 +48,7 @@ public class RivalService {
     }
 
     public Mono<Rival> updateRival(final String id, final Rival rival) {
-        return rivalRepository.findById(id).map(riv -> {
+        return getRival(id).map(riv -> {
             riv.setBrawn(rival.getBrawn());
             riv.setAgility(rival.getAgility());
             riv.setIntellect(rival.getIntellect());

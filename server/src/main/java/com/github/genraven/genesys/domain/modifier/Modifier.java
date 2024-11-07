@@ -24,7 +24,10 @@ public class Modifier {
         INCREASE_MELEE_DEFENSE("Increase Melee Defense"),
         INCREASE_RANGED_DEFENSE("Increase Ranged Defense"),
         //Soak
-        INCREASE_SOAK("Increase Soak");
+        INCREASE_SOAK("Increase Soak"),
+        IGNORE_SOAK("Ignore Soak"),
+        // Recharge
+        RECHARGE("Recharge");
 
         @JsonValue
         private final String label;

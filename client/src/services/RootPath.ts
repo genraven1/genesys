@@ -24,7 +24,7 @@ export enum LorePath {
 export enum ActorPath {
     Actor = '/actors/',
     Player = '/players/',
-    Nemesis = '/actors/nemeses/',
+    Nemesis = '/nemeses/',
     Rival = '/rivals/',
     Minion = '/actors/minions/',
     Npc = '/actors/npcs'

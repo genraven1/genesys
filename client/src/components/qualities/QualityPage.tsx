@@ -32,25 +32,31 @@ export default function QualityPage() {
 
     const handleDescriptionChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (quality) {
-            setQuality(await QualityService.updateQuality({...quality, description: event.target.value}));
+            await updateQuality({...quality, description: event.target.value});
         }
     };
 
     const handleArmorQualityChange = async (value: boolean) => {
         if (quality) {
-            setQuality(await QualityService.updateQuality({...quality, armor: value}));
+            await updateQuality({...quality, armor: value});
         }
     };
 
     const handleWeaponQualityChange = async (value: boolean) => {
         if (quality) {
-            setQuality(await QualityService.updateQuality({...quality, weapon: value}));
+            await updateQuality({...quality, weapon: value});
         }
     };
 
     const handleCostChange = async (value: number) => {
         if (quality) {
-            setQuality(await QualityService.updateQuality({...quality, cost: value}));
+            await updateQuality({...quality, cost: value});
+        }
+    };
+
+    const updateQuality = async (updatedQuality: Quality) => {
+        if (updatedQuality) {
+            setQuality(await QualityService.updateQuality(updatedQuality));
         }
     };
 
@@ -78,7 +84,7 @@ export default function QualityPage() {
                         <NumberTextFieldCard title={"Advantage Cost"} value={quality.cost} onChange={handleCostChange}
                                              min={0} max={3} disabled={pathname.endsWith('/view')}/>
                     </Grid>
-                    <QualityModifierCard qual={quality}/>
+                    <QualityModifierCard quality={quality} updateQuality={updateQuality}/>
                 </Grid>
             </CardContent>
         </Card>

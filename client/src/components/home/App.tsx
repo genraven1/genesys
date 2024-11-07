@@ -38,8 +38,8 @@ export default function App() {
                     <Route path={RootPath.Injury + ':id/edit'} element={<InjuryWorkflow/>}/>
 
                     <Route path={RootPath.Spell} element={<SpellWorkflow/>}/>
-                    <Route path={RootPath.Spell + ':name/view'} element={<SpellWorkflow/>}/>
-                    <Route path={RootPath.Spell + ':name/edit'} element={<SpellWorkflow/>}/>
+                    <Route path={RootPath.Spell + ':id/view'} element={<SpellWorkflow/>}/>
+                    <Route path={RootPath.Spell + ':id/edit'} element={<SpellWorkflow/>}/>
 
                     <Route path={RootPath.Talent} element={<TalentWorkflow/>}/>
                     <Route path={RootPath.Talent + ':id/view'} element={<TalentWorkflow/>}/>
@@ -67,16 +67,16 @@ export default function App() {
                     <Route path={ActorPath.Player + ':id/view'} element={<PlayerWorkflow/>}/>
 
                     <Route path={ActorPath.Nemesis} element={<AllNemesesView/>}/>
-                    <Route path={ActorPath.Nemesis + ':name/edit'} element={<NemesisWorkflow/>}/>
-                    <Route path={ActorPath.Nemesis + ':name/view'} element={<NemesisWorkflow/>}/>
+                    <Route path={ActorPath.Nemesis + ':id/edit'} element={<NemesisWorkflow/>}/>
+                    <Route path={ActorPath.Nemesis + ':id/view'} element={<NemesisWorkflow/>}/>
 
                     <Route path={ActorPath.Rival} element={<RivalWorkflow/>}/>
                     <Route path={ActorPath.Rival + ':id/edit'} element={<RivalWorkflow/>}/>
                     <Route path={ActorPath.Rival + ':id/view'} element={<RivalWorkflow/>}/>
 
                     <Route path={ActorPath.Minion} element={<MinionWorkflow/>}/>
-                    <Route path={ActorPath.Minion + ':name/edit'} element={<MinionWorkflow/>}/>
-                    <Route path={ActorPath.Minion + ':name/view'} element={<MinionWorkflow/>}/>
+                    <Route path={ActorPath.Minion + ':id/edit'} element={<MinionWorkflow/>}/>
+                    <Route path={ActorPath.Minion + ':id/view'} element={<MinionWorkflow/>}/>
 
                     {/*Equipment Routes*/}
                     <Route path={EquipmentPath.Armor} element={<ArmorWorkflow/>}/>
@@ -95,8 +95,8 @@ export default function App() {
                     <Route path={RootPath.Lore} element={<ViewAllLore/>}/>
 
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
-                    <Route path={LorePath.Organization + ':name/view'} element={<OrganizationWorkflow/>}/>
-                    <Route path={LorePath.Organization + ':name/edit'} element={<OrganizationWorkflow/>}/>
+                    <Route path={LorePath.Organization + ':id/view'} element={<OrganizationWorkflow/>}/>
+                    <Route path={LorePath.Organization + ':id/edit'} element={<OrganizationWorkflow/>}/>
 
                     {/*Campaign Routes*/}
                     <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>

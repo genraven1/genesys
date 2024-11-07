@@ -1,27 +1,27 @@
 import {Button, Card, CardContent, TableFooter} from "@mui/material";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
-import RivalTalentSelectionDialog from "./RivalTalentSelectionDialog";
+import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import RivalTalentSelectionDialog from "./SingleNonPlayerCharacterTalentSelectionDialog";
 import TableRow from "@mui/material/TableRow";
-import Talent, {ActorTalent} from "../../../../../models/Talent";
+import Talent, {ActorTalent} from "../../../../models/Talent";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import {
     GenesysDescriptionTypographyCenterTableCell,
     TypographyCenterTableCell
-} from "../../../../common/table/TypographyTableCell";
+} from "../../../common/table/TypographyTableCell";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 
 interface Props {
     talents: ActorTalent[]
     updateTalents: (talents: ActorTalent[]) => void
 }
 
-export default function RivalTalentCard(props: Props) {
+export default function SingleNonPlayerCharacterTalentCard(props: Props) {
     const {talents, updateTalents} = props;
     const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false);
     const headers = ['Name', 'Activation', 'Summary'];

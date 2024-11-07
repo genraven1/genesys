@@ -4,11 +4,11 @@ import {StatsType} from "../../../../models/actor/Stats";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
-import RivalSkillCard from "./skill/RivalSkillCard";
-import RivalTalentCard from "./talent/RivalTalentCard";
+import SingleNonPlayerCharacterSkillCard from "../skill/SingleNonPlayerCharacterSkillCard";
+import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
-import {ActorCharacteristicRow} from "../../common/CharacteristicRow";
+import CharacteristicRow, {ActorCharacteristicRow} from "../../common/CharacteristicRow";
 import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
@@ -136,7 +136,21 @@ export default function RivalPage() {
             )
         }
         return <Fragment/>
-    }
+    };
+
+    const renderCharacteristicRow = () => {
+        return pathname.endsWith(rival.id + '/edit') ?
+            <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/> :
+            <CharacteristicRow actor={rival}/>;
+    };
+
+    const renderWoundsCard = () => {
+        return pathname.endsWith(rival.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
+                                 onChange={handleWoundsChange} min={1} max={20}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(rival.wounds)}/>
+    };
 
     return (
         <Card>
@@ -144,25 +158,23 @@ export default function RivalPage() {
                                           subheader={getRatings(rival)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <ActorCharacteristicRow actor={rival} handleCharacteristicChange={handleCharacteristicChange}/>
+                    {renderCharacteristicRow()}
                     <Divider/>
                     <Grid container spacing={2}>
                         <ViewFieldCard name={'Soak'} value={String(rival.soak)}/>
-                        <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
-                                             onChange={handleWoundsChange} min={1} max={20}
-                                             disabled={!pathname.endsWith(rival.id + '/edit')}/>
+                        {renderWoundsCard()}
                         <ViewFieldCard name={DefenseType.Melee} value={String(rival.melee)}/>
                         <ViewFieldCard name={DefenseType.Ranged} value={String(rival.ranged)}/>
                     </Grid>
                     {renderRatingRow()}
                     <Divider/>
-                    <RivalSkillCard rival={rival} onSkillChange={handleSkillChange}/>
+                    <SingleNonPlayerCharacterSkillCard actor={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>
                     <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
                     <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
-                    <RivalTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
+                    <SingleNonPlayerCharacterTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>
