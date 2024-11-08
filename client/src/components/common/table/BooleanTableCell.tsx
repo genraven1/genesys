@@ -1,5 +1,7 @@
 import {TypographyCenterTableCell} from "./TypographyTableCell";
 import * as React from "react";
+import {Fragment} from "react";
+import {MenuItem, Select, TableCell, Typography} from "@mui/material";
 
 interface Props {
     bool: boolean
@@ -8,9 +10,5 @@ interface Props {
 export default function BooleanTableCell(props: Props) {
     const {bool} = props;
 
-    const renderRanked = (): string => {
-        return bool ? 'Yes' : 'No';
-    };
-
-    return <TypographyCenterTableCell value={renderRanked()}/>;
+    return <TypographyCenterTableCell value={bool ? 'Yes' : 'No'}/>;
 }
