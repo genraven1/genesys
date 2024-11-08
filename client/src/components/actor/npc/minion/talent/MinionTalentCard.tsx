@@ -15,6 +15,7 @@ import {
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
 import Talent from "../../../../../models/Talent";
+import CharacterTalentSelectionDialog from "../../talent/CharacterTalentSelectionDialog";
 
 interface Props {
     talents: GroupTalent[]
@@ -53,7 +54,7 @@ export default function MinionTalentCard(props: Props) {
                         <Button color='primary' variant='contained'
                                 onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
                         {openSelectTalentDialog &&
-                            <RivalTalentSelectionDialog open={openSelectTalentDialog}
+                            <CharacterTalentSelectionDialog open={openSelectTalentDialog}
                                                         onClose={(): void => setOpenSelectTalentDialog(false)}
                                                         addTalent={addTalent}/>}
                     </TableRow>

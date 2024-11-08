@@ -3,7 +3,6 @@ import {useLocation, useParams} from "react-router-dom";
 import {StatsType} from "../../../../models/actor/Stats";
 import * as React from "react";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
-import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import EquipmentCard from "../../common/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import CharacteristicRow, {ActorCharacteristicRow} from "../../common/CharacteristicRow";
@@ -19,9 +18,9 @@ import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import AbilityTableCard from "../../common/ability/AbilityTableCard";
 import Ability from "../../../../models/Ability";
-import {ActorTalent} from "../../../../models/Talent";
 import Minion, {GroupSkill, GroupTalent} from "../../../../models/actor/npc/Minion";
 import MinionSkillCard from "./skill/MinionSkillCard";
+import MinionTalentCard from "./talent/MinionTalentCard";
 
 export default function MinionPage() {
     const {id} = useParams<{ id: string }>();
@@ -173,7 +172,7 @@ export default function MinionPage() {
                     <Divider/>
                     <AbilityTableCard abilities={minion.abilities} updateAbilities={handleAbilityChange}/>
                     <Divider/>
-                    <SingleNonPlayerCharacterTalentCard talents={minion.talents} updateTalents={handleTalentChange}/>
+                    <MinionTalentCard talents={minion.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>
