@@ -27,7 +27,7 @@ export default function SingleNonPlayerCharacterSkillCard(props: Props) {
     const renderSkillGroupTable = (type: SkillType) => {
         return (
             <Table>
-                {renderDoubleRowTableHeader(headers, type, 3)}
+                {renderDoubleRowTableHeader(headers, type, headers.length)}
                 <TableBody>
                     {(actor.skills || [])
                         .filter((skill) => skill.type === type)

@@ -21,7 +21,7 @@ interface Props {
     onClose: () => void
 }
 
-export default function SingleNonPlayerCharacterTalentSelectionDialog(props: Props) {
+export default function CharacterTalentSelectionDialog(props: Props) {
     const {open, addTalent, onClose} = props;
     const [talents, setTalents] = useState<Talent[]>([]);
     const headers = ['Name', 'Activation', 'Description', 'Add'];

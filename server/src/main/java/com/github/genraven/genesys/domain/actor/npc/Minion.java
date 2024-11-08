@@ -1,6 +1,8 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
-import com.github.genraven.genesys.domain.Talent;
+import com.github.genraven.genesys.domain.equipment.Armor;
+import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
+import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -33,6 +35,31 @@ public class Minion extends NonPlayerActor {
         this.setWeapons(nonPlayerActor.getWeapons());
     }
 
-    private List<Talent> talents = new ArrayList<>();
+    private List<GroupTalent> talents = new ArrayList<>();
     private List<GroupSkill> skills = new ArrayList<>();
+
+    public void getTotalSoak() {
+        int soak = getBrawn();
+        soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
+        for (GroupTalent talent : getTalents()) {
+            for (Modifier modifier : talent.getModifiers()) {
+                if (modifier.getType().equals(Modifier.Type.INCREASE_SOAK)) {
+                    soak += modifier.getRanks();
+                }
+            }
+        }
+        this.setSoak(soak);
+    }
+
+    public void getTotalMeleeDefense() {
+        int melee = 0;
+        melee += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        this.setMelee(melee);
+    }
+
+    public void getTotalRangedDefense() {
+        int ranged = 0;
+        ranged += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        this.setRanged(ranged);
+    }
 }

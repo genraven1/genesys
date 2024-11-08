@@ -12,32 +12,6 @@ import TableRow from "@mui/material/TableRow";
 import {GenesysDicePoolCenterTableCell, TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import BooleanTableCell from "../../../common/table/BooleanTableCell";
 
-interface GroupProps {
-    player: Player
-    type: SkillType
-}
-
-export function SkillTypeGroup(props: GroupProps) {
-    const {player, type} = props;
-    let headers = ['Skill', 'Career', 'Ranks', 'Dice Pool'];
-
-    return (
-        <Table>
-            {renderDoubleRowTableHeader(headers, type, 3)}
-            <TableBody>
-                {(player.skills || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
-                    <TableRow key={skill.name}>
-                        {renderSkillName(skill)}
-                        <BooleanTableCell bool={skill.career}/>
-                        <TypographyCenterTableCell value={String(skill.ranks)}/>
-                        <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
-    );
-}
-
 interface Props {
     player: Player
 }
@@ -74,9 +48,7 @@ export default function PlayerSkillCard(props: Props) {
                             <Table>
                                 <TableBody>
                                     {renderSkillGroupTable(SkillType.General)}
-                                    {/*<SkillTypeGroup player={player} type={SkillType.General}/>*/}
                                     {renderSkillGroupTable(SkillType.Magic)}
-                                    {/*<SkillTypeGroup player={player} type={SkillType.Magic}/>*/}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -85,9 +57,9 @@ export default function PlayerSkillCard(props: Props) {
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableBody>
-                                    <SkillTypeGroup player={player} type={SkillType.Combat}/>
-                                    <SkillTypeGroup player={player} type={SkillType.Social}/>
-                                    <SkillTypeGroup player={player} type={SkillType.Knowledge}/>
+                                    {renderSkillGroupTable(SkillType.Combat)}
+                                    {renderSkillGroupTable(SkillType.Social)}
+                                    {renderSkillGroupTable(SkillType.Knowledge)}
                                 </TableBody>
                             </Table>
                         </TableContainer>

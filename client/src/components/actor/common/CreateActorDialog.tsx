@@ -24,7 +24,7 @@ export default function CreateActorDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case ActorType.Minion:
-                let minion = {...await ActorService.createMinion(name)};
+                let minion = await ActorService.createMinion(campaign.id, name);
                 navigate(ActorPath.Minion + minion.id + '/edit');
                 break
             case ActorType.Rival:

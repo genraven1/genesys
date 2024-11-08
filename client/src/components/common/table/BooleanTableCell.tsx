@@ -8,9 +8,5 @@ interface Props {
 export default function BooleanTableCell(props: Props) {
     const {bool} = props;
 
-    const renderRanked = (): string => {
-        return bool ? 'Yes' : 'No';
-    };
-
-    return <TypographyCenterTableCell value={renderRanked()}/>;
+    return <TypographyCenterTableCell value={bool ? 'Yes' : 'No'}/>;
 }

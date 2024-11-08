@@ -17,12 +17,13 @@ import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCe
 import {ActorType} from "../../../../models/actor/Actor";
 import {ActorPath} from "../../../../services/RootPath";
 import CreateActorDialog from "../../common/CreateActorDialog";
+import {useFetchCurrentCampaign} from "../../../campaign/CampaignWorkflow";
 
 interface Props {
     minion: Minion
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const { minion } = props
     const [open, setOpen] = useState(false)
 
@@ -30,7 +31,7 @@ function Row(props: Props): JSX.Element {
         <Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} onClick={() => setOpen(!open)}>
                 <TypographyCenterTableCell value={minion.name}/>
-                <ActionsTableCell name={minion.name} path={ActorPath.Minion}/>
+                <ActionsTableCell name={minion.id} path={ActorPath.Minion}/>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -49,17 +50,17 @@ function Row(props: Props): JSX.Element {
 }
 
 export default function ViewAllMinions() {
-    const [minions, setMinions] = useState<Minion[]>([])
-    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+    const [minions, setMinions] = useState<Minion[]>([]);
+    const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false);
+    let campaign = useFetchCurrentCampaign();
+    const headers = ['Name', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const minionList = await ActorService.getMinions()
-            if (!minionList) { return }
-            setMinions(minionList)
+            if (!campaign) return;
+            setMinions(await ActorService.getMinions(campaign.id));
         })()
-    }, [])
+    }, [campaign]);
 
     return (
         <Card>

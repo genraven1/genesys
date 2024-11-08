@@ -2,6 +2,7 @@ package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.actor.Actor;
 import com.github.genraven.genesys.domain.actor.ActorSkill;
+import com.github.genraven.genesys.domain.actor.npc.GroupSkill;
 import com.github.genraven.genesys.domain.actor.npc.Minion;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
@@ -221,7 +222,7 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> getMinion(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable(NAME);
+        final String name = serverRequest.pathVariable(ID);
         return minionService.getMinion(name)
                 .flatMap(minion -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -230,15 +231,26 @@ public class ActorHandler {
     }
 
     public Mono<ServerResponse> createMinion(final ServerRequest serverRequest) {
-        return minionService.createMinion(serverRequest.pathVariable("name"))
+        final String minionName = serverRequest.pathVariable("minionName");
+        return minionService.createMinion(minionName)
                 .flatMap(minion -> ServerResponse.created(getURI(minion)).bodyValue(minion));
     }
 
     public Mono<ServerResponse> updateMinion(final ServerRequest serverRequest) {
-        final String name = serverRequest.pathVariable(NAME);
+        final String id = serverRequest.pathVariable(ID);
         final Mono<Minion> minionMono = serverRequest.bodyToMono(Minion.class);
         return minionMono
-                .flatMap(minion -> minionService.updateMinion(name, minion))
+                .flatMap(minion -> minionService.updateMinion(id, minion))
+                .flatMap(minion -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(minion)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updateMinionSkill(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<GroupSkill> skillMono = serverRequest.bodyToMono(GroupSkill.class);
+        return skillMono.flatMap(skill -> minionService.updateMinionSkill(id, skill))
                 .flatMap(minion -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(minion)))
