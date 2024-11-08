@@ -20,6 +20,7 @@ public class Modifier {
         RESET_CRITICAL_INJURY("Reset Critical Injury"),
         //Strain
         SUFFER_STRAIN("Suffer Strain"),
+        DEAL_STRAIN_DAMAGE("Deal Strain Damage"),
         //Defense
         INCREASE_MELEE_DEFENSE("Increase Melee Defense"),
         INCREASE_RANGED_DEFENSE("Increase Ranged Defense"),

@@ -152,7 +152,7 @@ export default function MinionPage() {
 
     return (
         <Card>
-            <CenteredCardHeaderWithAction title={minion.name} path={ActorPath.Rival + minion.id}
+            <CenteredCardHeaderWithAction title={minion.name} path={ActorPath.Minion + minion.id}
                                           subheader={getRatings(minion)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>

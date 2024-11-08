@@ -24,14 +24,14 @@ public class ActorRouter {
                         .GET("/players/", actorHandler::getAllPlayers)
                         .POST("/players/{playerName}", actorHandler::createPlayer)
                 )
-                .path("/campaigns/{name}", builder -> builder
-                        .GET("/nemeses/", actorHandler::getAllNemeses)
-                        .POST("/nemeses/{nemesisName}", actorHandler::createNemesis)
-                )
                 .path("/nemeses", builder -> builder
                         .GET("/{name}", actorHandler::getNemesis)
                         .PUT("/{name}", actorHandler::updateNemesis)
                         .PATCH("/{id}/skills/", actorHandler::updateNemesisSkill)
+                )
+                .path("/campaigns/{name}", builder -> builder
+                        .GET("/nemeses/", actorHandler::getAllNemeses)
+                        .POST("/nemeses/{nemesisName}", actorHandler::createNemesis)
                 )
                 .path("/rivals", builder -> builder
                         .GET("/{id}", actorHandler::getRival)
@@ -42,11 +42,14 @@ public class ActorRouter {
                         .GET("/rivals/", actorHandler::getAllRivals)
                         .POST("/rivals/{rivalName}", actorHandler::createRival)
                 )
-                .path("/actors/minions", builder -> builder
-                        .GET("/", actorHandler::getAllMinions)
-                        .POST("/{name}", actorHandler::createMinion)
-                        .GET("/{name}", actorHandler::getMinion)
-                        .PUT("/{name}", actorHandler::updateMinion)
+                .path("/minions", builder -> builder
+                        .GET("/{id}", actorHandler::getMinion)
+                        .PUT("/{id}", actorHandler::updateMinion)
+                        .PATCH("/{id}/skills/", actorHandler::updateMinionSkill)
+                )
+                .path("/campaigns/{name}", builder -> builder
+                        .GET("/minions/", actorHandler::getAllMinions)
+                        .POST("/minions/{minionName}", actorHandler::createMinion)
                 ).build();
     }
 }

@@ -20,7 +20,7 @@ interface TableProps {
 
 export default function MinionSkillCard(props: TableProps) {
     const {minion, onGroupSkillChange} = props;
-    const headers = ['Skills'];
+    const headers = ['Name', 'Group'];
     let pathname = useLocation().pathname;
 
     const renderSkillGroupTable = (type: SkillType) => {

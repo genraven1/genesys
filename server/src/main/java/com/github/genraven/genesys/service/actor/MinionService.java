@@ -1,34 +1,46 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
-import com.github.genraven.genesys.domain.actor.npc.Minion;
-import com.github.genraven.genesys.domain.actor.npc.NonPlayerActor;
+import com.github.genraven.genesys.domain.actor.npc.*;
 import com.github.genraven.genesys.repository.actor.MinionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.genraven.genesys.service.SkillService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class MinionService {
 
     private final MinionRepository minionRepository;
-
-    @Autowired
-    public MinionService(final MinionRepository minionRepository) {
-        this.minionRepository = minionRepository;
-    }
+    private final SkillService skillService;
 
     public Flux<Minion> getAllMinions() {
-        return minionRepository.findAll();
+        return minionRepository.findAll().map(minion -> {
+            minion.getTotalSoak();
+            minion.getTotalMeleeDefense();
+            minion.getTotalRangedDefense();
+            return minion;
+        });
     }
 
-    public Mono<Minion> getMinion(final String name) {
-        return minionRepository.findById(name);
+    public Mono<Minion> getMinion(final String id) {
+        return minionRepository.findById(id).map(minion -> {
+            minion.getTotalSoak();
+            minion.getTotalMeleeDefense();
+            minion.getTotalRangedDefense();
+            return minion;
+        });
     }
 
     public Mono<Minion> createMinion(final String name) {
-        return minionRepository.save(new Minion(new NonPlayerActor(new Actor(name))));
+        return skillService.getSkillsForCurrentCampaign()
+                .flatMap(skills -> {
+                    final Minion rival = new Minion(new NonPlayerActor(new Actor(name)));
+                    rival.setSkills(skills.stream().map(GroupSkill::new).toList());
+                    return minionRepository.save(rival);
+                });
     }
 
     public Mono<Minion> updateMinion(final String name, final Minion minion) {
@@ -50,5 +62,13 @@ public class MinionService {
             min.setArmors(minion.getArmors());
             return min;
         }).flatMap(minionRepository::save);
+    }
+
+    public Mono<Minion> updateMinionSkill(final String id, final GroupSkill skill) {
+        return minionRepository.findById(id).flatMap(minion -> {
+            minion.getSkills().stream().filter(actorSkill -> actorSkill.getId().equals(skill.getId()))
+                    .forEach(actorSkill -> actorSkill.setGroup(skill.isGroup()));
+            return minionRepository.save(minion);
+        });
     }
 }
