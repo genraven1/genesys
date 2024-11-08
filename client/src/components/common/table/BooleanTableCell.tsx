@@ -1,7 +1,5 @@
 import {TypographyCenterTableCell} from "./TypographyTableCell";
 import * as React from "react";
-import {Fragment} from "react";
-import {MenuItem, Select, TableCell, Typography} from "@mui/material";
 
 interface Props {
     bool: boolean
