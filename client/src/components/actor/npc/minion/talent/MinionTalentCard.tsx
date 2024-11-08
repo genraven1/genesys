@@ -14,6 +14,7 @@ import {
 } from "../../../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import Talent from "../../../../../models/Talent";
 
 interface Props {
     talents: GroupTalent[]
@@ -27,7 +28,7 @@ export default function MinionTalentCard(props: Props) {
     const pathname = useLocation().pathname;
 
     const addTalent = (talent: Talent) => {
-        updateTalents([...talents, {...talent, ranks: 1}]);
+        updateTalents([...talents, {...talent, group: true}]);
     };
 
     const renderTableBody = () => {
