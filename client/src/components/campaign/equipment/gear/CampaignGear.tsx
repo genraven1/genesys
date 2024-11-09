@@ -6,47 +6,44 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import * as React from 'react';
 import {Fragment, useEffect, useState} from 'react';
-import {Armor} from "../../../models/equipment/Armor";
-import EquipmentService from "../../../services/EquipmentService";
-import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {EquipmentPath} from "../../../services/RootPath";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {renderSingleRowTableHeader} from '../../common/table/TableRenders';
-import {renderPrice, renderSoak} from '../../../models/equipment/EquipmentHelper';
+import * as React from 'react';
+import {Gear} from "../../../../models/equipment/Gear";
+import {renderPrice} from "../../../../models/equipment/EquipmentHelper";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
+import {EquipmentPath} from "../../../../services/RootPath";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import EquipmentService from "../../../../services/EquipmentService";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
-import {EquipmentType} from "../../../models/equipment/Equipment";
+import {EquipmentType} from "../../../../models/equipment/Equipment";
+
 
 interface Props {
-    armor: Armor
-    columns: number
+    gear: Gear
 }
 
 function Row(props: Props) {
-    const {armor, columns} = props
+    const {gear} = props
     const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
             <TableRow sx={{'& > *': {borderBottom: 'unset'}}} onClick={() => setOpen(!open)}>
-                <TypographyCenterTableCell value={armor.name}/>
-                <TypographyCenterTableCell value={String(armor.defense)}/>
-                <TypographyCenterTableCell value={renderSoak(armor)}/>
-                <TypographyCenterTableCell value={String(armor.encumbrance)}/>
-                <TypographyCenterTableCell value={renderPrice(armor)}/>
-                <TypographyCenterTableCell value={String(armor.rarity)}/>
-                <ActionsTableCell name={armor.id} path={EquipmentPath.Armor}/>
+                <TableCell component="th" scope="row">{gear.name}</TableCell>
+                <TableCell>{gear.encumbrance}</TableCell>
+                <TableCell>{renderPrice(gear)}</TableCell>
+                <TableCell>{gear.rarity}</TableCell>
+                <ActionsTableCell name={gear.id} path={EquipmentPath.Gear}/>
             </TableRow>
             <TableRow>
-                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={columns}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Table size="small">
                                 <TableBody>
-                                    <GenesysDescriptionTypography text={armor?.description!!}/>
+                                    <GenesysDescriptionTypography text={gear.description}/>
                                 </TableBody>
                             </Table>
                         </Box>
@@ -57,14 +54,14 @@ function Row(props: Props) {
     )
 }
 
-export default function ViewAllArmor() {
-    const [armors, setArmors] = useState<Armor[]>([])
+export default function CampaignGear() {
+    const [gears, setGears] = useState<Gear[]>([])
     const [openEquipmentCreationDialog, setOpenEquipmentCreationDialog] = useState(false)
-    const headers = ['Name', 'Defense', 'Soak', 'Encumbrance', 'Price', 'Rarity', 'View']
+    const headers = ['Name', 'Encumbrance', 'Price', 'Rarity', 'View']
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setArmors(await EquipmentService.getArmors())
+            setGears(await EquipmentService.getGears())
         })()
     }, [])
 
@@ -72,17 +69,17 @@ export default function ViewAllArmor() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Armors'}
+                title={'Campaign Gear'}
                 action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Armor</Button>}>
+                                onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Gear</Button>}>
             </CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {armors.map((armor: Armor) => (
-                                <Row key={armor.name} armor={armor} columns={headers.length}/>
+                            {gears.map((gear: Gear) => (
+                                <Row key={gear.name} gear={gear}/>
                             ))}
                         </TableBody>
                     </Table>
@@ -90,7 +87,7 @@ export default function ViewAllArmor() {
             </CardContent>
             {openEquipmentCreationDialog && <CreateEquipmentDialog open={openEquipmentCreationDialog}
                                                                    onClose={(): void => setOpenEquipmentCreationDialog(false)}
-                                                                   type={EquipmentType.Armor}/>}
+                                                                   type={EquipmentType.Gear}/>}
         </Card>
     )
 }

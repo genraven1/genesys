@@ -8,9 +8,6 @@ import {ViewAllLore} from "../lore/common/ViewAllLore";
 import OrganizationWorkflow from "../lore/organization/OrganizationWorkflow";
 import TalentWorkflow from "../talents/TalentWorkflow";
 import SkillWorkflow from "../skills/SkillWorkflow";
-import ArmorWorkflow from "../equipment/armor/ArmorWorkflow";
-import WeaponWorkflow from "../equipment/weapon/WeaponWorkflow";
-import GearWorkflow from "../equipment/gear/GearWorkflow";
 import NemesisWorkflow from "../actor/npc/nemesis/NemesisWorkflow";
 import RivalWorkflow from "../actor/npc/rival/RivalWorkflow";
 import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
@@ -22,6 +19,9 @@ import ArchetypeWorkflow from "../campaign/archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import HomeCampaignDashboard from "./HomeCampaignDashboard";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";
+import ArmorWorkflow from "../campaign/equipment/armor/ArmorWorkflow";
+import WeaponWorkflow from "../campaign/equipment/weapon/WeaponWorkflow";
+import GearWorkflow from '../campaign/equipment/gear/GearWorkflow';
 
 export default function App() {
 

@@ -1,20 +1,21 @@
 import {Card, CardContent, Grid,} from '@mui/material';
 import {useLocation, useParams} from 'react-router-dom';
 import * as React from 'react';
-import {Armor} from "../../../models/equipment/Armor";
-import {EquipmentPath} from "../../../services/RootPath";
+import {Armor} from "../../../../models/equipment/Armor";
 import {Fragment, useEffect, useState} from "react";
-import EquipmentService from "../../../services/EquipmentService";
+import EquipmentService from "../../../../services/EquipmentService";
+import {ViewFieldCard} from "../../../common/ViewFieldCard";
+import {TextFieldCard} from "../../../common/card/TextFieldCard";
+import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
+import {EquipmentPath} from "../../../../services/RootPath";
+import SoakCard from "../../../common/card/SoakCard";
+import DefenseCard from "../../../common/card/DefenseCard";
+import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
+import {BooleanTextFieldCard} from "../../../common/card/BooleanTextFieldCard";
+import PriceTextFieldCard from "../../../common/card/PriceTextFieldCard";
+import ArmorQualityCard from "./quality/ArmorQualityCard";
 import ArmorModifierCard from "./modifier/ArmorModifierCard";
-import ArmorQualityCard from './quality/ArmorQualityCard';
-import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
-import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {NumberTextFieldCard} from "../../common/card/NumberTextField";
-import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
-import {TextFieldCard} from "../../common/card/TextFieldCard";
-import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
-import SoakCard from "../../common/card/SoakCard";
-import DefenseCard from "../../common/card/DefenseCard";
+
 
 export default function ArmorPage() {
     const {id} = useParams<{ id: string }>();

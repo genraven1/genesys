@@ -4,7 +4,6 @@ import {useFetchCurrentCampaign} from "../campaign/CampaignWorkflow";
 import {useState} from "react";
 import MainDashboard from "./MainDashboard";
 import ActorDashboard from "./ActorDashboard";
-import EquipmentDashboard from "./EquipmentDashboard";
 import LoreDashboard from "./LoreDashboard";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -49,9 +48,8 @@ export default function HomeCampaignDashboard() {
                             <TabList onChange={handleChange} centered>
                                 <Tab label="Default" value="1"/>
                                 <Tab label="Actor" value="2"/>
-                                <Tab label="Equipment" value="3"/>
-                                <Tab label="Lore" value="4"/>
-                                <Tab label="Campaign" value="5"/>
+                                <Tab label="Lore" value="3"/>
+                                <Tab label="Campaign" value="4"/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -61,12 +59,9 @@ export default function HomeCampaignDashboard() {
                             <ActorDashboard/>
                         </TabPanel>
                         <TabPanel value="3">
-                            <EquipmentDashboard/>
-                        </TabPanel>
-                        <TabPanel value="4">
                             <LoreDashboard/>
                         </TabPanel>
-                        <TabPanel value="5">
+                        <TabPanel value="4">
                             <CampaignPage campaign={campaign}/>
                         </TabPanel>
                     </TabContext>

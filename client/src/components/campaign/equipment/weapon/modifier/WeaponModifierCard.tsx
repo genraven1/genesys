@@ -8,25 +8,25 @@ import AddIcon from '@mui/icons-material/Add';
 import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import TableCell from "@mui/material/TableCell";
-import ModifierService from "../../../../services/ModifierService";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import {Armor} from "../../../../models/equipment/Armor";
+import {Weapon} from "../../../../../models/equipment/Weapon";
+import ModifierService from "../../../../../services/ModifierService";
+import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 
 interface Props {
-    armor: Armor
-    updateArmor: (armor: Armor) => void
+    weapon: Weapon
+    updateWeapon: (weapon: Weapon) => void
     disabled: boolean
 }
 
-export default function ArmorModifierCard(props: Props) {
-    const {armor, updateArmor, disabled} = props;
+export default function WeaponModifierCard(props: Props) {
+    const {weapon, updateWeapon, disabled} = props;
     const headers = ['Type', 'Ranks'];
     const [typeOptions, setTypeOptions] = useState<string[]>([]);
 
     useEffect(() => {
         (async () => {
-            setTypeOptions(await ModifierService.getModifiers());
+            setTypeOptions(await ModifierService.getModifiers())
         })()
     }, [])
 
@@ -46,21 +46,24 @@ export default function ArmorModifierCard(props: Props) {
     }
 
     const handleTypeChange = async (index: number, value: string) => {
-        const updatedModifiers = armor.modifiers.map((row, i) =>
+        const updatedModifiers = weapon.modifiers.map((row, i) =>
             i === index ? {...row, type: value} : row
         );
-        updateArmor({...armor, modifiers: updatedModifiers});
+        updateWeapon({...weapon, modifiers: updatedModifiers});
     };
 
     const handleRanksChange = async (index: number, value: string) => {
-        const updatedModifiers = armor.modifiers.map((row, i) =>
+        const updatedModifiers = weapon.modifiers.map((row, i) =>
             i === index ? {...row, ranks: Number(value)} : row
         );
-        updateArmor({...armor, modifiers: updatedModifiers});
+        updateWeapon({...weapon, modifiers: updatedModifiers});
     };
 
     const addRow = async () => {
-        updateArmor({...armor, modifiers: [...armor.modifiers, {type: "Default", ranks: 1}]});
+        updateWeapon({
+            ...weapon,
+            modifiers: [...weapon.modifiers, {type: "Default", ranks: 1}]
+        });
     };
 
     return (
@@ -71,7 +74,7 @@ export default function ArmorModifierCard(props: Props) {
                     <Table>
                         {renderSingleRowTableHeader(headers)}
                         <TableBody>
-                            {armor.modifiers.map((modifier, index) => (
+                            {weapon.modifiers.map((modifier, index) => (
                                 <TableRow key={index}>
                                     <TableCell>
                                         <Autocomplete

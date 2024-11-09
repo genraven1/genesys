@@ -1,17 +1,17 @@
 import {Card, CardContent} from "@mui/material";
 import * as React from "react";
-import {Weapon} from "../../../../models/equipment/Weapon";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
-import {EquipmentQuality} from "../../../../models/Quality";
+import {Weapon} from "../../../../../models/equipment/Weapon";
+import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import {EquipmentQuality} from "../../../../../models/Quality";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import NumberTextFieldIndexTableCell from "../../../common/table/NumberTextFieldIndexTableCell";
-import QualityAutocompleteTableCell from "../../../common/table/QualityAutocompleteTableCell";
-import QualityTableFooter from "../../../common/table/QualityTableFooter";
+import NumberTextFieldIndexTableCell from "../../../../common/table/NumberTextFieldIndexTableCell";
+import QualityAutocompleteTableCell from "../../../../common/table/QualityAutocompleteTableCell";
+import QualityTableFooter from "../../../../common/table/QualityTableFooter";
 
 interface Props {
     weapon: Weapon

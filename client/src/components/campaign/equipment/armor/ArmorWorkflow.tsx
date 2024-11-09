@@ -1,13 +1,13 @@
 import {Fragment} from "react";
 import {useLocation} from "react-router-dom";
-import ViewAllArmor from "./ViewAllArmor";
-import {EquipmentPath} from "../../../services/RootPath";
+import CampaignArmor from "./CampaignArmor";
 import ArmorPage from "./ArmorPage";
+import {EquipmentPath} from "../../../../services/RootPath";
 
 export default function ArmorWorkflow() {
     return (
         <Fragment>
-            {useLocation().pathname.endsWith(EquipmentPath.Armor) ? <ViewAllArmor/> : <ArmorPage/>}
+            {useLocation().pathname.endsWith(EquipmentPath.Armor) ? <CampaignArmor/> : <ArmorPage/>}
         </Fragment>
     )
 }
