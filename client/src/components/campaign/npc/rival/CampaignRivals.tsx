@@ -17,7 +17,7 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {ActorType} from "../../../../models/actor/Actor";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 import {ActorPath} from "../../../../services/RootPath";
-import CreateActorDialog from "../../../actor/common/CreateActorDialog";
+import CreateActorDialog from "../../actor/common/CreateActorDialog";
 
 interface Props {
     rival: Rival

@@ -16,7 +16,7 @@ import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {ActorType} from "../../../../models/actor/Actor";
 import {ActorPath} from "../../../../services/RootPath";
-import CreateActorDialog from "../../../actor/common/CreateActorDialog";
+import CreateActorDialog from "../../actor/common/CreateActorDialog";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 
 interface Props {

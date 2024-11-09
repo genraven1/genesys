@@ -6,8 +6,8 @@ import {ActorArmor, Armor, ArmorSlot} from "../../../../../models/equipment/Armo
 import SoakCard from "../../../../common/card/SoakCard";
 import DefenseCard from "../../../../common/card/DefenseCard";
 import {useLocation} from "react-router-dom";
-import ArmorQualityCard from "../../../../campaign/equipment/armor/quality/ArmorQualityCard";
-import ArmorModifierCard from "../../../../campaign/equipment/armor/modifier/ArmorModifierCard";
+import ArmorQualityCard from "../../../equipment/armor/quality/ArmorQualityCard";
+import ArmorModifierCard from "../../../equipment/armor/modifier/ArmorModifierCard";
 
 interface Props {
     open: boolean
