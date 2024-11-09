@@ -9,7 +9,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import PlayerEditSkillTable from "./skill/PlayerEditSkillTable";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
-import CharacteristicRow from "../common/CharacteristicRow";
+import CharacteristicRow from "../../campaign/actor/common/CharacteristicRow";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 

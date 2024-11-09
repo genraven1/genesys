@@ -23,10 +23,6 @@ export default function HomeCampaignDashboard() {
         setValue(newValue);
     }
 
-    const getSubHeader = () => {
-        return campaign ? campaign?.name! : 'No Campaign Selected';
-    }
-
     const renderButton = () => {
         return campaign ? <Button color='primary' variant='contained'
                                   onClick={(): void => setOpenCampaignSelectionDialog(true)}>Change Campaign</Button> :
@@ -39,7 +35,7 @@ export default function HomeCampaignDashboard() {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={'Campaign Dashboard'}
-                subheader={getSubHeader()}>
+                subheader={campaign ? campaign?.name! : 'No Campaign Selected'}>
             </CardHeader>
             <CardContent>
                 <Grid sx={{width: 1}}>

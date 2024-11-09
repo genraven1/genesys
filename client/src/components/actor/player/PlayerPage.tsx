@@ -1,7 +1,7 @@
 import {Card, CardContent, Divider, Grid} from '@mui/material';
 import {useLocation, useParams} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
-import CharacteristicRow from "../common/CharacteristicRow";
+import CharacteristicRow from "../../campaign/actor/common/CharacteristicRow";
 import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";

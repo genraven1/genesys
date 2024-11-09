@@ -11,7 +11,7 @@ import Player from "../../../../../models/actor/player/Player";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import ActorService from "../../../../../services/ActorService";
-import ArmorBackdrop from "../../../common/equipment/ArmorBackdrop";
+import ArmorBackdrop from "../../../../campaign/actor/equipment/ArmorBackdrop";
 
 interface RowProps {
     armor: Armor

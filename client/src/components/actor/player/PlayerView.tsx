@@ -6,7 +6,7 @@ import PlayerTalentCard from "./talent/PlayerTalentCard";
 import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import { ActorPath } from '../../../services/RootPath';
-import CharacteristicRow from "../common/CharacteristicRow";
+import CharacteristicRow from "../../campaign/actor/common/CharacteristicRow";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 import PlayerSkillCard from "./skill/PlayerSkillCard";
 

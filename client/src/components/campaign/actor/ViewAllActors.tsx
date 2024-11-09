@@ -6,12 +6,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useEffect, useState} from 'react';
 import * as React from 'react';
-import Actor, {ActorType} from "../../models/actor/Actor";
-import ActionsTableCell from "../common/table/ActionsTableCell";
-import ActorService from "../../services/ActorService";
-import {ActorPath} from "../../services/RootPath";
+import Actor, {ActorType} from "../../../models/actor/Actor";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import ActorService from "../../../services/ActorService";
+import {ActorPath} from "../../../services/RootPath";
 import {Card, CardContent, CardHeader} from "@mui/material";
-import {renderSingleRowTableHeader} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 
 interface Props {
     actor: Actor

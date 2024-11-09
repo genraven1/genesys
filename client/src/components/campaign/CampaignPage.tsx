@@ -14,6 +14,9 @@ import CampaignArchetypes from "./archetype/CampaignArchetypes";
 import CampaignWeapon from "./equipment/weapon/CampaignWeapon";
 import CampaignArmor from "./equipment/armor/CampaignArmor";
 import CampaignGear from "./equipment/gear/CampaignGear";
+import CampaignMinion from "./npc/minion/CampaignMinion";
+import CampaignRivals from "./npc/rival/CampaignRivals";
+import CampaignNemeses from "./npc/nemesis/CampaignNemeses";
 
 interface Props {
     campaign: Campaign
@@ -46,6 +49,9 @@ export default function CampaignPage(props: Props) {
                                 <Tab label='Weapons' value='6'/>
                                 <Tab label='Armors' value='7'/>
                                 <Tab label='Gear' value='8'/>
+                                <Tab label='Nemesis' value='9'/>
+                                <Tab label='Rival' value='10'/>
+                                <Tab label='Minion' value='11'/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -71,6 +77,15 @@ export default function CampaignPage(props: Props) {
                         </TabPanel>
                         <TabPanel value="8">
                             <CampaignGear/>
+                        </TabPanel>
+                        <TabPanel value="9">
+                            <CampaignNemeses/>
+                        </TabPanel>
+                        <TabPanel value="10">
+                            <CampaignRivals/>
+                        </TabPanel>
+                        <TabPanel value="11">
+                            <CampaignMinion/>
                         </TabPanel>
                     </TabContext>
                 </Grid>
