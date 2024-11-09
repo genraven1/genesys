@@ -1,20 +1,20 @@
 import {Card, CardContent, Grid} from '@mui/material';
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {RootPath} from "../../services/RootPath";
-import Career from '../../models/actor/player/Career';
+import {RootPath} from "../../../services/RootPath";
+import Career from '../../../models/actor/player/Career';
 import {Fragment, useEffect, useState} from "react";
-import CareerService from '../../services/CareerService';
+import CareerService from '../../../services/CareerService';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeaderWithColumns} from "../common/table/TableRenders";
+import {renderSingleRowTableHeaderWithColumns} from "../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
-import SkillService from "../../services/SkillService";
-import Skill from "../../models/actor/Skill";
-import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
-import SkillAutocompleteTableCell from "../common/table/SkillAutocompleteTableCell";
+import SkillService from "../../../services/SkillService";
+import Skill from "../../../models/actor/Skill";
+import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import SkillAutocompleteTableCell from "../../common/table/SkillAutocompleteTableCell";
 
 export default function CareerPage() {
     const {id} = useParams<{ id: string }>();

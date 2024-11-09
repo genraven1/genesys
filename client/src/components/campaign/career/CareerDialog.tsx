@@ -1,9 +1,9 @@
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {RootPath} from "../../services/RootPath";
+import {RootPath} from "../../../services/RootPath";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import CareerService from "../../services/CareerService";
-import {GenesysDialogActions} from "../common/dialog/GenesysDialogActions";
+import CareerService from "../../../services/CareerService";
+import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
 
 interface Props {
     open: boolean
