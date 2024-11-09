@@ -1,8 +1,8 @@
-import {StatsType} from "../../models/actor/Stats";
+import {StatsType} from "../../../models/actor/Stats";
 import {Card, CardActions, CardContent, Grid} from "@mui/material";
-import InputNumberRangeSelectField from "../common/InputNumberRangeSelect";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
-import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
+import InputNumberRangeSelectField from "../../common/InputNumberRangeSelect";
+import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 
 interface EditProps {
     stats: number,

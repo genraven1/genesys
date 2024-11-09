@@ -16,8 +16,8 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
 import {ActorType} from "../../../../models/actor/Actor";
 import {ActorPath} from "../../../../services/RootPath";
-import CreateActorDialog from "../../common/CreateActorDialog";
-import {useFetchCurrentCampaign} from "../../../campaign/CampaignWorkflow";
+import CreateActorDialog from "../../../actor/common/CreateActorDialog";
+import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 
 interface Props {
     nemesis: Nemesis
@@ -49,7 +49,7 @@ function Row(props: Props) {
     )
 }
 
-export default function ViewAllNemeses() {
+export default function CampaignNemeses() {
     const [nemeses, setNemeses] = useState<Nemesis[]>([]);
     const [openActorCreationDialog, setOpenActorCreationDialog] = useState(false);
     let campaign = useFetchCurrentCampaign();
@@ -66,7 +66,7 @@ export default function ViewAllNemeses() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Nemeses'}
+                title={'Campaign Nemeses'}
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenActorCreationDialog(true)}>Create Nemesis</Button>}>
             </CardHeader>
