@@ -1,16 +1,16 @@
 import {Dialog, DialogContent, DialogTitle, Divider, Grid} from "@mui/material";
 import * as React from "react";
 import {useState} from "react";
-import Archetype from "../../../models/actor/player/Archetype";
-import Ability from "../../../models/Ability";
-import {Activation, getActivationOptions} from "../../../models/Talent";
-import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
-import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
-import ArchetypeService from "../../../services/ArchetypeService";
-import Cost, {CostType, DefaultCost, getCostOptions} from "../../../models/common/Cost";
-import Limit, {DefaultLimit, getLimitOptions, LimitType} from "../../../models/common/Limit";
-import NumberRangeSelectCard from "../../common/NumberRangeSelectCard";
+import Archetype from "../../../../models/actor/player/Archetype";
+import Ability from "../../../../models/Ability";
+import {Activation, getActivationOptions} from "../../../../models/Talent";
+import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
+import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
+import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
+import ArchetypeService from "../../../../services/ArchetypeService";
+import Cost, {CostType, DefaultCost, getCostOptions} from "../../../../models/common/Cost";
+import Limit, {DefaultLimit, getLimitOptions, LimitType} from "../../../../models/common/Limit";
+import NumberRangeSelectCard from "../../../common/NumberRangeSelectCard";
 
 interface Props {
     archetype: Archetype

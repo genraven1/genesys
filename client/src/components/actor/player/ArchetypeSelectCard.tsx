@@ -5,7 +5,7 @@ import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";
 import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
-import ArchetypeBackdrop from "../../archetype/ArchetypeBackdrop";
+import ArchetypeBackdrop from "../../campaign/archetype/ArchetypeBackdrop";
 
 interface Props {
     archetype: Archetype

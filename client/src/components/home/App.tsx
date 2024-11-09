@@ -18,7 +18,7 @@ import QualityWorkflow from "../qualities/QualityWorkflow";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
 import CareerWorkflow from "../campaign/career/CareerWorkflow";
-import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
+import ArchetypeWorkflow from "../campaign/archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import HomeCampaignDashboard from "./HomeCampaignDashboard";
 import PlayerWorkflow from "../actor/player/PlayerWorkflow";

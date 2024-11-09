@@ -6,15 +6,15 @@ import Paper from '@mui/material/Paper';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
-import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import ActionsTableCell from "../common/table/ActionsTableCell";
-import Archetype from "../../models/actor/player/Archetype";
-import {RootPath} from "../../services/RootPath";
-import ArchetypeService from "../../services/ArchetypeService";
-import {renderSingleRowTableHeader} from "../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import Archetype from "../../../models/actor/player/Archetype";
+import {RootPath} from "../../../services/RootPath";
+import ArchetypeService from "../../../services/ArchetypeService";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import ArchetypeDialog from "./ArchetypeDialog";
 
-export default function ViewAllArchetypes() {
+export default function CampaignArchetypes() {
     const [archetypes, setArchetypes] = useState<Archetype[]>([]);
     const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false);
     const headers = ['Name', 'View'];
@@ -29,7 +29,7 @@ export default function ViewAllArchetypes() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Archetypes'}
+                title={'Campaign Archetypes'}
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenArchetypeCreationDialog(true)}>Create Archetype</Button>}>
             </CardHeader>

@@ -1,13 +1,13 @@
 import {useLocation} from "react-router-dom";
 import {Fragment} from "react";
-import ViewAllArchetypes from "./ViewAllArchetypes";
-import {RootPath} from "../../services/RootPath";
+import CampaignArchetypes from "./CampaignArchetypes";
+import {RootPath} from "../../../services/RootPath";
 import ArchetypePage from "./ArchetypePage";
 
 export default function ArchetypeWorkflow() {
     return (
         <Fragment>
-            {useLocation().pathname.endsWith(RootPath.Archetype) ? <ViewAllArchetypes/> : <ArchetypePage/>}
+            {useLocation().pathname.endsWith(RootPath.Archetype) ? <CampaignArchetypes/> : <ArchetypePage/>}
         </Fragment>
     )
 }
