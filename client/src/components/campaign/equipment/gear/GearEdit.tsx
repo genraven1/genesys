@@ -3,18 +3,18 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import CheckIcon from '@mui/icons-material/Check';
-import EquipmentService from '../../../services/EquipmentService';
-import {EquipmentPath} from "../../../services/RootPath";
-import {InputTextFieldCard} from "../../common/InputTextFieldCard";
-import Skill from "../../../models/actor/Skill";
-import {RangeBand, getRangeOptions} from "../../../models/common/RangeBand";
-import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
-import {Gear} from "../../../models/equipment/Gear";
-import SkillSelectCard from "../../common/skill/SkillSelectCard";
-import {useFetchAllSkills} from "../../skills/SkillWorkflow";
-import {NumberTextFieldCard} from "../../common/card/NumberTextField";
-import {BooleanTextFieldCard} from "../../common/card/BooleanTextFieldCard";
-import PriceTextFieldCard from "../../common/card/PriceTextFieldCard";
+import EquipmentService from '../../../../services/EquipmentService';
+import {EquipmentPath} from "../../../../services/RootPath";
+import {InputTextFieldCard} from "../../../common/InputTextFieldCard";
+import Skill from "../../../../models/actor/Skill";
+import {RangeBand, getRangeOptions} from "../../../../models/common/RangeBand";
+import InputSelectFieldCard from "../../../common/InlineSelectFieldCard";
+import {Gear} from "../../../../models/equipment/Gear";
+import SkillSelectCard from "../../../common/skill/SkillSelectCard";
+import {useFetchAllSkills} from "../../../skills/SkillWorkflow";
+import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
+import {BooleanTextFieldCard} from "../../../common/card/BooleanTextFieldCard";
+import PriceTextFieldCard from "../../../common/card/PriceTextFieldCard";
 
 interface Props {
     gea: Gear

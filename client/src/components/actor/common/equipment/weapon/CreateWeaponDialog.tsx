@@ -8,13 +8,13 @@ import {GenesysDialogActions} from "../../../../common/dialog/GenesysDialogActio
 import {useFetchSkillsByType} from "../../../../skills/SkillWorkflow";
 import {ActorSkill} from "../../../../../models/actor/Actor";
 import {useLocation} from "react-router-dom";
-import WeaponQualityCard from "../../../../equipment/weapon/quality/WeaponQualityCard";
-import WeaponModifierCard from "../../../../equipment/weapon/modifier/WeaponModifierCard";
 import SkillAutocompleteCard from "../../../../common/card/SkillAutocompleteCard";
 import RangeBandCard from "../../../../common/card/select/RangeBandCard";
 import {NumberTextFieldCard} from "../../../../common/card/NumberTextField";
 import {BooleanTextFieldCard} from "../../../../common/card/BooleanTextFieldCard";
 import WeaponDamageTextFieldCard from "../../../../common/card/WeaponDamageTextFieldCard";
+import WeaponQualityCard from "../../../../campaign/equipment/weapon/quality/WeaponQualityCard";
+import WeaponModifierCard from "../../../../campaign/equipment/weapon/modifier/WeaponModifierCard";
 
 interface Props {
     open: boolean

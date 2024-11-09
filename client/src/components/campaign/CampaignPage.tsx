@@ -11,6 +11,9 @@ import ViewCampaignSkills from "./skill/ViewCampaignSkills";
 import PartyCard from "./party/PartyCard";
 import CampaignCareers from "./career/CampaignCareers";
 import CampaignArchetypes from "./archetype/CampaignArchetypes";
+import CampaignWeapon from "./equipment/weapon/CampaignWeapon";
+import CampaignArmor from "./equipment/armor/CampaignArmor";
+import CampaignGear from "./equipment/gear/CampaignGear";
 
 interface Props {
     campaign: Campaign
@@ -40,6 +43,9 @@ export default function CampaignPage(props: Props) {
                                 <Tab label="Skills" value="3"/>
                                 <Tab label='Archetypes' value='4'/>
                                 <Tab label='Careers' value='5'/>
+                                <Tab label='Weapons' value='6'/>
+                                <Tab label='Armors' value='7'/>
+                                <Tab label='Gear' value='8'/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -56,6 +62,15 @@ export default function CampaignPage(props: Props) {
                         </TabPanel>
                         <TabPanel value="5">
                             <CampaignCareers/>
+                        </TabPanel>
+                        <TabPanel value="6">
+                            <CampaignWeapon/>
+                        </TabPanel>
+                        <TabPanel value="7">
+                            <CampaignArmor/>
+                        </TabPanel>
+                        <TabPanel value="8">
+                            <CampaignGear/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

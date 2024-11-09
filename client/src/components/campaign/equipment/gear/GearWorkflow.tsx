@@ -1,10 +1,10 @@
 import {Fragment, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {Gear} from "../../../models/equipment/Gear";
-import EquipmentService from "../../../services/EquipmentService";
+import {Gear} from "../../../../models/equipment/Gear";
+import EquipmentService from "../../../../services/EquipmentService";
 import GearView from "./GearView";
 import GearEdit from "./GearEdit";
-import ViewAllGear from "./ViewAllGear";
+import CampaignGear from "./CampaignGear";
 
 
 function useFetchGear(name: string): Gear {
@@ -38,7 +38,7 @@ export default function GearWorkflow() {
         } else if (pathname.endsWith('/edit')) {
             return gear && <GearEdit gea={gear}/>
         } else {
-            return <ViewAllGear/>
+            return <CampaignGear/>
         }
     }
 

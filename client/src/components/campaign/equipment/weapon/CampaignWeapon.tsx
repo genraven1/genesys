@@ -8,18 +8,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import {Weapon} from "../../../models/equipment/Weapon";
-import EquipmentService from "../../../services/EquipmentService";
-import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {EquipmentPath} from "../../../services/RootPath";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import {renderDamage, renderPrice} from "../../../models/equipment/EquipmentHelper";
+import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {renderDamage, renderPrice} from '../../../../models/equipment/EquipmentHelper';
+import {Weapon} from "../../../../models/equipment/Weapon";
+import {renderSkillName} from "../../../common/skill/SkillRenders";
+import ActionsTableCell from "../../../common/table/ActionsTableCell";
+import {EquipmentPath} from "../../../../services/RootPath";
+import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import EquipmentService from "../../../../services/EquipmentService";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import CreateEquipmentDialog from "../CreateEquipmentDialog";
-import {EquipmentType} from "../../../models/equipment/Equipment";
-import {renderSkillName} from "../../common/skill/SkillRenders";
+import {EquipmentType} from "../../../../models/equipment/Equipment";
 
 interface Props {
     weapon: Weapon
@@ -60,7 +60,7 @@ function Row(props: Props) {
     )
 }
 
-export default function ViewAllWeapon() {
+export default function CampaignWeapon() {
     const [weapons, setWeapons] = useState<Weapon[]>([])
     const [openEquipmentCreationDialog, setOpenEquipmentCreationDialog] = useState(false)
     const headers = ['Name', 'Skill', 'Damage', 'Critical', 'Range', 'Encumbrance', 'Price', 'Rarity', 'View']
@@ -75,7 +75,7 @@ export default function ViewAllWeapon() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Weapons'}
+                title={'Campaign Weapons'}
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenEquipmentCreationDialog(true)}>Create Weapon</Button>}>
             </CardHeader>
