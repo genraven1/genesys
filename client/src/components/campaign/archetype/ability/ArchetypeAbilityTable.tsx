@@ -4,14 +4,14 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import Archetype from "../../../models/actor/player/Archetype";
-import Ability from "../../../models/Ability";
+import Archetype from "../../../../models/actor/player/Archetype";
+import Ability from "../../../../models/Ability";
 import {
     CostTableCell,
     GenesysDescriptionTypographyCenterTableCell, LimitTableCell, TypographyCenterTableCell,
     TypographyLeftTableCell
-} from "../../common/table/TypographyTableCell";
-import {renderDoubleRowTableHeader} from "../../common/table/TableRenders";
+} from "../../../common/table/TypographyTableCell";
+import {renderDoubleRowTableHeader} from "../../../common/table/TableRenders";
 
 interface Props {
     ability: Ability

@@ -1,20 +1,20 @@
 import {Card, CardContent, Grid} from '@mui/material';
 import {useLocation, useParams} from 'react-router-dom';
 import * as React from "react";
-import Archetype from "../../models/actor/player/Archetype";
-import {RootPath} from "../../services/RootPath";
-import {CharacteristicType} from "../../models/character/Characteristic";
-import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
+import Archetype from "../../../models/actor/player/Archetype";
+import {RootPath} from "../../../services/RootPath";
+import {CharacteristicType} from "../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
-import SkillService from "../../services/SkillService";
-import ArchetypeService from "../../services/ArchetypeService";
-import Skill from "../../models/actor/Skill";
-import {ViewFieldCard} from "../common/ViewFieldCard";
-import {NumberTextFieldCard} from "../common/card/NumberTextField";
-import {TextFieldCard} from "../common/card/TextFieldCard";
-import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
-import SkillAutocompleteCard from "../common/card/SkillAutocompleteCard";
-import CharacteristicCard from "../common/card/CharacteristicCard";
+import SkillService from "../../../services/SkillService";
+import ArchetypeService from "../../../services/ArchetypeService";
+import Skill from "../../../models/actor/Skill";
+import {ViewFieldCard} from "../../common/ViewFieldCard";
+import {NumberTextFieldCard} from "../../common/card/NumberTextField";
+import {TextFieldCard} from "../../common/card/TextFieldCard";
+import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import SkillAutocompleteCard from "../../common/card/SkillAutocompleteCard";
+import CharacteristicCard from "../../common/card/CharacteristicCard";
+import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";
 
 export default function ArchetypePage() {
     const {id} = useParams<{ id: string }>()

@@ -10,6 +10,7 @@ import ViewCampaignTalents from "./talents/ViewCampaignTalents";
 import ViewCampaignSkills from "./skill/ViewCampaignSkills";
 import PartyCard from "./party/PartyCard";
 import CampaignCareers from "./career/CampaignCareers";
+import CampaignArchetypes from "./archetype/CampaignArchetypes";
 
 interface Props {
     campaign: Campaign
@@ -37,7 +38,8 @@ export default function CampaignPage(props: Props) {
                                 <Tab label="Party" value="1"/>
                                 <Tab label="Talents" value="2"/>
                                 <Tab label="Skills" value="3"/>
-                                <Tab label={'Careers'} value='4'/>
+                                <Tab label='Archetypes' value='4'/>
+                                <Tab label='Careers' value='5'/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -50,6 +52,9 @@ export default function CampaignPage(props: Props) {
                             <ViewCampaignSkills/>
                         </TabPanel>
                         <TabPanel value="4">
+                            <CampaignArchetypes/>
+                        </TabPanel>
+                        <TabPanel value="5">
                             <CampaignCareers/>
                         </TabPanel>
                     </TabContext>
