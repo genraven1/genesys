@@ -5,7 +5,7 @@ import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
 import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
-import CareerBackdrop from "../../career/CareerBackdrop";
+import CareerBackdrop from "../../campaign/career/CareerBackdrop";
 import EditIcon from "@mui/icons-material/Edit";
 import Player, {PlayerSkill} from "../../../models/actor/player/Player";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";

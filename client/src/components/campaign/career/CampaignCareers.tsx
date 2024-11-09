@@ -1,8 +1,8 @@
 import {Fragment, useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../common/table/TypographyTableCell";
-import ActionsTableCell from "../common/table/ActionsTableCell";
-import {RootPath} from "../../services/RootPath";
+import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {RootPath} from "../../../services/RootPath";
 import TableCell from "@mui/material/TableCell";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -10,12 +10,12 @@ import TableBody from "@mui/material/TableBody";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import {renderSingleRowTableHeader} from "../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import * as React from "react";
-import Career from "../../models/actor/player/Career";
-import CareerService from "../../services/CareerService";
+import Career from "../../../models/actor/player/Career";
+import CareerService from "../../../services/CareerService";
 import CareerDialog from "./CareerDialog";
-import { renderSkillNames } from "../common/skill/SkillRenders";
+import { renderSkillNames } from "../../common/skill/SkillRenders";
 
 interface Props {
     career: Career
@@ -23,8 +23,8 @@ interface Props {
 }
 
 function Row(props: Props) {
-    const {career, columns} = props
-    const [open, setOpen] = useState(false)
+    const {career, columns} = props;
+    const [open, setOpen] = useState(false);
 
     return (
         <Fragment>
@@ -43,7 +43,7 @@ function Row(props: Props) {
     );
 }
 
-export default function ViewAllCareers() {
+export default function CampaignCareers() {
     const [careers, setCareers] = useState<Career[]>([])
     const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const headers = ['Name', 'View']
@@ -58,7 +58,7 @@ export default function ViewAllCareers() {
         <Card>
             <CardHeader
                 style={{textAlign: 'center'}}
-                title={'View All Careers'}
+                title={'Campaign Careers'}
                 action={<Button color='primary' variant='contained'
                                 onClick={(): void => setOpenCareerCreationDialog(true)}>Create Career</Button>}>
             </CardHeader>

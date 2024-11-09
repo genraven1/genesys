@@ -6,7 +6,6 @@ import ExpansionList from "../navigation/ExpansionList";
 import CenteredCardHeader from "../common/card/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
-import CareerDialog from "../career/CareerDialog";
 import ArchetypeDialog from "../archetype/ArchetypeDialog";
 import {RootPath} from "../../services/RootPath";
 import TalentDialog from "../talents/CreateTalentDialog";
@@ -18,7 +17,6 @@ export default function MainDashboard() {
     const [openSkillCreationDialog, setOpenSkillCreationDialog] = useState(false)
     const [openInjuryCreationDialog, setOpenInjuryCreationDialog] = useState(false)
     const [openSpellCreationDialog, setOpenSpellCreationDialog] = useState(false)
-    const [openCareerCreationDialog, setOpenCareerCreationDialog] = useState(false)
     const [openArchetypeCreationDialog, setOpenArchetypeCreationDialog] = useState(false)
 
     return (
@@ -32,9 +30,6 @@ export default function MainDashboard() {
                                 <ExpansionList header={'Talents'} viewTitle={'View All Talents'} to={RootPath.Talent}
                                                dialogTitle={'Create Talent'}
                                                onClick={(): void => setOpenTalentCreationDialog(true)}/>
-                                <ExpansionList header={'Careers'} viewTitle={'View All Careers'} to={RootPath.Career}
-                                               dialogTitle={'Create Career'}
-                                               onClick={(): void => setOpenCareerCreationDialog(true)}/>
                                 <ExpansionList header={'Archetypes'} viewTitle={'View All Archetypes'} to={RootPath.Archetype}
                                                dialogTitle={'Create Archetype'}
                                                onClick={(): void => setOpenArchetypeCreationDialog(true)}/>
@@ -68,8 +63,6 @@ export default function MainDashboard() {
                                                        onClose={(): void => setOpenTalentCreationDialog(false)}/>}
             {openQualityCreationDialog && <QualityDialog open={openQualityCreationDialog}
                                                          onClose={(): void => setOpenQualityCreationDialog(false)}/>}
-            {openCareerCreationDialog && <CareerDialog open={openCareerCreationDialog}
-                                                         onClose={(): void => setOpenCareerCreationDialog(false)}/>}
             {openArchetypeCreationDialog && <ArchetypeDialog open={openArchetypeCreationDialog}
                                                        onClose={(): void => setOpenArchetypeCreationDialog(false)}/>}
             {openSkillCreationDialog && <CreateSkillDialog open={openSkillCreationDialog}

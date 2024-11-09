@@ -17,7 +17,7 @@ import MinionWorkflow from "../actor/npc/minion/MinionWorkflow";
 import QualityWorkflow from "../qualities/QualityWorkflow";
 import InjuryWorkflow from "../injuries/InjuryWorkflow";
 import SpellWorkflow from "../spell/SpellWorkflow";
-import CareerWorkflow from "../career/CareerWorkflow";
+import CareerWorkflow from "../campaign/career/CareerWorkflow";
 import ArchetypeWorkflow from "../archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import HomeCampaignDashboard from "./HomeCampaignDashboard";
