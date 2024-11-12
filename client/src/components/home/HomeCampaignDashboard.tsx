@@ -59,7 +59,7 @@ export default function HomeCampaignDashboard() {
                             <CampaignPage campaign={campaign}/>
                         </TabPanel>
                         <TabPanel value="3">
-                            <PartyCard party={campaign.party}/>
+                            <PartyCard campaign={campaign}/>
                         </TabPanel>
                         <TabPanel value="4">
                             <ViewSessions camp={campaign}/>
