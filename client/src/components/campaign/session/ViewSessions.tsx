@@ -11,6 +11,7 @@ import CampaignSession from "../../../models/campaign/CampaignSession";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/RootPath";
 import TextFieldTableCell from "../../common/table/TextFieldTableCell";
+import CampaignService from "../../../services/CampaignService";
 
 interface Props {
     camp: Campaign
@@ -22,14 +23,21 @@ export default function ViewSessions(props: Props) {
     const headers = ['Name', 'View'];
 
     const addRow = async () => {
-        setCampaign({...campaign, sessions: [...campaign.sessions, {name: 'new', party: campaign.party, scenes: []} as CampaignSession]});
+        await updateCampaign({
+            ...campaign,
+            sessions: [...campaign.sessions, {name: 'new', party: campaign.party, scenes: []} as CampaignSession]
+        });
     };
 
     const onSessionNameChange = async (index: number, value: string) => {
         const updatedSessions = campaign.sessions.map((session, i) =>
             i === index ? {...session, name: value} : session
         );
-        setCampaign({...campaign, sessions: updatedSessions});
+        await updateCampaign({...campaign, sessions: updatedSessions});
+    };
+
+    const updateCampaign = async (updatedCampaign: Campaign) => {
+        setCampaign(await CampaignService.updateCampaign(updatedCampaign));
     };
 
     return (
@@ -42,7 +50,8 @@ export default function ViewSessions(props: Props) {
                         <TableBody>
                             {campaign.sessions.map((session, index) => (
                                 <TableRow key={index}>
-                                    <TextFieldTableCell onChange={onSessionNameChange} value={session.name} index={index}/>
+                                    <TextFieldTableCell onChange={onSessionNameChange} value={session.name}
+                                                        index={index}/>
                                     <ActionsTableCell name={session.name} path={CampaignPath.Session}/>
                                 </TableRow>
                             ))}

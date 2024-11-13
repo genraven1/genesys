@@ -1,13 +1,16 @@
 import {useParams} from "react-router-dom";
-import {Card} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
 
 export default function SessionPage() {
-    const {id} = useParams<{ id: string }>();
+    const {name} = useParams<{ name: string }>();
 
     return (
         <Card>
-            <CenteredCardHeader title={String(id)}/>
+            <CenteredCardHeader title={String(name)}/>
+            <CardContent>
+
+            </CardContent>
         </Card>
     )
 }
