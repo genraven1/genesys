@@ -22,6 +22,7 @@ import PlayerWorkflow from "../actor/player/PlayerWorkflow";
 import ArmorWorkflow from "../campaign/equipment/armor/ArmorWorkflow";
 import WeaponWorkflow from "../campaign/equipment/weapon/WeaponWorkflow";
 import GearWorkflow from '../campaign/equipment/gear/GearWorkflow';
+import SessionPage from "../campaign/session/SessionPage";
 
 export default function App() {
 
@@ -101,6 +102,8 @@ export default function App() {
                     {/*Campaign Routes*/}
                     <Route path={CampaignPath.Campaign} element={<CampaignWorkflow/>}/>
                     <Route path={CampaignPath.Campaign + ':id'} element={<CampaignWorkflow/>}/>
+
+                    <Route path={CampaignPath.Session + ':name'} element={<SessionPage/>}/>
                 </Routes>
             </HashRouter>
         </ThemeProvider>

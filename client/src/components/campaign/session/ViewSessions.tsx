@@ -8,7 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import AddIcon from "@mui/icons-material/Add";
 import CampaignSession from "../../../models/campaign/CampaignSession";
-import CampaignService from "../../../services/CampaignService";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {CampaignPath} from "../../../services/RootPath";
+import TextFieldTableCell from "../../common/table/TextFieldTableCell";
 
 interface Props {
     camp: Campaign
@@ -20,7 +22,14 @@ export default function ViewSessions(props: Props) {
     const headers = ['Name', 'View'];
 
     const addRow = async () => {
-        setCampaign({...campaign, sessions: [...campaign.sessions, {} as CampaignSession]});
+        setCampaign({...campaign, sessions: [...campaign.sessions, {name: 'new', party: campaign.party, scenes: []} as CampaignSession]});
+    };
+
+    const onSessionNameChange = async (index: number, value: string) => {
+        const updatedSessions = campaign.sessions.map((session, i) =>
+            i === index ? {...session, name: value} : session
+        );
+        setCampaign({...campaign, sessions: updatedSessions});
     };
 
     return (
@@ -33,14 +42,15 @@ export default function ViewSessions(props: Props) {
                         <TableBody>
                             {campaign.sessions.map((session, index) => (
                                 <TableRow key={index}>
-
+                                    <TextFieldTableCell onChange={onSessionNameChange} value={session.name} index={index}/>
+                                    <ActionsTableCell name={session.name} path={CampaignPath.Session}/>
                                 </TableRow>
                             ))}
                         </TableBody>
                         <TableFooter>
                             <TableRow key={'Footer'}>
                                 <Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add
-                                    Quality</Button>
+                                    Session</Button>
                             </TableRow>
                         </TableFooter>
                     </Table>
