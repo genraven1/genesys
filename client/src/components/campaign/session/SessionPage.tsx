@@ -17,9 +17,19 @@ export default function SessionPage() {
 
     const startSession = async () => {
         const currentPartyState: Party = campaign.party;
-        const updatedSession = {...session, party: currentPartyState, started: true};
+        const updatedSession = {...session, party: currentPartyState, active: true};
         const updatedCampaign = {
             ...campaign,
+            sessions: campaign.sessions.map(s => s.name === session.name ? updatedSession : s)
+        };
+        await CampaignService.updateCampaign(updatedCampaign);
+    };
+
+    const endSession = async () => {
+        const updatedSession = {...session, active: false};
+        const updatedCampaign = {
+            ...campaign,
+            party: session.party,
             sessions: campaign.sessions.map(s => s.name === session.name ? updatedSession : s)
         };
         await CampaignService.updateCampaign(updatedCampaign);
@@ -30,6 +40,7 @@ export default function SessionPage() {
             <CenteredCardHeader title={session.name}/>
             <CardContent>
                 <Button variant="contained" color="primary" onClick={startSession}>Start Session</Button>
+                <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>
             </CardContent>
         </Card>
     )
