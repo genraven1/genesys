@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {Fragment, useState} from "react";
 import {
-    GenesysDicePoolCenterTableCell,
+    GenesysDicePoolCenterTableCellButton,
     TypographyCenterTableCell,
     TypographyLeftTableCell
 } from "../../../../common/table/TypographyTableCell";
@@ -47,11 +47,13 @@ export default function WeaponTable(props: Props) {
                             <TypographyLeftTableCell value={weapon.name}/>
                             <TypographyCenterTableCell value={weapon.slot}/>
                             <TypographyCenterTableCell value={weapon.skill.name || ''}/>
-                            <TypographyCenterTableCell value={weapon.brawn ? String(actor.brawn + weapon.damage) : String(weapon.damage)}/>
+                            <TypographyCenterTableCell
+                                value={weapon.brawn ? String(actor.brawn + weapon.damage) : String(weapon.damage)}/>
                             <TypographyCenterTableCell value={String(weapon.critical)}/>
                             <TypographyCenterTableCell value={weapon.range}/>
                             <TypographyCenterTableCell value={renderQualities(weapon)}/>
-                            <GenesysDicePoolCenterTableCell actor={actor} skill={getActorSkill(actor as NonPlayerActor, weapon)}/>
+                            <GenesysDicePoolCenterTableCellButton actor={actor}
+                                                                  skill={getActorSkill(actor as NonPlayerActor, weapon)}/>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -89,13 +91,14 @@ export default function WeaponTable(props: Props) {
                                 onClick={(): void => setOpenSelectWeaponDialog(true)}>Add
                             Weapon</Button>
                         {openSelectWeaponDialog && <WeaponSelectionDialog open={openSelectWeaponDialog}
-                                                                         onClose={(): void => setOpenSelectWeaponDialog(false)}
+                                                                          onClose={(): void => setOpenSelectWeaponDialog(false)}
                                                                           addWeapon={addWeapon}/>}
-                        <Button color='primary' variant='contained' onClick={(): void => setOpenEquipWeaponDialog(true)}>Equip
+                        <Button color='primary' variant='contained'
+                                onClick={(): void => setOpenEquipWeaponDialog(true)}>Equip
                             Weapon</Button>
                         {openEquipWeaponDialog && <WeaponEquipDialog open={openEquipWeaponDialog}
-                                                                    onClose={(): void => setOpenEquipWeaponDialog(false)}
-                                                                    updateWeapons={equipWeapon} weapons={weapons}/>}
+                                                                     onClose={(): void => setOpenEquipWeaponDialog(false)}
+                                                                     updateWeapons={equipWeapon} weapons={weapons}/>}
                     </TableRow>
                 </TableFooter>
             )

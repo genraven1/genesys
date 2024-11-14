@@ -9,7 +9,7 @@ import {SkillType} from "../../../../models/actor/Skill";
 import * as React from "react";
 import {renderDoubleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
-import {GenesysDicePoolCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {GenesysDicePoolCenterTableCellButton} from "../../../common/table/TypographyTableCell";
 import {ActorSkill} from "../../../../models/actor/Actor";
 import SkillRanksTextFieldTableCell from "../../../common/table/SkillRanksTextFieldTableCell";
 import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
@@ -33,14 +33,14 @@ export default function SingleNonPlayerCharacterSkillCard(props: Props) {
                         .filter((skill) => skill.type === type)
                         .sort((a, b) => a.name.localeCompare(b.name))
                         .map((skill: ActorSkill) => (
-                        <TableRow key={skill.name}>
-                            {renderSkillName(skill)}
-                            <SkillRanksTextFieldTableCell onChange={onSkillChange}
-                                                          disabled={!pathname.endsWith(actor.id + '/edit')}
-                                                          skill={skill}/>
-                            <GenesysDicePoolCenterTableCell actor={actor} skill={skill}/>
-                        </TableRow>
-                    ))}
+                            <TableRow key={skill.name}>
+                                {renderSkillName(skill)}
+                                <SkillRanksTextFieldTableCell onChange={onSkillChange}
+                                                              disabled={!pathname.endsWith(actor.id + '/edit')}
+                                                              skill={skill}/>
+                                <GenesysDicePoolCenterTableCellButton actor={actor} skill={skill}/>
+                            </TableRow>
+                        ))}
                 </TableBody>
             </Table>
         );

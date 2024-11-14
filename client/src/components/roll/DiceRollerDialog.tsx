@@ -54,18 +54,25 @@ function tallyResults(results: GenesysSymbols[]): string {
 interface Props {
     open: boolean
     onClose: () => void
+    boost?: number
+    setback?: number
+    ability?: number
+    difficulty?: number
+    proficiency?: number
+    challenge?: number
+    symbols?: Record<GenesysSymbols, number>
 }
 
-export default function DiceRoller(props: Props) {
-    const {open, onClose} = props;
+export default function DiceRollerDialog(props: Props) {
+    const {open, onClose, boost, setback, ability, difficulty, proficiency, challenge, symbols} = props;
     const [results, setResults] = useState<string | null>(null);
-    const [boostDiceCount, setBoostDiceCount] = useState(0);
-    const [setbackDiceCount, setSetbackDiceCount] = useState(0);
-    const [abilityDiceCount, setAbilityDiceCount] = useState(0);
-    const [difficultyDiceCount, setDifficultyDiceCount] = useState(0);
-    const [proficiencyDiceCount, setProficiencyDiceCount] = useState(0);
-    const [challengeDieCount, setChallengeDieCount] = useState(0);
-    const [symbolCounts, setSymbolCounts] = useState({
+    const [boostDiceCount, setBoostDiceCount] = useState(boost);
+    const [setbackDiceCount, setSetbackDiceCount] = useState(setback);
+    const [abilityDiceCount, setAbilityDiceCount] = useState(ability);
+    const [difficultyDiceCount, setDifficultyDiceCount] = useState(difficulty);
+    const [proficiencyDiceCount, setProficiencyDiceCount] = useState(proficiency);
+    const [challengeDieCount, setChallengeDieCount] = useState(challenge);
+    const [symbolCounts, setSymbolCounts] = useState(symbols || {
         [GenesysSymbols.Success]: 0,
         [GenesysSymbols.Advantage]: 0,
         [GenesysSymbols.Triumph]: 0,

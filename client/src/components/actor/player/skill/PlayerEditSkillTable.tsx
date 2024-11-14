@@ -10,7 +10,10 @@ import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 import {SkillType} from "../../../../models/actor/Skill";
-import {GenesysDicePoolCenterTableCell, TypographyLeftTableCell} from "../../../common/table/TypographyTableCell";
+import {
+    GenesysDicePoolCenterTableCellButton,
+    TypographyLeftTableCell
+} from "../../../common/table/TypographyTableCell";
 import {renderBooleanTableCell, renderSingleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 import PlayerSkillRankTableCell from "../../../common/table/PlayerSkillRankTableCell";
 
@@ -28,7 +31,7 @@ function SkillRow(props: RowProps): JSX.Element {
             {renderSkillName(skill)}
             {renderBooleanTableCell(skill.career)}
             <TypographyLeftTableCell value={String(skill.ranks)}/>
-            <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
+            <GenesysDicePoolCenterTableCellButton actor={player} skill={skill}/>
             <PlayerSkillRankTableCell skill={skill} onSkillChange={onSkillChange} disabled={false}/>
         </TableRow>
     )

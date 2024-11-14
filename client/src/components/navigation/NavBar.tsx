@@ -8,7 +8,7 @@ import {useState} from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import {RootPath} from "../../services/RootPath";
 import {useNavigate} from "react-router-dom";
-import DiceRoller from "../roll/DiceRoller";
+import DiceRollerDialog from "../roll/DiceRollerDialog";
 
 export default function NavBar() {
     let navigate = useNavigate()
@@ -27,7 +27,7 @@ export default function NavBar() {
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>GENESYS</Typography>
                 <Button color='secondary' variant='contained' onClick={(): void => setOpenCustomRollBackDrop(true)}>Roll</Button>
-                {openCustomRollBackDrop && <DiceRoller open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
+                {openCustomRollBackDrop && <DiceRollerDialog open={openCustomRollBackDrop} onClose={(): void => setOpenCustomRollBackDrop(false)}/>}
             </Toolbar>
           </AppBar>
         </Box>

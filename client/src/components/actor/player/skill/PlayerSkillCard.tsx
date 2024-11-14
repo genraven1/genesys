@@ -9,7 +9,10 @@ import {SkillType} from "../../../../models/actor/Skill";
 import * as React from "react";
 import {renderDoubleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
-import {GenesysDicePoolCenterTableCell, TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import {
+    GenesysDicePoolCenterTableCellButton,
+    TypographyCenterTableCell
+} from "../../../common/table/TypographyTableCell";
 import BooleanTableCell from "../../../common/table/BooleanTableCell";
 
 interface Props {
@@ -30,7 +33,7 @@ export default function PlayerSkillCard(props: Props) {
                             {renderSkillName(skill)}
                             <BooleanTableCell bool={skill.career}/>
                             <TypographyCenterTableCell value={String(skill.ranks)}/>
-                            <GenesysDicePoolCenterTableCell actor={player} skill={skill}/>
+                            <GenesysDicePoolCenterTableCellButton actor={player} skill={skill}/>
                         </TableRow>
                     ))}
                 </TableBody>
