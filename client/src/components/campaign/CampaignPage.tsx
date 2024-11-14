@@ -8,7 +8,6 @@ import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import ViewCampaignTalents from "./talents/ViewCampaignTalents";
 import ViewCampaignSkills from "./skill/ViewCampaignSkills";
-import PartyCard from "./party/PartyCard";
 import CampaignCareers from "./career/CampaignCareers";
 import CampaignArchetypes from "./archetype/CampaignArchetypes";
 import CampaignWeapon from "./equipment/weapon/CampaignWeapon";
@@ -17,6 +16,7 @@ import CampaignGear from "./equipment/gear/CampaignGear";
 import CampaignMinion from "./npc/minion/CampaignMinion";
 import CampaignRivals from "./npc/rival/CampaignRivals";
 import CampaignNemeses from "./npc/nemesis/CampaignNemeses";
+import LoreDashboard from "../home/LoreDashboard";
 
 interface Props {
     campaign: Campaign
@@ -41,7 +41,7 @@ export default function CampaignPage(props: Props) {
                     <TabContext value={value}>
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
-                                <Tab label="Party" value="1"/>
+                                <Tab label="Lore" value="1"/>
                                 <Tab label="Talents" value="2"/>
                                 <Tab label="Skills" value="3"/>
                                 <Tab label='Archetypes' value='4'/>
@@ -55,7 +55,7 @@ export default function CampaignPage(props: Props) {
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
-                            <PartyCard party={campaign.party}/>
+                            <LoreDashboard/>
                         </TabPanel>
                         <TabPanel value="2">
                             <ViewCampaignTalents/>

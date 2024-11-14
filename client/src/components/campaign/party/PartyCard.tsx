@@ -1,4 +1,3 @@
-import Party from "../../../models/campaign/Party";
 import {Card, CardContent, TableFooter} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -6,20 +5,17 @@ import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import * as React from "react";
-import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
-import {ActorPath} from "../../../services/RootPath";
 import TableRow from "@mui/material/TableRow";
-import Character from "../../../models/character/Character";
 import ImportActorToPartySelection from "./ImportActorToPartySelection";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import Campaign from "../../../models/campaign/Campaign";
 
 interface Props {
-    party: Party
+    campaign: Campaign
 }
 
 export default function PartyCard(props: Props) {
-    const {party} = props;
+    const {campaign} = props;
     const headers = ['Name', 'View']
 
     const renderTableFooter = () => {
