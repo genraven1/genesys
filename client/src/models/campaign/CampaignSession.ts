@@ -4,5 +4,6 @@ import Scene from "./Scene";
 export default interface CampaignSession {
     name: string
     party: Party
-    scenes: Scene[]
+    active: boolean
+    sceneIds: string[]
 }
