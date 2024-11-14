@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import AddIcon from "@mui/icons-material/Add";
 import CampaignSession from "../../../models/campaign/CampaignSession";
-import ActionsTableCell from "../../common/table/ActionsTableCell";
+import ActionsTableCell, {SingleActionTableCell} from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/RootPath";
 import TextFieldTableCell from "../../common/table/TextFieldTableCell";
 import CampaignService from "../../../services/CampaignService";
@@ -25,7 +25,7 @@ export default function ViewSessions(props: Props) {
     const addRow = async () => {
         await updateCampaign({
             ...campaign,
-            sessions: [...campaign.sessions, {name: 'new', party: campaign.party, scenes: []} as CampaignSession]
+            sessions: [...campaign.sessions, {name: 'new', party: campaign.party, active: false, sceneIds: []} as CampaignSession]
         });
     };
 
@@ -52,7 +52,7 @@ export default function ViewSessions(props: Props) {
                                 <TableRow key={index}>
                                     <TextFieldTableCell onChange={onSessionNameChange} value={session.name}
                                                         index={index}/>
-                                    <ActionsTableCell name={session.name} path={CampaignPath.Session}/>
+                                    <SingleActionTableCell name={session.name} path={CampaignPath.Session}/>
                                 </TableRow>
                             ))}
                         </TableBody>
