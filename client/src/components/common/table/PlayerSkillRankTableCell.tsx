@@ -1,5 +1,4 @@
 import TableCell from "@mui/material/TableCell";
-import InputNumberRangeSelectField from "../InputNumberRangeSelect";
 import {PlayerSkill} from "../../../models/actor/player/Player";
 import {TextField} from "@mui/material";
 import * as React from "react";
@@ -13,14 +12,8 @@ interface Props {
 export default function PlayerSkillRankTableCell(props: Props) {
     const {skill, onSkillChange, disabled} = props
 
-    // const handleEdit = async (ranks: number): Promise<void> => {
-    //     skill.ranks = ranks
-    //     onSkillChange(skill)
-    // }
-
     return (
         <TableCell style={{textAlign: "center"}}>
-            {/*<InputNumberRangeSelectField defaultValue={skill.ranks} min={0} max={6} onCommit={handleEdit}/>*/}
             <TextField
                 type="number"
                 value={skill.ranks}

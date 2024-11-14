@@ -7,7 +7,7 @@ import * as React from "react";
 import {ActorWeapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import {
-    GenesysDicePoolCenterTableCell,
+    GenesysDicePoolCenterTableCellButton,
     TypographyCenterTableCell
 } from "../../../../common/table/TypographyTableCell";
 import {renderActorDamage, renderQualities} from "../../../../../models/equipment/EquipmentHelper";
@@ -54,7 +54,7 @@ export default function PlayerWeaponTable(props: Props) {
                             <TypographyCenterTableCell value={String(weapon.critical)}/>
                             <TypographyCenterTableCell value={weapon.range}/>
                             <TypographyCenterTableCell value={renderQualities(weapon)}/>
-                            <GenesysDicePoolCenterTableCell actor={player} skill={getActorSkill(weapon)}/>
+                            <GenesysDicePoolCenterTableCellButton actor={player} skill={getActorSkill(weapon)}/>
                         </TableRow>))}
                 </TableBody>
             )
