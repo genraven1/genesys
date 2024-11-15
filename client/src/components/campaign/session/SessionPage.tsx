@@ -20,6 +20,8 @@ export default function SessionPage() {
         const updatedSession = {...session, party: currentPartyState, active: true};
         const updatedCampaign = {
             ...campaign,
+            player: currentPartyState.players.length,
+            gm: 1,
             sessions: campaign.sessions.map(s => s.name === session.name ? updatedSession : s)
         };
         await CampaignService.updateCampaign(updatedCampaign);
@@ -43,5 +45,5 @@ export default function SessionPage() {
                 <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>
             </CardContent>
         </Card>
-    )
+    );
 }
