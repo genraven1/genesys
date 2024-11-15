@@ -2,8 +2,6 @@ import {Card, CardContent, Divider, Grid} from '@mui/material';
 import {useLocation, useParams} from 'react-router-dom';
 import Player, {PlayerSkill} from '../../../models/actor/player/Player';
 import CharacteristicRow from "../../campaign/actor/common/CharacteristicRow";
-import PlayerTalentCard from "./talent/PlayerTalentCard";
-import PlayerEquipmentCard from "./equipment/PlayerEquipmentCard";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {Fragment, useEffect, useState} from "react";
 import Career from "../../../models/actor/player/Career";
@@ -16,6 +14,11 @@ import ArchetypeSelectCard from "./ArchetypeSelectCard";
 import CareerSelectCard from "./CareerSkillCard";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
 import PlayerSkillCard from "./skill/PlayerSkillCard";
+import EquipmentCard from "../../campaign/actor/equipment/EquipmentCard";
+import {ActorArmor} from "../../../models/equipment/Armor";
+import {ActorWeapon} from "../../../models/equipment/Weapon";
+import SingleNonPlayerCharacterTalentCard from "../../campaign/npc/talent/SingleNonPlayerCharacterTalentCard";
+import {ActorTalent} from "../../../models/Talent";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -53,15 +56,33 @@ export default function PlayerPage() {
         }
     };
 
+    const handleArmorChange = async (value: ActorArmor[]) => {
+        if (player) {
+            setPlayer(await ActorService.updatePlayer({...player, armors: value}));
+        }
+    };
+
+    const handleWeaponChange = async (value: ActorWeapon[]) => {
+        if (player) {
+            setPlayer(await ActorService.updatePlayer({...player, weapons: value}));
+        }
+    };
+
+    const handleTalentChange = async (values: ActorTalent[]) => {
+        if (player) {
+            setPlayer(await ActorService.updatePlayer({...player, talents: values}));
+        }
+    };
+
     const renderArchetypeCard = () => {
         return pathname.endsWith('/view') ? <ViewFieldCard name={"Archetype"} value={player.archetype.name}/> :
             <ArchetypeSelectCard archetype={player.archetype} onCommit={handleArchetypeChange}/>;
-    }
+    };
 
     const renderCareerCard = () => {
         return pathname.endsWith('/view') ? <ViewFieldCard name={"Career"} value={player.career.name}/> :
             <CareerSelectCard player={player} onCommit={handleCareerChange} onSkillSelect={handleCareerSkillChange}/>;
-    }
+    };
 
     return (
         <Card>
@@ -80,9 +101,9 @@ export default function PlayerPage() {
                     <Divider/>
                     <PlayerSkillCard player={player}/>
                     <Divider/>
-                    <PlayerEquipmentCard player={player}/>
+                    <EquipmentCard actor={player} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
                     <Divider/>
-                    <PlayerTalentCard player={player}/>
+                    <SingleNonPlayerCharacterTalentCard talents={player.talents} updateTalents={handleTalentChange}/>
                 </Grid>
             </CardContent>
         </Card>

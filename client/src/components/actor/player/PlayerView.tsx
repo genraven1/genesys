@@ -8,7 +8,6 @@ import {ViewFieldCard} from "../../common/ViewFieldCard";
 import { ActorPath } from '../../../services/RootPath';
 import CharacteristicRow from "../../campaign/actor/common/CharacteristicRow";
 import DerivedPlayerStatsRow from "./DerivedPlayerStatsRow";
-import PlayerSkillCard from "./skill/PlayerSkillCard";
 
 interface Props {
     player: Player
