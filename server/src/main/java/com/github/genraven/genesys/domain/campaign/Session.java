@@ -18,5 +18,7 @@ public class Session {
     private String name;
     private Party party;
     private Boolean active = false;
+    private Integer player;
+    private Integer gm;
     private List<String> sceneIds = new ArrayList<>();
 }

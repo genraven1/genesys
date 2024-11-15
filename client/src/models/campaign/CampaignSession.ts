@@ -5,5 +5,7 @@ export default interface CampaignSession {
     name: string
     party: Party
     active: boolean
+    player: number
+    gm: number
     sceneIds: string[]
 }

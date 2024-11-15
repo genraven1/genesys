@@ -25,7 +25,14 @@ export default function ViewSessions(props: Props) {
     const addRow = async () => {
         await updateCampaign({
             ...campaign,
-            sessions: [...campaign.sessions, {name: 'new', party: campaign.party, active: false, sceneIds: []} as CampaignSession]
+            sessions: [...campaign.sessions, {
+                name: 'new',
+                party: campaign.party,
+                active: false,
+                sceneIds: [],
+                player: 0,
+                gm: 0
+            } as CampaignSession]
         });
     };
 
