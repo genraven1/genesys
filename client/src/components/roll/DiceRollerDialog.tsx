@@ -99,13 +99,14 @@ export default function DiceRollerDialog(props: Props) {
         const boostDice = Array(boostDiceCount).fill(boostDie);
         const setbackDice = Array(setbackDiceCount).fill(setbackDie);
         const abilityDice = Array(abilityDiceCount).fill(abilityDie);
-        const difficultyDice = Array(abilityDiceCount).fill(difficultyDie);
+        const difficultyDice = Array(difficultyDiceCount).fill(difficultyDie);
         const proficiencyDice = Array(proficiencyDiceCount).fill(proficiencyDie);
         const challengeDice = Array(challengeDieCount).fill(challengeDie);
         const diceToRoll = [...boostDice, ...setbackDice, ...abilityDice, ...difficultyDice, ...proficiencyDice, ...challengeDice];
         const customSymbols = Object.entries(symbolCounts)
             .flatMap(([symbol, count]) => symbol !== GenesysSymbols.Blank.toString() ? Array(count)
                 .fill([parseInt(symbol, 10)]) : []);
+        console.log(diceToRoll)
         const rolledResults = rollDice(diceToRoll, customSymbols);
         const tally = tallyResults(rolledResults);
         setResults(tally);

@@ -26,7 +26,7 @@ export default function PlayerSkillCard(props: Props) {
     const renderSkillGroupTable = (type: SkillType) => {
         return (
             <Table>
-                {renderDoubleRowTableHeader(headers, type, 3)}
+                {renderDoubleRowTableHeader(headers, type, headers.length)}
                 <TableBody>
                     {(player.skills || []).filter((skill) => skill.type === type).map((skill: PlayerSkill) => (
                         <TableRow key={skill.name}>
