@@ -30,6 +30,7 @@ public class CampaignService {
             camp.setName(campaign.getName());
             camp.setParty(campaign.getParty());
             camp.setSessions(campaign.getSessions());
+            camp.setActive(campaign.isActive());
             return camp;
         }).flatMap(campaignRepository::save);
     }

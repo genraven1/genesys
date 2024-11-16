@@ -6,10 +6,11 @@ interface Props {
     onChange: (index: number, value: string) => void
     value: string
     index: number
+    disabled: boolean
 }
 
 export default function TextFieldTableCell(props: Props) {
-    const {onChange, value, index} = props;
+    const {onChange, value, index, disabled} = props;
     const [name, setName] = useState(value);
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -20,7 +21,7 @@ export default function TextFieldTableCell(props: Props) {
 
     return (
         <TableCell style={{textAlign: 'left'}}>
-            <TextField onChange={onNameChange} value={name} fullWidth/>
+            <TextField onChange={onNameChange} value={name} fullWidth disabled={disabled}/>
         </TableCell>
     )
 }

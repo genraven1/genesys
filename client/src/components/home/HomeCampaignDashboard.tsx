@@ -12,6 +12,7 @@ import CampaignPage from "../campaign/CampaignPage";
 import CampaignSelectionDialog from "../campaign/selection/CampaignSelectionDialog";
 import ViewSessions from "../campaign/session/ViewSessions";
 import PartyCard from "../campaign/party/PartyCard";
+import CampaignService from "../../services/CampaignService";
 
 export default function HomeCampaignDashboard() {
     const campaign = useFetchCurrentCampaign();
@@ -21,6 +22,13 @@ export default function HomeCampaignDashboard() {
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
+    }
+
+    const startCampaign = async () => {
+        await CampaignService.updateCampaign({
+            ...campaign,
+            active: true
+        });
     }
 
     const renderButton = () => {
@@ -43,7 +51,6 @@ export default function HomeCampaignDashboard() {
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
                                 <Tab label="Genesys System Defaults" value="1"/>
-                                {/*<Tab label="Actor" value="2"/>*/}
                                 <Tab label="Campaign Information" value="2"/>
                                 <Tab label="Party Information" value="3"/>
                                 <Tab label="Session Management" value="4"/>
@@ -52,9 +59,6 @@ export default function HomeCampaignDashboard() {
                         <TabPanel value="1">
                             <GenesysSystemDashboard/>
                         </TabPanel>
-                        {/*<TabPanel value="2">*/}
-                        {/*    <ActorDashboard/>*/}
-                        {/*</TabPanel>*/}
                         <TabPanel value="2">
                             <CampaignPage campaign={campaign}/>
                         </TabPanel>
@@ -70,6 +74,7 @@ export default function HomeCampaignDashboard() {
             <CardActions>
                 <Grid container justifyContent={'center'}>
                     {renderButton()}
+                    {campaign && <Button color='primary' variant='contained' onClick={startCampaign}>Start Campaign</Button>}
                 </Grid>
             </CardActions>
             {openCampaignSelectionDialog && <CampaignSelectionDialog open={openCampaignSelectionDialog}
