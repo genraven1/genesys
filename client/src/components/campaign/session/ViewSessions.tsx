@@ -58,7 +58,7 @@ export default function ViewSessions(props: Props) {
                             {campaign.sessions.map((session, index) => (
                                 <TableRow key={index}>
                                     <TextFieldTableCell onChange={onSessionNameChange} value={session.name}
-                                                        index={index}/>
+                                                        index={index} disabled={session.active}/>
                                     <SingleActionTableCell name={session.name} path={CampaignPath.Session}/>
                                 </TableRow>
                             ))}
