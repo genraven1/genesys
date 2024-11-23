@@ -1,6 +1,6 @@
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import {Card, CardContent, Grid, TextField} from "@mui/material";
-import CenteredCardHeader from "./CenteredCardHeader";
+import CenteredCardHeader from "./header/CenteredCardHeader";
 import * as React from "react";
 
 interface CharacteristicProps {

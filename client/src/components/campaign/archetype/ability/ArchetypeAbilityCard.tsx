@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
 import Archetype from "../../../../models/actor/player/Archetype";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 import ArchetypeAbilityTable from "./ArchetypeAbilityTable";
 import CreateArchetypeAbilityDialog from "./CreateArchetypeAbilityDialog";
 

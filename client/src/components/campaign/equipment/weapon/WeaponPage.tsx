@@ -11,7 +11,7 @@ import EquipmentService from "../../../../services/EquipmentService";
 import {RangeBand} from "../../../../models/common/RangeBand";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {TextFieldCard} from "../../../common/card/TextFieldCard";
-import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {EquipmentPath} from "../../../../services/RootPath";
 import SkillAutocompleteCard from "../../../common/card/SkillAutocompleteCard";
 import RangeBandCard from "../../../common/card/select/RangeBandCard";

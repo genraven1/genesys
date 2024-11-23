@@ -14,25 +14,25 @@ interface Props {
     path: LorePath
 }
 
-export default function LoreCreationDialog(props: Props): JSX.Element {
-    const {open,onClose,lore,path} = props
-    const [ name, setName ] = useState('')
-    let navigate = useNavigate()
+export default function LoreCreationDialog(props: Props) {
+    const {open, onClose, lore, path} = props;
+    const [name, setName] = useState('');
+    let navigate = useNavigate();
 
     const handleCreate = async (): Promise<void> => {
-        await LoreService.createLore(name, path)
-        navigate(path + name + '/view')
-        onClose()
-    }
+        await LoreService.createLore(path, name);
+        navigate(path + name + '/view');
+        onClose();
+    };
 
     const onNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { value } = event.target
-        setName(value)
-    }
+        const {value} = event.target;
+        setName(value);
+    };
 
-    const getTitle = ():string => {
-        return 'Create ' + lore
-    }
+    const getTitle = (): string => {
+        return 'Create ' + lore;
+    };
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -42,5 +42,5 @@ export default function LoreCreationDialog(props: Props): JSX.Element {
             </DialogContentText>
             <GenesysDialogActions onClose={onClose} handleCreate={handleCreate}/>
         </Dialog>
-    )
+    );
 }

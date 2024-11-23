@@ -10,31 +10,37 @@ import {ViewAllOrganizations} from "./ViewAllOrganization";
 function useFetchOrganization(name: string, path: LorePath): Organization {
     const [organization, setOrganization] = useState<Organization>()
     useEffect(() => {
-        if(!name) {return}
+        if (!name) {
+            return
+        }
         (async (): Promise<void> => {
             try {
-                const orgData = await LoreService.getLore(name, path)
-                if (orgData) {setOrganization(orgData)}
-            } catch (err) {console.log(err)}
+                const orgData = await LoreService.getLore(path, name)
+                if (orgData) {
+                    setOrganization(orgData)
+                }
+            } catch (err) {
+                console.log(err)
+            }
         })()
-    },[name, setOrganization, path])
+    }, [name, setOrganization, path])
     return organization as Organization
 }
 
-export default function OrganizationWorkflow(): JSX.Element {
-    const { name } = useParams<{ name: string }>()
+export default function OrganizationWorkflow() {
+    const {name} = useParams<{ name: string }>()
     const path = LorePath.Organization
     const organization = useFetchOrganization(name as string, path)
 
-    const useWorkflowRender = (): JSX.Element => {
+    const useWorkflowRender = () => {
         const pathname = useLocation().pathname
         if (pathname.endsWith('/view')) {
-            return organization && <OrganizationView  organization={organization}/>
-        }
-        else if (pathname.endsWith('/edit')) {
+            return organization && <OrganizationView organization={organization}/>
+        } else if (pathname.endsWith('/edit')) {
             return organization && <OrganizationEdit org={organization}/>
+        } else {
+            return <ViewAllOrganizations/>
         }
-        else {return <ViewAllOrganizations/>}
     }
 
     return (

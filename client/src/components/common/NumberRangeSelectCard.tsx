@@ -1,6 +1,6 @@
 import {Card, CardActions, Grid} from "@mui/material";
 import InputNumberRangeSelectField from "./InputNumberRangeSelect";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import CenteredCardHeader from "./card/header/CenteredCardHeader";
 
 interface Props {
     defaultValue: number

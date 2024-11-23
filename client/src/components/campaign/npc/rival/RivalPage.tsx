@@ -9,7 +9,7 @@ import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharact
 import EquipmentCard from "../../actor/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/CharacteristicRow";
-import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
 import ActorService from "../../../../services/ActorService";

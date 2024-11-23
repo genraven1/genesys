@@ -14,12 +14,13 @@ import {Button, Card, CardContent, CardHeader} from "@mui/material";
 import LoreCreationDialog from "../common/LoreCreationDialog";
 import {LoreType} from "../../../models/lore/Lore";
 import {LorePath} from "../../../services/RootPath";
+import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 interface RowProps {
     organization: Organization
 }
 
-function OrganizationRow(props: RowProps): JSX.Element {
+function OrganizationRow(props: RowProps) {
     const {organization} = props
 
     return (
@@ -30,20 +31,18 @@ function OrganizationRow(props: RowProps): JSX.Element {
     )
 }
 
-export function ViewAllOrganizations(): JSX.Element {
-    const [organizations, setOrganizations] = useState<Organization[]>([])
-    const [openLoreCreationDialog, setOpenLoreCreationDialog] = useState(false)
-    const headers = ['Name', 'View']
+export function ViewAllOrganizations() {
+    const [organizations, setOrganizations] = useState<Organization[]>([]);
+    const [openLoreCreationDialog, setOpenLoreCreationDialog] = useState(false);
+    const headers = ['Name', 'View'];
+    const campaign = useFetchCurrentCampaign();
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const loreList = await LoreService.getAllLoreOfType(LorePath.Organization)
-            if (!loreList) {
-                return
-            }
-            setOrganizations(loreList)
+            if (!campaign) return;
+            setOrganizations(await LoreService.getAllLoreOfType(campaign.id, LorePath.Organization))
         })()
-    }, [])
+    }, [setOrganizations])
 
     return (
         <Card>

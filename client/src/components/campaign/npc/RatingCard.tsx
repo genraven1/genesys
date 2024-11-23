@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid, TextField} from "@mui/material";
 import * as React from "react";
 import {RatingType} from "../../../models/actor/npc/NonPlayerActor";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 
 interface Props {
     type: RatingType

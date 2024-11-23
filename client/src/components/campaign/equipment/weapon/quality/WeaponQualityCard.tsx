@@ -1,7 +1,7 @@
 import {Card, CardContent} from "@mui/material";
 import * as React from "react";
 import {Weapon} from "../../../../../models/equipment/Weapon";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 import {EquipmentQuality} from "../../../../../models/Quality";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";

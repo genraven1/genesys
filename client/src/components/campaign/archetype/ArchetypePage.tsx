@@ -11,7 +11,7 @@ import Skill from "../../../models/actor/Skill";
 import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../common/card/NumberTextField";
 import {TextFieldCard} from "../../common/card/TextFieldCard";
-import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
 import SkillAutocompleteCard from "../../common/card/SkillAutocompleteCard";
 import CharacteristicCard from "../../common/card/CharacteristicCard";
 import ArchetypeAbilityCard from "./ability/ArchetypeAbilityCard";

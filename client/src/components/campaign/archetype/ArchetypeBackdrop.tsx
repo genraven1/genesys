@@ -5,7 +5,7 @@ import Archetype from "../../../models/actor/player/Archetype";
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import {Card, CardContent, Grid} from "@mui/material";
 import {StatsType} from "../../../models/actor/Stats";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 
 interface Props {
     archetype: Archetype

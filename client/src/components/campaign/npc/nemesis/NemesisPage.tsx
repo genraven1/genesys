@@ -4,7 +4,7 @@ import ActorService from "../../../../services/ActorService";
 import * as React from "react";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import {Card, CardContent, Divider, Grid} from "@mui/material";
-import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {ActorPath} from "../../../../services/RootPath";
 import {getRatings, RatingType} from "../../../../models/actor/npc/NonPlayerActor";
 import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/CharacteristicRow";

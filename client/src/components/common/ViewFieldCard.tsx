@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid} from "@mui/material";
 import GenesysDescriptionTypography from "./typography/GenesysDescriptionTypography";
 import * as React from "react";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import CenteredCardHeader from "./card/header/CenteredCardHeader";
 
 interface ViewProps {
     name: string

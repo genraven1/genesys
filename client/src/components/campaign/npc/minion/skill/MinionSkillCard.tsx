@@ -11,7 +11,7 @@ import {TypographyCenterTableCell} from "../../../../common/table/TypographyTabl
 import Minion, {GroupSkill} from "../../../../../models/actor/npc/Minion";
 import EditableBooleanTableCell from "../../../../common/table/EditableBooleanTableCell";
 import {useLocation} from "react-router-dom";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 
 interface TableProps {
     minion: Minion

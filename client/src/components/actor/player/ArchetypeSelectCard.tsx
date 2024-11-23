@@ -1,5 +1,5 @@
 import {Autocomplete, Card, CardContent, Grid, IconButton, TextField} from "@mui/material";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import {useEffect, useState} from "react";
 import Archetype from "../../../models/actor/player/Archetype";
 import ArchetypeService from "../../../services/ArchetypeService";

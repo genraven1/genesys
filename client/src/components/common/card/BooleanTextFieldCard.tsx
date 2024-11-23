@@ -1,5 +1,5 @@
 import {Card, CardContent, FormControl, Grid, MenuItem, Select} from "@mui/material";
-import CenteredCardHeader from "./CenteredCardHeader";
+import CenteredCardHeader from "./header/CenteredCardHeader";
 import * as React from "react";
 
 interface BooleanTextFieldProps {

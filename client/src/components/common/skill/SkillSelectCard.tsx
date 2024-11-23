@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import EditField from "../EditField";
-import CenteredCardHeader from "../card/CenteredCardHeader";
+import CenteredCardHeader from "../card/header/CenteredCardHeader";
 
 interface Props {
     defaultValue: Skill

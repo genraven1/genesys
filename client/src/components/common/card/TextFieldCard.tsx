@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Card, CardContent, Grid} from "@mui/material";
-import CenteredCardHeader from "./CenteredCardHeader";
+import CenteredCardHeader from "./header/CenteredCardHeader";
 import GenesysTextField from "../GenesysTextField";
 
 interface Props {

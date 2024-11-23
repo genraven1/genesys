@@ -9,7 +9,7 @@ import {useState} from "react";
 import * as React from "react";
 import Injury from "../../../models/Injury";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import InjuryService from "../../../services/InjuryService";
 import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";
 import NumberTextFieldIndexTableCell from "../../common/table/NumberTextFieldIndexTableCell";

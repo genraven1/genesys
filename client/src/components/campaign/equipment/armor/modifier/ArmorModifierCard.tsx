@@ -10,7 +10,7 @@ import * as React from "react";
 import TableCell from "@mui/material/TableCell";
 import {Armor} from "../../../../../models/equipment/Armor";
 import ModifierService from "../../../../../services/ModifierService";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 
 interface Props {

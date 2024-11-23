@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import CreateSkillDialog from "../skills/CreateSkillDialog";
 import ExpansionList from "../navigation/ExpansionList";
-import CenteredCardHeader from "../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../common/card/header/CenteredCardHeader";
 import CreateInjuryDialog from "../injuries/CreateInjuryDialog";
 import CreateSpellDialog from "../spell/CreateSpellDialog";
 import {RootPath} from "../../services/RootPath";

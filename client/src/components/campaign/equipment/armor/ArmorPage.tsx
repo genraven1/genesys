@@ -6,7 +6,7 @@ import {Fragment, useEffect, useState} from "react";
 import EquipmentService from "../../../../services/EquipmentService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {TextFieldCard} from "../../../common/card/TextFieldCard";
-import CenteredCardHeaderWithAction from "../../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {EquipmentPath} from "../../../../services/RootPath";
 import SoakCard from "../../../common/card/SoakCard";
 import DefenseCard from "../../../common/card/DefenseCard";

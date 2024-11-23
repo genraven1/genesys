@@ -6,7 +6,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
 import SkillService from "../../services/SkillService";
 import {CharacteristicType} from "../../models/character/Characteristic";
-import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../common/card/header/CenteredCardHeaderWithAction";
 import SkillTypeCard from "../common/card/select/SkillTypeCard";
 import CharacteristicTypeCard from "../common/card/select/CharacteristicTypeCard";
 

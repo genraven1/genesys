@@ -23,6 +23,7 @@ import ArmorWorkflow from "../campaign/equipment/armor/ArmorWorkflow";
 import WeaponWorkflow from "../campaign/equipment/weapon/WeaponWorkflow";
 import GearWorkflow from '../campaign/equipment/gear/GearWorkflow';
 import SessionPage from "../campaign/session/SessionPage";
+import ScenePage from "../campaign/scene/ScenePage";
 
 export default function App() {
 
@@ -93,7 +94,7 @@ export default function App() {
                     <Route path={EquipmentPath.Gear + ':id/view'} element={<GearWorkflow/>}/>
 
                     {/*Lore Routes*/}
-                    <Route path={RootPath.Lore} element={<ViewAllLore/>}/>
+                    <Route path={CampaignPath.Lore} element={<ViewAllLore/>}/>
 
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':id/view'} element={<OrganizationWorkflow/>}/>
@@ -104,6 +105,8 @@ export default function App() {
                     <Route path={CampaignPath.Campaign + ':id'} element={<CampaignWorkflow/>}/>
 
                     <Route path={CampaignPath.Session + ':name'} element={<SessionPage/>}/>
+
+                    <Route path={CampaignPath.Scene + ':id'} element={<ScenePage/>}/>
                 </Routes>
             </HashRouter>
         </ThemeProvider>

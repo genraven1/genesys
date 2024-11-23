@@ -2,8 +2,6 @@ export enum RootPath {
     Home = 'home',
     Talent = '/talents/',
     Skills = '/skills/',
-    Lore = '/lore',
-    Roll = '/roll',
     Qualities = '/qualities/',
     Injury = '/injuries/',
     Spell = '/spells/',
@@ -27,7 +25,7 @@ export enum ActorPath {
     Nemesis = '/nemeses/',
     Rival = '/rivals/',
     Minion = '/minions/',
-    Npc = '/actors/npcs'
+    Npc = '/npcs/'
 }
 
 export enum CampaignPath {
@@ -36,6 +34,7 @@ export enum CampaignPath {
     Session = '/sessions/',
     Scene = '/scenes/',
     Current = '/current',
+    Lore = '/lore',
     Talents = '/campaigns/talents/',
     Skills = '/campaigns/skills/'
 }

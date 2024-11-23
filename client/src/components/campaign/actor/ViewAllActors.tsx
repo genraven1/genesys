@@ -12,12 +12,13 @@ import ActorService from "../../../services/ActorService";
 import {ActorPath} from "../../../services/RootPath";
 import {Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
+import {useFetchCurrentCampaign} from "../CampaignWorkflow";
 
 interface Props {
     actor: Actor
 }
 
-function Row(props: Props): JSX.Element {
+function Row(props: Props) {
     const {actor} = props
 
     const getPathFromType = (): string => {
@@ -43,23 +44,20 @@ function Row(props: Props): JSX.Element {
 }
 
 export default function ViewAllActors() {
-    const [actors, setActors] = useState<Actor[]>([])
-    const headers = ['Name', 'Type', 'View']
+    const [actors, setActors] = useState<Actor[]>([]);
+    const headers = ['Name', 'Type', 'View'];
+    const campaign = useFetchCurrentCampaign();
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const actorList = await ActorService.getActors()
-            if (!actorList) {
-                return
-            }
-            setActors(actorList)
+            if (!campaign) return;
+            setActors(await ActorService.getActors(campaign.id))
         })()
     }, [setActors])
 
     return (
         <Card>
-            <CardHeader style={{textAlign: 'center'}} title={'View All Actors'}>
-            </CardHeader>
+            <CardHeader style={{textAlign: 'center'}} title={'View All Actors'}></CardHeader>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

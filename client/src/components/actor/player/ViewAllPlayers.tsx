@@ -11,10 +11,11 @@ import ActionsTableCell from '../../common/table/ActionsTableCell';
 import {ActorPath} from "../../../services/RootPath";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CreateActorDialog from "../../campaign/actor/common/CreateActorDialog";
 import {ActorType} from "../../../models/actor/Actor";
 import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
+import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
 
 export default function ViewAllPlayers() {
     const [players, setPlayers] = useState<Player[]>([]);
@@ -31,11 +32,9 @@ export default function ViewAllPlayers() {
 
     return (
         <Card>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={'View All Players'}
-                action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Player</Button>}/>
+            <CenteredCardHeaderWithDialog title={'View All Players'}
+                                          onClick={(): void => setOpenActorCreationDialog(true)}
+                                          buttonText={'Create Player'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
