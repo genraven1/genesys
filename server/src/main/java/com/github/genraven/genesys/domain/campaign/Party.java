@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.domain.campaign;
 
+import com.github.genraven.genesys.domain.actor.player.Player;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Party {
 
-    private List<Character> characters = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
 }

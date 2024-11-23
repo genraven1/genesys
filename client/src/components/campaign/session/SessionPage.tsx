@@ -66,7 +66,7 @@ export default function SessionPage() {
                             <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>
                         </TabPanel>
                         <TabPanel value="2">
-                            <PartyCard/>
+                            <PartyCard party={session.party}/>
                         </TabPanel>
                     </TabContext>
                 </Grid>
