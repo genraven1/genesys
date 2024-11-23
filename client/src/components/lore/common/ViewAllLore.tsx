@@ -13,6 +13,7 @@ import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell"
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 interface RowProps {
     lore: Lore
@@ -37,15 +38,15 @@ function LoreRow(props: RowProps): JSX.Element {
     )
 }
 
-export function ViewAllLore(): JSX.Element {
-    const [lore, setLore] = useState<Lore[]>([])
-    const headers = ['Name', 'Type', 'View']
+export function ViewAllLore() {
+    const [lore, setLore] = useState<Lore[]>([]);
+    const headers = ['Name', 'Type', 'View'];
+    const campaign = useFetchCurrentCampaign();
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const loreList = await LoreService.getAllLore()
-            if (!loreList) { return }
-            setLore(loreList)
+            if (!campaign) return;
+            setLore(await LoreService.getAllLore(campaign.id))
         })()
     }, [])
 

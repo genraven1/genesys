@@ -63,8 +63,7 @@ export default function OrganizationEdit(props: Props) {
     }
 
     const updateOrganization = async (copyOrg: Organization) => {
-        setOrganization(copyOrg)
-        await LoreService.updateOrganization(organization.name, copyOrg)
+        setOrganization(await LoreService.updateOrganization(copyOrg))
     }
 
     const onView = () => {

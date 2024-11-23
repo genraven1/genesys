@@ -1,4 +1,3 @@
-import axios from "axios";
 import Player, {PlayerSkill} from "../models/actor/player/Player";
 import Nemesis from "../models/actor/npc/Nemesis";
 import Rival from "../models/actor/npc/Rival";
@@ -11,12 +10,32 @@ import {ActorPath, CampaignPath, RootPath} from "./RootPath";
 
 export default class ActorService {
 
-    static async getActors(): Promise<Actor[]> {
-        return await (await axios.get(ActorPath.Actor)).data;
+    static async getActors(campaignName: string): Promise<Actor[]> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Actor)
+            .then((res) => {
+                switch (res.status) {
+                    case 204:
+                        return []
+                    case 200:
+                        return res.json()
+                    default:
+                        throw new Error(res.statusText)
+                }
+            })
     }
 
-    static async getNonPlayerCharacters(): Promise<NonPlayerActor[]> {
-        return await (await axios.get(ActorPath.Npc)).data;
+    static async getNonPlayerCharacters(campaignName: string): Promise<NonPlayerActor[]> {
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Npc)
+            .then((res) => {
+                switch (res.status) {
+                    case 204:
+                        return []
+                    case 200:
+                        return res.json()
+                    default:
+                        throw new Error(res.statusText)
+                }
+            })
     }
 
     static async createPlayer(id: string, playerName: string): Promise<Player> {

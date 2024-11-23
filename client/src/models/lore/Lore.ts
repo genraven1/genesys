@@ -1,4 +1,5 @@
 export default interface Lore {
+    id: string
     name: string
     type: LoreType
 }
