@@ -3,7 +3,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {GenesysDifficultyCenterTableCell, TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {Button, Card, CardActions, CardContent} from "@mui/material";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";

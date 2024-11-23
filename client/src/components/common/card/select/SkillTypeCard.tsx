@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import {SkillType} from "../../../../models/actor/Skill";
-import CenteredCardHeader from "../CenteredCardHeader";
+import CenteredCardHeader from "../header/CenteredCardHeader";
 
 interface Props {
     value: SkillType

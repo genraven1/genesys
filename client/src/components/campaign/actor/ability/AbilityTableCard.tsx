@@ -14,7 +14,7 @@ import {
     GenesysDescriptionTypographyCenterTableCell, TypographyCenterTableCell,
     TypographyLeftTableCell
 } from "../../../common/table/TypographyTableCell";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 
 interface Props {
     abilities: Ability[]

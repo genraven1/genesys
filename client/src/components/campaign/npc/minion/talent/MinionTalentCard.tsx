@@ -13,7 +13,7 @@ import {
     TypographyCenterTableCell
 } from "../../../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 import Talent from "../../../../../models/Talent";
 import CharacterTalentSelectionDialog from "../../talent/CharacterTalentSelectionDialog";
 

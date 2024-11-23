@@ -8,7 +8,7 @@ import {Fragment, useEffect, useState} from "react";
 import InjuryService from "../../services/InjuryService";
 import {Difficulty} from "../../models/common/Difficulty";
 import {ViewFieldCard} from "../common/ViewFieldCard";
-import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../common/card/header/CenteredCardHeaderWithAction";
 import DifficultyCard from "../common/card/select/DifficultyCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {TextFieldCard} from "../common/card/TextFieldCard";

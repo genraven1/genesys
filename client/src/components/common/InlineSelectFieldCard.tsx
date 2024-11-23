@@ -1,6 +1,6 @@
 import {Card, CardContent, Grid} from "@mui/material";
 import InputSelectField, {Option} from "./InputSelectField";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import CenteredCardHeader from "./card/header/CenteredCardHeader";
 
 interface TextProps {
     defaultValue: string

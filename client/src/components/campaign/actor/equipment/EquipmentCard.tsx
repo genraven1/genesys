@@ -5,7 +5,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import {useState} from "react";
-import CenteredCardHeader from "../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 import ArmorTable from "./armor/ArmorTable";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import Actor from "../../../../models/actor/Actor";

@@ -1,7 +1,7 @@
 import {Tier} from "../../../../models/Talent";
 import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
-import CenteredCardHeader from "../CenteredCardHeader";
+import CenteredCardHeader from "../header/CenteredCardHeader";
 
 interface Props {
     value: Tier

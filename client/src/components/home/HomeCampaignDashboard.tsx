@@ -13,6 +13,7 @@ import CampaignSelectionDialog from "../campaign/selection/CampaignSelectionDial
 import ViewSessions from "../campaign/session/ViewSessions";
 import PartyCard from "../campaign/party/PartyCard";
 import CampaignService from "../../services/CampaignService";
+import ViewAllPlayers from "../actor/player/ViewAllPlayers";
 
 export default function HomeCampaignDashboard() {
     const campaign = useFetchCurrentCampaign();
@@ -63,7 +64,7 @@ export default function HomeCampaignDashboard() {
                             <CampaignPage campaign={campaign}/>
                         </TabPanel>
                         <TabPanel value="3">
-                            <PartyCard campaign={campaign}/>
+                            <ViewAllPlayers/>
                         </TabPanel>
                         <TabPanel value="4">
                             <ViewSessions camp={campaign}/>

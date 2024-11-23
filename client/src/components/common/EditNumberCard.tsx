@@ -1,6 +1,6 @@
 import {Card, CardContent, Grid} from "@mui/material";
 import InlineNumberField from "./NumberField";
-import CenteredCardHeader from "./card/CenteredCardHeader";
+import CenteredCardHeader from "./card/header/CenteredCardHeader";
 
 interface Props {
     title: string

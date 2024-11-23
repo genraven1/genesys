@@ -13,7 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import SkillService from "../../../services/SkillService";
 import Skill from "../../../models/actor/Skill";
-import CenteredCardHeaderWithAction from "../../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
 import SkillAutocompleteTableCell from "../../common/table/SkillAutocompleteTableCell";
 
 export default function CareerPage() {

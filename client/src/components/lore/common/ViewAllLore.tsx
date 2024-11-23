@@ -12,7 +12,7 @@ import {LorePath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import {Card, CardContent} from "@mui/material";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 
 interface RowProps {

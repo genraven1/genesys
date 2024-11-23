@@ -1,7 +1,7 @@
 import {Grid, Card, CardActions, CardContent} from "@mui/material";
 import {CharacteristicType} from "../../../models/character/Characteristic";
 import InputNumberRangeSelectField from "../../common/InputNumberRangeSelect";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../common/typography/GenesysDescriptionTypography";
 
 interface EditProps {

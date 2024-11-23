@@ -2,7 +2,7 @@ import {Card, CardContent} from "@mui/material";
 import * as React from "react";
 import {Armor} from "../../../../../models/equipment/Armor";
 import {EquipmentQuality} from "../../../../../models/Quality";
-import CenteredCardHeader from "../../../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import Paper from "@mui/material/Paper";

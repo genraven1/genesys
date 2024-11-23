@@ -7,7 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import Quality from "../../../models/Quality";
 import NumberTextFieldIndexTableCell from "../../common/table/NumberTextFieldIndexTableCell";
 import ModifierAutocompleteTableCell from "../../common/table/ModifierAutocompleteTableCell";

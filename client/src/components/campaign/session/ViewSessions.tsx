@@ -1,7 +1,7 @@
 import Campaign from "../../../models/campaign/Campaign";
 import React, {useState} from "react";
 import {Button, Card, CardContent, Table, TableContainer, TableFooter} from "@mui/material";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import Paper from "@mui/material/Paper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";

@@ -7,7 +7,7 @@ import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import TalentService from "../../services/TalentService";
 import {ViewFieldCard} from "../common/ViewFieldCard";
-import CenteredCardHeaderWithAction from "../common/card/CenteredCardHeaderWithAction";
+import CenteredCardHeaderWithAction from "../common/card/header/CenteredCardHeaderWithAction";
 import ActivationCard from "../common/card/select/ActivationCard";
 import TierCard from "../common/card/select/TierCard";
 import {TextFieldCard} from "../common/card/TextFieldCard";

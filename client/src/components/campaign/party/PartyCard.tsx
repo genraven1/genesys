@@ -7,16 +7,15 @@ import TableBody from "@mui/material/TableBody";
 import * as React from "react";
 import TableRow from "@mui/material/TableRow";
 import ImportActorToPartySelection from "./ImportActorToPartySelection";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import Campaign from "../../../models/campaign/Campaign";
 import ViewAllPlayers from "../../actor/player/ViewAllPlayers";
 
 interface Props {
-    campaign: Campaign
+
 }
 
 export default function PartyCard(props: Props) {
-    const {campaign} = props;
 
     return (
         <Card sx={{"width": 1}}>

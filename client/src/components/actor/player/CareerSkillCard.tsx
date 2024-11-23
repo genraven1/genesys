@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Autocomplete, Card, CardContent, Grid, IconButton, TextField,} from "@mui/material";
-import CenteredCardHeader from "../../common/card/CenteredCardHeader";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import CareerService from "../../../services/CareerService";
 import Career from "../../../models/actor/player/Career";
 import InfoIcon from "@mui/icons-material/Info";
