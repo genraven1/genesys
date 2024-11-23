@@ -71,7 +71,7 @@ export default function SessionPage() {
                             <PartyCard party={session.party}/>
                         </TabPanel>
                         <TabPanel value="3">
-                            <ViewScenes/>
+                            <ViewScenes scenes={session.scenes}/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

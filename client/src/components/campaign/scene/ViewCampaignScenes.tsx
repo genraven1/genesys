@@ -1,6 +1,5 @@
 import {Button, Card, CardContent, Table, TableContainer, TableFooter} from "@mui/material";
-import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Scene from "../../../models/campaign/Scene";
 import Paper from "@mui/material/Paper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
@@ -9,21 +8,24 @@ import TableRow from "@mui/material/TableRow";
 import {SingleActionTableCell} from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/RootPath";
 import AddIcon from "@mui/icons-material/Add";
+import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
+import CampaignService from "../../../services/CampaignService";
 
-interface Props {
-    scenes: Scene[]
-}
-
-export default function ViewScenes(props: Props) {
-    const {scenes} = props;
+export default function ViewCampaignScenes() {
+    const [scenes, setScenes] = useState<Scene[]>([]);
     const [openSceneDialog, setOpenSceneDialog] = useState(false);
     const headers = ['Name', 'View'];
 
+    useEffect(() => {
+        (async (): Promise<void> => {
+            setScenes(await CampaignService.getCampaignScenes())
+        })()
+    }, [setScenes])
+
     return (
         <Card>
-            <CenteredCardHeaderWithDialog title={'Scenes'} onClick={() => setOpenSceneDialog(true)}
-                                          buttonText={'Add Scene'}/>
+            <CenteredCardHeader title={'Scenes'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
@@ -32,7 +34,7 @@ export default function ViewScenes(props: Props) {
                             {scenes.map((scene, index) => (
                                 <TableRow key={index}>
                                     <TypographyCenterTableCell value={scene.name}/>
-                                    <SingleActionTableCell name={scene.id} path={CampaignPath.Session}/>
+                                    <SingleActionTableCell name={scene.id} path={CampaignPath.Scene}/>
                                 </TableRow>
                             ))}
                         </TableBody>

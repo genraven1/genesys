@@ -7,6 +7,7 @@ export enum RootPath {
     Spell = '/spells/',
     Career = '/careers/',
     Archetype = '/archetypes/',
+    Scenes = '/scenes/'
 }
 
 export enum EquipmentPath {
@@ -32,7 +33,7 @@ export enum CampaignPath {
     Campaign = '/campaigns/',
     Party = '/party/',
     Session = '/sessions/',
-    Scene = '/scenes/',
+    Scene = '/campaigns/scenes/',
     Current = '/current',
     Lore = '/lore',
     Talents = '/campaigns/talents/',
