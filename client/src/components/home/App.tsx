@@ -93,7 +93,7 @@ export default function App() {
                     <Route path={EquipmentPath.Gear + ':id/view'} element={<GearWorkflow/>}/>
 
                     {/*Lore Routes*/}
-                    <Route path={RootPath.Lore} element={<ViewAllLore/>}/>
+                    <Route path={CampaignPath.Lore} element={<ViewAllLore/>}/>
 
                     <Route path={LorePath.Organization} element={<OrganizationWorkflow/>}/>
                     <Route path={LorePath.Organization + ':id/view'} element={<OrganizationWorkflow/>}/>

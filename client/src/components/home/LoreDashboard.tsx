@@ -1,4 +1,4 @@
-import {LorePath, RootPath} from "../../services/RootPath";
+import {CampaignPath, LorePath} from "../../services/RootPath";
 import {useNavigate} from "react-router-dom";
 import {Button, Card, CardContent, CardHeader, Grid} from "@mui/material";
 import * as React from "react";
@@ -13,7 +13,7 @@ export default function LoreDashboard() {
             <CardHeader
                 style={{textAlign: 'center'}}
                 title={'Lore MainDashboard'}
-                action={<Button color='primary' variant='contained' onClick={() => navigate(RootPath.Lore)}>Lore</Button>}>
+                action={<Button color='primary' variant='contained' onClick={() => navigate(CampaignPath.Lore)}>Lore</Button>}>
             </CardHeader>
             <CardContent>
                 <Grid container justifyContent={'center'}>
