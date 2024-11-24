@@ -13,6 +13,7 @@ import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import PartyCard from "../party/PartyCard";
 import ViewScenes from "../scene/ViewScenes";
+import ViewCampaignScenes from "../scene/ViewCampaignScenes";
 
 export default function SessionPage() {
     const {name} = useParams<{ name: string }>();
@@ -71,7 +72,7 @@ export default function SessionPage() {
                             <PartyCard party={session.party}/>
                         </TabPanel>
                         <TabPanel value="3">
-                            <ViewScenes scenes={session.scenes}/>
+                            <ViewCampaignScenes/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

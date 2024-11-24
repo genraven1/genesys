@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, Table, TableContainer, TableFooter} from "@mui/material";
+import {Card, CardContent, Table, TableContainer} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import Scene from "../../../models/campaign/Scene";
 import Paper from "@mui/material/Paper";
@@ -7,10 +7,9 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {SingleActionTableCell} from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/RootPath";
-import AddIcon from "@mui/icons-material/Add";
-import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import CampaignService from "../../../services/CampaignService";
+import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
 
 export default function ViewCampaignScenes() {
     const [scenes, setScenes] = useState<Scene[]>([]);
@@ -19,13 +18,16 @@ export default function ViewCampaignScenes() {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setScenes(await CampaignService.getCampaignScenes())
+            setScenes(await CampaignService.getCampaignScenes());
         })()
     }, [setScenes])
 
     return (
         <Card>
-            <CenteredCardHeader title={'Scenes'}/>
+            <CenteredCardHeaderWithDialog title={'Scenes'} onClick={() => setOpenSceneDialog(true)}
+                                          buttonText={'Add Scene'}/>
+            {/*{openSceneDialog && <SceneCreationDialog open={openSceneDialog}*/}
+            {/*                                         onClose={(): void => setOpenSceneDialog(false)}/>}*/}
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
@@ -38,12 +40,6 @@ export default function ViewCampaignScenes() {
                                 </TableRow>
                             ))}
                         </TableBody>
-                        <TableFooter>
-                            <TableRow key={'Footer'}>
-                                {/*<Button variant='contained' color='primary' onClick={addRow} startIcon={<AddIcon/>}>Add*/}
-                                {/*    Scene</Button>*/}
-                            </TableRow>
-                        </TableFooter>
                     </Table>
                 </TableContainer>
             </CardContent>
