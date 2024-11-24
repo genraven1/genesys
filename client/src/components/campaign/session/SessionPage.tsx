@@ -12,6 +12,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import PartyCard from "../party/PartyCard";
+import ViewCampaignScenes from "../scene/ViewCampaignScenes";
 
 export default function SessionPage() {
     const {name} = useParams<{ name: string }>();
@@ -59,6 +60,7 @@ export default function SessionPage() {
                             <TabList onChange={handleChange} centered>
                                 <Tab label="Settings" value="1"/>
                                 <Tab label="Party" value="2"/>
+                                <Tab label="Scenes" value="3"/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -67,6 +69,9 @@ export default function SessionPage() {
                         </TabPanel>
                         <TabPanel value="2">
                             <PartyCard party={session.party}/>
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <ViewCampaignScenes/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

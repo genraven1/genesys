@@ -5,15 +5,16 @@ import {useState} from "react";
 import GenesysSystemDashboard from "./MainDashboard";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import CampaignDialog from "../campaign/CampaignDialog";
 import CampaignPage from "../campaign/CampaignPage";
 import CampaignSelectionDialog from "../campaign/selection/CampaignSelectionDialog";
 import ViewSessions from "../campaign/session/ViewSessions";
-import PartyCard from "../campaign/party/PartyCard";
 import CampaignService from "../../services/CampaignService";
 import ViewAllPlayers from "../actor/player/ViewAllPlayers";
+import ViewCampaignScenes from "../campaign/scene/ViewCampaignScenes";
+import Tab from "@mui/material/Tab";
+import ViewScenes from "../campaign/scene/ViewScenes";
 
 export default function HomeCampaignDashboard() {
     const campaign = useFetchCurrentCampaign();
@@ -55,6 +56,7 @@ export default function HomeCampaignDashboard() {
                                 <Tab label="Campaign Information" value="2"/>
                                 <Tab label="Party Information" value="3"/>
                                 <Tab label="Session Management" value="4"/>
+                                <Tab label="Scene Management" value="5"/>
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
@@ -68,6 +70,9 @@ export default function HomeCampaignDashboard() {
                         </TabPanel>
                         <TabPanel value="4">
                             <ViewSessions camp={campaign}/>
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <ViewScenes/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

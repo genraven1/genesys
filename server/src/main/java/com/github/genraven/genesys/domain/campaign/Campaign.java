@@ -27,4 +27,5 @@ public class Campaign {
     private boolean active = false;
     private List<String> talentIds = new ArrayList<>();
     private List<String> skillIds = new ArrayList<>();
+    private List<String> sceneIds = new ArrayList<>();
 }

@@ -7,5 +7,5 @@ export default interface CampaignSession {
     active: boolean
     player: number
     gm: number
-    sceneIds: string[]
+    scenes: Scene[]
 }

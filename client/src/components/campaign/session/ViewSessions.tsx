@@ -29,7 +29,7 @@ export default function ViewSessions(props: Props) {
                 name: 'new',
                 party: campaign.party,
                 active: false,
-                sceneIds: [],
+                scenes: [],
                 player: 0,
                 gm: 0
             } as CampaignSession]

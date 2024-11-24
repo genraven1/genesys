@@ -1,5 +1,4 @@
 import {Card, CardContent, Table, TableContainer} from "@mui/material";
-import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
 import React, {useEffect, useState} from "react";
 import Scene from "../../../models/campaign/Scene";
 import Paper from "@mui/material/Paper";
@@ -9,26 +8,26 @@ import TableRow from "@mui/material/TableRow";
 import {SingleActionTableCell} from "../../common/table/ActionsTableCell";
 import {CampaignPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
-import SceneCreationDialog from "./SceneCreationDialog";
-import SceneService from "../../../services/SceneService";
+import CampaignService from "../../../services/CampaignService";
+import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
 
-export default function ViewScenes() {
+export default function ViewCampaignScenes() {
     const [scenes, setScenes] = useState<Scene[]>([]);
     const [openSceneDialog, setOpenSceneDialog] = useState(false);
     const headers = ['Name', 'View'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setScenes(await SceneService.getScenes());
+            setScenes(await CampaignService.getCampaignScenes());
         })()
     }, [setScenes])
 
     return (
         <Card>
             <CenteredCardHeaderWithDialog title={'Scenes'} onClick={() => setOpenSceneDialog(true)}
-                                          buttonText={'Create Scene'}/>
-            {openSceneDialog && <SceneCreationDialog open={openSceneDialog}
-                                                     onClose={(): void => setOpenSceneDialog(false)}/>}
+                                          buttonText={'Add Scene'}/>
+            {/*{openSceneDialog && <SceneCreationDialog open={openSceneDialog}*/}
+            {/*                                         onClose={(): void => setOpenSceneDialog(false)}/>}*/}
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

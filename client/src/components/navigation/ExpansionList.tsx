@@ -1,8 +1,7 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {Box, List, ListItemText, Collapse, ListItemButton} from "@mui/material";
-import React, {useState} from "react";
-import ListMenuItemDialog from "./ListMenuItemDialog";
-import ListMenuItemLink from "./ListMenuItemLink";
+import React, {forwardRef, ReactElement, useMemo, useState} from "react";
+import {Link, LinkProps} from "react-router-dom";
 
 interface Props {
     header: string
@@ -13,8 +12,12 @@ interface Props {
 }
 
 export default function ExpansionList(props: Props) {
-    const {header,viewTitle,to,dialogTitle,onClick} = props
-    const [collapse, setCollapse] = useState(false)
+    const {header,viewTitle,to,dialogTitle,onClick} = props;
+    const [collapse, setCollapse] = useState(false);
+
+    const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): ReactElement => (
+        <Link to={to} ref={ref} {...itemProps} />
+    )), [to]);
 
     return (
         <Box role="presentation">
@@ -25,8 +28,12 @@ export default function ExpansionList(props: Props) {
                 </ListItemButton>
                 <Collapse in={collapse} timeout="auto" unmountOnExit>
                     <List>
-                        <ListMenuItemLink  name={viewTitle} to={to}/>
-                        <ListMenuItemDialog name={dialogTitle} onClick={onClick} />
+                        <ListItemButton component={renderLink}>
+                            <ListItemText primary={viewTitle} />
+                        </ListItemButton>
+                        <ListItemButton>
+                            <ListItemText primary={dialogTitle} onClick={onClick} />
+                        </ListItemButton>
                     </List>
                 </Collapse>
             </List>

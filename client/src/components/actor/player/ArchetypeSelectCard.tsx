@@ -21,7 +21,7 @@ export default function ArchetypeSelectCard(props: Props) {
         (async (): Promise<void> => {
             setArchetypes(await ArchetypeService.getArchetypes());
         })()
-    }, [])
+    }, [setArchetypes])
 
     return (
         <Grid item xs>
