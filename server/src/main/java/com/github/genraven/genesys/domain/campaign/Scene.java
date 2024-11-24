@@ -20,6 +20,6 @@ public class Scene {
     @Id
     private String id;
     private String name;
-    private Party party;
+    private Party party = new Party();
     private List<Encounter> encounters = new ArrayList<>();
 }

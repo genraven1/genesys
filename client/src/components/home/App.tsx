@@ -93,6 +93,9 @@ export default function App() {
                     <Route path={EquipmentPath.Gear + ':id/edit'} element={<GearWorkflow/>}/>
                     <Route path={EquipmentPath.Gear + ':id/view'} element={<GearWorkflow/>}/>
 
+                    <Route path={RootPath.Scenes + ':id/edit'} element={<ScenePage/>}/>
+                    <Route path={RootPath.Scenes + ':id/view'} element={<ScenePage/>}/>
+
                     {/*Lore Routes*/}
                     <Route path={CampaignPath.Lore} element={<ViewAllLore/>}/>
 
@@ -105,8 +108,6 @@ export default function App() {
                     <Route path={CampaignPath.Campaign + ':id'} element={<CampaignWorkflow/>}/>
 
                     <Route path={CampaignPath.Session + ':name'} element={<SessionPage/>}/>
-
-                    <Route path={CampaignPath.Scene + ':id'} element={<ScenePage/>}/>
                 </Routes>
             </HashRouter>
         </ThemeProvider>

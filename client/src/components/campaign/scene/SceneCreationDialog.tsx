@@ -28,7 +28,7 @@ export default function SceneCreationDialog(props: Props){
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle title={'Create Scene'}/>
+            <DialogTitle sx={{textAlign: 'center'}}>Create Scene</DialogTitle>
             <DialogContent>
                 <TextField onChange={onChange} value={name} required/>
             </DialogContent>

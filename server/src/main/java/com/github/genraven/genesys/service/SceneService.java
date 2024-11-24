@@ -40,14 +40,14 @@ public class SceneService {
 
     public Mono<List<Scene>> getScenesForCurrentCampaign() {
         return campaignRepository.findByCurrent(true)
-                .flatMap(campaign -> Flux.fromIterable(campaign.getTalentIds())
+                .flatMap(campaign -> Flux.fromIterable(campaign.getSceneIds())
                         .flatMap(sceneRepository::findById)
                         .collectList());
     }
 
     public Mono<Campaign> addSceneToCurrentCampaign(final String sceneId) {
         return campaignRepository.findByCurrent(true).flatMap(existingCampaign -> {
-            existingCampaign.getTalentIds().add(sceneId);
+            existingCampaign.getSkillIds().add(sceneId);
             return campaignRepository.save(existingCampaign);
         });
     }

@@ -12,7 +12,6 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import PartyCard from "../party/PartyCard";
-import ViewScenes from "../scene/ViewScenes";
 import ViewCampaignScenes from "../scene/ViewCampaignScenes";
 
 export default function SessionPage() {
