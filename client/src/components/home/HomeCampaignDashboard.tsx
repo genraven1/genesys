@@ -12,7 +12,6 @@ import CampaignSelectionDialog from "../campaign/selection/CampaignSelectionDial
 import ViewSessions from "../campaign/session/ViewSessions";
 import CampaignService from "../../services/CampaignService";
 import ViewAllPlayers from "../actor/player/ViewAllPlayers";
-import ViewCampaignScenes from "../campaign/scene/ViewCampaignScenes";
 import Tab from "@mui/material/Tab";
 import ViewScenes from "../campaign/scene/ViewScenes";
 

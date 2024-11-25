@@ -48,7 +48,7 @@ export function ViewAllLore() {
             if (!campaign) return;
             setLore(await LoreService.getAllLore(campaign.id))
         })()
-    }, [])
+    }, [campaign])
 
     return (
         <Card>

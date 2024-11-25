@@ -42,7 +42,7 @@ export function ViewAllOrganizations() {
             if (!campaign) return;
             setOrganizations(await LoreService.getAllLoreOfType(campaign.id, LorePath.Organization))
         })()
-    }, [setOrganizations])
+    }, [setOrganizations, campaign])
 
     return (
         <Card>

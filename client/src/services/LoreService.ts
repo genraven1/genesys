@@ -4,30 +4,6 @@ import {CampaignPath, LorePath} from "./RootPath";
 
 
 export default class LoreService {
-
-    static async createLore(path: LorePath, name: string): Promise<Lore> {
-        return await fetch(`${path}` + `${name}`, {
-            method: "POST"
-        })
-            .then((res) => {
-                console.log(res)
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async getLore(path: LorePath, id: string): Promise<any> {
-        return await fetch(`${path}` + `${id}`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
     static async getAllLore(campaignId: string): Promise<Lore[]> {
         return await fetch(CampaignPath.Campaign + `${campaignId}` + CampaignPath.Lore)
             .then((res) => {

@@ -3,8 +3,8 @@ import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {LorePath} from "../../../services/RootPath";
 import {Dialog, DialogContentText, DialogTitle, TextField} from "@mui/material";
-import LoreService from "../../../services/LoreService";
 import {GenesysDialogActions} from "../../common/dialog/GenesysDialogActions";
+import OrganizationService from "../../../services/lore/OrganizationService";
 
 
 interface Props {
@@ -20,8 +20,11 @@ export default function LoreCreationDialog(props: Props) {
     let navigate = useNavigate();
 
     const handleCreate = async (): Promise<void> => {
-        await LoreService.createLore(path, name);
-        navigate(path + name + '/view');
+        switch (lore) {
+            case LoreType.ORGANIZATION:
+                let organization = await OrganizationService.createOrganization(name);
+                navigate(path + organization.name + '/view');
+        }
         onClose();
     };
 
