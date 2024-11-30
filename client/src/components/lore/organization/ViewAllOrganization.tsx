@@ -2,7 +2,6 @@ import {Organization} from "../../../models/lore/Organization";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import TableRow from "@mui/material/TableRow";
-import LoreService from "../../../services/LoreService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -15,6 +14,7 @@ import LoreCreationDialog from "../common/LoreCreationDialog";
 import {LoreType} from "../../../models/lore/Lore";
 import {LorePath} from "../../../services/RootPath";
 import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
+import OrganizationService from "../../../services/lore/OrganizationService";
 
 interface RowProps {
     organization: Organization
@@ -40,9 +40,9 @@ export function ViewAllOrganizations() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setOrganizations(await LoreService.getAllLoreOfType(campaign.id, LorePath.Organization))
+            setOrganizations(await OrganizationService.getOrganizations());
         })()
-    }, [setOrganizations])
+    }, [setOrganizations, campaign])
 
     return (
         <Card>

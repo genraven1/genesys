@@ -2,10 +2,10 @@ import {useLocation, useParams} from "react-router-dom";
 import {LorePath} from "../../../services/RootPath";
 import {Organization} from "../../../models/lore/Organization";
 import {Fragment, useEffect, useState} from "react";
-import LoreService from "../../../services/LoreService";
 import OrganizationView from "./OrganizationView";
 import OrganizationEdit from "./OrganizationEdit";
 import {ViewAllOrganizations} from "./ViewAllOrganization";
+import OrganizationService from "../../../services/lore/OrganizationService";
 
 function useFetchOrganization(name: string, path: LorePath): Organization {
     const [organization, setOrganization] = useState<Organization>()
@@ -15,10 +15,7 @@ function useFetchOrganization(name: string, path: LorePath): Organization {
         }
         (async (): Promise<void> => {
             try {
-                const orgData = await LoreService.getLore(path, name)
-                if (orgData) {
-                    setOrganization(orgData)
-                }
+                setOrganization(await OrganizationService.getOrganization(name))
             } catch (err) {
                 console.log(err)
             }

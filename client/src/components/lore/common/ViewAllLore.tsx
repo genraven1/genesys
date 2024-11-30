@@ -5,7 +5,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import LoreService from "../../../services/LoreService";
+import LoreService from "../../../services/lore/LoreService";
 import Lore, {LoreType} from "../../../models/lore/Lore";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
 import {LorePath} from "../../../services/RootPath";
@@ -48,7 +48,7 @@ export function ViewAllLore() {
             if (!campaign) return;
             setLore(await LoreService.getAllLore(campaign.id))
         })()
-    }, [])
+    }, [campaign])
 
     return (
         <Card>

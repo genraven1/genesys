@@ -1,6 +1,6 @@
-import {Button, Card, CardContent, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
 import * as React from "react";
 import Scene from "../../../models/campaign/Scene";
@@ -16,7 +16,6 @@ export default function ScenePage() {
     const {id} = useParams<{ id: string }>();
     const [scene, setScene] = useState<Scene | null>(null);
     const [value, setValue] = useState('1');
-    let pathname = useLocation().pathname;
 
     useEffect(() => {
         if (!id) {
