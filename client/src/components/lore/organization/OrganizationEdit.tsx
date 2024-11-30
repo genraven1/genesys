@@ -5,12 +5,12 @@ import {Card, CardContent, CardHeader, Grid, IconButton} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import * as React from "react";
 import {Organization, OrgKey, OrgType} from "../../../models/lore/Organization";
-import LoreService from "../../../services/LoreService";
 import {Option} from "../../common/InputSelectField";
 import EditNumberCard from "../../common/EditNumberCard";
 import {InputTextFieldCard} from "../../common/InputTextFieldCard";
 import {LoreType} from "../../../models/lore/Lore";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
+import OrganizationService from "../../../services/lore/OrganizationService";
 
 const getOrgTypes = (): Option[] => {
     return Object.values(OrgType).map((value) => ({value}))
@@ -63,7 +63,7 @@ export default function OrganizationEdit(props: Props) {
     }
 
     const updateOrganization = async (copyOrg: Organization) => {
-        setOrganization(await LoreService.updateOrganization(copyOrg))
+        setOrganization(await OrganizationService.updateOrganization(copyOrg))
     }
 
     const onView = () => {

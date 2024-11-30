@@ -7,7 +7,7 @@ import {Difficulty} from "../../../models/common/Difficulty";
 import GenesysDifficultyDiceTypography from "../typography/GenesysDifficultyDiceTypography";
 import Cost, {CostType} from "../../../models/common/Cost";
 import Limit, {LimitType} from "../../../models/common/Limit";
-import {GenesysSymbols} from "../../../models/roll/GenesysSymbols";
+// import {GenesysSymbols} from "../../../models/roll/GenesysSymbols";
 import DiceRollerDialog from "../../roll/DiceRollerDialog";
 
 interface LeftProps {
@@ -113,23 +113,31 @@ interface DiceRollProps {
 export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
     const {actor, skill} = props;
     const [openCustomRollBackDrop, setOpenCustomRollBackDrop] = useState(false);
-    const [symbolCounts, setSymbolCounts] = useState({
-        [GenesysSymbols.Success]: 0,
-        [GenesysSymbols.Advantage]: 0,
-        [GenesysSymbols.Triumph]: 0,
-        [GenesysSymbols.Failure]: 0,
-        [GenesysSymbols.Threat]: 0,
-        [GenesysSymbols.Despair]: 0,
-        [GenesysSymbols.Blank]: 0,
-    });
-    const [dicePool, setDicePool] = useState({
+    // const [symbolCounts, setSymbolCounts] = useState({
+    //     [GenesysSymbols.Success]: 0,
+    //     [GenesysSymbols.Advantage]: 0,
+    //     [GenesysSymbols.Triumph]: 0,
+    //     [GenesysSymbols.Failure]: 0,
+    //     [GenesysSymbols.Threat]: 0,
+    //     [GenesysSymbols.Despair]: 0,
+    //     [GenesysSymbols.Blank]: 0,
+    // });
+    // const [dicePool, setDicePool] = useState({
+    //     boost: 0,
+    //     setback: 0,
+    //     ability: Math.max(getCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
+    //     difficulty: 0,
+    //     proficiency: Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
+    //     challenge: 0,
+    // });
+    const dicePool = {
         boost: 0,
         setback: 0,
         ability: Math.max(getCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
         difficulty: 0,
         proficiency: Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
         challenge: 0,
-    });
+    };
 
     return (
         <TableCell style={{textAlign: 'center'}}>

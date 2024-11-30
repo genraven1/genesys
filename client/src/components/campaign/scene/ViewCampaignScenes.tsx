@@ -10,6 +10,7 @@ import {CampaignPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import CampaignService from "../../../services/CampaignService";
 import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
+import SceneCreationDialog from "./SceneCreationDialog";
 
 export default function ViewCampaignScenes() {
     const [scenes, setScenes] = useState<Scene[]>([]);
@@ -26,8 +27,8 @@ export default function ViewCampaignScenes() {
         <Card>
             <CenteredCardHeaderWithDialog title={'Scenes'} onClick={() => setOpenSceneDialog(true)}
                                           buttonText={'Add Scene'}/>
-            {/*{openSceneDialog && <SceneCreationDialog open={openSceneDialog}*/}
-            {/*                                         onClose={(): void => setOpenSceneDialog(false)}/>}*/}
+            {openSceneDialog && <SceneCreationDialog open={openSceneDialog}
+                                                     onClose={(): void => setOpenSceneDialog(false)}/>}
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>
