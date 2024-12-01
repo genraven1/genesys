@@ -1,6 +1,5 @@
 import Player, {PlayerSkill} from "../../models/actor/player/Player";
 import Nemesis from "../../models/actor/npc/Nemesis";
-import Rival from "../../models/actor/npc/Rival";
 import Actor, {ActorSkill} from "../../models/actor/Actor";
 import NonPlayerActor from "../../models/actor/npc/NonPlayerActor";
 import Career from "../../models/actor/player/Career";
@@ -193,75 +192,6 @@ export default class ActorService {
 
     static async updateNemesisSkill(id: string, skill: ActorSkill): Promise<Nemesis> {
         return await fetch(ActorPath.Nemesis + `${id}` + RootPath.Skills, {
-            method: "PATCH",
-            body: JSON.stringify(skill),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async getRival(id: string): Promise<Rival> {
-        return await fetch(ActorPath.Rival + `${id}`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async createRival(id: string, rivalName: string): Promise<Rival> {
-        return await fetch(CampaignPath.Campaign + `${id}` + ActorPath.Rival + `${rivalName}`, {
-            method: "POST"
-        })
-            .then((res) => {
-                console.log(res)
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async getRivals(campaignName: string): Promise<Rival[]> {
-        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Rival)
-            .then((res) => {
-                switch (res.status) {
-                    case 204:
-                        return []
-                    case 200:
-                        return res.json()
-                    default:
-                        throw new Error(res.statusText)
-                }
-            })
-    }
-
-    static async updateRival(rival: Rival): Promise<Rival> {
-        return await fetch(ActorPath.Rival + `${rival.id}`, {
-            method: "PUT",
-            body: JSON.stringify(rival),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(res.statusText)
-                }
-                return res.json()
-            })
-    }
-
-    static async updateRivalSkill(id: string, skill: ActorSkill): Promise<Rival> {
-        return await fetch(ActorPath.Rival + `${id}` + RootPath.Skills, {
             method: "PATCH",
             body: JSON.stringify(skill),
             headers: {

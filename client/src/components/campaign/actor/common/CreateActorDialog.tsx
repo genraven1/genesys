@@ -8,6 +8,7 @@ import {ActorType, getActorTypes} from "../../../../models/actor/Actor";
 import InputSelectField from "../../../common/InputSelectField";
 import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
+import RivalService from "../../../../services/actor/RivalService";
 
 interface Props {
     open: boolean
@@ -29,7 +30,7 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Minion + minion.id + '/edit');
                 break
             case ActorType.Rival:
-                let rival = await ActorService.createRival(campaign.id, name);
+                let rival = await RivalService.createRival(campaign.id, name);
                 navigate(ActorPath.Rival + rival.id + '/edit');
                 break
             case ActorType.Nemesis:

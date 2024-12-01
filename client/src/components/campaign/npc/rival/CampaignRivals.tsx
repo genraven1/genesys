@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
-import ActorService from '../../../../services/actor/ActorService'
+import RivalService from '../../../../services/actor/RivalService'
 import Rival from "../../../../models/actor/npc/Rival";
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
@@ -59,7 +59,7 @@ export default function CampaignRivals() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setRivals(await ActorService.getRivals(campaign.id));
+            setRivals(await RivalService.getRivals(campaign.id));
         })()
     }, [campaign]);
 
