@@ -10,7 +10,7 @@ import {Weapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import Player from "../../../../../models/actor/player/Player";
-import ActorService from "../../../../../services/ActorService";
+import ActorService from "../../../../../services/actor/ActorService";
 import WeaponBackdrop from "../../../../campaign/actor/equipment/WeaponBackdrop";
 
 interface RowProps {

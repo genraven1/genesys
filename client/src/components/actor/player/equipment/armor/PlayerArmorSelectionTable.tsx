@@ -10,7 +10,7 @@ import {Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
 import Player from "../../../../../models/actor/player/Player";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import ActorService from "../../../../../services/ActorService";
+import ActorService from "../../../../../services/actor/ActorService";
 import ArmorBackdrop from "../../../../campaign/actor/equipment/ArmorBackdrop";
 
 interface RowProps {

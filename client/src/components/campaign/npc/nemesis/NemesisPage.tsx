@@ -1,6 +1,6 @@
 import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
-import ActorService from "../../../../services/ActorService";
+import ActorService from "../../../../services/actor/ActorService";
 import * as React from "react";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import {Card, CardContent, Divider, Grid} from "@mui/material";

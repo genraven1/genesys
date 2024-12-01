@@ -6,7 +6,7 @@ import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {Fragment, useEffect, useState} from "react";
 import Career from "../../../models/actor/player/Career";
 import * as React from "react";
-import ActorService from "../../../services/ActorService";
+import ActorService from "../../../services/actor/ActorService";
 import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
 import Archetype from "../../../models/actor/player/Archetype";
 import {ActorPath} from "../../../services/RootPath";

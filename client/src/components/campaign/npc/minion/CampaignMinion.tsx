@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Fragment, useEffect, useState } from 'react';
 import * as React from 'react';
-import ActorService from '../../../../services/ActorService'
+import MinionService from '../../../../services/actor/MinionService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import Minion from "../../../../models/actor/npc/Minion";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
@@ -58,7 +58,7 @@ export default function CampaignMinion() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setMinions(await ActorService.getMinions(campaign.id));
+            setMinions(await MinionService.getMinions(campaign.id));
         })()
     }, [campaign]);
 

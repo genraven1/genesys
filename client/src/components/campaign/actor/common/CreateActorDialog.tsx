@@ -1,7 +1,8 @@
 import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ActorService from "../../../../services/ActorService";
+import ActorService from "../../../../services/actor/ActorService";
+import MinionService from "../../../../services/actor/MinionService";
 import {ActorPath} from "../../../../services/RootPath";
 import {ActorType, getActorTypes} from "../../../../models/actor/Actor";
 import InputSelectField from "../../../common/InputSelectField";
@@ -24,7 +25,7 @@ export default function CreateActorDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case ActorType.Minion:
-                let minion = await ActorService.createMinion(campaign.id, name);
+                let minion = await MinionService.createMinion(campaign.id, name);
                 navigate(ActorPath.Minion + minion.id + '/edit');
                 break
             case ActorType.Rival:

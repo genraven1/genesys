@@ -12,7 +12,7 @@ import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/Char
 import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
-import ActorService from "../../../../services/ActorService";
+import ActorService from "../../../../services/actor/ActorService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {DefenseType} from "../../../../models/actor/Defense";

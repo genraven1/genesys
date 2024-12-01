@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Player from '../../../models/actor/player/Player';
-import ActorService from '../../../services/ActorService';
+import ActorService from '../../../services/actor/ActorService';
 import ActionsTableCell from '../../common/table/ActionsTableCell';
 import {ActorPath} from "../../../services/RootPath";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";

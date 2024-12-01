@@ -39,3 +39,7 @@ export enum CampaignPath {
     Talents = '/campaigns/talents/',
     Skills = '/campaigns/skills/'
 }
+
+export enum ScenePath {
+    Rivals = '/scenes/rivals/'
+}

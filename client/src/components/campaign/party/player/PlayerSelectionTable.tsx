@@ -6,7 +6,7 @@ import TableBody from "@mui/material/TableBody";
 import Talent from "../../../../models/Talent";
 import {useEffect, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
-import ActorService from "../../../../services/ActorService";
+import ActorService from "../../../../services/actor/ActorService";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {Button} from "@mui/material";

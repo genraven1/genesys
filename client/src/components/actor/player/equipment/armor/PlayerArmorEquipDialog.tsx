@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import {TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
 import InputSelectField from "../../../../common/InputSelectField";
 import Player from "../../../../../models/actor/player/Player";
-import ActorService from "../../../../../services/ActorService";
+import ActorService from "../../../../../services/actor/ActorService";
 
 interface Props {
     open: boolean;
