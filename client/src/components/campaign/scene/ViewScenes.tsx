@@ -6,8 +6,8 @@ import Paper from "@mui/material/Paper";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {SingleActionTableCell} from "../../common/table/ActionsTableCell";
-import {CampaignPath} from "../../../services/RootPath";
+import ActionsTableCell from "../../common/table/ActionsTableCell";
+import {RootPath} from "../../../services/RootPath";
 import {TypographyCenterTableCell} from "../../common/table/TypographyTableCell";
 import SceneCreationDialog from "./SceneCreationDialog";
 import SceneService from "../../../services/SceneService";
@@ -37,7 +37,7 @@ export default function ViewScenes() {
                             {scenes.map((scene, index) => (
                                 <TableRow key={index}>
                                     <TypographyCenterTableCell value={scene.name}/>
-                                    <SingleActionTableCell name={scene.id} path={CampaignPath.Scene}/>
+                                    <ActionsTableCell name={scene.id} path={RootPath.Scenes}/>
                                 </TableRow>
                             ))}
                         </TableBody>

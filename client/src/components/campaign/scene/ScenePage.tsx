@@ -11,6 +11,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import PartyCard from "../party/PartyCard";
+import RivalSkill from "./npc/RivalSkill";
 
 export default function ScenePage() {
     const {id} = useParams<{ id: string }>();
@@ -32,7 +33,7 @@ export default function ScenePage() {
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
-    }
+    };
 
     return (
         <Card>
@@ -43,19 +44,23 @@ export default function ScenePage() {
                         <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
                             <TabList onChange={handleChange} centered>
                                 {/*<Tab label="Settings" value="1"/>*/}
-                                <Tab label="Party" value="2"/>
-                                <Tab label="Encounters" value="3"/>
+                                <Tab label="Party" value="1"/>
+                                <Tab label="Encounters" value="2"/>
+                                <Tab label="Enemy NPC" value="3"/>
                             </TabList>
                         </Grid>
                         {/*<TabPanel value="1">*/}
                         {/*    <Button variant="contained" color="primary" onClick={startSession}>Start Session</Button>*/}
                         {/*    <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>*/}
                         {/*</TabPanel>*/}
-                        <TabPanel value="2">
+                        <TabPanel value="1">
                             <PartyCard party={scene.party}/>
                         </TabPanel>
-                        <TabPanel value="3">
+                        <TabPanel value="2">
 
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <RivalSkill rivals={scene.enemy_rivals}/>
                         </TabPanel>
                     </TabContext>
                 </Grid>

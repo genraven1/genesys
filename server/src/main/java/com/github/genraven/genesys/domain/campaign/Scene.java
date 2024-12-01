@@ -22,4 +22,5 @@ public class Scene {
     private String name;
     private Party party = new Party();
     private List<Encounter> encounters = new ArrayList<>();
+    private List<String> enemy_rivals = new ArrayList<>();
 }
