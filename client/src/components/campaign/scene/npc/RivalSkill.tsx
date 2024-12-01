@@ -1,6 +1,6 @@
-import {Card, CardContent, Grid} from "@mui/material";
+import {Button, Card, CardContent, Grid} from "@mui/material";
 import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
-import {Fragment, useState} from "react";
+import {useState} from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
@@ -8,6 +8,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
 import SingleNonPlayerCharacterSkillCard from "../../npc/skill/SingleNonPlayerCharacterSkillCard";
+import AddRivalToSceneDialog from "./AddRivalToSceneDialog";
 
 interface Props {
     rivals: Rival[]
@@ -16,13 +17,20 @@ interface Props {
 export default function RivalSkill(props: Props) {
     const {rivals} = props;
     const [value, setValue] = useState('1');
+    const [addRivalDialog, setAddRivalDialog] = useState(false);
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
     if (!rivals) {
-        return <Fragment/>
+        return (
+            <Card>
+                <Button color='primary' variant='contained' onClick={(): void => setAddRivalDialog(true)}>Add Rival</Button>
+                {addRivalDialog && <AddRivalToSceneDialog open={addRivalDialog}
+                                                                  onClose={(): void => setAddRivalDialog(false)}/>}
+            </Card>
+        )
     }
 
     return (
