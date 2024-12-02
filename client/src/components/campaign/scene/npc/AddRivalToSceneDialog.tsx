@@ -1,5 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import CampaignRivals from "../../npc/rival/CampaignRivals";
+import EnemySceneRivals from "./EnemySceneRivals";
 
 interface Props {
     open: boolean
@@ -13,11 +13,11 @@ export default function AddRivalToSceneDialog(props: Props) {
         <Dialog open={open} onClose={onClose} fullScreen>
             <DialogTitle title={'Add Rival'}/>
             <DialogContent>
-                <CampaignRivals/>
+                <EnemySceneRivals/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
             </DialogActions>
         </Dialog>
-    )
+    );
 }

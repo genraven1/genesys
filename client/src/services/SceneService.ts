@@ -1,5 +1,6 @@
 import Scene from "../models/campaign/Scene";
-import {RootPath} from "./RootPath";
+import {RootPath, ScenePath} from "./RootPath";
+import Rival from "../models/actor/npc/Rival";
 
 
 export default class SceneService {
@@ -42,6 +43,32 @@ export default class SceneService {
         return await fetch(RootPath.Scenes + `${scene.id}`, {
             method: "PUT",
             body: JSON.stringify(scene),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async getEnemyRivalsForScene(): Promise<Rival[]> {
+        return await fetch(ScenePath.Rivals + 'enemies/')
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async addRivalToScene(rival: Rival): Promise<Scene> {
+        return await fetch(ScenePath.Rivals, {
+            method: "POST",
+            body: JSON.stringify(rival),
             headers: {
                 'Content-Type': 'application/json'
             }
