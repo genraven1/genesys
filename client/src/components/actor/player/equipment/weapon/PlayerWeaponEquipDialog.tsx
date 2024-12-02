@@ -10,6 +10,7 @@ import InputSelectField from "../../../../common/InputSelectField";
 import Player from "../../../../../models/actor/player/Player";
 import ActorService from "../../../../../services/actor/ActorService";
 import {ActorWeapon, getWeaponSlotOptions, WeaponSlot} from "../../../../../models/equipment/Weapon";
+import PlayerService from "../../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean;
@@ -37,7 +38,7 @@ export default function PlayerWeaponEquipDialog(props: Props) {
                 }
             })
         }
-        await ActorService.updatePlayer(player)
+        await PlayerService.updatePlayer(player)
     }
 
     return (

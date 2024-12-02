@@ -1,7 +1,6 @@
 import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ActorService from "../../../../services/actor/ActorService";
 import MinionService from "../../../../services/actor/MinionService";
 import {ActorPath} from "../../../../services/RootPath";
 import {ActorType, getActorTypes} from "../../../../models/actor/Actor";
@@ -10,6 +9,7 @@ import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions"
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 import RivalService from "../../../../services/actor/RivalService";
 import NemesisService from "../../../../services/actor/NemesisService";
+import PlayerService from "../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean
@@ -39,7 +39,7 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Nemesis + nemesis.id + '/edit');
                 break
             case ActorType.Player:
-                let player = await ActorService.createPlayer(campaign.id, name);
+                let player = await PlayerService.createPlayer(campaign.id, name);
                 navigate(ActorPath.Player + player.id + '/edit');
                 break
         }

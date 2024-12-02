@@ -12,6 +12,7 @@ import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders"
 import Player from "../../../../../models/actor/player/Player";
 import ActorService from "../../../../../services/actor/ActorService";
 import WeaponBackdrop from "../../../../campaign/actor/equipment/WeaponBackdrop";
+import PlayerService from "../../../../../services/actor/PlayerService";
 
 interface RowProps {
     weapon: Weapon
@@ -24,7 +25,7 @@ function WeaponNameRow(props: RowProps): JSX.Element {
 
     const addWeapon = async () => {
         player.weapons.push({slot: WeaponSlot.None, ...weapon})
-        await ActorService.updatePlayer(player)
+        await PlayerService.updatePlayer(player)
     }
 
     return (

@@ -6,7 +6,6 @@ import {ViewFieldCard} from "../../common/ViewFieldCard";
 import {Fragment, useEffect, useState} from "react";
 import Career from "../../../models/actor/player/Career";
 import * as React from "react";
-import ActorService from "../../../services/actor/ActorService";
 import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
 import Archetype from "../../../models/actor/player/Archetype";
 import {ActorPath} from "../../../services/RootPath";
@@ -19,6 +18,7 @@ import {ActorArmor} from "../../../models/equipment/Armor";
 import {ActorWeapon} from "../../../models/equipment/Weapon";
 import SingleNonPlayerCharacterTalentCard from "../../campaign/npc/talent/SingleNonPlayerCharacterTalentCard";
 import {ActorTalent} from "../../../models/Talent";
+import PlayerService from "../../../services/actor/PlayerService";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -30,7 +30,7 @@ export default function PlayerPage() {
             return
         }
         (async (): Promise<void> => {
-            setPlayer(await ActorService.getPlayer(id));
+            setPlayer(await PlayerService.getPlayer(id));
         })()
     }, [id, setPlayer])
 
@@ -40,37 +40,37 @@ export default function PlayerPage() {
 
     const handleArchetypeChange = async (value: Archetype) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayerArchetype(player.id, value));
+            setPlayer(await PlayerService.updatePlayerArchetype(player.id, value));
         }
     };
 
     const handleCareerChange = async (value: Career) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayerCareer(player.id, value));
+            setPlayer(await PlayerService.updatePlayerCareer(player.id, value));
         }
     };
 
     const handleCareerSkillChange = async (value: PlayerSkill[]) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayerCareerSkills(player.id, value));
+            setPlayer(await PlayerService.updatePlayerCareerSkills(player.id, value));
         }
     };
 
     const handleArmorChange = async (value: ActorArmor[]) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayer({...player, armors: value}));
+            setPlayer(await PlayerService.updatePlayer({...player, armors: value}));
         }
     };
 
     const handleWeaponChange = async (value: ActorWeapon[]) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayer({...player, weapons: value}));
+            setPlayer(await PlayerService.updatePlayer({...player, weapons: value}));
         }
     };
 
     const handleTalentChange = async (values: ActorTalent[]) => {
         if (player) {
-            setPlayer(await ActorService.updatePlayer({...player, talents: values}));
+            setPlayer(await PlayerService.updatePlayer({...player, talents: values}));
         }
     };
 
