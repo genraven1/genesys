@@ -10,19 +10,28 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import SceneService from "../../../../services/SceneService";
 import {useEffect, useState} from "react";
+import RivalService from "../../../../services/actor/RivalService";
+import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 
-export default function EnemySceneRivals() {
+interface Props {
+    id: string
+}
+
+export default function EnemySceneRivals(props: Props) {
+    const {id} = props;
     const [rivals, setRivals] = useState<Rival[]>([]);
+    let campaign = useFetchCurrentCampaign();
     const headers = ['Name', 'Add'];
 
     useEffect(() => {
         (async (): Promise<void> => {
-            setRivals(await SceneService.getEnemyRivalsForScene());
+            if (!campaign) return;
+            setRivals(await RivalService.getRivals(campaign.id));
         })()
-    }, [setRivals]);
+    }, [setRivals, campaign]);
 
     const addRival = async (rival: Rival) => {
-        await SceneService.addRivalToScene(rival);
+        await SceneService.addRivalToScene(id, rival);
     }
 
     return (

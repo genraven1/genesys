@@ -60,7 +60,7 @@ export default function ScenePage() {
 
                         </TabPanel>
                         <TabPanel value="3">
-                            <RivalSkill rivals={scene.enemy_rivals}/>
+                            <RivalSkill scene={scene}/>
                         </TabPanel>
                     </TabContext>
                 </Grid>
