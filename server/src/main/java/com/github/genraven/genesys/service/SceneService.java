@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.service;
 
+import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.repository.CampaignRepository;
@@ -49,6 +50,17 @@ public class SceneService {
         return campaignRepository.findByCurrent(true).flatMap(existingCampaign -> {
             existingCampaign.getSkillIds().add(sceneId);
             return campaignRepository.save(existingCampaign);
+        });
+    }
+
+    public Mono<List<Rival>> getEnemyRivals(final String id) {
+        return getScene(id).flatMap(scene -> Flux.fromIterable(scene.getEnemyRivals()).collectList());
+    }
+
+    public Mono<Scene> addEnemyRivalToScene(final String sceneId, final Rival rival) {
+        return getScene(sceneId).flatMap(existingScene -> {
+            existingScene.getEnemyRivals().add(rival);
+            return sceneRepository.save(existingScene);
         });
     }
 }

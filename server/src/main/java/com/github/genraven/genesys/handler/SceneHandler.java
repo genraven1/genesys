@@ -1,8 +1,10 @@
 package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.Talent;
+import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.service.SceneService;
+import com.github.genraven.genesys.service.actor.RivalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
+import static com.github.genraven.genesys.constants.CommonConstants.ID;
 import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
@@ -68,6 +71,19 @@ public class SceneHandler {
         return request.bodyToMono(Scene.class)
                 .flatMap(scene -> sceneService.addSceneToCurrentCampaign(scene.getId()))
                 .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getEnemyRivals(final ServerRequest serverRequest) {
+        return sceneService.getEnemyRivals(serverRequest.pathVariable(ID))
+                .flatMap(rivals -> ServerResponse.ok().bodyValue(rivals))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> addEnemyRivalToScene(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Rival.class)
+                .flatMap(rival -> sceneService.addEnemyRivalToScene(serverRequest.pathVariable(ID), rival))
+                .flatMap(updatedScene -> ServerResponse.ok().bodyValue(updatedScene))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 

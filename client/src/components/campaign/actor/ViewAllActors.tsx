@@ -8,7 +8,7 @@ import {useEffect, useState} from 'react';
 import * as React from 'react';
 import Actor, {ActorType} from "../../../models/actor/Actor";
 import ActionsTableCell from "../../common/table/ActionsTableCell";
-import ActorService from "../../../services/ActorService";
+import ActorService from "../../../services/actor/ActorService";
 import {ActorPath} from "../../../services/RootPath";
 import {Card, CardContent, CardHeader} from "@mui/material";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";

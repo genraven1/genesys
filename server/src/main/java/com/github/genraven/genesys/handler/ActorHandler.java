@@ -14,6 +14,7 @@ import com.github.genraven.genesys.service.actor.MinionService;
 import com.github.genraven.genesys.service.actor.NemesisService;
 import com.github.genraven.genesys.service.actor.PlayerService;
 import com.github.genraven.genesys.service.actor.RivalService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -31,21 +32,13 @@ import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
+@RequiredArgsConstructor
 public class ActorHandler {
 
     private final PlayerService playerService;
     private final RivalService rivalService;
     private final NemesisService nemesisService;
     private final MinionService minionService;
-
-    @Autowired
-    public ActorHandler(final PlayerService playerService, final NemesisService nemesisService,
-                        final RivalService rivalService, final MinionService minionService) {
-        this.playerService = playerService;
-        this.nemesisService = nemesisService;
-        this.rivalService = rivalService;
-        this.minionService = minionService;
-    }
 
     public Mono<ServerResponse> getAllPlayers(final ServerRequest serverRequest) {
         return playerService.getAllPlayers().collectList().flatMap(players -> {

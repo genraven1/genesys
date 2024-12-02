@@ -16,12 +16,12 @@ import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerAc
 
 interface Props {
     actor: SingleNonPlayerCharacter
-    onSkillChange: (skill: ActorSkill) => void
+    onSkillChange?: (skill: ActorSkill) => void
 }
 
 export default function SingleNonPlayerCharacterSkillCard(props: Props) {
     const {actor, onSkillChange} = props;
-    let headers = ['Skill', 'Ranks', 'Dice Pool'];
+    let headers = onSkillChange ? ['Skill', 'Ranks', 'Dice Pool'] : ['Skill', 'Dice Pool'];
     const pathname = useLocation().pathname;
 
     const renderSkillGroupTable = (type: SkillType) => {
@@ -35,9 +35,9 @@ export default function SingleNonPlayerCharacterSkillCard(props: Props) {
                         .map((skill: ActorSkill) => (
                             <TableRow key={skill.name}>
                                 {renderSkillName(skill)}
-                                <SkillRanksTextFieldTableCell onChange={onSkillChange}
-                                                              disabled={!pathname.endsWith(actor.id + '/edit')}
-                                                              skill={skill}/>
+                                {onSkillChange && <SkillRanksTextFieldTableCell onChange={onSkillChange}
+                                                                                disabled={!pathname.endsWith(actor.id + '/edit')}
+                                                                                skill={skill}/>}
                                 <GenesysDicePoolCenterTableCellButton actor={actor} skill={skill}/>
                             </TableRow>
                         ))}

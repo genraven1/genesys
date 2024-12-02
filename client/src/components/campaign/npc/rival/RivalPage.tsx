@@ -12,7 +12,7 @@ import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/Char
 import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
-import ActorService from "../../../../services/ActorService";
+import RivalService from "../../../../services/actor/RivalService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {DefenseType} from "../../../../models/actor/Defense";
@@ -34,7 +34,7 @@ export default function RivalPage() {
             return
         }
         (async (): Promise<void> => {
-            setRival(await ActorService.getRival(id));
+            setRival(await RivalService.getRival(id));
         })()
     }, [id, setRival])
 
@@ -46,22 +46,22 @@ export default function RivalPage() {
         if (rival) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setRival(await ActorService.updateRival({...rival, brawn: value}));
+                    setRival(await RivalService.updateRival({...rival, brawn: value}));
                     break;
                 case CharacteristicType.Agility:
-                    setRival(await ActorService.updateRival({...rival, agility: value}));
+                    setRival(await RivalService.updateRival({...rival, agility: value}));
                     break;
                 case CharacteristicType.Intellect:
-                    setRival(await ActorService.updateRival({...rival, intellect: value}));
+                    setRival(await RivalService.updateRival({...rival, intellect: value}));
                     break;
                 case CharacteristicType.Cunning:
-                    setRival(await ActorService.updateRival({...rival, cunning: value}));
+                    setRival(await RivalService.updateRival({...rival, cunning: value}));
                     break;
                 case CharacteristicType.Willpower:
-                    setRival(await ActorService.updateRival({...rival, willpower: value}));
+                    setRival(await RivalService.updateRival({...rival, willpower: value}));
                     break;
                 case CharacteristicType.Presence:
-                    setRival(await ActorService.updateRival({...rival, presence: value}));
+                    setRival(await RivalService.updateRival({...rival, presence: value}));
                     break;
             }
         }
@@ -69,7 +69,7 @@ export default function RivalPage() {
 
     const handleWoundsChange = async (value: number) => {
         if (rival) {
-            setRival(await ActorService.updateRival({...rival, wounds: value}));
+            setRival(await RivalService.updateRival({...rival, wounds: value}));
         }
     };
 
@@ -77,13 +77,13 @@ export default function RivalPage() {
         if (rival) {
             switch (type) {
                 case RatingType.Combat:
-                    setRival(await ActorService.updateRival({...rival, combat: value}));
+                    setRival(await RivalService.updateRival({...rival, combat: value}));
                     break;
                 case RatingType.Social:
-                    setRival(await ActorService.updateRival({...rival, social: value}));
+                    setRival(await RivalService.updateRival({...rival, social: value}));
                     break;
                 case RatingType.General:
-                    setRival(await ActorService.updateRival({...rival, general: value}));
+                    setRival(await RivalService.updateRival({...rival, general: value}));
                     break;
             }
         }
@@ -91,31 +91,31 @@ export default function RivalPage() {
 
     const handleSkillChange = async (value: ActorSkill) => {
         if (rival) {
-            setRival(await ActorService.updateRivalSkill(rival.id, value));
+            setRival(await RivalService.updateRivalSkill(rival.id, value));
         }
     };
 
     const handleArmorChange = async (value: ActorArmor[]) => {
         if (rival) {
-            setRival(await ActorService.updateRival({...rival, armors: value}));
+            setRival(await RivalService.updateRival({...rival, armors: value}));
         }
     };
 
     const handleWeaponChange = async (value: ActorWeapon[]) => {
         if (rival) {
-            setRival(await ActorService.updateRival({...rival, weapons: value}));
+            setRival(await RivalService.updateRival({...rival, weapons: value}));
         }
     };
 
     const handleAbilityChange = async (values: Ability[]) => {
         if (rival) {
-            setRival(await ActorService.updateRival({...rival, abilities: values}));
+            setRival(await RivalService.updateRival({...rival, abilities: values}));
         }
     };
 
     const handleTalentChange = async (values: ActorTalent[]) => {
         if (rival) {
-            setRival(await ActorService.updateRival({...rival, talents: values}));
+            setRival(await RivalService.updateRival({...rival, talents: values}));
         }
     };
 

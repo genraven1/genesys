@@ -10,8 +10,9 @@ import {Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
 import Player from "../../../../../models/actor/player/Player";
 import EquipmentService from "../../../../../services/EquipmentService";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import ActorService from "../../../../../services/ActorService";
+import ActorService from "../../../../../services/actor/ActorService";
 import ArmorBackdrop from "../../../../campaign/actor/equipment/ArmorBackdrop";
+import PlayerService from "../../../../../services/actor/PlayerService";
 
 interface RowProps {
     armor: Armor
@@ -24,7 +25,7 @@ function ArmorNameRow(props: RowProps): JSX.Element {
 
     const addArmor = async () => {
         player.armors.push({slot: ArmorSlot.None, ...armor})
-        await ActorService.updatePlayer(player)
+        await PlayerService.updatePlayer(player)
     }
 
     return (

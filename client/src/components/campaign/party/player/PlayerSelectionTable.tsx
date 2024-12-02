@@ -3,17 +3,14 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import Talent from "../../../../models/Talent";
 import {useEffect, useState} from "react";
 import Player from "../../../../models/actor/player/Player";
-import ActorService from "../../../../services/ActorService";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {Button} from "@mui/material";
-import TalentBackdrop from "../../../talents/TalentBackdrop";
 import Campaign from "../../../../models/campaign/Campaign";
 import PlayerBackdrop from "./PlayerBackdrop";
-import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
+import PlayerService from "../../../../services/actor/PlayerService";
 
 interface RowProps {
     campaign: Campaign
@@ -25,7 +22,7 @@ function AddPlayerToCampaign(props: RowProps): JSX.Element {
     const [openPlayerBackDrop, setOpenPlayerBackDrop] = useState(false)
 
     const importPlayer = async () => {
-        // await ActorService.updatePlayer(player.name, player)
+        // await PlayerService.updatePlayer(player.name, player)
     }
 
     return (
@@ -54,7 +51,7 @@ export default function PlayerSelectionTable(props: Props) {
 
     useEffect(() => {
         (async (): Promise<void> => {
-            const playerList = await ActorService.getPlayers(campaign.id)
+            const playerList = await PlayerService.getPlayers(campaign.id)
             if (!playerList) {
                 return
             }

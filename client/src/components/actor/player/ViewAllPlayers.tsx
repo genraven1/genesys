@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import Player from '../../../models/actor/player/Player';
-import ActorService from '../../../services/ActorService';
 import ActionsTableCell from '../../common/table/ActionsTableCell';
 import {ActorPath} from "../../../services/RootPath";
 import {renderSingleRowTableHeader} from "../../common/table/TableRenders";
@@ -16,6 +15,7 @@ import CreateActorDialog from "../../campaign/actor/common/CreateActorDialog";
 import {ActorType} from "../../../models/actor/Actor";
 import {useFetchCurrentCampaign} from "../../campaign/CampaignWorkflow";
 import CenteredCardHeaderWithDialog from "../../common/card/header/CenteredCardHeaderWithDialog";
+import PlayerService from "../../../services/actor/PlayerService";
 
 export default function ViewAllPlayers() {
     const [players, setPlayers] = useState<Player[]>([]);
@@ -26,7 +26,7 @@ export default function ViewAllPlayers() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setPlayers(await ActorService.getPlayers(campaign.id));
+            setPlayers(await PlayerService.getPlayers(campaign.id));
         })()
     }, [campaign])
 

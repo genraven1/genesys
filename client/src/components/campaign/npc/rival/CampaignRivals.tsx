@@ -8,16 +8,17 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
-import ActorService from '../../../../services/ActorService'
+import RivalService from '../../../../services/actor/RivalService'
 import Rival from "../../../../models/actor/npc/Rival";
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
-import {Button, Card, CardContent, CardHeader} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import {ActorType} from "../../../../models/actor/Actor";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 import {ActorPath} from "../../../../services/RootPath";
 import CreateActorDialog from "../../actor/common/CreateActorDialog";
+import CenteredCardHeaderWithDialog from "../../../common/card/header/CenteredCardHeaderWithDialog";
 
 interface Props {
     rival: Rival
@@ -58,18 +59,15 @@ export default function CampaignRivals() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setRivals(await ActorService.getRivals(campaign.id));
+            setRivals(await RivalService.getRivals(campaign.id));
         })()
     }, [campaign]);
 
     return (
         <Card>
-            <CardHeader
-                style={{textAlign: 'center'}}
-                title={'Campaign Rivals'}
-                action={<Button color='primary' variant='contained'
-                                onClick={(): void => setOpenActorCreationDialog(true)}>Create Rival</Button>}>
-            </CardHeader>
+            <CenteredCardHeaderWithDialog title={'Campaign Rivals'}
+                                          onClick={(): void => setOpenActorCreationDialog(true)}
+                                          buttonText={'Create Rival'}/>
             <CardContent>
                 <TableContainer component={Paper}>
                     <Table>

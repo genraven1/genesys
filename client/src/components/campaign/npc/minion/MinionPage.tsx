@@ -9,7 +9,7 @@ import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/Char
 import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
 import {CharacteristicType} from "../../../../models/character/Characteristic";
 import {Fragment, useEffect, useState} from "react";
-import ActorService from "../../../../services/ActorService";
+import MinionService from "../../../../services/actor/MinionService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import {NumberTextFieldCard} from "../../../common/card/NumberTextField";
 import {DefenseType} from "../../../../models/actor/Defense";
@@ -32,7 +32,7 @@ export default function MinionPage() {
             return
         }
         (async (): Promise<void> => {
-            setMinion(await ActorService.getMinion(id));
+            setMinion(await MinionService.getMinion(id));
         })()
     }, [id, setMinion])
 
@@ -44,22 +44,22 @@ export default function MinionPage() {
         if (minion) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setMinion(await ActorService.updateMinion({...minion, brawn: value}));
+                    setMinion(await MinionService.updateMinion({...minion, brawn: value}));
                     break;
                 case CharacteristicType.Agility:
-                    setMinion(await ActorService.updateMinion({...minion, agility: value}));
+                    setMinion(await MinionService.updateMinion({...minion, agility: value}));
                     break;
                 case CharacteristicType.Intellect:
-                    setMinion(await ActorService.updateMinion({...minion, intellect: value}));
+                    setMinion(await MinionService.updateMinion({...minion, intellect: value}));
                     break;
                 case CharacteristicType.Cunning:
-                    setMinion(await ActorService.updateMinion({...minion, cunning: value}));
+                    setMinion(await MinionService.updateMinion({...minion, cunning: value}));
                     break;
                 case CharacteristicType.Willpower:
-                    setMinion(await ActorService.updateMinion({...minion, willpower: value}));
+                    setMinion(await MinionService.updateMinion({...minion, willpower: value}));
                     break;
                 case CharacteristicType.Presence:
-                    setMinion(await ActorService.updateMinion({...minion, presence: value}));
+                    setMinion(await MinionService.updateMinion({...minion, presence: value}));
                     break;
             }
         }
@@ -67,7 +67,7 @@ export default function MinionPage() {
 
     const handleWoundsChange = async (value: number) => {
         if (minion) {
-            setMinion(await ActorService.updateMinion({...minion, wounds: value}));
+            setMinion(await MinionService.updateMinion({...minion, wounds: value}));
         }
     };
 
@@ -75,13 +75,13 @@ export default function MinionPage() {
         if (minion) {
             switch (type) {
                 case RatingType.Combat:
-                    setMinion(await ActorService.updateMinion({...minion, combat: value}));
+                    setMinion(await MinionService.updateMinion({...minion, combat: value}));
                     break;
                 case RatingType.Social:
-                    setMinion(await ActorService.updateMinion({...minion, social: value}));
+                    setMinion(await MinionService.updateMinion({...minion, social: value}));
                     break;
                 case RatingType.General:
-                    setMinion(await ActorService.updateMinion({...minion, general: value}));
+                    setMinion(await MinionService.updateMinion({...minion, general: value}));
                     break;
             }
         }
@@ -89,31 +89,31 @@ export default function MinionPage() {
 
     const handleSkillChange = async (value: GroupSkill) => {
         if (minion) {
-            setMinion(await ActorService.updateMinionSkill(minion.id, value));
+            setMinion(await MinionService.updateMinionSkill(minion.id, value));
         }
     };
 
     const handleArmorChange = async (value: ActorArmor[]) => {
         if (minion) {
-            setMinion(await ActorService.updateMinion({...minion, armors: value}));
+            setMinion(await MinionService.updateMinion({...minion, armors: value}));
         }
     };
 
     const handleWeaponChange = async (value: ActorWeapon[]) => {
         if (minion) {
-            setMinion(await ActorService.updateMinion({...minion, weapons: value}));
+            setMinion(await MinionService.updateMinion({...minion, weapons: value}));
         }
     };
 
     const handleAbilityChange = async (values: Ability[]) => {
         if (minion) {
-            setMinion(await ActorService.updateMinion({...minion, abilities: values}));
+            setMinion(await MinionService.updateMinion({...minion, abilities: values}));
         }
     };
 
     const handleTalentChange = async (values: GroupTalent[]) => {
         if (minion) {
-            setMinion(await ActorService.updateMinion({...minion, talents: values}));
+            setMinion(await MinionService.updateMinion({...minion, talents: values}));
         }
     };
 

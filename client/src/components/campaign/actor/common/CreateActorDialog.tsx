@@ -1,12 +1,15 @@
 import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ActorService from "../../../../services/ActorService";
+import MinionService from "../../../../services/actor/MinionService";
 import {ActorPath} from "../../../../services/RootPath";
 import {ActorType, getActorTypes} from "../../../../models/actor/Actor";
 import InputSelectField from "../../../common/InputSelectField";
 import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
+import RivalService from "../../../../services/actor/RivalService";
+import NemesisService from "../../../../services/actor/NemesisService";
+import PlayerService from "../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean
@@ -24,19 +27,19 @@ export default function CreateActorDialog(props: Props) {
     const handleCreate = async (): Promise<void> => {
         switch (type) {
             case ActorType.Minion:
-                let minion = await ActorService.createMinion(campaign.id, name);
+                let minion = await MinionService.createMinion(campaign.id, name);
                 navigate(ActorPath.Minion + minion.id + '/edit');
                 break
             case ActorType.Rival:
-                let rival = await ActorService.createRival(campaign.id, name);
+                let rival = await RivalService.createRival(campaign.id, name);
                 navigate(ActorPath.Rival + rival.id + '/edit');
                 break
             case ActorType.Nemesis:
-                let nemesis = await ActorService.createNemesis(campaign.id, name);
+                let nemesis = await NemesisService.createNemesis(campaign.id, name);
                 navigate(ActorPath.Nemesis + nemesis.id + '/edit');
                 break
             case ActorType.Player:
-                let player = await ActorService.createPlayer(campaign.id, name);
+                let player = await PlayerService.createPlayer(campaign.id, name);
                 navigate(ActorPath.Player + player.id + '/edit');
                 break
         }

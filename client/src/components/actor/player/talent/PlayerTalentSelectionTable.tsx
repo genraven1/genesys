@@ -8,10 +8,11 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
 import Talent from "../../../../models/Talent";
-import ActorService from "../../../../services/ActorService";
+import ActorService from "../../../../services/actor/ActorService";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import TalentBackdrop from "../../../talents/TalentBackdrop";
 import Player from "../../../../models/actor/player/Player";
+import PlayerService from "../../../../services/actor/PlayerService";
 
 interface RowProps {
     talent: Talent
@@ -33,7 +34,7 @@ function TalentNameRow(props: RowProps): JSX.Element {
         } else {
             player.talents.push({...talent, ranks: 1})
         }
-        await ActorService.updatePlayer(player)
+        await PlayerService.updatePlayer(player)
     }
 
     return (
