@@ -82,7 +82,7 @@ public class SceneHandler {
 
     public Mono<ServerResponse> addEnemyRivalToScene(final ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Rival.class)
-                .flatMap(rival -> sceneService.addEnemyRivalToScene(serverRequest.pathVariable(ID), rival.getId()))
+                .flatMap(rival -> sceneService.addEnemyRivalToScene(serverRequest.pathVariable(ID), rival))
                 .flatMap(updatedScene -> ServerResponse.ok().bodyValue(updatedScene))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }

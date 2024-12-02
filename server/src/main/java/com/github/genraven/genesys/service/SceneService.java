@@ -5,7 +5,6 @@ import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.repository.CampaignRepository;
 import com.github.genraven.genesys.repository.SceneRepository;
-import com.github.genraven.genesys.repository.actor.RivalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -19,7 +18,6 @@ public class SceneService {
 
     private final SceneRepository sceneRepository;
     private final CampaignRepository campaignRepository;
-    private final RivalRepository rivalRepository;
 
     public Flux<Scene> getAllScenes() {
         return sceneRepository.findAll();
@@ -56,14 +54,12 @@ public class SceneService {
     }
 
     public Mono<List<Rival>> getEnemyRivals(final String id) {
-        return getScene(id).flatMap(scene -> Flux.fromIterable(scene.getEnemyRivalsIds())
-                        .flatMap(rivalRepository::findById)
-                        .collectList());
+        return getScene(id).flatMap(scene -> Flux.fromIterable(scene.getEnemyRivals()).collectList());
     }
 
-    public Mono<Scene> addEnemyRivalToScene(final String sceneId, final String rivalId) {
+    public Mono<Scene> addEnemyRivalToScene(final String sceneId, final Rival rival) {
         return getScene(sceneId).flatMap(existingScene -> {
-            existingScene.getEnemyRivalsIds().add(rivalId);
+            existingScene.getEnemyRivals().add(rival);
             return sceneRepository.save(existingScene);
         });
     }

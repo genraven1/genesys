@@ -32,16 +32,6 @@ export default function RivalSkill(props: Props) {
         setValue(newValue);
     };
 
-    if (!rivals) {
-        return (
-            <Card>
-                <Button color='primary' variant='contained' onClick={(): void => setAddRivalDialog(true)}>Add Rival</Button>
-                {addRivalDialog && <AddRivalToSceneDialog open={addRivalDialog}
-                                                          onClose={(): void => setAddRivalDialog(false)} id={scene.id}/>}
-            </Card>
-        )
-    }
-
     return (
         <Card>
             <CenteredCardHeader title={'Rivals'}/>
@@ -57,11 +47,15 @@ export default function RivalSkill(props: Props) {
                         </Grid>
                         {rivals.map((rival, index) => (
                             <TabPanel value={String(index)}>
-                                {console.log(index)}
                                 <SingleNonPlayerCharacterSkillCard actor={rival}/>
                             </TabPanel>
                         ))}
                     </TabContext>
+                </Grid>
+                <Grid sx={{textAlign: "center"}}>
+                    <Button color='primary' variant='contained' onClick={(): void => setAddRivalDialog(true)}>Add Rival</Button>
+                    {addRivalDialog && <AddRivalToSceneDialog open={addRivalDialog}
+                                                              onClose={(): void => setAddRivalDialog(false)} id={scene.id}/>}
                 </Grid>
             </CardContent>
         </Card>
