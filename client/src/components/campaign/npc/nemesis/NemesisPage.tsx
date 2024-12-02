@@ -1,6 +1,5 @@
 import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
-import ActorService from "../../../../services/actor/ActorService";
 import * as React from "react";
 import Nemesis from "../../../../models/actor/npc/Nemesis";
 import {Card, CardContent, Divider, Grid} from "@mui/material";
@@ -23,6 +22,7 @@ import {ActorArmor} from "../../../../models/equipment/Armor";
 import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import Ability from "../../../../models/Ability";
 import {ActorTalent} from "../../../../models/Talent";
+import NemesisService from "../../../../services/actor/NemesisService";
 
 export default function NemesisPage() {
     const {id} = useParams<{ id: string }>();
@@ -34,7 +34,7 @@ export default function NemesisPage() {
             return
         }
         (async (): Promise<void> => {
-            setNemesis(await ActorService.getNemesis(id));
+            setNemesis(await NemesisService.getNemesis(id));
         })()
     }, [id, setNemesis])
 
@@ -46,22 +46,22 @@ export default function NemesisPage() {
         if (nemesis) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, brawn: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, brawn: value}));
                     break;
                 case CharacteristicType.Agility:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, agility: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, agility: value}));
                     break;
                 case CharacteristicType.Intellect:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, intellect: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, intellect: value}));
                     break;
                 case CharacteristicType.Cunning:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, cunning: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, cunning: value}));
                     break;
                 case CharacteristicType.Willpower:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, willpower: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, willpower: value}));
                     break;
                 case CharacteristicType.Presence:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, presence: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, presence: value}));
                     break;
             }
         }
@@ -69,13 +69,13 @@ export default function NemesisPage() {
 
     const handleWoundsChange = async (value: number) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, wounds: value}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, wounds: value}));
         }
     };
 
     const handleStrainChange = async (value: number) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, strain: value}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, strain: value}));
         }
     };
 
@@ -83,13 +83,13 @@ export default function NemesisPage() {
         if (nemesis) {
             switch (type) {
                 case RatingType.Combat:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, combat: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, combat: value}));
                     break;
                 case RatingType.Social:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, social: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, social: value}));
                     break;
                 case RatingType.General:
-                    setNemesis(await ActorService.updateNemesis({...nemesis, general: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, general: value}));
                     break;
             }
         }
@@ -97,31 +97,31 @@ export default function NemesisPage() {
 
     const handleSkillChange = async (value: ActorSkill) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesisSkill(nemesis.id, value));
+            setNemesis(await NemesisService.updateNemesisSkill(nemesis.id, value));
         }
     };
 
     const handleArmorChange = async (value: ActorArmor[]) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, armors: value}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, armors: value}));
         }
     };
 
     const handleWeaponChange = async (value: ActorWeapon[]) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, weapons: value}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, weapons: value}));
         }
     };
 
     const handleAbilityChange = async (values: Ability[]) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, abilities: values}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, abilities: values}));
         }
     };
 
     const handleTalentChange = async (values: ActorTalent[]) => {
         if (nemesis) {
-            setNemesis(await ActorService.updateNemesis({...nemesis, talents: values}));
+            setNemesis(await NemesisService.updateNemesis({...nemesis, talents: values}));
         }
     };
 

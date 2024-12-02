@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import {Fragment, useEffect, useState} from 'react';
 import * as React from 'react';
 import Nemesis from "../../../../models/actor/npc/Nemesis";
-import ActorService from '../../../../services/actor/ActorService'
 import ActionsTableCell from "../../../common/table/ActionsTableCell";
 import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
 import {Button, Card, CardContent, CardHeader} from "@mui/material";
@@ -18,6 +17,7 @@ import {ActorType} from "../../../../models/actor/Actor";
 import {ActorPath} from "../../../../services/RootPath";
 import CreateActorDialog from "../../actor/common/CreateActorDialog";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
+import NemesisService from "../../../../services/actor/NemesisService";
 
 interface Props {
     nemesis: Nemesis
@@ -58,7 +58,7 @@ export default function CampaignNemeses() {
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setNemeses(await ActorService.getNemeses(campaign.id));
+            setNemeses(await NemesisService.getNemeses(campaign.id));
         })()
     }, [campaign]);
 

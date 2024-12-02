@@ -9,6 +9,7 @@ import InputSelectField from "../../../common/InputSelectField";
 import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 import RivalService from "../../../../services/actor/RivalService";
+import NemesisService from "../../../../services/actor/NemesisService";
 
 interface Props {
     open: boolean
@@ -34,7 +35,7 @@ export default function CreateActorDialog(props: Props) {
                 navigate(ActorPath.Rival + rival.id + '/edit');
                 break
             case ActorType.Nemesis:
-                let nemesis = await ActorService.createNemesis(campaign.id, name);
+                let nemesis = await NemesisService.createNemesis(campaign.id, name);
                 navigate(ActorPath.Nemesis + nemesis.id + '/edit');
                 break
             case ActorType.Player:
