@@ -48,7 +48,7 @@ export default function AddNonPlayerCharacterToSceneDialog(props: Props) {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>
+                <Button color='secondary' variant='contained' onClick={onClose}>CLOSE</Button>
             </DialogActions>
         </Dialog>
     );
