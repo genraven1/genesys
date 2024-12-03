@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.Talent;
+import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Scene;
 import com.github.genraven.genesys.service.SceneService;
@@ -83,6 +84,19 @@ public class SceneHandler {
     public Mono<ServerResponse> addEnemyRivalToScene(final ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Rival.class)
                 .flatMap(rival -> sceneService.addEnemyRivalToScene(serverRequest.pathVariable(ID), rival))
+                .flatMap(updatedScene -> ServerResponse.ok().bodyValue(updatedScene))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getEnemyNemeses(final ServerRequest serverRequest) {
+        return sceneService.getEnemyNemeses(serverRequest.pathVariable(ID))
+                .flatMap(nemeses -> ServerResponse.ok().bodyValue(nemeses))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> addEnemyNemesisToScene(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Nemesis.class)
+                .flatMap(nemesis -> sceneService.addEnemyNemesisToScene(serverRequest.pathVariable(ID), nemesis))
                 .flatMap(updatedScene -> ServerResponse.ok().bodyValue(updatedScene))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
