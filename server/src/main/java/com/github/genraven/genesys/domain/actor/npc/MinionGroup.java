@@ -33,8 +33,10 @@ public class MinionGroup extends SingleNonPlayerActor {
         // Minion Group Size Changes
         this.setWounds(minion.getWounds() * size);
         this.setSkills(adaptGroupSkillsToActorSkills(minion.getSkills(), size));
-
+        this.setSize(size);
     }
+
+    private int size = 3;
 
     public static List<ActorSkill> adaptGroupSkillsToActorSkills(final List<GroupSkill> groupSkills, final int size) {
         final List<ActorSkill> actorSkills = new ArrayList<>();
