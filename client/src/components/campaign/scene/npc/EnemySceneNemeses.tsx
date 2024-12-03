@@ -1,4 +1,3 @@
-import Rival from "../../../../models/actor/npc/Rival";
 import {Button} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
@@ -10,28 +9,29 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import SceneService from "../../../../services/SceneService";
 import {useEffect, useState} from "react";
-import RivalService from "../../../../services/actor/RivalService";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
+import Nemesis from "../../../../models/actor/npc/Nemesis";
+import NemesisService from "../../../../services/actor/NemesisService";
 
 interface Props {
     id: string
 }
 
-export default function EnemySceneRivals(props: Props) {
+export default function EnemySceneNemeses(props: Props) {
     const {id} = props;
-    const [rivals, setRivals] = useState<Rival[]>([]);
+    const [nemeses, setNemeses] = useState<Nemesis[]>([]);
     let campaign = useFetchCurrentCampaign();
     const headers = ['Name', 'Add'];
 
     useEffect(() => {
         (async (): Promise<void> => {
             if (!campaign) return;
-            setRivals(await RivalService.getRivals(campaign.id));
+            setNemeses(await NemesisService.getNemeses(campaign.id));
         })()
-    }, [setRivals, campaign]);
+    }, [setNemeses, campaign]);
 
-    const addRival = async (rival: Rival) => {
-        await SceneService.addRivalToScene(id, rival);
+    const addNemesis = async (nemesis: Nemesis) => {
+        await SceneService.addNemesisToScene(id, nemesis);
     }
 
     return (
@@ -39,13 +39,13 @@ export default function EnemySceneRivals(props: Props) {
             <Table>
                 {renderSingleRowTableHeader(headers)}
                 <TableBody>
-                    {rivals.map((rival: Rival) => (
-                        <TableRow key={rival.id}>
+                    {nemeses.map((nemesis: Nemesis) => (
+                        <TableRow key={nemesis.id}>
                             <TableCell style={{textAlign: 'left'}}>
-                                <Button>{rival.name}</Button>
+                                <Button>{nemesis.name}</Button>
                             </TableCell>
                             <TableCell style={{textAlign: 'center'}}>
-                                <Button onClick={() => addRival(rival)}>Add</Button>
+                                <Button onClick={() => addNemesis(nemesis)}>Add</Button>
                             </TableCell>
                         </TableRow>
                     ))}

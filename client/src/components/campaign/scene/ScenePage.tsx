@@ -11,7 +11,7 @@ import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import PartyCard from "../party/PartyCard";
-import RivalSkill from "./npc/RivalSkill";
+import NonPlayerCharacterScene from "./npc/NonPlayerCharacterScene";
 
 export default function ScenePage() {
     const {id} = useParams<{ id: string }>();
@@ -60,7 +60,7 @@ export default function ScenePage() {
 
                         </TabPanel>
                         <TabPanel value="3">
-                            <RivalSkill scene={scene}/>
+                            <NonPlayerCharacterScene scene={scene}/>
                         </TabPanel>
                     </TabContext>
                 </Grid>
