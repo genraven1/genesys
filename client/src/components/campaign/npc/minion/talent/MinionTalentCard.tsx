@@ -7,19 +7,18 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {GroupTalent} from "../../../../../models/actor/npc/Minion";
 import {
     GenesysDescriptionTypographyCenterTableCell,
     TypographyCenterTableCell
 } from "../../../../common/table/TypographyTableCell";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
-import Talent from "../../../../../models/Talent";
+import Talent, {ActorTalent} from "../../../../../models/Talent";
 import CharacterTalentSelectionDialog from "../../talent/CharacterTalentSelectionDialog";
 
 interface Props {
-    talents: GroupTalent[]
-    updateTalents: (talents: GroupTalent[]) => void
+    talents: ActorTalent[]
+    updateTalents: (talents: ActorTalent[]) => void
 }
 
 export default function MinionTalentCard(props: Props) {
@@ -29,13 +28,13 @@ export default function MinionTalentCard(props: Props) {
     const pathname = useLocation().pathname;
 
     const addTalent = (talent: Talent) => {
-        updateTalents([...talents, {...talent, group: true}]);
+        updateTalents([...talents, {...talent, ranks: 0}]);
     };
 
     const renderTableBody = () => {
         return (
             <TableBody>
-                {(talents).map((talent: GroupTalent) => (
+                {(talents).map((talent: ActorTalent) => (
                     <TableRow>
                         <TypographyCenterTableCell value={talent.name}/>
                         <TypographyCenterTableCell value={talent.activation}/>
