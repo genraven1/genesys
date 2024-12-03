@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.domain.campaign;
 
+import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -24,4 +25,5 @@ public class Scene {
     private Party party = new Party();
     private List<Encounter> encounters = new ArrayList<>();
     private List<Rival> enemyRivals = new ArrayList<>();
+    private List<Nemesis> enemyNemeses = new ArrayList<>();
 }

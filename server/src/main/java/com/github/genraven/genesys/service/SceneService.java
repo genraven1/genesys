@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.service;
 
+import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Campaign;
 import com.github.genraven.genesys.domain.campaign.Scene;
@@ -60,6 +61,17 @@ public class SceneService {
     public Mono<Scene> addEnemyRivalToScene(final String sceneId, final Rival rival) {
         return getScene(sceneId).flatMap(existingScene -> {
             existingScene.getEnemyRivals().add(rival);
+            return sceneRepository.save(existingScene);
+        });
+    }
+
+    public Mono<List<Nemesis>> getEnemyNemeses(final String id) {
+        return getScene(id).flatMap(scene -> Flux.fromIterable(scene.getEnemyNemeses()).collectList());
+    }
+
+    public Mono<Scene> addEnemyNemesisToScene(final String sceneId, final Nemesis nemesis) {
+        return getScene(sceneId).flatMap(existingScene -> {
+            existingScene.getEnemyNemeses().add(nemesis);
             return sceneRepository.save(existingScene);
         });
     }
