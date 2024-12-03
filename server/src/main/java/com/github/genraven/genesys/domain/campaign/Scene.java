@@ -1,5 +1,6 @@
 package com.github.genraven.genesys.domain.campaign;
 
+import com.github.genraven.genesys.domain.actor.npc.MinionGroup;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import lombok.Data;
@@ -26,4 +27,5 @@ public class Scene {
     private List<Encounter> encounters = new ArrayList<>();
     private List<Rival> enemyRivals = new ArrayList<>();
     private List<Nemesis> enemyNemeses = new ArrayList<>();
+    private List<MinionGroup> enemyMinionGroups = new ArrayList<>();
 }

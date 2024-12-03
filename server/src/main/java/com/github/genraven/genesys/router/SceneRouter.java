@@ -19,6 +19,10 @@ public class SceneRouter {
                         .GET("/{name}", sceneHandler::getScene)
                         .PUT("/{name}", sceneHandler::updateScene)
                 )
+                .path("/scenes/{id}/minions/enemies", builder -> builder
+                        .GET("/", sceneHandler::getEnemyMinions)
+                        .POST("/{size}",sceneHandler::addEnemyMinionToScene)
+                )
                 .path("/scenes/{id}/rivals/enemies", builder -> builder
                         .GET("/", sceneHandler::getEnemyRivals)
                         .POST("/",sceneHandler::addEnemyRivalToScene)
