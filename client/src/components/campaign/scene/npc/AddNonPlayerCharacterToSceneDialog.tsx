@@ -7,6 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import * as React from "react";
 import {useState} from "react";
 import EnemySceneNemeses from "./EnemySceneNemeses";
+import EnemySceneMinions from "./EnemySceneMinions";
 
 interface Props {
     id: string
@@ -36,7 +37,7 @@ export default function AddNonPlayerCharacterToSceneDialog(props: Props) {
                             </TabList>
                         </Grid>
                         <TabPanel value={'0'}>
-
+                            <EnemySceneMinions id={id}/>
                         </TabPanel>
                         <TabPanel value={'1'}>
                             <EnemySceneRivals id={id}/>
