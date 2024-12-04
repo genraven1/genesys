@@ -13,12 +13,12 @@ export default interface NonPlayerActor extends Actor {
     combat: number,
     social: number,
     general: number,
-    abilities: Ability[]
+    abilities: Ability[],
+    talents: ActorTalent[]
 }
 
 export interface SingleNonPlayerCharacter extends NonPlayerActor {
     skills: ActorSkill[]
-    talents: ActorTalent[]
     injuries: Injury[]
 }
 

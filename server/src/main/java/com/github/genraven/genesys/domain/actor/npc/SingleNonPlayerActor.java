@@ -1,7 +1,6 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
 import com.github.genraven.genesys.domain.actor.ActorSkill;
-import com.github.genraven.genesys.domain.actor.ActorTalent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,9 +28,9 @@ public class SingleNonPlayerActor extends NonPlayerActor {
         this.setCombat(nonPlayerActor.getCombat());
         this.setSocial(nonPlayerActor.getSocial());
         this.setGeneral(nonPlayerActor.getGeneral());
+        this.setTalents(nonPlayerActor.getTalents());
         this.setAbilities(nonPlayerActor.getAbilities());
     }
 
-    private List<ActorTalent> talents = new ArrayList<>();
     private List<ActorSkill> skills = new ArrayList<>();
 }

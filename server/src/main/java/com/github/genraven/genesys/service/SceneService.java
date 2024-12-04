@@ -1,5 +1,7 @@
 package com.github.genraven.genesys.service;
 
+import com.github.genraven.genesys.domain.actor.npc.Minion;
+import com.github.genraven.genesys.domain.actor.npc.MinionGroup;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Campaign;
@@ -51,6 +53,17 @@ public class SceneService {
         return campaignRepository.findByCurrent(true).flatMap(existingCampaign -> {
             existingCampaign.getSkillIds().add(sceneId);
             return campaignRepository.save(existingCampaign);
+        });
+    }
+
+    public Mono<List<MinionGroup>> getEnemyMinions(final String id) {
+        return getScene(id).flatMap(scene -> Flux.fromIterable(scene.getEnemyMinionGroups()).collectList());
+    }
+
+    public Mono<Scene> addEnemyMinionToScene(final String sceneId, final Minion minion, final int size) {
+        return getScene(sceneId).flatMap(existingScene -> {
+            existingScene.getEnemyMinionGroups().add(new MinionGroup(minion, size));
+            return sceneRepository.save(existingScene);
         });
     }
 

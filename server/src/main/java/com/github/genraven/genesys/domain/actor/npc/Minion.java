@@ -2,7 +2,6 @@ package com.github.genraven.genesys.domain.actor.npc;
 
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
-import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -35,19 +34,11 @@ public class Minion extends NonPlayerActor {
         this.setWeapons(nonPlayerActor.getWeapons());
     }
 
-    private List<GroupTalent> talents = new ArrayList<>();
     private List<GroupSkill> skills = new ArrayList<>();
 
     public void getTotalSoak() {
         int soak = getBrawn();
         soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
-        for (GroupTalent talent : getTalents()) {
-            for (Modifier modifier : talent.getModifiers()) {
-                if (modifier.getType().equals(Modifier.Type.INCREASE_SOAK)) {
-                    soak += modifier.getRanks();
-                }
-            }
-        }
         this.setSoak(soak);
     }
 

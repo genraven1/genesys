@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.Talent;
+import com.github.genraven.genesys.domain.actor.npc.Minion;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.campaign.Scene;
@@ -28,7 +29,7 @@ public class SceneHandler {
 
     public Mono<ServerResponse> getAllScenes(final ServerRequest serverRequest) {
         return sceneService.getAllScenes().collectList().flatMap(scenes -> {
-            if(scenes.isEmpty()) {
+            if (scenes.isEmpty()) {
                 return ServerResponse.noContent().build();
             }
             return ServerResponse.ok()
@@ -72,6 +73,19 @@ public class SceneHandler {
         return request.bodyToMono(Scene.class)
                 .flatMap(scene -> sceneService.addSceneToCurrentCampaign(scene.getId()))
                 .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getEnemyMinions(final ServerRequest serverRequest) {
+        return sceneService.getEnemyMinions(serverRequest.pathVariable(ID))
+                .flatMap(minions -> ServerResponse.ok().bodyValue(minions))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> addEnemyMinionToScene(final ServerRequest serverRequest) {
+        return serverRequest.bodyToMono(Minion.class)
+                .flatMap(minion -> sceneService.addEnemyMinionToScene(serverRequest.pathVariable(ID), minion, Integer.parseInt(serverRequest.pathVariable("size"))))
+                .flatMap(updatedScene -> ServerResponse.ok().bodyValue(updatedScene))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 

@@ -2,6 +2,7 @@ import Scene from "../models/campaign/Scene";
 import {ActorPath, RootPath} from "./RootPath";
 import Rival from "../models/actor/npc/Rival";
 import Nemesis from "../models/actor/npc/Nemesis";
+import Minion, {MinionGroup} from "../models/actor/npc/Minion";
 
 
 export default class SceneService {
@@ -44,6 +45,32 @@ export default class SceneService {
         return await fetch(RootPath.Scenes + `${scene.id}`, {
             method: "PUT",
             body: JSON.stringify(scene),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async getEnemyMinionsForScene(id: string): Promise<MinionGroup[]> {
+        return await fetch(RootPath.Scenes + `${id}` + ActorPath.Minion + 'enemies/')
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async addMinionToScene(id: string, minion: Minion): Promise<Scene> {
+        return await fetch(RootPath.Scenes + `${id}` + ActorPath.Minion + 'enemies/3', {
+            method: "POST",
+            body: JSON.stringify(minion),
             headers: {
                 'Content-Type': 'application/json'
             }

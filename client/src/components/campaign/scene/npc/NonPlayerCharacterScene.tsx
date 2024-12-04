@@ -24,9 +24,11 @@ export default function NonPlayerCharacterScene(props: Props) {
 
     useEffect(() => {
         (async (): Promise<void> => {
+            const minions = await SceneService.getEnemyMinionsForScene(scene.id);
             const rivals = await SceneService.getEnemyRivalsForScene(scene.id);
             const nemeses = await SceneService.getEnemyNemesesForScene(scene.id);
             const combinedEnemies = [
+                ...minions.map(minion => ({...minion})),
                 ...rivals.map(rival => ({...rival})),
                 ...nemeses.map(nemesis => ({...nemesis}))
             ];

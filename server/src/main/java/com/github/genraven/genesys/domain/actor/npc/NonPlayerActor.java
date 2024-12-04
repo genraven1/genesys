@@ -2,6 +2,7 @@ package com.github.genraven.genesys.domain.actor.npc;
 
 import com.github.genraven.genesys.domain.Ability;
 import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.ActorTalent;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,5 +35,6 @@ public class NonPlayerActor extends Actor {
     private int combat = 1;
     private int social = 1;
     private int general = 1;
+    private List<ActorTalent> talents = new ArrayList<>();
     private List<Ability> abilities = new ArrayList<>();
 }

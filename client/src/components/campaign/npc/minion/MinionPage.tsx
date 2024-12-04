@@ -18,9 +18,10 @@ import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import AbilityTableCard from "../../actor/ability/AbilityTableCard";
 import Ability from "../../../../models/Ability";
-import Minion, {GroupSkill, GroupTalent} from "../../../../models/actor/npc/Minion";
+import Minion, {GroupSkill} from "../../../../models/actor/npc/Minion";
 import MinionSkillCard from "./skill/MinionSkillCard";
 import MinionTalentCard from "./talent/MinionTalentCard";
+import {ActorTalent} from "../../../../models/Talent";
 
 export default function MinionPage() {
     const {id} = useParams<{ id: string }>();
@@ -111,7 +112,7 @@ export default function MinionPage() {
         }
     };
 
-    const handleTalentChange = async (values: GroupTalent[]) => {
+    const handleTalentChange = async (values: ActorTalent[]) => {
         if (minion) {
             setMinion(await MinionService.updateMinion({...minion, talents: values}));
         }
