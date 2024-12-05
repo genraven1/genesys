@@ -1,8 +1,9 @@
 import Party from "./Party";
+import Encounter from "./Encounter";
 
 export default interface Scene {
     id: string
     name: string
     party: Party
-    encounters: []
+    encounters: Encounter[]
 }

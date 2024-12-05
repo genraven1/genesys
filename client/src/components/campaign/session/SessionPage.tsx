@@ -64,8 +64,10 @@ export default function SessionPage() {
                             </TabList>
                         </Grid>
                         <TabPanel value="1">
-                            <Button variant="contained" color="primary" onClick={startSession}>Start Session</Button>
-                            <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>
+                            <Grid container justifyContent={"center"}>
+                                <Button variant="contained" color="primary" onClick={startSession}>Start Session</Button>
+                                <Button variant="contained" color="primary" onClick={endSession}>End Session</Button>
+                            </Grid>
                         </TabPanel>
                         <TabPanel value="2">
                             <PartyCard party={session.party}/>
