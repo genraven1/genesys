@@ -1,10 +1,8 @@
 package com.github.genraven.genesys.domain.actor;
 
-import com.github.genraven.genesys.domain.actor.npc.GroupSkill;
 import com.github.genraven.genesys.domain.skill.Skill;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,6 +15,7 @@ public class ActorSkill extends Skill {
         this.setName(skill.getName());
         this.setCharacteristic(skill.getCharacteristic());
         this.setType(skill.getType());
+        this.setInitiative(skill.isInitiative());
     }
 
     private int ranks = 0;

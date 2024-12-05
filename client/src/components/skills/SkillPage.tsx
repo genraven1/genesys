@@ -9,6 +9,7 @@ import {CharacteristicType} from "../../models/character/Characteristic";
 import CenteredCardHeaderWithAction from "../common/card/header/CenteredCardHeaderWithAction";
 import SkillTypeCard from "../common/card/select/SkillTypeCard";
 import CharacteristicTypeCard from "../common/card/select/CharacteristicTypeCard";
+import {BooleanTextFieldCard} from "../common/card/BooleanTextFieldCard";
 
 export default function SkillPage() {
     const {id} = useParams<{ id: string }>()
@@ -30,15 +31,19 @@ export default function SkillPage() {
 
     const handleSkillTypeChange = async (value: SkillType) => {
         if (skill) {
-            const updatedSkill = {...skill, type: value};
-            setSkill(await SkillService.updateSkill(updatedSkill));
+            setSkill(await SkillService.updateSkill({...skill, type: value}));
         }
     };
 
     const handleCharacteristicTypeChange = async (value: CharacteristicType) => {
         if (skill) {
-            const updatedSkill = {...skill, characteristic: value};
-            setSkill(await SkillService.updateSkill(updatedSkill));
+            setSkill(await SkillService.updateSkill({...skill, characteristic: value}));
+        }
+    };
+
+    const handleInitiativeSkillChange = async (value: boolean) => {
+        if (skill) {
+            setSkill(await SkillService.updateSkill({...skill, initiative: value}));
         }
     };
 
@@ -51,6 +56,8 @@ export default function SkillPage() {
                                    disabled={pathname.endsWith('/view')}/>
                     <CharacteristicTypeCard value={skill.characteristic} onChange={handleCharacteristicTypeChange}
                                             disabled={pathname.endsWith('/view')}/>
+                    <BooleanTextFieldCard title={'Initiative Skill'} value={skill.initiative}
+                                          disabled={pathname.endsWith('/view')} onChange={handleInitiativeSkillChange}/>
                 </Grid>
             </CardContent>
         </Card>
