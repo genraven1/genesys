@@ -1,51 +1,44 @@
-import {Card, CardContent, Grid} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 import * as React from "react";
-import {useState} from "react";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import Tab from "@mui/material/Tab";
-import TabPanel from "@mui/lab/TabPanel";
-import PartyCard from "../../party/PartyCard";
-import Party from "../../../../models/campaign/Party";
+import {useEffect, useState} from "react";
 import {SingleNonPlayerCharacter} from "../../../../models/actor/npc/NonPlayerActor";
+import SceneService from "../../../../services/SceneService";
+import Scene from "../../../../models/campaign/Scene";
+import InitiativeTrackCard from "./InitiativeTrackCard";
 
 interface Props {
-    party: Party
-    npcs: SingleNonPlayerCharacter[]
+    scene: Scene
 }
 
 export default function EncounterCard(props: Props) {
-    const {party, npcs} = props;
-    const [value, setValue] = useState('1');
+    const {scene} = props;
+    const [singleNonPlayerCharacters, setSingleNonPlayerCharacters] = useState<SingleNonPlayerCharacter[]>([]);
+    // const [value, setValue] = useState('1');
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
+    useEffect(() => {
+        (async (): Promise<void> => {
+            const minions = await SceneService.getEnemyMinionsForScene(scene.id);
+            const rivals = await SceneService.getEnemyRivalsForScene(scene.id);
+            const nemeses = await SceneService.getEnemyNemesesForScene(scene.id);
+            const combinedEnemies = [
+                ...minions.map(minion => ({...minion})),
+                ...rivals.map(rival => ({...rival})),
+                ...nemeses.map(nemesis => ({...nemesis}))
+            ];
+            setSingleNonPlayerCharacters(combinedEnemies);
+        })();
+    }, [scene]);
+
+    // const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    //     setValue(newValue);
+    // };
 
     return (
         <Card>
             <CenteredCardHeader title={'Encounters'}/>
             <CardContent>
-                <Grid sx={{width: 1}}>
-                    <TabContext value={value}>
-                        <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
-                            <TabList onChange={handleChange} centered>
-                                {/*<Tab label="Settings" value="1"/>*/}
-                                <Tab label="Party" value="1"/>
-                                <Tab label="Enemy NPC" value="2"/>
-                            </TabList>
-                        </Grid>
-                        <TabPanel value="1">
-                            <PartyCard party={party}/>
-                        </TabPanel>
-                        <TabPanel value="2">
-
-                        </TabPanel>
-                        <TabPanel value="3">
-                        </TabPanel>
-                    </TabContext>
-                </Grid>
+                <InitiativeTrackCard npcs={singleNonPlayerCharacters}/>
             </CardContent>
         </Card>
     );

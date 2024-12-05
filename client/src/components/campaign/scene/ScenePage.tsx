@@ -57,7 +57,7 @@ export default function ScenePage() {
                             <PartyCard party={scene.party}/>
                         </TabPanel>
                         <TabPanel value="2">
-                            <EncounterCard party={scene.party} npcs={[]}/>
+                            <EncounterCard scene={scene}/>
                         </TabPanel>
                         <TabPanel value="3">
                             <NonPlayerCharacterScene scene={scene}/>
