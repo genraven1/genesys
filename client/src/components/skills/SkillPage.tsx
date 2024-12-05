@@ -12,9 +12,9 @@ import CharacteristicTypeCard from "../common/card/select/CharacteristicTypeCard
 import {BooleanTextFieldCard} from "../common/card/BooleanTextFieldCard";
 
 export default function SkillPage() {
-    const {id} = useParams<{ id: string }>()
-    const [skill, setSkill] = useState<Skill | null>(null)
-    let pathname = useLocation().pathname
+    const {id} = useParams<{ id: string }>();
+    const [skill, setSkill] = useState<Skill | null>(null);
+    let pathname = useLocation().pathname;
 
     useEffect(() => {
         if (!id) {
