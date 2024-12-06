@@ -21,4 +21,5 @@ public class Skill {
     private String name;
     private CharacteristicType characteristic;
     private SkillType type;
+    private boolean initiative = false;
 }

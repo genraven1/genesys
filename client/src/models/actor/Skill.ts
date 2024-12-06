@@ -1,12 +1,12 @@
 import {CharacteristicType} from '../character/Characteristic';
-import {Option} from "../../components/common/InputSelectField";
 
 export default interface Skill {
     id: string
     characteristic: CharacteristicType
     type: SkillType
     name: string
-}
+    initiative: boolean
+};
 
 export enum SkillType {
     General = 'General',
@@ -14,8 +14,4 @@ export enum SkillType {
     Social = 'Social',
     Combat = 'Combat',
     Knowledge = 'Knowledge'
-}
-
-export const getSkillTypes = (): Option[] => {
-    return Object.values(SkillType).map((value) => ({value}))
 }
