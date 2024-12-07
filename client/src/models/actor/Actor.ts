@@ -4,6 +4,7 @@ import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
 import {Option} from "../../components/common/InputSelectField";
+import {SingleNonPlayerCharacter} from "./npc/NonPlayerActor";
 
 export default interface Actor {
     id: string
@@ -28,7 +29,24 @@ export interface ActorSkill extends Skill {
     ranks: number
 }
 
-export const getCharacteristicRanks = (actor: Actor, skill: ActorSkill): number => {
+export const getActorCharacteristicRanks = (actor: Actor, skill: ActorSkill): number => {
+    switch (skill.characteristic) {
+        case CharacteristicType.Agility:
+            return actor.agility
+        case CharacteristicType.Brawn:
+            return actor.brawn
+        case CharacteristicType.Cunning:
+            return actor.cunning
+        case CharacteristicType.Intellect:
+            return actor.intellect
+        case CharacteristicType.Presence:
+            return actor.presence
+        case CharacteristicType.Willpower:
+            return actor.willpower
+    }
+}
+
+export const getCharacteristicRanks = (actor: SingleNonPlayerCharacter, skill: ActorSkill): number => {
     switch (skill.characteristic) {
         case CharacteristicType.Agility:
             return actor.agility

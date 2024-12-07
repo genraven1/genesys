@@ -1,13 +1,8 @@
 import {Die} from "../../models/roll/dice/Die";
 import {GenesysSymbols} from "../../models/roll/GenesysSymbols";
-import {boostDie} from "../../models/roll/dice/Boost";
-import {setbackDie} from "../../models/roll/dice/Setback";
-import {abilityDie} from "../../models/roll/dice/Ability";
-import {difficultyDie} from "../../models/roll/dice/Difficulty";
-import {proficiencyDie} from "../../models/roll/dice/Proficiency";
-import {challengeDie} from "../../models/roll/dice/Challenge";
+import {diceToRoll} from "../../models/roll/dice/DicePool";
 
-function rollDice(dice: Die[], customSymbols: GenesysSymbols[][]): GenesysSymbols[] {
+export function rollDice(dice: Die[], customSymbols: GenesysSymbols[][]): GenesysSymbols[] {
     const results: GenesysSymbols[] = [];
     dice.forEach(die => {
         results.push(...die.roll());
@@ -18,7 +13,7 @@ function rollDice(dice: Die[], customSymbols: GenesysSymbols[][]): GenesysSymbol
     return results;
 }
 
-function tallyResults(results: GenesysSymbols[]): string {
+export function tallyResults(results: GenesysSymbols[]): Record<GenesysSymbols, number> {
     const tally: Record<GenesysSymbols, number> = {
         [GenesysSymbols.Success]: 0,
         [GenesysSymbols.Advantage]: 0,
@@ -42,7 +37,11 @@ function tallyResults(results: GenesysSymbols[]): string {
     tally[GenesysSymbols.Threat] = Math.max(0, -netAdvantages);
 
     tally[GenesysSymbols.Blank] = 0;
-    return Object.entries(tally)
+    return tally;
+}
+
+export function convertResultsToString(results: Record<GenesysSymbols, number>) {
+    return Object.entries(results)
         .filter(([_, count]) => count > 0)
         .map(([symbol, count]) => `[${GenesysSymbols[symbol as unknown as GenesysSymbols]}] `.repeat(count))
         .join(' ');
@@ -60,17 +59,12 @@ interface Props {
 
 export default function handleDiceRoll(props: Props) {
     const {boost, setback, ability, difficulty, proficiency, challenge, symbols} = props;
-    const diceToRoll = [
-        ...Array(boost).fill(boostDie),
-        ...Array(setback).fill(setbackDie),
-        ...Array(ability).fill(abilityDie),
-        ...Array(difficulty).fill(difficultyDie),
-        ...Array(proficiency).fill(proficiencyDie),
-        ...Array(challenge).fill(challengeDie)
-    ];
     const customSymbols = Object.entries(symbols)
         .flatMap(([symbol, count]) => symbol !== GenesysSymbols.Blank.toString() ? Array(count)
             .fill([parseInt(symbol, 10)]) : []);
-    const rolledResults = rollDice(diceToRoll, customSymbols);
-    return tallyResults(rolledResults);
+    const rolledResults = rollDice(diceToRoll(boost, setback, ability, difficulty, proficiency, challenge), customSymbols);
+    return Object.entries(tallyResults(rolledResults))
+        .filter(([_, count]) => count > 0)
+        .map(([symbol, count]) => `[${GenesysSymbols[symbol as unknown as GenesysSymbols]}] `.repeat(count))
+        .join(' ');
 }

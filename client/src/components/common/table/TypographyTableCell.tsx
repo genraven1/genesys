@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, TableCell, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
-import Actor, {ActorSkill, getCharacteristicRanks} from "../../../models/actor/Actor";
+import Actor, {ActorSkill, getActorCharacteristicRanks} from "../../../models/actor/Actor";
 import GenesysSkillDiceTypography from "../typography/GenesysSkillDiceTypography";
 import {Difficulty} from "../../../models/common/Difficulty";
 import GenesysDifficultyDiceTypography from "../typography/GenesysDifficultyDiceTypography";
@@ -133,16 +133,16 @@ export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
     const dicePool = {
         boost: 0,
         setback: 0,
-        ability: Math.max(getCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
+        ability: Math.max(getActorCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
         difficulty: 0,
-        proficiency: Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
+        proficiency: Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
         challenge: 0,
     };
 
     return (
         <TableCell style={{textAlign: 'center'}}>
             <Button onClick={(): void => setOpenCustomRollBackDrop(true)}>
-                <GenesysSkillDiceTypography characteristicRanks={getCharacteristicRanks(actor, skill)}
+                <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
                                             skillRanks={skill.ranks}/>
             </Button>
             {openCustomRollBackDrop && <DiceRollerDialog open={openCustomRollBackDrop}
