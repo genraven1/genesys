@@ -15,12 +15,17 @@ interface Props {
 export default function NonPlayerCharacterInitiativeCard(props: Props) {
     const {npc, onChange, index} = props;
 
+    const onCommit = (index: number, name: string) => {
+        let selectedSkill = npc.skills.find((sk) => sk.name === name) as ActorSkill;
+        onChange(index, selectedSkill);
+    }
+
     return (
         <Card>
             <CenteredCardHeader title={npc.name}/>
             <CardContent>
                 <Select
-                    onChange={(e) => onChange(index, e.target.value as ActorSkill)}
+                    onChange={(e) => onCommit(index, String(e.target.value))}
                     fullWidth
                     label={'Skill'}
                 >

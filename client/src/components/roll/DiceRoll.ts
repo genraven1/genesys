@@ -40,6 +40,13 @@ export function tallyResults(results: GenesysSymbols[]): Record<GenesysSymbols, 
     return tally;
 }
 
+export function convertResultsToString(results: Record<GenesysSymbols, number>) {
+    return Object.entries(results)
+        .filter(([_, count]) => count > 0)
+        .map(([symbol, count]) => `[${GenesysSymbols[symbol as unknown as GenesysSymbols]}] `.repeat(count))
+        .join(' ');
+}
+
 interface Props {
     boost: number
     setback: number
