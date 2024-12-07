@@ -57,7 +57,7 @@ export default function DiceRollerDialog(props: Props) {
             setback: setbackDiceCount,
             symbols: symbolCounts,
             boost: boostDiceCount
-        }))
+        }));
     };
 
     return (
