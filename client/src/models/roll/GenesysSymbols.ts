@@ -7,13 +7,3 @@ export enum GenesysSymbols {
     Despair,
     Blank
 }
-
-// export enum GenesysSymbols {
-//     Success = "Success",
-//     Advantage = "Advantage",
-//     Triumph = "Triumph",
-//     Failure = "Failure",
-//     Threat = "Threat",
-//     Despair = "Despair",
-//     Blank = "Blank"
-// }

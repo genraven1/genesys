@@ -6,7 +6,7 @@ interface Props {
     skillRanks: number
 }
 
-export default function GenesysSkillDiceTypography(props: Props): JSX.Element {
+export default function GenesysSkillDiceTypography(props: Props) {
     let {characteristicRanks,skillRanks} = props;
 
     const generateSkillDice = () => {
