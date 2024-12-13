@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {Autocomplete, Card, CardContent, Grid, IconButton, TextField,} from "@mui/material";
-import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
-import CareerService from "../../../services/CareerService";
-import Career from "../../../models/actor/player/Career";
+import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
+import CareerService from "../../../../services/CareerService";
+import Career from "../../../../models/actor/player/Career";
 import InfoIcon from "@mui/icons-material/Info";
 import * as React from "react";
-import CareerBackdrop from "../../campaign/career/CareerBackdrop";
+import CareerBackdrop from "../../career/CareerBackdrop";
 import EditIcon from "@mui/icons-material/Edit";
-import Player, {PlayerSkill} from "../../../models/actor/player/Player";
+import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
 import CareerSkillSelectDialog from "./skill/CareerSkillSelectDialog";
 
 interface Props {

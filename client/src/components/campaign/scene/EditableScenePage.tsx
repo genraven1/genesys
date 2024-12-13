@@ -46,7 +46,7 @@ export default function EditableScenePage() {
                             <TabList onChange={handleChange} centered>
                                 {/*<Tab label="Settings" value="1"/>*/}
                                 <Tab label="Party" value="1"/>
-                                <Tab label="Encounters" value="2"/>
+                                {/*<Tab label="Encounters" value="2"/>*/}
                                 <Tab label="Enemy NPC" value="3"/>
                             </TabList>
                         </Grid>
@@ -57,9 +57,9 @@ export default function EditableScenePage() {
                         <TabPanel value="1">
                             <PartyCard party={scene.party}/>
                         </TabPanel>
-                        <TabPanel value="2">
-                            <EncounterCard scene={scene}/>
-                        </TabPanel>
+                        {/*<TabPanel value="2">*/}
+                        {/*    <EncounterCard scene={scene}/>*/}
+                        {/*</TabPanel>*/}
                         <TabPanel value="3">
                             <NonPlayerCharacterScene scene={scene}/>
                         </TabPanel>

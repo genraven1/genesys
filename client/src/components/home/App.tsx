@@ -18,7 +18,7 @@ import CareerWorkflow from "../campaign/career/CareerWorkflow";
 import ArchetypeWorkflow from "../campaign/archetype/ArchetypeWorkflow";
 import CampaignWorkflow from "../campaign/CampaignWorkflow";
 import HomeCampaignDashboard from "./HomeCampaignDashboard";
-import PlayerWorkflow from "../actor/player/PlayerWorkflow";
+import PlayerWorkflow from "../campaign/party/player/PlayerWorkflow";
 import ArmorWorkflow from "../campaign/equipment/armor/ArmorWorkflow";
 import WeaponWorkflow from "../campaign/equipment/weapon/WeaponWorkflow";
 import GearWorkflow from '../campaign/equipment/gear/GearWorkflow';

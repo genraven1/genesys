@@ -1,9 +1,9 @@
 import {Button, Card, CardContent} from "@mui/material";
-import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
-import Player from "../../../../models/actor/player/Player";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
+import Player from "../../../../../models/actor/player/Player";
 import {Fragment, useState} from "react";
 import {useLocation} from "react-router-dom";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
 import PlayerTalentTable from "./PlayerTalentTable";
 import PlayerTalentSelectionDialog from "./PlayerTalentSelectionDialog";
 

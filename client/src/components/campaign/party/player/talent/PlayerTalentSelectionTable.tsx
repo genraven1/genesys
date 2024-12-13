@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import TalentService from "../../../../services/TalentService";
+import TalentService from "../../../../../services/TalentService";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,12 +7,12 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import Talent from "../../../../models/Talent";
-import ActorService from "../../../../services/actor/ActorService";
-import {renderSingleRowTableHeader} from "../../../common/table/TableRenders";
-import TalentBackdrop from "../../../talents/TalentBackdrop";
-import Player from "../../../../models/actor/player/Player";
-import PlayerService from "../../../../services/actor/PlayerService";
+import Talent from "../../../../../models/Talent";
+import ActorService from "../../../../../services/actor/ActorService";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import TalentBackdrop from "../../../../talents/TalentBackdrop";
+import Player from "../../../../../models/actor/player/Player";
+import PlayerService from "../../../../../services/actor/PlayerService";
 
 interface RowProps {
     talent: Talent

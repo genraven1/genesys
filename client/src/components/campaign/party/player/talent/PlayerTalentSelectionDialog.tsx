@@ -1,5 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-import PlayerArmorSelectionTable from "./PlayerArmorSelectionTable";
+import PlayerTalentSelectionTable from "./PlayerTalentSelectionTable";
 import Player from "../../../../../models/actor/player/Player";
 
 interface Props {
@@ -8,14 +8,14 @@ interface Props {
     onClose: () => void
 }
 
-export default function PlayerArmorSelectionDialog(props: Props) {
+export default function PlayerTalentSelectionDialog(props: Props) {
     const {player, open, onClose} = props
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle title={'Add Armor'}/>
+            <DialogTitle title={'Add Talent'}/>
             <DialogContent>
-                <PlayerArmorSelectionTable player={player}/>
+                <PlayerTalentSelectionTable player={player}/>
             </DialogContent>
             <DialogActions>
                 <Button color='secondary' variant='contained' onClick={onClose}>CANCEL</Button>

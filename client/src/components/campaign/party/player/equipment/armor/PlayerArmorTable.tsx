@@ -4,10 +4,10 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
-import {ActorArmor, ArmorSlot} from "../../../../../models/equipment/Armor";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import {renderQualities, renderSoak} from "../../../../../models/equipment/EquipmentHelper";
+import {TypographyCenterTableCell, TypographyLeftTableCell} from "../../../../../common/table/TypographyTableCell";
+import {ActorArmor, ArmorSlot} from "../../../../../../models/equipment/Armor";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import {renderQualities, renderSoak} from "../../../../../../models/equipment/EquipmentHelper";
 
 interface Props {
     armor: ActorArmor[]

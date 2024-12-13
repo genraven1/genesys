@@ -65,8 +65,9 @@ public class Player extends Actor {
     }
 
     public void updateAvailableExperience(final int experience) {
-        Experience oldExperience = getExperience();
+        final Experience oldExperience = getExperience();
         oldExperience.setAvailable(experience);
+        oldExperience.setTotal(experience);
         this.experience = oldExperience;
     }
 

@@ -4,15 +4,15 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
-import {ActorWeapon, WeaponSlot} from "../../../../../models/equipment/Weapon";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {ActorWeapon, WeaponSlot} from "../../../../../../models/equipment/Weapon";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
 import {
     GenesysDicePoolCenterTableCellButton,
     TypographyCenterTableCell
-} from "../../../../common/table/TypographyTableCell";
-import {renderActorDamage, renderQualities} from "../../../../../models/equipment/EquipmentHelper";
-import Player from "../../../../../models/actor/player/Player";
-import {ActorSkill} from "../../../../../models/actor/Actor";
+} from "../../../../../common/table/TypographyTableCell";
+import {renderActorDamage, renderQualities} from "../../../../../../models/equipment/EquipmentHelper";
+import Player from "../../../../../../models/actor/player/Player";
+import {ActorSkill} from "../../../../../../models/actor/Actor";
 import {Fragment} from "react";
 
 

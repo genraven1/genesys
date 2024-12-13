@@ -1,7 +1,7 @@
 import {Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import {useState} from "react";
-import Skill from "../../../../models/actor/Skill";
-import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
+import Skill from "../../../../../models/actor/Skill";
+import Player, {PlayerSkill} from "../../../../../models/actor/player/Player";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
