@@ -1,16 +1,16 @@
-import {Experience} from "../../../../models/actor/player/Player";
-import {Card, CardContent, Grid} from "@mui/material";
+import Player from "../../../../models/actor/player/Player";
+import {Button, Card, CardContent, Grid} from "@mui/material";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
 import * as React from "react";
 import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
 
 interface Props {
-    experience: Experience
+    player: Player
 }
 
 export default function ExperienceCard(props: Props) {
-    const {experience} = props;
+    const {player} = props;
 
     return (
         <Grid item xs>
@@ -19,11 +19,15 @@ export default function ExperienceCard(props: Props) {
                     <Card>
                         <CenteredCardHeader title={'Available'}/>
                         <CardContent>
-                            <GenesysDescriptionTypography text={String(experience.available)}/>
+                            <Grid container justifyContent={"center"}>
+                                <Button>
+                                    <GenesysDescriptionTypography text={String(player.experience.available)}/>
+                                </Button>
+                            </Grid>
                         </CardContent>
                     </Card>
                 </Grid>
-                <ViewFieldCard name={'Total'} value={String(experience.total)}/>
+                <ViewFieldCard name={'Total'} value={String(player.experience.total)}/>
             </Grid>
         </Grid>
     )

@@ -94,7 +94,7 @@ export default function PlayerPage() {
                         {renderArchetypeCard()}
                         {renderCareerCard()}
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
-                        <ExperienceCard experience={player.experience}/>
+                        <ExperienceCard player={player}/>
                     </Grid>
                     <Divider/>
                     <CharacteristicRow actor={player}/>
