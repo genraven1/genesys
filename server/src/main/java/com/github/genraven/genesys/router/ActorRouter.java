@@ -16,10 +16,19 @@ public class ActorRouter {
                 .path("/players", builder -> builder
                         .GET("/{name}", actorHandler::getPlayer)
                         .PUT("/{name}", actorHandler::updatePlayer)
+                )
+                .path("players/creation", builder -> builder
                         .PATCH("/{id}/careers/", actorHandler::updatePlayerCareer)
                         .PATCH("/{id}/careers/skills/", actorHandler::updatePlayerCareerSkills)
                         .PATCH("/{id}/archetypes/", actorHandler::updatePlayerArchetype)
+//                        .PATCH("/{id}/characteristics/")
+//                        .PATCH("/{id}/skills/")
+//                        .PATCH("/{id}/talents")
                 )
+//                .path("players/active", builder -> builder
+//                        .PATCH("/{id}/skills/")
+//                        .PATCH("/{id}/talents")
+//                )
                 .path("/campaigns/{name}", builder -> builder
                         .GET("/players/", actorHandler::getAllPlayers)
                         .POST("/players/{playerName}", actorHandler::createPlayer)
