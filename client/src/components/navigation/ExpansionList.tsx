@@ -1,5 +1,5 @@
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import {Box, List, ListItemText, Collapse, ListItemButton} from "@mui/material";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
+import {List, ListItemText, Collapse, ListItemButton} from "@mui/material";
 import React, {forwardRef, ReactElement, useMemo, useState} from "react";
 import {Link, LinkProps} from "react-router-dom";
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function ExpansionList(props: Props) {
-    const {header,viewTitle,to,dialogTitle,onClick} = props;
+    const {header, viewTitle, to, dialogTitle, onClick} = props;
     const [collapse, setCollapse] = useState(false);
 
     const renderLink = useMemo(() => forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref): ReactElement => (
@@ -20,23 +20,21 @@ export default function ExpansionList(props: Props) {
     )), [to]);
 
     return (
-        <Box role="presentation">
-            <List>
-                <ListItemButton onClick={() => setCollapse(!collapse)} color='primary'>
-                    <ListItemText primary={header} />
-                    {collapse ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={collapse} timeout="auto" unmountOnExit>
-                    <List>
-                        <ListItemButton component={renderLink}>
-                            <ListItemText primary={viewTitle} />
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemText primary={dialogTitle} onClick={onClick} />
-                        </ListItemButton>
-                    </List>
-                </Collapse>
-            </List>
-        </Box>
-    )
-}
+        <List>
+            <ListItemButton onClick={() => setCollapse(!collapse)} color='primary'>
+                <ListItemText primary={header}/>
+                {collapse ? <ExpandLess/> : <ExpandMore/>}
+            </ListItemButton>
+            <Collapse in={collapse} timeout="auto" unmountOnExit>
+                <List>
+                    <ListItemButton component={renderLink}>
+                        <ListItemText primary={viewTitle}/>
+                    </ListItemButton>
+                    <ListItemButton>
+                        <ListItemText primary={dialogTitle} onClick={onClick}/>
+                    </ListItemButton>
+                </List>
+            </Collapse>
+        </List>
+    );
+};
