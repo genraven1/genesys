@@ -19,6 +19,7 @@ import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import SingleNonPlayerCharacterTalentCard from "../../npc/talent/SingleNonPlayerCharacterTalentCard";
 import {ActorTalent} from "../../../../models/Talent";
 import PlayerService from "../../../../services/actor/PlayerService";
+import ExperienceCard from "./ExperienceCard";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -93,6 +94,7 @@ export default function PlayerPage() {
                         {renderArchetypeCard()}
                         {renderCareerCard()}
                         <ViewFieldCard name={'Encumbrance'} value={String(player.encumbrance)}/>
+                        <ExperienceCard experience={player.experience}/>
                     </Grid>
                     <Divider/>
                     <CharacteristicRow actor={player}/>
