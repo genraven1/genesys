@@ -12,6 +12,10 @@ interface Props {
 export default function ExperienceCard(props: Props) {
     const {player} = props;
 
+    const handleSpendExperience = () => {
+
+    };
+
     return (
         <Grid item xs>
             <Grid container spacing={2}>
@@ -20,7 +24,7 @@ export default function ExperienceCard(props: Props) {
                         <CenteredCardHeader title={'Available'}/>
                         <CardContent>
                             <Grid container justifyContent={"center"}>
-                                <Button>
+                                <Button onClick={handleSpendExperience}>
                                     <GenesysDescriptionTypography text={String(player.experience.available)}/>
                                 </Button>
                             </Grid>
