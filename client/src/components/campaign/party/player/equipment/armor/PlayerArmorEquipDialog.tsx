@@ -1,16 +1,16 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
-import {ActorArmor, ArmorSlot, getArmorSlotOptions} from "../../../../../models/equipment/Armor";
+import {ActorArmor, ArmorSlot, getArmorSlotOptions} from "../../../../../../models/equipment/Armor";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import {TypographyLeftTableCell} from "../../../../common/table/TypographyTableCell";
-import InputSelectField from "../../../../common/InputSelectField";
-import Player from "../../../../../models/actor/player/Player";
-import ActorService from "../../../../../services/actor/ActorService";
-import PlayerService from "../../../../../services/actor/PlayerService";
+import {TypographyLeftTableCell} from "../../../../../common/table/TypographyTableCell";
+import InputSelectField from "../../../../../common/InputSelectField";
+import Player from "../../../../../../models/actor/player/Player";
+import ActorService from "../../../../../../services/actor/ActorService";
+import PlayerService from "../../../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean;

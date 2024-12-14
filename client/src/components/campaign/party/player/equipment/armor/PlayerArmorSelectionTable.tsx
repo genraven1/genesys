@@ -6,13 +6,13 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import {Button} from "@mui/material";
-import {Armor, ArmorSlot} from "../../../../../models/equipment/Armor";
-import Player from "../../../../../models/actor/player/Player";
-import EquipmentService from "../../../../../services/EquipmentService";
-import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
-import ActorService from "../../../../../services/actor/ActorService";
-import ArmorBackdrop from "../../../../campaign/actor/equipment/ArmorBackdrop";
-import PlayerService from "../../../../../services/actor/PlayerService";
+import {Armor, ArmorSlot} from "../../../../../../models/equipment/Armor";
+import Player from "../../../../../../models/actor/player/Player";
+import EquipmentService from "../../../../../../services/EquipmentService";
+import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
+import ActorService from "../../../../../../services/actor/ActorService";
+import ArmorBackdrop from "../../../../actor/equipment/ArmorBackdrop";
+import PlayerService from "../../../../../../services/actor/PlayerService";
 
 interface RowProps {
     armor: Armor

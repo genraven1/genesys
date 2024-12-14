@@ -29,6 +29,12 @@ export enum ActorPath {
     Npc = '/npcs/'
 }
 
+export enum PlayerPath {
+    Player = '/players',
+    Creation = '/players/creation/',
+    Active = '/players/active/'
+}
+
 export enum CampaignPath {
     Campaign = '/campaigns/',
     Party = '/party/',

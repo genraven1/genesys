@@ -1,8 +1,8 @@
-import Player from "../../../models/actor/player/Player";
-import {StatsType} from "../../../models/actor/Stats";
+import Player from "../../../../models/actor/player/Player";
+import {StatsType} from "../../../../models/actor/Stats";
 import {Grid} from "@mui/material";
-import {ViewFieldCard} from "../../common/ViewFieldCard";
-import {DefenseType} from "../../../models/actor/Defense";
+import {ViewFieldCard} from "../../../common/ViewFieldCard";
+import {DefenseType} from "../../../../models/actor/Defense";
 
 interface Props {
     player: Player;

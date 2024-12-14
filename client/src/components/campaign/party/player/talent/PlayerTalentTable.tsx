@@ -5,11 +5,11 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import GenesysTalentTypography from "../../../common/typography/GenesysTalentTypography";
-import Player from "../../../../models/actor/player/Player";
-import {ActorTalent} from "../../../../models/Talent";
-import {renderDoubleRowTableHeader} from "../../../common/table/TableRenders";
-import {TypographyCenterTableCell} from "../../../common/table/TypographyTableCell";
+import GenesysTalentTypography from "../../../../common/typography/GenesysTalentTypography";
+import Player from "../../../../../models/actor/player/Player";
+import {ActorTalent} from "../../../../../models/Talent";
+import {renderDoubleRowTableHeader} from "../../../../common/table/TableRenders";
+import {TypographyCenterTableCell} from "../../../../common/table/TypographyTableCell";
 
 interface Props {
     talent: ActorTalent

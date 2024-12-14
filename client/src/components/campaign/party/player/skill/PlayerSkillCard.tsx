@@ -1,19 +1,19 @@
-import Player, {PlayerSkill} from "../../../../models/actor/player/Player";
+import Player, {PlayerSkill} from "../../../../../models/actor/player/Player";
 import {Card, CardContent, Grid} from "@mui/material";
-import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import {SkillType} from "../../../../models/actor/Skill";
+import {SkillType} from "../../../../../models/actor/Skill";
 import * as React from "react";
-import {renderDoubleRowTableHeader, renderSkillName} from "../../../common/table/TableRenders";
+import {renderDoubleRowTableHeader, renderSkillName} from "../../../../common/table/TableRenders";
 import TableRow from "@mui/material/TableRow";
 import {
     GenesysDicePoolCenterTableCellButton,
     TypographyCenterTableCell
-} from "../../../common/table/TypographyTableCell";
-import BooleanTableCell from "../../../common/table/BooleanTableCell";
+} from "../../../../common/table/TypographyTableCell";
+import BooleanTableCell from "../../../../common/table/BooleanTableCell";
 
 interface Props {
     player: Player

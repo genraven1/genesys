@@ -1,11 +1,11 @@
 import Player, {PlayerSkill} from "../../models/actor/player/Player";
-import {ActorPath, CampaignPath, RootPath} from "../RootPath";
+import {PlayerPath, CampaignPath, RootPath} from "../RootPath";
 import Career from "../../models/actor/player/Career";
 import Archetype from "../../models/actor/player/Archetype";
 
 export default class PlayerService {
     static async createPlayer(id: string, playerName: string): Promise<Player> {
-        return await fetch(CampaignPath.Campaign + `${id}` + ActorPath.Player + `${playerName}`, {
+        return await fetch(CampaignPath.Campaign + `${id}` + PlayerPath.Player + `${playerName}`, {
             method: "POST"
         })
             .then((res) => {
@@ -18,7 +18,7 @@ export default class PlayerService {
     }
 
     static async getPlayer(id: string): Promise<Player> {
-        return await fetch(ActorPath.Player + `${id}`)
+        return await fetch(PlayerPath.Player + `${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)
@@ -28,7 +28,7 @@ export default class PlayerService {
     }
 
     static async getPlayers(campaignName: string): Promise<Player[]> {
-        return await fetch(CampaignPath.Campaign + `${campaignName}` + ActorPath.Player)
+        return await fetch(CampaignPath.Campaign + `${campaignName}` + PlayerPath.Player)
             .then((res) => {
                 switch (res.status) {
                     case 204:
@@ -42,7 +42,7 @@ export default class PlayerService {
     }
 
     static async updatePlayer(player: Player): Promise<Player> {
-        return await fetch(ActorPath.Player + `${player.id}`, {
+        return await fetch(PlayerPath.Player + `${player.id}`, {
             method: "PUT",
             body: JSON.stringify(player),
             headers: {
@@ -58,7 +58,7 @@ export default class PlayerService {
     }
 
     static async updatePlayerCareer(playerId: string, career: Career): Promise<Player> {
-        return await fetch(ActorPath.Player + `${playerId}` + RootPath.Career, {
+        return await fetch(PlayerPath.Creation + `${playerId}` + RootPath.Career, {
             method: "PATCH",
             body: JSON.stringify(career),
             headers: {
@@ -74,7 +74,7 @@ export default class PlayerService {
     }
 
     static async updatePlayerCareerSkills(playerId: string, skills: PlayerSkill[]): Promise<Player> {
-        return await fetch(ActorPath.Player + `${playerId}` + RootPath.Career + 'skills/', {
+        return await fetch(PlayerPath.Creation + `${playerId}` + RootPath.Career + 'skills/', {
             method: "PATCH",
             body: JSON.stringify(skills),
             headers: {
@@ -90,7 +90,7 @@ export default class PlayerService {
     }
 
     static async updatePlayerArchetype(playerId: string, archetype: Archetype): Promise<Player> {
-        return await fetch(ActorPath.Player + `${playerId}` + RootPath.Archetype, {
+        return await fetch(PlayerPath.Creation + `${playerId}` + RootPath.Archetype, {
             method: "PATCH",
             body: JSON.stringify(archetype),
             headers: {
