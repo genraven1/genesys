@@ -50,7 +50,7 @@ export default function PlayerWeaponTable(props: Props) {
                             <TypographyCenterTableCell value={weapon.name}/>
                             <TypographyCenterTableCell value={renderEquipped(weapon)}/>
                             <TypographyCenterTableCell value={weapon.skill.name}/>
-                            <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn)}/>
+                            <TypographyCenterTableCell value={renderActorDamage(weapon, player.brawn.current)}/>
                             <TypographyCenterTableCell value={String(weapon.critical)}/>
                             <TypographyCenterTableCell value={weapon.range}/>
                             <TypographyCenterTableCell value={renderQualities(weapon)}/>

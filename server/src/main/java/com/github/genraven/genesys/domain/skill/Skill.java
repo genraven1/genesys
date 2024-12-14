@@ -1,6 +1,6 @@
 package com.github.genraven.genesys.domain.skill;
 
-import com.github.genraven.genesys.domain.actor.CharacteristicType;
+import com.github.genraven.genesys.domain.actor.Characteristic;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,7 +19,7 @@ public class Skill {
     @Id
     private String id;
     private String name;
-    private CharacteristicType characteristic;
+    private Characteristic.Type characteristic;
     private SkillType type;
     private boolean initiative = false;
 }

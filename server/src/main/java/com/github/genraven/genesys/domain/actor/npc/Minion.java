@@ -37,7 +37,7 @@ public class Minion extends NonPlayerActor {
     private List<GroupSkill> skills = new ArrayList<>();
 
     public void getTotalSoak() {
-        int soak = getBrawn();
+        int soak = getBrawn().getCurrent();
         soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
         this.setSoak(soak);
     }

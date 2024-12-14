@@ -4,6 +4,7 @@ import com.github.genraven.genesys.domain.CriticalInjury;
 import com.github.genraven.genesys.domain.actor.Actor;
 
 import com.github.genraven.genesys.domain.actor.ActorTalent;
+import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
 import com.github.genraven.genesys.domain.modifier.Modifier;
@@ -38,7 +39,7 @@ public class Player extends Actor {
         this.setArmors(actor.getArmors());
     }
     private int strain = 1;
-    private int encumbrance = 5 + getBrawn();
+    private int encumbrance;
     private Experience experience = new Experience();
     private Career career = new Career();
     private Archetype archetype = new Archetype();
@@ -47,7 +48,7 @@ public class Player extends Actor {
     private List<CriticalInjury> injuries = new ArrayList<>();
 
     public void getTotalSoak() {
-        int soak = getBrawn();
+        int soak = getBrawn().getCurrent();
         soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
         for (ActorTalent talent : getTalents()) {
             for (Modifier modifier : talent.getModifiers()) {
@@ -60,12 +61,13 @@ public class Player extends Actor {
     }
 
     public void getTotalEncumbrance() {
-        int encumbrance = getBrawn() + 5;
+        int encumbrance = getBrawn().getCurrent() + 5;
         this.setEncumbrance(encumbrance);
     }
 
     public void updateAvailableExperience(final int experience) {
         final Experience oldExperience = getExperience();
+        oldExperience.setInitial(experience);
         oldExperience.setAvailable(experience);
         oldExperience.setTotal(experience);
         this.experience = oldExperience;

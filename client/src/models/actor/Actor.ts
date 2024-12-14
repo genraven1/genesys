@@ -1,4 +1,4 @@
-import {CharacteristicType} from '../character/Characteristic';
+import {Characteristic, CharacteristicType} from './Characteristic';
 import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
@@ -10,12 +10,12 @@ export default interface Actor {
     id: string
     name: string,
     type: ActorType,
-    brawn: number,
-    agility: number,
-    intellect: number,
-    cunning: number,
-    willpower: number,
-    presence: number,
+    brawn: Characteristic,
+    agility: Characteristic,
+    intellect: Characteristic,
+    cunning: Characteristic,
+    willpower: Characteristic,
+    presence: Characteristic,
     wounds: number,
     soak: number,
     melee: number,
@@ -32,36 +32,36 @@ export interface ActorSkill extends Skill {
 export const getActorCharacteristicRanks = (actor: Actor, skill: ActorSkill): number => {
     switch (skill.characteristic) {
         case CharacteristicType.Agility:
-            return actor.agility
+            return actor.agility.current;
         case CharacteristicType.Brawn:
-            return actor.brawn
+            return actor.brawn.current;
         case CharacteristicType.Cunning:
-            return actor.cunning
+            return actor.cunning.current;
         case CharacteristicType.Intellect:
-            return actor.intellect
+            return actor.intellect.current;
         case CharacteristicType.Presence:
-            return actor.presence
+            return actor.presence.current;
         case CharacteristicType.Willpower:
-            return actor.willpower
+            return actor.willpower.current;
     }
-}
+};
 
 export const getCharacteristicRanks = (actor: SingleNonPlayerCharacter, skill: ActorSkill): number => {
     switch (skill.characteristic) {
         case CharacteristicType.Agility:
-            return actor.agility
+            return actor.agility.current;
         case CharacteristicType.Brawn:
-            return actor.brawn
+            return actor.brawn.current;
         case CharacteristicType.Cunning:
-            return actor.cunning
+            return actor.cunning.current;
         case CharacteristicType.Intellect:
-            return actor.intellect
+            return actor.intellect.current;
         case CharacteristicType.Presence:
-            return actor.presence
+            return actor.presence.current;
         case CharacteristicType.Willpower:
-            return actor.willpower
+            return actor.willpower.current;
     }
-}
+};
 
 export enum ActorType {
     Minion = 'Minion',
