@@ -2,6 +2,7 @@ import Player, {PlayerSkill} from "../../models/actor/player/Player";
 import {PlayerPath, CampaignPath, RootPath} from "../RootPath";
 import Career from "../../models/actor/player/Career";
 import Archetype from "../../models/actor/player/Archetype";
+import {Characteristic} from "../../models/actor/Characteristic";
 
 export default class PlayerService {
     static async createPlayer(id: string, playerName: string): Promise<Player> {
@@ -93,6 +94,22 @@ export default class PlayerService {
         return await fetch(PlayerPath.Creation + `${playerId}` + RootPath.Archetype, {
             method: "PATCH",
             body: JSON.stringify(archetype),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async purchaseCharacteristicUpgrade(playerId: string, characteristic: Characteristic): Promise<Player> {
+        return await fetch(PlayerPath.Creation + `${playerId}` + PlayerPath.Characteristic, {
+            method: "PATCH",
+            body: JSON.stringify(characteristic),
             headers: {
                 'Content-Type': 'application/json'
             }

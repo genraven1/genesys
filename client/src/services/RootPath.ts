@@ -30,9 +30,10 @@ export enum ActorPath {
 }
 
 export enum PlayerPath {
-    Player = '/players',
+    Player = '/players/',
     Creation = '/players/creation/',
-    Active = '/players/active/'
+    Active = '/players/active/',
+    Characteristic = '/characteristics/'
 }
 
 export enum CampaignPath {
