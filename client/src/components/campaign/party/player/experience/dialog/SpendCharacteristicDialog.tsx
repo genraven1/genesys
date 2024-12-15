@@ -2,46 +2,44 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconBut
 import {Characteristic} from "../../../../../../models/actor/Characteristic";
 import Typography from "@mui/material/Typography";
 import {Add} from "@mui/icons-material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Player from "../../../../../../models/actor/player/Player";
 import PlayerService from "../../../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean
-    onCLose: () => void
+    onClose: () => void
     currentPlayer: Player
 }
 
 export default function SpendCharacteristicDialog(props: Props) {
-    const {open, onCLose, currentPlayer} = props;
-    const [xp, setXp] = useState(0);
+    const {open, onClose, currentPlayer} = props;
     const [player, setPlayer] = useState(currentPlayer);
 
-    const calculateRequiredXp = (level: number) => {
-        return (level + 1) * 10;
-    };
+    useEffect(() => {
+        setPlayer(currentPlayer);
+    }, [currentPlayer]);
 
     const handleIncreaseLevel = async (characteristic: Characteristic) => {
-        const newXp = xp + calculateRequiredXp(characteristic.current);
-        if (newXp <= player.experience.available) {
-            setPlayer(await PlayerService.purchaseCharacteristicUpgrade(player.id, characteristic))
-        }
+        setPlayer(await PlayerService.purchaseCharacteristicUpgrade(player.id, characteristic))
     };
 
     const characteristics: Characteristic[] = [
-        {type: 'Characteristic1', current: 1},
-        {type: 'Characteristic2', current: 2},
-        {type: 'Characteristic3', current: 3},
-        // Add more characteristics as needed
+        {type: player.brawn.type, current: player.brawn.current},
+        {type: player.agility.type, current: player.agility.current},
+        {type: player.intellect.type, current: player.intellect.current},
+        {type: player.cunning.type, current: player.cunning.current},
+        {type: player.willpower.type, current: player.willpower.current},
+        {type: player.presence.type, current: player.presence.current},
     ];
 
     const handleCancel = async () => {
         await PlayerService.updatePlayerArchetype(player.id, player.archetype);
-        onCLose();
+        onClose();
     };
 
     return (
-        <Dialog open={open} onClose={onCLose}>
+        <Dialog open={open} onClose={onClose}>
             <DialogTitle>Spend Experience on Characteristic</DialogTitle>
             <DialogContent>
                 <Grid container spacing={2}>
@@ -50,8 +48,7 @@ export default function SpendCharacteristicDialog(props: Props) {
                             <Typography variant="h6">{characteristic.type} (Value {characteristic.current})</Typography>
                             <IconButton
                                 onClick={() => handleIncreaseLevel(characteristic)}
-                                color="primary"
-                                disabled={xp + calculateRequiredXp(characteristic.current) > availableXp}>
+                                color="primary">
                                 <Add/>
                             </IconButton>
                         </Grid>
@@ -59,13 +56,8 @@ export default function SpendCharacteristicDialog(props: Props) {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCancel()} color="primary">Cancel</Button>
-                <Button
-                    onClick={() => onCLose}
-                    color="primary"
-                    disabled={xp === 0 || xp > availableXp}>
-                    Confirm
-                </Button>
+                <Button onClick={() => onClose} color="primary">Confirm</Button>
+                <Button onClick={handleCancel} color="secondary">Cancel</Button>
             </DialogActions>
         </Dialog>
     );

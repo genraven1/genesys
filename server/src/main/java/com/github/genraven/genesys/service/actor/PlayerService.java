@@ -1,10 +1,7 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
-import com.github.genraven.genesys.domain.actor.player.Archetype;
-import com.github.genraven.genesys.domain.actor.player.Career;
-import com.github.genraven.genesys.domain.actor.player.Player;
-import com.github.genraven.genesys.domain.actor.player.PlayerSkill;
+import com.github.genraven.genesys.domain.actor.player.*;
 import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.repository.actor.PlayerRepository;
 import com.github.genraven.genesys.service.SkillService;
@@ -111,7 +108,14 @@ public class PlayerService {
                 case WILLPOWER -> player.setWillpower(characteristic);
                 case PRESENCE -> player.setPresence(characteristic);
             }
+            player.setExperience(spendInitialExperience(player.getExperience(), characteristic.getCurrent() * 10));
             return playerRepository.save(player);
         });
+    }
+
+    private Experience spendInitialExperience(final Experience experience, final int change) {
+        experience.setInitial(experience.getInitial() - change);
+        experience.setAvailable(experience.getAvailable() - change);
+        return experience;
     }
 }
