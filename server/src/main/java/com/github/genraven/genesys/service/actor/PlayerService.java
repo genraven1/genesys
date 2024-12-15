@@ -62,10 +62,10 @@ public class PlayerService {
     public Mono<Player> updatePlayerCareer(final String id, final Career career) {
         return getPlayer(id).flatMap(existingPlayer -> {
             existingPlayer.setCareer(career);
-            existingPlayer.getSkills().forEach(playerSkill -> career.getSkills().forEach(skill -> {
-                playerSkill.setCareer(playerSkill.getId().equals(skill.getId()));
+            existingPlayer.getSkills().forEach(playerSkill -> {
+                playerSkill.setCareer(isCareerSkill(career, playerSkill));
                 playerSkill.setRanks(0);
-            }));
+            });
             return playerRepository.save(existingPlayer);
         });
     }
@@ -76,6 +76,10 @@ public class PlayerService {
             getCareerSkills(existingPlayer).forEach(playerSkill -> playerSkill.setRanks(ids.contains(playerSkill.getId()) ? 1 : 0));
             return playerRepository.save(existingPlayer);
         });
+    }
+
+    private boolean isCareerSkill(final Career career, final PlayerSkill playerSkill) {
+        return career.getSkills().stream().anyMatch(skill -> skill.getId().equals(playerSkill.getId()));
     }
 
     private List<PlayerSkill> getCareerSkills(final Player player) {
