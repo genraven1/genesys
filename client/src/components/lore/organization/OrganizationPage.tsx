@@ -1,0 +1,46 @@
+import {Organization} from "../../../models/lore/Organization";
+import {LorePath} from "../../../services/RootPath";
+import {Card, CardContent, Grid} from "@mui/material";
+import * as React from "react";
+import OrganizationSidebar from "./OrganizationSidebar";
+import OrganizationService from "../../../services/lore/OrganizationService";
+import CenteredCardHeaderWithAction from "../../common/card/header/CenteredCardHeaderWithAction";
+
+export default function OrganizationPage() {
+    const {id} = useParams<{ id: string }>();
+    const [organization, setOrganization] = useState<Organization | null>(null);
+    let pathname = useLocation().pathname;
+
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
+        (async (): Promise<void> => {
+            setOrganization(await OrganizationService.getOrganization(id));
+        })()
+    }, [id, setOrganization]);
+
+    if (!organization) {
+        return <Fragment/>;
+    }
+
+
+
+    return (
+        <Card>
+            <CenteredCardHeaderWithAction title={organization.name} path={LorePath.Organization + organization.id}/>
+            <CardContent>
+                <Grid container justifyContent={'center'}>
+                    <Grid container spacing={10}>
+                        <Grid item xs={8}>
+
+                        </Grid>
+                        <Grid item xs={4}>
+                            <OrganizationSidebar organization={organization} />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    )
+}

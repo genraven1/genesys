@@ -6,10 +6,10 @@ interface Props {
     organization: Organization
 }
 
-export default function OrganizationSidebar(props: Props): JSX.Element {
+export default function OrganizationSidebar(props: Props) {
     const {organization} = props
 
-    const renderFragment = (name: string, value: any): JSX.Element => {
+    const renderFragment = (name: string, value: any) => {
         return (
             <Fragment>
                 <Typography>{name}</Typography>
