@@ -117,6 +117,16 @@ public class PlayerService {
         });
     }
 
+    public Mono<Player> updatePlayerSkill(final String id, final PlayerSkill playerSkill) {
+        return getPlayer(id).flatMap(player -> {
+            player.getSkills().stream()
+                    .filter(skill -> skill.getId().equals(playerSkill.getId())).findFirst()
+                    .ifPresent(skill -> skill.setRanks(skill.getRanks() + 1));
+            player.setExperience(spendInitialExperience(player.getExperience(), isCareerSkill(player.getCareer(), playerSkill) ? playerSkill.getRanks() * 5 : 5 + playerSkill.getRanks() * 5));
+            return playerRepository.save(player);
+        });
+    }
+
     private Experience spendInitialExperience(final Experience experience, final int change) {
         experience.setInitial(experience.getInitial() - change);
         experience.setAvailable(experience.getAvailable() - change);

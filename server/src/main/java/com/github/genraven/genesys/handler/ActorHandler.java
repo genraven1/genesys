@@ -122,6 +122,17 @@ public class ActorHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    public Mono<ServerResponse> updatePlayerSkill(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<PlayerSkill> playerSkillMono = serverRequest.bodyToMono(PlayerSkill.class);
+        return playerSkillMono
+                .flatMap(playerSkill -> playerService.updatePlayerSkill(id, playerSkill))
+                .flatMap(player -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
     public Mono<ServerResponse> getAllNemeses(final ServerRequest serverRequest) {
         return nemesisService.getAllNemeses().collectList().flatMap(nemeses -> {
             if (nemeses.isEmpty()) {

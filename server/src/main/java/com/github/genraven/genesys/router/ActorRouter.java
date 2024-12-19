@@ -22,7 +22,7 @@ public class ActorRouter {
                         .PATCH("/{id}/careers/skills/", actorHandler::updatePlayerCareerSkills)
                         .PATCH("/{id}/archetypes/", actorHandler::updatePlayerArchetype)
                         .PATCH("/{id}/characteristics/", actorHandler::updatePlayerCharacteristic)
-//                        .PATCH("/{id}/skills/")
+                        .PATCH("/{id}/skills/", actorHandler::updatePlayerSkill)
 //                        .PATCH("/{id}/talents")
                 )
 //                .path("players/active", builder -> builder
