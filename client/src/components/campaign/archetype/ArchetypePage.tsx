@@ -3,7 +3,7 @@ import {useLocation, useParams} from 'react-router-dom';
 import * as React from "react";
 import Archetype from "../../../models/actor/player/Archetype";
 import {RootPath} from "../../../services/RootPath";
-import {CharacteristicType} from "../../../models/character/Characteristic";
+import {CharacteristicType} from "../../../models/actor/Characteristic";
 import {Fragment, useEffect, useState} from "react";
 import SkillService from "../../../services/SkillService";
 import ArchetypeService from "../../../services/ArchetypeService";

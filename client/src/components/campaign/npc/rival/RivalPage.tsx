@@ -10,7 +10,7 @@ import EquipmentCard from "../../actor/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/CharacteristicRow";
 import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
-import {CharacteristicType} from "../../../../models/character/Characteristic";
+import {CharacteristicType} from "../../../../models/actor/Characteristic";
 import {Fragment, useEffect, useState} from "react";
 import RivalService from "../../../../services/actor/RivalService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
@@ -46,22 +46,22 @@ export default function RivalPage() {
         if (rival) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setRival(await RivalService.updateRival({...rival, brawn: value}));
+                    setRival(await RivalService.updateRival({...rival, brawn: {...rival.brawn, current: value}}));
                     break;
                 case CharacteristicType.Agility:
-                    setRival(await RivalService.updateRival({...rival, agility: value}));
+                    setRival(await RivalService.updateRival({...rival, agility: {...rival.agility, current: value}}));
                     break;
                 case CharacteristicType.Intellect:
-                    setRival(await RivalService.updateRival({...rival, intellect: value}));
+                    setRival(await RivalService.updateRival({...rival, intellect: {...rival.intellect, current: value}}));
                     break;
                 case CharacteristicType.Cunning:
-                    setRival(await RivalService.updateRival({...rival, cunning: value}));
+                    setRival(await RivalService.updateRival({...rival, cunning: {...rival.cunning, current: value}}));
                     break;
                 case CharacteristicType.Willpower:
-                    setRival(await RivalService.updateRival({...rival, willpower: value}));
+                    setRival(await RivalService.updateRival({...rival, willpower: {...rival.willpower, current: value}}));
                     break;
                 case CharacteristicType.Presence:
-                    setRival(await RivalService.updateRival({...rival, presence: value}));
+                    setRival(await RivalService.updateRival({...rival, presence: {...rival.presence, current: value}}));
                     break;
             }
         }

@@ -7,7 +7,7 @@ import EquipmentCard from "../../actor/equipment/EquipmentCard";
 import {ActorPath} from "../../../../services/RootPath";
 import CharacteristicRow, {ActorCharacteristicRow} from "../../actor/common/CharacteristicRow";
 import CenteredCardHeaderWithAction from "../../../common/card/header/CenteredCardHeaderWithAction";
-import {CharacteristicType} from "../../../../models/character/Characteristic";
+import {CharacteristicType} from "../../../../models/actor/Characteristic";
 import {Fragment, useEffect, useState} from "react";
 import MinionService from "../../../../services/actor/MinionService";
 import {ViewFieldCard} from "../../../common/ViewFieldCard";
@@ -45,22 +45,22 @@ export default function MinionPage() {
         if (minion) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setMinion(await MinionService.updateMinion({...minion, brawn: value}));
+                    setMinion(await MinionService.updateMinion({...minion, brawn: {...minion.brawn, current: value}}));
                     break;
                 case CharacteristicType.Agility:
-                    setMinion(await MinionService.updateMinion({...minion, agility: value}));
+                    setMinion(await MinionService.updateMinion({...minion, agility: {...minion.agility, current: value}}));
                     break;
                 case CharacteristicType.Intellect:
-                    setMinion(await MinionService.updateMinion({...minion, intellect: value}));
+                    setMinion(await MinionService.updateMinion({...minion, intellect: {...minion.intellect, current: value}}));
                     break;
                 case CharacteristicType.Cunning:
-                    setMinion(await MinionService.updateMinion({...minion, cunning: value}));
+                    setMinion(await MinionService.updateMinion({...minion, cunning: {...minion.cunning, current: value}}));
                     break;
                 case CharacteristicType.Willpower:
-                    setMinion(await MinionService.updateMinion({...minion, willpower: value}));
+                    setMinion(await MinionService.updateMinion({...minion, willpower: {...minion.willpower, current: value}}));
                     break;
                 case CharacteristicType.Presence:
-                    setMinion(await MinionService.updateMinion({...minion, presence: value}));
+                    setMinion(await MinionService.updateMinion({...minion, presence: {...minion.presence, current: value}}));
                     break;
             }
         }

@@ -20,6 +20,7 @@ export interface PlayerSkill extends ActorSkill {
 }
 
 export interface Experience {
+    initial: number
     total: number
     available: number
 }

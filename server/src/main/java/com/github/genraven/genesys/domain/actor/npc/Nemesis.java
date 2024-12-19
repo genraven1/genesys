@@ -37,7 +37,7 @@ public class Nemesis extends SingleNonPlayerActor {
     private int strain = 0;
 
     public void getTotalSoak() {
-        int soak = getBrawn();
+        int soak = getBrawn().getCurrent();
         soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
         for (ActorTalent talent : getTalents()) {
             for (Modifier modifier : talent.getModifiers()) {

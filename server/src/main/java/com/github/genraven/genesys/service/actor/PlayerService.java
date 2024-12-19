@@ -1,11 +1,8 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
-import com.github.genraven.genesys.domain.actor.player.Archetype;
-import com.github.genraven.genesys.domain.actor.player.Career;
-import com.github.genraven.genesys.domain.actor.player.Player;
-import com.github.genraven.genesys.domain.actor.player.PlayerSkill;
-import com.github.genraven.genesys.domain.skill.Skill;
+import com.github.genraven.genesys.domain.actor.player.*;
+import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.repository.actor.PlayerRepository;
 import com.github.genraven.genesys.service.SkillService;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +10,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +51,6 @@ public class PlayerService {
 
     public Mono<Player> updatePlayer(final String name, final Player player) {
         return getPlayer(name).map(existingPlayer -> {
-            existingPlayer.setExperience(player.getExperience());
             existingPlayer.setSkills(player.getSkills());
             existingPlayer.setTalents(player.getTalents());
             existingPlayer.setWeapons(player.getWeapons());
@@ -68,10 +62,10 @@ public class PlayerService {
     public Mono<Player> updatePlayerCareer(final String id, final Career career) {
         return getPlayer(id).flatMap(existingPlayer -> {
             existingPlayer.setCareer(career);
-            existingPlayer.getSkills().forEach(playerSkill -> career.getSkills().forEach(skill -> {
-                playerSkill.setCareer(playerSkill.getId().equals(skill.getId()));
+            existingPlayer.getSkills().forEach(playerSkill -> {
+                playerSkill.setCareer(isCareerSkill(career, playerSkill));
                 playerSkill.setRanks(0);
-            }));
+            });
             return playerRepository.save(existingPlayer);
         });
     }
@@ -84,6 +78,10 @@ public class PlayerService {
         });
     }
 
+    private boolean isCareerSkill(final Career career, final PlayerSkill playerSkill) {
+        return career.getSkills().stream().anyMatch(skill -> skill.getId().equals(playerSkill.getId()));
+    }
+
     private List<PlayerSkill> getCareerSkills(final Player player) {
         return player.getSkills().stream().filter(PlayerSkill::isCareer).toList();
     }
@@ -91,16 +89,37 @@ public class PlayerService {
     public Mono<Player> updatePlayerArchetype(final String id, final Archetype archetype) {
         return getPlayer(id).flatMap(existingPlayer -> {
             existingPlayer.setArchetype(archetype);
-            existingPlayer.setBrawn(archetype.getBrawn());
-            existingPlayer.setAgility(archetype.getAgility());
-            existingPlayer.setIntellect(archetype.getIntellect());
-            existingPlayer.setCunning(archetype.getCunning());
-            existingPlayer.setWillpower(archetype.getWillpower());
-            existingPlayer.setPresence(archetype.getPresence());
+            existingPlayer.setBrawn(new Characteristic(Characteristic.Type.BRAWN, archetype.getBrawn()));
+            existingPlayer.setAgility(new Characteristic(Characteristic.Type.AGILITY, archetype.getAgility()));
+            existingPlayer.setIntellect(new Characteristic(Characteristic.Type.INTELLECT, archetype.getIntellect()));
+            existingPlayer.setCunning(new Characteristic(Characteristic.Type.CUNNING, archetype.getCunning()));
+            existingPlayer.setWillpower(new Characteristic(Characteristic.Type.WILLPOWER, archetype.getWillpower()));
+            existingPlayer.setPresence(new Characteristic(Characteristic.Type.PRESENCE, archetype.getPresence()));
             existingPlayer.setWounds(archetype.getWounds());
             existingPlayer.setStrain(archetype.getStrain());
             existingPlayer.updateAvailableExperience(archetype.getExperience());
             return playerRepository.save(existingPlayer);
         });
+    }
+
+    public Mono<Player> updatePlayerCharacteristic(final String id, final Characteristic characteristic) {
+        return getPlayer(id).flatMap(player -> {
+            switch (characteristic.getType()) {
+                case BRAWN -> player.setBrawn(characteristic);
+                case AGILITY -> player.setAgility(characteristic);
+                case INTELLECT -> player.setIntellect(characteristic);
+                case CUNNING -> player.setCunning(characteristic);
+                case WILLPOWER -> player.setWillpower(characteristic);
+                case PRESENCE -> player.setPresence(characteristic);
+            }
+            player.setExperience(spendInitialExperience(player.getExperience(), characteristic.getCurrent() * 10));
+            return playerRepository.save(player);
+        });
+    }
+
+    private Experience spendInitialExperience(final Experience experience, final int change) {
+        experience.setInitial(experience.getInitial() - change);
+        experience.setAvailable(experience.getAvailable() - change);
+        return experience;
     }
 }

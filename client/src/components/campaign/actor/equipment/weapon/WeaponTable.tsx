@@ -48,7 +48,7 @@ export default function WeaponTable(props: Props) {
                             <TypographyCenterTableCell value={weapon.slot}/>
                             <TypographyCenterTableCell value={weapon.skill.name || ''}/>
                             <TypographyCenterTableCell
-                                value={weapon.brawn ? String(actor.brawn + weapon.damage) : String(weapon.damage)}/>
+                                value={weapon.brawn ? String(actor.brawn.current + weapon.damage) : String(weapon.damage)}/>
                             <TypographyCenterTableCell value={String(weapon.critical)}/>
                             <TypographyCenterTableCell value={weapon.range}/>
                             <TypographyCenterTableCell value={renderQualities(weapon)}/>

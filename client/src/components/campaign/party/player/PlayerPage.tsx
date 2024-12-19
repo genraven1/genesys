@@ -19,7 +19,7 @@ import {ActorWeapon} from "../../../../models/equipment/Weapon";
 import SingleNonPlayerCharacterTalentCard from "../../npc/talent/SingleNonPlayerCharacterTalentCard";
 import {ActorTalent} from "../../../../models/Talent";
 import PlayerService from "../../../../services/actor/PlayerService";
-import ExperienceCard from "./ExperienceCard";
+import ExperienceCard from "./experience/ExperienceCard";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();

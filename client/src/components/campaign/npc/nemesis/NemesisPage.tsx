@@ -16,7 +16,7 @@ import EquipmentCard from "../../actor/equipment/EquipmentCard";
 import AbilityTableCard from "../../actor/ability/AbilityTableCard";
 import SingleNonPlayerCharacterTalentCard from "../talent/SingleNonPlayerCharacterTalentCard";
 import RatingCard from "../RatingCard";
-import {CharacteristicType} from "../../../../models/character/Characteristic";
+import {CharacteristicType} from "../../../../models/actor/Characteristic";
 import {ActorSkill} from "../../../../models/actor/Actor";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import {ActorWeapon} from "../../../../models/equipment/Weapon";
@@ -46,22 +46,22 @@ export default function NemesisPage() {
         if (nemesis) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, brawn: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, brawn: {...nemesis.brawn, current: value}}));
                     break;
                 case CharacteristicType.Agility:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, agility: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, agility: {...nemesis.agility, current: value}}));
                     break;
                 case CharacteristicType.Intellect:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, intellect: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, intellect: {...nemesis.intellect, current: value}}));
                     break;
                 case CharacteristicType.Cunning:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, cunning: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, cunning: {...nemesis.cunning, current: value}}));
                     break;
                 case CharacteristicType.Willpower:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, willpower: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, willpower: {...nemesis.willpower, current: value}}));
                     break;
                 case CharacteristicType.Presence:
-                    setNemesis(await NemesisService.updateNemesis({...nemesis, presence: value}));
+                    setNemesis(await NemesisService.updateNemesis({...nemesis, presence: {...nemesis.presence, current: value}}));
                     break;
             }
         }

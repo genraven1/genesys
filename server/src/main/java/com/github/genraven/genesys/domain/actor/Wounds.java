@@ -1,4 +1,4 @@
-package com.github.genraven.genesys.domain.character;
+package com.github.genraven.genesys.domain.actor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,9 +1,9 @@
-import Player from "../../../../models/actor/player/Player";
-import {Button, Card, CardContent, Grid} from "@mui/material";
-import {ViewFieldCard} from "../../../common/ViewFieldCard";
+import Player from "../../../../../models/actor/player/Player";
+import {Card, CardContent, Grid} from "@mui/material";
+import {ViewFieldCard} from "../../../../common/ViewFieldCard";
 import * as React from "react";
-import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
-import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";
+import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
+import SpendExperienceMenuButton from "./SpendExperienceMenuButton";
 
 interface Props {
     player: Player
@@ -12,9 +12,9 @@ interface Props {
 export default function ExperienceCard(props: Props) {
     const {player} = props;
 
-    const handleSpendExperience = () => {
-
-    };
+    // const handleSpendExperience = () => {
+    //
+    // };
 
     return (
         <Grid item xs>
@@ -24,9 +24,7 @@ export default function ExperienceCard(props: Props) {
                         <CenteredCardHeader title={'Available'}/>
                         <CardContent>
                             <Grid container justifyContent={"center"}>
-                                <Button onClick={handleSpendExperience}>
-                                    <GenesysDescriptionTypography text={String(player.experience.available)}/>
-                                </Button>
+                                <SpendExperienceMenuButton player={player}/>
                             </Grid>
                         </CardContent>
                     </Card>

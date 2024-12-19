@@ -1,7 +1,7 @@
 import {Card, CardContent, Grid, MenuItem, Select} from "@mui/material";
 import * as React from "react";
 import CenteredCardHeader from "../header/CenteredCardHeader";
-import {CharacteristicType} from "../../../../models/character/Characteristic";
+import {CharacteristicType} from "../../../../models/actor/Characteristic";
 
 interface Props {
     value: CharacteristicType

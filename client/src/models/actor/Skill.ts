@@ -1,4 +1,4 @@
-import {CharacteristicType} from '../character/Characteristic';
+import {CharacteristicType} from './Characteristic';
 
 export default interface Skill {
     id: string
