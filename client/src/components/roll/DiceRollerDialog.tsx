@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from '@mui/material';
 import GenesysDescriptionTypography from "../common/typography/GenesysDescriptionTypography";
 import {GenesysSymbols} from "../../models/roll/GenesysSymbols";
-import handleDiceRoll from "./DiceRoll";
+import handleDiceRoll from "../../models/roll/DiceRoll";
 
 interface Props {
     open: boolean

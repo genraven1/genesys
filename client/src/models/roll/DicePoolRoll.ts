@@ -1,6 +1,6 @@
-import {GenesysSymbols} from "../../models/roll/GenesysSymbols";
+import {GenesysSymbols} from "./GenesysSymbols";
 import {rollDice, tallyResults} from "./DiceRoll";
-import { Die } from "../../models/roll/dice/Die";
+import { Die } from "./dice/Die";
 
 interface Props {
     dice: Die[]
