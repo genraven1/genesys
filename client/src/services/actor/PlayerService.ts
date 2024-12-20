@@ -121,4 +121,20 @@ export default class PlayerService {
                 return res.json()
             })
     }
+
+    static async purchaseSkillUpgrade(playerId: string, skill: PlayerSkill): Promise<Player> {
+        return await fetch(PlayerPath.Creation + `${playerId}` + PlayerPath.Skills, {
+            method: "PATCH",
+            body: JSON.stringify(skill),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
 }

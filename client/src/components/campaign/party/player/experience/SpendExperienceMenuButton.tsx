@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {Collapse, List, ListItemButton, ListItemText} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 import SpendCharacteristicDialog from "./dialog/SpendCharacteristicDialog";
+import SpendSkillDialog from "./dialog/SpendSkillDialog";
 
 interface Props {
     player: Player
@@ -12,6 +13,7 @@ export default function SpendExperienceMenuButton(props: Props) {
     const {player} = props;
     const [collapse, setCollapse] = useState(false);
     const [openCharacteristicDialog, setOpenCharacteristicDialog] = useState(false);
+    const [openSkillDialog, setOpenSkillDialog] = useState(false);
 
     return (
         <List>
@@ -24,11 +26,14 @@ export default function SpendExperienceMenuButton(props: Props) {
                     <ListItemButton onClick={() => setOpenCharacteristicDialog(true)}>
                         <ListItemText primary={'Characteristic'}/>
                         {openCharacteristicDialog && <SpendCharacteristicDialog open={openCharacteristicDialog}
-                                                                        onClose={(): void => setOpenCharacteristicDialog(false)}
-                                                                        currentPlayer={player}/>}
+                                                                                onClose={(): void => setOpenCharacteristicDialog(false)}
+                                                                                currentPlayer={player}/>}
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => setOpenSkillDialog(true)}>
                         <ListItemText primary={'Skill'}/>
+                        {openSkillDialog &&
+                            <SpendSkillDialog open={openSkillDialog} onClose={(): void => setOpenSkillDialog(false)}
+                                              currentPlayer={player}/>}
                     </ListItemButton>
                     <ListItemButton>
                         <ListItemText primary={'Talent'}/>
