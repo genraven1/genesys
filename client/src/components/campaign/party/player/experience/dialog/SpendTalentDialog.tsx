@@ -32,9 +32,19 @@ export default function SpendTalentDialog(props: Props) {
         onClose();
     };
 
-    const renderTalentPaper = (talents: ActorTalent[]) => {
+    const renderTalentCard = (talents: ActorTalent[], size: number) => {
         return (
             <Grid container direction="column" spacing={2}>
+                {new Array(size).map((talent) => (
+                    <Grid item key={talent.id}>
+                        <Card>
+                            <CenteredCardHeader title={talent.name}/>
+                            <CardContent>
+                                <GenesysDescriptionTypography text={talent.summary}/>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
                 {talents.map((talent) => (
                     <Grid item key={talent.id}>
                         <Card>
@@ -45,7 +55,8 @@ export default function SpendTalentDialog(props: Props) {
                         </Card>
                     </Grid>
                 ))}
-            </Grid>);
+            </Grid>
+        );
     };
 
     return (
@@ -54,19 +65,19 @@ export default function SpendTalentDialog(props: Props) {
             <DialogContent>
                 <Grid container spacing={2} columns={5}>
                     <Grid item xs={1}>
-                        {renderTalentPaper(firstTalents)}
+                        {renderTalentCard(firstTalents, 0)}
                     </Grid>
                     <Grid item xs={1}>
-                        {renderTalentPaper(secondTalents)}
+                        {renderTalentCard(secondTalents, 1)}
                     </Grid>
                     <Grid item xs={1}>
-                        {renderTalentPaper(thirdTalents)}
+                        {renderTalentCard(thirdTalents, 2)}
                     </Grid>
                     <Grid item xs={1}>
-                        {renderTalentPaper(fourthTalents)}
+                        {renderTalentCard(fourthTalents, 3)}
                     </Grid>
                     <Grid item xs={1}>
-                        {renderTalentPaper(fifthTalents)}
+                        {renderTalentCard(fifthTalents, 4)}
                     </Grid>
                 </Grid>
             </DialogContent>
