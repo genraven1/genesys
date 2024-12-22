@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,13 @@ public class TalentService {
         return campaignRepository.findByCurrent(true).flatMap(existingCampaign -> {
             existingCampaign.getTalentIds().add(talentId);
             return campaignRepository.save(existingCampaign);
+        });
+    }
+
+    public Mono<List<Talent>> getTalentsForCurrentCampaignByTier(final Talent.Tier tier) {
+        return getTalentsForCurrentCampaign().flatMap(talents -> {
+            final List<Talent> tierTalents = talents.stream().filter(talent -> talent.getTier() == tier).collect(Collectors.toList());
+            return Mono.just(tierTalents);
         });
     }
 }
