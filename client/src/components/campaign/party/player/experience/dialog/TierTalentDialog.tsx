@@ -29,7 +29,6 @@ export default function TierTalentDialog(props: Props) {
     useEffect(() => {
         (async (): Promise<void> => {
             setTalents(await CampaignService.getCampaignTierTalents(tier));
-            // Filter is not removing invalid tier talents
         })();
     }, [setTalents, tier]);
 
@@ -49,7 +48,6 @@ export default function TierTalentDialog(props: Props) {
                             {filterTalents().map((talent: Talent) => (
                                 <TableRow key={talent.name}>
                                     <TypographyCenterTableCell value={talent.name}/>
-                                    {/*<ActionsTableCell name={player.id} path={ActorPath.Player}/>*/}
                                 </TableRow>
                             ))}
                         </TableBody>
