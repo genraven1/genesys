@@ -77,18 +77,18 @@ export default function SpendTalentDialog(props: Props) {
                     <Grid item xs={1}>
                         {renderTalentCard(firstTalents, 0)}
                     </Grid>
-                    <Grid item xs={1}>
-                        {renderTalentCard(secondTalents, 1)}
-                    </Grid>
-                    <Grid item xs={1}>
-                        {renderTalentCard(thirdTalents, 2)}
-                    </Grid>
-                    <Grid item xs={1}>
-                        {renderTalentCard(fourthTalents, 3)}
-                    </Grid>
-                    <Grid item xs={1}>
-                        {renderTalentCard(fifthTalents, 4)}
-                    </Grid>
+                    {/*<Grid item xs={1}>*/}
+                    {/*    {renderTalentCard(secondTalents, 1)}*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={1}>*/}
+                    {/*    {renderTalentCard(thirdTalents, 2)}*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={1}>*/}
+                    {/*    {renderTalentCard(fourthTalents, 3)}*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item xs={1}>*/}
+                    {/*    {renderTalentCard(fifthTalents, 4)}*/}
+                    {/*</Grid>*/}
                 </Grid>
             </DialogContent>
             <DialogActions>
