@@ -9,7 +9,10 @@ import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../../../common/table/TableRenders";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {TypographyCenterTableCell} from "../../../../../common/table/TypographyTableCell";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../../../common/table/TypographyTableCell";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
 
@@ -24,7 +27,7 @@ export default function TierTalentDialog(props: Props) {
     const {open, onClose, currentPlayer, tier} = props;
     const [talents, setTalents] = useState<Talent[]>([]);
     const playerTalents = currentPlayer.talents.filter(talent => talent.tier === tier);
-    let headers = ['Name'];
+    let headers = ['Name', 'Activation', 'Summary'];
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -48,6 +51,8 @@ export default function TierTalentDialog(props: Props) {
                             {filterTalents().map((talent: Talent) => (
                                 <TableRow key={talent.name}>
                                     <TypographyCenterTableCell value={talent.name}/>
+                                    <TypographyCenterTableCell value={talent.activation}/>
+                                    <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
                                 </TableRow>
                             ))}
                         </TableBody>
