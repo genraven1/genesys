@@ -6,7 +6,6 @@ import PlayerService from "../../../../../../services/actor/PlayerService";
 import CenteredDialogTitle from "../../../../../common/dialog/CenteredDialogTitle";
 import TalentDialogCard from "./TalentDialogCard";
 import {Tier} from "../../../../../../models/Talent";
-import Typography from "@mui/material/Typography";
 
 interface Props {
     open: boolean
@@ -47,7 +46,6 @@ export default function SpendTalentDialog(props: Props) {
                     <Grid item xs={1}>
                         <TalentDialogCard player={player} size={4} tier={Tier.Fifth}/>
                     </Grid>
-                    <Typography>IloveYou</Typography>
                 </Grid>
             </DialogContent>
             <DialogActions>
