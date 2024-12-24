@@ -42,7 +42,7 @@ export default function RivalPage() {
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setTab(newValue);
-    }
+    };
 
     const handleSkillChange = async (value: ActorSkill) => {
         if (rival) {
