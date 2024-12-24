@@ -3,7 +3,6 @@ import Skill from "./Skill";
 import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
-import {Option} from "../../components/common/InputSelectField";
 import {SingleNonPlayerCharacter} from "./npc/NonPlayerActor";
 
 export default interface Actor {
@@ -68,10 +67,6 @@ export enum ActorType {
     Rival = 'Rival',
     Nemesis = 'Nemesis',
     Player = 'Player'
-}
-
-export const getActorTypes = (): Option[] => {
-    return Object.values(ActorType).map((value) => ({value}))
 }
 
 export enum ActorKey {

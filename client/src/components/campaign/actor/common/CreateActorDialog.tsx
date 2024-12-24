@@ -1,15 +1,15 @@
-import {Dialog, DialogContentText, DialogTitle, Divider, TextField} from "@mui/material";
+import {Dialog, DialogContentText, DialogTitle, Divider, MenuItem, Select, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import MinionService from "../../../../services/actor/MinionService";
 import {ActorPath} from "../../../../services/RootPath";
-import {ActorType, getActorTypes} from "../../../../models/actor/Actor";
-import InputSelectField from "../../../common/InputSelectField";
+import {ActorType} from "../../../../models/actor/Actor";
 import {GenesysDialogActions} from "../../../common/dialog/GenesysDialogActions";
 import {useFetchCurrentCampaign} from "../../CampaignWorkflow";
 import RivalService from "../../../../services/actor/RivalService";
 import NemesisService from "../../../../services/actor/NemesisService";
 import PlayerService from "../../../../services/actor/PlayerService";
+import * as React from "react";
 
 interface Props {
     open: boolean
@@ -65,10 +65,18 @@ export default function CreateActorDialog(props: Props) {
             <DialogContentText>
                 <TextField onChange={onNameChange} value={name} required/>
                 <Divider/>
-                <InputSelectField defaultValue={type} options={getActorTypes()}
-                                  onCommit={(value: string) => {
-                                      onTypeChange(value as ActorType)
-                                  }}/>
+                <Select
+                    value={type}
+                    onChange={(e) => onTypeChange(e.target.value as ActorType)}
+                    fullWidth
+                    label={'Type'}
+                >
+                    {Object.values(ActorType).map(option => (
+                        <MenuItem key={option} value={option}>
+                            {option}
+                        </MenuItem>
+                    ))}
+                </Select>
             </DialogContentText>
             <GenesysDialogActions handleCreate={handleCreate} onClose={onClose}/>
         </Dialog>
