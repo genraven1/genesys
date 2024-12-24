@@ -17,10 +17,15 @@ import AbilityTableCard from "../../actor/ability/AbilityTableCard";
 import Ability from "../../../../models/Ability";
 import {ActorTalent} from "../../../../models/Talent";
 import RivalCharacteristicTab from "./RivalCharacteristicTab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList/TabList";
+import Tab from "@mui/material/Tab";
+import TabPanel from "@mui/lab/TabPanel";
 
 export default function RivalPage() {
     const {id} = useParams<{ id: string }>();
     const [rival, setRival] = useState<Rival | null>(null);
+    const [tab, setTab] = useState('1');
 
     useEffect(() => {
         if (!id) {
@@ -33,6 +38,10 @@ export default function RivalPage() {
 
     if (!rival) {
         return <Fragment/>;
+    }
+
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setTab(newValue);
     }
 
     const handleSkillChange = async (value: ActorSkill) => {
@@ -71,7 +80,33 @@ export default function RivalPage() {
                                           subheader={getRatings(rival)}/>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <RivalCharacteristicTab rival={rival} updateRival={setRival}/>
+                    <TabContext value={tab}>
+                        <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
+                            <TabList onChange={handleChange} centered>
+                                <Tab label="Characteristics" value="1"/>
+                    {/*            <Tab label="Campaign Information" value="2"/>*/}
+                    {/*            <Tab label="Party Information" value="3"/>*/}
+                    {/*            <Tab label="Session Management" value="4"/>*/}
+                    {/*            <Tab label="Scene Management" value="5"/>*/}
+                            </TabList>
+                        </Grid>
+                        <TabPanel value="1">
+                            <RivalCharacteristicTab rival={rival} updateRival={setRival}/>
+                        </TabPanel>
+                    {/*    <TabPanel value="2">*/}
+                    {/*        <CampaignPage campaign={campaign}/>*/}
+                    {/*    </TabPanel>*/}
+                    {/*    <TabPanel value="3">*/}
+                    {/*        <ViewAllPlayers/>*/}
+                    {/*    </TabPanel>*/}
+                    {/*    <TabPanel value="4">*/}
+                    {/*        <ViewSessions camp={campaign}/>*/}
+                    {/*    </TabPanel>*/}
+                    {/*    <TabPanel value="5">*/}
+                    {/*        <ViewScenes/>*/}
+                    {/*    </TabPanel>*/}
+                    </TabContext>
+                    {/*<RivalCharacteristicTab rival={rival} updateRival={setRival}/>*/}
                     <Divider/>
                     <SingleNonPlayerCharacterSkillCard actor={rival} onSkillChange={handleSkillChange}/>
                     <Divider/>
