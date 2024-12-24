@@ -2,7 +2,7 @@ package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.Talent;
 import com.github.genraven.genesys.service.TalentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -16,14 +16,10 @@ import static com.github.genraven.genesys.constants.CommonConstants.NAME;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
+@RequiredArgsConstructor
 public class TalentHandler {
 
     private final TalentService talentService;
-
-    @Autowired
-    public TalentHandler(final TalentService talentService) {
-        this.talentService = talentService;
-    }
 
     public Mono<ServerResponse> getAllTalents(final ServerRequest serverRequest) {
         return talentService.getAllTalents().collectList().flatMap(talents -> {
@@ -71,6 +67,13 @@ public class TalentHandler {
         return request.bodyToMono(Talent.class)
                 .flatMap(talent -> talentService.addTalentToCurrentCampaign(talent.getId()))
                 .flatMap(updatedCampaign -> ServerResponse.ok().bodyValue(updatedCampaign))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> getTalentsForCurrentCampaignByTier(final ServerRequest request) {
+        final Talent.Tier tierEnum = Talent.Tier.valueOf(request.pathVariable("tier").toUpperCase());
+        return talentService.getTalentsForCurrentCampaignByTier(tierEnum)
+                .flatMap(talents -> ServerResponse.ok().bodyValue(talents))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 

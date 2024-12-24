@@ -1,6 +1,6 @@
 import Campaign from "../models/campaign/Campaign";
 import {CampaignPath} from "./RootPath";
-import Talent from "../models/Talent";
+import Talent, {Tier} from "../models/Talent";
 import Skill from "../models/actor/Skill";
 import Scene from "../models/campaign/Scene";
 
@@ -75,6 +75,16 @@ export default class CampaignService {
                 'Content-Type': 'application/json'
             }
         })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
+    }
+
+    static async getCampaignTierTalents(tier: Tier): Promise<Talent[]> {
+        return await fetch(CampaignPath.TalentTiers + `${tier}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(res.statusText)

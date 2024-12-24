@@ -6,7 +6,7 @@ import NonPlayerCharacterInitiativeCard from "./NonPlayerCharacterInitiativeCard
 import {ActorSkill} from "../../../../models/actor/Actor";
 import {Fragment, useState} from "react";
 import {basicSkillDicePool} from "../../../../models/roll/dice/DicePool";
-import handleDicePoolRoll from "../../../roll/DicePoolRoll";
+import handleDicePoolRoll from "../../../../models/roll/DicePoolRoll";
 import {GenesysSymbols} from "../../../../models/roll/GenesysSymbols";
 import InitiativeSlot, {Type} from "../../../../models/campaign/InitiativeSlot";
 import InitiativeSlotCard from "./InitiativeSlotCard";

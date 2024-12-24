@@ -4,6 +4,7 @@ import {Collapse, List, ListItemButton, ListItemText} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 import SpendCharacteristicDialog from "./dialog/SpendCharacteristicDialog";
 import SpendSkillDialog from "./dialog/SpendSkillDialog";
+import SpendTalentDialog from "./dialog/SpendTalentDialog";
 
 interface Props {
     player: Player
@@ -14,6 +15,7 @@ export default function SpendExperienceMenuButton(props: Props) {
     const [collapse, setCollapse] = useState(false);
     const [openCharacteristicDialog, setOpenCharacteristicDialog] = useState(false);
     const [openSkillDialog, setOpenSkillDialog] = useState(false);
+    const [openTalentDialog, setOpenTalentDialog] = useState(false);
 
     return (
         <List>
@@ -35,8 +37,11 @@ export default function SpendExperienceMenuButton(props: Props) {
                             <SpendSkillDialog open={openSkillDialog} onClose={(): void => setOpenSkillDialog(false)}
                                               currentPlayer={player}/>}
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => setOpenTalentDialog(true)}>
                         <ListItemText primary={'Talent'}/>
+                        {openTalentDialog &&
+                            <SpendTalentDialog open={openTalentDialog} onClose={() => setOpenTalentDialog(false)}
+                                               currentPlayer={player}/>}
                     </ListItemButton>
                 </List>
             </Collapse>

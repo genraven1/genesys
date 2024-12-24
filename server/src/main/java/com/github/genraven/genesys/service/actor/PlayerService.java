@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.ActorTalent;
 import com.github.genraven.genesys.domain.actor.player.*;
 import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.repository.actor.PlayerRepository;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +31,6 @@ public class PlayerService {
             return player;
         });
     }
-
 
     public Mono<Player> getPlayer(final String id) {
         return playerRepository.findById(id).map(player -> {
@@ -125,6 +126,70 @@ public class PlayerService {
             player.setExperience(spendInitialExperience(player.getExperience(), isCareerSkill(player.getCareer(), playerSkill) ? playerSkill.getRanks() * 5 : 5 + playerSkill.getRanks() * 5));
             return playerRepository.save(player);
         });
+    }
+
+    public Mono<Player> updatePlayerTalent(final String id, final ActorTalent actorTalent) {
+        return getPlayer(id).flatMap(player -> {
+            final Optional<ActorTalent> talentOptional = player.getTalents().stream()
+                    .filter(talent -> talent.getId().equals(actorTalent.getId()))
+                    .findFirst();
+
+            if (talentOptional.isPresent()) {
+                final ActorTalent talent = talentOptional.get();
+                if (!talent.isRanked()) {
+                    return Mono.error(new IllegalArgumentException("Talent is not ranked."));
+                } else {
+                    talent.setRanks(talent.getRanks() + 1);
+                    player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromRankedTalent(talent)));
+                }
+            } else {
+                player.getTalents().add(actorTalent);
+                player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromUnrankedTalent(actorTalent)));
+            }
+            return playerRepository.save(player);
+        });
+    }
+
+    private int getExperienceFromUnrankedTalent(final ActorTalent talent) {
+        switch (talent.getTier()) {
+            case FIRST -> {
+                return 5;
+            }
+            case SECOND -> {
+                return 10;
+            }
+            case THIRD -> {
+                return 15;
+            }
+            case FOURTH -> {
+                return 20;
+            }
+            case FIFTH -> {
+                return 25;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + talent.getTier());
+        }
+    }
+
+    private int getExperienceFromRankedTalent(final ActorTalent talent) {
+        switch (talent.getTier()) {
+            case FIRST -> {
+                return talent.getRanks() * 5;
+            }
+            case SECOND -> {
+                return 5 + talent.getRanks() * 5;
+            }
+            case THIRD -> {
+                return 10 + talent.getRanks() * 5;
+            }
+            case FOURTH -> {
+                return 15 + talent.getRanks() * 5;
+            }
+            case FIFTH -> {
+                return 25;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + talent.getTier());
+        }
     }
 
     private Experience spendInitialExperience(final Experience experience, final int change) {

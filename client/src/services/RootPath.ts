@@ -34,7 +34,8 @@ export enum PlayerPath {
     Creation = '/players/creation/',
     Active = '/players/active/',
     Characteristic = '/characteristics/',
-    Skills = '/skills/'
+    Skills = '/skills/',
+    Talents = '/talents/'
 }
 
 export enum CampaignPath {
@@ -45,6 +46,7 @@ export enum CampaignPath {
     Current = '/current',
     Lore = '/lore',
     Talents = '/campaigns/talents/',
+    TalentTiers = '/campaigns/talents/tiers/',
     Skills = '/campaigns/skills/'
 }
 

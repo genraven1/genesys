@@ -34,13 +34,13 @@ export default function SpendSkillDialog(props: Props) {
     };
 
     const handleCancel = async () => {
-        await PlayerService.updatePlayer(currentPlayer);
+        setPlayer(await PlayerService.updatePlayer(currentPlayer));
         onClose();
     };
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Spend Experience on Characteristic</DialogTitle>
+            <DialogTitle>Spend Experience on Skill</DialogTitle>
             <DialogContent>
                 <Grid container spacing={2}>
                     <TableContainer component={Paper}>

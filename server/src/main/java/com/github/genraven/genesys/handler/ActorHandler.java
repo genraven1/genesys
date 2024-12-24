@@ -2,6 +2,7 @@ package com.github.genraven.genesys.handler;
 
 import com.github.genraven.genesys.domain.actor.Actor;
 import com.github.genraven.genesys.domain.actor.ActorSkill;
+import com.github.genraven.genesys.domain.actor.ActorTalent;
 import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.domain.actor.npc.GroupSkill;
 import com.github.genraven.genesys.domain.actor.npc.Minion;
@@ -16,7 +17,6 @@ import com.github.genraven.genesys.service.actor.NemesisService;
 import com.github.genraven.genesys.service.actor.PlayerService;
 import com.github.genraven.genesys.service.actor.RivalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -127,6 +127,17 @@ public class ActorHandler {
         final Mono<PlayerSkill> playerSkillMono = serverRequest.bodyToMono(PlayerSkill.class);
         return playerSkillMono
                 .flatMap(playerSkill -> playerService.updatePlayerSkill(id, playerSkill))
+                .flatMap(player -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(fromValue(player)))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> updatePlayerTalent(final ServerRequest serverRequest) {
+        final String id = serverRequest.pathVariable(ID);
+        final Mono<ActorTalent> actorTalentMono = serverRequest.bodyToMono(ActorTalent.class);
+        return actorTalentMono
+                .flatMap(actorTalent -> playerService.updatePlayerTalent(id, actorTalent))
                 .flatMap(player -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(player)))

@@ -1,6 +1,6 @@
-import {Die} from "../../models/roll/dice/Die";
-import {GenesysSymbols} from "../../models/roll/GenesysSymbols";
-import {diceToRoll} from "../../models/roll/dice/DicePool";
+import {Die} from "./dice/Die";
+import {GenesysSymbols} from "./GenesysSymbols";
+import {diceToRoll} from "./dice/DicePool";
 
 export function rollDice(dice: Die[], customSymbols: GenesysSymbols[][]): GenesysSymbols[] {
     const results: GenesysSymbols[] = [];
