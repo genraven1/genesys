@@ -1,4 +1,4 @@
-import {Card, CardContent, Divider, Grid} from "@mui/material";
+import {Card, CardContent, Grid} from "@mui/material";
 import {useParams} from "react-router-dom";
 import * as React from "react";
 import Rival from "../../../../models/actor/npc/Rival";
@@ -79,43 +79,32 @@ export default function RivalPage() {
             <CenteredCardHeaderWithAction title={rival.name} path={ActorPath.Rival + rival.id}
                                           subheader={getRatings(rival)}/>
             <CardContent>
-                <Grid container justifyContent={'center'}>
-                    <TabContext value={tab}>
-                        <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
-                            <TabList onChange={handleChange} centered>
-                                <Tab label="Characteristics" value="1"/>
-                    {/*            <Tab label="Campaign Information" value="2"/>*/}
-                    {/*            <Tab label="Party Information" value="3"/>*/}
-                    {/*            <Tab label="Session Management" value="4"/>*/}
-                    {/*            <Tab label="Scene Management" value="5"/>*/}
-                            </TabList>
-                        </Grid>
-                        <TabPanel value="1">
-                            <RivalCharacteristicTab rival={rival} updateRival={setRival}/>
+                <TabContext value={tab}>
+                    <Grid sx={{borderBottom: 1, borderColor: 'divider'}}>
+                        <TabList onChange={handleChange} centered>
+                            <Tab label="Characteristics" value="1"/>
+                                        <Tab label="Skills" value="2"/>
+                                        <Tab label="Equipment" value="3"/>
+                                        <Tab label="Abilities" value="4"/>
+                                        <Tab label="Talents" value="5"/>
+                        </TabList>
+                    </Grid>
+                    <TabPanel value="1">
+                        <RivalCharacteristicTab rival={rival} updateRival={setRival}/>
+                    </TabPanel>
+                        <TabPanel value="2">
+                            <SingleNonPlayerCharacterSkillCard actor={rival} onSkillChange={handleSkillChange}/>
                         </TabPanel>
-                    {/*    <TabPanel value="2">*/}
-                    {/*        <CampaignPage campaign={campaign}/>*/}
-                    {/*    </TabPanel>*/}
-                    {/*    <TabPanel value="3">*/}
-                    {/*        <ViewAllPlayers/>*/}
-                    {/*    </TabPanel>*/}
-                    {/*    <TabPanel value="4">*/}
-                    {/*        <ViewSessions camp={campaign}/>*/}
-                    {/*    </TabPanel>*/}
-                    {/*    <TabPanel value="5">*/}
-                    {/*        <ViewScenes/>*/}
-                    {/*    </TabPanel>*/}
-                    </TabContext>
-                    {/*<RivalCharacteristicTab rival={rival} updateRival={setRival}/>*/}
-                    <Divider/>
-                    <SingleNonPlayerCharacterSkillCard actor={rival} onSkillChange={handleSkillChange}/>
-                    <Divider/>
-                    <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
-                    <Divider/>
-                    <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
-                    <Divider/>
-                    <SingleNonPlayerCharacterTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
-                </Grid>
+                        <TabPanel value="3">
+                            <EquipmentCard actor={rival} updateArmors={handleArmorChange} updateWeapons={handleWeaponChange}/>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <AbilityTableCard abilities={rival.abilities} updateAbilities={handleAbilityChange}/>
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <SingleNonPlayerCharacterTalentCard talents={rival.talents} updateTalents={handleTalentChange}/>
+                        </TabPanel>
+                </TabContext>
             </CardContent>
         </Card>
     )
