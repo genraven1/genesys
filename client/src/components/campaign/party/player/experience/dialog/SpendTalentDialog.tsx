@@ -5,6 +5,8 @@ import {Button, Dialog, DialogActions, DialogContent, Grid} from "@mui/material"
 import PlayerService from "../../../../../../services/actor/PlayerService";
 import CenteredDialogTitle from "../../../../../common/dialog/CenteredDialogTitle";
 import TalentDialogCard from "./TalentDialogCard";
+import {Tier} from "../../../../../../models/Talent";
+import Typography from "@mui/material/Typography";
 
 interface Props {
     open: boolean
@@ -31,20 +33,21 @@ export default function SpendTalentDialog(props: Props) {
             <DialogContent>
                 <Grid container spacing={2} columns={5}>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={0}/>
+                        <TalentDialogCard player={player} size={0} tier={Tier.First}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={1}/>
+                        <TalentDialogCard player={player} size={1} tier={Tier.Second}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={2}/>
+                        <TalentDialogCard player={player} size={2} tier={Tier.Third}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={3}/>
+                        <TalentDialogCard player={player} size={3} tier={Tier.Fourth}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={4}/>
+                        <TalentDialogCard player={player} size={4} tier={Tier.Fifth}/>
                     </Grid>
+                    <Typography>IloveYou</Typography>
                 </Grid>
             </DialogContent>
             <DialogActions>
