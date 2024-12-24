@@ -1,10 +1,11 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, Grid, IconButton} from "@mui/material";
 import {Characteristic} from "../../../../../../models/actor/Characteristic";
 import Typography from "@mui/material/Typography";
 import {Add} from "@mui/icons-material";
 import {useEffect, useState} from "react";
 import Player from "../../../../../../models/actor/player/Player";
 import PlayerService from "../../../../../../services/actor/PlayerService";
+import CenteredDialogTitle from "../../../../../common/dialog/CenteredDialogTitle";
 
 interface Props {
     open: boolean
@@ -34,13 +35,13 @@ export default function SpendCharacteristicDialog(props: Props) {
     ];
 
     const handleCancel = async () => {
-        await PlayerService.updatePlayerArchetype(player.id, player.archetype);
+        await PlayerService.updatePlayer(currentPlayer);
         onClose();
     };
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Spend Experience on Characteristic</DialogTitle>
+            <CenteredDialogTitle title={'Spend Experience on Characteristic'}/>
             <DialogContent>
                 <Grid container spacing={2}>
                     {characteristics.map((characteristic, index) => (
