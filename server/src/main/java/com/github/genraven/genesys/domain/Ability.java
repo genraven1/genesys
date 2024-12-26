@@ -11,7 +11,7 @@ public class Ability {
     private String name;
     private String description;
     private Activation activation;
-    private Cost cost;
-    private Limit limit;
+    private Cost cost = new Cost();
+    private Limit limit = new Limit();
     private List<Modifier> modifiers = new ArrayList<>();
 }

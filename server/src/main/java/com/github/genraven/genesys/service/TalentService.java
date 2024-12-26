@@ -50,6 +50,8 @@ public class TalentService {
                     tal.setTier(talent.getTier());
                     tal.setDescription(talent.getDescription());
                     tal.setSummary(talent.getSummary());
+                    tal.setCost(talent.getCost());
+                    tal.setLimit(talent.getLimit());
                     tal.setModifiers(talent.getModifiers());
                     return tal;
                 }).flatMap(talentRepository::save)
