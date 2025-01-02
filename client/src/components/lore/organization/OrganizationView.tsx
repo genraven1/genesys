@@ -36,7 +36,7 @@ export default function OrganizationView(props: Props) {
 
                         </Grid>
                         <Grid item xs={4}>
-                            <OrganizationSidebar organization={organization} />
+                            {/*<OrganizationSidebar organization={organization} />*/}
                         </Grid>
                     </Grid>
                 </Grid>

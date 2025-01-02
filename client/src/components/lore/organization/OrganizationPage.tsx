@@ -26,7 +26,11 @@ export default function OrganizationPage() {
         return <Fragment/>;
     }
 
-
+    const updateOrganization = async (updatedOrganization: Organization) => {
+        if (organization) {
+            setOrganization(await OrganizationService.updateOrganization(updatedOrganization));
+        }
+    };
 
     return (
         <Card>
@@ -38,7 +42,9 @@ export default function OrganizationPage() {
 
                         </Grid>
                         <Grid item xs={4}>
-                            <OrganizationSidebar organization={organization} />
+                            <OrganizationSidebar organization={organization}
+                                                 updateOrganization={updateOrganization}
+                                                 disabled={pathname.endsWith('/view')}/>
                         </Grid>
                     </Grid>
                 </Grid>

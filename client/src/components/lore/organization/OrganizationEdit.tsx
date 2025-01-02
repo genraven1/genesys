@@ -12,10 +12,6 @@ import {LoreType} from "../../../models/lore/Lore";
 import InputSelectFieldCard from "../../common/InlineSelectFieldCard";
 import OrganizationService from "../../../services/lore/OrganizationService";
 
-const getOrgTypes = (): Option[] => {
-    return Object.values(OrgType).map((value) => ({value}))
-}
-
 interface Props {
     org: Organization
 }
@@ -79,11 +75,6 @@ export default function OrganizationEdit(props: Props) {
             </CardHeader>
             <CardContent>
                 <Grid container justifyContent={'center'}>
-                    <Grid container spacing={10}>
-                        <InputSelectFieldCard defaultValue={organization.type} onCommit={(value: string): void => {
-                            onChange(OrgKey.orgType, value)
-                        }} options={getOrgTypes()} title={'Type of Organization'}/>
-                    </Grid>
                     <Grid container spacing={10}>
                         <EditNumberCard title={'Founding Year'} value={organization.founded}
                                         onChange={(value: number): void => {
