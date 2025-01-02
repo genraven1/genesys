@@ -23,7 +23,7 @@ export default function LoreCreationDialog(props: Props) {
         switch (lore) {
             case LoreType.ORGANIZATION:
                 let organization = await OrganizationService.createOrganization(name);
-                navigate(path + organization.name + '/view');
+                navigate(path + organization.id + '/view');
         }
         onClose();
     };
