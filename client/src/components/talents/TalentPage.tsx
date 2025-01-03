@@ -14,6 +14,8 @@ import {BooleanTextFieldCard} from "../common/card/BooleanTextFieldCard";
 import {RootPath} from "../../services/RootPath";
 import CostCard from "../common/card/select/CostCard";
 import Cost from "../../models/common/Cost";
+import Limit from "../../models/common/Limit";
+import LimitCard from "../common/card/select/LimitCard";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -54,6 +56,12 @@ export default function TalentPage() {
     const handleCostChange = async (value: Cost) => {
         if (talent) {
             setTalent(await TalentService.updateTalent({...talent, cost: value}));
+        }
+    };
+
+    const handleLimitChange = async (value: Limit) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent({...talent, limit: value}));
         }
     };
 
@@ -99,6 +107,8 @@ export default function TalentPage() {
                     <Grid container spacing={2}>
                         <CostCard initialCost={talent.cost} onChange={handleCostChange}
                                   disabled={pathname.endsWith('/view')}/>
+                        <LimitCard initialLimit={talent.limit} onChange={handleLimitChange}
+                                   disabled={pathname.endsWith('/view')}/>
                     </Grid>
                 </Grid>
                 <Grid container justifyContent={'center'}>
