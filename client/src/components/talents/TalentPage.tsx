@@ -2,7 +2,6 @@ import {Card, CardContent, Grid} from '@mui/material';
 import Talent, {Activation, Tier} from "../../models/Talent";
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
-
 import {Fragment, useEffect, useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import TalentService from "../../services/TalentService";
@@ -13,6 +12,8 @@ import TierCard from "../common/card/select/TierCard";
 import {TextFieldCard} from "../common/card/TextFieldCard";
 import {BooleanTextFieldCard} from "../common/card/BooleanTextFieldCard";
 import {RootPath} from "../../services/RootPath";
+import CostCard from "../common/card/select/CostCard";
+import Cost from "../../models/common/Cost";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -47,6 +48,12 @@ export default function TalentPage() {
     const handleTierChange = async (value: Tier) => {
         if (talent) {
             setTalent(await TalentService.updateTalent({...talent, tier: value}));
+        }
+    };
+
+    const handleCostChange = async (value: Cost) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent({...talent, cost: value}));
         }
     };
 
@@ -85,6 +92,12 @@ export default function TalentPage() {
                         <ActivationCard value={talent.activation} onChange={handleActivationChange}
                                         disabled={pathname.endsWith('/view')}/>
                         <TierCard value={talent.tier} onChange={handleTierChange}
+                                  disabled={pathname.endsWith('/view')}/>
+                    </Grid>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    <Grid container spacing={2}>
+                        <CostCard initialCost={talent.cost} onChange={handleCostChange}
                                   disabled={pathname.endsWith('/view')}/>
                     </Grid>
                 </Grid>

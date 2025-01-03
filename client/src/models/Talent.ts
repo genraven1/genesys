@@ -1,5 +1,7 @@
 import {Option} from "../components/common/InputSelectField";
 import Modifier from "./common/Modifier";
+import Cost from "./common/Cost";
+import Limit from "./common/Limit";
 
 export default interface Talent {
     id: string
@@ -9,6 +11,8 @@ export default interface Talent {
     tier: Tier
     summary: string
     description: string
+    cost: Cost
+    limit: Limit
     modifiers: Modifier[]
 }
 

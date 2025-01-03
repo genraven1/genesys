@@ -30,6 +30,8 @@ public class Talent {
     private boolean ranked = false;
     private String summary;
     private String description;
+    private Cost cost = new Cost();
+    private Limit limit = new Limit();
     private List<Modifier> modifiers = new ArrayList<>();
 
     @AllArgsConstructor
