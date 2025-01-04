@@ -1,5 +1,5 @@
 import {Card, CardContent, Grid} from '@mui/material';
-import Talent, {Activation, Tier} from "../../models/Talent";
+import Talent, {Activation, TalentSkills, Tier} from "../../models/Talent";
 import * as React from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
@@ -16,6 +16,7 @@ import CostCard from "../common/card/select/CostCard";
 import Cost from "../../models/common/Cost";
 import Limit from "../../models/common/Limit";
 import LimitCard from "../common/card/select/LimitCard";
+import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -65,6 +66,12 @@ export default function TalentPage() {
         }
     };
 
+    const handleTalentSkillsChange = async (value: TalentSkills) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent({...talent, talentSkills: value}));
+        }
+    };
+
     const handleSummaryChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (talent) {
             setTalent(await TalentService.updateTalent({...talent, summary: event.target.value}));
@@ -110,6 +117,11 @@ export default function TalentPage() {
                         <LimitCard initialLimit={talent.limit} onChange={handleLimitChange}
                                    disabled={pathname.endsWith('/view')}/>
                     </Grid>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    <TalentCareerSkillsCard initialTalentSkills={talent.talentSkills}
+                                            updateTalentSkills={handleTalentSkillsChange}
+                                            disabled={pathname.endsWith('/view')}/>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     {renderSummaryCard()}

@@ -5,7 +5,7 @@ interface Props {
     onClose: () => void
 }
 
-export function GenesysDialogActions(props: Props):JSX.Element {
+export function GenesysDialogActions(props: Props) {
     const { handleCreate, onClose } = props;
     return (
         <DialogActions>
