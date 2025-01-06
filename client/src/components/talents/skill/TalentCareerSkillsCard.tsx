@@ -8,19 +8,17 @@ import * as React from "react";
 import TalentCareerSkillDialog from "./TalentCareerSkillDialog";
 
 interface Props {
-    initialTalentSkills: TalentSkills
+    talentSkills: TalentSkills
     updateTalentSkills: (talentSkills: TalentSkills) => void
     disabled: boolean
 }
 
 export default function TalentCareerSkillsCard(props: Props) {
-    const {initialTalentSkills, updateTalentSkills, disabled} = props;
-    const [talentSkills, setTalentSkills] = useState<TalentSkills>(initialTalentSkills);
+    const {talentSkills, updateTalentSkills, disabled} = props;
     const [openCareerSkillDialog, setOpenCareerSkillDialog] = useState(false);
 
     const addSkills = async (skills: Skill[]) => {
-        setTalentSkills({...talentSkills, potentialCareerSkills: [...talentSkills.potentialCareerSkills, ...skills]});
-        updateTalentSkills(talentSkills);
+        updateTalentSkills({...talentSkills, potentialCareerSkills: [...talentSkills.potentialCareerSkills, ...skills]});
     };
 
     return (

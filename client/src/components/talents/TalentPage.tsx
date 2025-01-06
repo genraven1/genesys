@@ -119,7 +119,7 @@ export default function TalentPage() {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    <TalentCareerSkillsCard initialTalentSkills={talent.talentSkills}
+                    <TalentCareerSkillsCard talentSkills={talent.talentSkills}
                                             updateTalentSkills={handleTalentSkillsChange}
                                             disabled={pathname.endsWith('/view')}/>
                 </Grid>
