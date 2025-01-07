@@ -10,7 +10,7 @@ import {renderSingleRowTableHeader} from "../../../../../common/table/TableRende
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {
-    GenesysDescriptionTypographyCenterTableCell,
+    GenesysDescriptionTypographyCenterTableCell, TableCellButton,
     TypographyCenterTableCell
 } from "../../../../../common/table/TypographyTableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -21,13 +21,14 @@ interface Props {
     onClose: () => void
     currentPlayer: Player
     tier: Tier
+    addTalent: (talent: Talent) => void
 }
 
 export default function TierTalentDialog(props: Props) {
-    const {open, onClose, currentPlayer, tier} = props;
+    const {open, onClose, currentPlayer, tier, addTalent} = props;
     const [talents, setTalents] = useState<Talent[]>([]);
     const playerTalents = currentPlayer.talents.filter(talent => talent.tier === tier);
-    let headers = ['Name', 'Activation', 'Summary'];
+    let headers = ['Name', 'Activation', 'Summary', 'Purchase'];
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -38,7 +39,22 @@ export default function TierTalentDialog(props: Props) {
     const filterTalents = (): Talent[] => {
         const filteredPlayerTalents = new Set(playerTalents.map(talent => talent.id));
         return talents.filter(talent => !filteredPlayerTalents.has(talent.id));
-    }
+    };
+
+    const renderExperienceCost = () => {
+        switch (tier) {
+            case Tier.First:
+                return '5XP';
+            case Tier.Second:
+                return '10XP';
+            case Tier.Third:
+                return '15XP';
+            case Tier.Fourth:
+                return '20XP';
+            case Tier.Fifth:
+                return '25XP';
+        }
+    };
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -53,6 +69,7 @@ export default function TierTalentDialog(props: Props) {
                                     <TypographyCenterTableCell value={talent.name}/>
                                     <TypographyCenterTableCell value={talent.activation}/>
                                     <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
+                                    <TableCellButton value={renderExperienceCost()} onClick={() => addTalent(talent)}/>
                                 </TableRow>
                             ))}
                         </TableBody>

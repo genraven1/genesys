@@ -4,6 +4,7 @@ import com.github.genraven.genesys.domain.actor.Actor;
 import com.github.genraven.genesys.domain.actor.ActorTalent;
 import com.github.genraven.genesys.domain.actor.player.*;
 import com.github.genraven.genesys.domain.actor.Characteristic;
+import com.github.genraven.genesys.domain.talent.Talent;
 import com.github.genraven.genesys.repository.actor.PlayerRepository;
 import com.github.genraven.genesys.service.SkillService;
 import lombok.RequiredArgsConstructor;
@@ -128,23 +129,24 @@ public class PlayerService {
         });
     }
 
-    public Mono<Player> updatePlayerTalent(final String id, final ActorTalent actorTalent) {
+    public Mono<Player> updatePlayerTalent(final String id, final Talent talent) {
         return getPlayer(id).flatMap(player -> {
             final Optional<ActorTalent> talentOptional = player.getTalents().stream()
-                    .filter(talent -> talent.getId().equals(actorTalent.getId()))
+                    .filter(actorTalent -> actorTalent.getId().equals(talent.getId()))
                     .findFirst();
 
             if (talentOptional.isPresent()) {
-                final ActorTalent talent = talentOptional.get();
-                if (!talent.isRanked()) {
+                final ActorTalent actorTalent = talentOptional.get();
+                if (!actorTalent.isRanked()) {
                     return Mono.error(new IllegalArgumentException("Talent is not ranked."));
                 } else {
-                    talent.setRanks(talent.getRanks() + 1);
-                    player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromRankedTalent(talent)));
+                    actorTalent.setRanks(actorTalent.getRanks() + 1);
+                    player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromRankedTalent(actorTalent)));
                 }
             } else {
-                player.getTalents().add(actorTalent);
-                player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromUnrankedTalent(actorTalent)));
+                final ActorTalent playerTalent = new ActorTalent(talent);
+                player.getTalents().add(playerTalent);
+                player.setExperience(spendInitialExperience(player.getExperience(), getExperienceFromUnrankedTalent(playerTalent)));
             }
             return playerRepository.save(player);
         });

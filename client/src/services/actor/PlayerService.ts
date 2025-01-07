@@ -3,7 +3,7 @@ import {PlayerPath, CampaignPath, RootPath} from "../RootPath";
 import Career from "../../models/actor/player/Career";
 import Archetype from "../../models/actor/player/Archetype";
 import {Characteristic} from "../../models/actor/Characteristic";
-import {ActorTalent} from "../../models/Talent";
+import Talent from "../../models/Talent";
 
 export default class PlayerService {
     static async createPlayer(id: string, playerName: string): Promise<Player> {
@@ -139,7 +139,7 @@ export default class PlayerService {
             })
     }
 
-    static async purchaseTalentUpgrade(playerId: string, talent: ActorTalent): Promise<Player> {
+    static async purchaseTalentUpgrade(playerId: string, talent: Talent): Promise<Player> {
         return await fetch(PlayerPath.Creation + `${playerId}` + PlayerPath.Talents, {
             method: "PATCH",
             body: JSON.stringify(talent),
