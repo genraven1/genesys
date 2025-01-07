@@ -5,7 +5,7 @@ import {Button, Dialog, DialogActions, DialogContent, Grid} from "@mui/material"
 import PlayerService from "../../../../../../services/actor/PlayerService";
 import CenteredDialogTitle from "../../../../../common/dialog/CenteredDialogTitle";
 import TalentDialogCard from "./TalentDialogCard";
-import {Tier} from "../../../../../../models/Talent";
+import Talent, {Tier} from "../../../../../../models/Talent";
 
 interface Props {
     open: boolean
@@ -16,10 +16,18 @@ interface Props {
 export default function SpendTalentDialog(props: Props) {
     const {open, onClose, currentPlayer} = props;
     const [player, setPlayer] = useState(currentPlayer);
+    const [talent, setTalent] = useState<Talent>();
 
     useEffect(() => {
         setPlayer(currentPlayer);
     }, [currentPlayer]);
+
+    const updatePlayer = async () => {
+        if (talent) {
+            setPlayer(await PlayerService.purchaseTalentUpgrade(player.id, talent));
+            onClose();
+        }
+    }
 
     const handleCancel = async () => {
         setPlayer(await PlayerService.updatePlayer(currentPlayer));
@@ -32,24 +40,29 @@ export default function SpendTalentDialog(props: Props) {
             <DialogContent>
                 <Grid container spacing={2} columns={5}>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={0} tier={Tier.First}/>
+                        <TalentDialogCard player={player} size={0} tier={Tier.First}
+                                          addTalent={() => setTalent(talent)}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={1} tier={Tier.Second}/>
+                        <TalentDialogCard player={player} size={1} tier={Tier.Second}
+                                          addTalent={() => setTalent(talent)}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={2} tier={Tier.Third}/>
+                        <TalentDialogCard player={player} size={2} tier={Tier.Third}
+                                          addTalent={() => setTalent(talent)}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={3} tier={Tier.Fourth}/>
+                        <TalentDialogCard player={player} size={3} tier={Tier.Fourth}
+                                          addTalent={() => setTalent(talent)}/>
                     </Grid>
                     <Grid item xs={1}>
-                        <TalentDialogCard player={player} size={4} tier={Tier.Fifth}/>
+                        <TalentDialogCard player={player} size={4} tier={Tier.Fifth}
+                                          addTalent={() => setTalent(talent)}/>
                     </Grid>
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => onClose} color="primary">Confirm</Button>
+                <Button onClick={updatePlayer} color="primary" disabled={!talent}>Confirm</Button>
                 <Button onClick={handleCancel} color="secondary">Cancel</Button>
             </DialogActions>
         </Dialog>

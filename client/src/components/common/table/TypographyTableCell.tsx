@@ -37,6 +37,23 @@ export function TypographyCenterTableCell(props: CenterProps) {
     )
 }
 
+interface ButtonProps {
+    value: string
+    onClick: () => void
+}
+
+export function TableCellButton(props: ButtonProps) {
+    const {value, onClick} = props;
+
+    return (
+        <TableCell style={{textAlign: 'center'}}>
+            <Button onClick={onClick}>
+                {value}
+            </Button>
+        </TableCell>
+    )
+}
+
 interface CostProps {
     cost: Cost
     span?: number

@@ -1,7 +1,7 @@
 import {Button, Card, CardContent, Grid} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TierTalentDialog from "./TierTalentDialog";
-import {Tier} from "../../../../../../models/Talent";
+import Talent, {Tier} from "../../../../../../models/Talent";
 import CenteredCardHeader from "../../../../../common/card/header/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../../../../common/typography/GenesysDescriptionTypography";
 import * as React from "react";
@@ -12,10 +12,11 @@ interface Props {
     player: Player
     size: number
     tier: Tier
+    addTalent: (talent: Talent) => void
 }
 
 export default function TalentDialogCard(props: Props) {
-    const {player, size, tier} = props;
+    const {player, size, tier, addTalent} = props;
     const [openTalentDialog, setOpenTalentDialog] = useState(false);
     const talents = player.talents.filter(talent => talent.tier === tier);
 
@@ -26,7 +27,7 @@ export default function TalentDialogCard(props: Props) {
                 Add Talent
             </Button>
             {openTalentDialog && <TierTalentDialog open={openTalentDialog} onClose={() => setOpenTalentDialog(false)}
-                                                   currentPlayer={player} tier={tier}/>}
+                                                   currentPlayer={player} tier={tier} addTalent={addTalent}/>}
             <Grid container direction="column" spacing={2}>
                 {new Array(size).map((talent) => (
                     <Grid item key={talent.id}>

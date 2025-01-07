@@ -12,6 +12,7 @@ import com.github.genraven.genesys.domain.actor.player.Archetype;
 import com.github.genraven.genesys.domain.actor.player.Career;
 import com.github.genraven.genesys.domain.actor.player.Player;
 import com.github.genraven.genesys.domain.actor.player.PlayerSkill;
+import com.github.genraven.genesys.domain.talent.Talent;
 import com.github.genraven.genesys.service.actor.MinionService;
 import com.github.genraven.genesys.service.actor.NemesisService;
 import com.github.genraven.genesys.service.actor.PlayerService;
@@ -135,9 +136,9 @@ public class ActorHandler {
 
     public Mono<ServerResponse> updatePlayerTalent(final ServerRequest serverRequest) {
         final String id = serverRequest.pathVariable(ID);
-        final Mono<ActorTalent> actorTalentMono = serverRequest.bodyToMono(ActorTalent.class);
-        return actorTalentMono
-                .flatMap(actorTalent -> playerService.updatePlayerTalent(id, actorTalent))
+        final Mono<Talent> talentMono = serverRequest.bodyToMono(Talent.class);
+        return talentMono
+                .flatMap(talent -> playerService.updatePlayerTalent(id, talent))
                 .flatMap(player -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(fromValue(player)))
