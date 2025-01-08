@@ -30,6 +30,8 @@ public class PlayerService {
             player.getTotalEncumbrance();
             player.getTotalMeleeDefense();
             player.getTotalRangedDefense();
+            player.getTotalWounds();
+            player.getTotalStrain();
             return player;
         });
     }
@@ -40,6 +42,8 @@ public class PlayerService {
             player.getTotalEncumbrance();
             player.getTotalMeleeDefense();
             player.getTotalRangedDefense();
+            player.getTotalWounds();
+            player.getTotalStrain();
             return player;
         });
     }
