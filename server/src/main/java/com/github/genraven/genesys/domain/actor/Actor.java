@@ -29,7 +29,7 @@ public class Actor {
     private Characteristic cunning = new Characteristic(Characteristic.Type.CUNNING, 1);
     private Characteristic willpower = new Characteristic(Characteristic.Type.WILLPOWER, 1);
     private Characteristic presence = new Characteristic(Characteristic.Type.PRESENCE, 1);
-    private int wounds = 1;
+    private Wounds wounds = new Wounds(0, 1);
     private int soak = getBrawn().getCurrent();
     private int melee = 0;
     private int ranged = 0;

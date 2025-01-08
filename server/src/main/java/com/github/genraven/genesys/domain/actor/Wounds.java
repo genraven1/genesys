@@ -9,6 +9,6 @@ public class Wounds {
 
     protected Wounds() {}
 
-    private int wounds;
+    private int current;
     private int threshold;
 }
