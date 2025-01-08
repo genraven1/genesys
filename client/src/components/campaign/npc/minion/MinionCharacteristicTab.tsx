@@ -26,22 +26,40 @@ export default function MinionCharacteristicTab(props: Props) {
         if (minion) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    updateMinion(await MinionService.updateMinion({...minion, brawn: {...minion.brawn, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        brawn: {...minion.brawn, current: value}
+                    }));
                     break;
                 case CharacteristicType.Agility:
-                    updateMinion(await MinionService.updateMinion({...minion, agility: {...minion.agility, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        agility: {...minion.agility, current: value}
+                    }));
                     break;
                 case CharacteristicType.Intellect:
-                    updateMinion(await MinionService.updateMinion({...minion, intellect: {...minion.intellect, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        intellect: {...minion.intellect, current: value}
+                    }));
                     break;
                 case CharacteristicType.Cunning:
-                    updateMinion(await MinionService.updateMinion({...minion, cunning: {...minion.cunning, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        cunning: {...minion.cunning, current: value}
+                    }));
                     break;
                 case CharacteristicType.Willpower:
-                    updateMinion(await MinionService.updateMinion({...minion, willpower: {...minion.willpower, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        willpower: {...minion.willpower, current: value}
+                    }));
                     break;
                 case CharacteristicType.Presence:
-                    updateMinion(await MinionService.updateMinion({...minion, presence: {...minion.presence, current: value}}));
+                    updateMinion(await MinionService.updateMinion({
+                        ...minion,
+                        presence: {...minion.presence, current: value}
+                    }));
                     break;
             }
         }
@@ -49,7 +67,10 @@ export default function MinionCharacteristicTab(props: Props) {
 
     const handleWoundsChange = async (value: number) => {
         if (minion) {
-            updateMinion(await MinionService.updateMinion({...minion, wounds: value}));
+            updateMinion(await MinionService.updateMinion({
+                ...minion,
+                wounds: {current: minion.wounds.current, threshold: value, type: minion.wounds.type}
+            }));
         }
     };
 
@@ -96,10 +117,10 @@ export default function MinionCharacteristicTab(props: Props) {
 
     const renderWoundsCard = () => {
         return pathname.endsWith(minion.id + '/edit') ?
-            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={minion.wounds}
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={minion.wounds.threshold}
                                  onChange={handleWoundsChange} min={1} max={20}
                                  disabled={false}/> :
-            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(minion.wounds)}/>
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(minion.wounds.threshold)}/>
     };
 
     return (
