@@ -9,14 +9,13 @@ import PlayerSkillCard from "./skill/PlayerSkillCard";
 import EquipmentCard from "../../actor/equipment/EquipmentCard";
 import {ActorArmor} from "../../../../models/equipment/Armor";
 import {ActorWeapon} from "../../../../models/equipment/Weapon";
-import SingleNonPlayerCharacterTalentCard from "../../npc/talent/SingleNonPlayerCharacterTalentCard";
-import {ActorTalent} from "../../../../models/Talent";
 import PlayerService from "../../../../services/actor/PlayerService";
 import TabList from "@mui/lab/TabList/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import PlayerCharacteristicTab from "./PlayerCharacteristicTab";
+import PlayerTalentCard from "./talent/PlayerTalentCard";
 
 export default function PlayerPage() {
     const {id} = useParams<{ id: string }>();
@@ -52,12 +51,6 @@ export default function PlayerPage() {
         }
     };
 
-    const handleTalentChange = async (values: ActorTalent[]) => {
-        if (player) {
-            setPlayer(await PlayerService.updatePlayer({...player, talents: values}));
-        }
-    };
-
     return (
         <Card>
             <CenteredCardHeaderWithAction title={player.name} path={ActorPath.Player + player.id}/>
@@ -82,8 +75,7 @@ export default function PlayerPage() {
                                        updateWeapons={handleWeaponChange}/>
                     </TabPanel>
                     <TabPanel value="4">
-                        <SingleNonPlayerCharacterTalentCard talents={player.talents}
-                                                            updateTalents={handleTalentChange}/>
+                        <PlayerTalentCard talents={player.talents}/>
                     </TabPanel>
                 </TabContext>
             </CardContent>
