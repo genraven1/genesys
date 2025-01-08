@@ -17,6 +17,8 @@ import Cost from "../../models/common/Cost";
 import Limit from "../../models/common/Limit";
 import LimitCard from "../common/card/select/LimitCard";
 import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
+import {NumberTextFieldCard} from "../common/card/NumberTextField";
+import {StatsType} from "../../models/actor/Stats";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -122,6 +124,9 @@ export default function TalentPage() {
                     <TalentCareerSkillsCard talentSkills={talent.talentSkills}
                                             updateTalentSkills={handleTalentSkillsChange}
                                             disabled={pathname.endsWith('/view')}/>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     {renderSummaryCard()}
