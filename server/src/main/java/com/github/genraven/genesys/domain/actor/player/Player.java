@@ -5,6 +5,7 @@ import com.github.genraven.genesys.domain.actor.Actor;
 
 import com.github.genraven.genesys.domain.actor.ActorTalent;
 import com.github.genraven.genesys.domain.actor.Characteristic;
+import com.github.genraven.genesys.domain.actor.Stats;
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
 import com.github.genraven.genesys.domain.modifier.Modifier;
@@ -38,7 +39,7 @@ public class Player extends Actor {
         this.setWeapons(actor.getWeapons());
         this.setArmors(actor.getArmors());
     }
-    private int strain = 1;
+    private Stats strain = new Stats(0, 1, Stats.Type.STRAIN);
     private int encumbrance;
     private Experience experience = new Experience();
     private Career career = new Career();

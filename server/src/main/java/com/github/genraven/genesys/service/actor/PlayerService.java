@@ -99,7 +99,7 @@ public class PlayerService {
             existingPlayer.setWillpower(new Characteristic(Characteristic.Type.WILLPOWER, archetype.getWillpower()));
             existingPlayer.setPresence(new Characteristic(Characteristic.Type.PRESENCE, archetype.getPresence()));
             existingPlayer.setWounds(new Stats(0, archetype.getWounds(), Stats.Type.WOUNDS));
-            existingPlayer.setStrain(archetype.getStrain());
+            existingPlayer.setStrain(new Stats(0, archetype.getStrain(), Stats.Type.STRAIN));
             existingPlayer.updateAvailableExperience(archetype.getExperience());
             return playerRepository.save(existingPlayer);
         });
