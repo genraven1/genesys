@@ -1,10 +1,8 @@
 package com.github.genraven.genesys.domain.actor.player;
 
 import com.github.genraven.genesys.domain.CriticalInjury;
-import com.github.genraven.genesys.domain.actor.Actor;
+import com.github.genraven.genesys.domain.actor.*;
 
-import com.github.genraven.genesys.domain.actor.ActorTalent;
-import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
 import com.github.genraven.genesys.domain.modifier.Modifier;
@@ -20,7 +18,8 @@ import java.util.List;
 @Document(collection = "players")
 public class Player extends Actor {
 
-    protected Player() {}
+    protected Player() {
+    }
 
     public Player(final Actor actor) {
         this.setName(actor.getName());
@@ -38,7 +37,8 @@ public class Player extends Actor {
         this.setWeapons(actor.getWeapons());
         this.setArmors(actor.getArmors());
     }
-    private int strain = 1;
+
+    private Stats strain = new Stats(0, 1, Stats.Type.STRAIN);
     private int encumbrance;
     private Experience experience = new Experience();
     private Career career = new Career();
@@ -81,7 +81,32 @@ public class Player extends Actor {
 
     public void getTotalRangedDefense() {
         int ranged = 0;
-        ranged += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        int sum = 0;
+        for (ActorArmor armor : getArmors()) {
+            if (armor.getSlot().equals(EquipmentSlot.BODY)) {
+                int defense = armor.getDefense();
+                sum += defense;
+            }
+        }
+        ranged += sum;
         this.setRanged(ranged);
+    }
+
+    public void getTotalWounds() {
+        int threshold = getArchetype().getWounds();
+        threshold += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getWounds() != 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getWounds() * talent.getRanks() : talent.getTalentStats().getWounds())
+                .sum();
+        this.setWounds(new Stats(this.getWounds().getCurrent(), threshold, Stats.Type.WOUNDS));
+    }
+
+    public void getTotalStrain() {
+        int threshold = getArchetype().getStrain();
+        threshold += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getStrain() != 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getStrain() * talent.getRanks() : talent.getTalentStats().getStrain())
+                .sum();
+        this.setStrain(new Stats(this.getStrain().getCurrent(), threshold, Stats.Type.STRAIN));
     }
 }

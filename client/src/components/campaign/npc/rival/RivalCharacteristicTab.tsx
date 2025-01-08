@@ -29,19 +29,34 @@ export default function RivalCharacteristicTab(props: Props) {
                     updateRival(await RivalService.updateRival({...rival, brawn: {...rival.brawn, current: value}}));
                     break;
                 case CharacteristicType.Agility:
-                    updateRival(await RivalService.updateRival({...rival, agility: {...rival.agility, current: value}}));
+                    updateRival(await RivalService.updateRival({
+                        ...rival,
+                        agility: {...rival.agility, current: value}
+                    }));
                     break;
                 case CharacteristicType.Intellect:
-                    updateRival(await RivalService.updateRival({...rival, intellect: {...rival.intellect, current: value}}));
+                    updateRival(await RivalService.updateRival({
+                        ...rival,
+                        intellect: {...rival.intellect, current: value}
+                    }));
                     break;
                 case CharacteristicType.Cunning:
-                    updateRival(await RivalService.updateRival({...rival, cunning: {...rival.cunning, current: value}}));
+                    updateRival(await RivalService.updateRival({
+                        ...rival,
+                        cunning: {...rival.cunning, current: value}
+                    }));
                     break;
                 case CharacteristicType.Willpower:
-                    updateRival(await RivalService.updateRival({...rival, willpower: {...rival.willpower, current: value}}));
+                    updateRival(await RivalService.updateRival({
+                        ...rival,
+                        willpower: {...rival.willpower, current: value}
+                    }));
                     break;
                 case CharacteristicType.Presence:
-                    updateRival(await RivalService.updateRival({...rival, presence: {...rival.presence, current: value}}));
+                    updateRival(await RivalService.updateRival({
+                        ...rival,
+                        presence: {...rival.presence, current: value}
+                    }));
                     break;
             }
         }
@@ -49,7 +64,10 @@ export default function RivalCharacteristicTab(props: Props) {
 
     const handleWoundsChange = async (value: number) => {
         if (rival) {
-            updateRival(await RivalService.updateRival({...rival, wounds: value}));
+            updateRival(await RivalService.updateRival({
+                ...rival,
+                wounds: {current: rival.wounds.current, threshold: value, type: rival.wounds.type}
+            }));
         }
     };
 
@@ -96,10 +114,10 @@ export default function RivalCharacteristicTab(props: Props) {
 
     const renderWoundsCard = () => {
         return pathname.endsWith(rival.id + '/edit') ?
-            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds}
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={rival.wounds.threshold}
                                  onChange={handleWoundsChange} min={1} max={20}
                                  disabled={false}/> :
-            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(rival.wounds)}/>
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(rival.wounds.threshold)}/>
     };
 
     return (

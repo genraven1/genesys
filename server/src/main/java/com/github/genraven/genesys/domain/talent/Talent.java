@@ -36,6 +36,7 @@ public class Talent {
     private Cost cost = new Cost();
     private Limit limit = new Limit();
     private TalentSkills talentSkills = new TalentSkills();
+    private TalentStats talentStats = new TalentStats();
     private List<Modifier> modifiers = new ArrayList<>();
 
     @AllArgsConstructor

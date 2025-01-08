@@ -15,17 +15,18 @@ import {
 } from "../../../../../common/table/TypographyTableCell";
 import TableContainer from "@mui/material/TableContainer";
 import * as React from "react";
+import PlayerService from "../../../../../../services/actor/PlayerService";
 
 interface Props {
     open: boolean
     onClose: () => void
     currentPlayer: Player
     tier: Tier
-    addTalent: (talent: Talent) => void
+    updatePlayer: (player: Player) => void
 }
 
 export default function TierTalentDialog(props: Props) {
-    const {open, onClose, currentPlayer, tier, addTalent} = props;
+    const {open, onClose, currentPlayer, tier, updatePlayer} = props;
     const [talents, setTalents] = useState<Talent[]>([]);
     const playerTalents = currentPlayer.talents.filter(talent => talent.tier === tier);
     let headers = ['Name', 'Activation', 'Summary', 'Purchase'];
@@ -35,6 +36,11 @@ export default function TierTalentDialog(props: Props) {
             setTalents(await CampaignService.getCampaignTierTalents(tier));
         })();
     }, [setTalents, tier]);
+
+    const addTalent = async (talent: Talent) => {
+        updatePlayer(await PlayerService.purchaseTalentUpgrade(currentPlayer.id, talent));
+        onClose();
+    };
 
     const filterTalents = (): Talent[] => {
         const filteredPlayerTalents = new Set(playerTalents.map(talent => talent.id));

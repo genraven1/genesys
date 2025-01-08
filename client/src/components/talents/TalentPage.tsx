@@ -17,6 +17,8 @@ import Cost from "../../models/common/Cost";
 import Limit from "../../models/common/Limit";
 import LimitCard from "../common/card/select/LimitCard";
 import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
+import {NumberTextFieldCard} from "../common/card/NumberTextField";
+import {StatsType} from "../../models/actor/Stats";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -72,6 +74,40 @@ export default function TalentPage() {
         }
     };
 
+    const handleWoundsChange = async (value: number) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent({
+                ...talent,
+                talentStats: {wounds: value, strain: talent.talentStats.strain}
+            }));
+        }
+    };
+
+    const handleStrainChange = async (value: number) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent({
+                ...talent,
+                talentStats: {wounds: talent.talentStats.wounds, strain: value}
+            }));
+        }
+    };
+
+    const renderWoundsCard = () => {
+        return pathname.endsWith(talent.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={talent.talentStats.wounds}
+                                 onChange={handleWoundsChange} min={0} max={5}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(talent.talentStats.wounds)}/>
+    };
+
+    const renderStrainCard = () => {
+        return pathname.endsWith(talent.id + '/edit') ?
+            <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={talent.talentStats.strain}
+                                 onChange={handleStrainChange} min={0} max={5}
+                                 disabled={false}/> :
+            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(talent.talentStats.strain)}/>
+    };
+
     const handleSummaryChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (talent) {
             setTalent(await TalentService.updateTalent({...talent, summary: event.target.value}));
@@ -122,6 +158,10 @@ export default function TalentPage() {
                     <TalentCareerSkillsCard talentSkills={talent.talentSkills}
                                             updateTalentSkills={handleTalentSkillsChange}
                                             disabled={pathname.endsWith('/view')}/>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    {renderWoundsCard()}
+                    {renderStrainCard()}
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     {renderSummaryCard()}

@@ -14,8 +14,8 @@ export default function DerivedPlayerStatsRow(props: Props) {
     return (
         <Grid container spacing={2}>
             <ViewFieldCard name={'Soak'} value={String(player.soak)}/>
-            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(player.wounds)}/>
-            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(player.strain)}/>
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(player.wounds.threshold)}/>
+            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(player.strain.threshold)}/>
             <ViewFieldCard name={DefenseType.Melee} value={String(player.melee)}/>
             <ViewFieldCard name={DefenseType.Ranged} value={String(player.ranged)}/>
         </Grid>

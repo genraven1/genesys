@@ -4,6 +4,7 @@ import {ActorWeapon} from "../equipment/Weapon";
 import {ActorArmor} from "../equipment/Armor";
 import {ActorGear} from "../equipment/Gear";
 import {SingleNonPlayerCharacter} from "./npc/NonPlayerActor";
+import Stats from "./Stats";
 
 export default interface Actor {
     id: string
@@ -15,7 +16,7 @@ export default interface Actor {
     cunning: Characteristic,
     willpower: Characteristic,
     presence: Characteristic,
-    wounds: number,
+    wounds: Stats,
     soak: number,
     melee: number,
     ranged: number,

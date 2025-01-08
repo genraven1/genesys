@@ -2,6 +2,7 @@ package com.github.genraven.genesys.service.actor;
 
 import com.github.genraven.genesys.domain.actor.Actor;
 import com.github.genraven.genesys.domain.actor.ActorTalent;
+import com.github.genraven.genesys.domain.actor.Stats;
 import com.github.genraven.genesys.domain.actor.player.*;
 import com.github.genraven.genesys.domain.actor.Characteristic;
 import com.github.genraven.genesys.domain.talent.Talent;
@@ -29,6 +30,8 @@ public class PlayerService {
             player.getTotalEncumbrance();
             player.getTotalMeleeDefense();
             player.getTotalRangedDefense();
+            player.getTotalWounds();
+            player.getTotalStrain();
             return player;
         });
     }
@@ -39,6 +42,8 @@ public class PlayerService {
             player.getTotalEncumbrance();
             player.getTotalMeleeDefense();
             player.getTotalRangedDefense();
+            player.getTotalWounds();
+            player.getTotalStrain();
             return player;
         });
     }
@@ -97,8 +102,8 @@ public class PlayerService {
             existingPlayer.setCunning(new Characteristic(Characteristic.Type.CUNNING, archetype.getCunning()));
             existingPlayer.setWillpower(new Characteristic(Characteristic.Type.WILLPOWER, archetype.getWillpower()));
             existingPlayer.setPresence(new Characteristic(Characteristic.Type.PRESENCE, archetype.getPresence()));
-            existingPlayer.setWounds(archetype.getWounds());
-            existingPlayer.setStrain(archetype.getStrain());
+            existingPlayer.setWounds(new Stats(0, archetype.getWounds(), Stats.Type.WOUNDS));
+            existingPlayer.setStrain(new Stats(0, archetype.getStrain(), Stats.Type.STRAIN));
             existingPlayer.updateAvailableExperience(archetype.getExperience());
             return playerRepository.save(existingPlayer);
         });

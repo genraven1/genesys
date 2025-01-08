@@ -21,6 +21,7 @@ public class ActorTalent extends Talent {
         this.setCost(talent.getCost());
         this.setLimit(talent.getLimit());
         this.setTalentSkills(talent.getTalentSkills());
+        this.setTalentStats(talent.getTalentStats());
     }
 
     private int ranks = 1;

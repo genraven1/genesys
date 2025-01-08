@@ -3,9 +3,10 @@ import Actor, {ActorSkill} from "../Actor";
 import Injury from "../../Injury";
 import Career from "./Career";
 import Archetype from "./Archetype";
+import Stats from "../Stats";
 
 export default interface Player extends Actor {
-    strain: number
+    strain: Stats
     encumbrance: number
     experience: Experience
     career: Career

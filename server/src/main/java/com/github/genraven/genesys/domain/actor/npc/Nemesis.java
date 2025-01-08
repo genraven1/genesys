@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
 import com.github.genraven.genesys.domain.actor.ActorTalent;
+import com.github.genraven.genesys.domain.actor.Stats;
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
 import com.github.genraven.genesys.domain.modifier.Modifier;
@@ -34,7 +35,7 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setTalents(singleNonPlayerActor.getTalents());
         this.setWeapons(singleNonPlayerActor.getWeapons());
     }
-    private int strain = 0;
+    private Stats strain = new Stats(0, 1, Stats.Type.STRAIN);
 
     public void getTotalSoak() {
         int soak = getBrawn().getCurrent();

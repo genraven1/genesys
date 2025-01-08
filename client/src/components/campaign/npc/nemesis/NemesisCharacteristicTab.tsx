@@ -26,22 +26,40 @@ export default function NemesisCharacteristicTab(props: Props) {
         if (nemesis) {
             switch (characteristic) {
                 case CharacteristicType.Brawn:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, brawn: {...nemesis.brawn, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        brawn: {...nemesis.brawn, current: value}
+                    }));
                     break;
                 case CharacteristicType.Agility:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, agility: {...nemesis.agility, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        agility: {...nemesis.agility, current: value}
+                    }));
                     break;
                 case CharacteristicType.Intellect:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, intellect: {...nemesis.intellect, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        intellect: {...nemesis.intellect, current: value}
+                    }));
                     break;
                 case CharacteristicType.Cunning:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, cunning: {...nemesis.cunning, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        cunning: {...nemesis.cunning, current: value}
+                    }));
                     break;
                 case CharacteristicType.Willpower:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, willpower: {...nemesis.willpower, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        willpower: {...nemesis.willpower, current: value}
+                    }));
                     break;
                 case CharacteristicType.Presence:
-                    updateNemesis(await NemesisService.updateNemesis({...nemesis, presence: {...nemesis.presence, current: value}}));
+                    updateNemesis(await NemesisService.updateNemesis({
+                        ...nemesis,
+                        presence: {...nemesis.presence, current: value}
+                    }));
                     break;
             }
         }
@@ -49,13 +67,19 @@ export default function NemesisCharacteristicTab(props: Props) {
 
     const handleWoundsChange = async (value: number) => {
         if (nemesis) {
-            updateNemesis(await NemesisService.updateNemesis({...nemesis, wounds: value}));
+            updateNemesis(await NemesisService.updateNemesis({
+                ...nemesis,
+                wounds: {current: nemesis.wounds.current, threshold: value, type: nemesis.wounds.type}
+            }));
         }
     };
 
     const handleStrainChange = async (value: number) => {
         if (nemesis) {
-            updateNemesis(await NemesisService.updateNemesis({...nemesis, strain: value}));
+            updateNemesis(await NemesisService.updateNemesis({
+                ...nemesis,
+                strain: {current: nemesis.strain.current, threshold: value, type: nemesis.strain.type}
+            }));
         }
     };
 
@@ -102,18 +126,18 @@ export default function NemesisCharacteristicTab(props: Props) {
 
     const renderWoundsCard = () => {
         return pathname.endsWith(nemesis.id + '/edit') ?
-            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={nemesis.wounds}
+            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={nemesis.wounds.threshold}
                                  onChange={handleWoundsChange} min={1} max={35}
                                  disabled={false}/> :
-            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(nemesis.wounds)}/>
+            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(nemesis.wounds.threshold)}/>
     };
 
     const renderStrainCard = () => {
         return pathname.endsWith(nemesis.id + '/edit') ?
-            <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={nemesis.strain}
+            <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={nemesis.strain.threshold}
                                  onChange={handleStrainChange} min={1} max={35}
                                  disabled={false}/> :
-            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(nemesis.strain)}/>
+            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(nemesis.strain.threshold)}/>
     };
 
     return (

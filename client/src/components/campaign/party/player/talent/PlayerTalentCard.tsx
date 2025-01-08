@@ -1,48 +1,50 @@
-import {Button, Card, CardContent} from "@mui/material";
+import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../../../common/card/header/CenteredCardHeader";
-import Player from "../../../../../models/actor/player/Player";
-import {Fragment, useState} from "react";
-import {useLocation} from "react-router-dom";
-import GenesysDescriptionTypography from "../../../../common/typography/GenesysDescriptionTypography";
-import PlayerTalentTable from "./PlayerTalentTable";
-import PlayerTalentSelectionDialog from "./PlayerTalentSelectionDialog";
+import {ActorTalent} from "../../../../../models/Talent";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import {
+    GenesysDescriptionTypographyCenterTableCell,
+    TypographyCenterTableCell
+} from "../../../../common/table/TypographyTableCell";
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
+import * as React from "react";
 
 interface Props {
-    player: Player
+    talents: ActorTalent[]
 }
 
 export default function PlayerTalentCard(props: Props): JSX.Element {
-    const {player} = props
-    const [openSelectTalentDialog, setOpenSelectTalentDialog] = useState(false)
-    const pathname = useLocation().pathname
+    const {talents} = props;
+    const headers = ['Name', 'Activation', 'Summary'];
 
-    const renderTable = (): JSX.Element => {
-        if (player.talents === undefined || player.talents.length === 0) {
-            return <GenesysDescriptionTypography text={'None'}/>
-        }
-        return <PlayerTalentTable player={player} />
-    }
-
-    const renderButton = (): JSX.Element => {
-        if (pathname.endsWith('/edit')) {
-            return (
-                <Fragment>
-                    <Button color='primary' variant='contained' onClick={(): void => setOpenSelectTalentDialog(true)}>Add Talent</Button>
-                    {openSelectTalentDialog && <PlayerTalentSelectionDialog player={player} open={openSelectTalentDialog}
-                                                                      onClose={(): void => setOpenSelectTalentDialog(false)}/>}
-                </Fragment>
-            )
-        } else {
-            return <Fragment/>
-        }
-    }
+    const renderTableBody = () => {
+        return (
+            <TableBody>
+                {(talents).map((talent: ActorTalent) => (
+                    <TableRow>
+                        <TypographyCenterTableCell value={talent.name}/>
+                        <TypographyCenterTableCell value={talent.activation}/>
+                        <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
+                    </TableRow>
+                ))}
+            </TableBody>
+        )
+    };
 
     return (
         <Card sx={{"width": 1}}>
             <CenteredCardHeader title={'Talents'}/>
             <CardContent>
-                {renderTable()}
-                {renderButton()}
+                <TableContainer component={Paper}>
+                    <Table>
+                        {renderSingleRowTableHeader(headers)}
+                        {renderTableBody()}
+                    </Table>
+                </TableContainer>
             </CardContent>
         </Card>
     )
