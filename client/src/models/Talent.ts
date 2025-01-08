@@ -15,11 +15,17 @@ export default interface Talent {
     cost: Cost
     limit: Limit
     talentSkills: TalentSkills
+    talentStats: TalentStats
     modifiers: Modifier[]
 }
 
 export interface TalentSkills {
     potentialCareerSkills: Skill[]
+}
+
+export interface TalentStats {
+    wounds: number
+    strain: number
 }
 
 export enum Activation {
