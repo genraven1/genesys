@@ -1,6 +1,7 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
 import com.github.genraven.genesys.domain.actor.ActorSkill;
+import com.github.genraven.genesys.domain.actor.Stats;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,7 +32,7 @@ public class MinionGroup extends SingleNonPlayerActor {
         this.setArmors(minion.getArmors());
         this.setTalents(minion.getTalents());
         // Minion Group Size Changes
-        this.setWounds(minion.getWounds() * size);
+        this.setWounds(new Stats(0, minion.getWounds().getThreshold() * size, Stats.Type.WOUNDS));
         this.setSkills(adaptGroupSkillsToActorSkills(minion.getSkills(), size));
         this.setSize(size);
     }
