@@ -1,7 +1,6 @@
 import TableCell from "@mui/material/TableCell";
 import {Activation, ActorTalent} from "../../../models/Talent";
 import Typography from "@mui/material/Typography";
-import {Button} from "@mui/material";
 import React, {Fragment} from "react";
 
 interface Props {

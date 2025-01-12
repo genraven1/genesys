@@ -3,6 +3,7 @@ import Modifier from "./common/Modifier";
 import Cost from "./common/Cost";
 import Limit from "./common/Limit";
 import Skill from "./actor/Skill";
+import {ActorSkill} from "./actor/Actor";
 
 export default interface Talent {
     id: string
@@ -16,6 +17,8 @@ export default interface Talent {
     limit: Limit
     talentSkills: TalentSkills
     talentStats: TalentStats
+    talentSkillCheck: TalentSkillCheck
+    talentRollModifiers: TalentRollModifiers[]
     modifiers: Modifier[]
 }
 
@@ -26,6 +29,14 @@ export interface TalentSkills {
 export interface TalentStats {
     wounds: number
     strain: number
+}
+
+export interface TalentSkillCheck {
+    skill: ActorSkill
+}
+
+export interface TalentRollModifiers {
+    skill: ActorSkill
 }
 
 export enum Activation {
