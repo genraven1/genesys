@@ -20,7 +20,7 @@ interface Props {
 
 export default function PlayerTalentCard(props: Props) {
     const {talents} = props;
-    const headers = ['Name', 'Activation', 'Summary', 'Activate'];
+    const headers = ['Name', 'Summary', 'Activate'];
 
     const renderTableBody = () => {
         return (
@@ -28,7 +28,6 @@ export default function PlayerTalentCard(props: Props) {
                 {(talents).map((talent: ActorTalent) => (
                     <TableRow>
                         <TypographyCenterTableCell value={talent.name}/>
-                        <TypographyCenterTableCell value={talent.activation}/>
                         <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
                         <TalentActivationTableCell talent={talent}/>
                     </TableRow>
