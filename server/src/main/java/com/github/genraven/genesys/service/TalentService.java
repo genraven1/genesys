@@ -54,6 +54,8 @@ public class TalentService {
                     tal.setLimit(talent.getLimit());
                     tal.setTalentSkills(talent.getTalentSkills());
                     tal.setTalentStats(talent.getTalentStats());
+                    tal.setTalentSkillCheck(talent.getTalentSkillCheck());
+                    tal.setTalentRollModifiers(talent.getTalentRollModifiers());
                     tal.setModifiers(talent.getModifiers());
                     return tal;
                 }).flatMap(talentRepository::save)
