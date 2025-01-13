@@ -35,6 +35,7 @@ export interface TalentStats {
 export interface TalentSkillCheck {
     skill: ActorSkill
     difficulty: Difficulty
+    opposedSkill: ActorSkill
 }
 
 export interface TalentRollModifiers {
