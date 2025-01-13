@@ -4,10 +4,11 @@ import {Typography} from "@mui/material";
 interface Props {
     characteristicRanks: number
     skillRanks: number
+    difficulty?: number
 }
 
 export default function GenesysSkillDiceTypography(props: Props) {
-    let {characteristicRanks,skillRanks} = props;
+    let {characteristicRanks, skillRanks, difficulty} = props;
 
     const generateSkillDice = () => {
         let text = ''
@@ -26,6 +27,12 @@ export default function GenesysSkillDiceTypography(props: Props) {
             while (skillRanks > 0) {
                 text = text.concat('[ability] ')
                 skillRanks--
+            }
+        }
+        if (difficulty && difficulty > 0) {
+            while (difficulty > 0) {
+                text = text.concat('[difficulty] ')
+                difficulty--
             }
         }
         const string = text.split(' ');
@@ -70,7 +77,7 @@ export default function GenesysSkillDiceTypography(props: Props) {
 
     return (
         <Fragment>
-            <Typography style={{ wordWrap: 'break-word' }} dangerouslySetInnerHTML={{ __html: generateSkillDice()}}/>
+            <Typography style={{wordWrap: 'break-word'}} dangerouslySetInnerHTML={{__html: generateSkillDice()}}/>
         </Fragment>
     )
 }

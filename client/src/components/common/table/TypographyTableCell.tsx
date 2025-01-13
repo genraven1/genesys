@@ -3,7 +3,7 @@ import {Button, TableCell, Typography} from "@mui/material";
 import GenesysDescriptionTypography from "../typography/GenesysDescriptionTypography";
 import Actor, {ActorSkill, getActorCharacteristicRanks} from "../../../models/actor/Actor";
 import GenesysSkillDiceTypography from "../typography/GenesysSkillDiceTypography";
-import {Difficulty} from "../../../models/common/Difficulty";
+import {Difficulty, getDifficultyDice} from "../../../models/common/Difficulty";
 import GenesysDifficultyDiceTypography from "../typography/GenesysDifficultyDiceTypography";
 import Cost, {CostType} from "../../../models/common/Cost";
 import Limit, {LimitType} from "../../../models/common/Limit";
@@ -17,7 +17,7 @@ interface LeftProps {
 export function TypographyLeftTableCell(props: LeftProps) {
     const {value} = props
     return (
-        <TableCell style={{textAlign: 'left'}}>
+        <TableCell style={{textAlign: 'left'}} key={value}>
             <Typography>{value}</Typography>
         </TableCell>
     )
@@ -31,7 +31,7 @@ interface CenterProps {
 export function TypographyCenterTableCell(props: CenterProps) {
     const {value, span} = props
     return (
-        <TableCell style={{textAlign: 'center'}} colSpan={span}>
+        <TableCell style={{textAlign: 'center'}} colSpan={span} key={value}>
             <Typography>{value}</Typography>
         </TableCell>
     )
@@ -125,10 +125,11 @@ export function GenesysDescriptionTypographyCenterTableCell(props: DescriptionCe
 interface DiceRollProps {
     actor: Actor
     skill: ActorSkill
+    difficulty?: Difficulty
 }
 
 export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
-    const {actor, skill} = props;
+    const {actor, skill, difficulty} = props;
     const [openCustomRollBackDrop, setOpenCustomRollBackDrop] = useState(false);
     // const [symbolCounts, setSymbolCounts] = useState({
     //     [GenesysSymbols.Success]: 0,
@@ -151,7 +152,7 @@ export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
         boost: 0,
         setback: 0,
         ability: Math.max(getActorCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
-        difficulty: 0,
+        difficulty: difficulty ? getDifficultyDice(difficulty) : 0,
         proficiency: Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
         challenge: 0,
     };
@@ -160,7 +161,7 @@ export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
         <TableCell style={{textAlign: 'center'}}>
             <Button onClick={(): void => setOpenCustomRollBackDrop(true)}>
                 <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
-                                            skillRanks={skill.ranks}/>
+                                            skillRanks={skill.ranks} difficulty={dicePool.difficulty}/>
             </Button>
             {openCustomRollBackDrop && <DiceRollerDialog open={openCustomRollBackDrop}
                                                          onClose={(): void => setOpenCustomRollBackDrop(false)}
