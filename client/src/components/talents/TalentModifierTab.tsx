@@ -3,15 +3,15 @@ import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid} fro
 import CostCard from "../common/card/select/CostCard";
 import LimitCard from "../common/card/select/LimitCard";
 import * as React from "react";
+import {useState} from "react";
 import TalentModifierCard from "./modifier/TalentModifierCard";
 import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
 import TalentSkillCheckCard from "./skill/TalentSkillCheckCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {StatsType} from "../../models/actor/Stats";
 import {ViewFieldCard} from "../common/ViewFieldCard";
-import Cost from "../../models/common/Cost";
-import Limit from "../../models/common/Limit";
-import {useState} from "react";
+import Cost, {CostType} from "../../models/common/Cost";
+import Limit, {LimitType} from "../../models/common/Limit";
 
 interface Props {
     talent: Talent
@@ -22,7 +22,7 @@ interface Props {
 export default function TalentModifierTab(props: Props) {
     const {talent, updateTalent, disabled} = props;
     const [state, setState] = useState({
-        cost: !!(talent.cost || talent.limit),
+        cost: !(talent.cost.type === CostType.None && talent.limit.type === LimitType.None),
         careerSkill: talent.talentSkills.potentialCareerSkills.length > 0,
         skillCheck: !!talent.talentSkillCheck.skill,
         stats: talent.talentStats.wounds < 0 || talent.talentStats.strain < 0
