@@ -1,4 +1,4 @@
-import {Card, CardContent, Grid} from "@mui/material";
+import {Card, CardContent, FormControlLabel, Grid, Switch} from "@mui/material";
 import CenteredCardHeader from "../../common/card/header/CenteredCardHeader";
 import * as React from "react";
 import SkillAutocompleteCard from "../../common/card/SkillAutocompleteCard";
@@ -8,6 +8,7 @@ import Skill from "../../../models/actor/Skill";
 import {ActorSkill} from "../../../models/actor/Actor";
 import DifficultyCard from "../../common/card/select/DifficultyCard";
 import {Difficulty} from "../../../models/common/Difficulty";
+import {useState} from "react";
 
 interface Props {
     talent: Talent
@@ -17,6 +18,12 @@ interface Props {
 
 export default function TalentSkillCheckCard(props: Props) {
     const {talent, updateTalent, disabled} = props;
+    const [opposed, setOpposed] = useState<boolean>(false);
+    const skills = useFetchAllSkills();
+
+    const handleChange = () => {
+        setOpposed(!opposed);
+    }
 
     const handleSkillChange = (value: Skill) => {
         updateTalent({...talent, talentSkillCheck: {...talent.talentSkillCheck, skill: value as ActorSkill}});
@@ -26,16 +33,34 @@ export default function TalentSkillCheckCard(props: Props) {
         updateTalent({...talent, talentSkillCheck: {...talent.talentSkillCheck, difficulty: value}});
     };
 
+    const handleOpposedSkillChange = (value: Skill) => {
+        updateTalent({...talent, talentSkillCheck: {...talent.talentSkillCheck, opposedSkill: value as ActorSkill}});
+    };
+
     return (
-        <Card sx={{width: 1}}>
-            <CenteredCardHeader title={'Skill Check'}/>
-            <CardContent>
+        <Grid item xs>
+            <Card sx={{width: 1}}>
+                <CenteredCardHeader title={'Skill Check'}/>
                 <Grid container justifyContent={'center'}>
-                    <SkillAutocompleteCard disabled={disabled} handleSkillChange={handleSkillChange}
-                                           skills={useFetchAllSkills()} startingSkill={talent.talentSkillCheck.skill}/>
-                    <DifficultyCard value={talent.talentSkillCheck.difficulty} onChange={handleDifficultyChange} disabled={disabled}/>
+                    <FormControlLabel control={<Switch checked={opposed} onChange={handleChange}/>}
+                                      label="Opposed Check"
+                                      sx={{textAlign: 'center'}}/>
                 </Grid>
-            </CardContent>
-        </Card>
+                <CardContent>
+                    <Grid container justifyContent={'center'}>
+                        <SkillAutocompleteCard disabled={disabled} handleSkillChange={handleSkillChange}
+                                               skills={skills}
+                                               startingSkill={talent.talentSkillCheck.skill}/>
+                        {!opposed &&
+                            <DifficultyCard value={talent.talentSkillCheck.difficulty} onChange={handleDifficultyChange}
+                                            disabled={disabled}/>}
+                        {opposed &&
+                            <SkillAutocompleteCard disabled={disabled} handleSkillChange={handleOpposedSkillChange}
+                                                   skills={skills}
+                                                   startingSkill={talent.talentSkillCheck.opposedSkill}/>}
+                    </Grid>
+                </CardContent>
+            </Card>
+        </Grid>
     );
 }
