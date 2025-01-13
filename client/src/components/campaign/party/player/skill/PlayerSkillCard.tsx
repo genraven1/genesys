@@ -39,7 +39,7 @@ export default function PlayerSkillCard(props: Props) {
                 </TableBody>
             </Table>
         )
-    }
+    };
 
     return (
         <Card sx={{"width": 1}}>

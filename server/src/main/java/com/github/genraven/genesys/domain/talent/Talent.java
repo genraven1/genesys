@@ -37,6 +37,8 @@ public class Talent {
     private Limit limit = new Limit();
     private TalentSkills talentSkills = new TalentSkills();
     private TalentStats talentStats = new TalentStats();
+    private TalentSkillCheck talentSkillCheck = new TalentSkillCheck();
+    private List<TalentRollModifiers> talentRollModifiers = new ArrayList<>();
     private List<Modifier> modifiers = new ArrayList<>();
 
     @AllArgsConstructor

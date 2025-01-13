@@ -19,6 +19,7 @@ import LimitCard from "../common/card/select/LimitCard";
 import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {StatsType} from "../../models/actor/Stats";
+import TalentSkillCheckCard from "./skill/TalentSkillCheckCard";
 
 export default function TalentPage() {
     const {id} = useParams<{ id: string }>();
@@ -132,6 +133,12 @@ export default function TalentPage() {
                            disabled={pathname.endsWith('/view')} onChange={handleSummaryChange}/>;
     };
 
+    const updateTalent = async (updatedTalent: Talent) => {
+        if (talent) {
+            setTalent(await TalentService.updateTalent(updatedTalent));
+        }
+    }
+
     return (
         <Card>
             <CenteredCardHeaderWithAction title={talent.name} path={RootPath.Talent + talent.id}/>
@@ -158,6 +165,9 @@ export default function TalentPage() {
                     <TalentCareerSkillsCard talentSkills={talent.talentSkills}
                                             updateTalentSkills={handleTalentSkillsChange}
                                             disabled={pathname.endsWith('/view')}/>
+                </Grid>
+                <Grid container justifyContent={'center'}>
+                    <TalentSkillCheckCard talent={talent} updateTalent={updateTalent} disabled={pathname.endsWith('/view')}/>
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     {renderWoundsCard()}

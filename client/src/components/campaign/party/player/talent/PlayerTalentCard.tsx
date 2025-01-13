@@ -13,13 +13,15 @@ import Table from "@mui/material/Table";
 import {renderSingleRowTableHeader} from "../../../../common/table/TableRenders";
 import * as React from "react";
 import TalentActivationTableCell from "../../../../common/table/TalentActivationTableCell";
+import Player from "../../../../../models/actor/player/Player";
 
 interface Props {
+    player: Player
     talents: ActorTalent[]
 }
 
 export default function PlayerTalentCard(props: Props) {
-    const {talents} = props;
+    const {player, talents} = props;
     const headers = ['Name', 'Summary', 'Activate'];
 
     const renderTableBody = () => {
@@ -29,7 +31,7 @@ export default function PlayerTalentCard(props: Props) {
                     <TableRow>
                         <TypographyCenterTableCell value={talent.name}/>
                         <GenesysDescriptionTypographyCenterTableCell value={talent.summary}/>
-                        <TalentActivationTableCell talent={talent}/>
+                        <TalentActivationTableCell talent={talent} actor={player}/>
                     </TableRow>
                 ))}
             </TableBody>

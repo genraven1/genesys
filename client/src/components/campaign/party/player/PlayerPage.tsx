@@ -75,7 +75,7 @@ export default function PlayerPage() {
                                        updateWeapons={handleWeaponChange}/>
                     </TabPanel>
                     <TabPanel value="4">
-                        <PlayerTalentCard talents={player.talents}/>
+                        <PlayerTalentCard talents={player.talents} player={player}/>
                     </TabPanel>
                 </TabContext>
             </CardContent>
