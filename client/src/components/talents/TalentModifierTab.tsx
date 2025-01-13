@@ -22,10 +22,10 @@ interface Props {
 export default function TalentModifierTab(props: Props) {
     const {talent, updateTalent, disabled} = props;
     const [state, setState] = useState({
-        cost: false,
-        careerSkill: false,
-        skillCheck: false,
-        stats: false
+        cost: !!(talent.cost || talent.limit),
+        careerSkill: talent.talentSkills.potentialCareerSkills.length > 0,
+        skillCheck: !!talent.talentSkillCheck.skill,
+        stats: talent.talentStats.wounds < 0 || talent.talentStats.strain < 0
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
