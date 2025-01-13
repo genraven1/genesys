@@ -1,5 +1,5 @@
 import Talent, {TalentSkills} from "../../models/Talent";
-import {Grid} from "@mui/material";
+import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid} from "@mui/material";
 import CostCard from "../common/card/select/CostCard";
 import LimitCard from "../common/card/select/LimitCard";
 import * as React from "react";
@@ -11,6 +11,7 @@ import {StatsType} from "../../models/actor/Stats";
 import {ViewFieldCard} from "../common/ViewFieldCard";
 import Cost from "../../models/common/Cost";
 import Limit from "../../models/common/Limit";
+import {useState} from "react";
 
 interface Props {
     talent: Talent
@@ -20,6 +21,19 @@ interface Props {
 
 export default function TalentModifierTab(props: Props) {
     const {talent, updateTalent, disabled} = props;
+    const [state, setState] = useState({
+        cost: false,
+        careerSkill: false,
+        skillCheck: false,
+        stats: false
+    });
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({
+            ...state,
+            [event.target.name]: event.target.checked,
+        });
+    };
 
     const handleCostChange = async (value: Cost) => {
         if (talent) {
@@ -75,25 +89,56 @@ export default function TalentModifierTab(props: Props) {
 
     return (
         <Grid container justifyContent={'center'}>
-            <Grid container spacing={2}>
+            <Grid container justifyContent={'center'}>
+                <FormControl sx={{m: 3}} component="fieldset" variant="standard">
+                    <FormLabel component="legend" sx={{textAlign: 'center'}}>Talent Modifiers</FormLabel>
+                    <FormGroup row>
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={state.cost} onChange={handleChange} name="cost"/>
+                            }
+                            label="Cost"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={state.careerSkill} onChange={handleChange} name="careerSkill"/>
+                            }
+                            label="Career Skills"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={state.skillCheck} onChange={handleChange} name="skillCheck"/>
+                            }
+                            label="Skill Check"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox checked={state.stats} onChange={handleChange} name="stats"/>
+                            }
+                            label="Stats"
+                        />
+                    </FormGroup>
+                </FormControl>
+            </Grid>
+            {state.cost && <Grid container spacing={2}>
                 <CostCard initialCost={talent.cost} onChange={handleCostChange}
                           disabled={disabled}/>
                 <LimitCard initialLimit={talent.limit} onChange={handleLimitChange}
                            disabled={disabled}/>
-            </Grid>
-            <Grid container spacing={2}>
+            </Grid>}
+            {state.careerSkill && <Grid container spacing={2}>
                 <TalentCareerSkillsCard talentSkills={talent.talentSkills}
                                         updateTalentSkills={handleTalentSkillsChange}
                                         disabled={disabled}/>
-            </Grid>
-            <Grid container spacing={2}>
+            </Grid>}
+            {state.skillCheck && <Grid container spacing={2}>
                 <TalentSkillCheckCard talent={talent} updateTalent={updateTalent}
                                       disabled={disabled}/>
-            </Grid>
-            <Grid container spacing={2}>
+            </Grid>}
+            {state.stats && <Grid container spacing={2}>
                 {renderWoundsCard()}
                 {renderStrainCard()}
-            </Grid>
+            </Grid>}
             <TalentModifierCard tal={talent}/>
         </Grid>
     );
