@@ -38,19 +38,40 @@ public class Minion extends NonPlayerActor {
 
     public void getTotalSoak() {
         int soak = getBrawn().getCurrent();
-        soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
+        soak += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getSoak)
+                .sum();
+        soak += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getSoak() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getSoak() * talent.getRanks() : talent.getTalentStats().getSoak())
+                .sum();
         this.setSoak(soak);
     }
 
     public void getTotalMeleeDefense() {
         int melee = 0;
-        melee += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        melee += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getDefense() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getDefense() * talent.getRanks() : talent.getTalentStats().getDefense())
+                .sum();
+        melee += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getDefense)
+                .sum();
         this.setMelee(melee);
     }
 
     public void getTotalRangedDefense() {
         int ranged = 0;
-        ranged += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        ranged += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getDefense() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getDefense() * talent.getRanks() : talent.getTalentStats().getDefense())
+                .sum();
+        ranged += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getDefense)
+                .sum();
         this.setRanged(ranged);
     }
 }

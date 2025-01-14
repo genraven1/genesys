@@ -9,7 +9,6 @@ import TalentCareerSkillsCard from "./skill/TalentCareerSkillsCard";
 import TalentSkillCheckCard from "./skill/TalentSkillCheckCard";
 import {NumberTextFieldCard} from "../common/card/NumberTextField";
 import {StatsType} from "../../models/actor/Stats";
-import {ViewFieldCard} from "../common/ViewFieldCard";
 import Cost, {CostType} from "../../models/common/Cost";
 import Limit, {LimitType} from "../../models/common/Limit";
 
@@ -25,7 +24,7 @@ export default function TalentModifierTab(props: Props) {
         cost: !(talent.cost.type === CostType.None && talent.limit.type === LimitType.None),
         careerSkill: talent.talentSkills.potentialCareerSkills.length > 0,
         skillCheck: !!talent.talentSkillCheck.skill,
-        stats: talent.talentStats.wounds < 0 || talent.talentStats.strain < 0
+        stats: talent.talentStats.wounds > 0 || talent.talentStats.strain > 0 || talent.talentStats.soak > 0 || talent.talentStats.defense > 0
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +56,12 @@ export default function TalentModifierTab(props: Props) {
         if (talent) {
             updateTalent({
                 ...talent,
-                talentStats: {wounds: value, strain: talent.talentStats.strain}
+                talentStats: {
+                    wounds: value,
+                    strain: talent.talentStats.strain,
+                    soak: talent.talentStats.soak,
+                    defense: talent.talentStats.defense
+                }
             });
         }
     };
@@ -66,25 +70,42 @@ export default function TalentModifierTab(props: Props) {
         if (talent) {
             updateTalent({
                 ...talent,
-                talentStats: {wounds: talent.talentStats.wounds, strain: value}
+                talentStats: {
+                    wounds: value,
+                    strain: talent.talentStats.strain,
+                    soak: talent.talentStats.soak,
+                    defense: talent.talentStats.defense
+                }
             });
         }
     };
 
-    const renderWoundsCard = () => {
-        return disabled ?
-            <ViewFieldCard name={StatsType.Wounds + ' Threshold'} value={String(talent.talentStats.wounds)}/> :
-            <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={talent.talentStats.wounds}
-                                 onChange={handleWoundsChange} min={0} max={5}
-                                 disabled={disabled}/>
+    const handleSoakChange = async (value: number) => {
+        if (talent) {
+            updateTalent({
+                ...talent,
+                talentStats: {
+                    wounds: talent.talentStats.wounds,
+                    strain: talent.talentStats.strain,
+                    soak: value,
+                    defense: talent.talentStats.defense
+                }
+            });
+        }
     };
 
-    const renderStrainCard = () => {
-        return disabled ?
-            <ViewFieldCard name={StatsType.Strain + ' Threshold'} value={String(talent.talentStats.strain)}/> :
-            <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={talent.talentStats.strain}
-                                 onChange={handleStrainChange} min={0} max={5}
-                                 disabled={disabled}/>
+    const handleDefenseChange = async (value: number) => {
+        if (talent) {
+            updateTalent({
+                ...talent,
+                talentStats: {
+                    wounds: talent.talentStats.wounds,
+                    strain: talent.talentStats.strain,
+                    soak: talent.talentStats.soak,
+                    defense: value
+                }
+            });
+        }
     };
 
     return (
@@ -136,8 +157,18 @@ export default function TalentModifierTab(props: Props) {
                                       disabled={disabled}/>
             </Grid>}
             {state.stats && <Grid container spacing={2}>
-                {renderWoundsCard()}
-                {renderStrainCard()}
+                <NumberTextFieldCard title={StatsType.Wounds + ' Threshold'} value={talent.talentStats.wounds}
+                                     onChange={handleWoundsChange} min={0} max={5}
+                                     disabled={disabled}/>
+                <NumberTextFieldCard title={StatsType.Strain + ' Threshold'} value={talent.talentStats.strain}
+                                     onChange={handleStrainChange} min={0} max={5}
+                                     disabled={disabled}/>
+                <NumberTextFieldCard title={'Soak'} value={talent.talentStats.soak}
+                                     onChange={handleSoakChange} min={0} max={5}
+                                     disabled={disabled}/>
+                <NumberTextFieldCard title={'Defense'} value={talent.talentStats.defense}
+                                     onChange={handleDefenseChange} min={0} max={5}
+                                     disabled={disabled}/>
             </Grid>}
             <TalentModifierCard tal={talent}/>
         </Grid>

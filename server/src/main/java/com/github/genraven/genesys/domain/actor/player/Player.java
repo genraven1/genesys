@@ -5,7 +5,6 @@ import com.github.genraven.genesys.domain.actor.*;
 
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
-import com.github.genraven.genesys.domain.modifier.Modifier;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -49,14 +48,14 @@ public class Player extends Actor {
 
     public void getTotalSoak() {
         int soak = getBrawn().getCurrent();
-        soak += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getSoak).sum();
-        for (ActorTalent talent : getTalents()) {
-            for (Modifier modifier : talent.getModifiers()) {
-                if (modifier.getType().equals(Modifier.Type.INCREASE_SOAK)) {
-                    soak = talent.isRanked() ? soak + modifier.getRanks() * talent.getRanks() : soak + modifier.getRanks();
-                }
-            }
-        }
+        soak += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getSoak() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getSoak() * talent.getRanks() : talent.getTalentStats().getSoak())
+                .sum();
+        soak += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getSoak)
+                .sum();
         this.setSoak(soak);
     }
 
@@ -75,20 +74,26 @@ public class Player extends Actor {
 
     public void getTotalMeleeDefense() {
         int melee = 0;
-        melee += getArmors().stream().filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY)).mapToInt(Armor::getDefense).sum();
+        melee += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getDefense() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getDefense() * talent.getRanks() : talent.getTalentStats().getDefense())
+                .sum();
+        melee += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getDefense).sum();
         this.setMelee(melee);
     }
 
     public void getTotalRangedDefense() {
         int ranged = 0;
-        int sum = 0;
-        for (ActorArmor armor : getArmors()) {
-            if (armor.getSlot().equals(EquipmentSlot.BODY)) {
-                int defense = armor.getDefense();
-                sum += defense;
-            }
-        }
-        ranged += sum;
+        ranged += getTalents().stream()
+                .filter(talent -> talent.getTalentStats().getDefense() > 0)
+                .mapToInt(talent -> talent.isRanked() ? talent.getTalentStats().getDefense() * talent.getRanks() : talent.getTalentStats().getDefense())
+                .sum();
+        ranged += getArmors().stream()
+                .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
+                .mapToInt(Armor::getDefense)
+                .sum();
         this.setRanged(ranged);
     }
 
