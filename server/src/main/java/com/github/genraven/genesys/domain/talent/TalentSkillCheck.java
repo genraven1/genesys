@@ -9,4 +9,5 @@ public class TalentSkillCheck {
 
     private ActorSkill skill;
     private Difficulty difficulty;
+    private ActorSkill opposedSkill;
 }
