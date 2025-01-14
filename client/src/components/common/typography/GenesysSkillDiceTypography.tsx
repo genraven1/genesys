@@ -1,14 +1,20 @@
 import {Fragment} from "react";
 import {Typography} from "@mui/material";
 
+interface Target {
+    characteristicRanks: number
+    skillRanks: number
+}
+
 interface Props {
     characteristicRanks: number
     skillRanks: number
     difficulty?: number
+    target?: Target
 }
 
 export default function GenesysSkillDiceTypography(props: Props) {
-    let {characteristicRanks, skillRanks, difficulty} = props;
+    let {characteristicRanks, skillRanks, difficulty, target} = props;
 
     const generateSkillDice = () => {
         let text = ''
@@ -33,6 +39,25 @@ export default function GenesysSkillDiceTypography(props: Props) {
             while (difficulty > 0) {
                 text = text.concat('[difficulty] ')
                 difficulty--
+            }
+        }
+        if (target) {
+            while (target.characteristicRanks > 0 && target.skillRanks > 0) {
+                text = text.concat('[challenge] ')
+                target.characteristicRanks--
+                target.skillRanks--
+            }
+            if (target.characteristicRanks > 0) {
+                while (target.characteristicRanks > 0) {
+                    text = text.concat('[difficulty] ')
+                    target.characteristicRanks--
+                }
+            }
+            if (target.skillRanks > 0) {
+                while (target.skillRanks > 0) {
+                    text = text.concat('[difficulty] ')
+                    target.skillRanks--
+                }
             }
         }
         const string = text.split(' ');

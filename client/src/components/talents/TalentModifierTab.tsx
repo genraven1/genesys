@@ -90,7 +90,7 @@ export default function TalentModifierTab(props: Props) {
     return (
         <Grid container justifyContent={'center'}>
             <Grid container justifyContent={'center'}>
-                <FormControl sx={{m: 3}} component="fieldset" variant="standard">
+                <FormControl sx={{m: 3}} component="fieldset" variant="standard" disabled={disabled}>
                     <FormLabel component="legend" sx={{textAlign: 'center'}}>Talent Modifiers</FormLabel>
                     <FormGroup row>
                         <FormControlLabel

@@ -18,7 +18,7 @@ interface Props {
 
 export default function TalentSkillCheckCard(props: Props) {
     const {talent, updateTalent, disabled} = props;
-    const [opposed, setOpposed] = useState<boolean>(false);
+    const [opposed, setOpposed] = useState<boolean>(!talent.talentSkillCheck.difficulty);
     const skills = useFetchAllSkills();
 
     const handleChange = () => {
@@ -43,7 +43,7 @@ export default function TalentSkillCheckCard(props: Props) {
                 <CenteredCardHeader title={'Skill Check'}/>
                 <Grid container justifyContent={'center'}>
                     <FormControlLabel control={<Switch checked={opposed} onChange={handleChange}/>}
-                                      label="Opposed Check"
+                                      label="Opposed Check" disabled={disabled}
                                       sx={{textAlign: 'center'}}/>
                 </Grid>
                 <CardContent>

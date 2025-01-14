@@ -122,14 +122,20 @@ export function GenesysDescriptionTypographyCenterTableCell(props: DescriptionCe
     )
 }
 
+interface Target {
+    actor: Actor
+    skill: ActorSkill
+}
+
 interface DiceRollProps {
     actor: Actor
     skill: ActorSkill
     difficulty?: Difficulty
+    target?: Target
 }
 
 export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
-    const {actor, skill, difficulty} = props;
+    const {actor, skill, difficulty, target} = props;
     const [openCustomRollBackDrop, setOpenCustomRollBackDrop] = useState(false);
     // const [symbolCounts, setSymbolCounts] = useState({
     //     [GenesysSymbols.Success]: 0,
@@ -148,20 +154,51 @@ export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
     //     proficiency: Math.min(getCharacteristicRanks(actor, skill), skill.ranks),
     //     challenge: 0,
     // });
+
+    const gatherBoostDice = () => {
+        return 0;
+    };
+
+    const gatherSetbackDice = () => {
+        return 0;
+    };
+
+    const gatherAbilityDice = () => {
+        return Math.max(getActorCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks);
+    };
+
+    const gatherDifficultyDice = () => {
+        return difficulty ? getDifficultyDice(difficulty) : target ? Math.max(getActorCharacteristicRanks(target.actor, target.skill), target.skill.ranks) - Math.min(getActorCharacteristicRanks(target.actor, target.skill), target.skill.ranks) : 0;
+    };
+
+    const gatherProficiencyDice = () => {
+        return Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks);
+    };
+
+    const gatherChallengeDice = () => {
+        return target ? Math.min(getActorCharacteristicRanks(target.actor, target.skill), target.skill.ranks) : 0;
+    };
+
     const dicePool = {
-        boost: 0,
-        setback: 0,
-        ability: Math.max(getActorCharacteristicRanks(actor, skill), skill.ranks) - Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
-        difficulty: difficulty ? getDifficultyDice(difficulty) : 0,
-        proficiency: Math.min(getActorCharacteristicRanks(actor, skill), skill.ranks),
-        challenge: 0,
+        boost: gatherBoostDice(),
+        setback: gatherSetbackDice(),
+        ability: gatherAbilityDice(),
+        difficulty: gatherDifficultyDice(),
+        proficiency: gatherProficiencyDice(),
+        challenge: gatherChallengeDice(),
     };
 
     return (
         <TableCell style={{textAlign: 'center'}}>
             <Button onClick={(): void => setOpenCustomRollBackDrop(true)}>
-                <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
-                                            skillRanks={skill.ranks} difficulty={dicePool.difficulty}/>
+                {difficulty &&
+                    <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
+                                                skillRanks={skill.ranks} difficulty={dicePool.difficulty}/>}
+                {target && <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
+                                                       skillRanks={skill.ranks} target={{
+                    characteristicRanks: getActorCharacteristicRanks(target.actor, target.skill),
+                    skillRanks: target.skill.ranks
+                }}/>}
             </Button>
             {openCustomRollBackDrop && <DiceRollerDialog open={openCustomRollBackDrop}
                                                          onClose={(): void => setOpenCustomRollBackDrop(false)}
