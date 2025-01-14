@@ -30,6 +30,8 @@ export interface TalentSkills {
 export interface TalentStats {
     wounds: number
     strain: number
+    soak: number
+    defense: number
 }
 
 export interface TalentSkillCheck {
