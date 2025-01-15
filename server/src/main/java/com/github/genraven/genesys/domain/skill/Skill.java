@@ -19,7 +19,7 @@ public class Skill {
     @Id
     private String id;
     private String name;
-    private Characteristic.Type characteristic;
-    private SkillType type;
+    private Characteristic.Type characteristic = Characteristic.Type.BRAWN;
+    private SkillType type = SkillType.GENERAL;
     private boolean initiative = false;
 }

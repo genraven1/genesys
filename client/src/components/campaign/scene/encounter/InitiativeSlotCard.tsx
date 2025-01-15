@@ -1,4 +1,4 @@
-import InitiativeSlot from "../../../../models/campaign/InitiativeSlot";
+import InitiativeSlot from "../../../../models/campaign/encounter/InitiativeSlot";
 import {Card, CardContent} from "@mui/material";
 import CenteredCardHeader from "../../../common/card/header/CenteredCardHeader";
 import GenesysDescriptionTypography from "../../../common/typography/GenesysDescriptionTypography";

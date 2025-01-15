@@ -28,8 +28,8 @@ public class Talent {
     @Id
     private String id;
     private String name;
-    private Activation activation;
-    private Tier tier;
+    private Activation activation = Activation.PASSIVE;
+    private Tier tier = Tier.FIRST;
     private boolean ranked = false;
     private String summary;
     private String description;

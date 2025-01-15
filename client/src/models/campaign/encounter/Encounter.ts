@@ -1,7 +1,7 @@
-import Party from "./Party";
-import {MinionGroup} from "../actor/npc/Minion";
-import Rival from "../actor/npc/Rival";
-import Nemesis from "../actor/npc/Nemesis";
+import Party from "../Party";
+import {MinionGroup} from "../../actor/npc/Minion";
+import Rival from "../../actor/npc/Rival";
+import Nemesis from "../../actor/npc/Nemesis";
 
 export default interface Encounter {
     type: Type

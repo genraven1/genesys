@@ -191,6 +191,9 @@ export function GenesysDicePoolCenterTableCellButton(props: DiceRollProps) {
     return (
         <TableCell style={{textAlign: 'center'}}>
             <Button onClick={(): void => setOpenCustomRollBackDrop(true)}>
+                {!difficulty && !target &&
+                    <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
+                                                skillRanks={skill.ranks}/>}
                 {difficulty &&
                     <GenesysSkillDiceTypography characteristicRanks={getActorCharacteristicRanks(actor, skill)}
                                                 skillRanks={skill.ranks} difficulty={dicePool.difficulty}/>}
