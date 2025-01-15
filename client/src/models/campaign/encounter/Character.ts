@@ -1,13 +1,13 @@
-import {Characteristic} from "./Characteristic";
-import Stats from "./Stats";
-import {ActorWeapon} from "../equipment/Weapon";
-import {ActorArmor} from "../equipment/Armor";
-import {ActorGear} from "../equipment/Gear";
-import {ActorSkill, ActorType} from "./Actor";
-import Ability from "../Ability";
-import {ActorTalent} from "../Talent";
-import Injury from "../Injury";
-import StatusEffect from "./StatusEffect";
+import {Characteristic} from "../../actor/Characteristic";
+import Stats from "../../actor/Stats";
+import {ActorWeapon} from "../../equipment/Weapon";
+import {ActorArmor} from "../../equipment/Armor";
+import {ActorGear} from "../../equipment/Gear";
+import {ActorSkill, ActorType} from "../../actor/Actor";
+import Ability from "../../Ability";
+import {ActorTalent} from "../../Talent";
+import Injury from "../../Injury";
+import StatusEffect from "../../actor/StatusEffect";
 
 export default interface Character {
     id: string

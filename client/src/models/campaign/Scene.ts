@@ -1,5 +1,5 @@
 import Party from "./Party";
-import Encounter from "./Encounter";
+import Encounter from "./encounter/Encounter";
 
 export default interface Scene {
     id: string
