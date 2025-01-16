@@ -1,13 +1,16 @@
 package com.github.genraven.genesys.domain.campaign.encounter;
 
-import com.github.genraven.genesys.domain.actor.Actor;
-import com.github.genraven.genesys.domain.actor.Characteristic;
-import com.github.genraven.genesys.domain.actor.Stats;
+import com.github.genraven.genesys.domain.Ability;
+import com.github.genraven.genesys.domain.CriticalInjury;
+import com.github.genraven.genesys.domain.actor.*;
 import com.github.genraven.genesys.domain.actor.npc.MinionGroup;
 import com.github.genraven.genesys.domain.actor.npc.Nemesis;
 import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.actor.player.Player;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class Character {
@@ -32,6 +35,12 @@ public class Character {
         this.setSoak(player.getSoak());
         this.setMelee(player.getMelee());
         this.setRanged(player.getRanged());
+
+        this.setWeapons(player.getWeapons());
+        this.setArmors(player.getArmors());
+        this.setTalents(player.getTalents());
+        this.setInjuries(player.getInjuries());
+        this.setAbilities(player.getArchetype().getAbilities());
     }
 
     public Character(final Nemesis nemesis) {
@@ -88,4 +97,9 @@ public class Character {
     private int soak;
     private int melee;
     private int ranged;
+    private List<ActorWeapon> weapons;
+    private List<ActorArmor> armors;
+    private List<Ability> abilities;
+    private List<ActorTalent> talents;
+    private List<CriticalInjury> injuries;
 }
