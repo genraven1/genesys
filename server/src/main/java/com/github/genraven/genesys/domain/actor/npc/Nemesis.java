@@ -1,11 +1,15 @@
 package com.github.genraven.genesys.domain.actor.npc;
 
+import com.github.genraven.genesys.domain.CriticalInjury;
 import com.github.genraven.genesys.domain.actor.Stats;
 import com.github.genraven.genesys.domain.equipment.Armor;
 import com.github.genraven.genesys.domain.equipment.EquipmentSlot;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -34,8 +38,15 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setWeapons(singleNonPlayerActor.getWeapons());
     }
     private Stats strain = new Stats(0, 1, Stats.Type.STRAIN);
+    private List<CriticalInjury> injuries = new ArrayList<>();
 
-    public void getTotalSoak() {
+    public void getTotalNemesisStats() {
+        this.getTotalSoak();
+        this.getTotalMeleeDefense();
+        this.getTotalRangedDefense();
+    }
+
+    private void getTotalSoak() {
         int soak = getBrawn().getCurrent();
         soak += getArmors().stream()
                 .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
@@ -48,7 +59,7 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setSoak(soak);
     }
 
-    public void getTotalMeleeDefense() {
+    private void getTotalMeleeDefense() {
         int melee = 0;
         melee += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)
@@ -61,7 +72,7 @@ public class Nemesis extends SingleNonPlayerActor {
         this.setMelee(melee);
     }
 
-    public void getTotalRangedDefense() {
+    private void getTotalRangedDefense() {
         int ranged = 0;
         ranged += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)

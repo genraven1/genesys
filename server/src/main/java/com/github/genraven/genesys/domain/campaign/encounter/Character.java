@@ -9,8 +9,8 @@ import com.github.genraven.genesys.domain.actor.npc.Rival;
 import com.github.genraven.genesys.domain.actor.player.Player;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class Character {
@@ -41,9 +41,12 @@ public class Character {
         this.setTalents(player.getTalents());
         this.setInjuries(player.getInjuries());
         this.setAbilities(player.getArchetype().getAbilities());
+        this.setSkills(player.getSkills().stream().map(ActorSkill::new).collect(Collectors.toList()));
     }
 
     public Character(final Nemesis nemesis) {
+        nemesis.getTotalNemesisStats();
+
         this.setId(nemesis.getId());
         this.setName(nemesis.getName());
         this.setType(nemesis.getType());
@@ -55,9 +58,20 @@ public class Character {
         this.setPresence(nemesis.getPresence());
         this.setWounds(nemesis.getWounds());
         this.setStrain(nemesis.getStrain());
+        this.setSoak(nemesis.getSoak());
+        this.setMelee(nemesis.getMelee());
+        this.setRanged(nemesis.getRanged());
+        this.setWeapons(nemesis.getWeapons());
+        this.setArmors(nemesis.getArmors());
+        this.setTalents(nemesis.getTalents());
+        this.setInjuries(nemesis.getInjuries());
+        this.setAbilities(nemesis.getAbilities());
+        this.setSkills(nemesis.getSkills());
     }
 
     public Character(final Rival rival) {
+
+
         this.setId(rival.getId());
         this.setName(rival.getName());
         this.setType(rival.getType());
@@ -68,9 +82,20 @@ public class Character {
         this.setWillpower(rival.getWillpower());
         this.setPresence(rival.getPresence());
         this.setWounds(rival.getWounds());
+        this.setSoak(rival.getSoak());
+        this.setMelee(rival.getMelee());
+        this.setRanged(rival.getRanged());
+        this.setWeapons(rival.getWeapons());
+        this.setArmors(rival.getArmors());
+        this.setTalents(rival.getTalents());
+        this.setInjuries(rival.getInjuries());
+        this.setAbilities(rival.getAbilities());
+        this.setSkills(rival.getSkills());
     }
 
     public Character(final MinionGroup minionGroup) {
+
+
         this.setId(minionGroup.getId());
         this.setName(minionGroup.getName());
         this.setType(minionGroup.getType());
@@ -81,6 +106,14 @@ public class Character {
         this.setWillpower(minionGroup.getWillpower());
         this.setPresence(minionGroup.getPresence());
         this.setWounds(minionGroup.getWounds());
+        this.setSoak(minionGroup.getSoak());
+        this.setMelee(minionGroup.getMelee());
+        this.setRanged(minionGroup.getRanged());
+        this.setWeapons(minionGroup.getWeapons());
+        this.setArmors(minionGroup.getArmors());
+        this.setTalents(minionGroup.getTalents());
+        this.setAbilities(minionGroup.getAbilities());
+        this.setSkills(minionGroup.getSkills());
     }
 
     private String id;
@@ -102,4 +135,8 @@ public class Character {
     private List<Ability> abilities;
     private List<ActorTalent> talents;
     private List<CriticalInjury> injuries;
+    private List<ActorSkill> skills;
+    private StatusEffect disoriented = new StatusEffect(StatusEffect.Type.DISORIENTED);
+    private StatusEffect immobilized = new StatusEffect(StatusEffect.Type.IMMOBILIZED);
+    private StatusEffect staggered = new StatusEffect(StatusEffect.Type.STAGGERED);
 }

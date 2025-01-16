@@ -22,18 +22,14 @@ public class RivalService {
 
     public Flux<Rival> getAllRivals() {
         return rivalRepository.findAll().map(rival -> {
-            rival.getTotalSoak();
-            rival.getTotalMeleeDefense();
-            rival.getTotalRangedDefense();
+            rival.getTotalRivalStats();
             return rival;
         });
     }
 
     public Mono<Rival> getRival(final String id) {
         return rivalRepository.findById(id).map(rival -> {
-            rival.getTotalSoak();
-            rival.getTotalMeleeDefense();
-            rival.getTotalRangedDefense();
+            rival.getTotalRivalStats();
             return rival;
         });
     }
