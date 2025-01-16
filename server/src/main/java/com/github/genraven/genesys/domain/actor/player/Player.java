@@ -46,7 +46,16 @@ public class Player extends Actor {
     private List<PlayerSkill> skills = new ArrayList<>();
     private List<CriticalInjury> injuries = new ArrayList<>();
 
-    public void getTotalSoak() {
+    public void getTotalPlayerStats() {
+        this.getTotalSoak();
+        this.getTotalWounds();
+        this.getTotalStrain();
+        this.getTotalMeleeDefense();
+        this.getTotalRangedDefense();
+        this.getTotalEncumbrance();
+    }
+
+    private void getTotalSoak() {
         int soak = getBrawn().getCurrent();
         soak += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getSoak() > 0)
@@ -59,7 +68,7 @@ public class Player extends Actor {
         this.setSoak(soak);
     }
 
-    public void getTotalEncumbrance() {
+    private void getTotalEncumbrance() {
         int encumbrance = getBrawn().getCurrent() + 5;
         this.setEncumbrance(encumbrance);
     }
@@ -72,7 +81,7 @@ public class Player extends Actor {
         this.experience = oldExperience;
     }
 
-    public void getTotalMeleeDefense() {
+    private void getTotalMeleeDefense() {
         int melee = 0;
         melee += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)
@@ -84,7 +93,7 @@ public class Player extends Actor {
         this.setMelee(melee);
     }
 
-    public void getTotalRangedDefense() {
+    private void getTotalRangedDefense() {
         int ranged = 0;
         ranged += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)
@@ -97,7 +106,7 @@ public class Player extends Actor {
         this.setRanged(ranged);
     }
 
-    public void getTotalWounds() {
+    private void getTotalWounds() {
         int threshold = getArchetype().getWounds();
         threshold += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getWounds() != 0)
@@ -106,7 +115,7 @@ public class Player extends Actor {
         this.setWounds(new Stats(this.getWounds().getCurrent(), threshold, Stats.Type.WOUNDS));
     }
 
-    public void getTotalStrain() {
+    private void getTotalStrain() {
         int threshold = getArchetype().getStrain();
         threshold += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getStrain() != 0)

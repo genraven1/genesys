@@ -16,6 +16,8 @@ public class Character {
     }
 
     public Character(final Player player) {
+        player.getTotalPlayerStats();
+
         this.setId(player.getId());
         this.setName(player.getName());
         this.setType(player.getType());
@@ -27,6 +29,9 @@ public class Character {
         this.setPresence(player.getPresence());
         this.setWounds(player.getWounds());
         this.setStrain(player.getStrain());
+        this.setSoak(player.getSoak());
+        this.setMelee(player.getMelee());
+        this.setRanged(player.getRanged());
     }
 
     public Character(final Nemesis nemesis) {
@@ -80,4 +85,7 @@ public class Character {
     private Characteristic presence;
     private Stats wounds;
     private Stats strain;
+    private int soak;
+    private int melee;
+    private int ranged;
 }

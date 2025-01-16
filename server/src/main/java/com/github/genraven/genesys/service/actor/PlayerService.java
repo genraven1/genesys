@@ -26,24 +26,14 @@ public class PlayerService {
 
     public Flux<Player> getAllPlayers() {
         return playerRepository.findAll().map(player -> {
-            player.getTotalSoak();
-            player.getTotalEncumbrance();
-            player.getTotalMeleeDefense();
-            player.getTotalRangedDefense();
-            player.getTotalWounds();
-            player.getTotalStrain();
+            player.getTotalPlayerStats();
             return player;
         });
     }
 
     public Mono<Player> getPlayer(final String id) {
         return playerRepository.findById(id).map(player -> {
-            player.getTotalSoak();
-            player.getTotalEncumbrance();
-            player.getTotalMeleeDefense();
-            player.getTotalRangedDefense();
-            player.getTotalWounds();
-            player.getTotalStrain();
+            player.getTotalPlayerStats();
             return player;
         });
     }
