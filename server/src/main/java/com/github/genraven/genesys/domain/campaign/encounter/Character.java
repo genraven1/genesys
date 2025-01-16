@@ -70,7 +70,7 @@ public class Character {
     }
 
     public Character(final Rival rival) {
-
+        rival.getTotalRivalStats();
 
         this.setId(rival.getId());
         this.setName(rival.getName());
@@ -94,7 +94,7 @@ public class Character {
     }
 
     public Character(final MinionGroup minionGroup) {
-
+        this.setSize(minionGroup.getSize());
 
         this.setId(minionGroup.getId());
         this.setName(minionGroup.getName());
@@ -139,4 +139,6 @@ public class Character {
     private StatusEffect disoriented = new StatusEffect(StatusEffect.Type.DISORIENTED);
     private StatusEffect immobilized = new StatusEffect(StatusEffect.Type.IMMOBILIZED);
     private StatusEffect staggered = new StatusEffect(StatusEffect.Type.STAGGERED);
+
+    private int size;
 }

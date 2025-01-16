@@ -15,6 +15,8 @@ public class MinionGroup extends SingleNonPlayerActor {
     }
 
     public MinionGroup(final Minion minion, final int size) {
+        minion.getTotalMinionStats();
+
         this.setName(minion.getName());
         this.setType(ActorType.MINION);
         this.setBrawn(minion.getBrawn());
