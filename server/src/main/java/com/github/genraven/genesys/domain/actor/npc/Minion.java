@@ -36,7 +36,13 @@ public class Minion extends NonPlayerActor {
 
     private List<GroupSkill> skills = new ArrayList<>();
 
-    public void getTotalSoak() {
+    public void getTotalMinionStats() {
+        this.getTotalSoak();
+        this.getTotalMeleeDefense();
+        this.getTotalRangedDefense();
+    }
+
+    private void getTotalSoak() {
         int soak = getBrawn().getCurrent();
         soak += getArmors().stream()
                 .filter(armor -> armor.getSlot().equals(EquipmentSlot.BODY))
@@ -49,7 +55,7 @@ public class Minion extends NonPlayerActor {
         this.setSoak(soak);
     }
 
-    public void getTotalMeleeDefense() {
+    private void getTotalMeleeDefense() {
         int melee = 0;
         melee += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)
@@ -62,7 +68,7 @@ public class Minion extends NonPlayerActor {
         this.setMelee(melee);
     }
 
-    public void getTotalRangedDefense() {
+    private void getTotalRangedDefense() {
         int ranged = 0;
         ranged += getTalents().stream()
                 .filter(talent -> talent.getTalentStats().getDefense() > 0)
